@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线，M2 未开始。当前已有可运行的中性 Home、`The Chinese Underworld / 中国阴间` Collection、`Zhong Kui, the Demon Queller` Entry、第二轮 Review Board、3×2 Collection 家族探针和字体验收页；它们仍是不可发布的独立原型，不是应用源码。
-- 视觉保留意见：用户在冻结 M1 时明确指出当前页面风格仍不是其想要的方向。冻结只确认页面职责、语义阅读链、来源/现代改编边界、真实链接、响应式和无障碍骨架足以进入工程；不表示视觉满意、品牌定稿或生产视觉批准，后续首个真实纵切片必须允许替换共享表现层并重新确认美术方向。
+- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 的技术与内容合同已经确认，但实施仍未开始。当前已有可运行的中性 Home、`The Chinese Underworld / 中国阴间` Collection、`Zhong Kui, the Demon Queller` Entry、第二轮 Review Board、3×2 Collection 家族探针和字体验收页；它们仍是不可发布的独立原型，不是应用源码。
+- 视觉方向：冻结时的 M1 页面外观仍未获批准；2026-08-27，用户在后续仓库外 Home 方向稿中确认“以 A 为主、C 为辅”。首个真实 Home 以 A 的现代文化展览式中性母体、图片主导的非对称策展构图为主，并以 C 的抽象雕塑、地形、路径和裁切为辅助语汇。该选择只确认 Home 概念方向，不追认旧原型，也不批准方向稿本身、最终页面、字体或生产视觉资产；这些语言如何延展到共享表现层、Collection 与 Entry 仍须在真实纵切片中设计并确认。
 - 工作名称：`Mythic China`；目录名与未来包名使用 `mythic-china`。
 - 当前权威日期：2026-08-27。
-- 下一项允许动作：停止本次 M1 收口；M2 未开始。后续只有在技术栈确认和用户另行授权后才能初始化应用，首次真实纵切片进入批量制作前须重新取得人工视觉批准。不得把当前独立原型整份移入未来应用。
+- 下一项允许动作：M2 实施仍未开始。技术合同已经确认；只有在用户另行授权 Node.js 24 项目运行时切换/安装、pnpm 依赖安装和当前仓库根的手工最小初始化后，才能写入应用源码、配置与锁文件。首个真实 Home 须按已确认的 A 主、C 辅概念方向实现，Collection 与 Entry 仍按既有三层系统单独设计，三页都须在批量制作前取得用户页面级视觉确认。不得把当前独立原型或仓库外方向稿整份移入未来应用。
 
 ## 项目负责
 
@@ -28,7 +28,7 @@
 
 应用尚未初始化，因此当前没有应用运行链路。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 组成冻结的 M1 独立原型；它们可以评审目标体验和工程边界，但不是生产页面、正式内容包或 M2 应用脚手架。目标体验与内部生产必须分开理解：
 
-- 读者阅读：`主视觉 + 故事问题 -> Quick Answer -> 核心故事 -> 原典写了什么 -> 后世传统与版本 -> 本站解释 -> 完整 Sources -> Related Entries -> Reader Request -> 全站 Footer`。轻量出处随相关主张出现；完整来源在正文收束后、继续探索之前列出，newsletter 只在全站 Footer 出现。
+- 读者阅读：`主视觉 + 故事问题 -> opening 故事入口 -> Quick Answer -> 核心故事 -> 原典写了什么 -> 后世传统与版本 -> 本站解释 -> 完整 Sources -> Related Entries -> Reader Request -> 全站 Footer`。轻量出处随相关主张出现；完整来源在正文收束后、继续探索之前列出，newsletter 只在全站 Footer 出现。
 - 编辑生产：`研究问题 -> claim map 与可定位来源 -> 术语/译文审核 -> 英文叙事与视觉 brief -> 编辑/视觉审核 -> 内容 Schema 校验 -> 静态构建 -> CDN 网站`。
 - 视觉生产：`有出处的视觉 brief -> 绘制/授权素材/可选 ComfyUI 辅助 -> 人工审校 -> Web/社媒导出`。
 - 读者反馈：`文章页选题入口 -> 外部表单或隔离接口 -> 归并候选题 -> 编辑排期`。
@@ -39,11 +39,11 @@
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
-| 本地文档与原型工作区 | `F:\codex-project\mythic-china` | 用户已建立 `main`、initial commit 与 `origin`；M1 工程参考已冻结；应用制品尚未初始化 | Git 命令见 `DEV_WORKFLOW.md` | 本地 Markdown、不可发布的独立 HTML 原型及 prototype-only 图片；外部站点仅作只读研究 | 文档编写、只读核查、工程参考评审 |
+| 本地文档与原型工作区 | `F:\codex-project\mythic-china` | 用户已建立 `main`、initial commit 与 `origin`；M1 工程参考已冻结；M2 决策已确认，应用制品尚未初始化 | Git 命令见 `DEV_WORKFLOW.md` | 本地 Markdown、不可发布的独立 HTML 原型及 prototype-only 图片；外部站点仅作只读研究 | 文档编写、只读核查、工程参考评审 |
 
 ## 项目构建与运行
 
-当前不适用。项目尚无 `package.json`、应用源码或依赖锁文件；独立 HTML 原型不构成应用运行时，不得据此假设构建或服务命令。初始化完成后，必须先把真实运行时、包管理器、构建、测试和发布命令写入 `DEV_WORKFLOW.md`。
+当前不适用。项目尚无 `package.json`、应用源码或依赖锁文件；独立 HTML 原型不构成应用运行时，不得据此假设构建或服务命令。M2 已确认 Astro 7 静态模式、TypeScript、Node.js 24 LTS、pnpm 11、Entry Markdown 与结构化 YAML 的目标基线，完整边界见 `docs/ARCHITECTURE.md` 与 `docs/CONTENT_MODEL.md`。获得实施授权后，必须在安装前把精确命令写入 `DEV_WORKFLOW.md`；文档决策本身不代表运行时已配置或应用已初始化。
 
 ## 当前最小验证
 

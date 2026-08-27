@@ -28,9 +28,9 @@
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
-| 需求状态 | 草拟；M1 工程冻结决策已确认 | “中国神话传说博物馆”三层体系、首个 `The Chinese Underworld / 中国阴间` Collection 与钟馗 Featured Entry 已确认；公开品牌、技术/托管路线、第二个 Collection 和审核责任按后续门禁分别确认 |
-| 实施状态 | M1 已完成并冻结为工程参考基线；M2 未开始 | 已有不可发布的中性 Home、中国阴间 Collection、钟馗 Entry、Review Board、3×2 家族探针、字体验收页和 prototype-only 资产；没有应用源码、应用依赖或运行环境 |
-| 验证状态 | M1 已执行的工程/结构检查按证据记录；人工视觉满意度未通过 | 核心三页在当前浏览器完成 390/768/1440px、链接/历史、锚点/焦点回归、Escape、对比/触控目标、无图/灰度、系统 fallback、控制台和本地资源检查。用户明确表示当前页面风格不是期望结果；真实 Tab/Shift+Tab/Enter、reduced-motion、禁用 JavaScript、真实 200% 缩放、正式字体/慢加载/跨平台 fallback、目标读者测试仍未验证并移交后续门禁 |
+| 需求状态 | 草拟；M1 工程冻结与 M2 技术/内容决策已确认 | “中国神话传说博物馆”三层体系、首个 `The Chinese Underworld / 中国阴间` Collection、钟馗 Featured Entry 与 M2 静态内容核心已确认；公开品牌、托管、第二个 Collection 和审核责任按后续门禁分别确认 |
+| 实施状态 | M1 已完成并冻结为工程参考基线；M2 实施未开始 | 已有不可发布的中性 Home、中国阴间 Collection、钟馗 Entry、Review Board、3×2 家族探针、字体验收页和 prototype-only 资产；没有应用源码、应用依赖或项目运行环境 |
+| 验证状态 | M1 已执行的工程/结构检查按证据记录；旧 M1 页面视觉未通过，后续 Home 概念方向已确认；生产页面未批准 | 核心三页在当前浏览器完成 390/768/1440px、链接/历史、锚点/焦点回归、Escape、对比/触控目标、无图/灰度、系统 fallback、控制台和本地资源检查。用户随后确认 A 主、C 辅的 Home 概念方向；该选择不是旧原型、候选方向稿、字体、生产资产或真实纵切片验收。真实 Tab/Shift+Tab/Enter、reduced-motion、禁用 JavaScript、真实 200% 缩放、正式字体/慢加载/跨平台 fallback、目标读者测试仍未验证并移交后续门禁 |
 | 发布状态 | 未发布 | 未创建托管项目、域名或发布配置 |
 
 - 当前权威结论更新时间：2026-08-27。
@@ -40,14 +40,14 @@
 
 ### 1.1 一句话结论
 
-先交付一个英语优先、静态生成、视觉驱动且来源清楚的 6 篇内容 MVP；栏目、反馈和商业化通过稳定内容 ID 与隔离 adapter 保留演进路径，不提前建设平台。
+先交付一个英语优先、静态生成、视觉驱动且来源清楚的 6 篇内容 MVP；栏目、反馈和商业化通过稳定内容 ID 与后续独立需求的隔离边界保留演进路径，不提前建设 adapter 或平台。
 
 ### 1.2 开发就绪
 
-- 是否可以进入开发：否；M1 已冻结，但 M2 技术栈尚未确认，应用初始化、运行时和依赖安装未获单独授权。
-- M2 必要前提：确认技术栈、Node.js/包管理器版本、应用目录影响与真实命令，并由用户单独授权。M1 冻结只允许 M2 参考语义/结构/替换边界，不允许把当前页面皮肤当作已批准设计直接移植。人工视觉满意度、正式字体/跨平台加载、真实 200% 和目标读者比较测试是首个真实纵切片进入批量页面/插画制作前的门禁。
+- 是否可以立即执行开发：否。M2 技术与内容合同已经确认，当前阻塞只剩用户尚未单独授权 Node.js 24 项目运行时切换/安装、pnpm 依赖安装和当前仓库根的手工最小应用初始化。
+- M2 实施前提：按 `../ARCHITECTURE.md` 与 `../../DEV_WORKFLOW.md` 核对精确环境和影响，补齐当时可执行的真实命令，并取得上述单独授权。M1 冻结只允许 M2 参考语义、结构和替换边界；首个真实 Home 可以 A 主、C 辅作为实现目标，但不得整份移植旧原型或候选方向稿，也不得把 Home 概念选择自动扩展为 Collection、Entry 或共享表现层批准。正式字体、跨平台加载、真实 200%、目标读者比较测试和首个真实纵切片的页面级人工确认仍是进入批量页面/插画制作前的门禁。
 - 不阻塞 M2 的后置决策：公开品牌/域名在首次公开预览或发布前确认；托管候选在首次远端预览前确认；第二个 Collection 在 M6 前确认；英文编辑、研究和图片文化审核责任人在内容进入 `ready` 前确认。
-- 下一项允许动作：停止本轮收口。只有确认技术栈并获得用户单独授权后才能开始 M2；首次真实纵切片进入批量制作前须重新取得人工视觉批准。
+- 下一项允许动作：用户若要开始 M2，需单独授权运行时切换/安装、依赖安装与原地手工初始化；在此之前只允许继续只读核查或文档决策。首个真实 Home 按 A 主、C 辅实现，Collection 与 Entry 的延展另行设计，三页完成页面级人工视觉确认后才能进入批量制作。
 
 ### 1.3 事实、推断与风险
 
@@ -70,12 +70,13 @@
 - 国风不等于水墨；外部 Skill 不能成为品牌母体或文化来源。
 - 页面需要更连续的主题背景和更明确的功能性动效。整页背景不足是非阻断视觉完善项，不阻断内容、Schema、导航、来源和基础阅读功能。
 - 当前 M1 原型已冻结为工程参考，但用户明确表示页面风格仍不是期望结果，人工视觉满意度未通过；工程必须允许未来整体重构表现层，而不改写内容、证据关系、稳定身份与 URL。
+- 用户后续确认首个真实 Home 的概念方向采用 A 主、C 辅：A 提供现代中性文化平台感与图片主导的非对称策展构图，C 提供抽象雕塑、地形、路径和裁切的辅助视觉语汇。B 未被选作 Home 方向。该确认不批准候选稿本身或生产资产，也不自动决定 Collection、Entry 或共享表现层。
 
 设计选择与推荐：
 
-- 当前 M1 采用 `../DESIGN.md` 的“中国神话传说博物馆”：现代中性文化平台负责全站导视，Collection 负责独立主题世界，Entry 负责统一阅读与来源；中国绘画、手卷、印本和文物只在具体题材/来源成立时进入美术方向。M1 冻结的是首个工程参考基线，不是视觉批准或永久品牌冻结。
-- Astro + Markdown/MDX + 静态部署仍是内容型 MVP 的推荐技术选择；Next.js 是出现近期会员、个性化、多数动态路由或 React 应用需求时的重评选项，不是已经安装或运行的事实。
-- Astro + Vercel 是对新手最省事的 MVP 托管推荐，Cloudflare 为备选；二者都尚未创建项目。
+- 当前 M1 采用 `../DESIGN.md` 的“中国神话传说博物馆”：现代中性文化平台负责全站导视，Collection 负责独立主题世界，Entry 负责统一阅读与来源；中国绘画、手卷、印本和文物只在具体题材/来源成立时进入美术方向。M1 冻结的是首个工程参考基线，不是视觉批准或永久品牌冻结；冻结后确认的 A 主、C 辅只关闭 Home 概念方向选择，生产页面仍待验收。
+- M2 已确认 Astro 7 静态模式、TypeScript strict、Node.js 24 LTS、pnpm 11、Entry Markdown + 结构化 YAML、Content Layer + 独立内容图校验、供应商中立静态输出；MDX、adapter、客户端 UI 框架和商业依赖不进入 M2。Next.js 只有在多数产品路由近期需要请求时身份/权限/个性化，或产品主体成为 React 应用时才重评，不是已经安装或运行的事实。
+- M2 不选择托管。Vercel 与 Cloudflare 只是首次远端预览前的候选，二者都尚未创建项目。
 
 待验证假设：
 
@@ -96,12 +97,17 @@
 1. 设计体系为“中国神话传说博物馆”：现代中性文化平台母体 + Collection 独立主题 + 统一 Entry 阅读器。
 2. 首个正式 Collection 为 `The Chinese Underworld / 中国阴间`。
 3. M1 Featured Entry 为 `Zhong Kui, the Demon Queller`；钟馗不代表整个阴间，也不默认被描述为阴间统治者。
-4. 当前 M1 原型已完成并冻结为工程参考；只可继承结构、语义、链接、响应式/无障碍骨架与表现层替换边界，当前视觉未获用户批准。
+4. 当前 M1 原型已完成并冻结为工程参考；只可继承结构、语义、链接、响应式/无障碍骨架与表现层替换边界，旧原型外观未获用户批准。
+5. 首个真实 Home 的概念方向采用 A 主、C 辅；方向稿不是生产资产或页面批准，该选择也不自动决定 Collection、Entry 或共享表现层。
+6. M2 采用 Astro 7 静态模式、TypeScript strict、Node.js 24 LTS 与 pnpm 11；使用唯一 `pnpm-lock.yaml`，在当前非空仓库根手工最小初始化，不使用 starter/template、旁路目录或新仓库。
+7. Entry 使用 Markdown，Collection/Source/Claim/Terminology 使用一对象一文件的 YAML；M2 不使用 MDX。内部 ID 从文件名显式生成并与记录 ID 校验，公开 slug 独立；Entry 与 Collection canonical 分别为 `/explore/{slug}/`、`/collections/{slug}/`。
+8. M2 用 Zod 校验单记录，用纯内容图校验器和 Vitest 校验跨集合关系/状态/唯一性；两个真实 draft demo 为 `zhong-kui` 与 `chinese-underworld-guide`。生产 Asset Manifest 属于 M3，真实页面视觉与浏览器门禁属于 M4。
+9. 商业化只保留供应商中立的未来边界；M2 不创建商业字段、组件、adapter、事件或服务。托管也延后到首次远端预览前选择。
 
 仍待确认：
 
 1. 是否批准 `Mythic China` 作为当前工作品牌，并允许后续在域名/商标核查后调整公开名。
-2. 是否批准 Astro 静态核心、Next.js 条件式重评、Vercel 首选/Cloudflare 备选的技术与托管路线。
+2. 首次远端预览使用哪一静态托管服务、账户归属、发布授权和退出路径。
 3. 第二个 MVP Collection 是从现有候选中选择，还是把“至少 2 个合集页”调整为一个完整 Collection 加一个候选预览页。
 4. 由谁承担中文/古汉语事实与译文复核、英文可读性编辑和图片文化审校的最终签字。
 
@@ -119,7 +125,7 @@
 
 ### 2.3 目标行为
 
-- 读者能从首页/合集进入文章，先通过视觉问题、Quick Answer 和核心故事建立理解，再进入原典、版本与本站解释；完整 Sources 之后才能出现 Related Entries 与 Reader Request。
+- 读者能从首页/合集进入文章，先通过视觉问题、`opening` 故事入口、Quick Answer 和核心故事建立理解，再进入原典、版本与本站解释；完整 Sources 之后才能出现 Related Entries 与 Reader Request。
 - 创作者能先建立 claim map 与术语记录，再用固定 Schema 和工具无关的视觉管线生产一个完整内容包；ComfyUI 可用但非必需。
 - 读者能无账号推荐下一篇传说，并可选择是否留下邮箱。
 - 读者可在全站 Footer 订阅，但不会在每篇末尾遇到重复订阅 CTA。
@@ -131,7 +137,7 @@
 - 至少 6 篇首发内容与 2 个合集页达到 `published` 门禁。
 - 构建对缺失 source、relation、asset manifest、accessibility mode、alt / 空 alt、适用的 caption 和 disclosure 失败。
 - 关键事实主张能追到具体版本/对象与 locator；关键术语首次出现有汉字、规范拼音、语境化英文和双语审核状态。
-- Entry 的阅读层级固定为故事入口、Quick Answer、核心故事、原典/版本/解释、完整 Sources、Related Entries、Reader Request；轻量出处随对应主张出现。
+- Entry 的阅读层级固定为 `opening` 故事入口、Quick Answer、核心故事、原典/版本/解释、完整 Sources、Related Entries、Reader Request；轻量出处随对应主张出现。
 - 关闭 JavaScript 后正文、来源和核心导航仍可阅读。
 - 无阻塞键盘/无障碍问题；减弱动效模式下内容不延迟或缺失。
 - 所有外部引用显示来源名称和链接，网页来源有访问日期。
@@ -143,7 +149,9 @@
 
 ## 3. 范围与边界
 
-### 3.1 本期交付
+### 3.1 完整 MVP 交付范围（跨 M1–M7）
+
+本节描述整个 001 需求关闭前的累计范围，不是 M2 待办清单；M2 只以第 8 节“M2 工程与内容合同”的交付、不交付与完成条件为准。
 
 - Astro/TypeScript 静态应用及固定运行时、包管理器和锁文件。
 - `entries`、`collections`、`sources`、`claims`、`terminology` 与 asset manifest Schema。
@@ -187,7 +195,7 @@
   -> 本地模板与外部参考只读研究
   -> 项目治理/产品/设计/架构文档
   -> 不可发布的 M1 Home / Collection / Entry / Review Board / 字体原型
-  -> M1 工程参考已冻结；人工视觉满意度未通过；M2 未开始
+  -> M1 工程参考已冻结；旧页面视觉未通过；A 主、C 辅概念方向已确认；M2 决策已确认、实施未开始
 ```
 
 当前没有应用代码、内容构建、外部写接口和部署链路。
@@ -215,6 +223,7 @@
 Search / static social card / Home
   -> Collection or Entry
   -> Main visual + story question
+  -> opening 故事入口
   -> Quick Answer
   -> Core story
   -> What the text says
@@ -255,6 +264,7 @@ Search / static social card / Home
 - `collectionId: chinese-underworld`，`slug: chinese-underworld`，公开标题 `The Chinese Underworld`，`titleZh: 中国阴间`，`pinyin: Zhōngguó yīnjiān`，`featuredEntryId: zhong-kui`。
 - `中国阴间` 是宽泛编辑栏目名；`地府` 可用于官署、审判、十殿等具体语境，但不得把二者写成有严格学术分界的两个固定体系。
 - `entryId: zhong-kui`，`slug: zhong-kui`，公开标题 `Zhong Kui, the Demon Queller`，中文身份 `钟馗 · Zhōng Kuí`；M1 将其作为 Collection Featured Entry。
+- `entryId: chinese-underworld-guide`，`slug: chinese-underworld-guide`，作为 M2 的第二个真实 draft demo 与 Collection 阅读路径第一项；公开标题和正文仍须在正式内容阶段完成研究/英文审核，不用占位事实填充。
 - `Collection.entryIds` 是成员关系与阅读顺序的唯一事实来源；Entry 的反向 Collection 入口在构建期派生，不保存 `collectionIds`。`featuredEntryId` 必须同时存在于同一 Collection 的 `entryIds` 中并通过 `CONTENT_MODEL.md` 第 2.2 节状态矩阵；它只控制当前重点入口，不改变策展阅读顺序、Entry ID、slug 或 canonical URL。realm token 与主题资产不得写入 Collection 内容记录。
 
 ### 5.2 身份与唯一性
@@ -262,6 +272,7 @@ Search / static social card / Home
 - `entryId`、`collectionId`、`sourceId`、`claimId`、`termId`、`assetId` 全局稳定且唯一。
 - slug 唯一；已发布 slug 修改必须产生明确 redirect 需求。
 - 关系和合集只保存稳定 ID，不保存标题字符串作为身份。
+- Entry canonical 固定为 `/explore/{slug}/`，Collection canonical 固定为 `/collections/{slug}/`；文件名/loader ID/记录内稳定 ID 三者一致，slug 不覆盖内部身份。
 
 ### 5.3 正常流程
 
@@ -302,6 +313,7 @@ Search / static social card / Home
 
 - 采用 `../DESIGN.md` 的“中国神话传说博物馆”：这是只策展中国神话、志怪、民间传说、宗教传统与传奇人物的数字体验体系，不是世界神话平台或实体机构声明。
 - 品牌母体使用现代中性 canvas、sans 显示标题、固定 Logo、导航、栅格、功能组件、Entry 正文、来源和无障碍行为；全站不使用米黄纸纹、褐色做旧、密集 hairline、印章和重衬线标题作为文化身份。
+- 首个真实 Home 以 A 的现代文化展览式中性母体和图片主导非对称构图为主，以 C 的抽象雕塑、地形、路径、层叠和裁切为辅。A/B/C 是 Home 方向评审简称，不是内容 ID、theme ID 或 asset identity；候选稿不得整图导入应用，其语言如何延展到 Collection、Entry 或共享表现层须另行设计和确认。
 - Collection 可以覆盖批准的 `--realm-bg / --realm-surface / --realm-tone / --realm-accent / --realm-on-surface`，并拥有独立主图、媒介、环境纹理、构图、章节过渡和一次 Hero 动效；不得新增字体、导航、按钮、引用结构或交互模型。
 - Home 保持中性，Collection 主题只通过图片、短色带和标签进入；`The Chinese Underworld` 的暗色不得成为全站默认。Collection 主题可以延续到 1–2 个章节过渡，功能 UI 仍完全共享。
 - Entry 开场可延续 Collection 气氛，正文则回到高对比的中性阅读表面、固定字体角色和最大约 68ch；非图片 UI 的主题变化不超过 10%。
@@ -343,11 +355,11 @@ Search / static social card / Home
 
 ### M2 工程与内容合同
 
-- 目标：按已确认决策初始化 Astro/TypeScript、包管理和内容 Schema。
-- 交付：真实 `DEV_WORKFLOW.md` 命令、entries/collections/sources/claims/terminology、ID/关系/引用/术语测试、语义模板与可替换表现层边界，以及两个 demo Entry；不得把独立 HTML 原型整份复制为永久 UI。
-- 不交付：批量文章和生产发布。
-- 完成条件：干净环境安装后可构建；所有架构红线拥有实际测试入口。
-- 状态：未开始。
+- 目标：按已确认的 Astro 7 静态内容核心，在当前非空仓库根手工建立最小、可复现且表现层可替换的工程与内容合同。
+- 交付：Node.js/pnpm/package/唯一锁文件与真实 `DEV_WORKFLOW.md` 命令；Entry Markdown 和 Collection/Source/Claim/Terminology YAML 的 Content Layer；显式 loader ID、Zod Schema、纯内容图校验器与 Vitest；`/explore/{slug}/`、`/collections/{slug}/` 语义路由/调试模板；`zhong-kui` 与 `chinese-underworld-guide` 两个真实 draft demo。不得把独立 HTML 原型整份复制为永久 UI。
+- 不交付：批量文章、生产 Asset Manifest/图片管线、A 主 C 辅生产视觉、浏览器自动化、newsletter/feedback/analytics adapter、托管配置、商业字段/组件/服务、外部联调或发布。MDX、adapter、客户端 UI 框架、CSS/动画框架、CMS、数据库、认证与搜索也不进入 M2。
+- 完成条件：项目精确使用已确认的 Node.js 24/pnpm 11 身份，`package.json` 与唯一 `pnpm-lock.yaml` 一致；干净环境 `pnpm install --frozen-lockfile` 可复现依赖解析；格式、lint、Vitest、`astro check` 与静态 build 通过；ID/slug 唯一性、文件/loader/记录 ID 一致、跨集合关系与状态矩阵、Featured Entry、明确排序和失败语义有正反测试。仅以 M2 范围内红线为完成依据，不把 M3 资产、M4 视觉/浏览器或 M5 外部服务提前拉入。
+- 状态：决策合同已确认；实施未开始。项目运行时切换/安装、依赖安装与手工初始化尚未获得单独授权。
 
 ### M3 视觉资产管线
 
@@ -393,7 +405,7 @@ Search / static social card / Home
 | --- | --- | --- | --- |
 | 文档 | 文件清单、占位符、UTF-8、相对链接、阶段边界 | 15/15 Markdown 文件存在，无原模板占位符，编码有效，链接存在，且未误建实现项 | 通过（2026-08-27） |
 | 竞品 | 直接竞品/相邻标杆、桌面/移动证据、采用/不采用决策 | 观察与项目评估分开；每项设计决策能指出借鉴来源或原创理由 | 首轮 10 个内容/编辑站点加 Black Myth 台账保留；M+、Oculi Mundi、Rijksmuseum、Google Arts & Culture 第二轮结论已落实到 Review Board 的目标/落点/转译/不采用证据。截图为仓库外临时材料；目标读者差异化与可信度测试未执行，移交 M4 |
-| 视觉家族 | 六个 Collection Hero、中性 Home、统一 Article、无图与灰度 | 同一现代品牌、不同主题展厅；Collection 只覆盖批准 token/资产/动效；文章阅读系统固定 | 中性 Home、中国阴间 Collection、钟馗 Entry 与 3×2 家族探针已作为工程参考冻结；无图/灰度和 realm token 静态/浏览器检查有证据。用户人工视觉满意度未通过，当前外观不得作为生产批准皮肤 |
+| 视觉家族 | 六个 Collection Hero、中性 Home、统一 Article、无图与灰度 | 同一现代品牌、不同主题展厅；Collection 只覆盖批准 token/资产/动效；文章阅读系统固定 | 中性 Home、中国阴间 Collection、钟馗 Entry 与 3×2 家族探针已作为工程参考冻结；无图/灰度和 realm token 静态/浏览器检查有证据。旧原型外观仍未获批准；用户后续确认 A 主、C 辅的 Home 概念方向，真实页面、生产资产与完整视觉验收仍未执行 |
 | 表现层替换 | 内容快照 + 中性调试样式或替换候选预览 | UI 重构不改内容文件、稳定 ID、证据关系、slug、canonical、语义阅读顺序与静态输出 | 合同已记录；代码阶段未实现 |
 | 字体 | 英文、中文、拼音、困难字形、fallback、慢加载、200% 缩放 | 无缺字/伪字体/裁切；阅读舒适；CLS 在后续预算内 | 独立样张、字符覆盖、112/72/48px、当前 Windows system fallback 和等效窄视口检查已执行；批准自托管字体、慢加载、macOS/iOS/Android fallback、实际命中字形和真实 200% 未验证，移交首个真实纵切片门禁 |
 | 内容 | Schema、枚举、ID、slug | 所有已发布对象合法且唯一 | 未实现 |
@@ -415,7 +427,7 @@ Search / static social card / Home
 | --- | --- | --- | --- | --- |
 | 本轮文档整理 | 本地文档工作区 | 修改既有项目 Markdown | 用户已明确授权 | 已执行并完成文档验证 |
 | 本地 Git 初始化 | 当前项目根 `F:\codex-project\mythic-china` | 代理只执行 plain `git init`；用户随后自行创建 initial commit、改用 `main` 并配置 `origin` | 用户分别确认初始化与其自行 Git 操作 | 当前为 `main...origin/main`；后续 M1 基线提交命令见 `../../DEV_WORKFLOW.md`，代理未执行 add/commit/push |
-| 依赖安装与应用初始化 | 未来本地开发环境 | 修改依赖目录、锁文件和源码 | 实施前明确授权 | 未授权 |
+| M2 运行时切换、依赖安装与应用初始化 | 当前项目根及本地开发环境 | 切换/安装 Node.js 24 与 pnpm 11；新增依赖目录、唯一锁文件、配置、源码和测试 | 各影响在实施前明确授权 | 技术合同已确认；执行未授权 |
 | M1 临时 Express 预览/浏览器测试 | 当前本地工作区；仅 `127.0.0.1:4173` | 系统临时目录安装 Express；短时改变本地进程状态；不写项目运行时 | 执行前说明影响 | 2026-08-27 本次已授权并执行；浏览器检查完成后服务已停止，端口不可达，项目未产生运行时依赖文件 |
 | 外部表单、邮件、分析真实联调 | 未来测试环境 | 发送数据/改变第三方状态 | 单独授权 | 未授权 |
 | 预览部署 | 未来预览环境 | 远端构建与可访问 URL | 单独授权或已定义流水线 | 未授权 |
@@ -433,20 +445,20 @@ Search / static social card / Home
 
 ## 12. 当前完成记录
 
-- 结果：M1 工程参考基线已完成并按用户决定冻结；人工视觉满意度未通过；M2 未开始，工程应用实施尚未授权。
+- 结果：M1 工程参考基线已完成并按用户决定冻结；旧 M1 页面视觉未通过，后续 A 主、C 辅的 Home 概念方向已确认；M2 技术/内容决策合同已确认，但生产页面尚未批准，M2 实施与工程应用初始化尚未授权。
 - 已完成：治理、产品/架构/设计/内容合同与本需求草案；不可发布的中性 Home、中国阴间 Collection、钟馗 Entry、Review Board、首轮 10+1 台账、四个第二轮系统证据、3×2 家族探针、字体验收页和 prototype-only 资产登记。
 - 已验证：5 个原型 HTML 的重复 ID、本地资源/fragment、图片 alt/尺寸、标签/表单/ARIA、JSON-LD、阅读顺序和 JavaScript 语法；核心三页的 Home → Collection → Entry、Sources → Related → Reader Request、移动菜单/目录、390/768/1440px、浏览历史、锚点/焦点回归、Escape、对比/触控目标、无图/灰度、当前 system fallback、控制台和本地资源检查。用户冻结 M1 是停止本轮迭代的范围决定，不表示当前视觉通过。
 - 未执行：应用初始化、应用依赖安装、应用测试、外部联调和发布。真实键盘全链、reduced-motion、禁用 JavaScript、真实 200% 缩放、批准字体/慢加载/跨平台 fallback、实际字形命中和目标读者测试仍未验证；临时预览服务已执行并停止，不构成应用运行时。
-- 剩余风险：M2 技术栈尚未最终确认；当前页面外观不能作为生产批准稿，首次真实纵切片必须重新取得人工视觉批准。公开品牌/域名、托管、第二个 Collection、审核责任人、钟馗正式 claim/source/术语与生产图片权利/文化审核按后续门禁分别待确认。
+- 剩余风险：当前公开 PATH 的 Node.js 16 不满足已确认的 Astro 7 基线，运行时切换/安装与依赖安装尚未授权；旧原型和仓库外方向稿都不能作为生产批准稿。首个真实 Home 仍须按 A 主、C 辅完成页面级人工确认，Collection 与 Entry 的具体延展仍待设计和确认。公开品牌/域名、托管、第二个 Collection、审核责任人、钟馗正式 claim/source/术语与生产图片权利/文化审核按后续门禁分别待确认。
 - 版本身份：用户已建立本地 `main`、initial commit 与 `origin/main` 跟踪关系；这些操作不是代理执行。M1 收口内容的下一次本地提交由用户按 `../../DEV_WORKFLOW.md` 执行；应用和发布身份仍未建立。
 
 ## 13. 当前最终结论
 
-- 需求状态：草拟；M1 工程冻结决策、设计体系、首个 Collection 与钟馗 Featured Entry 已确认，其余列明事项待确认。
-- 实施状态：M1 已完成并冻结为工程参考基线；M2 未开始，应用实现未开始。
-- 验证状态：已执行的 M1 工程/结构检查见第 9 节；人工视觉满意度未通过，列明的人工/环境项目仍未验证，应用验证未开始。
+- 需求状态：草拟；M1 工程冻结决策、设计体系、A 主 C 辅的 Home 概念方向、首个 Collection、钟馗 Featured Entry 与 M2 技术/内容合同已确认，其余列明事项待确认。
+- 实施状态：M1 已完成并冻结为工程参考基线；M2 决策已确认、实施未开始，应用实现未开始。
+- 验证状态：已执行的 M1 工程/结构检查见第 9 节；旧 M1 页面视觉未通过，A 主、C 辅的 Home 概念方向已确认，但真实纵切片页面尚未批准；列明的人工/环境项目仍未验证，应用验证未开始。
 - 发布状态：未发布。
-- 已满足：项目范围、推荐架构、内容/引用/资产合同、实施拆分，以及“中国神话传说博物馆 + 中国阴间 + 钟馗 Entry”的工程参考与表现层替换边界已形成。
-- 尚未满足：M2 技术栈确认和用户单独授权；首个真实纵切片的 `DESIGN.md` 第 12 节完整验收、正式字体和人工视觉批准；公开品牌/域名、托管、第二个 Collection、审核责任人等后续门禁。代码、正式内容、应用测试、外部服务和发布均未开始。
-- 下一项允许动作：停止本次 M1 收口；后续只有确认技术栈并获得用户单独授权后才能开始 M2。
+- 已满足：项目范围、M2 目标架构与内容合同、引用/资产边界、实施拆分，以及“中国神话传说博物馆 + A 主 C 辅 Home 概念方向 + 中国阴间 + 钟馗 Entry”的工程参考与表现层替换边界已形成；未来商业化只保留隔离出口，不进入 M2 实现。
+- 尚未满足：用户对 M2 运行时切换/安装、依赖安装和原地手工初始化的单独授权；首个真实 Home 按 A 主、C 辅实现，Collection 与 Entry 完成具体美术延展设计，三页通过 `DESIGN.md` 第 12 节完整验收、正式字体和页面级人工视觉批准；公开品牌/域名、托管、第二个 Collection、审核责任人等后续门禁。代码、正式内容、应用测试、外部服务和发布均未开始。
+- 下一项允许动作：停止本次决策收口；用户单独授权运行时、依赖和原地初始化后，才能执行 M2 实施。
 - 是否可以关闭需求：否。

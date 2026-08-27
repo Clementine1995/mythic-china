@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、initial commit 与 `origin`，但尚无应用运行时、应用依赖或发布环境。不提供不可执行的假设命令。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、initial commit 与 `origin`。M2 技术合同已经确认，但尚无项目运行时、应用依赖、应用源码或发布环境。不提供不可执行的假设命令，也不把文档决策写成已经实施的状态。
 
 ## 当前环境身份门禁
 
@@ -22,7 +22,22 @@ Get-ChildItem -LiteralPath $mythicChinaRoot -Force | Select-Object Name, Mode
 
 ## 初始化、构建与本地运行
 
-应用初始化仍不适用。没有 `package.json`、锁文件、应用源码和应用配置；`prototypes/entry-reader-flow.html` 是直接评审用静态原型，不构成应用运行时。因此不得把临时预览解释为 M2 开始、应用依赖授权或长期开发服务器。
+应用初始化仍不适用。没有 `package.json`、锁文件、应用源码和应用配置；`prototypes/entry-reader-flow.html` 是直接评审用静态原型，不构成应用运行时。因此不得把 M2 决策确认或临时预览解释为实施开始、依赖授权或长期开发服务器。
+
+### M2 已确认目标与实施授权门禁
+
+已确认但尚未执行的项目环境合同：
+
+- Node.js 24 LTS；初始精确值 `24.20.0`，未来 `.node-version` 精确记录，`engines.node` 限制为 `>=24.20.0 <25`。
+- pnpm 11；初始精确值 `11.22.0`，未来 `packageManager` 记录 `pnpm@11.22.0`，`engines.pnpm` 限制为 `>=11.22.0 <12`，仓库只保留 `pnpm-lock.yaml`。
+- Astro 7 静态模式、TypeScript strict、Entry Markdown、结构化 YAML、Content Layer、内容图校验与 Vitest；不安装 adapter、MDX、UI/CSS/动画框架、Playwright 浏览器、CMS、数据库、认证、搜索、外部服务或商业依赖。
+- 当前非空仓库只允许在精确根目录手工建立最小 Astro 配置，不运行 starter/template 向导，不创建临时项目、旁路目录、worktree 或新仓库。
+
+2026-08-27 的只读环境核查：公开 PATH 为 Node.js `16.20.2`、npm `8.19.4`、pnpm `11.19.0`、Corepack `0.17.0`。Node.js 16 已停止维护且不满足 Astro 7 的运行前提；现有 pnpm 也不是已确认精确值。M1 临时预览使用的 Codex bundled Node.js `24.19.0` 只属于历史临时服务，不得当作项目长期运行时或借此跳过授权。
+
+下列动作仍需用户单独授权：安装或切换 Node.js 24.20.0、提供/切换 pnpm 11.22.0、下载应用依赖、生成 `node_modules` / `package.json` / `pnpm-lock.yaml` / 配置 / 源码 / 测试，以及启动任何 dev/preview 服务。授权后且执行安装前，必须先在本节补入当时验证过的精确初始化/安装命令、影响、停止条件和回查方式；若官方兼容信息已变化，先更新架构与需求文档，不静默换版本。
+
+初始化后必须建立 `format:check`、`lint`、`test`、`typecheck`、`build` 与聚合 `check` 的真实 script；其中 `build` 必须先执行 `astro check` 再执行 `astro build`，`check` 还须覆盖格式、lint 与 Vitest。脚本文件不存在前，本段只是执行门禁，不是可运行命令。
 
 ### M1 临时 Express 预览
 
@@ -99,9 +114,9 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
 - 用户于 2026-08-27 明确冻结 M1 以结束继续探索，同时明确表示当前页面风格不是其想要的方向；这项反馈记录为人工视觉满意度未通过，不能把 M1 冻结解释为设计批准。
 - `Ctrl+C` 未在限定等待内结束进程，随后只读确认精确监听 PID、Node 路径与启动时间后终止该临时进程。`127.0.0.1:4173` 已无监听且 HTTP 不可达；项目仍无 `package.json`、锁文件或 `node_modules`。
 
-当 `docs/requirements/001-mvp-foundation.md` 获得确认并开始应用初始化时，必须在执行任何安装前把以下真实信息写入本文件：
+`docs/requirements/001-mvp-foundation.md` 的 M2 决策合同已经确认；应用初始化仍未授权。获得实施授权后，必须在执行任何安装前把以下真实信息写入本文件：
 
-- Node.js 与包管理器的固定版本。
+- 已实际切换并验证的 Node.js 与包管理器身份。
 - 初始化与安装命令及其状态影响。
 - 开发、构建、预览、定向测试、全量测试、格式和类型检查命令。
 - 本地、预览和生产环境的实际身份校验。

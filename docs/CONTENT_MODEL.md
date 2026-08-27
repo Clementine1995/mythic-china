@@ -2,9 +2,17 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案，尚未实现 Schema。
+- 状态：MVP 目标合同草案；M2 文件形态、身份、状态与关系子集已经确认，Schema 尚未实现。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
+
+### 0.1 M2 文件与加载合同
+
+- Entry 使用 `src/content/entries/{entryId}.md`：YAML frontmatter 保存结构化字段，Markdown body 从“核心故事”开始。
+- Collection、Source、Claim、Terminology 分别使用 `src/content/{collections|sources|claims|terminology}/{stableId}.yml`；一对象一文件。M2 不安装或使用 MDX。
+- 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
+- M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
+- M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容。
 
 ## 1. 编辑分类
 
@@ -27,35 +35,28 @@
 人物、异兽、地点、故事和指南共用一个内容集合，以 `entryType` 控制模板差异。
 
 ```yaml
-entryId: meng-po
-slug: meng-po
-title: Meng Po and the Soup of Forgetfulness
-subtitle: The old woman who waits before rebirth
+entryId: zhong-kui
+slug: zhong-kui
+title: Zhong Kui, the Demon Queller
+subtitle: null
 entryType: figure
-traditionType: folklore
-nameZh: 孟婆
-pinyin: Mèng Pó
-aliases:
-  - Lady Meng
-summary: A concise 80–120 word answer.
-periodLabel: later imperial and modern popular tradition
+traditionType: null
+nameZh: 钟馗
+pinyin: Zhōng Kuí
+aliases: []
+opening: []
+summary: null
+periodLabel: null
 earliestKnownSourceId: null
-sourceIds:
-  - source-example
-claimIds:
-  - claim-meng-po-bowl
-terminologyRecordIds:
-  - term-meng-po
-topicIds:
-  - afterlife
-relatedEntryIds:
-  - nai-he-bridge
-heroAssetId: asset-meng-po-hero-v1
+sourceIds: []
+claimIds: []
+terminologyRecordIds: []
+relatedEntryIds: []
+heroAssetId: null
 publishedAt: null
 updatedAt: null
 lastFactCheckedAt: null
 status: draft
-commercialDisclosure: null
 ```
 
 必填逻辑：
@@ -63,15 +64,30 @@ commercialDisclosure: null
 - `entryId`：稳定内部身份，发布后不得因标题和栏目变化修改。
 - `slug`：稳定 canonical URL 片段；修改必须有显式 redirect 需求。
 - `entryType`：`figure | creature | realm | tale | guide`。
-- `traditionType`：使用第 1 节枚举。
+- `opening`：字符串序列；draft 可为 `[]`，进入 `editorial-review` 时提供 1–2 个纯文本段落，承担有悬念但不虚构引语的开场；模板将其放在 Quick Answer 前。Markdown body 不重复开场，从核心故事开始。
+- `summary`：draft 可为 `null`；进入 `editorial-review` 时提供 80–120 词 Quick Answer。
+- `traditionType`：使用第 1 节枚举；draft 可为 `null`，进入 `editorial-review` 前必须确认。
 - `sourceIds`：已发布内容至少一个；涉及多版本时覆盖主要版本来源。
 - `claimIds`：已发布内容中的事实性文化主张必须能通过正文引用或 Claim 关联到具体 source 与 locator。
 - `terminologyRecordIds`：出现需要语境化处理的关键专名或术语时必填。
 - `earliestKnownSourceId`：只有对应的“最早已定位证据”Claim 通过核查时才填写；检索边界不足时保持 `null`，不得用推测补位。
-- `heroAssetId`：已发布内容必须关联 approved asset。
+- `heroAssetId`：draft 与 `editorial-review` 可为 `null`；进入 `visual-review` 后必须指向 M3 已建立的有效资产记录，已发布内容必须关联 approved asset。M2 不创建假 Asset Manifest 或生产图片。
 - `lastFactCheckedAt`：已发布内容必填。
 - `status`：`draft | editorial-review | visual-review | ready | published | archived`。
 - Entry 不保存 `collectionIds`；Collection 成员关系与阅读顺序只由 `Collection.entryIds` 编写，Entry 页所需的反向 Collection 入口在构建期从 Collection 记录派生，避免双向关系漂移。
+- M2 不实现 `Topic` 权威集合，因此 Entry Schema 暂不包含 `topicIds`。首次引入 Explore 筛选/Topic 时必须先定义稳定对象、关系校验与 URL 行为，不能留下未校验的字符串外键。
+
+M2 以状态递进校验代替“draft 也伪装完整”的默认值：
+
+| 状态 | 最小要求 |
+| --- | --- |
+| `draft` | 稳定 `entryId`、`slug`、`title`、`entryType` 与 `status`；研究、开场、摘要、关系和资产字段可以显式为 `null` / `[]` |
+| `editorial-review` | `traditionType`、开场、Quick Answer、正文草稿和至少一个真实 Source 已存在；Claim/术语关系按正文实际风险逐步补齐 |
+| `visual-review` | 满足编辑审核要求；`heroAssetId` 指向 M3 建立的非 archived 资产记录，视觉 brief 与披露可审核 |
+| `ready` | 满足第 8 节全部编辑、证据、术语、关系、视觉与无障碍门禁 |
+| `published` | 满足 `ready`，并补齐发布日期、最后事实核查日期、公开关系与 canonical 验证 |
+
+Zod 负责一条记录的字段与同记录条件，独立内容图校验器负责跨对象存在性、状态矩阵、唯一性和循环展开保护；不得在页面模板中用默认值掩盖失败。
 
 ### 2.2 Collection
 
@@ -88,11 +104,8 @@ featuredEntryId: zhong-kui
 entryIds:
   - chinese-underworld-guide
   - zhong-kui
-  - fengdu
-  - yanluo-ten-kings
-  - meng-po
 status: draft
-heroAssetId: asset-underworld-collection-v1
+heroAssetId: null
 ```
 
 - `entryIds` 顺序有编辑意义。
@@ -102,6 +115,7 @@ heroAssetId: asset-underworld-collection-v1
 - `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建但保留既有关系供历史追溯。
 - Collection 必须说明范围与限制，避免把不同时代/传统强行拼成统一体系。
 - Topic 是可复用筛选标签；Collection 是有导语、有顺序、有结论的产品页面。
+- 上述 M2 draft Collection 只引用两个已确认 demo；其余首发候选在创建真实 Entry 后再加入，不能用悬空 ID 预占阅读路径。
 - Collection 的 realm token、纹理、构图和主题资产属于表现层/Asset Manifest，不写入本内容对象。
 
 ### 2.3 Source
@@ -283,19 +297,21 @@ normalizedTopicId: null
 ## 3. 稳定 ID 与关系
 
 - ID 使用小写 kebab-case，只表达对象身份，不包含栏目、年份或状态。
+- 一文件一对象的文件名就是稳定内部 ID；Astro loader 生成的 `entry.id`、文件名和记录内对应 `*Id` 必须三者一致。frontmatter/data `slug` 不得覆盖内部身份。
 - 关系只保存稳定 ID，不保存展示标题。
 - `Collection.entryIds` 是 Collection 成员关系与顺序的唯一事实来源；Entry 的反向 Collection 列表由构建期派生，不另存一份关系。
 - 构建时必须验证：ID 唯一、slug 唯一、关系目标存在、Collection—Entry 状态符合第 2.2 节矩阵；`featuredEntryId` 存在时必须同时出现在该 Collection 的 `entryIds` 中并通过相同状态校验。
 - 循环关系本身可以存在，但页面生成必须防止递归展开。
 - 删除已发布对象前先评估 redirect、外部链接和关联内容，不直接清除身份。
+- 所有公开列表显式按 Collection 的编辑顺序、日期或稳定键排序，不依赖 Content Layer 返回顺序。
 
 ## 4. 正文模板
 
-本节定义发布时的读者语义顺序与必需内容块，不冻结具体栅格或组件树；实现仍须让 DOM 顺序与下列阅读顺序一致。内容文件不得保存模板版本、组件实现名、CSS class、token、断点、动画或排版参数；受控 MDX 只能使用项目批准的编辑语义组件。
+本节定义发布时的读者语义顺序与必需内容块，不冻结具体栅格或组件树；实现仍须让 DOM 顺序与下列阅读顺序一致。内容文件不得保存模板版本、组件实现名、CSS class、token、断点、动画或排版参数。若未来独立需求批准受控 MDX，其组件也只能表达项目批准的编辑语义；M2 不使用 MDX。
 
 默认 Entry 面向读者的正文顺序如下。编辑生产时仍须先完成 claim/source 与术语核查；正文中的轻量引用跟随相关主张，下面的 `Sources` 指完整书目：
 
-1. 有悬念但不虚构引语的开场。
+1. `opening` 中有悬念但不虚构引语的 1–2 段开场。
 2. 80–120 词 Quick Answer。
 3. 核心故事。
 4. `What the text says`：最早/主要文本或传统。
@@ -307,7 +323,7 @@ normalizedTopicId: null
 10. Related Entries / 下一条探索路径。
 11. Reader Request。
 
-全站 Footer newsletter 属于页面外壳，不属于 Entry 正文模板，也不得插入上述阅读链。
+`opening` 与 `summary` 来自 frontmatter；Markdown body 从第 3 项核心故事开始，避免解析渲染后 HTML、按首段切割或为此引入 MDX。全站 Footer newsletter 属于页面外壳，不属于 Entry 正文模板，也不得插入上述阅读链。
 
 历史人物额外固定：
 
@@ -333,6 +349,8 @@ normalizedTopicId: null
 - 不同神系、地区或文本之间的关系。
 - 历史人物事迹与神化过程。
 - 容易与现代流行改编混淆的说法。
+
+M2 先校验 Entry `claimIds`、Claim `sourceLinks`、locator、evidence role 与 certainty 的结构化关系，不为尚未完成的生产正文引入 MDX 或自定义 Markdown 插件。正文附近 source note 的最终作者语法与可访问回链在 M4 首个真实 Entry 模板中确认；在该语法有真实测试前，不得声称“附近引用”已自动覆盖。
 
 原典或馆藏记录用于证明“这个版本/对象呈现了什么”，专业研究用于证明年代、形成过程、意义和跨传统关系，田野或非遗档案用于证明特定地域、群体和记录时期的活态传统。三者不能因看似“权威”而跨用途替代。
 
@@ -422,26 +440,15 @@ visual-production/
 - 与 `accessibilityMode` 匹配的 alt / 空 alt、适用的 caption、credit、AI disclosure 和焦点坐标。
 - 桌面、移动、OG 和社媒裁切预览。
 
-## 7. 商业字段
+## 7. 未来商业扩展边界（非 M2 Schema）
 
-MVP 字段可以为空，但进入商业阶段后只能使用显式结构：
+M2 不在 Entry、Collection 或其他内容记录中创建空商业字段，也不建立商品、价格、赞助、联盟、支付或会员 Schema。未来只有经独立需求批准后，才可以增加明确结构，并遵守：
 
-```yaml
-commercialDisclosure:
-  type: affiliate
-  text: This page contains affiliate links.
-affiliateLinks:
-  - label: Recommended translation
-    url: https://example.org/product
-    provider: example
-sponsor:
-  name: null
-  disclosure: null
-```
-
-- 参考书目与购买推荐分区显示。
-- source 不因 affiliate 状态获得更高权重。
-- 跟踪参数由单一商业链接组件管理，不写进内容正文。
+- 供应商中立的内部 `productId` / `offerId` 与支付供应商 ID、checkout URL、价格同步和跟踪参数分离；后者只进入可替换 adapter/配置，不进入稳定内容身份或 Markdown 正文。
+- 商业引用与 `Source` / `Claim` 证据关系分开；参考书目与购买推荐分区显示，source 不因 affiliate、sponsor 或 paid product 状态获得更高权重。
+- disclosure 记录必须能指向具体商业入口并紧邻渲染；不得依靠全站页脚的一句泛化声明覆盖正文入口。
+- 第一阶段优先外部托管结账。若需求涉及购买者身份、付费权限或下载权益，必须先定义认证、webhook、会话、存储、退款/撤销与数据删除边界；静态 HTML 隐藏不构成访问控制。
+- 跟踪参数和赞助脚本只能由单一商业边界管理；没有真实需求和渲染入口时不创建字段、组件或空目录。
 
 ## 8. 发布状态与门禁
 
@@ -460,7 +467,7 @@ draft
 - traditionType、sourceIds、claimIds、适用的 terminologyRecordIds、related IDs 和 lastFactCheckedAt 完整。
 - 所有已发布事实性文化主张都有可定位证据；`provisional` Claim 未作为事实发布，`disputed` Claim 已在页面显示分歧。
 - 所有公开视觉资产为 approved，manifest 与导出物存在。
-- alt / 空 alt、适用的 caption、credit、AI disclosure、权利状态与商业披露符合 `accessibilityMode` 和生产方式。
+- alt / 空 alt、适用的 caption、credit、AI disclosure、权利状态与生产方式一致；若后续需求引入商业入口，其披露还须通过第 7 节门禁。
 - 页面在移动、键盘、减弱动效和无 JavaScript 条件下通过验收。
 
 状态变更不允许靠修改一个字段绕过验证；实际发布门禁和命令在应用初始化后写入 `DEV_WORKFLOW.md`。
