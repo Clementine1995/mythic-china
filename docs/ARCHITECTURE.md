@@ -2,11 +2,11 @@
 
 ## 0. 状态与结论
 
-- 状态：M2 目标架构决策已于 2026-08-27 确认，应用代码、项目运行时和依赖尚未初始化。
+- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证；源码和锁文件尚未由代理提交，生产视觉、Asset Manifest、外部服务、托管与发布仍未开始。
 - 决策：**Astro 7 静态模式 + TypeScript strict + Git 内 Entry Markdown / 结构化 YAML + 构建期内容图校验 + 外部服务承接后续少量交互**。M2 不选择托管、不安装 adapter、MDX、React/Vue/Svelte、Tailwind 或商业依赖。
 - 核心判断：这是内容出版物，不是先造平台。首版的复杂度应集中在内容、出处、图片和设计，而不是账号、数据库和运行时服务。
 - 当前没有创建 Vercel/Cloudflare 项目、平台子域名、自有域名、DNS 记录或任何生产托管配置；纯静态 `dist/` 保持供应商中立，首次远端预览前再选择托管。
-- 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准当前页面风格，不能把其视觉皮肤整份移入未来应用，也不代表目标栈已经初始化。
+- 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准当前页面风格，不能把其视觉皮肤整份移入未来应用。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
 
 Astro 默认将页面预渲染为静态 HTML，并允许未来只把个别路由改为按需渲染，因此适合“静态核心、局部动态升级”的路线。来源：[Astro On-demand Rendering](https://docs.astro.build/en/guides/on-demand-rendering/)，访问于 2026-08-27。
 
@@ -53,11 +53,11 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 
 | 层 | MVP 推荐 | 选择原因 | 当前状态 |
 | --- | --- | --- | --- |
-| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | 已确认，待初始化 |
-| 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | 已确认，待初始化 |
-| 内容约束 | Astro Content Layer + Zod 单记录 Schema + 独立内容图校验器 | Schema 校验字段；纯函数校验器负责跨集合关系、状态矩阵、ID 与 slug | 已确认，待初始化 |
-| UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | 已确认，待初始化 |
-| 图片 | `src/assets` + Astro `Image/Picture` | 构建期输出 AVIF/WebP 与响应式尺寸 | 待初始化 |
+| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M2 已实施并生成 3 个 `noindex` debug 页面 |
+| 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | M2 Schema 与 2 Entry + 1 Collection draft 已实施 |
+| 内容约束 | Astro Content Layer + Zod 单记录 Schema + 独立内容图校验器 | Schema 校验字段；纯函数校验器负责跨集合关系、状态矩阵、ID 与 slug | M2 已实施并由 Vitest/build 覆盖 |
+| UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | M2 仅实施中性 debug templates；生产表现层属 M4 |
+| 图片 | `src/assets` + Astro `Image/Picture` | 构建期输出 AVIF/WebP 与响应式尺寸 | M3 待实施 |
 | 搜索 | Pagefind（达到约 30 篇后） | 扫描构建后的静态 HTML，无搜索服务器 | 后续触发 |
 | 托管 | 供应商中立的静态输出；Vercel / Cloudflare 仅为后续候选 | M2 不需要远端运行时，不让托管决定内容、URL 或应用结构 | 首次远端预览前确认 |
 | 邮件 | Buttondown 等外部邮件服务候选 | 静态表单可直接交给服务，不自建邮箱库 | 待隐私与服务确认 |
@@ -76,18 +76,18 @@ Pagefind 在静态站构建后生成随站点部署的搜索 bundle，不需要�
 
 | 项目 | 初始精确值 | 合同 |
 | --- | --- | --- |
-| Node.js | `24.20.0` LTS | `.node-version` 精确记录；`engines.node` 为 `>=24.20.0 <25` |
+| Node.js | `24.16.0` LTS | 所有会话固定调用 `D:\Program Files\nvm\v24.16.0\node.exe`；当前 `.node-version` 精确记录 `24.16.0`；`engines.node` 为 `>=24.16.0 <25` |
 | pnpm | `11.22.0` | `packageManager` 精确记录；`engines.pnpm` 为 `>=11.22.0 <12`；只保留 `pnpm-lock.yaml` |
 | Astro | `7.2.8` | `package.json` 精确记录；默认静态输出，不安装 adapter |
 | TypeScript | `6.0.3` | 使用 Astro strict 基线；在 `astro check` 正式支持其程序化 API 前不采用 TypeScript 7 |
 
 Astro 精确快照以官方 [Astro changelog 7.2.8](https://github.com/withastro/astro/blob/latest/packages/astro/CHANGELOG.md#728) 为依据；TypeScript 7 的当前限制以 Astro language tools 的 [`astro check` compatibility guard](https://github.com/withastro/astro/blob/main/packages/language-tools/language-server/src/check.ts#L1018-L1044) 为准，访问于 2026-08-27。
 
-当前公开 PATH 的 Node.js `16.20.2` 已停止维护且不满足 Astro 的 Node.js `22.12.0+` 前提；M1 临时预览使用的 Codex bundled runtime 也不是项目运行时。M2 实施前必须另行授权安装/切换项目运行时，并验证 `node --version` 与 `pnpm --version`。Node 版本状态与 Astro 前提见 [Node.js releases](https://nodejs.org/en/about/previous-releases) 和 [Astro installation prerequisites](https://docs.astro.build/en/install-and-setup/#prerequisites)；pnpm 初始版本见 [pnpm 11.22.0 release](https://github.com/pnpm/pnpm/releases/tag/v11.22.0)，访问于 2026-08-27。
+当前公开 PATH 的 Node.js `16.20.2` 已停止维护且不满足 Astro 的 Node.js `22.12.0+` 前提，因此不得用于本项目；M1 临时预览使用的 Codex bundled runtime 也不是项目运行时。用户已于 2026-08-27 固定所有会话使用 `D:\Program Files\nvm\v24.16.0\node.exe`，验证返回 `v24.16.0`；M2 已通过同目录 Corepack `0.35.0` 提供 pnpm `11.22.0` 并完成安装。后续本地命令必须先把固定目录置于当前进程 PATH 首位，再显式调用同目录 Corepack；`scripts/verify-runtime.mjs` 会拒绝子进程回落到公开 PATH 的 Node。Node 版本状态与 Astro 前提见 [Node.js releases](https://nodejs.org/en/about/previous-releases) 和 [Astro installation prerequisites](https://docs.astro.build/en/install-and-setup/#prerequisites)；pnpm 初始版本见 [pnpm 11.22.0 release](https://github.com/pnpm/pnpm/releases/tag/v11.22.0)，访问于 2026-08-27。
 
-依赖安装只生成 `pnpm-lock.yaml`，不得并存 `package-lock.json` 或其他锁文件；干净环境/未来 CI 使用 `pnpm install --frozen-lockfile`，manifest 与锁文件不一致时失败，不允许验证过程静默改写依赖解析。锁文件锁定依赖解析，但不声称消除操作系统、原生构建脚本或远端环境差异。来源：[pnpm install --frozen-lockfile](https://pnpm.io/cli/install#--frozen-lockfile)，访问于 2026-08-27。
+依赖安装只生成 `pnpm-lock.yaml`，不得并存 `package-lock.json` 或其他锁文件；干净环境/未来 CI 使用 `pnpm install --frozen-lockfile --ignore-scripts`，manifest 与锁文件不一致时失败，不允许验证过程静默改写依赖解析或执行第三方安装脚本。锁文件锁定依赖解析，但不声称消除操作系统或远端环境差异。来源：[pnpm install --frozen-lockfile](https://pnpm.io/cli/install#--frozen-lockfile)，访问于 2026-08-27。
 
-在实际安装前再次只读核对兼容性；如果决策值已不可用或存在已知阻塞，不静默换版本，而是先更新本节与需求状态。后续升级按独立批次执行完整 `check`；不自动合并 major，Astro、TypeScript、Node.js 或 pnpm major 变化必须先审阅迁移说明。
+首次实际安装前已再次只读核对兼容性并按上表完成精确安装；后续若决策值不可用或出现已知阻塞，不静默换版本，而是先更新本节与需求状态。后续升级按独立批次执行完整 `check`；不自动合并 major，Astro、TypeScript、Node.js 或 pnpm major 变化必须先审阅迁移说明。
 
 ### 3.2 Astro 与 Next.js App Router 比较
 
@@ -123,13 +123,13 @@ Entry Markdown + typed YAML records
 
 ### 3.4 当前非空仓库的初始化边界
 
-当前根目录已经包含治理文档、权威合同、原型和用户 Git 历史。获得单独实施授权后，M2 只在精确的 `F:\codex-project\mythic-china` 根目录手工建立 Astro 官方 manual setup 所需的最小文件；不运行 starter/template 向导覆盖现有结构，不创建临时项目再复制，不建立旁路目录、worktree 或新仓库。来源：[Astro manual setup](https://docs.astro.build/en/install-and-setup/#manual-setup)，访问于 2026-08-27。
+当前根目录已经包含治理文档、权威合同、原型和用户 Git 历史。获得用户单独实施授权后，M2 已只在精确的 `F:\codex-project\mythic-china` 根目录手工建立 Astro 官方 manual setup 所需的最小文件；没有运行 starter/template 向导，没有创建临时项目、旁路目录、worktree、分支或新仓库。来源：[Astro manual setup](https://docs.astro.build/en/install-and-setup/#manual-setup)，访问于 2026-08-27。
 
-初始化首批只包含静态 Astro、TypeScript、Content Layer、内容图校验、Vitest、ESLint 与 Prettier 的必要依赖和配置。M2 不安装 Playwright/浏览器二进制、MDX、UI 框架、CSS 框架、动画库、CMS、数据库、认证、搜索、adapter、分析、表单或商业依赖；这些都由出现真实需求的后续里程碑决定。
+初始化首批只包含静态 Astro、TypeScript、Content Layer、内容图校验、Vitest、ESLint 与 Prettier 的必要依赖和配置。M2 未安装 Playwright/浏览器二进制、MDX、UI 框架、CSS 框架、动画库、CMS、数据库、认证、搜索、adapter、分析、表单或商业依赖；这些都由出现真实需求的后续里程碑决定。pnpm 11 因默认一日发布成熟期为已确认的当天版 `astro@7.2.8` 自动生成 `minimumReleaseAgeExclude`，该配置只保留根包，不扩大依赖或工作区范围。
 
 ## 4. 目标目录
 
-以下是 `001-mvp-foundation` 的目标结构，不代表当前已存在：
+以下是 `001-mvp-foundation` 的跨里程碑目标结构；M2 直接需要的 `src/content`、`layouts`、`templates`、两个动态路由、内容/架构测试和固定运行时脚本已经存在，其余标注的后续目录仍只是目标：
 
 ```text
 mythic-china/
@@ -181,7 +181,7 @@ mythic-china/
 
 Entry 使用 `{entryId}.md`；Collection、Source、Claim、Terminology 分别使用 `{collectionId|sourceId|claimId|termId}.yml`，一对象一文件。所有 `glob()` loader 必须显式实现 `generateId`，从规范化的相对文件名生成内部 ID；内容图校验器必须核对 loader 的 `entry.id` 与记录声明的 `entryId` / `collectionId` / `sourceId` / `claimId` / `termId` 一致。`data.slug` 只承担公开 URL，不得覆盖内部关系身份。Astro 默认 ID 可被 frontmatter/data `slug` 覆盖，因此显式 `generateId` 是本项目分离 ID 与 URL 的硬门禁。来源：[Astro custom IDs](https://docs.astro.build/en/guides/content-collections/#defining-custom-ids) 与 [`glob()` `generateId`](https://docs.astro.build/en/reference/content-loader-reference/#generateid)，访问于 2026-08-27。
 
-Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络且可由 Vitest 直接调用的纯内容图校验器负责跨集合目标存在性、ID/slug 唯一性、Collection—Entry 状态矩阵、Featured Entry 约束、来源/Claim/术语关系和明确排序。不得依赖运行时 fallback 猜测悬空关系。Astro `getCollection()` 返回顺序不作为编辑顺序事实；所有列表按合同字段或稳定键显式排序。来源：[Astro sorting collection entries](https://docs.astro.build/en/guides/content-collections/#sorting-collection-entries)，访问于 2026-08-27。
+Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络且可由 Vitest 直接调用的纯内容图校验器负责跨集合目标存在性、ID/slug 唯一性、Collection—Entry 状态矩阵、Featured Entry 约束、来源/Claim/术语关系、Claim `evidenceContext` 与 Source 类型/role 矩阵、Entry earliest Claim/Source 成对精确绑定和明确排序。校验器先对 loader 记录副本按稳定身份排序，再生成确定性错误；不得依赖运行时 fallback 或 Content Layer 返回顺序猜测关系。Astro `getCollection()` 返回顺序不作为编辑顺序事实；所有列表按合同字段或稳定键显式排序。来源：[Astro sorting collection entries](https://docs.astro.build/en/guides/content-collections/#sorting-collection-entries)，访问于 2026-08-27。
 
 图片最终使用独立 Asset Manifest 并由 Entry/Collection 引用，但生产 manifest 与真实视觉资产属于 M3。M2 只实现允许 draft `heroAssetId: null` 的字段/状态边界与测试 fixture，不创建假 approved 资产。字段合同见 `docs/CONTENT_MODEL.md`。
 
@@ -310,16 +310,16 @@ MVP 至少建立：
 
 - 内容 Schema、枚举、稳定 ID 与 slug 唯一性测试。
 - source、related ID 与 collection 引用完整性测试。
-- 高风险 claim 的 source role、locator、certainty 与关键术语双语审核状态测试。
+- 高风险 claim 的 evidence context、Source 类型/role、locator、certainty、earliest Claim/Source 精确绑定与关键术语双语审核状态测试。
 - 已发布视觉资产的 accessibility mode、alt / 空 alt、适用的 caption、AI disclosure 与 asset manifest 测试。
 - 关键页面静态构建、链接、Sitemap、RSS 与结构化数据测试。
 - 桌面/移动视觉回归或截图验收。
 - 键盘、焦点、减弱动效和自动化无障碍检查。
 - LCP 主图、图片尺寸预留和客户端 JavaScript 预算检查。
 
-M2 首批自动门禁固定为：Prettier check、ESLint correctness、Vitest 内容/架构测试、`astro check` 与 `astro build`。`astro build` 只转译而不执行类型检查，因此未来 `build` script 必须先运行 `astro check`，全量 `check` 再按格式、lint、测试、build 的顺序组合；不得把单独 build 成功写成类型检查通过。来源：[Astro type checking](https://docs.astro.build/en/guides/typescript/#type-checking)，访问于 2026-08-27。
+M2 首批自动门禁固定为：Prettier check、ESLint correctness、Vitest 内容/架构测试、`astro check` 与 `astro build`。`build` script 已先运行 `astro check` 再运行 `astro build`，聚合 `check` 按格式、lint、测试、类型/内容检查、build 顺序执行；不得把单独 build 成功写成类型检查通过。2026-08-27 已完成依赖干净复现；2026-08-28 审计修复后的最新聚合门禁结果为：4 个测试文件、41 项测试通过，Astro 检查 0 errors / 0 warnings / 0 hints，静态输出 3 页且无客户端 JavaScript。来源：[Astro type checking](https://docs.astro.build/en/guides/typescript/#type-checking)，访问于 2026-08-27。
 
-Playwright、浏览器二进制与自动无障碍浏览器测试延后到 M4 出现真实 Home/Collection/Entry 纵切片后再引入；M2 不为尚不存在的生产页面承担浏览器依赖。真实安装与 script 命令只有在获得实施授权、创建对应文件前写入 `DEV_WORKFLOW.md`。
+Playwright、浏览器二进制与自动无障碍浏览器测试延后到 M4 出现真实 Home/Collection/Entry 纵切片后再评估引入；M2 不为尚不存在的生产页面承担浏览器依赖。M2 真实安装、定向验证、聚合门禁和未授权的 dev/preview 服务命令均记录在 `DEV_WORKFLOW.md`。
 
 ## 12. MVP 明确不做
 

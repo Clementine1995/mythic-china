@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import CollectionTemplate from "../../templates/CollectionTemplate.astro";
+
+interface Props {
+  collection: CollectionEntry<"collections">;
+  entries: CollectionEntry<"entries">[];
+  featuredEntry: CollectionEntry<"entries"> | null;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const graph = await loadValidatedContentGraph();
+  const entriesById = new Map(graph.entries.map((entry) => [entry.id, entry]));
+
+  return graph.collections
+    .filter((collection) => collection.data.status !== "archived")
+    .map((collection) => {
+      const entries = collection.data.entryIds.flatMap((id) => {
+        const entry = entriesById.get(id);
+        return entry && entry.data.status !== "archived" ? [entry] : [];
+      });
+      const featuredEntry = collection.data.featuredEntryId
+        ? (entriesById.get(collection.data.featuredEntryId) ?? null)
+        : null;
+
+      return {
+        params: { slug: collection.data.slug },
+        props: {
+          collection,
+          entries,
+          featuredEntry,
+        } satisfies Props,
+      };
+    });
+};
+
+const props = Astro.props;
+---
+
+<CollectionTemplate {...props} />

@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 文件形态、身份、状态与关系子集已经确认，Schema 尚未实现。
+- 状态：MVP 目标合同草案；M2 文件形态、身份、状态、关系子集与 Schema 已在本地实现并通过工程门禁，生产内容、资产与页面仍按后续里程碑推进。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -10,9 +10,10 @@
 
 - Entry 使用 `src/content/entries/{entryId}.md`：YAML frontmatter 保存结构化字段，Markdown body 从“核心故事”开始。
 - Collection、Source、Claim、Terminology 分别使用 `src/content/{collections|sources|claims|terminology}/{stableId}.yml`；一对象一文件。M2 不安装或使用 MDX。
+- 内容目录 inventory 只允许上述约定扩展名（空目录可保留 `.gitkeep`）；`.yaml`、备份后缀和其他不会被 loader 匹配的文件必须使架构门禁失败，不能被 `glob()` 静默忽略。
 - 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
 - M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
-- M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容。
+- M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容；`Chinese Underworld Guide (Working Draft)` 只是内部工作标题，不是已冻结的公开标题。
 
 ## 1. 编辑分类
 
@@ -48,6 +49,7 @@ opening: []
 summary: null
 periodLabel: null
 earliestKnownSourceId: null
+earliestKnownClaimId: null
 sourceIds: []
 claimIds: []
 terminologyRecordIds: []
@@ -70,9 +72,9 @@ status: draft
 - `sourceIds`：已发布内容至少一个；涉及多版本时覆盖主要版本来源。
 - `claimIds`：已发布内容中的事实性文化主张必须能通过正文引用或 Claim 关联到具体 source 与 locator。
 - `terminologyRecordIds`：出现需要语境化处理的关键专名或术语时必填。
-- `earliestKnownSourceId`：只有对应的“最早已定位证据”Claim 通过核查时才填写；检索边界不足时保持 `null`，不得用推测补位。
+- `earliestKnownSourceId` 与 `earliestKnownClaimId`：必须同时为 `null` 或同时填写。Claim ID 必须精确指向当前 Entry `claimIds` 中归属该 Entry 的 `verified`、`historical`、`historical-tradition` Claim；Source ID 必须出现在 `sourceIds`，并作为该 Claim 中匹配的一手文本、馆藏对象或田野记录 locator。同一 Claim 还必须包含另一条已列入 Entry 书目的独立 scholarship Source。其他 Claim 不得替被指定 Claim 完成此门禁；检索边界不足时两者都保持 `null`。
 - `heroAssetId`：draft 与 `editorial-review` 可为 `null`；进入 `visual-review` 后必须指向 M3 已建立的有效资产记录，已发布内容必须关联 approved asset。M2 不创建假 Asset Manifest 或生产图片。
-- `lastFactCheckedAt`：已发布内容必填。
+- `lastFactCheckedAt`：进入 `ready` 时即必填，`published` 必须保留；`archived` 继承已发布谱系的完整性，不得通过归档清空。
 - `status`：`draft | editorial-review | visual-review | ready | published | archived`。
 - Entry 不保存 `collectionIds`；Collection 成员关系与阅读顺序只由 `Collection.entryIds` 编写，Entry 页所需的反向 Collection 入口在构建期从 Collection 记录派生，避免双向关系漂移。
 - M2 不实现 `Topic` 权威集合，因此 Entry Schema 暂不包含 `topicIds`。首次引入 Explore 筛选/Topic 时必须先定义稳定对象、关系校验与 URL 行为，不能留下未校验的字符串外键。
@@ -86,6 +88,9 @@ M2 以状态递进校验代替“draft 也伪装完整”的默认值：
 | `visual-review` | 满足编辑审核要求；`heroAssetId` 指向 M3 建立的非 archived 资产记录，视觉 brief 与披露可审核 |
 | `ready` | 满足第 8 节全部编辑、证据、术语、关系、视觉与无障碍门禁 |
 | `published` | 满足 `ready`，并补齐发布日期、最后事实核查日期、公开关系与 canonical 验证 |
+| `archived` | 仅从完整发布谱系进入；保留 `published` 的编辑、证据、日期和关系完整性，但退出公开静态路由 |
+
+正文门禁要求真实可见的 Markdown 内容；空白、单个或多个 HTML 注释以及未闭合的纯注释不能让 Entry 进入 `editorial-review` 或更后状态。M2 不把这项最小门禁描述成完整 Markdown 可见性分析，复杂渲染语义仍由后续真实正文模板验收。
 
 Zod 负责一条记录的字段与同记录条件，独立内容图校验器负责跨对象存在性、状态矩阵、唯一性和循环展开保护；不得在页面模板中用默认值掩盖失败。
 
@@ -109,10 +114,11 @@ heroAssetId: null
 ```
 
 - `entryIds` 顺序有编辑意义。
+- draft、`editorial-review` 与 `visual-review` 可暂时保留空的策划路径；进入 `ready` 后（含 `published | archived`）必须至少有一个真实 Entry 成员。
 - `titleZh` 与 `pinyin` 承载 Collection 的中文身份；首发英语页面出现中文标题时两者成对必填，拼音遵循 `STYLE.md` 的带声调 Hanyu Pinyin 规则。
 - `status` 与 Entry 共用 `draft | editorial-review | visual-review | ready | published | archived` 枚举。
 - `featuredEntryId` 可选，用于把当前重点入口与 `entryIds` 的策展阅读顺序分开；若填写，目标必须存在于同一 Collection 的 `entryIds` 中，并服从下述 Collection—Entry 状态矩阵。更换 Featured Entry 不得改变 Entry 的稳定 ID、slug 或阅读顺序。
-- `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建但保留既有关系供历史追溯。
+- `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建，只能保留指向 `published | archived` Entry 的既有发布谱系关系供历史追溯，不能借归档状态新挂 draft/未公开对象。
 - Collection 必须说明范围与限制，避免把不同时代/传统强行拼成统一体系。
 - Topic 是可复用筛选标签；Collection 是有导语、有顺序、有结论的产品页面。
 - 上述 M2 draft Collection 只引用两个已确认 demo；其余首发候选在创建真实 Entry 后再加入，不能用悬空 ID 预占阅读路径。
@@ -131,7 +137,7 @@ editionBasisOrObjectId: Qing woodblock edition / museum object number
 originalPeriod: Qing dynasty
 publicationYear: 2020
 url: https://example.org/source
-accessedAt: 2026-08-26
+accessedAt: "2026-08-26"
 language: en
 translator: null
 pageOrSection: chapter 1
@@ -140,7 +146,7 @@ rightsUrl: https://example.org/rights
 notes: Why this source is used and its limitations.
 ```
 
-`sourceType` 建议值：
+`sourceType` 在 M2 中使用下列闭合枚举；新增类型前必须先更新本合同与测试：
 
 - `primary-text`
 - `translation`
@@ -151,7 +157,9 @@ notes: Why this source is used and its limitations.
 - `reference-website`
 - `modern-adaptation`
 
-网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。原典、译本、论文和馆藏分别记录适用的底本/版次、出版年、卷章页行或对象编号；数字影像和现代译文还要记录 `rightsStatus` 与 `rightsUrl`。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。现代改编不得作为古代事实的唯一证据。
+网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。M2 的最小可追溯组合是：`primary-text` 至少有版次/底本身份；`scholarship` 与 `modern-adaptation` 有作者/机构及出版物、年份或 URL 身份；`museum-or-library` 与 `fieldwork-or-community-archive` 有负责机构及对象号、档案/版次或 URL 身份。`translation` 记录必须填写 `translator`、`publicationOrEdition`、`pageOrSection`、`rightsStatus` 与 `rightsUrl`，任何填写了 `rightsUrl` 的记录也必须填写 `rightsStatus`。数字影像同样需要两项权利信息，但 M2 Source 尚无可靠的数字影像判别字段，因此不得凭现有字段臆测并自动放行；首次接入此类记录前先扩充合同与 Schema。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。
+
+M2 的 Entry/Source 日期字段只接受带引号的 ISO calendar date 字符串 `"YYYY-MM-DD"`。未加引号的 YAML 日期会被 loader 解析为 `Date`，时间戳还可能因时区跨日；Schema 一律拒绝 `Date` 与 timestamp，不做静默截断或日期迁移。
 
 ### 2.4 Claim
 
@@ -161,6 +169,7 @@ Claim 记录可发布主张与证据的对应关系，不要求把文章拆成�
 claimId: claim-meng-po-bowl
 entryId: meng-po
 claimType: textual
+evidenceContext: historical-tradition
 statement: Meng Po offers the dead a drink associated with forgetting before rebirth.
 certainty: verified
 sourceLinks:
@@ -175,10 +184,12 @@ sourceLinks:
 ```
 
 - `claimType`：`textual | historical | tradition | translation | interpretation`。
+- `evidenceContext`：`historical-tradition | modern-reception`。前者覆盖原典、历史形成、传统、翻译及基于这些材料的解释；后者覆盖现代游戏、影视、当代改编、机构说明与接受史。它是证据门禁字段，不从 `statement` 文本猜测。
 - `certainty`：`verified | disputed | provisional`；`provisional` 不得作为已确认事实发布，`disputed` 必须在页面显示分歧。
-- `role`：`primary | scholarship | translation | object-record | fieldwork | adaptation`；证据等级取决于主张类型，不把任何单一来源当作万能权威。
-- “最早”“首次”“形成于某时期”和跨传统关系必须同时有可定位的一手证据与专业研究；无法证明已穷尽时写 `earliest securely located` 等有边界的表述，不写绝对起源。
-- 现代改编、旅游宣传、百科、生成式模型输出和 AI 搜索摘要只能帮助发现线索或说明现代接受，不能单独支撑古代事实。
+- `role`：`primary | scholarship | translation | object-record | fieldwork | adaptation | reference`。M2 固定匹配为：`primary-text/primary`、`translation/translation`、`scholarship/scholarship`、`museum-or-library/object-record`、`fieldwork-or-community-archive/fieldwork`、`modern-adaptation/adaptation`，以及 `official-site | reference-website` / `reference`；未列组合全部构建失败。
+- `verified | disputed` 的 `historical-tradition` Claim 至少需要一个 `primary | scholarship | translation | object-record | fieldwork` 证据；`adaptation` 与 `reference` 可以补充语境，但不能单独支撑传统、古代或历史事实。`modern-reception` 至少需要一个匹配的 `scholarship | object-record | fieldwork | adaptation | reference` 证据。`provisional` 可以暂存类型/role 匹配但证据尚不完整的研究线索，仍不得被 `ready | published | archived` Entry 引用。
+- “最早”“首次”“形成于某时期”和跨传统关系必须同时有可定位的一手证据与专业研究；Entry 必须用 `earliestKnownClaimId` 精确指定负责该判断的 Claim，不能在 `claimIds` 中搜索任意碰巧包含相同 Source 的 Claim。被指定 Claim 必须为 `verified`、`historical`、`historical-tradition`，并要求 `primary-text/primary`、`museum-or-library/object-record` 或 `fieldwork-or-community-archive/fieldwork` 成对匹配，以及另一个独立且列入 Entry 书目的 `scholarship` Source 以 `scholarship` role 支撑研究边界。无法证明已穷尽时写 `earliest securely located` 等有边界的表述，不写绝对起源。
+- 现代改编、旅游宣传、百科、生成式模型输出和 AI 搜索摘要只能帮助发现线索或说明现代接受，不能单独支撑古代事实；生成式模型输出与 AI 搜索摘要不作为 Source 记录或 Claim 证据。
 
 ### 2.5 TerminologyRecord
 
@@ -296,11 +307,11 @@ normalizedTopicId: null
 
 ## 3. 稳定 ID 与关系
 
-- ID 使用小写 kebab-case，只表达对象身份，不包含栏目、年份或状态。
+- ID 使用小写 kebab-case，只表达对象身份，不包含栏目、年份或状态；Entry、Collection、Source、Claim 与 Terminology 五类稳定 ID 在同一内容图内全局唯一。
 - 一文件一对象的文件名就是稳定内部 ID；Astro loader 生成的 `entry.id`、文件名和记录内对应 `*Id` 必须三者一致。frontmatter/data `slug` 不得覆盖内部身份。
 - 关系只保存稳定 ID，不保存展示标题。
 - `Collection.entryIds` 是 Collection 成员关系与顺序的唯一事实来源；Entry 的反向 Collection 列表由构建期派生，不另存一份关系。
-- 构建时必须验证：ID 唯一、slug 唯一、关系目标存在、Collection—Entry 状态符合第 2.2 节矩阵；`featuredEntryId` 存在时必须同时出现在该 Collection 的 `entryIds` 中并通过相同状态校验。
+- 构建时必须验证：五类稳定 ID 全局唯一，Entry 与 Collection 的 slug 在两类间全局唯一，关系目标存在、Collection—Entry 状态符合第 2.2 节矩阵；`featuredEntryId` 存在时必须同时出现在该 Collection 的 `entryIds` 中并通过相同状态校验。`published` Entry 的 `relatedEntryIds` 只能指向 `published` Entry；`archived` Entry 只保留指向 `published | archived` Entry 的历史关系，不能借归档状态引用 draft/未公开对象。
 - 循环关系本身可以存在，但页面生成必须防止递归展开。
 - 删除已发布对象前先评估 redirect、外部链接和关联内容，不直接清除身份。
 - 所有公开列表显式按 Collection 的编辑顺序、日期或稳定键排序，不依赖 Content Layer 返回顺序。
@@ -337,6 +348,7 @@ normalizedTopicId: null
 
 - 每篇已发布 Entry 的 `sourceIds` 至少一个。
 - `sourceIds` 是页面书目入口，不代表证据自动完整；事实性文化主张仍须由正文附近引用或 Claim 关联到具体 locator。
+- Entry 进入 `ready` 后，其已关联 Claim 与 TerminologyRecord 使用的全部 Source 都必须同时出现在该 Entry 的 `sourceIds` 完整书目中；draft 允许研究中的书目暂未闭合。
 - Sources 区显示作者/机构、标题、版本/年份、链接和访问日期等适用信息。
 - 外部网站链接使用描述性名称，不显示无上下文裸 URL。
 
@@ -350,7 +362,7 @@ normalizedTopicId: null
 - 历史人物事迹与神化过程。
 - 容易与现代流行改编混淆的说法。
 
-M2 先校验 Entry `claimIds`、Claim `sourceLinks`、locator、evidence role 与 certainty 的结构化关系，不为尚未完成的生产正文引入 MDX 或自定义 Markdown 插件。正文附近 source note 的最终作者语法与可访问回链在 M4 首个真实 Entry 模板中确认；在该语法有真实测试前，不得声称“附近引用”已自动覆盖。
+M2 先校验 Entry `claimIds`、成对的 `earliestKnownClaimId` / `earliestKnownSourceId`、Claim `evidenceContext`、`sourceLinks`、locator、Source 类型/role 与 certainty 的结构化关系，不为尚未完成的生产正文引入 MDX 或自定义 Markdown 插件。正文附近 source note 的最终作者语法与可访问回链在 M4 首个真实 Entry 模板中确认；在该语法有真实测试前，不得声称“附近引用”已自动覆盖。
 
 原典或馆藏记录用于证明“这个版本/对象呈现了什么”，专业研究用于证明年代、形成过程、意义和跨传统关系，田野或非遗档案用于证明特定地域、群体和记录时期的活态传统。三者不能因看似“权威”而跨用途替代。
 
@@ -470,4 +482,4 @@ draft
 - alt / 空 alt、适用的 caption、credit、AI disclosure、权利状态与生产方式一致；若后续需求引入商业入口，其披露还须通过第 7 节门禁。
 - 页面在移动、键盘、减弱动效和无 JavaScript 条件下通过验收。
 
-状态变更不允许靠修改一个字段绕过验证；实际发布门禁和命令在应用初始化后写入 `DEV_WORKFLOW.md`。
+状态变更不允许靠修改一个字段绕过验证；M2 已建立本地工程门禁与命令，实际预览和发布仍须在对应里程碑开始前继续补齐 `DEV_WORKFLOW.md` 并取得独立授权。

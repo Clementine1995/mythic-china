@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、initial commit 与 `origin`。M2 技术合同已经确认，但尚无项目运行时、应用依赖、应用源码或发布环境。不提供不可执行的假设命令，也不把文档决策写成已经实施的状态。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1 基线提交与 `origin`。M2 本地工程与内容核心已实施并验证，但没有运行中的应用服务、真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 解释为预览或生产发布。
 
 ## 当前环境身份门禁
 
@@ -22,22 +22,150 @@ Get-ChildItem -LiteralPath $mythicChinaRoot -Force | Select-Object Name, Mode
 
 ## 初始化、构建与本地运行
 
-应用初始化仍不适用。没有 `package.json`、锁文件、应用源码和应用配置；`prototypes/entry-reader-flow.html` 是直接评审用静态原型，不构成应用运行时。因此不得把 M2 决策确认或临时预览解释为实施开始、依赖授权或长期开发服务器。
+M2 已在当前非空仓库根手工最小初始化；没有运行 starter/template，也没有创建旁路项目、worktree、分支或新仓库。`prototypes/entry-reader-flow.html` 等 M1 文件仍是直接评审用静态原型，不进入 Astro 应用构建。M2 build 只生成 `noindex` 语义调试页，不代表生产页面、生产视觉或长期开发服务器。
 
 ### M2 已确认目标与实施授权门禁
 
-已确认但尚未执行的项目环境合同：
+已实施的项目环境合同：
 
-- Node.js 24 LTS；初始精确值 `24.20.0`，未来 `.node-version` 精确记录，`engines.node` 限制为 `>=24.20.0 <25`。
-- pnpm 11；初始精确值 `11.22.0`，未来 `packageManager` 记录 `pnpm@11.22.0`，`engines.pnpm` 限制为 `>=11.22.0 <12`，仓库只保留 `pnpm-lock.yaml`。
+- Node.js 24 LTS；固定绝对路径为 `D:\Program Files\nvm\v24.16.0\node.exe`，初始精确值与当前 `.node-version` 均为 `24.16.0`，`engines.node` 限制为 `>=24.16.0 <25`。所有会话和项目命令必须显式调用该路径，不依赖 PATH、`nvm use` 或 Codex bundled runtime。
+- pnpm 11；初始精确值为 `11.22.0`，当前 `packageManager` 记录 `pnpm@11.22.0`，`engines.pnpm` 限制为 `>=11.22.0 <12`，仓库只保留 `pnpm-lock.yaml`。
 - Astro 7 静态模式、TypeScript strict、Entry Markdown、结构化 YAML、Content Layer、内容图校验与 Vitest；不安装 adapter、MDX、UI/CSS/动画框架、Playwright 浏览器、CMS、数据库、认证、搜索、外部服务或商业依赖。
 - 当前非空仓库只允许在精确根目录手工建立最小 Astro 配置，不运行 starter/template 向导，不创建临时项目、旁路目录、worktree 或新仓库。
 
-2026-08-27 的只读环境核查：公开 PATH 为 Node.js `16.20.2`、npm `8.19.4`、pnpm `11.19.0`、Corepack `0.17.0`。Node.js 16 已停止维护且不满足 Astro 7 的运行前提；现有 pnpm 也不是已确认精确值。M1 临时预览使用的 Codex bundled Node.js `24.19.0` 只属于历史临时服务，不得当作项目长期运行时或借此跳过授权。
+固定 Node 身份只读验证：
 
-下列动作仍需用户单独授权：安装或切换 Node.js 24.20.0、提供/切换 pnpm 11.22.0、下载应用依赖、生成 `node_modules` / `package.json` / `pnpm-lock.yaml` / 配置 / 源码 / 测试，以及启动任何 dev/preview 服务。授权后且执行安装前，必须先在本节补入当时验证过的精确初始化/安装命令、影响、停止条件和回查方式；若官方兼容信息已变化，先更新架构与需求文档，不静默换版本。
+```powershell
+$mythicProjectNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
+if (-not (Test-Path -LiteralPath $mythicProjectNode)) {
+  throw 'Mythic China fixed Node.js runtime not found.'
+}
+$mythicProjectNodeVersion = & $mythicProjectNode --version
+if ($mythicProjectNodeVersion -ne 'v24.16.0') {
+  throw "Unexpected Mythic China Node.js version: $mythicProjectNodeVersion"
+}
+```
 
-初始化后必须建立 `format:check`、`lint`、`test`、`typecheck`、`build` 与聚合 `check` 的真实 script；其中 `build` 必须先执行 `astro check` 再执行 `astro build`，`check` 还须覆盖格式、lint 与 Vitest。脚本文件不存在前，本段只是执行门禁，不是可运行命令。
+通过标准：命令退出成功并精确返回 `v24.16.0`。不得用无路径限定的 `node` 结果替代此门禁。
+
+2026-08-27 的只读环境核查：公开 PATH 为 Node.js `16.20.2`、npm `8.19.4`、pnpm `11.19.0`、Corepack `0.17.0`。这些 PATH 工具不得用于本项目。用户随后固定所有会话使用 `D:\Program Files\nvm\v24.16.0\node.exe`；该目录已验证为 Node.js `24.16.0`，并自带 npm `11.13.0` 与 Corepack `0.35.0`，但没有现成的 `pnpm.cmd`。M1 临时预览使用的 Codex bundled Node.js `24.19.0` 只属于历史临时服务，不得当作项目长期运行时或借此跳过授权。
+
+固定 Node.js `24.16.0` 的选择与只读验证已经完成，不再安装或切换其他 Node。用户于 2026-08-27 明确授权：使用该固定 Node 自带的 Corepack 提供项目固定的 pnpm `11.22.0`，下载 M2 白名单依赖，并在当前非空仓库根手工建立最小应用。授权不包含启动 dev/preview 服务、Git 写操作或发布。
+
+执行安装前，先由文件修改建立 `.node-version`、`package.json`、Astro/TypeScript/ESLint/Prettier 配置与应用源码；不运行 starter/template。初始依赖白名单固定为：运行依赖 `astro@7.2.8`；开发依赖 `@astrojs/check@0.9.10`、`@eslint/js@10.0.1`、`@types/node@24.13.3`、`eslint@10.9.1`、`eslint-plugin-astro@3.1.0`、`prettier@3.6.2`、`prettier-plugin-astro@0.14.1`、`typescript@6.0.3`、`typescript-eslint@8.68.0` 与 `vitest@4.1.11`。Prettier 暂停在 `3.6.2`，因为稳定的 `prettier-plugin-astro@0.14.1` 与 Prettier `3.7+` 存在尚未进入稳定版插件的 Astro 条件内联脚本解析回归；插件发布兼容版后再独立升级。不得在安装时静默增加 adapter、MDX、UI/CSS/动画框架、Playwright、CMS、数据库、认证、搜索、外部服务或商业依赖。
+
+安装身份、命令与停止条件：
+
+```powershell
+$mythicProjectRoot = (Resolve-Path -LiteralPath '.').Path
+$mythicProjectNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
+$mythicProjectCorepack = 'D:\Program Files\nvm\v24.16.0\corepack.cmd'
+$mythicProjectRuntimeDirectory = Split-Path -LiteralPath $mythicProjectNode -Parent
+$env:ASTRO_TELEMETRY_DISABLED = '1'
+
+if ($mythicProjectRoot -ne 'F:\codex-project\mythic-china') {
+  throw "Unexpected workspace: $mythicProjectRoot"
+}
+if (-not (Test-Path -LiteralPath $mythicProjectNode)) {
+  throw 'Mythic China fixed Node.js runtime not found.'
+}
+if (-not (Test-Path -LiteralPath $mythicProjectCorepack)) {
+  throw 'Mythic China fixed Corepack command not found.'
+}
+if ((& $mythicProjectNode --version) -ne 'v24.16.0') {
+  throw 'Unexpected Mythic China Node.js version.'
+}
+if ((& $mythicProjectCorepack --version) -ne '0.35.0') {
+  throw 'Unexpected Mythic China Corepack version.'
+}
+
+$mythicOtherPathEntries = @($env:Path -split [IO.Path]::PathSeparator) | Where-Object {
+  $_ -and $_.TrimEnd('\\') -ine $mythicProjectRuntimeDirectory.TrimEnd('\\')
+}
+$env:Path = (@($mythicProjectRuntimeDirectory) + $mythicOtherPathEntries) -join [IO.Path]::PathSeparator
+$mythicResolvedNode = (Get-Command node -CommandType Application | Select-Object -First 1).Source
+if ((Resolve-Path -LiteralPath $mythicResolvedNode).Path -ne (Resolve-Path -LiteralPath $mythicProjectNode).Path) {
+  throw "Project child processes would use the wrong Node.js: $mythicResolvedNode"
+}
+
+$mythicPackage = Get-Content -LiteralPath (Join-Path $mythicProjectRoot 'package.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+if ($mythicPackage.packageManager -ne 'pnpm@11.22.0') {
+  throw "Unexpected package manager contract: $($mythicPackage.packageManager)"
+}
+
+& $mythicProjectCorepack install
+if ($LASTEXITCODE -ne 0) { throw 'Corepack failed to provide the project package manager.' }
+
+$mythicPnpmVersion = & $mythicProjectCorepack pnpm --version
+if ($LASTEXITCODE -ne 0 -or $mythicPnpmVersion -ne '11.22.0') {
+  throw "Unexpected pnpm version: $mythicPnpmVersion"
+}
+
+& $mythicProjectCorepack pnpm install --ignore-scripts
+if ($LASTEXITCODE -ne 0) { throw 'M2 dependency installation failed.' }
+```
+
+影响：`corepack install` 只把 `packageManager` 指定的 pnpm 下载到 Corepack 用户缓存；当前机器的 pnpm 内容寻址 store 实际为 `F:\.pnpm-store\v11`，项目内只生成 `node_modules` 与唯一的 `pnpm-lock.yaml`。pnpm 11 默认的一日依赖成熟期策略因 Astro `7.2.8` 为新发布的已确认精确版本，自动在项目根生成 `pnpm-workspace.yaml`，只记录 `astro@7.2.8` 的 `minimumReleaseAgeExclude`；它是供应链策略配置，不声明额外工作区包。`--ignore-scripts` 阻止第三方依赖生命周期脚本执行；不创建全局 pnpm shim，不修改系统 PATH、nvm 当前选择或其他项目。上述 PATH 调整只作用于当前 PowerShell 进程，确保 pnpm 启动的 `node`、Astro、ESLint、Vitest 与 Prettier 子进程也解析到固定目录。若根目录、固定运行时/Corepack/pnpm 精确版本、manifest 白名单或锁文件种类不符，若安装要求额外依赖/构建批准，或任一命令失败，立即停止，不改用其他 Node、pnpm、lock 或 fallback。
+
+安装后回查：
+
+```powershell
+if (-not (Test-Path -LiteralPath (Join-Path $mythicProjectRoot 'node_modules'))) {
+  throw 'node_modules was not created in the project root.'
+}
+if (-not (Test-Path -LiteralPath (Join-Path $mythicProjectRoot 'pnpm-lock.yaml'))) {
+  throw 'pnpm-lock.yaml was not created.'
+}
+$mythicUnexpectedLocks = Get-ChildItem -LiteralPath $mythicProjectRoot -File | Where-Object {
+  $_.Name -in @('package-lock.json', 'npm-shrinkwrap.json', 'yarn.lock', 'bun.lock', 'bun.lockb')
+}
+if ($mythicUnexpectedLocks) {
+  $mythicUnexpectedLocks.FullName
+  throw 'Unexpected lock file found.'
+}
+& $mythicProjectCorepack pnpm list --depth 0
+if ($LASTEXITCODE -ne 0) { throw 'Installed dependency verification failed.' }
+& $mythicProjectCorepack pnpm run runtime:check
+if ($LASTEXITCODE -ne 0) { throw 'Project child-process runtime verification failed.' }
+git status --short --branch
+```
+
+初始化必须建立 `format:check`、`lint`、`test`、`typecheck`、`build` 与聚合 `check` 的真实 script；其中 `build` 必须先执行 `astro check` 再执行 `astro build`，`check` 按格式、lint、Vitest、build 的顺序执行。所有命令都通过固定 Corepack 显式调用：
+
+```powershell
+& $mythicProjectCorepack pnpm run format:check
+& $mythicProjectCorepack pnpm run lint
+& $mythicProjectCorepack pnpm run test
+& $mythicProjectCorepack pnpm run typecheck
+& $mythicProjectCorepack pnpm run build
+& $mythicProjectCorepack pnpm run check
+```
+
+`dev` 与 `preview` script 可以写入 manifest，但本轮没有服务启动授权，不执行。首次锁文件生成并通过门禁后，干净环境复现使用 `& $mythicProjectCorepack pnpm install --frozen-lockfile --ignore-scripts`；任何 manifest/lock 不一致必须失败，不允许在验证阶段静默更新锁文件。
+
+定向测试使用同一身份门禁和进程环境，例如：
+
+```powershell
+& $mythicProjectCorepack pnpm exec vitest run tests/content/content-schemas.test.ts
+```
+
+只有获得单独服务启动授权后，才可在已经通过上述根目录、Node、PATH 子进程与 pnpm 身份门禁的同一 PowerShell 会话中运行：
+
+```powershell
+& $mythicProjectCorepack pnpm run dev -- --host 127.0.0.1
+# 或按明确验收范围运行：
+& $mythicProjectCorepack pnpm run preview -- --host 127.0.0.1
+```
+
+影响：命令会启动本地 HTTP 服务并持续占用端口，必须记录实际监听地址和 PID；验收完成、根目录/运行时身份变化、出现非预期外部监听或服务错误时立即 `Ctrl+C`，随后只读确认端口不再监听。本次 M2 没有获得或执行这项服务授权。
+
+M2 执行记录（2026-08-27 初始化；2026-08-28 审计修复）：
+
+- 固定运行时为 `D:\Program Files\nvm\v24.16.0\node.exe` / `v24.16.0`，固定 Corepack 为同目录 `0.35.0`，项目 pnpm 为 `11.22.0`。公开 PATH 的 Node.js `16.20.2` 曾被子进程回查识别并阻止；`scripts/verify-runtime.mjs` 与进程内 PATH 置顶共同确保所有 package script 使用固定运行时。
+- 在精确项目根手工创建 manifest、配置、源码和测试后，以 `--ignore-scripts` 安装精确白名单依赖。pnpm 11 的默认一日发布成熟期为当天确认的 `astro@7.2.8` 自动生成唯一 `pnpm-workspace.yaml` 例外；项目仍只有根包和唯一 `pnpm-lock.yaml`。
+- 干净复现时只删除已验证位于项目根下的 `node_modules`、`.astro` 与 `dist` 三个可再生目录；`pnpm install --frozen-lockfile --ignore-scripts` 从 `F:\.pnpm-store\v11` 复用 378 个包、下载 0 个，并重建依赖目录。`package.json`、`pnpm-lock.yaml` 与 `pnpm-workspace.yaml` 的 SHA-256 前后完全一致。
+- 2026-08-28 审计修复后，聚合 `check` 再次按格式、lint、Vitest、`astro check`、`astro build` 顺序通过：4 个测试文件、41 项测试通过；类型/内容检查为 0 errors、0 warnings、0 hints；静态构建生成 3 个页面且没有客户端 JavaScript 文件。空的 Source、Claim、Terminology 集合会输出预期告警，因为 M2 不制造假文化记录。
+- `ASTRO_TELEMETRY_DISABLED=1` 用于项目命令；未启用应用分析或真实外部服务。没有启动 dev/preview、没有 Git add/commit/push、没有部署或发布。
 
 ### M1 临时 Express 预览
 
@@ -112,15 +240,9 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
 - 当前 M1 原型已完成单一桌面浏览器中的 390/768/1440px 视觉与溢出、移动菜单/目录、Home → Collection → Entry 与浏览历史、页内锚点和焦点回归、Escape、对比与触控目标、无图/灰度、当前系统 fallback、控制台和本地资源检查。新 Review Board 已落实四个第二轮系统证据；截图只保存于仓库外的临时验收目录。
 - 当前浏览器控制面不提供 JavaScript 禁用或媒体偏好模拟，真实 Tab/Shift+Tab/Enter 全链、浏览器真实 200% 缩放和开发者工具逐字形命中也无法可靠驱动；这些项目继续保持未验收。批准的自托管字体文件、慢加载、macOS/iOS/Android fallback 与目标读者测试移交首个真实纵切片门禁。
 - 用户于 2026-08-27 明确冻结 M1 以结束继续探索，同时明确表示当前页面风格不是其想要的方向；这项反馈记录为人工视觉满意度未通过，不能把 M1 冻结解释为设计批准。
-- `Ctrl+C` 未在限定等待内结束进程，随后只读确认精确监听 PID、Node 路径与启动时间后终止该临时进程。`127.0.0.1:4173` 已无监听且 HTTP 不可达；项目仍无 `package.json`、锁文件或 `node_modules`。
+- `Ctrl+C` 未在限定等待内结束进程，随后只读确认精确监听 PID、Node 路径与启动时间后终止该临时进程。`127.0.0.1:4173` 已无监听且 HTTP 不可达；该次 M1 收口当时项目仍无 `package.json`、锁文件或 `node_modules`。
 
-`docs/requirements/001-mvp-foundation.md` 的 M2 决策合同已经确认；应用初始化仍未授权。获得实施授权后，必须在执行任何安装前把以下真实信息写入本文件：
-
-- 已实际切换并验证的 Node.js 与包管理器身份。
-- 初始化与安装命令及其状态影响。
-- 开发、构建、预览、定向测试、全量测试、格式和类型检查命令。
-- 本地、预览和生产环境的实际身份校验。
-- 部署入口、源身份和发布后只读检查。
+`docs/requirements/001-mvp-foundation.md` 的 M2 本地实施已经完成；本节保存其真实运行时、安装、定向/全量验证与本地服务门禁。预览/生产环境仍不存在，首次建立前必须另行补入实际身份、部署入口、不可变源身份、停止/撤销方式和发布后只读检查，并取得对应授权。
 
 ## 文档验证
 
@@ -147,11 +269,13 @@ rg -n '\{\{[^}]+\}\}' .
 ```powershell
 $utf8Strict = [Text.UTF8Encoding]::new($false, $true)
 $invalidUtf8Files = @()
-Get-ChildItem -LiteralPath . -Recurse -File -Filter '*.md' | ForEach-Object {
+$markdownFiles = @(rg --files -g '*.md')
+$markdownFiles | ForEach-Object {
+  $markdownFile = Get-Item -LiteralPath $_
   try {
-    $null = $utf8Strict.GetString([IO.File]::ReadAllBytes($_.FullName))
+    $null = $utf8Strict.GetString([IO.File]::ReadAllBytes($markdownFile.FullName))
   } catch {
-    $invalidUtf8Files += $_.FullName
+    $invalidUtf8Files += $markdownFile.FullName
   }
 }
 if ($invalidUtf8Files.Count -gt 0) {
@@ -166,8 +290,9 @@ if ($invalidUtf8Files.Count -gt 0) {
 
 ```powershell
 $brokenMarkdownLinks = @()
-Get-ChildItem -LiteralPath . -Recurse -File -Filter '*.md' | ForEach-Object {
-  $markdownFile = $_
+$markdownFiles = @(rg --files -g '*.md')
+$markdownFiles | ForEach-Object {
+  $markdownFile = Get-Item -LiteralPath $_
   $markdownText = Get-Content -LiteralPath $markdownFile.FullName -Raw -Encoding UTF8
   $relativeLinks = [regex]::Matches($markdownText, '\[[^\]]+\]\((?!https?://|mailto:|#)([^)#]+)(?:#[^)]+)?\)')
   foreach ($relativeLink in $relativeLinks) {
@@ -242,7 +367,7 @@ if ($mythicRemotes) {
 - 已在精确根目录 `F:\codex-project\mythic-china` 执行 plain `git init`，未传入初始分支名，也未执行 `branch`、`checkout`、`switch` 或 `worktree`。
 - `git rev-parse --show-toplevel` 返回当前项目根；`git status --short --branch` 显示 `No commits yet on master`。`master` 只是本机 Git 产生的 unborn HEAD 标签，不代表已批准的长期分支策略。
 - `git ls-files --cached` 为 0 个条目，未执行 `git add` 或 `git commit`；所有项目文件保持未跟踪。
-- `git remote -v` 无输出，未创建远端，也未执行 push。应用运行时、依赖、托管和发布仍未初始化。
+- `git remote -v` 无输出，未创建远端，也未执行 push；在该 Git 初始化时点，应用运行时、依赖、托管和发布均未初始化。
 - 用户随后自行创建 `first commit`、将当前分支改为 `main`、配置 `origin` 并建立 `main...origin/main` 跟踪关系；用户已确认这些操作属于本人。代理没有执行、撤销或改写这些 Git 操作。
 
 ### 用户执行的 M1 工程参考基线提交

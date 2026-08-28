@@ -1,0 +1,37 @@
+{
+  "name": "mythic-china",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.22.0",
+  "engines": {
+    "node": ">=24.16.0 <25",
+    "pnpm": ">=11.22.0 <12"
+  },
+  "scripts": {
+    "runtime:check": "node scripts/verify-runtime.mjs",
+    "dev": "node scripts/verify-runtime.mjs && astro dev",
+    "preview": "node scripts/verify-runtime.mjs && astro preview",
+    "format": "node scripts/verify-runtime.mjs && prettier --write .",
+    "format:check": "node scripts/verify-runtime.mjs && prettier --check .",
+    "lint": "node scripts/verify-runtime.mjs && eslint .",
+    "test": "node scripts/verify-runtime.mjs && vitest run",
+    "typecheck": "node scripts/verify-runtime.mjs && astro check",
+    "build": "node scripts/verify-runtime.mjs && astro check && astro build",
+    "check": "node scripts/verify-runtime.mjs && prettier --check . && eslint . && vitest run && astro check && astro build"
+  },
+  "dependencies": {
+    "astro": "7.2.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.3",
+    "eslint": "10.9.1",
+    "eslint-plugin-astro": "3.1.0",
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.68.0",
+    "vitest": "4.1.11"
+  }
+}

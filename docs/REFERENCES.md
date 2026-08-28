@@ -134,7 +134,7 @@
 - [Next.js Static Exports](https://nextjs.org/docs/app/guides/static-exports)、[MDX](https://nextjs.org/docs/app/guides/mdx/) 与 [Backend for Frontend](https://nextjs.org/docs/app/guides/backend-for-frontend) — Next.js 官方文档。用途：Next.js 静态能力、限制和未来后端边界比较。
 - [Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare caching](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Lab and field data differences](https://web.dev/articles/lab-and-field-data-differences) — 用途：全球交付候选与海外实测原则；供应商宣传不替代真实页面测试。
 
-MVP 当前推荐 Astro + Vercel，Cloudflare 为明确备选；Next.js 在动态产品需求被验证后再重评。当前没有托管项目、账号授权、域名或部署事实。
+MVP 当前只确认 Astro 的供应商中立静态输出；Vercel 与 Cloudflare 都只是首次远端预览前需要比较的托管候选，尚未形成推荐顺序。Next.js 仅在动态产品需求被验证后再重评。当前没有托管项目、账号授权、域名或部署事实。
 
 ### Newsletter
 

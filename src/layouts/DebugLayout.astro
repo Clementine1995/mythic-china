@@ -1,0 +1,160 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} · Mythic China M2 Debug</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <p class="site-name">Mythic China</p>
+      <p class="environment-label">
+        M2 semantic debug view · not production UI
+      </p>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer>
+      <p>
+        Draft content is shown only to verify structure, relationships, and
+        static routing. It is not approved cultural or visual production
+        material.
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  /* M2 readability only. Production design is intentionally deferred to M4. */
+  :root {
+    color: #201e1a;
+    background: #f7f5ef;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    line-height: 1.6;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  a {
+    color: #71431f;
+  }
+
+  a:focus-visible {
+    outline: 3px solid #9b5d28;
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    inset-block-start: 0.5rem;
+    inset-inline-start: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .site-header,
+  main,
+  footer {
+    width: min(100% - 2rem, 68rem);
+    margin-inline: auto;
+  }
+
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    justify-content: space-between;
+    padding-block: 1rem;
+    border-block-end: 1px solid #c9c4b7;
+  }
+
+  .site-name,
+  .environment-label {
+    margin: 0;
+  }
+
+  .environment-label,
+  .debug-note,
+  .record-meta {
+    color: #615d54;
+  }
+
+  main {
+    padding-block: 2rem 4rem;
+  }
+
+  article,
+  .collection-view {
+    max-width: 52rem;
+  }
+
+  h1,
+  h2 {
+    line-height: 1.2;
+  }
+
+  h2 {
+    margin-block-start: 2.5rem;
+  }
+
+  .status-label {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid currentColor;
+    font-size: 0.875rem;
+  }
+
+  .empty-state {
+    padding: 0.75rem;
+    border-inline-start: 3px solid #9b9382;
+    color: #615d54;
+  }
+
+  li + li {
+    margin-block-start: 0.75rem;
+  }
+
+  footer {
+    padding-block: 1.5rem;
+    border-block-start: 1px solid #c9c4b7;
+    color: #615d54;
+    font-size: 0.875rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

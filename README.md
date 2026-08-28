@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 的技术与内容合同已经确认，但实施仍未开始。当前已有可运行的中性 Home、`The Chinese Underworld / 中国阴间` Collection、`Zhong Kui, the Demon Queller` Entry、第二轮 Review Board、3×2 Collection 家族探针和字体验收页；它们仍是不可发布的独立原型，不是应用源码。
+- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已在当前项目根完成本地实施和自动验证。当前应用包含 Astro 7 静态基线、五类 Content Layer Schema、构建期内容图校验、41 项 Vitest，以及 1 个 Collection / 2 个 Entry 的 `noindex` 语义调试页；这些调试页不是生产视觉或已审核正式内容。既有 Home、Review Board、3×2 Collection 家族探针和字体验收页仍是不可发布的 M1 独立原型，不是应用源码。
 - 视觉方向：冻结时的 M1 页面外观仍未获批准；2026-08-27，用户在后续仓库外 Home 方向稿中确认“以 A 为主、C 为辅”。首个真实 Home 以 A 的现代文化展览式中性母体、图片主导的非对称策展构图为主，并以 C 的抽象雕塑、地形、路径和裁切为辅助语汇。该选择只确认 Home 概念方向，不追认旧原型，也不批准方向稿本身、最终页面、字体或生产视觉资产；这些语言如何延展到共享表现层、Collection 与 Entry 仍须在真实纵切片中设计并确认。
 - 工作名称：`Mythic China`；目录名与未来包名使用 `mythic-china`。
-- 当前权威日期：2026-08-27。
-- 下一项允许动作：M2 实施仍未开始。技术合同已经确认；只有在用户另行授权 Node.js 24 项目运行时切换/安装、pnpm 依赖安装和当前仓库根的手工最小初始化后，才能写入应用源码、配置与锁文件。首个真实 Home 须按已确认的 A 主、C 辅概念方向实现，Collection 与 Entry 仍按既有三层系统单独设计，三页都须在批量制作前取得用户页面级视觉确认。不得把当前独立原型或仓库外方向稿整份移入未来应用。
+- 当前权威日期：2026-08-28。
+- 下一项允许动作：先由用户审阅 M2 本地结果并决定版本控制动作；代理未执行 `git add`、commit、push 或发布。M3 生产 Asset Manifest/图片管线、M4 首个真实视觉纵切片及任何 dev/preview 服务都不会因 M2 完成自动开始，须按对应范围另行发出开始命令或授权。首个真实 Home 仍须按已确认的 A 主、C 辅概念方向实现，Collection 与 Entry 分别设计并取得页面级视觉确认；不得把 M1 原型或仓库外方向稿整份移入应用。
 
 ## 项目负责
 
@@ -26,7 +26,7 @@
 
 ## 当前主链路
 
-应用尚未初始化，因此当前没有应用运行链路。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 组成冻结的 M1 独立原型；它们可以评审目标体验和工程边界，但不是生产页面、正式内容包或 M2 应用脚手架。目标体验与内部生产必须分开理解：
+M2 已建立本地静态应用链路：`Entry Markdown / 结构化 YAML -> 严格 Schema -> 纯内容图校验 -> Astro 静态路由 -> dist/`。当前只生成 `/collections/chinese-underworld/`、`/explore/zhong-kui/` 与 `/explore/chinese-underworld-guide/` 三个 `noindex` debug 页面；两个 Entry 保持空正文 draft，不含伪来源、伪 Claim 或假资产。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 继续组成冻结的 M1 独立原型，不属于应用构建输入。目标体验与内部生产仍必须分开理解：
 
 - 读者阅读：`主视觉 + 故事问题 -> opening 故事入口 -> Quick Answer -> 核心故事 -> 原典写了什么 -> 后世传统与版本 -> 本站解释 -> 完整 Sources -> Related Entries -> Reader Request -> 全站 Footer`。轻量出处随相关主张出现；完整来源在正文收束后、继续探索之前列出，newsletter 只在全站 Footer 出现。
 - 编辑生产：`研究问题 -> claim map 与可定位来源 -> 术语/译文审核 -> 英文叙事与视觉 brief -> 编辑/视觉审核 -> 内容 Schema 校验 -> 静态构建 -> CDN 网站`。
@@ -35,25 +35,30 @@
 
 ## 当前运行口径
 
-当前只有本地文档和独立原型工作区，没有应用开发、测试或生产运行环境，也没有数据库与远端资源。
+当前已有本地应用开发与自动验证环境，但没有已授权运行中的 dev/preview 服务、真实联调环境、数据库、托管项目或远端发布资源。
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
-| 本地文档与原型工作区 | `F:\codex-project\mythic-china` | 用户已建立 `main`、initial commit 与 `origin`；M1 工程参考已冻结；M2 决策已确认，应用制品尚未初始化 | Git 命令见 `DEV_WORKFLOW.md` | 本地 Markdown、不可发布的独立 HTML 原型及 prototype-only 图片；外部站点仅作只读研究 | 文档编写、只读核查、工程参考评审 |
+| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | 用户已建立 `main`、M1 基线提交与 `origin`；M2 源码/内容/测试已本地实施但未由代理提交 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、不可发布 M1 原型与 prototype-only 图片；无数据库或真实外部写入口 | M2 静态构建、自动验证、文档与工程参考评审 |
 
 ## 项目构建与运行
 
-当前不适用。项目尚无 `package.json`、应用源码或依赖锁文件；独立 HTML 原型不构成应用运行时，不得据此假设构建或服务命令。M2 已确认 Astro 7 静态模式、TypeScript、Node.js 24 LTS、pnpm 11、Entry Markdown 与结构化 YAML 的目标基线，完整边界见 `docs/ARCHITECTURE.md` 与 `docs/CONTENT_MODEL.md`。获得实施授权后，必须在安装前把精确命令写入 `DEV_WORKFLOW.md`；文档决策本身不代表运行时已配置或应用已初始化。
+项目已经手工最小初始化；不使用 starter、adapter、MDX、UI/CSS/动画框架或外部服务。所有本地命令必须按 `DEV_WORKFLOW.md` 将 `D:\Program Files\nvm\v24.16.0` 置于当前进程 PATH 首位，并通过同目录 Corepack 调用 pnpm `11.22.0`；直接使用公开 PATH 的 Node/pnpm 不受支持。`dev` 与 `preview` script 虽已存在，但启动服务仍需单独授权。完整边界见 `docs/ARCHITECTURE.md` 与 `docs/CONTENT_MODEL.md`。
 
 ## 当前最小验证
 
 工作目录：`F:\codex-project\mythic-china`
 
-列出当前 Markdown 文件：
+执行 M2 聚合门禁：
 
 ```powershell
-rg --files -g '*.md'
+$fixedRuntime = 'D:\Program Files\nvm\v24.16.0'
+$env:ASTRO_TELEMETRY_DISABLED = '1'
+$env:Path = "$fixedRuntime;$env:Path"
+& (Join-Path $fixedRuntime 'corepack.cmd') pnpm run check
 ```
+
+该命令真实覆盖 Prettier check、ESLint、Vitest、`astro check` 与静态 build。完整身份门禁、定向命令、干净安装和停止条件以 `DEV_WORKFLOW.md` 为唯一来源。
 
 检查是否残留原模板占位符；通过标准为无输出：
 
@@ -72,8 +77,11 @@ rg -n '\{\{[^}]+\}\}' .
 - `docs/CONTENT_MODEL.md`：内容分类、声明与术语记录、工具无关的视觉资产及读者反馈模型。
 - `docs/REFERENCES.md`：本轮外部参考、视觉 Skill/工具采用边界与用途说明。
 - `docs/requirements/`：单项需求的业务合同、实施单元和验收状态。
+- `src/`：M2 Content Layer、纯内容图校验、语义 debug templates 与静态路由。
+- `tests/`：内容 ID、Schema、内容图和 M2 架构边界 Vitest。
+- `scripts/verify-runtime.mjs`：固定 Node 子进程身份门禁。
 - `prototypes/`：不可发布的静态视觉评审原型；不代表应用实现或已核准内容，工作母版与探索废图不应进入正式代码仓库。
-- 应用源码、测试与稳定脚本将在 MVP 初始化需求中按已确认架构创建，不提前保留空目录。
+- `package.json`、`pnpm-lock.yaml` 与 `pnpm-workspace.yaml`：精确依赖、唯一锁与 pnpm 11 发布成熟期例外；不得另建 lock。
 
 ## 文件地图
 

@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import DebugLayout from "../layouts/DebugLayout.astro";
+
+interface Props {
+  collection: CollectionEntry<"collections">;
+  entries: CollectionEntry<"entries">[];
+  featuredEntry: CollectionEntry<"entries"> | null;
+}
+
+const { collection, entries, featuredEntry } = Astro.props;
+---
+
+<DebugLayout
+  title={collection.data.title}
+  description={`M2 semantic debug view for ${collection.data.title}.`}
+>
+  <section class="collection-view" aria-labelledby="collection-title">
+    <header>
+      <p class="status-label">Status: {collection.data.status}</p>
+      <p class="record-meta">
+        Collection ID: <code>{collection.data.collectionId}</code>
+      </p>
+      <h1 id="collection-title">{collection.data.title}</h1>
+      {
+        collection.data.titleZh && (
+          <p lang="zh-Hans">
+            {collection.data.titleZh} ·{" "}
+            <span lang="zh-Latn-pinyin">{collection.data.pinyin}</span>
+          </p>
+        )
+      }
+      <p>{collection.data.description}</p>
+    </header>
+
+    <section aria-labelledby="featured-heading">
+      <h2 id="featured-heading">Featured Entry</h2>
+      {
+        featuredEntry ? (
+          <p>
+            <a href={`/explore/${featuredEntry.data.slug}/`}>
+              {featuredEntry.data.title}
+            </a>{" "}
+            <span class="record-meta">({featuredEntry.data.status})</span>
+          </p>
+        ) : (
+          <p class="empty-state">No Featured Entry is selected.</p>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="reading-order-heading">
+      <h2 id="reading-order-heading">Curated reading order</h2>
+      <p class="debug-note">
+        This numbered order comes directly from <code>Collection.entryIds</code
+        >{" "}
+        and is never inferred from loader order.
+      </p>
+      <ol>
+        {
+          entries.map((entry) => (
+            <li>
+              <a href={`/explore/${entry.data.slug}/`}>{entry.data.title}</a>
+              <span class="record-meta">
+                {" "}
+                · {entry.data.entryType} · {entry.data.status}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </section>
+</DebugLayout>

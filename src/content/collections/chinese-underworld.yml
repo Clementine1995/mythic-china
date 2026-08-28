@@ -1,0 +1,12 @@
+collectionId: chinese-underworld
+slug: chinese-underworld
+title: The Chinese Underworld
+titleZh: 中国阴间
+pinyin: Zhōngguó yīnjiān
+description: A guided exploration of changing Chinese ideas about realms of the dead, keeping periods, regions, texts and traditions distinct rather than presenting one timeless map or canon.
+featuredEntryId: zhong-kui
+entryIds:
+  - chinese-underworld-guide
+  - zhong-kui
+status: draft
+heroAssetId: null
