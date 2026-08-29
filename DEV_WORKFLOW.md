@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3 基线提交与 `origin`。M2 历史基线为 `f258227`；M3 已完成并形成当前提交基线 `c606f5`（`M3 completed`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1 合同确认并单独授权 M4-U2；U2 noindex review 页面代码与自动静态门禁现已完成，等待页面级评审。U3-U5、服务、依赖、Git 写入、部署与发布未获授权。当前没有运行中的应用服务、真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 解释为预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），当前提交基线为 `8c6d12`（`feat(pages): add M4 noindex review slice`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1 合同确认、单独授权 M4-U2，并在获授权的本地 preview/浏览器评审后确认 U2 页面方向。正式字体与 U5 完整页面门禁仍未完成；U3-U5、依赖、代理 Git 写入、部署与发布未获授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
 ## 当前环境身份门禁
 
@@ -505,14 +505,17 @@ M4-U1 开始前的只读核查记录（2026-08-29）：
 
 M4-U2 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。本单元唯一允许值为 `review`；缺失、`public` 或其他未知值都必须失败。`public` 只有在后续单元建立 published-only 投影与 SEO 发布门禁后才能加入允许值，不能由 `NODE_ENV`、平台 URL 或内容数量推断。
 
-项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但当前没有服务启动授权，不运行。
+项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但每次启动、停止或重启仍须单独授权。M4-U2 页面评审已获得并使用一次本地 preview/浏览器授权，该授权不自动延续到 U3-U5。
 
-### M4-U2 页面与静态验证记录
+### M4-U2 页面、静态与浏览器验证记录
 
 - 已实现显式 review 投影、共享页面壳、Home/Explore/Collections/Collection/两个 Entry/About 共 7 页、approved/current Hero v2 页面接线、完整 Source 展示、CSS-only Collection realm surface 与输出 verifier。
+- Project owner 在 411×651 实际视口查看后反馈字号偏大、排版松散；授权范围内只调整 `src/styles/global.css`，收敛主标题、区块间距、Home 分栏、索引/About 信息轴、Collection 移动顺序和 Entry Hero 响应式尺度，未改内容、路由、组件结构或图片。
 - 固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、13 个测试文件/87 项测试、`astro check`（53 个文件，0 error、0 warning、0 hint）与 7 页静态 build。产物审计确认全部页面为 `noindex, nofollow`、全部内部链接有效、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并精确生成 14 个 Hero v2 AVIF/WebP 页面输出。
 - `pnpm run visual:build:check` 回归通过七个 local master 与三份 current responsive rendition 的 22 个实际输出复核。
-- 未执行 dev/preview、浏览器、真实视口/键盘/缩放/字体检查、Project owner 页面批准、Git 写入、部署或发布。静态门禁通过不构成页面级或发布批准。
+- 获单独授权后启动本地 preview，并在真实浏览器逐页复核全部 7 页的 1440×900、768×900 与 390×844 视口；另在 Project owner 当前 411×651 视口复核 Explore。未发现横向溢出或控制台错误/警告，页面保持 `noindex, nofollow` 与零客户端 JavaScript。
+- Project owner 于 2026-08-29 明确确认 M4-U2 页面方向。该确认基于系统 fallback 字体，不构成正式字体、键盘全链、真实 200% 缩放、禁用 JavaScript、reduced-motion、图片失败、性能、跨平台 fallback、U5 最终视觉或发布批准。
+- U1/U2 主体已由用户提交为 `8c6d12cabce11741bb83941904993f4d8831c818`；代理未执行 Git 写入、部署或发布。后续 U3-U5 与服务控制仍须逐项授权。
 - 未改内容、Schema、manifest、production record、repository source、依赖或 lockfile。未来 Hero 版本切换必须同步受控页面图片 registry；不一致时构建失败，不静默回退。
 
 ## 数据库、外部服务与真实写入口

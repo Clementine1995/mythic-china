@@ -29,23 +29,23 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | 已确认 | Project owner 于 2026-08-29 明确确认 M4 合同第 1–9 项并单独授权 U2；U3-U5 仍须逐项授权 |
-| 实施状态 | M4-U1 与 M4-U2 代码/静态门禁已完成 | U2 已交付 noindex review 页面基础、首个真实纵切片、最小导航入口、测试与静态回归，等待页面级评审 |
-| 验证状态 | U1 文档与 U2 自动门禁通过；页面级验收未执行 | 13 个测试文件/87 项测试、Astro 53 文件零诊断、7 页/14 个 v2 图片输出与 M3 视觉回归通过；浏览器、正式字体和人工视觉未执行 |
+| 实施状态 | M4-U1 与 M4-U2 已完成 | U2 已交付 noindex review 页面基础、首个真实纵切片、最小导航入口、测试与静态回归；经浏览器调整后获 Project owner 页面方向确认 |
+| 验证状态 | U1 文档、U2 自动门禁与 U2 页面方向评审通过 | 13 个测试文件/87 项测试、Astro 53 文件零诊断、7 页/14 个 v2 图片输出与 M3 视觉回归通过；7 页 390/768/1440 实际视口无阻塞布局或溢出，正式字体与 U5 完整门禁未执行 |
 | 发布状态 | 不适用 | 当前没有站点 origin、托管项目、预览环境、生产环境或发布授权 |
 
 - 当前权威结论更新时间：2026-08-29。
-- 当前提交基线：`c606f5aab92d908ff2935c5b7212ad5066636a50`（`M3 completed`）。
-- M4-U1 写入前，HEAD、`main` 与本地 `origin/main` 均指向该提交，`git status --short --branch` 只有 `## main...origin/main`。未执行 fetch，因此不能据此证明服务器端分支状态。
+- 当前提交基线：`8c6d12cabce11741bb83941904993f4d8831c818`（`feat(pages): add M4 noindex review slice`）；M3 历史基线为 `c606f5aab92d908ff2935c5b7212ad5066636a50`。
+- 本次收口文档写入前，HEAD、`main` 与本地 `origin/main` 均指向当前提交基线，`git status --short --branch` 仅显示 `src/styles/global.css` 的已授权未提交调整。未执行 fetch，因此不能据此证明服务器端分支状态。
 
 ## 1. 结论与开发就绪判断
 
 - 一句话结论：先冻结发布投影和首个真实纵切片，再以 noindex 的本地评审页面关闭共享表现层；不得一次铺开批量内容或把资产批准写成页面批准。
-- 是否可以进入页面开发：否。M4-U2 代码与自动静态门禁已完成，当前应停止并等待 Project owner 页面级评审；该授权不延伸至 U3-U5、服务、依赖、Git 写入、部署或发布。
+- 是否可以进入页面开发：否。M4-U2 已完成并获得 Project owner 页面方向确认；当前授权只覆盖 U2 收口文档，不自动延伸至 U3-U5、服务控制、依赖、Git 写入、部署或发布。
 - U2 进入条件：明确授权文件范围；主代理完整读取并执行 `design-taste-frontend` Skill；按本合同声明目标、不做范围、完成标准与验证；写入前复核源身份和用户已有改动。
 - 不阻塞 U2 本地结构评审的事项：真实站点 origin、文章 author/publisher 身份、Collection 专属 Hero、完整钟馗正文和正式字体可以保持未决，但对应页面必须 fail closed 为不可发布、不可索引且不得被写成最终验收通过。
-- 阻塞 M4 页面级最终验收的事项：正式字体文件与许可证/子集、三页实际响应式与人工视觉确认、Collection 最终视觉、完整 Entry 内容与引用层级。
+- 阻塞 M4 页面级最终验收的事项：正式字体文件与许可证/子集、键盘/缩放/媒体偏好/图片失败/性能/跨平台 fallback、Collection 最终视觉、完整 Entry 内容与引用层级。
 - 阻塞 indexable SEO 输出的事项：真实站点 origin；公开 author/publisher 身份及必要 URL/标识；实际页面的发布资格；用途匹配且已批准的 OG 视觉（若输出 `og:image`）。
-- 下一项允许动作：停止并提交 Home、The Chinese Underworld Collection 与 Zhong Kui Entry 三页候选供 Project owner 页面级评审。
+- 下一项允许动作：完成 U2 收口文档与回归验证后停止；U3、Git 写入和后续服务控制仍须 Project owner 分别授权。
 
 ### 1.1 已确认事实
 
@@ -56,7 +56,7 @@
 - 中国阴间 Collection 的 `heroAssetId` 为 `null`。钟馗 Hero 属于 Entry，不是整个 Collection 的 Hero。
 - 中国阴间 Collection 的 `entryIds` 依次包含 draft 的 `chinese-underworld-guide` 与 `zhong-kui`；既有内容图禁止 published Collection 引用未发布 Entry，因此不能只发布钟馗后在页面层过滤 Guide。
 - 仓库已有 U2 共享页面壳、Home、Explore index、Collections index 与 About review 候选；仍没有正式字体、真实站点 origin、canonical、Sitemap、RSS 或结构化数据。
-- M3 资产通过不等于 M4 页面使用、裁切、排版、响应式或整体设计通过。
+- M3 资产通过本身不等于 M4 页面批准；Home/Entry 的 Hero v2 页面使用、裁切、排版与响应式已随 U2 页面方向确认，但正式字体、U5 完整视觉门禁与发布资格仍未批准。
 
 ### 1.2 本合同采用的设计选择
 
@@ -74,14 +74,14 @@
 - 正式字体角色已在 DESIGN 中定义，但仓库没有已批准 WOFF2、CJK 子集、哈希或许可证记录。
 - 首个 Collection 没有已批准专属 Hero；中性 surface 不能被误写为最终主题资产。
 - 当前钟馗只有视觉研究所需的五份 Claim/Source，不等于完整文章研究、英文叙事或发布就绪。
-- 当前没有浏览器服务授权；390/768/1440、键盘、真实 200%、禁用 JavaScript、reduced motion 和跨平台字体仍未验证。
+- U2 已获一次本地 preview/浏览器授权，并完成 7 页 390/768/1440 实际视口复核；键盘全链、真实 200%、禁用 JavaScript、reduced motion、图片失败、性能和跨平台字体仍未验证。
 - 若未来把已发布内容改为 archived，URL 迁移或重定向必须先独立决定；当前合同不静默制造 redirect。
 
 ## 2. 背景、目标与成功标准
 
 ### 2.1 当前问题
 
-M2/M3 已把内容、证据和版本化视觉资产建成可靠的静态输入；U2 现已用 noindex review 页面替换 debug templates。该候选仍不是 deployable/public 输出：public 投影、真实 SEO 身份、浏览器与页面级批准必须在后续单元独立关闭，不能把 draft、`ready` 或资产批准当作发布资格。
+M2/M3 已把内容、证据和版本化视觉资产建成可靠的静态输入；U2 已用 noindex review 页面替换 debug templates，并完成系统 fallback 字体下的页面方向评审。该候选仍不是 deployable/public 输出：public 投影、真实 SEO 身份、正式字体与 U5 完整页面门禁必须在后续单元独立关闭，不能把 draft、`ready`、资产批准或 U2 方向确认当作发布资格。
 
 ### 2.2 用户与业务价值
 
@@ -243,7 +243,7 @@ validated content graph + approved current visual manifests
 - Zhong Kui Entry Hero 必须通过 `asset-zhong-kui-hero-primary` 调用现有 resolver，并解析唯一 approved/current Hero v2。模板不得引用 `-v1`、`-v2` manifest ID 或具体文件名。
 - Zhong Kui Article Lead 若进入 U2 页面，只能通过用途匹配的 `asset-zhong-kui-lead-primary` 与 current resolver 使用；实际位置、裁切与是否保留仍须页面级人工确认。
 - Entry 的 OG 图片若启用，使用用途匹配的逻辑资产 `asset-zhong-kui-og-primary` 及 current resolver；不得把它当作全站或 Collection 默认图。
-- Home 上对 Zhong Kui 的任何图片使用仍是页面级候选，需要在 U2 实际页面中人工确认；M3 的资产批准不能自动关闭该门禁。
+- Home 实际使用 approved/current Hero v2 已在 U2 浏览器评审中获得页面方向确认；该确认不把 Zhong Kui 固化为长期全站身份，也不替代正式字体、U5 最终页面或发布批准。
 - Collection Hero 为 `null` 时使用无图、无文化事实主张的中性 realm surface。该 surface 不伪装成历史地图、阴间结构或已批准视觉资产。
 - alt、空 alt、caption、credit 与 AI disclosure 继续服从 Manifest 的 accessibility mode 和 M3 合同；正文文字不得烧录进图片。
 - U2 不下载字体。正式字体门禁按 DESIGN 执行；系统 fallback 只能支持评审，并必须标为非最终字体状态。
@@ -344,7 +344,7 @@ Astro Content Layer
 - 交付：共享 token/Layout/Header/Footer；真实三页；稳定内容与 Hero current resolver 接线；为保证四项全局导航不产生死链，必须同时提供 Explore、Collections、About 的最小中性真实入口，但三者的完整内容与最终验收仍属于 U3。
 - 不交付：内容补写、状态提升、canonical/Sitemap/RSS/JSON-LD、正式字体、新视觉、外部交互或发布。
 - 完成条件：无编造内容；Hero 解析 v2；Collection 不借用 Entry Hero；所有评审页 noindex；核心导航无死链；定向测试与静态回归通过；三页提交 Project owner 页面级评审。
-- 当前状态：代码与自动静态门禁已完成，等待 Project owner 页面级评审；不包含服务启动、浏览器验证、依赖或 Git 写入。
+- 当前状态：已完成。代码、自动静态门禁、获授权的 7 页三档浏览器复核、字号/排版收敛与 Project owner 页面方向确认均已闭合；正式字体和 U5 完整门禁不属于本单元，U3-U5、依赖与代理 Git 写入未获授权。
 
 ### M4-U3 Explore、Collections 与 About
 
@@ -385,8 +385,8 @@ Astro Content Layer
 | 页面 | 六类 URL、语义顺序、无 JS | 路由/链接完整，真实字段与 Sources 默认可见 | 聚合 `pnpm run check` | 通过：7 页精确 inventory、全部内部链接、5 份完整 Source、零客户端 JS 与缺失区块省略均通过 |
 | 页面图片 | stable ID、current、art direction、产物纯度 | v2-only，desktop/mobile 独立，候选宽度不放大 | resolver Vitest + 静态产物门禁 | 通过：Home/Entry 各引用同一组 14 个 v2 AVIF/WebP；dist 无 v1/Lead/OG/Social |
 | SEO | canonical、OG、Sitemap、RSS、JSON-LD | published-only、绝对身份一致、无 placeholder | U4 定向测试 + 聚合检查 | 未执行，未授权 |
-| 浏览器/无障碍 | 390/768/1440、键盘、200%、reduced motion、字体 | DESIGN 与 WCAG 门禁闭合 | U5 经授权的服务/浏览器入口 | 未执行，未授权 |
-| 人工视觉 | Home A/C、Collection 主题、Entry 阅读器 | Project owner 明确确认页面，不继承 M1/M3 批准 | U5 页面级评审 | 未执行，未授权 |
+| 浏览器/无障碍 | 390/768/1440、键盘、200%、reduced motion、字体 | DESIGN 与 WCAG 门禁闭合 | U2 页面方向评审 + U5 经授权的完整入口 | 部分通过：7 页三档视口无阻塞布局/横向溢出且控制台清洁；键盘、200%、媒体偏好、正式字体和跨平台仍待 U5 |
+| 人工视觉 | Home A/C、Collection 主题、Entry 阅读器 | Project owner 明确确认页面，不继承 M1/M3 批准 | U2 方向评审 + U5 最终页面级评审 | U2 页面方向已于 2026-08-29 确认；正式字体与 U5 最终视觉仍未批准 |
 
 M4-U2 当前自动结果为 13 个测试文件/87 项测试、Astro 53 文件 0 error/0 warning/0 hint、7 页静态 build 与 14 个页面 Hero v2 输出；非默认视觉回归继续通过 7 个 local master 与 22 个 current 响应式输出。空 Terminology 提示符合当前 inventory。
 
@@ -395,9 +395,9 @@ M4-U2 当前自动结果为 13 个测试文件/87 项测试、Astro 53 文件 0 
 | 动作 | 环境与影响 | 所需授权 | 当前状态 |
 | --- | --- | --- | --- |
 | M4-U1 文档写入 | 当前工作区四个 Markdown；无源码/运行时影响 | 已授权 | 已完成并通过文档门禁 |
-| M4-U2 页面/测试/review 构建入口写入 | 当前工作区已列明的源码、测试、package scripts 与文档 | Project owner 明确授权 M4-U2 | 代码与自动静态门禁已完成，等待页面级评审；未改变依赖或 lockfile |
+| M4-U2 页面/测试/review 构建入口写入 | 当前工作区已列明的源码、测试、package scripts 与文档 | Project owner 明确授权 M4-U2 | 已完成并由用户提交为 `8c6d12`；后续 CSS 收敛与收口文档仍未提交，未改变依赖或 lockfile |
 | 依赖安装或调整 | package、lock、node_modules | 单独说明并授权 | 未授权 |
-| dev/preview 或浏览器服务 | 本机进程与端口 | 单独授权 | 未授权，当前无服务 |
+| dev/preview 或浏览器服务 | 本机进程与端口 | 单独授权 | U2 页面方向评审已单独授权并执行；不形成 U3-U5 可复用授权 |
 | 外部写接口或用户数据 | 表单、邮件、分析、数据库 | 不属于 M4 | 禁止 |
 | Git 写操作 | add/commit/push/分支/worktree | 单独授权 | 未授权 |
 | 远端预览、部署或发布 | 托管、域名、DNS、生产 | 单独逐次授权 | 未授权 |
@@ -423,18 +423,19 @@ M4-U2 没有发布目标。当前没有真实 origin、托管身份、预览环�
 
 ### 12.2 M4-U2
 
-- 结果：显式 noindex review 构建、共享页面壳、首个真实纵切片与最小全局入口已实现并通过自动静态门禁，等待 Project owner 页面级评审。
-- 实际修改：增加 review build intent/projection、approved page asset gate、受控页面图片 registry、Layout/Header/Footer/Manifest Hero、Home/Collection/Entry 模板、Explore/Collections/About 入口、共享 CSS、定向测试和 7 页输出 verifier；删除已无引用的 DebugLayout。
+- 结果：显式 noindex review 构建、共享页面壳、首个真实纵切片与最小全局入口已实现并通过自动静态门禁、实际浏览器方向评审和 Project owner 确认，M4-U2 可以关闭。
+- 实际修改：增加 review build intent/projection、approved page asset gate、受控页面图片 registry、Layout/Header/Footer/Manifest Hero、Home/Collection/Entry 模板、Explore/Collections/About 入口、共享 CSS、定向测试和 7 页输出 verifier；删除已无引用的 DebugLayout。页面评审后只在 `src/styles/global.css` 收敛标题尺度、留白、信息轴和移动布局。
 - 内容与资产边界：未改内容、Schema、manifest、production record 或 repository source。钟馗缺失的 opening/summary/body 保持省略，Claims 未进入页面叙事；五份 Source 完整显示。Home/Entry 通过 stable ID/current resolver 使用 Hero v2，Collection 只用 aria-hidden CSS realm surface。
-- 验证：固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、13 个测试文件/87 项测试、`astro check`（53 个文件，0 error、0 warning、0 hint）与 7 页静态 build。产物审计确认全页 `noindex, nofollow`、全部内部链接存在、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并精确生成 14 个 v2 页面 AVIF/WebP。`pnpm run visual:build:check` 回归通过 7 个 local master 与 22 个 current 响应式输出。
-- 未执行：dev/preview、浏览器、390/768/1440 实际视口、键盘/缩放/reduced-motion/禁用 JS、正式字体、Project owner 页面批准、Git 写入、远端部署或发布。
+- 验证：固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、13 个测试文件/87 项测试、`astro check`（53 个文件，0 error、0 warning、0 hint）与 7 页静态 build。产物审计确认全页 `noindex, nofollow`、全部内部链接存在、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并精确生成 14 个 v2 页面 AVIF/WebP。`pnpm run visual:build:check` 回归通过 7 个 local master 与 22 个 current 响应式输出。真实浏览器逐页复核 1440×900、768×900 与 390×844，另在 Project owner 的 411×651 视口复核 Explore；无横向溢出或控制台错误/警告，保持零客户端 JavaScript。
+- 人工确认：Project owner 先反馈字号偏大、排版松散，授权 CSS-only 收敛后于 2026-08-29 明确回复“确认 M4-U2 页面方向，授权同步收口文档”。该确认限于 U2 页面方向和系统 fallback 字体状态。
+- 未执行：键盘全链、真实 200% 缩放、reduced-motion、禁用 JavaScript、正式字体/慢加载/跨平台 fallback、图片失败、性能、U5 最终页面验收、代理 Git 写入、远端部署或发布。
 - 偏差与维护风险：为避免 Astro 全目录 eager glob 把非 current/未用图片带入 dist，U2 使用受控 page image module registry；未来 v3 或回滚在 resolver 切换后还必须同步 registry，否则构建 fail closed。Explore/Collections/About 仍只是 U2 防死链最小入口，不代表 U3 完成。
-- 源身份：HEAD 仍为 `c606f5aab92d908ff2935c5b7212ad5066636a50`；M4-U1/U2 改动未提交，未执行 fetch、Git 写操作或发布。
+- 源身份：HEAD、`main` 与本地 `origin/main` 均为用户提交的 `8c6d12cabce11741bb83941904993f4d8831c818`；页面收敛 CSS 与本次收口文档未提交。未执行 fetch，代理未执行 Git 写操作或发布。
 
 ## 13. 当前最终结论
 
-- M4-U1 合同与 M4-U2 代码/自动静态门禁已完成；U2 页面候选尚未获 Project owner 页面级批准。
-- 已满足：显式 review 投影、7 页 noindex 静态页面、真实纵切片、Hero v2 接线、Source 展示、内部链接与零客户端 JavaScript 门禁。
-- 尚未满足：实际响应式/键盘/缩放/字体/性能/人工视觉验收，U3 完整入口、U4 SEO、U5 收口，以及各后置事项的对应授权。
-- 下一项允许动作：停止并提交三页候选供 Project owner 页面级评审；没有自动延续至 U3-U5。
-- 是否可以关闭：M4-U1 可以关闭；M4-U2 自动实施阶段完成但页面批准待定；M4 总需求不能关闭。
+- M4-U1 与 M4-U2 已完成；U2 页面方向已获 Project owner 确认，但这不是正式字体、U5 最终页面或发布批准。
+- 已满足：显式 review 投影、7 页 noindex 静态页面、真实纵切片、Hero v2 接线、Source 展示、内部链接、零客户端 JavaScript、三档实际视口和 U2 人工方向确认。
+- 尚未满足：键盘、真实缩放、媒体偏好、正式字体、性能、跨平台 fallback、U3 完整入口、U4 SEO、U5 收口，以及各后置事项的对应授权。
+- 下一项允许动作：完成当前 U2 收口验证后停止；没有自动延续至 U3-U5。
+- 是否可以关闭：M4-U1 与 M4-U2 可以关闭；M4 总需求不能关闭。

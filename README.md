@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已由用户提交为历史基线 `f258227`（`feat: complete M2 content foundation`）。M3-U1/U2/U3/U4/U5 已完成并形成当前提交基线 `c606f5`（`M3 completed`）。M3 终验曾因 Hero v1 双手解剖缺陷重开；2026-08-29 Project owner 明确验收定向返修候选后，Hero v2 已成为 approved/current，Hero v1 保留为 approved/non-current 审计历史。当前版本化 inventory 共七个精确画布 master、七份 repository source rendition、两份真实 production record 与五份 manifest 版本记录，其中四份为 approved/current。M4-U1 合同与 M4-U2 noindex review 页面实现、自动检查和静态构建门禁已完成；页面级浏览器、正式字体与 Project owner 视觉批准仍未完成。既有 M1 原型仍不可发布。
-- 视觉方向：冻结时的 M1 页面外观仍未获批准；2026-08-27，用户在后续仓库外 Home 方向稿中确认“以 A 为主、C 为辅”。首个真实 Home 以 A 的现代文化展览式中性母体、图片主导的非对称策展构图为主，并以 C 的抽象雕塑、地形、路径和裁切为辅助语汇。该选择只确认 Home 概念方向，不追认旧原型，也不批准方向稿本身、最终页面、字体或 M3 资产在页面中的具体使用；这些语言如何延展到共享表现层、Collection 与 Entry 仍须在真实纵切片中设计并确认。
+- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已由用户提交为历史基线 `f258227`（`feat: complete M2 content foundation`）。M3-U1/U2/U3/U4/U5 已完成并形成历史基线 `c606f5`（`M3 completed`）。M3 终验曾因 Hero v1 双手解剖缺陷重开；2026-08-29 Project owner 明确验收定向返修候选后，Hero v2 已成为 approved/current，Hero v1 保留为 approved/non-current 审计历史。当前版本化 inventory 共七个精确画布 master、七份 repository source rendition、两份真实 production record 与五份 manifest 版本记录，其中四份为 approved/current。M4-U1/U2 已由用户提交为当前基线 `8c6d12`（`feat(pages): add M4 noindex review slice`）；U2 页面在获授权的本地 preview 中完成 7 页三档浏览器复核，并经 Project owner 确认页面方向。正式字体与 U5 的完整无障碍、性能和最终视觉门禁仍未完成。既有 M1 原型仍不可发布。
+- 视觉方向：冻结时的 M1 页面外观仍未获批准；2026-08-27，用户在后续仓库外 Home 方向稿中确认“以 A 为主、C 为辅”。首个真实 Home 以 A 的现代文化展览式中性母体、图片主导的非对称策展构图为主，并以 C 的抽象雕塑、地形、路径和裁切为辅助语汇。2026-08-29，Project owner 在实际浏览器查看并要求收敛字号与排版后，明确确认 M4-U2 页面方向；该确认不追认旧原型，也不批准正式字体、U5 最终页面门禁或发布。
 - 工作名称：`Mythic China`；目录名与未来包名使用 `mythic-china`。
 - 当前权威日期：2026-08-29。
-- Project owner 已确认 M4 合同第 1–9 项并单独授权 M4-U2。U2 代码与静态门禁现已完成，等待 Home、The Chinese Underworld Collection 与 Zhong Kui Entry 的页面级评审；当前结果不是页面批准。U3-U5、依赖调整、dev/preview 服务、Git 写入、部署或发布仍未授权。制作方式保持 AI-assisted OpenAI ImageGen，本期不使用 ComfyUI。
+- Project owner 已确认 M4 合同第 1–9 项、单独授权 M4-U2，并在获授权的 preview/浏览器评审后确认 U2 页面方向。U2 可以按当前系统 fallback 字体状态收口；该结论不是正式字体批准或 U5 最终页面验收。U3-U5、依赖调整、后续服务控制、代理 Git 写入、部署或发布仍未授权。制作方式保持 AI-assisted OpenAI ImageGen，本期不使用 ComfyUI。
 
 ## 项目负责
 
@@ -35,11 +35,11 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 
 ## 当前运行口径
 
-当前已有本地应用开发与自动验证环境，但没有已授权运行中的 dev/preview 服务、真实联调环境、数据库、托管项目或远端发布资源。
+当前已有本地应用开发与自动验证环境；M4-U2 页面评审曾按 Project owner 单独授权启动本地 preview 与浏览器，但该次授权不建立可复用的服务或发布许可。项目仍没有真实联调环境、数据库、托管项目或远端发布资源。
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
-| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | 当前提交基线为 `c606f5`（`M3 completed`）；M4-U1 接管前 HEAD、`main` 与本地 `origin/main` 对齐且工作树干净，未执行 fetch 核验远端服务器；当前未提交改动属于已授权的 M4-U1/U2 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、一份 approved brief、两份 production record、五份 manifest 版本记录、七份 approved repository source rendition、不可发布 M1 原型与 prototype-only 图片；其中 Hero v1 为非 current 审计历史，无数据库或真实外部写入口 | M4-U2 noindex review 页面与自动静态验证；不含服务、U3-U5、部署或发布 |
+| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | 当前提交基线为 `8c6d12`（`feat(pages): add M4 noindex review slice`）；HEAD、`main` 与本地 `origin/main` 对齐，未执行 fetch 核验远端服务器；当前未提交改动属于已授权的 U2 页面调整与收口文档 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、一份 approved brief、两份 production record、五份 manifest 版本记录、七份 approved repository source rendition、不可发布 M1 原型与 prototype-only 图片；其中 Hero v1 为非 current 审计历史，无数据库或真实外部写入口 | M4-U2 noindex review、页面方向收口与经单独授权的本地评审；不含 U3-U5、远端部署或发布 |
 
 ## 项目构建与运行
 
