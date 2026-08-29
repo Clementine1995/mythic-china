@@ -56,6 +56,7 @@ export async function loadValidatedContentGraph(): Promise<LoadedContentGraph> {
     loadVisualRecordInventory(),
   ]);
 
+  // Page code receives data only after both the editorial and visual graphs pass.
   const content = validateContentGraph({
     entries,
     collections,

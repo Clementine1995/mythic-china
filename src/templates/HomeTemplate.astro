@@ -1,0 +1,103 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import ManifestHeroPicture from "../components/ManifestHeroPicture.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
+
+interface Props {
+  collection: CollectionEntry<"collections">;
+  entry: CollectionEntry<"entries">;
+  heroAsset: ResolvedAssetRecord;
+}
+
+const { collection, entry, heroAsset } = Astro.props;
+---
+
+<SiteLayout
+  title="Mythic China"
+  description="An English-language cultural publication for Chinese myths, legends, traditions, and their sources."
+  pageClass="page-home"
+>
+  <section class="home-hero page-shell" aria-labelledby="home-title">
+    <div class="home-hero__copy">
+      <p class="hero-context">An English-language cultural publication</p>
+      <h1 id="home-title">Chinese myths, carefully told.</h1>
+      <p class="home-hero__dek">
+        Explore stories, beliefs, and legendary figures through clear sources
+        and carefully separated traditions.
+      </p>
+      <div class="hero-actions">
+        <a class="button-link" href={`/collections/${collection.data.slug}/`}>
+          Explore the collection
+        </a>
+        <a class="text-link" href={`/explore/${entry.data.slug}/`}>
+          Read Zhong Kui
+        </a>
+      </div>
+    </div>
+
+    <figure class="home-hero__figure">
+      <ManifestHeroPicture
+        asset={heroAsset}
+        sizes="(max-width: 767px) 100vw, 62vw"
+        priority
+      />
+      <figcaption class="visual-note">
+        <span>{heroAsset.data.caption}</span>
+        <span>{heroAsset.data.credit}. {heroAsset.data.aiDisclosure}</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section
+    class="home-collection section-space page-shell"
+    aria-labelledby="collection-heading"
+  >
+    <div
+      class="realm-preview"
+      data-realm="chinese-underworld"
+      aria-hidden="true"
+    >
+      <div class="realm-surface"></div>
+    </div>
+    <div class="home-collection__copy">
+      <p class="section-context">Explore a collection</p>
+      <h2 id="collection-heading">{collection.data.title}</h2>
+      {
+        collection.data.titleZh && (
+          <p class="bilingual-name">
+            <span lang="zh-Hans">{collection.data.titleZh}</span>
+            <span lang="zh-Latn-pinyin">{collection.data.pinyin}</span>
+          </p>
+        )
+      }
+      <p>{collection.data.description}</p>
+      <a class="text-link" href={`/collections/${collection.data.slug}/`}>
+        Follow the guided path
+      </a>
+    </div>
+  </section>
+
+  <section
+    class="featured-story section-space page-shell"
+    aria-labelledby="featured-heading"
+  >
+    <div class="featured-story__identity">
+      <p class="section-context">Featured story</p>
+      <p class="bilingual-name">
+        <span lang="zh-Hans">{entry.data.nameZh}</span>
+        <span lang="zh-Latn-pinyin">{entry.data.pinyin}</span>
+      </p>
+    </div>
+    <div class="featured-story__title">
+      <h2 id="featured-heading">{entry.data.title}</h2>
+      <a
+        class="button-link button-link--quiet"
+        href={`/explore/${entry.data.slug}/`}
+      >
+        Open the entry
+      </a>
+    </div>
+  </section>
+</SiteLayout>

@@ -38,6 +38,7 @@ function resolveCurrent(
   selector: string,
   options: ResolveAssetOptions,
 ): ResolvedAssetRecord | undefined {
+  // Current is selected only by explicit isCurrent, never by highest version.
   const current = records.filter((record) => record.data.isCurrent);
   if (current.length === 0) {
     if (options.required ?? true) {

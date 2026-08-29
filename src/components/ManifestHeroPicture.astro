@@ -1,0 +1,110 @@
+---
+import type { ImageMetadata, ImageOutputFormat } from "astro";
+import { getImage } from "astro:assets";
+
+import { resolvePageImageModule } from "../visual/page-image-module-registry";
+import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
+
+interface Props {
+  asset: ResolvedAssetRecord;
+  sizes: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const { asset, sizes, priority = false, class: className } = Astro.props;
+const alt = asset.data.alt;
+if (asset.data.status !== "approved" || !asset.data.isCurrent) {
+  throw new Error("ManifestHeroPicture requires an approved current asset.");
+}
+if (asset.data.accessibilityMode !== "informative" || !alt) {
+  throw new Error("ManifestHeroPicture requires informative accessibility.");
+}
+
+// Mobile and desktop are separately approved compositions, not one CSS crop.
+const desktop = asset.data.repositoryRenditions.find(
+  (rendition) => rendition.usage === "hero-desktop",
+);
+const mobile = asset.data.repositoryRenditions.find(
+  (rendition) => rendition.usage === "hero-mobile",
+);
+if (desktop === undefined || mobile === undefined) {
+  throw new Error(
+    "ManifestHeroPicture requires desktop and mobile renditions.",
+  );
+}
+
+const desktopSource = resolvePageImageModule(desktop.path);
+const mobileSource = resolvePageImageModule(mobile.path);
+
+async function transform(
+  source: ImageMetadata,
+  widths: readonly number[],
+  format: ImageOutputFormat,
+) {
+  // Pin src to the largest candidate so Astro does not emit an original-width fallback.
+  const fallbackWidth = widths.at(-1);
+  if (fallbackWidth === undefined) {
+    throw new Error("ManifestHeroPicture requires candidate widths.");
+  }
+  return getImage({
+    src: source,
+    width: fallbackWidth,
+    widths: [...widths],
+    format,
+  });
+}
+
+const [desktopAvif, desktopWebp, mobileAvif, mobileWebp] = await Promise.all([
+  transform(desktopSource, desktop.buildPlan.candidateWidths, "avif"),
+  transform(desktopSource, desktop.buildPlan.candidateWidths, "webp"),
+  transform(mobileSource, mobile.buildPlan.candidateWidths, "avif"),
+  transform(mobileSource, mobile.buildPlan.candidateWidths, "webp"),
+]);
+const focalStyle = [
+  `--hero-desktop-x: ${desktop.focalPoint.x * 100}%`,
+  `--hero-desktop-y: ${desktop.focalPoint.y * 100}%`,
+  `--hero-mobile-x: ${mobile.focalPoint.x * 100}%`,
+  `--hero-mobile-y: ${mobile.focalPoint.y * 100}%`,
+].join(";");
+---
+
+<div class:list={["manifest-hero-picture", className]} style={focalStyle}>
+  <picture>
+    <source
+      media="(max-width: 767px)"
+      type="image/avif"
+      srcset={mobileAvif.srcSet.attribute}
+      sizes={sizes}
+    />
+    <source
+      media="(max-width: 767px)"
+      type="image/webp"
+      srcset={mobileWebp.srcSet.attribute}
+      sizes={sizes}
+    />
+    <source
+      media="(min-width: 768px)"
+      type="image/avif"
+      srcset={desktopAvif.srcSet.attribute}
+      sizes={sizes}
+    />
+    <source
+      media="(min-width: 768px)"
+      type="image/webp"
+      srcset={desktopWebp.srcSet.attribute}
+      sizes={sizes}
+    />
+    <img
+      src={desktopWebp.src}
+      srcset={desktopWebp.srcSet.attribute}
+      sizes={sizes}
+      width={desktop.widthPx}
+      height={desktop.heightPx}
+      alt={alt}
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : undefined}
+      decoding="async"
+    />
+  </picture>
+</div>

@@ -1,0 +1,27 @@
+import type { ImageMetadata } from "astro";
+
+import zhongKuiHeroDesktop from "../assets/images/zhong-kui-hero-primary-v2-hero-desktop-3200w.webp";
+import zhongKuiHeroMobile from "../assets/images/zhong-kui-hero-primary-v2-hero-mobile-1600w.webp";
+
+// Explicit imports prevent eager globs from emitting non-current or non-page assets.
+// Version switches must add their resolved paths here and otherwise fail closed.
+const reviewPageImages = new Map<string, ImageMetadata>([
+  [
+    "/src/assets/images/zhong-kui-hero-primary-v2-hero-desktop-3200w.webp",
+    zhongKuiHeroDesktop,
+  ],
+  [
+    "/src/assets/images/zhong-kui-hero-primary-v2-hero-mobile-1600w.webp",
+    zhongKuiHeroMobile,
+  ],
+]);
+
+export function resolvePageImageModule(repositoryPath: string): ImageMetadata {
+  const image = reviewPageImages.get(`/${repositoryPath}`);
+  if (image === undefined) {
+    throw new Error(
+      `No authorized review page image module matches ${repositoryPath}.`,
+    );
+  }
+  return image;
+}

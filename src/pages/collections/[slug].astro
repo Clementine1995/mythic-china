@@ -3,6 +3,12 @@ import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import { readBuildIntent } from "../../site/build-intent";
+import {
+  createReviewProjection,
+  getReviewCollectionEntries,
+  getReviewFeaturedEntry,
+} from "../../site/review-projection";
 import CollectionTemplate from "../../templates/CollectionTemplate.astro";
 
 interface Props {
@@ -12,29 +18,24 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  readBuildIntent();
   const graph = await loadValidatedContentGraph();
-  const entriesById = new Map(graph.entries.map((entry) => [entry.id, entry]));
+  const projection = createReviewProjection(graph);
 
-  return graph.collections
-    .filter((collection) => collection.data.status !== "archived")
-    .map((collection) => {
-      const entries = collection.data.entryIds.flatMap((id) => {
-        const entry = entriesById.get(id);
-        return entry && entry.data.status !== "archived" ? [entry] : [];
-      });
-      const featuredEntry = collection.data.featuredEntryId
-        ? (entriesById.get(collection.data.featuredEntryId) ?? null)
-        : null;
-
-      return {
-        params: { slug: collection.data.slug },
-        props: {
-          collection,
-          entries,
-          featuredEntry,
-        } satisfies Props,
-      };
-    });
+  return projection.collections.map((collection) => ({
+    params: { slug: collection.data.slug },
+    props: {
+      collection,
+      entries: getReviewCollectionEntries(
+        collection.data.entryIds,
+        projection.entries,
+      ),
+      featuredEntry: getReviewFeaturedEntry(
+        collection.data.featuredEntryId,
+        projection.entries,
+      ),
+    } satisfies Props,
+  }));
 };
 
 const props = Astro.props;

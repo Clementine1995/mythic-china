@@ -1,0 +1,57 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../site/build-intent";
+
+readBuildIntent();
+---
+
+<SiteLayout
+  title="About"
+  description="The scope and editorial method behind Mythic China."
+>
+  <article class="about-page page-shell">
+    <header class="about-hero section-space">
+      <p class="section-context">About Mythic China</p>
+      <h1>A digital publication with a curatorial method.</h1>
+      <p>
+        Mythic China introduces Chinese myths, legends, traditions, and their
+        sources for English-language readers.
+      </p>
+    </header>
+
+    <div class="about-method section-space">
+      <section>
+        <p class="section-context">01</p>
+        <h2>Scope</h2>
+        <p>
+          The publication covers stories, legendary figures, creatures, realms,
+          customs, and related cultural contexts.
+        </p>
+      </section>
+      <section>
+        <p class="section-context">02</p>
+        <h2>Editorial method</h2>
+        <p>
+          Sources stay close to the statements they support. Distinct periods,
+          regions, texts, and traditions are not collapsed into one canon.
+        </p>
+      </section>
+      <section>
+        <p class="section-context">03</p>
+        <h2>Images</h2>
+        <p>
+          Original and AI-assisted editorial illustrations are labeled. They are
+          not presented as historical images, artifacts, or source evidence.
+        </p>
+      </section>
+      <section>
+        <p class="section-context">04</p>
+        <h2>The museum metaphor</h2>
+        <p>
+          The site borrows the clarity and care of a digital museum. Mythic
+          China is a publication, not a physical museum or cultural authority.
+        </p>
+      </section>
+    </div>
+  </article>
+</SiteLayout>

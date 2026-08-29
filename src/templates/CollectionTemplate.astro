@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import DebugLayout from "../layouts/DebugLayout.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
 
 interface Props {
   collection: CollectionEntry<"collections">;
@@ -10,66 +10,116 @@ interface Props {
 }
 
 const { collection, entries, featuredEntry } = Astro.props;
+// U2 has no approved Collection image, so a future asset claim must fail visibly.
+if (collection.data.heroAssetId !== null) {
+  throw new Error(
+    `M4-U2 Collection ${collection.id} requires its own approved Hero implementation.`,
+  );
+}
 ---
 
-<DebugLayout
+<SiteLayout
   title={collection.data.title}
-  description={`M2 semantic debug view for ${collection.data.title}.`}
+  description={collection.data.description}
 >
-  <section class="collection-view" aria-labelledby="collection-title">
-    <header>
-      <p class="status-label">Status: {collection.data.status}</p>
-      <p class="record-meta">
-        Collection ID: <code>{collection.data.collectionId}</code>
-      </p>
-      <h1 id="collection-title">{collection.data.title}</h1>
-      {
-        collection.data.titleZh && (
-          <p lang="zh-Hans">
-            {collection.data.titleZh} ·{" "}
-            <span lang="zh-Latn-pinyin">{collection.data.pinyin}</span>
-          </p>
-        )
-      }
-      <p>{collection.data.description}</p>
+  <article class="collection-page" data-realm={collection.data.collectionId}>
+    <header class="collection-hero">
+      <div class="collection-hero__inner page-shell">
+        <div class="collection-hero__copy">
+          <p class="collection-context">Collection</p>
+          <h1>{collection.data.title}</h1>
+          {
+            collection.data.titleZh && (
+              <p class="collection-identity">
+                <span lang="zh-Hans">{collection.data.titleZh}</span>
+                <span lang="zh-Latn-pinyin">{collection.data.pinyin}</span>
+              </p>
+            )
+          }
+          <p class="collection-description">{collection.data.description}</p>
+        </div>
+        <div class="collection-hero__surface" aria-hidden="true">
+          <div class="realm-surface"></div>
+        </div>
+      </div>
     </header>
 
-    <section aria-labelledby="featured-heading">
-      <h2 id="featured-heading">Featured Entry</h2>
+    <div class="collection-reading page-shell section-space">
       {
-        featuredEntry ? (
-          <p>
-            <a href={`/explore/${featuredEntry.data.slug}/`}>
-              {featuredEntry.data.title}
-            </a>{" "}
-            <span class="record-meta">({featuredEntry.data.status})</span>
-          </p>
-        ) : (
-          <p class="empty-state">No Featured Entry is selected.</p>
+        featuredEntry && (
+          <section
+            class="collection-featured"
+            aria-labelledby="featured-entry-heading"
+          >
+            <div>
+              <p class="section-context">Featured story</p>
+              <p class="bilingual-name">
+                {featuredEntry.data.nameZh && (
+                  <span lang="zh-Hans">{featuredEntry.data.nameZh}</span>
+                )}
+                {featuredEntry.data.pinyin && (
+                  <span lang="zh-Latn-pinyin">{featuredEntry.data.pinyin}</span>
+                )}
+              </p>
+            </div>
+            <div>
+              <h2 id="featured-entry-heading">{featuredEntry.data.title}</h2>
+              <a
+                class="button-link button-link--quiet"
+                href={`/explore/${featuredEntry.data.slug}/`}
+              >
+                Read the entry
+              </a>
+            </div>
+          </section>
         )
       }
-    </section>
 
-    <section aria-labelledby="reading-order-heading">
-      <h2 id="reading-order-heading">Curated reading order</h2>
-      <p class="debug-note">
-        This numbered order comes directly from <code>Collection.entryIds</code
-        >{" "}
-        and is never inferred from loader order.
-      </p>
-      <ol>
-        {
-          entries.map((entry) => (
-            <li>
-              <a href={`/explore/${entry.data.slug}/`}>{entry.data.title}</a>
-              <span class="record-meta">
-                {" "}
-                · {entry.data.entryType} · {entry.data.status}
-              </span>
-            </li>
-          ))
-        }
-      </ol>
-    </section>
-  </section>
-</DebugLayout>
+      <section class="guided-path" aria-labelledby="guided-path-heading">
+        <div class="guided-path__heading">
+          <p class="section-context">Curated order</p>
+          <h2 id="guided-path-heading">Follow the guided path</h2>
+        </div>
+        <ol>
+          {
+            entries.map((entry, index) => (
+              <li>
+                <span class="path-position">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p class="entry-type">{entry.data.entryType}</p>
+                  <h3>
+                    <a href={`/explore/${entry.data.slug}/`}>
+                      {entry.data.title}
+                    </a>
+                  </h3>
+                  {entry.data.nameZh && (
+                    <p class="bilingual-name">
+                      <span lang="zh-Hans">{entry.data.nameZh}</span>
+                      <span lang="zh-Latn-pinyin">{entry.data.pinyin}</span>
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <nav class="collection-browse" aria-labelledby="browse-heading">
+        <p class="section-context">All entries</p>
+        <h2 id="browse-heading">Browse this collection</h2>
+        <ul>
+          {
+            entries.map((entry) => (
+              <li>
+                <a href={`/explore/${entry.data.slug}/`}>{entry.data.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </article>
+</SiteLayout>

@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已由用户提交为本地基线 `f258227`（`feat: complete M2 content foundation`）。M3-U1/U2/U3/U4/U5 已完成。M3 终验曾因 Hero v1 双手解剖缺陷重开；2026-08-29 Project owner 明确验收定向返修候选后，Hero v2 已成为 approved/current，Hero v1 保留为 approved/non-current 审计历史。当前版本化 inventory 共七个精确画布 master、七份 repository source rendition、两份真实 production record 与五份 manifest 版本记录，其中四份为 approved/current。`sharp@0.35.4` 仍是唯一新增的项目直接依赖；返修后 `visual:build:check` 已复核七个 local master，并从三份 current responsive rendition 实际生成、解码验证全部 22 个 AVIF/WebP 目标。Entry 仍为 draft，`heroAssetId` 继续通过稳定逻辑 ID 解析 Hero v2；M4 页面尚未开始。既有 M1 原型仍不可发布。
+- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已由用户提交为历史基线 `f258227`（`feat: complete M2 content foundation`）。M3-U1/U2/U3/U4/U5 已完成并形成当前提交基线 `c606f5`（`M3 completed`）。M3 终验曾因 Hero v1 双手解剖缺陷重开；2026-08-29 Project owner 明确验收定向返修候选后，Hero v2 已成为 approved/current，Hero v1 保留为 approved/non-current 审计历史。当前版本化 inventory 共七个精确画布 master、七份 repository source rendition、两份真实 production record 与五份 manifest 版本记录，其中四份为 approved/current。M4-U1 合同与 M4-U2 noindex review 页面实现、自动检查和静态构建门禁已完成；页面级浏览器、正式字体与 Project owner 视觉批准仍未完成。既有 M1 原型仍不可发布。
 - 视觉方向：冻结时的 M1 页面外观仍未获批准；2026-08-27，用户在后续仓库外 Home 方向稿中确认“以 A 为主、C 为辅”。首个真实 Home 以 A 的现代文化展览式中性母体、图片主导的非对称策展构图为主，并以 C 的抽象雕塑、地形、路径和裁切为辅助语汇。该选择只确认 Home 概念方向，不追认旧原型，也不批准方向稿本身、最终页面、字体或 M3 资产在页面中的具体使用；这些语言如何延展到共享表现层、Collection 与 Entry 仍须在真实纵切片中设计并确认。
 - 工作名称：`Mythic China`；目录名与未来包名使用 `mythic-china`。
 - 当前权威日期：2026-08-29。
-- 下一阶段是 M4 页面、探索与 SEO，但尚未获得实施授权；进入 M4、启动 dev/preview 服务、Git 写入或发布仍须分别授权。制作方式保持 AI-assisted OpenAI ImageGen，本期不使用 ComfyUI。
+- Project owner 已确认 M4 合同第 1–9 项并单独授权 M4-U2。U2 代码与静态门禁现已完成，等待 Home、The Chinese Underworld Collection 与 Zhong Kui Entry 的页面级评审；当前结果不是页面批准。U3-U5、依赖调整、dev/preview 服务、Git 写入、部署或发布仍未授权。制作方式保持 AI-assisted OpenAI ImageGen，本期不使用 ComfyUI。
 
 ## 项目负责
 
@@ -26,7 +26,7 @@
 
 ## 当前主链路
 
-M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复核链路：`Entry Markdown / 结构化 YAML + visual brief / production record / versioned manifest -> 严格 Schema -> 纯内容图与视觉资产图/文件校验 -> 显式 current resolver -> Astro 静态路由 -> dist/`。当前真实 inventory 包含一份 approved brief、两份 production record、五份 manifest 版本记录与七份 repository source rendition；四个逻辑资产各有且仅有一份 approved/current manifest，Hero v1 的两份 source 与版本记录保留为 approved/non-current 历史。默认构建会核对记录关系和全部 repository 文件 metadata，但不会读取 Git-ignored `/.local/` master。非默认 `visual:build:check` 会复核七个 local master，并通过直接依赖 `sharp@0.35.4` 按三份 current responsive buildPlan 实际生成和解码验证 22 个 AVIF/WebP 目标。钟馗 Entry 已通过 versionless `assetId` 解析 approved/current Hero v2；应用仍只生成 `/collections/chinese-underworld/`、`/explore/zhong-kui/` 与 `/explore/chinese-underworld-guide/` 三个 `noindex` debug 页面，两个 Entry 保持空正文 draft。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 继续组成冻结的 M1 独立原型，不属于应用构建输入。目标体验与内部生产仍必须分开理解：
+M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复核链路：`Entry Markdown / 结构化 YAML + visual brief / production record / versioned manifest -> 严格 Schema -> 纯内容图与视觉资产图/文件校验 -> 显式 current resolver -> review 投影 -> Astro 静态路由 -> dist/`。当前真实 inventory 包含一份 approved brief、两份 production record、五份 manifest 版本记录与七份 repository source rendition；四个逻辑资产各有且仅有一份 approved/current manifest，Hero v1 的两份 source 与版本记录保留为 approved/non-current 历史。默认 review 构建生成 Home、Explore、Collections、About、一个 Collection 与两个 Entry 共 7 个 `noindex, nofollow` 页面；Explore/Collections 只列 published 内容，因此当前显示真实空状态，固定 Home 纵切片是唯一 draft 选择例外。钟馗 Hero 从 versionless `assetId` 经过 approved/current 门禁解析 v2，并生成 14 个页面实际使用的 AVIF/WebP 输出；Collection 使用无图 CSS realm surface。两个 Entry 仍为 draft，钟馗缺失的 opening、summary 与正文不会被 fallback 或 Claim 补写。非默认 `visual:build:check` 继续复核七个 local master，并按三份 current responsive buildPlan 实际生成和解码验证 22 个 AVIF/WebP 目标。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 继续组成冻结的 M1 独立原型，不属于应用构建输入。目标体验与内部生产仍必须分开理解：
 
 - 读者阅读：`主视觉 + 故事问题 -> opening 故事入口 -> Quick Answer -> 核心故事 -> 原典写了什么 -> 后世传统与版本 -> 本站解释 -> 完整 Sources -> Related Entries -> Reader Request -> 全站 Footer`。轻量出处随相关主张出现；完整来源在正文收束后、继续探索之前列出，newsletter 只在全站 Footer 出现。
 - 编辑生产：`研究问题 -> claim map 与可定位来源 -> 术语/译文审核 -> 英文叙事与视觉 brief -> 编辑/视觉审核 -> 内容 Schema 校验 -> 静态构建 -> CDN 网站`。
@@ -39,7 +39,7 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
-| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | M2 本地基线为 `f258227`；M3-U1 开始前 HEAD、`main` 与本地 `origin/main` 对齐且工作树干净，未执行 fetch 核验远端服务器；当前有未提交的 M3-U1–U5 合同、研究、代码、视觉资产、Hero v2 返修、`sharp@0.35.4` 与锁文件改动 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、一份 approved brief、两份 production record、五份 manifest 版本记录、七份 approved repository source rendition、不可发布 M1 原型与 prototype-only 图片；其中 Hero v1 为非 current 审计历史，无数据库或真实外部写入口 | M2 静态构建、自动验证、M3 合同/研究/资产门禁与工程参考评审 |
+| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | 当前提交基线为 `c606f5`（`M3 completed`）；M4-U1 接管前 HEAD、`main` 与本地 `origin/main` 对齐且工作树干净，未执行 fetch 核验远端服务器；当前未提交改动属于已授权的 M4-U1/U2 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、一份 approved brief、两份 production record、五份 manifest 版本记录、七份 approved repository source rendition、不可发布 M1 原型与 prototype-only 图片；其中 Hero v1 为非 current 审计历史，无数据库或真实外部写入口 | M4-U2 noindex review 页面与自动静态验证；不含服务、U3-U5、部署或发布 |
 
 ## 项目构建与运行
 
@@ -76,9 +76,9 @@ rg -n '\{\{[^}]+\}\}' .
 - `docs/ARCHITECTURE.md`：静态优先技术架构、数据边界和升级触发条件。
 - `docs/CONTENT_MODEL.md`：内容分类、声明与术语记录、工具无关的视觉资产及读者反馈模型。
 - `docs/REFERENCES.md`：本轮外部参考、视觉 Skill/工具采用边界与用途说明。
-- `docs/requirements/`：`001` 保存 MVP/M1–M7 总合同，`002` 保存 M3 视觉资产管线的详细合同、实施单元和验收状态。
-- `src/`：M2 Content Layer、纯内容图校验、语义 debug templates 与静态路由。
-- `tests/`：内容 ID、Schema、内容图和 M2 架构边界 Vitest。
+- `docs/requirements/`：`001` 保存 MVP/M1–M7 总合同，`002` 保存 M3 视觉资产管线合同，`003` 保存 M4 页面、探索与 SEO 的详细合同、状态投影、实施单元和验收门禁。
+- `src/`：Content Layer、视觉资产加载/校验/current resolver、review 投影、共享生产壳、真实页面模板与静态路由。
+- `tests/`：内容、视觉资产、页面投影、resolver、运行时和架构边界 Vitest。
 - `scripts/verify-runtime.mjs`：固定 Node 子进程身份门禁。
 - `prototypes/`：不可发布的静态视觉评审原型；不代表应用实现或已核准内容，工作母版与探索废图不应进入正式代码仓库。
 - `package.json`、`pnpm-lock.yaml` 与 `pnpm-workspace.yaml`：精确依赖、唯一锁、pnpm 11 发布成熟期例外与显式第三方 build-script 拒绝策略；不得另建 lock。

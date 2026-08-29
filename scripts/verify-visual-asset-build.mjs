@@ -31,6 +31,8 @@ const outputDirectory = join(temporaryRoot, "dist");
 const cacheDirectory = join(temporaryRoot, "astro-cache");
 const viteCacheDirectory = join(temporaryRoot, "vite-cache");
 const verificationRoute = "/__m3-visual-asset-build-verification";
+const buildIntentVariable = "MYTHIC_CHINA_BUILD_INTENT";
+const previousBuildIntent = process.env[buildIntentVariable];
 
 const verificationIntegration = {
   name: "mythic-china-m3-visual-build-verification",
@@ -58,6 +60,8 @@ function isOutsideRoot(rootDirectory, targetPath) {
 }
 
 try {
+  // This isolated M3 build must satisfy review build intent and is never deployable.
+  process.env[buildIntentVariable] = "review";
   await build({
     root: projectRoot,
     outDir: outputDirectory,
@@ -142,5 +146,11 @@ try {
     `Verified ${result.masterCount} local masters and ${result.generatedOutputs.length} responsive AVIF/WebP outputs from ${result.responsiveRenditionCount} repository renditions.\n`,
   );
 } finally {
+  // Do not leak the temporary build intent into later commands in this process.
+  if (previousBuildIntent === undefined) {
+    delete process.env[buildIntentVariable];
+  } else {
+    process.env[buildIntentVariable] = previousBuildIntent;
+  }
   await rm(temporaryRoot, { recursive: true, force: true });
 }

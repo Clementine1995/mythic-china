@@ -1,0 +1,51 @@
+---
+import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../../site/build-intent";
+import { createReviewProjection } from "../../site/review-projection";
+
+readBuildIntent();
+const graph = await loadValidatedContentGraph();
+const { publishedCollections } = createReviewProjection(graph);
+---
+
+<SiteLayout
+  title="Collections"
+  description="Explore curated Mythic China reading paths."
+>
+  <header class="index-hero page-shell section-space">
+    <p class="section-context">Collections</p>
+    <h1>Curated reading paths</h1>
+    <p>
+      Collections bring related entries into an intentional order while keeping
+      periods, regions, texts, and traditions distinct.
+    </p>
+  </header>
+
+  <section class="index-results page-shell section-space" aria-live="polite">
+    {
+      publishedCollections.length > 0 ? (
+        <ol class="editorial-index">
+          {publishedCollections.map((collection) => (
+            <li>
+              <h2>
+                <a href={`/collections/${collection.data.slug}/`}>
+                  {collection.data.title}
+                </a>
+              </h2>
+              <p>{collection.data.description}</p>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <div class="honest-empty-state">
+          <h2>No published collections yet</h2>
+          <p>
+            A collection appears here only when its complete reading path is
+            ready for publication.
+          </p>
+        </div>
+      )
+    }
+  </section>
+</SiteLayout>

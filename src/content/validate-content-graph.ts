@@ -63,6 +63,7 @@ export class ContentGraphValidationError extends Error {
 
 type AddIssue = (issue: ContentGraphIssue) => void;
 
+// Archived records retain the same evidence obligations as publication-ready work.
 const statusesRequiringReadyEvidence = new Set<ContentStatus>([
   "ready",
   "published",
@@ -157,6 +158,7 @@ function filenameFromPath(filePath: string): string {
 }
 
 function hasVisibleEditorialBody(body: string | undefined): boolean {
+  // Leading editorial comments are scaffolding, not reader-visible prose.
   let remaining = body?.trim() ?? "";
 
   while (remaining.startsWith("<!--")) {
@@ -295,6 +297,7 @@ export function isCollectionEntryStatusAllowed(
   collectionStatus: ContentStatus,
   entryStatus: ContentStatus,
 ): boolean {
+  // Ready, published and archived Collections impose stricter Entry status limits.
   if (collectionStatus === "archived") {
     return entryStatus === "published" || entryStatus === "archived";
   }
@@ -321,6 +324,7 @@ export function validateContentGraph(graph: ContentGraph): ContentGraph {
     string,
     { objectType: ContentObjectType; objectId: string }
   >();
+  // Stable ordering keeps validation output independent from loader order.
   const orderedGraph = {
     entries: sortedRecordCopy(graph.entries, (entry) => entry.data.entryId),
     collections: sortedRecordCopy(

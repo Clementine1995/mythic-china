@@ -9,16 +9,16 @@
   },
   "scripts": {
     "runtime:check": "node scripts/verify-runtime.mjs",
-    "dev": "node scripts/verify-runtime.mjs && astro dev",
-    "preview": "node scripts/verify-runtime.mjs && astro preview",
+    "dev": "node scripts/verify-runtime.mjs && node scripts/run-review-astro.mjs dev",
+    "preview": "node scripts/verify-runtime.mjs && node scripts/verify-m4-u2-output.mjs && node scripts/run-review-astro.mjs preview",
     "format": "node scripts/verify-runtime.mjs && prettier --write .",
     "format:check": "node scripts/verify-runtime.mjs && prettier --check .",
     "lint": "node scripts/verify-runtime.mjs && eslint .",
     "test": "node scripts/verify-runtime.mjs && vitest run",
     "visual:build:check": "node scripts/verify-runtime.mjs && node scripts/verify-visual-asset-build.mjs",
-    "typecheck": "node scripts/verify-runtime.mjs && astro check",
-    "build": "node scripts/verify-runtime.mjs && astro check && astro build",
-    "check": "node scripts/verify-runtime.mjs && prettier --check . && eslint . && vitest run && astro check && astro build"
+    "typecheck": "node scripts/verify-runtime.mjs && node scripts/run-review-astro.mjs check",
+    "build": "node scripts/verify-runtime.mjs && node scripts/run-review-astro.mjs check && node scripts/run-review-astro.mjs build && node scripts/verify-m4-u2-output.mjs",
+    "check": "node scripts/verify-runtime.mjs && prettier --check . && eslint . && vitest run && node scripts/run-review-astro.mjs check && node scripts/run-review-astro.mjs build && node scripts/verify-m4-u2-output.mjs"
   },
   "dependencies": {
     "astro": "7.2.8",

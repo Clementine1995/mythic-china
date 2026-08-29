@@ -1,0 +1,38 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { readBuildIntent } from "../site/build-intent";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  pageClass?: string;
+}
+
+const { title, description, pageClass } = Astro.props;
+readBuildIntent();
+// U2 is review-only; canonical, social and structured metadata wait for public identity.
+const documentTitle =
+  title === "Mythic China" ? title : `${title} | Mythic China`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="color-scheme" content="light" />
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{documentTitle}</title>
+  </head>
+  <body class={pageClass}>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader currentPath={Astro.url.pathname} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

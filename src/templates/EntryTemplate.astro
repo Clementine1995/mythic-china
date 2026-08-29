@@ -1,210 +1,256 @@
 ---
 import { render, type CollectionEntry } from "astro:content";
 
-import DebugLayout from "../layouts/DebugLayout.astro";
+import ManifestHeroPicture from "../components/ManifestHeroPicture.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
 
 interface Props {
   entry: CollectionEntry<"entries">;
   collections: CollectionEntry<"collections">[];
   relatedEntries: CollectionEntry<"entries">[];
   sources: CollectionEntry<"sources">[];
-  claims: CollectionEntry<"claims">[];
-  terminology: CollectionEntry<"terminology">[];
+  heroAsset: ResolvedAssetRecord | null;
 }
 
-const { entry, collections, relatedEntries, sources, claims, terminology } =
-  Astro.props;
+const { entry, collections, relatedEntries, sources, heroAsset } = Astro.props;
 const { Content } = await render(entry);
+// Empty editorial fields stay absent; draft metadata is not substituted as reader copy.
 const hasBody = Boolean(entry.body?.trim());
 const hasChineseIdentity = entry.data.nameZh !== null;
+const entryTypeLabel =
+  entry.data.entryType.charAt(0).toUpperCase() + entry.data.entryType.slice(1);
 ---
 
-<DebugLayout
+<SiteLayout
   title={entry.data.title}
-  description={`M2 semantic debug view for ${entry.data.title}.`}
+  description={entry.data.summary ?? undefined}
 >
-  <article>
-    <header>
-      <p class="status-label">Status: {entry.data.status}</p>
-      <p class="record-meta">
-        Entry ID: <code>{entry.data.entryId}</code> · Type: {
-          entry.data.entryType
-        }
-      </p>
-      <h1>{entry.data.title}</h1>
-      {
-        hasChineseIdentity && (
-          <p lang="zh-Hans">
-            {entry.data.nameZh} ·{" "}
-            <span lang="zh-Latn-pinyin">{entry.data.pinyin}</span>
-          </p>
-        )
-      }
-      {entry.data.subtitle && <p class="record-meta">{entry.data.subtitle}</p>}
-      <p class="debug-note">
-        This title and every empty section remain working draft data until the
-        required research and editorial reviews are complete.
-      </p>
-    </header>
+  <article
+    class:list={[
+      "entry-page",
+      heroAsset ? "entry-page--visual" : "entry-page--simple",
+    ]}
+  >
+    {
+      heroAsset ? (
+        <header class="entry-hero page-shell">
+          <div class="entry-hero__identity">
+            <p class="entry-context">{entryTypeLabel}</p>
+            <h1>{entry.data.title}</h1>
+            {hasChineseIdentity && (
+              <p class="bilingual-name entry-chinese-name">
+                <span lang="zh-Hans">{entry.data.nameZh}</span>
+                <span lang="zh-Latn-pinyin">{entry.data.pinyin}</span>
+              </p>
+            )}
+            {entry.data.subtitle && (
+              <p class="entry-dek">{entry.data.subtitle}</p>
+            )}
+          </div>
 
-    <section aria-labelledby="opening-heading">
-      <h2 id="opening-heading">Opening</h2>
-      {
-        entry.data.opening.length > 0 ? (
-          entry.data.opening.map((paragraph) => <p>{paragraph}</p>)
-        ) : (
-          <p class="empty-state">Not supplied at draft status.</p>
-        )
-      }
-    </section>
+          <figure class="entry-hero__figure">
+            <ManifestHeroPicture
+              asset={heroAsset}
+              sizes="(max-width: 767px) 100vw, 90vw"
+              priority
+            />
+            <figcaption class="visual-note">
+              <span>{heroAsset.data.caption}</span>
+              <span>
+                {heroAsset.data.credit}. {heroAsset.data.aiDisclosure}
+              </span>
+            </figcaption>
+          </figure>
+        </header>
+      ) : (
+        <header class="entry-simple-header page-shell section-space">
+          <p class="entry-context">{entryTypeLabel}</p>
+          <h1>{entry.data.title}</h1>
+          {hasChineseIdentity && (
+            <p class="bilingual-name entry-chinese-name">
+              <span lang="zh-Hans">{entry.data.nameZh}</span>
+              <span lang="zh-Latn-pinyin">{entry.data.pinyin}</span>
+            </p>
+          )}
+          {entry.data.subtitle && (
+            <p class="entry-dek">{entry.data.subtitle}</p>
+          )}
+        </header>
+      )
+    }
 
-    <section aria-labelledby="quick-answer-heading">
-      <h2 id="quick-answer-heading">Quick Answer</h2>
+    <div class="entry-reading page-shell section-space">
       {
-        entry.data.summary ? (
-          <p>{entry.data.summary}</p>
-        ) : (
-          <p class="empty-state">Not supplied at draft status.</p>
-        )
-      }
-    </section>
-
-    <section aria-labelledby="body-heading">
-      <h2 id="body-heading">Article body</h2>
-      {
-        hasBody ? (
-          <Content />
-        ) : (
-          <p class="empty-state">
-            The Markdown body is intentionally empty; M2 does not add
-            placeholder cultural facts.
-          </p>
-        )
-      }
-    </section>
-
-    <section aria-labelledby="sources-heading">
-      <h2 id="sources-heading">Sources</h2>
-      {
-        sources.length > 0 ? (
-          <ul>
-            {sources.map((source) => (
-              <li>
-                <strong>{source.data.title}</strong>
-                {source.data.authorOrOrganization &&
-                  ` — ${source.data.authorOrOrganization}`}
-                {source.data.url && (
-                  <>
-                    {" · "}
-                    <a href={source.data.url}>Source page</a>
-                  </>
-                )}
-              </li>
+        entry.data.opening.length > 0 && (
+          <section class="entry-opening" aria-label="Opening">
+            {entry.data.opening.map((paragraph) => (
+              <p>{paragraph}</p>
             ))}
-          </ul>
-        ) : (
-          <p class="empty-state">
-            No Source records are linked at draft status.
-          </p>
+          </section>
         )
       }
-    </section>
 
-    <section aria-labelledby="claims-heading">
-      <h2 id="claims-heading">Structured Claims</h2>
       {
-        claims.length > 0 ? (
-          <ol>
-            {claims.map((claim) => (
-              <li>
-                <p>{claim.data.statement}</p>
-                <p class="record-meta">
-                  Certainty: {claim.data.certainty} · Type:{" "}
-                  {claim.data.claimType} · Context: {claim.data.evidenceContext}
-                </p>
-                <ul>
-                  {claim.data.sourceLinks.map((link) => (
-                    <li>
-                      <code>{link.sourceId}</code> · {link.role} ·{" "}
-                      {link.locator} — {link.note}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ol>
-        ) : (
-          <p class="empty-state">
-            No Claim records are linked at draft status.
-          </p>
+        entry.data.summary && (
+          <section class="entry-section" aria-labelledby="quick-answer-heading">
+            <p class="section-context">At a glance</p>
+            <h2 id="quick-answer-heading">Quick Answer</h2>
+            <p>{entry.data.summary}</p>
+          </section>
         )
       }
-    </section>
 
-    <section aria-labelledby="terminology-heading">
-      <h2 id="terminology-heading">Terminology review</h2>
       {
-        terminology.length > 0 ? (
-          <dl>
-            {terminology.map((term) => (
-              <>
-                <dt>
-                  <span lang="zh-Hans">{term.data.hanzi}</span> ·{" "}
-                  <span lang="zh-Latn-pinyin">{term.data.pinyin}</span>
-                </dt>
-                <dd>
-                  {term.data.chosenEnglish} — {term.data.firstUseGloss} (review:{" "}
-                  {term.data.reviewStatus})
-                </dd>
-              </>
-            ))}
-          </dl>
-        ) : (
-          <p class="empty-state">
-            No Terminology records are linked at draft status.
-          </p>
+        hasBody && (
+          <section class="entry-prose" aria-label="Story">
+            <Content />
+          </section>
         )
       }
-    </section>
 
-    <nav aria-labelledby="collections-heading">
-      <h2 id="collections-heading">Collections</h2>
       {
-        collections.length > 0 ? (
-          <ul>
-            {collections.map((collection) => (
-              <li>
-                <a href={`/collections/${collection.data.slug}/`}>
-                  {collection.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="empty-state">This Entry is not in an active Collection.</p>
+        sources.length > 0 && (
+          <section class="source-section" aria-labelledby="sources-heading">
+            <div class="entry-section__heading">
+              <p class="section-context">Evidence record</p>
+              <h2 id="sources-heading">Sources</h2>
+            </div>
+            <ol class="source-list">
+              {sources.map((source) => (
+                <li>
+                  <p class="source-list__type">
+                    {source.data.sourceType.replaceAll("-", " ")}
+                  </p>
+                  <h3>{source.data.title}</h3>
+                  {source.data.titleZh && (
+                    <p class="source-list__chinese-title" lang="zh-Hant">
+                      {source.data.titleZh}
+                    </p>
+                  )}
+                  <dl class="source-metadata">
+                    {source.data.authorOrOrganization && (
+                      <div>
+                        <dt>Author / organization</dt>
+                        <dd>{source.data.authorOrOrganization}</dd>
+                      </div>
+                    )}
+                    {source.data.publicationOrEdition && (
+                      <div>
+                        <dt>Publication</dt>
+                        <dd>{source.data.publicationOrEdition}</dd>
+                      </div>
+                    )}
+                    {source.data.editionBasisOrObjectId && (
+                      <div>
+                        <dt>Record</dt>
+                        <dd>{source.data.editionBasisOrObjectId}</dd>
+                      </div>
+                    )}
+                    {source.data.originalPeriod && (
+                      <div>
+                        <dt>Period</dt>
+                        <dd>{source.data.originalPeriod}</dd>
+                      </div>
+                    )}
+                    {source.data.publicationYear !== null && (
+                      <div>
+                        <dt>Year</dt>
+                        <dd>{source.data.publicationYear}</dd>
+                      </div>
+                    )}
+                    {source.data.translator && (
+                      <div>
+                        <dt>Translator</dt>
+                        <dd>{source.data.translator}</dd>
+                      </div>
+                    )}
+                    {source.data.pageOrSection && (
+                      <div>
+                        <dt>Locator</dt>
+                        <dd>{source.data.pageOrSection}</dd>
+                      </div>
+                    )}
+                    <div>
+                      <dt>Language</dt>
+                      <dd>{source.data.language}</dd>
+                    </div>
+                    {source.data.accessedAt && (
+                      <div>
+                        <dt>Accessed</dt>
+                        <dd>
+                          <time datetime={source.data.accessedAt}>
+                            {source.data.accessedAt}
+                          </time>
+                        </dd>
+                      </div>
+                    )}
+                    {source.data.rightsStatus && (
+                      <div>
+                        <dt>Rights</dt>
+                        <dd>{source.data.rightsStatus}</dd>
+                      </div>
+                    )}
+                  </dl>
+                  {source.data.url && (
+                    <a
+                      href={source.data.url}
+                      aria-label={`Open source record: ${source.data.title}`}
+                    >
+                      Open source record
+                    </a>
+                  )}
+                  {source.data.rightsUrl && (
+                    <a
+                      class="source-rights-link"
+                      href={source.data.rightsUrl}
+                      aria-label={`Open rights information for: ${source.data.title}`}
+                    >
+                      Rights information
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
         )
       }
-    </nav>
 
-    <nav aria-labelledby="related-heading">
-      <h2 id="related-heading">Related Entries</h2>
       {
-        relatedEntries.length > 0 ? (
-          <ul>
-            {relatedEntries.map((relatedEntry) => (
-              <li>
-                <a href={`/explore/${relatedEntry.data.slug}/`}>
-                  {relatedEntry.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="empty-state">
-            No related Entries are linked at draft status.
-          </p>
+        collections.length > 0 && (
+          <nav class="entry-section" aria-labelledby="collections-heading">
+            <p class="section-context">Reading path</p>
+            <h2 id="collections-heading">Part of a collection</h2>
+            <ul class="related-entries">
+              {collections.map((collection) => (
+                <li>
+                  <a href={`/collections/${collection.data.slug}/`}>
+                    {collection.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         )
       }
-    </nav>
+
+      {
+        relatedEntries.length > 0 && (
+          <nav class="entry-section" aria-labelledby="related-heading">
+            <p class="section-context">Continue exploring</p>
+            <h2 id="related-heading">Related entries</h2>
+            <ul class="related-entries">
+              {relatedEntries.map((relatedEntry) => (
+                <li>
+                  <a href={`/explore/${relatedEntry.data.slug}/`}>
+                    {relatedEntry.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+    </div>
   </article>
-</DebugLayout>
+</SiteLayout>

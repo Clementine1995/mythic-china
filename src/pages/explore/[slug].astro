@@ -3,59 +3,62 @@ import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import { readBuildIntent } from "../../site/build-intent";
+import { createReviewProjection } from "../../site/review-projection";
 import EntryTemplate from "../../templates/EntryTemplate.astro";
+import { resolveApprovedPageAssetById } from "../../visual/resolve-approved-page-asset";
+import type { ResolvedAssetRecord } from "../../visual/resolve-visual-assets";
 
 interface Props {
   entry: CollectionEntry<"entries">;
   collections: CollectionEntry<"collections">[];
   relatedEntries: CollectionEntry<"entries">[];
   sources: CollectionEntry<"sources">[];
-  claims: CollectionEntry<"claims">[];
-  terminology: CollectionEntry<"terminology">[];
+  heroAsset: ResolvedAssetRecord | null;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  readBuildIntent();
   const graph = await loadValidatedContentGraph();
-  const entriesById = new Map(graph.entries.map((entry) => [entry.id, entry]));
+  const projection = createReviewProjection(graph);
+  // Related Entries stay published-only even when the current route is a draft review.
+  const publishedEntriesById = new Map(
+    projection.publishedEntries.map((entry) => [entry.id, entry]),
+  );
   const sourcesById = new Map(
     graph.sources.map((source) => [source.id, source]),
   );
-  const claimsById = new Map(graph.claims.map((claim) => [claim.id, claim]));
-  const terminologyById = new Map(
-    graph.terminology.map((term) => [term.id, term]),
-  );
 
-  return graph.entries
-    .filter((entry) => entry.data.status !== "archived")
-    .map((entry) => ({
+  return projection.entries.map((entry) => {
+    const heroAsset = entry.data.heroAssetId
+      ? resolveApprovedPageAssetById(graph.assets, entry.data.heroAssetId, {
+          ownerType: "entry",
+          ownerId: entry.id,
+          role: "hero",
+          slotId: "primary",
+          accessibilityMode: "informative",
+        })
+      : null;
+
+    return {
       params: { slug: entry.data.slug },
       props: {
         entry,
-        collections: graph.collections.filter(
-          (collection) =>
-            collection.data.status !== "archived" &&
-            collection.data.entryIds.includes(entry.id),
+        collections: projection.collections.filter((collection) =>
+          collection.data.entryIds.includes(entry.id),
         ),
         relatedEntries: entry.data.relatedEntryIds.flatMap((id) => {
-          const relatedEntry = entriesById.get(id);
-          return relatedEntry && relatedEntry.data.status !== "archived"
-            ? [relatedEntry]
-            : [];
+          const relatedEntry = publishedEntriesById.get(id);
+          return relatedEntry ? [relatedEntry] : [];
         }),
         sources: entry.data.sourceIds.flatMap((id) => {
           const source = sourcesById.get(id);
           return source ? [source] : [];
         }),
-        claims: entry.data.claimIds.flatMap((id) => {
-          const claim = claimsById.get(id);
-          return claim ? [claim] : [];
-        }),
-        terminology: entry.data.terminologyRecordIds.flatMap((id) => {
-          const term = terminologyById.get(id);
-          return term ? [term] : [];
-        }),
+        heroAsset,
       } satisfies Props,
-    }));
+    };
+  });
 };
 
 const props = Astro.props;

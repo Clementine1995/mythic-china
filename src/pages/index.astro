@@ -1,0 +1,32 @@
+---
+import { loadValidatedContentGraph } from "../content/load-validated-content-graph";
+import { readBuildIntent } from "../site/build-intent";
+import {
+  createReviewProjection,
+  getReviewHomeSlice,
+} from "../site/review-projection";
+import HomeTemplate from "../templates/HomeTemplate.astro";
+import { resolveApprovedPageAssetById } from "../visual/resolve-approved-page-asset";
+
+readBuildIntent();
+const graph = await loadValidatedContentGraph();
+const projection = createReviewProjection(graph);
+const { collection, entry } = getReviewHomeSlice(projection);
+if (entry.data.heroAssetId === null) {
+  throw new Error(`Review Home Entry ${entry.id} requires a Hero asset.`);
+}
+// Home reaches the selected Entry Hero only through its versionless logical ID.
+const heroAsset = resolveApprovedPageAssetById(
+  graph.assets,
+  entry.data.heroAssetId,
+  {
+    ownerType: "entry",
+    ownerId: entry.id,
+    role: "hero",
+    slotId: "primary",
+    accessibilityMode: "informative",
+  },
+);
+---
+
+<HomeTemplate {collection} {entry} {heroAsset} />

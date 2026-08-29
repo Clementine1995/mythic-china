@@ -1,0 +1,50 @@
+---
+import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../../site/build-intent";
+import { createReviewProjection } from "../../site/review-projection";
+
+readBuildIntent();
+const graph = await loadValidatedContentGraph();
+const { publishedEntries } = createReviewProjection(graph);
+---
+
+<SiteLayout
+  title="Explore"
+  description="Browse published Mythic China stories and cultural guides."
+>
+  <header class="index-hero page-shell section-space">
+    <p class="section-context">Explore</p>
+    <h1>Stories and traditions</h1>
+    <p>
+      Browse published entries across myths, legends, figures, realms, and
+      cultural traditions.
+    </p>
+  </header>
+
+  <section class="index-results page-shell section-space" aria-live="polite">
+    {
+      publishedEntries.length > 0 ? (
+        <ol class="editorial-index">
+          {publishedEntries.map((entry) => (
+            <li>
+              <p>{entry.data.entryType}</p>
+              <h2>
+                <a href={`/explore/${entry.data.slug}/`}>{entry.data.title}</a>
+              </h2>
+              {entry.data.summary && <p>{entry.data.summary}</p>}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <div class="honest-empty-state">
+          <h2>No published entries yet</h2>
+          <p>
+            Entries appear here only after research, editorial, visual, and
+            publication review are complete.
+          </p>
+        </div>
+      )
+    }
+  </section>
+</SiteLayout>

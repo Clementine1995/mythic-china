@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2 基线提交与 `origin`，当前 M2 本地基线为 `f258227`。M3-U1/U2/U3/U4/U5 已完成；M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。当前没有运行中的应用服务、真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 解释为预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3 基线提交与 `origin`。M2 历史基线为 `f258227`；M3 已完成并形成当前提交基线 `c606f5`（`M3 completed`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1 合同确认并单独授权 M4-U2；U2 noindex review 页面代码与自动静态门禁现已完成，等待页面级评审。U3-U5、服务、依赖、Git 写入、部署与发布未获授权。当前没有运行中的应用服务、真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 解释为预览或生产发布。
 
 ## 当前环境身份门禁
 
@@ -417,7 +417,7 @@ M3-U1 开始前的只读核查记录（2026-08-28）：
 - 本地 HEAD 为 `f258227da1b5a73f22c87ec99722243742db0ba0`，subject 为 `feat: complete M2 content foundation`。
 - HEAD、`main` 与本地 remote-tracking ref `origin/main` 指向同一提交；`git status --short --branch` 当时只有 `## main...origin/main`，工作树干净。
 - 本次没有执行 `git fetch` 或访问远端服务器，因此该记录只证明本地 `origin/main` 的已知状态，不证明服务器端分支在核查时仍相同。
-- 该提交由用户完成。记录此基线不授予代理执行 `git add`、commit、push、分支、worktree 或发布的权限；当前 M3-U1/U2/U3/U4/U5 修改均保持未提交，后续版本控制动作仍需单独明确授权。
+- 该提交由用户完成。记录此基线不授予代理执行 `git add`、commit、push、分支、worktree 或发布的权限；本段描述 M3-U1 开始前现场，M3 后续结果现已形成 `c606f5` 完成基线，见下方“M3 完成基线与 M4-U1 接管”。
 
 ### M3-U2 最小研究与 visual brief
 
@@ -488,6 +488,32 @@ $env:Path = "$fixedRuntime;$env:Path"
 - 返修后版本化 inventory 为七个 local master、七份 repository source、两份 production record 与五份 manifest 记录；Hero v2 是唯一 current Hero，Lead/OG/Social 仍为 v1 current。钟馗 Entry 的 versionless `heroAssetId` 无需改写，由 resolver 解析到 Hero v2。
 - 固定 Node `24.16.0` 下 `pnpm run visual:build:check` 通过：七个 local master 与三份 current responsive rendition 均核验成功，22 个 AVIF/WebP 目标实际生成并解码复核。完整 `pnpm run check` 通过 Prettier、ESLint、10 个测试文件/72 项测试、`astro check`（36 个文件，0 error、0 warning、0 hint）与 3 页静态 build。
 - M3 已重新闭合；未启动 dev/preview、未安装/升级/移除依赖、未执行 Git 写操作、未进入 M4、未发布。
+
+### M3 完成基线与 M4-U1 接管
+
+M4-U1 开始前的只读核查记录（2026-08-29）：
+
+- HEAD、`main` 与本地 `origin/main` 均为 `c606f5aab92d908ff2935c5b7212ad5066636a50`，subject 为 `M3 completed`。
+- `git status --short --branch` 只有 `## main...origin/main`，工作树干净。
+- 未执行 fetch，因此不能据此证明服务器端分支状态。
+- Project owner 仅授权 M4-U1 合同单元：新增 `docs/requirements/003-pages-exploration-seo.md` 并同步 README、001 与本文件。授权不包含页面实现、内容/资产修改、依赖、配置、服务、Git 写入、部署或发布。
+- U1 文档实施完成后只执行本文件“文档验证”与 Git 只读差异检查；不运行会刷新 `.astro/` 或 `dist/` 的聚合 build。
+- 执行结果：固定 Node/Corepack 下 `pnpm run format:check` 通过；19 份 Markdown 严格 UTF-8、相对链接和原模板占位符检查通过；`git diff --check` 与四个授权文件的工作树范围检查通过。未运行测试/build、服务或 Git 写操作。
+- 随后 Project owner 明确确认 M4 合同第 1–9 项，并要求后置事项按对应单元再确认。该确认先收口 M4-U1；Project owner 之后又单独要求开始 M4-U2。U2 授权只覆盖已列明的 noindex review 页面、测试、package scripts 与文档，不包含 U3-U5、服务、依赖、Git 写入、部署或发布。
+
+### M4-U2 review 构建意图
+
+M4-U2 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。本单元唯一允许值为 `review`；缺失、`public` 或其他未知值都必须失败。`public` 只有在后续单元建立 published-only 投影与 SEO 发布门禁后才能加入允许值，不能由 `NODE_ENV`、平台 URL 或内容数量推断。
+
+项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但当前没有服务启动授权，不运行。
+
+### M4-U2 页面与静态验证记录
+
+- 已实现显式 review 投影、共享页面壳、Home/Explore/Collections/Collection/两个 Entry/About 共 7 页、approved/current Hero v2 页面接线、完整 Source 展示、CSS-only Collection realm surface 与输出 verifier。
+- 固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、13 个测试文件/87 项测试、`astro check`（53 个文件，0 error、0 warning、0 hint）与 7 页静态 build。产物审计确认全部页面为 `noindex, nofollow`、全部内部链接有效、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并精确生成 14 个 Hero v2 AVIF/WebP 页面输出。
+- `pnpm run visual:build:check` 回归通过七个 local master 与三份 current responsive rendition 的 22 个实际输出复核。
+- 未执行 dev/preview、浏览器、真实视口/键盘/缩放/字体检查、Project owner 页面批准、Git 写入、部署或发布。静态门禁通过不构成页面级或发布批准。
+- 未改内容、Schema、manifest、production record、repository source、依赖或 lockfile。未来 Hero 版本切换必须同步受控页面图片 registry；不一致时构建失败，不静默回退。
 
 ## 数据库、外部服务与真实写入口
 
