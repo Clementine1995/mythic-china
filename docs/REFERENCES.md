@@ -88,11 +88,24 @@
 以下资料访问于 2026-08-27，用于固定首个 Collection 的范围与钟馗 Entry 的角色边界；它们是需求与研究入口，不替代单篇文章的 claim map、具体版本和 locator：
 
 - [“阴间”](https://dict.revised.moe.edu.tw/dictView.jsp?ID=156490&q=1&word=%E9%99%B0) 与 [“地府”](https://dict.revised.moe.edu.tw/dictView.jsp?ID=45218&q=1&word=%E5%BA%9C) — 教育部《重编国语辞典修订本》。用途：一般词义与拼音边界；只支持“中国阴间”是可用的宽泛中文栏目名，不支持一套自古统一的体系。
-- [Zhong Kui, the Demon Queller with Five Bats](https://www.metmuseum.org/art/collection/search/75262) — The Met。用途：`Demon Queller` 身份和具体馆藏图像；不单独支持绝对起源或所有传统中的固定职司。
+- [Demon queller Zhong Kui with demons](https://www.metmuseum.org/art/collection/search/75262) — The Met。用途：`Demon Queller` 身份和具体清代竹雕群像；不单独支持绝对起源或所有传统中的固定职司。对象标题于 2026-08-28 重新核对，旧的“五蝠”标签不属于此对象。
 - [Ten Magistrates of the Underworld](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm) — Columbia University。用途：十王、审判、轮回及官僚化阴间想象的教学入口；不能代表所有地区、时期和传统。
 - [Black Myth: Zhong Kui 官方网站](https://www.gamesci.cn/zhongkui/) 与 [2026-08-20 官方实机演示](https://www.bilibili.com/video/BV1kS8H6VERt/) — Game Science / 黑神话官方账号。用途：现代改编和 2026 年当代关注；官方材料只支持游戏自身且仍处研发阶段，不支持古代、宗教或民俗事实。动态播放量不得写成稳定事实。
 
 稳定内容结论：`The Chinese Underworld / 中国阴间` 是首个正式 Collection；The Met 支持 `Zhong Kui, the Demon Queller` 这一身份，本站据此把钟馗作为驱鬼形象策展为 Featured Entry。该收录关系不表示他是阴间统治者、十王之一或跨传统固定阴司官员；`At the Threshold` 仅是本站策展标签。具体文本若赋予其判官、鬼王或其他职司，必须限定到该文本、时期和传统。
+
+### M3-U2 钟馗视觉证据与参考权利
+
+以下资料访问于 2026-08-28，已物化为钟馗 Source/Claim 与随后在 M3-U3 获批的 visual brief；对象记录只证明对应作品呈现了什么，不建立唯一正典、固定服制或绝对起源：
+
+- [The Lantern Night Excursion of Zhong Kui](https://www.clevelandart.org/art/1961.206) — Yan Hui / Cleveland Museum of Art，Yuan-period handscroll，object 1961.206。用途：有胡须、着袍、指挥队伍的钟馗，以及节庆队伍与鬼从关系。对象页明确允许复制、修改与分发；权利入口：[CMA Open Access](https://www.clevelandart.org/open-access)。
+- [Zhong Kui](https://www.metmuseum.org/art/collection/search/37393) — Ren Yi / The Met，1883 hanging scroll，object 2002.208.2。用途：晚清文雅士人式钟馗、入鞘佩剑与人物画节奏；不复制具体姿态、花朵、案头器物、题跋或政治寓意。
+- [Demon queller Zhong Kui with demons](https://www.metmuseum.org/art/collection/search/75262) — The Met，late 17th–early 18th century bamboo group，object 2008.636。用途：紧凑群像、被压服/献物鬼从与主从层级；竹材颜色不支持服装色判断。
+- [Zhong Kui taming the Five Pestilences](https://asia.si.edu/explore-art-culture/collections/search/edanmdm:fsg_F1909.164/) — Smithsonian National Museum of Asian Art，16th–17th century painting，object F1909.164。用途：竖幅层级与围绕主体的形体关系；对象页未解释各动物/人物与“五疫”的逐项映射，本站不自行补义。对象页标注 CC0；权利入口：[Smithsonian Open Access FAQ](https://www.si.edu/openaccess/faq)。
+- [Zhong Kui, the Demon Queller, Patrolling the Palace](https://www.si.edu/object/zhong-kui-demon-queller-patrolling-palace:fsg_F1982.13) — Hongwu / Smithsonian National Museum of Asian Art，late 18th century painting，object F1982.13。用途：核对护佑节令语境与被制服鬼从；图片标有 usage conditions，本期只引用馆藏说明并作 research-only 研究，不下载、描摹或进入生产输入。权利入口：[Smithsonian Terms of Use](https://www.si.edu/termsofuse)。
+- [The Met Image and Data Resources](https://www.metmuseum.org/policies/image-resources) — The Met。用途：确认上述标注 Public Domain 的 Met 对象图像按 Open Access/CC0 可下载、分享和改编；CC0 不替代文化准确性、署名与人工审核。
+
+本期 primary reference family 固定为“晚清中国钟馗人物画中的文雅士人表达与入鞘佩剑”；其他元/明清对象只用于交叉核对人物、鬼从、群像与构图边界。所有公开资产都必须重新构图，不复制任何一件馆藏的完整姿态、题跋、印章或版式。
 
 ### 通用原典、数据库与翻译研究入口
 
@@ -119,6 +132,10 @@
 - [Actions](https://docs.astro.build/en/guides/actions/) 与 [Sessions](https://docs.astro.build/en/guides/sessions/) — Astro 官方文档。用途：未来少量写入、会话与 adapter 隔离边界，不代表 MVP 已采用。
 - [Images](https://docs.astro.build/en/guides/images/) — Astro 官方文档。用途：`Image` / `Picture`、AVIF/WebP 与响应式图片策略。
 - [Sitemap Integration](https://docs.astro.build/en/guides/integrations-guide/sitemap/) — Astro 官方文档。用途：未来 Sitemap 实现入口。
+
+### Image Build
+
+- [Sharp 官方文档](https://sharp.pixelplumbing.com/) 与 [官方许可证](https://github.com/lovell/sharp/blob/main/LICENSE) — 用途：核对 Sharp 的 Node.js 图片转换定位、WebP/AVIF 输出能力与 Apache-2.0 许可；访问于 2026-08-29。M3-U5 只把精确 `sharp@0.35.4` 用作本地构建期编码后端，不把它加入浏览器运行时。
 
 ### Static Search
 
@@ -159,10 +176,10 @@ MVP 当前只确认 Astro 的供应商中立静态输出；Vercel 与 Cloudflare
 | [Zeejay0 / gathered-scenes-zine-skill](https://github.com/Zeejay0/gathered-scenes-zine-skill) | [个人非商业许可证](https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/LICENSE)，明确限制商业工作流及相关输出 | 不采用 | 项目保留订阅、广告和产品化路线，与许可证不兼容；除非未来取得明确书面商业许可，否则不安装、不使用其输出。 |
 | [liyue-aigc / xianxia-visual-director](https://github.com/liyue-aigc/xianxia-visual-director) | 仓库明确未附开源许可证 | 不采用 | 其固定仙侠巨构、建筑、人物与服装 house rules 是幻想设定，不是历史/宗教依据；不复制 Skill 文本或资产，也不让其发明具体人物、建筑、仪式和神系。镜头层级、尺度参照等通用构图常识只能自行表述。 |
 | [LiamGvchi / gc-minimal-zine-poster](https://github.com/LiamGvchi/gc-minimal-zine-poster) | [MIT](https://github.com/LiamGvchi/gc-minimal-zine-poster/blob/main/LICENSE) | 仅借方法 | 可借 observed vs interpretation、fixed/variable/sample residue、输入图保留等级及 full/thumbnail QA；不采用其日韩 indie-zine、旧纸、高彩点色和默认 3:5 外观。 |
-| built-in `imagegen` | 当前环境内置图片生成能力；输入素材与输出权利仍按服务条款和素材权利另行判断 | 条件可用 | 只在 claim/source/terminology 与 visual brief 核准后执行原型或资产探索；输出进入公开站点前必须有 manifest、权利判断、人工文化/语言审核和披露。 |
+| built-in `imagegen` | 当前环境内置图片生成能力；[OpenAI Terms of Use](https://openai.com/policies/terms-of-use/) 于 2026-08-28 核对，实际适用账户关系由 Project owner 据实确认 | 条件可用 | 只在画面实际涉及的 Claim/Source、适用 Terminology 与 visual brief 核准后执行原型或资产探索；未引入新术语的 scoped visual sample 可以没有 TerminologyRecord。输出进入公开站点前必须有 manifest、权利判断、人工文化/语言审核和披露。2026-08-29 Project owner 确认钟馗 U4 使用个人且非组织管理账户并拥有项目发布授权；该记录不替代可版权性、唯一性或第三方权利判断。 |
 | local `design-taste-frontend` | 当前环境的设计审计指令；不复制或随项目分发其文本 | 条件可用，仅作 QA | 只借 brief inference、布局重复、移动折叠、对比、reduced motion 与性能检查；其默认技术栈、双主题和营销页规则不得覆盖本项目的 Astro 推荐、编辑长文和中国文化主题合同。 |
 
-采用分组：**条件可用**为 `ink-wash-poster`、built-in `imagegen`、`design-taste-frontend`；**仅借方法**为 `scene-distillation-zine-v1-3`、`gc-minimal-zine-poster`；**不采用**为 `gathered-scenes-zine-skill`、`xianxia-visual-director`。没有任何 Skill 可以绕过 `CONTENT_MODEL.md` 的 Claim、TerminologyRecord、visual brief、Asset Manifest 与权利审核。
+采用分组：**条件可用**为 `ink-wash-poster`、built-in `imagegen`、`design-taste-frontend`；**仅借方法**为 `scene-distillation-zine-v1-3`、`gc-minimal-zine-poster`；**不采用**为 `gathered-scenes-zine-skill`、`xianxia-visual-director`。没有任何 Skill 可以绕过 `CONTENT_MODEL.md` 的 Claim、适用 TerminologyRecord、visual brief、Asset Manifest 与权利审核。
 
 ## 8. 项目内引用位置
 

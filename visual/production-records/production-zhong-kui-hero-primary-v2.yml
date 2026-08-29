@@ -1,0 +1,110 @@
+productionRecordId: production-zhong-kui-hero-primary-v2
+briefId: brief-zhong-kui-visual-package-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen
+modelId: null
+modelNotes: The built-in ImageGen tool did not expose a model identifier in the edit responses; no model name or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: The v2 hand repair used only project-original Hero v1 masters and project-generated edit intermediates. On 2026-08-29 the Project owner approved desktop candidate 01 and mobile candidate 02 and retained the previously confirmed personal, non-organization-managed OpenAI account and publication authority. This record does not make broader copyrightability, exclusivity, or non-infringement claims.
+recordedAt: "2026-08-29T05:42:52Z"
+renditions:
+  - manifestId: asset-zhong-kui-hero-primary-v2
+    usage: hero-desktop
+    prompt: |-
+      Use case: precise-object-edit
+      Asset type: Mythic China entry Hero desktop repair candidate, 16:9 landscape.
+      Input images: Image 1 is the sole edit target and the current project-original Hero desktop master.
+      Primary request: Repair only Zhong Kui's two visible human hands so both have credible adult human anatomy while preserving their existing gestures and positions.
+
+      Exact hand corrections:
+      - The hand on the screen-right side of Zhong Kui is the raised open gesture. Reconstruct one anatomically coherent hand with exactly five digits total: four distinct fingers and one correctly oriented thumb. Give it a continuous wrist-to-palm structure, believable metacarpals, natural knuckle spacing, tapering finger lengths, and plausible joint bends in perspective. Remove the current multi-finger/duplicated-digit impression and unnatural finger-root connections.
+      - The hand on the screen-left side of Zhong Kui hangs lower from the sleeve. Reconstruct one anatomically coherent relaxed hand with exactly five digits total: four fingers and one correctly oriented thumb. Natural partial sleeve occlusion is acceptable, but the visible palm, finger bases, joints, proportions, and wrist connection must be plausible, not simplified into fused or ambiguous forms.
+
+      Hard invariants: Change only Zhong Kui's two hands and the minimum immediately adjacent sleeve-edge pixels needed to integrate them. Keep Zhong Kui's exact identity, face, expression, beard, hair, headpiece, ribbons, body proportions, pose, robe design, fabric pattern, belt, fully sheathed sword, tassel, lighting, palette, brush texture, and silhouette unchanged. Keep all three subordinate demon attendants exactly unchanged in count, identity, faces, anatomy, positions, wary/bracing/recoiling non-worshipping poses, and scale. Keep the entire abstract threshold, stone steps, mist, architectural shapes, 16:9 framing, focal point, quiet top 16 percent, quiet rightmost 38 percent, and all negative-space/safe-area relationships unchanged. Preserve the original contemporary museum-editorial ink-and-color style without global repainting, sharpening, recoloring, cropping, reframing, or restyling.
+
+      Constraints: exactly two human hands belonging to Zhong Kui; exactly five digits on each; no extra fingers, missing fingers, fused fingers, duplicated thumbs, broken wrists, malformed joints, floating anatomy, or ambiguous finger clusters. No added or removed figures or objects. No changes to any demon hands. No text, Chinese characters, pseudo-writing, inscription, seal, talisman, logo, watermark, title, UI, franchise/game styling, gore, armor, duplicate weapons, or protected character design. This remains a contemporary original editorial illustration, not a historical reconstruction.
+    receivedAt: "2026-08-29T04:06:08Z"
+    inputImages:
+      - kind: edit-target
+        sha256: e6a622d3344075122d811618e602f8e07ce3f26da170df4e5cccc5addfb35850
+        rightsNotes: Project-original approved Hero v1 desktop master; supplied only as the hand-repair edit target and retained unchanged in v1 local production storage.
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: 04742717431e184fcaf98db73414c6285bbfae04a9eb8dcb05a742de76899809
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v2/zhong-kui-hero-primary-v2-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 1738ed4896b61fbfecae6f973aaa4573fd99b748152792e7bac99c998f80c68b
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Selected Project-owner-approved desktop candidate 01 after full-canvas and native-output hand-detail review.
+        - Used centered fit-cover processing to remove approximately one output pixel vertically while preserving the approved 16:9 composition and safe areas.
+        - Reconstructed the exact 3200x1800 PNG master with the Lanczos3 kernel; the master is not described as a native ImageGen output.
+        - Encoded the repository rendition as same-canvas WebP at quality 90.
+    verifiedAt: "2026-08-29T05:42:52Z"
+  - manifestId: asset-zhong-kui-hero-primary-v2
+    usage: hero-mobile
+    prompt: |-
+      Initial repair:
+      Use case: precise-object-edit
+      Asset type: Mythic China entry Hero mobile repair candidate, vertical 4:5.
+      Input images: Image 1 is the sole edit target and the current project-original Hero mobile master.
+      Primary request: Repair only Zhong Kui's two visible human hands so both have credible adult human anatomy while preserving their existing gestures and positions.
+
+      Exact hand corrections:
+      - The hand on the screen-right side of Zhong Kui is at his waist beside the robe, belt, and sheathed sword. Reconstruct one anatomically coherent hand with exactly five digits total: four distinct fingers and one correctly oriented thumb. Preserve the same waist-level action and relationship to the belt/robe/sword; give it a believable palm, metacarpals, knuckle spacing, finger lengths, joint bends, and wrist connection. Remove the current fused-finger, unclear-proportion, and ambiguous-thumb impression.
+      - The hand on the screen-left side of Zhong Kui hangs lower from the sleeve. Reconstruct one anatomically coherent relaxed hand with exactly five digits total: four fingers and one correctly oriented thumb. Natural partial sleeve occlusion is acceptable, but the visible palm, finger bases, joints, proportions, and wrist connection must be plausible and legible rather than fused or structurally vague.
+
+      Hard invariants: Change only Zhong Kui's two hands and the minimum immediately adjacent sleeve/belt-edge pixels needed to integrate them. Keep Zhong Kui's exact identity, face, expression, beard, hair, headpiece, ribbons, body proportions, pose, robe design, fabric pattern, belt, fully sheathed sword, scabbard, tassel, lighting, palette, brush texture, and silhouette unchanged. Keep all three subordinate demon attendants exactly unchanged in count, identity, faces, anatomy, positions, scale, and wary/bracing/recoiling non-worshipping poses; do not turn them into kneeling, praying, bowing, hand-clasping, or supplicant figures. Keep the entire abstract threshold, stone steps, mist, architecture, vertical 4:5 framing, focal point, quiet top 22 percent, quiet bottom 14 percent, and all negative-space/safe-area relationships unchanged. Preserve the original contemporary museum-editorial ink-and-color style without global repainting, sharpening, recoloring, cropping, reframing, or restyling.
+
+      Constraints: exactly two human hands belonging to Zhong Kui; exactly five digits on each; no extra fingers, missing fingers, fused fingers, duplicated thumbs, reversed thumbs, broken wrists, malformed joints, floating anatomy, or ambiguous finger clusters. No added or removed figures or objects. No changes to any demon hands. No text, Chinese characters, pseudo-writing, inscription, seal, talisman, logo, watermark, title, UI, franchise/game styling, gore, armor, duplicate weapons, or protected character design. This remains a contemporary original editorial illustration, not a historical reconstruction.
+
+      Native-output hand-detail correction:
+      Use case: precise-object-edit
+      Asset type: Mythic China entry Hero mobile hand-repair candidate, vertical 4:5.
+      Input images: Image 1 is the sole edit target. Its overall composition, character, clothing, sword, background, three non-worshipping demons, safety zones, and style are already locked.
+      Primary request: Change only Zhong Kui's two human hands to make every digit anatomically explicit and readable at native resolution.
+
+      Screen-right waist hand: keep it at the same waist-level location beside the robe, belt, and fully sheathed sword. Give it exactly five digits total: four naturally separated fingers plus one clearly visible, correctly oriented thumb emerging from the correct side of the palm. The thumb must not be hidden, fused, reversed, or mistaken for a fifth long finger. Use believable palm width, knuckles, tapered finger lengths, joint bends, and wrist-to-sleeve connection. Preserve a calm semi-grip/resting action at the belt/robe rather than a floating or limp hand.
+
+      Screen-left lowered hand: keep it hanging from the same sleeve opening. Give it exactly five digits total: four individually discernible relaxed fingers plus one clearly visible, correctly oriented side thumb. All five digits must be readable even with natural sleeve occlusion; show a coherent palm, finger bases, knuckles, proportions, joints, and wrist connection. Do not hide most of the fingers inside a vague cluster.
+
+      Hard invariants: edit only these two hands and the minimum adjacent sleeve/belt pixels required for integration. Keep every other image element unchanged: Zhong Kui's exact identity, face, expression, beard, hair, headpiece, ribbons, body, pose, robe, pattern, belt, fully sheathed sword, tassel, silhouette, lighting, palette and brush texture; exactly three subordinate demons with the same faces, anatomy, positions, scale, and wary/bracing/recoiling non-worshipping poses; the architecture, steps, mist, 4:5 framing, focal point, quiet top 22 percent, quiet bottom 14 percent and all safe areas. No global repainting, reframing, cropping, rescaling, restyling or composition changes.
+
+      Constraints: exactly five digits per Zhong Kui hand; clearly visible correct thumb on each; no extra, missing, fused, duplicated or reversed digits; no malformed palms, joints or wrists; no changes to demon hands; no added/removed figures or objects; no kneeling, praying, bowing, worshipping or clasped demon gestures. No text, pseudo-writing, Chinese characters, seal, talisman, logo, watermark, title, UI, franchise/game styling, gore, armor, duplicate weapons or protected character design.
+    receivedAt: "2026-08-29T04:10:50Z"
+    inputImages:
+      - kind: edit-target
+        sha256: be99a2116ffd8ac17c64b3af457b17daf029fb25c31375826dd5965c767fbd35
+        rightsNotes: Project-original approved Hero v1 mobile master; supplied only to the initial hand-repair edit and retained unchanged in v1 local production storage.
+      - kind: edit-target
+        sha256: b49ebe30f33e390a7c44d1a6a80700643581ba18da58cc5a157365b328f4a75e
+        rightsNotes: Project-generated mobile candidate 01; supplied only for the native-output thumb and finger-legibility correction and retained in Git-ignored exploration storage.
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 7249451039eec0a498896b0c6bf68e3a317a2db683297946c46c0b744be4c80f
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v2/zhong-kui-hero-primary-v2-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: b0c26dc2a641c01f8be97cff4a7021171842fc3636624fcfe2560542c6cb15e6
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Rejected mobile candidate 01 after native-output review found the waist-side thumb direction and lowered-hand digit count insufficiently explicit.
+        - Selected Project-owner-approved mobile candidate 02 after full-canvas and native-output hand-detail review.
+        - Used centered fit-cover processing to remove less than one output pixel horizontally while preserving the approved 4:5 composition and safe areas.
+        - Reconstructed the exact 1600x2000 PNG master with the Lanczos3 kernel; the master is not described as a native ImageGen output.
+        - Encoded the repository rendition as same-canvas WebP at quality 90.
+    verifiedAt: "2026-08-29T05:42:52Z"
+notes: M3 final visual review reopened after the Project owner identified anatomically implausible Zhong Kui hands in both Hero v1 renditions. The v2 edit repaired only the two Zhong Kui hands per canvas while preserving identity, clothing, fully sheathed sword, composition, required safe areas, and the three non-worshipping attendants. Desktop candidate 01 and mobile candidate 02 were approved by the Project owner. The complete v1 manifest, repository sources, local masters, production record, and exploration history remain intact with v1 no longer current. Museum reference images were not supplied to ImageGen.

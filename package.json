@@ -15,12 +15,14 @@
     "format:check": "node scripts/verify-runtime.mjs && prettier --check .",
     "lint": "node scripts/verify-runtime.mjs && eslint .",
     "test": "node scripts/verify-runtime.mjs && vitest run",
+    "visual:build:check": "node scripts/verify-runtime.mjs && node scripts/verify-visual-asset-build.mjs",
     "typecheck": "node scripts/verify-runtime.mjs && astro check",
     "build": "node scripts/verify-runtime.mjs && astro check && astro build",
     "check": "node scripts/verify-runtime.mjs && prettier --check . && eslint . && vitest run && astro check && astro build"
   },
   "dependencies": {
-    "astro": "7.2.8"
+    "astro": "7.2.8",
+    "sharp": "0.35.4"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

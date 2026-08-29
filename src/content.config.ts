@@ -9,6 +9,11 @@ import {
   sourceSchema,
   terminologySchema,
 } from "./content/content-schemas";
+import {
+  assetManifestSchema,
+  visualBriefSchema,
+  visualProductionRecordSchema,
+} from "./visual/visual-asset-schemas";
 
 const entries = defineCollection({
   loader: glob({
@@ -56,10 +61,40 @@ const terminology = defineCollection({
   schema: terminologySchema,
 });
 
+const visualBriefs = defineCollection({
+  loader: glob({
+    base: "./visual/briefs",
+    pattern: "**/*.yml",
+    generateId: ({ entry }) => contentIdFromEntryPath(entry, ".yml"),
+  }),
+  schema: visualBriefSchema,
+});
+
+const assets = defineCollection({
+  loader: glob({
+    base: "./visual/manifests",
+    pattern: "**/*.yml",
+    generateId: ({ entry }) => contentIdFromEntryPath(entry, ".yml"),
+  }),
+  schema: assetManifestSchema,
+});
+
+const productionRecords = defineCollection({
+  loader: glob({
+    base: "./visual/production-records",
+    pattern: "**/*.yml",
+    generateId: ({ entry }) => contentIdFromEntryPath(entry, ".yml"),
+  }),
+  schema: visualProductionRecordSchema,
+});
+
 export const collections = {
   entries,
   collections: curatedCollections,
   sources,
   claims,
   terminology,
+  visualBriefs,
+  assets,
+  productionRecords,
 };

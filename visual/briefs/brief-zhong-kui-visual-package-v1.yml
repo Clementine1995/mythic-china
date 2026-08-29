@@ -1,0 +1,225 @@
+briefId: brief-zhong-kui-visual-package-v1
+version: 1
+status: approved
+ownerType: entry
+ownerId: zhong-kui
+purpose: visual-package
+approvedBy: Project owner (user-confirmed)
+approvedAt: "2026-08-28T07:36:04Z"
+notes: Approved by the project owner for M3-U3 validation and as the brief gate for a separately authorized M3-U4 production step; this approval does not approve any image or production method.
+primaryReferenceFamily: Late-Qing Chinese ink-and-color scholarly portrayal of Zhong Kui with a sheathed sword
+period: Primary reference dated 1883; Yuan-through-Qing object records provide supporting iconographic checks only
+region: China
+medium: Contemporary digital editorial illustration translating figure-painting rhythm into a modern museum composition, not a historical facsimile
+culturalContext:
+  - Present Zhong Kui as a demon-quelling and protective figure, not an underworld ruler, one of the Ten Kings, or a universal bureaucratic officeholder.
+  - Treat beard, robe, sheathed sword, and demon attendants as historically attested visual choices with variation across works, not one canonical costume.
+  - Separate verified museum-record evidence from editorial inference and newly invented space, light, gestures, and demon anatomy.
+  - Keep the mood protective, commanding, and uncanny rather than gory, game-like, or horror-led.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: Three-quarter or full figure left of center, with a subdued demon layer below and a clear path through the frame.
+        safeArea: Keep the rightmost 38 percent and top 16 percent low-detail for M4 HTML title and navigation; render no text into the image.
+        focalPointGoal:
+          x: 0.36
+          y: 0.5
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: Independently composed vertical portrait with Zhong Kui centered above a simplified demon layer; do not crop the desktop scene.
+        safeArea: Keep the top 22 percent and lower action edge low-detail for M4 HTML title and controls; render no text into the image.
+        focalPointGoal:
+          x: 0.5
+          y: 0.48
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+  - role: lead
+    slotId: primary
+    requiredUsages:
+      - article-lead
+    optionalUsages: []
+    canvas:
+      - usage: article-lead
+        widthPx: 2400
+        heightPx: 1600
+        compositionGoal: Quiet scholarly portrait with the sheathed sword legible and demon attendants secondary to the face and hands.
+        safeArea: Keep edge details expendable for narrow responsive crops; render no text into the image.
+        focalPointGoal:
+          x: 0.44
+          y: 0.46
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+  - role: og
+    slotId: primary
+    requiredUsages:
+      - open-graph
+    optionalUsages: []
+    canvas:
+      - usage: open-graph
+        widthPx: 1200
+        heightPx: 630
+        compositionGoal: Strong horizontal silhouette on the right half, with a restrained demon cue below and clear title space on the left.
+        safeArea: Keep the left 48 percent low-detail for M4 typography; render no text, logos, or seals into the image.
+        focalPointGoal:
+          x: 0.72
+          y: 0.5
+        buildPlan:
+          mode: exact-canvas
+          formats:
+            - png
+          candidateWidths:
+            - 1200
+          allowUpscale: false
+  - role: social
+    slotId: primary
+    requiredUsages:
+      - social-portrait
+    optionalUsages:
+      - social-story
+    canvas:
+      - usage: social-portrait
+        widthPx: 1080
+        heightPx: 1350
+        compositionGoal: Vertical character-first composition with a legible face, robe rhythm, sheathed sword, and one restrained demon counter-shape.
+        safeArea: Keep the top and bottom 12 percent free of essential anatomy or symbols; render no text, logos, or seals into the image.
+        focalPointGoal:
+          x: 0.5
+          y: 0.46
+        buildPlan:
+          mode: exact-canvas
+          formats:
+            - png
+          candidateWidths:
+            - 1080
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: protective-demon-queller
+      statement: Zhong Kui is presented as a demon queller in protective New Year and fifth-month contexts.
+      claimIds:
+        - claim-zhong-kui-demon-queller-role
+        - claim-zhong-kui-protective-new-year-context
+    - elementId: bearded-robed-commanding-figure
+      statement: A bearded, robe-wearing Zhong Kui occupies the commanding position in an attested Yuan-period handscroll portrayal.
+      claimIds:
+        - claim-zhong-kui-bearded-robed-appearance
+    - elementId: sheathed-sword
+      statement: Zhong Kui carries a sheathed sword, without fixing a universal sword type, ornament, or supernatural function.
+      claimIds:
+        - claim-zhong-kui-sheathed-sword
+    - elementId: subordinate-demon-retinue
+      statement: Demon figures remain visibly subordinate as followers, bearers, or subdued figures rather than equal rulers.
+      claimIds:
+        - claim-zhong-kui-demon-retinue
+  inferred:
+    - elementId: threshold-guardian-composition
+      statement: Place Zhong Kui at an abstract threshold to connect the protective role to the site's editorial path.
+      rationale: At the Threshold is a Mythic China editorial label and spatial device, not a historical office or documented palace location.
+    - elementId: late-imperial-ink-rhythm
+      statement: Use controlled brush-like edges, reserved space, and asymmetrical figure grouping without imitating one historical work.
+      rationale: These are editorial abstractions from the primary reference family and supporting object records, not a reconstruction of one period style.
+    - elementId: charcoal-jade-cinnabar-palette
+      statement: Use charcoal, oxidized jade, and restrained cinnabar accents.
+      rationale: The palette comes from the approved Chinese Underworld product direction and is not asserted as the historical pigment scheme of any reference object.
+    - elementId: restrained-demon-scale
+      statement: Keep demon figures small, varied, and visually subordinate so the image reads as protection rather than spectacle.
+      rationale: Museum records support different demon relationships, but their unified scale and behavior in this package are an editorial synthesis.
+  invented:
+    - elementId: original-face-and-gesture
+      statement: The exact face, anatomy, expression, hand pose, and movement are newly designed for this package.
+    - elementId: abstract-threshold-space
+      statement: The stone-like threshold, depth layers, and nonliteral environment are a modern editorial invention, not a map of the Chinese underworld.
+    - elementId: cinematic-light-and-mist
+      statement: Directional light, mineral haze, and shadow transitions are invented visual devices.
+    - elementId: original-demon-designs
+      statement: Demon faces, bodies, colors, garments, and gestures are newly designed and carry no undocumented names, ranks, species, or fixed number.
+referenceAssets:
+  - referenceId: ref-zhong-kui-ren-yi-2002-208-2
+    url: https://www.metmuseum.org/art/collection/search/37393
+    organization: The Metropolitan Museum of Art
+    creator: Ren Yi (Ren Bonian)
+    rightsStatus: public-domain
+    rightsUrl: https://www.metmuseum.org/policies/image-resources
+    licenseOrPermissionId: cc0-1.0
+    notes: Primary stylistic family for scholarly restraint and figure-painting rhythm; do not copy the pose, blossom, table setting, inscriptions, or complete composition.
+  - referenceId: ref-zhong-kui-lantern-night-1961-206
+    url: https://www.clevelandart.org/art/1961.206
+    organization: Cleveland Museum of Art
+    creator: Yan Hui
+    rightsStatus: public-domain
+    rightsUrl: https://www.clevelandart.org/open-access
+    licenseOrPermissionId: cc0-1.0
+    notes: Study handscroll procession rhythm, command gesture, and varied attendant action; do not replicate the long sequence, individual stunts, or exact figures.
+  - referenceId: ref-zhong-kui-bamboo-group-2008-636
+    url: https://www.metmuseum.org/art/collection/search/75262
+    organization: The Metropolitan Museum of Art
+    creator: Unidentified Chinese artist
+    rightsStatus: public-domain
+    rightsUrl: https://www.metmuseum.org/policies/image-resources
+    licenseOrPermissionId: cc0-1.0
+    notes: Study compact group hierarchy and overlapping silhouettes; do not infer clothing colors from bamboo or copy the carved outline, poses, or offering arrangement.
+  - referenceId: ref-zhong-kui-five-pestilences-f1909-164
+    url: https://asia.si.edu/explore-art-culture/collections/search/edanmdm:fsg_F1909.164/
+    organization: Smithsonian National Museum of Asian Art
+    creator: Unidentified Chinese artist
+    rightsStatus: public-domain
+    rightsUrl: https://www.si.edu/openaccess/faq
+    licenseOrPermissionId: cc0-1.0
+    notes: Study vertical hierarchy, ink-and-color restraint, and the relationship between one dominant figure and surrounding forms; do not assign undocumented meanings to the animals or reproduce seals, inscriptions, or the complete layout.
+composition:
+  continuity: Keep one consistent original Zhong Kui identity, robe family, sheathed sword, and demon design language across all four logical assets while recomposing each canvas independently.
+  hierarchy: Zhong Kui is always the clear primary figure; demons support the demon-queller reading without becoming a spectacle or a fixed supernatural taxonomy.
+  colorDirection: Charcoal and oxidized jade dominate; restrained cinnabar marks focal accents only; warm neutral light keeps the Entry image readable on the site's shared article surface.
+  lightingDirection: Use one directional reveal through haze and solid form modeling; avoid neon rim light, game-poster bloom, or a black-red HUD atmosphere.
+  textPolicy: All public text, Chinese names, pinyin, titles, credits, and disclosures remain HTML or M4-generated typography; artwork contains no pseudo-Chinese writing, logo, seal, watermark, or baked-in title.
+excludedMotifs:
+  - Black Myth, game UI, entertainment franchise silhouettes, trademarks, logos, or copied camera compositions
+  - Zhong Kui shown as one of the Ten Kings, the universal ruler of the underworld, or a fixed bureaucratic officeholder
+  - Claims of reconstructing Tang dress, one canonical official robe, a fixed sword type, or a historically exact underworld building
+  - Five-bat, Five-Pestilences, peach, talisman, seal, inscription, or ritual-symbol meanings not separately selected and supported by Claim
+  - Japanese-specific festival iconography presented as universal Chinese evidence
+  - European fantasy armor, Japanese armor, horned-devil defaults, gore, torture spectacle, skull piles, or demonic species labels
+  - Pseudo-Chinese characters, invented scripture, talismans, official seals, logos, watermarks, or embedded UI text
+  - Direct copies of any reference pose, composition, inscription, seal, or identifiable protected character design
+openDecisions:
+  - Actual production method and tool or model license
+  - Exact external master storage location, backup, and logical URI mapping
+  - Named cultural, rights, visual, accessibility, and language reviewers
+  - M4 page typography, final safe-area verification, and generated OG or social text treatment

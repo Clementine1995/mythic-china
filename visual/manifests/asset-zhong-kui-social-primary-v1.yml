@@ -1,0 +1,98 @@
+assetId: asset-zhong-kui-social-primary
+manifestId: asset-zhong-kui-social-primary-v1
+ownerType: entry
+ownerId: zhong-kui
+role: social
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-zhong-kui-visual-package-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-social-primary-v1-social-portrait-1080w.png
+    usage: social-portrait
+    widthPx: 1080
+    heightPx: 1350
+    sha256: 15326f3a2e0bbe9b1a32a00d20136b3d1da3b80b1b67031de95ade0c0cf9fc48
+repositoryRenditions:
+  - usage: social-portrait
+    path: src/assets/images/zhong-kui-social-primary-v1-social-portrait-1080w.png
+    format: png
+    widthPx: 1080
+    heightPx: 1350
+    sha256: 15326f3a2e0bbe9b1a32a00d20136b3d1da3b80b1b67031de95ade0c0cf9fc48
+    focalPoint:
+      x: 0.5
+      y: 0.46
+    buildPlan:
+      mode: exact-canvas
+      formats:
+        - png
+      candidateWidths:
+        - 1080
+      allowUpscale: false
+referenceAssetIds:
+  - ref-zhong-kui-ren-yi-2002-208-2
+  - ref-zhong-kui-lantern-night-1961-206
+  - ref-zhong-kui-bamboo-group-2008-636
+  - ref-zhong-kui-five-pestilences-f1909-164
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner (private individual)
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: The Project owner confirmed on 2026-08-29 that the ImageGen run used a personal, non-organization-managed OpenAI account and that the Project owner is authorized to generate, save, and publish the output for Mythic China. Museum images informed only the sourced textual brief and were not supplied to ImageGen; this approval does not claim exclusivity or clear unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - protective-demon-queller
+  - bearded-robed-commanding-figure
+  - sheathed-sword
+  - subordinate-demon-retinue
+  - threshold-guardian-composition
+  - late-imperial-ink-rhythm
+  - charcoal-jade-cinnabar-palette
+  - restrained-demon-scale
+  - original-face-and-gesture
+  - abstract-threshold-space
+  - cinematic-light-and-mist
+  - original-demon-designs
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen
+  recordPath: visual/production-records/production-zhong-kui-visual-package-v1.yml
+  workflow: null
+humanEdits:
+  - Corrected the selected social candidate to remove pseudo-writing-like robe marks and restore quiet top and bottom safe areas.
+  - Cropped and reconstructed the corrected raw output to the exact approved 1080x1350 canvas, recording the operation in the production record.
+  - Copied the exact-canvas PNG master byte-for-byte as the repository rendition.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: Approved as a protective demon-queller with one clearly subordinate attendant; the scene does not present Zhong Kui as an underworld ruler or assign undocumented rank, species, or ritual meaning to the attendant.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: Approved after the Project owner confirmed a personal, non-organization-managed ImageGen account and authority to generate, save, and publish the project output; museum references were not uploaded to ImageGen.
+  visual:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: The exact 1080x1350 canvas, face, hands, fully sheathed sword, single subordinate attendant, and quiet top/bottom safe areas were reviewed; no pseudo-writing, embedded text, logo, watermark, or obvious fused anatomy was accepted.
+  accessibility:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: The informative alt accurately identifies Zhong Kui, the sheathed sword, one attendant, and abstract misty threshold; the caption clearly identifies a contemporary AI-assisted interpretation rather than a historical image.
+  language:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: No rendered text, Chinese characters, pseudo-writing, seals, or talismans are present. The English alt, caption, credit, disclosure, and Zhong Kui naming were reviewed and approved.
+alt: Zhong Kui in dark green robes stands with a sheathed sword beside one small crouching demon at an abstract misty threshold.
+caption: A contemporary AI-assisted editorial interpretation of Zhong Kui as a protective demon-queller with one subordinate demon attendant; it is not a historical image.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

@@ -1,0 +1,128 @@
+assetId: asset-zhong-kui-hero-primary
+manifestId: asset-zhong-kui-hero-primary-v2
+ownerType: entry
+ownerId: zhong-kui
+role: hero
+slotId: primary
+version: 2
+status: approved
+isCurrent: true
+briefId: brief-zhong-kui-visual-package-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v2/zhong-kui-hero-primary-v2-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 1738ed4896b61fbfecae6f973aaa4573fd99b748152792e7bac99c998f80c68b
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v2/zhong-kui-hero-primary-v2-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: b0c26dc2a641c01f8be97cff4a7021171842fc3636624fcfe2560542c6cb15e6
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/zhong-kui-hero-primary-v2-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 8d1ec2328adcf59e287b8054bedf31b70223f7e0d719807f3c783fe5aa3e6ed1
+    focalPoint:
+      x: 0.36
+      y: 0.5
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/zhong-kui-hero-primary-v2-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 13656c0074892af87a1c94bf2c52e43b39360f670252c578f08d30b1eb61bebc
+    focalPoint:
+      x: 0.5
+      y: 0.48
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-zhong-kui-ren-yi-2002-208-2
+  - ref-zhong-kui-lantern-night-1961-206
+  - ref-zhong-kui-bamboo-group-2008-636
+  - ref-zhong-kui-five-pestilences-f1909-164
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner (private individual)
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: The Project owner confirmed on 2026-08-29 that the ImageGen run used a personal, non-organization-managed OpenAI account and that the Project owner is authorized to generate, save, and publish the output for Mythic China. The v2 hand repair used only the project-original v1 Hero masters and generated intermediates; museum images were not supplied to ImageGen. This approval does not claim exclusivity or clear unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - protective-demon-queller
+  - bearded-robed-commanding-figure
+  - sheathed-sword
+  - subordinate-demon-retinue
+  - threshold-guardian-composition
+  - late-imperial-ink-rhythm
+  - charcoal-jade-cinnabar-palette
+  - restrained-demon-scale
+  - original-face-and-gesture
+  - abstract-threshold-space
+  - cinematic-light-and-mist
+  - original-demon-designs
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen
+  recordPath: visual/production-records/production-zhong-kui-hero-primary-v2.yml
+  workflow: null
+humanEdits:
+  - Selected the Project-owner-approved desktop candidate 01 and mobile candidate 02 after native-output hand-detail review.
+  - Repaired both Zhong Kui hands in each Hero rendition as credible five-digit human hands while preserving the three non-worshipping attendants and required safe areas.
+  - Reconstructed both selected native outputs to the exact approved Hero canvases with Sharp fit-cover Lanczos3 processing recorded in the production record.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the complete v1 manifest, repository sources, local masters, production record, and rejected/exploration history for audit.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T05:42:52Z"
+    notes: Approved after the hand-only repair. Zhong Kui remains a protective demon-queller, while all three attendants remain subordinate in wary, bracing, or recoiling non-worshipping poses without undocumented ranks, species, or ritual meanings.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T05:42:52Z"
+    notes: Approved for the v2 repair under the previously confirmed personal, non-organization-managed ImageGen account and publication authority. Only project-original v1 Hero images and generated intermediates were supplied to ImageGen.
+  visual:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T05:42:52Z"
+    notes: The Project owner approved desktop candidate 01 and mobile candidate 02 after full-canvas and hand-detail review. Each Zhong Kui hand reads as one anatomically coherent five-digit human hand with plausible palm, thumb, finger, joint, and wrist structure; identity, clothing, sword, composition, safe areas, and three non-worshipping attendants remain consistent.
+  accessibility:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T05:42:52Z"
+    notes: The existing informative alt and caption remain accurate after the hand-only repair and continue to identify a contemporary AI-assisted interpretation rather than a historical image.
+  language:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T05:42:52Z"
+    notes: No rendered text, Chinese characters, pseudo-writing, seals, or talismans are present. The English alt, caption, credit, disclosure, and Zhong Kui naming remain accurate after the hand repair.
+alt: Zhong Kui, a bearded figure in dark green robes with a sheathed sword, stands at a misty abstract threshold above several crouching demon attendants.
+caption: A contemporary AI-assisted editorial interpretation of Zhong Kui as a protective demon-queller, with a sheathed sword and subordinate demon attendants; it is not a historical image.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

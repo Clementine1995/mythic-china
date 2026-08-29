@@ -1,0 +1,11 @@
+claimId: claim-zhong-kui-sheathed-sword
+entryId: zhong-kui
+claimType: tradition
+evidenceContext: historical-tradition
+statement: A late-Qing painting in The Metropolitan Museum of Art depicts Zhong Kui as a scholar with a sheathed sword.
+certainty: verified
+sourceLinks:
+  - sourceId: source-met-zhong-kui-ren-yi-2002-208-2
+    role: object-record
+    locator: Overview
+    note: Supports a sheathed sword in this specific 1883 portrayal, not a fixed sword type or mandatory attribute in every tradition.

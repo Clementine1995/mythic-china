@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1 基线提交与 `origin`。M2 本地工程与内容核心已实施并验证，但没有运行中的应用服务、真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 解释为预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2 基线提交与 `origin`，当前 M2 本地基线为 `f258227`。M3-U1/U2/U3/U4/U5 已完成；M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。当前没有运行中的应用服务、真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 解释为预览或生产发布。
 
 ## 当前环境身份门禁
 
@@ -52,7 +52,7 @@ if ($mythicProjectNodeVersion -ne 'v24.16.0') {
 
 固定 Node.js `24.16.0` 的选择与只读验证已经完成，不再安装或切换其他 Node。用户于 2026-08-27 明确授权：使用该固定 Node 自带的 Corepack 提供项目固定的 pnpm `11.22.0`，下载 M2 白名单依赖，并在当前非空仓库根手工建立最小应用。授权不包含启动 dev/preview 服务、Git 写操作或发布。
 
-执行安装前，先由文件修改建立 `.node-version`、`package.json`、Astro/TypeScript/ESLint/Prettier 配置与应用源码；不运行 starter/template。初始依赖白名单固定为：运行依赖 `astro@7.2.8`；开发依赖 `@astrojs/check@0.9.10`、`@eslint/js@10.0.1`、`@types/node@24.13.3`、`eslint@10.9.1`、`eslint-plugin-astro@3.1.0`、`prettier@3.6.2`、`prettier-plugin-astro@0.14.1`、`typescript@6.0.3`、`typescript-eslint@8.68.0` 与 `vitest@4.1.11`。Prettier 暂停在 `3.6.2`，因为稳定的 `prettier-plugin-astro@0.14.1` 与 Prettier `3.7+` 存在尚未进入稳定版插件的 Astro 条件内联脚本解析回归；插件发布兼容版后再独立升级。不得在安装时静默增加 adapter、MDX、UI/CSS/动画框架、Playwright、CMS、数据库、认证、搜索、外部服务或商业依赖。
+执行安装前，先由文件修改建立 `.node-version`、`package.json`、Astro/TypeScript/ESLint/Prettier 配置与应用源码；不运行 starter/template。M2 初始依赖白名单固定为：运行依赖 `astro@7.2.8`；开发依赖 `@astrojs/check@0.9.10`、`@eslint/js@10.0.1`、`@types/node@24.13.3`、`eslint@10.9.1`、`eslint-plugin-astro@3.1.0`、`prettier@3.6.2`、`prettier-plugin-astro@0.14.1`、`typescript@6.0.3`、`typescript-eslint@8.68.0` 与 `vitest@4.1.11`。M3-U5 经 Project owner 单独授权后增加唯一运行依赖 `sharp@0.35.4`，用于 Astro 构建期响应式 AVIF/WebP 编码。Prettier 暂停在 `3.6.2`，因为稳定的 `prettier-plugin-astro@0.14.1` 与 Prettier `3.7+` 存在尚未进入稳定版插件的 Astro 条件内联脚本解析回归；插件发布兼容版后再独立升级。不得在安装时静默增加 adapter、MDX、UI/CSS/动画框架、Playwright、CMS、数据库、认证、搜索、外部服务或商业依赖。
 
 安装身份、命令与停止条件：
 
@@ -60,7 +60,7 @@ if ($mythicProjectNodeVersion -ne 'v24.16.0') {
 $mythicProjectRoot = (Resolve-Path -LiteralPath '.').Path
 $mythicProjectNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
 $mythicProjectCorepack = 'D:\Program Files\nvm\v24.16.0\corepack.cmd'
-$mythicProjectRuntimeDirectory = Split-Path -LiteralPath $mythicProjectNode -Parent
+$mythicProjectRuntimeDirectory = [IO.Path]::GetDirectoryName($mythicProjectNode)
 $env:ASTRO_TELEMETRY_DISABLED = '1'
 
 if ($mythicProjectRoot -ne 'F:\codex-project\mythic-china') {
@@ -105,7 +105,7 @@ if ($LASTEXITCODE -ne 0 -or $mythicPnpmVersion -ne '11.22.0') {
 if ($LASTEXITCODE -ne 0) { throw 'M2 dependency installation failed.' }
 ```
 
-影响：`corepack install` 只把 `packageManager` 指定的 pnpm 下载到 Corepack 用户缓存；当前机器的 pnpm 内容寻址 store 实际为 `F:\.pnpm-store\v11`，项目内只生成 `node_modules` 与唯一的 `pnpm-lock.yaml`。pnpm 11 默认的一日依赖成熟期策略因 Astro `7.2.8` 为新发布的已确认精确版本，自动在项目根生成 `pnpm-workspace.yaml`，只记录 `astro@7.2.8` 的 `minimumReleaseAgeExclude`；它是供应链策略配置，不声明额外工作区包。`--ignore-scripts` 阻止第三方依赖生命周期脚本执行；不创建全局 pnpm shim，不修改系统 PATH、nvm 当前选择或其他项目。上述 PATH 调整只作用于当前 PowerShell 进程，确保 pnpm 启动的 `node`、Astro、ESLint、Vitest 与 Prettier 子进程也解析到固定目录。若根目录、固定运行时/Corepack/pnpm 精确版本、manifest 白名单或锁文件种类不符，若安装要求额外依赖/构建批准，或任一命令失败，立即停止，不改用其他 Node、pnpm、lock 或 fallback。
+影响：`corepack install` 只把 `packageManager` 指定的 pnpm 下载到 Corepack 用户缓存；当前机器的 pnpm 内容寻址 store 实际为 `F:\.pnpm-store\v11`，项目内只生成 `node_modules` 与唯一的 `pnpm-lock.yaml`。pnpm 11 默认的一日依赖成熟期策略因 Astro `7.2.8` 为新发布的已确认精确版本，在项目根 `pnpm-workspace.yaml` 记录 `astro@7.2.8` 的 `minimumReleaseAgeExclude`；同一文件显式记录 `allowBuilds.esbuild: false`，与 `--ignore-scripts` 的既有供应链边界一致，不授权第三方生命周期脚本。该文件不声明额外工作区包。安装不创建全局 pnpm shim，不修改系统 PATH、nvm 当前选择或其他项目。上述 PATH 调整只作用于当前 PowerShell 进程，确保 pnpm 启动的 `node`、Astro、ESLint、Vitest 与 Prettier 子进程也解析到固定目录。若根目录、固定运行时/Corepack/pnpm 精确版本、manifest 白名单或锁文件种类不符，若安装要求额外依赖/构建批准，或任一命令失败，立即停止，不改用其他 Node、pnpm、lock 或 fallback。
 
 安装后回查：
 
@@ -254,7 +254,7 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
 rg --files -g '*.md'
 ```
 
-通过标准：根目录治理文档、`docs/` 专题文档和首个需求文档全部存在。
+通过标准：根目录治理文档、`docs/` 专题文档和当前需求文档全部存在。
 
 ### 原模板占位符
 
@@ -409,6 +409,85 @@ git status --short --branch
 ```
 
 预期：第一段结束时，暂存区只包含上面明确列出的项目文件，且 `git diff --cached --check` 无输出。若清单出现范围外文件，停止，不执行第二段。提交成功后工作树干净；因本节不执行 push，状态通常显示本地 `main` 领先 `origin/main` 一个提交。远端推送需用户另行决定和执行。
+
+### 用户执行的 M2 工程与内容基线提交
+
+M3-U1 开始前的只读核查记录（2026-08-28）：
+
+- 本地 HEAD 为 `f258227da1b5a73f22c87ec99722243742db0ba0`，subject 为 `feat: complete M2 content foundation`。
+- HEAD、`main` 与本地 remote-tracking ref `origin/main` 指向同一提交；`git status --short --branch` 当时只有 `## main...origin/main`，工作树干净。
+- 本次没有执行 `git fetch` 或访问远端服务器，因此该记录只证明本地 `origin/main` 的已知状态，不证明服务器端分支在核查时仍相同。
+- 该提交由用户完成。记录此基线不授予代理执行 `git add`、commit、push、分支、worktree 或发布的权限；当前 M3-U1/U2/U3/U4/U5 修改均保持未提交，后续版本控制动作仍需单独明确授权。
+
+### M3-U2 最小研究与 visual brief
+
+2026-08-28，用户确认 M3-U1 六项核心决定并明确开始 M3-U2。当前执行记录：
+
+- 新增 5 份真实馆藏 Source、5 份限定表述的 verified Claim，并把全部证据 Source/Claim 原子列入 draft `zhong-kui` Entry；未填写 `earliestKnown*`、Terminology 或 `heroAssetId`，未扩写正文或提升状态。
+- 新增 `visual/briefs/brief-zhong-kui-visual-package-v1.yml`，状态为 `in-review`；4 个 reference asset 的图像权利已核为 public-domain/CC0，brief 明确区分 verified、inferred 与 invented。
+- M2 架构测试只做必要边界同步：允许唯一的 `visual/briefs/*.yml` 研究记录，继续禁止 manifest、production record、style guide、workflow 与 `src/assets`。
+- 固定 Node `24.16.0` 下完整 `pnpm run check` 通过：Prettier、ESLint、4 个测试文件/41 项测试、`astro check`（0 error、0 warning、0 hint）与 3 页静态 build 全部成功。Terminology 仍为空时 Astro 输出预期的空集合提示；未安装依赖、启动服务、创建图片、执行 Git 写入或发布。
+
+### M3-U3 Schema、loader、validator 与 resolver
+
+2026-08-28，用户明确确认 M3-U2 brief 并授权开始 M3-U3。当前执行记录：
+
+- `brief-zhong-kui-visual-package-v1` 由项目所有者确认并记录为 `approved`；批准身份使用可核实的角色 `Project owner (user-confirmed)`，未臆造个人姓名。该决定只批准 brief，不批准图片、制作方式或发布。
+- `visualBriefs` 与 `assets` 两个 build-time collection 已通过原生 Astro `glob()` 接入；`src/visual/` 已建立严格 brief/manifest Schema、纯关系/文件 validator、本地图片 metadata registry、可信目录链 inventory 与显式 current resolver。Entry/Collection 的非空 `heroAssetId` 现必须解析真实逻辑资产，不能再用格式合法的假字符串绕过；visual/图片目录的父级或嵌套 symlink/junction 同样 fail-closed。
+- `visual/manifests/.gitkeep` 与 `src/assets/images/.gitkeep` 只建立空 inventory 边界；没有生产 manifest、图片、workflow、model registry 或 production record。空 `assets` 与 `terminology` collection 的 Astro 提示为当前预期，不代表假数据应被加入。
+- production record/workflow/model registry 的真实文件、workflow SHA 与 model ID 外键，以及真实生产 AVIF/WebP 输入尚未核验；这些是 M3-U4 的明确阻塞，U3 只验证字段、路径形状、关系和空 inventory，不能把合成 fixture 写成生产事实。
+- 固定 Node `24.16.0` 下完整 `pnpm run check` 通过：Prettier、ESLint、9 个测试文件/68 项测试、`astro check`（0 error、0 warning、0 hint）与 3 页静态 build 全部成功。未安装依赖、启动 dev/preview 服务、执行 Git 写入、访问真实业务写接口或发布。
+
+### M3-U4 钟馗视觉生产
+
+2026-08-28，用户明确授权开始 M3-U4，并确认 `ai-assisted + OpenAI ImageGen`、本期不使用 ComfyUI、项目根 `/.local/visual-production/masters/` 为 Git-ignored master 根、五项审核由 `Project owner (user-confirmed)` 承担。当前执行记录：
+
+- `/.gitignore` 已锚定忽略 `/.local/`；该目录不进入 Git inventory、Content Layer 或默认 build，当前没有独立备份，丢失时只能按 production record 重新生成。
+- Hero `1672×941` art-direction anchor 已由 Project owner 确认，仅作为后续独立构图的项目原创身份参考，不作为 `3200×1800` master 或历史证据。
+- 新增 `productionRecords` build-time collection、strict production record Schema、可信目录 inventory 与 manifest 双向外键；默认 build 校验已提交的 brief/method/tool/master tuple，但不读取未跟踪 local master。
+- 使用 Hero 身份锚点独立构图并筛选 Hero mobile、Article Lead、Open Graph 与 Social portrait；Social 初稿因伪文字状纹样被拒绝并定向修正，Hero desktop/mobile 又因安全区终审分别完成顶部/右侧与顶部/底部定向修正。2026-08-29 Project owner 拒绝 Hero mobile 小鬼的跪拜/合掌姿态；两次定向编辑将三名小鬼改为警戒、支撑或退避姿态并恢复完整底部安全区。旧 mobile master/source 备份于 Git-ignored local explore 目录，最终五个 exact-canvas master 保存在 `/.local/`，五份尺寸锁定 repository source rendition 已进入 `src/assets/images/`。
+- production record 保存真实 prompt、输入/原始输出/master hash、尺寸、收到/核验时间和裁切/重建/编码过程；馆藏图片没有上传给 ImageGen。本轮使用的托管工具未在回执中暴露模型 ID，因此保持 `modelId: null`，不猜测模型或 seed。
+- 固定 Node `24.16.0` 下完整 `pnpm run check` 通过：Prettier、ESLint、9 个测试文件/70 项测试、`astro check`（0 error、0 warning、0 hint）与 3 页静态 build 全部成功。真实 WebP/PNG source 的格式、尺寸、SHA-256、10 MiB 上限、manifest/record 双向关系与孤儿文件门禁均通过。
+- 2026-08-29 Project owner 确认本轮使用个人且非组织管理的 OpenAI 账户，并确认有权为 Mythic China 生成、保存和发布输出；四份 manifest 的 publication rights 与文化、权利、视觉、无障碍、语言审核已据实记录为 approved/current，钟馗 Entry 已绑定 Hero。
+- 2026-08-29 最终状态再次使用固定 Node `24.16.0` 运行完整 `pnpm run check`：Prettier、ESLint、9 个测试文件/70 项测试、`astro check`（0 error、0 warning、0 hint）与 3 页静态 build 全部成功；修正后的 Hero mobile metadata/hash、production record、approved/current 审核门禁与 Entry Hero 解析均通过。
+- U4 收口时尚未执行：M3-U5、依赖变更、dev/preview 服务、Git 写入或发布；后续 U5 授权与结果见下一节。
+
+### M3-U5 构建与收口
+
+用户于 2026-08-29 首先授权 M3-U5 的资产构建验证与文档收口，排除服务、依赖调整、Git 写操作和 M4；初次验证确认 `MissingSharp` 后，Project owner 又单独授权把 `sharp@0.35.4` 加为直接依赖、更新唯一锁文件并使用固定运行时安装，然后重跑 U5、完整工程门禁与文档收口。两次授权均不包含服务、Git 写操作、发布或 M4。U5 新增以下非默认入口：
+
+```powershell
+$fixedRuntime = 'D:\Program Files\nvm\v24.16.0'
+$env:ASTRO_TELEMETRY_DISABLED = '1'
+$env:Path = "$fixedRuntime;$env:Path"
+& (Join-Path $fixedRuntime 'corepack.cmd') pnpm run visual:build:check
+```
+
+影响与边界：
+
+- 命令先通过固定运行时守卫，再从真实 Asset Manifest 核验项目内 Git-ignored `/.local/visual-production/masters/`。它检查 logical URI、路径边界、目录链接、孤儿文件、真实尺寸、格式和 SHA-256；这是刻意与默认 build 分离的本地生产复核，clone/CI 缺少 ignored master 时普通 `pnpm run check` 仍不失败。
+- 命令在创建临时目录前先从项目可信根逐段拒绝 `/.local/visual-production/` 父链中的 symlink/junction、缺失项或非目录。随后通过临时注入且只存在于本次构建的 `noindex` verification route 消费 approved/current manifest；三份 responsive repository rendition 按各自 buildPlan 请求 AVIF/WebP 与全部 candidate widths。验证 `outDir`、Astro 图片缓存和 Vite cache 只写入 ignored `/.local/visual-production/m3-build-check-*`，完成或失败后由 `finally` 删除，不写入默认 `dist/`、manifest 或生产页面。
+- Astro 的 Content Layer/预渲染实现仍可能刷新项目根下 ignored `.astro/` 构建元数据；这类可重建缓存不进入 Git 或发布制品，也不作为 U5 的持久完成证据。普通 `pnpm run check` 同样可能刷新项目的 ignored build cache，因此“临时输出已清理”只指上行的 `m3-build-check-*` 与其中缓存，不声称清除既有 `.astro/` 或 `node_modules/.astro/`。
+- 该入口不启动 dev/preview 服务、不调用 ImageGen/ComfyUI、不访问网络、不修改依赖或锁文件、不执行 Git 写入。
+
+2026-08-29 执行记录：
+
+- local master 验证通过：四份 manifest 引用的五个 master 均存在且唯一，路径未逃逸、无 symlink/junction 或孤儿文件，实际尺寸、格式与 SHA-256 一致。
+- 初次隔离构建在登记 22 个目标后因项目没有直接 `sharp` 依赖报告 `MissingSharp`。Project owner 随后单独授权精确依赖；`package.json` 与唯一 `pnpm-lock.yaml` 已加入 `sharp@0.35.4`，固定 Node/Corepack/pnpm 从既有 `F:\.pnpm-store\v11` 复用 379 个包、下载 0 个，并以 `--ignore-scripts` 完成 frozen-lockfile 安装。固定 Node 可实际加载 Sharp `0.35.4` 与 libvips `8.18.6`。
+- `pnpm-workspace.yaml` 显式记录 `allowBuilds.esbuild: false`，没有运行第三方安装脚本；当前受限执行环境通过显式指向既有 store 完成安装和门禁，项目根没有残留旁路 pnpm store 或额外 lock。
+- 临时 Astro 构建成功读取四份 approved/current manifest，并为三份 responsive repository rendition 实际写出和解码复核 22 个不放大的 AVIF/WebP 目标；本次验证 `outDir` 与可配置缓存位于 ignored 验证目录，验证结束后已清理。项目 ignored `.astro/` / `node_modules/.astro/` 中可重建的历史或构建缓存不属于该完成证据，未在本任务中删除。
+- 固定 Node `24.16.0` 下完整 `pnpm run check` 通过：Prettier、ESLint、10 个测试文件/72 项测试、`astro check`（36 个文件，0 error、0 warning、0 hint）与 3 页静态 build 全部成功。默认 build 没有读取 `/.local`，也没有生成 M4 页面。
+- M3-U5 与整个 M3 已完成。Entry 仍为 draft；没有启动 dev/preview 服务、进入 M4、执行 Git 写操作或发布。
+
+### M3 终验 Hero v2 手部返修
+
+2026-08-29，Project owner 在 M3 终验中指出 Hero desktop/mobile 的钟馗双手不具可信人手结构，M3 因此重开。返修严格限定在 Hero 双手，保持人物身份、面部、服装、整体构图、负空间/安全区、画幅和三名小鬼的警戒/支撑/退避姿态不变；未进入 M4，也未启动服务或调整依赖。
+
+- 使用 OpenAI ImageGen 对 v1 desktop/mobile source 做定向编辑；候选先保存在 Git-ignored `/.local/visual-production/explore/zhong-kui/v2-hand-repair-review/`，未在确认前写成 approved/current。Project owner 明确回复“可以”后，desktop candidate 01 与 mobile candidate 02 才进入 v2 生产链；未选 mobile candidate 01 保留为探索审计材料。
+- v2 使用新版本路径与文件名生成两份 exact-canvas PNG master 和两份 repository WebP source；没有覆盖或移动 v1。`asset-zhong-kui-hero-primary-v1` 仅把 `isCurrent` 改为 `false`，其余既有生产、审核与文件证据保持不变；新增 v2 manifest 与独立 production record 记录输入、raw output、prompt、处理步骤、尺寸、SHA-256 和验收时间。
+- 返修后版本化 inventory 为七个 local master、七份 repository source、两份 production record 与五份 manifest 记录；Hero v2 是唯一 current Hero，Lead/OG/Social 仍为 v1 current。钟馗 Entry 的 versionless `heroAssetId` 无需改写，由 resolver 解析到 Hero v2。
+- 固定 Node `24.16.0` 下 `pnpm run visual:build:check` 通过：七个 local master 与三份 current responsive rendition 均核验成功，22 个 AVIF/WebP 目标实际生成并解码复核。完整 `pnpm run check` 通过 Prettier、ESLint、10 个测试文件/72 项测试、`astro check`（36 个文件，0 error、0 warning、0 hint）与 3 页静态 build。
+- M3 已重新闭合；未启动 dev/preview、未安装/升级/移除依赖、未执行 Git 写操作、未进入 M4、未发布。
 
 ## 数据库、外部服务与真实写入口
 

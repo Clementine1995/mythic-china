@@ -1,0 +1,115 @@
+---
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+import { getCollection } from "astro:content";
+
+import { verifyLocalVisualProductionMasters } from "../src/visual/verify-local-visual-production-masters";
+
+const manifests = await getCollection("assets");
+const currentApprovedManifests = manifests.filter(
+  (manifest) => manifest.data.status === "approved" && manifest.data.isCurrent,
+);
+if (currentApprovedManifests.length === 0) {
+  throw new Error(
+    "Visual build verification requires approved current manifests.",
+  );
+}
+
+const masterVerification = await verifyLocalVisualProductionMasters(manifests);
+if (masterVerification.issues.length > 0) {
+  throw new Error(
+    `Local master verification failed:\n${masterVerification.issues
+      .map((issue) => `${issue.code}: ${issue.path}: ${issue.message}`)
+      .join("\n")}`,
+  );
+}
+
+const sourceImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*",
+  { eager: true },
+);
+const generatedOutputs: Array<{
+  manifestId: string;
+  usage: string;
+  sourceWidthPx: number;
+  widthPx: number;
+  format: string;
+  url: string;
+}> = [];
+let responsiveRenditionCount = 0;
+
+for (const manifest of currentApprovedManifests) {
+  for (const rendition of manifest.data.repositoryRenditions) {
+    if (rendition.buildPlan.mode !== "responsive") continue;
+    responsiveRenditionCount += 1;
+    const sourceModule = sourceImages[`/${rendition.path}`];
+    if (sourceModule === undefined) {
+      throw new Error(`Missing imported source image: ${rendition.path}`);
+    }
+
+    for (const format of rendition.buildPlan.formats) {
+      const image = await getImage({
+        src: sourceModule.default,
+        widths: rendition.buildPlan.candidateWidths,
+        format,
+      });
+      const actualWidths = image.srcSet.values.map(
+        (value) => value.transform.width,
+      );
+      if (
+        actualWidths.join("|") !== rendition.buildPlan.candidateWidths.join("|")
+      ) {
+        throw new Error(
+          `${manifest.data.manifestId}/${rendition.usage}/${format} generated unexpected widths: ${actualWidths.join(", ")}`,
+        );
+      }
+
+      for (const output of image.srcSet.values) {
+        const widthPx = output.transform.width;
+        if (widthPx === undefined) {
+          throw new Error("Responsive output is missing an explicit width.");
+        }
+        generatedOutputs.push({
+          manifestId: manifest.data.manifestId,
+          usage: rendition.usage,
+          sourceWidthPx: rendition.widthPx,
+          widthPx,
+          format,
+          url: output.url,
+        });
+      }
+    }
+  }
+}
+
+if (responsiveRenditionCount === 0 || generatedOutputs.length === 0) {
+  throw new Error(
+    "Visual build verification did not exercise responsive outputs.",
+  );
+}
+
+const verificationResult = JSON.stringify({
+  manifestCount: currentApprovedManifests.length,
+  masterCount: masterVerification.verifiedFileCount,
+  responsiveRenditionCount,
+  generatedOutputs,
+}).replaceAll("<", "\\u003c");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>M3 visual asset build verification</title>
+  </head>
+  <body>
+    <h1>M3 visual asset build verification</h1>
+    <script
+      type="application/json"
+      data-m3-visual-build-results
+      is:inline
+      set:html={verificationResult}
+    />
+  </body>
+</html>

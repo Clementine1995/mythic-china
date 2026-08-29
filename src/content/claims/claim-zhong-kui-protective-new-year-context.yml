@@ -1,0 +1,15 @@
+claimId: claim-zhong-kui-protective-new-year-context
+entryId: zhong-kui
+claimType: tradition
+evidenceContext: historical-tradition
+statement: Museum interpretation connects Zhong Kui imagery and performance traditions with protective New Year and fifth-month contexts intended to clear or ward off harmful influences.
+certainty: verified
+sourceLinks:
+  - sourceId: source-cma-zhong-kui-lantern-night-1961-206
+    role: object-record
+    locator: Description
+    note: Connects the depicted procession to a New Year custom described as clearing households of evil spirits in southeast Chinese cities.
+  - sourceId: source-nmaa-zhong-kui-palace-patrol-f1982-13
+    role: object-record
+    locator: Object details, label
+    note: Describes hanging Zhong Kui portraits at Lunar New Year and on the fifth day of the fifth lunar month as talismans against harmful influences.

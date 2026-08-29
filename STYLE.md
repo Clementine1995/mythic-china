@@ -19,7 +19,7 @@
 8. 文件与 URL slug 使用小写 kebab-case；稳定内容 ID 一经发布不因栏目或标题变化而改变。
 9. Astro/前端组件使用 PascalCase，函数和变量使用 camelCase，常量使用 SCREAMING_SNAKE_CASE。
 10. 布尔值使用 `is`、`has`、`can`、`should` 前缀；时间使用 `At` 或 `Date` 后缀；尺寸和数量写明单位，例如 `widthPx`、`readingTimeMinutes`。
-11. 图片名采用 `{entry-id}-{role}-{variant}.{ext}`，例如 `meng-po-hero-mobile.avif`。
+11. 视觉资产采用稳定逻辑 ID 与显式版本：逻辑 ID 为 `asset-{owner-id}-{role}-{slot-id}`，包级 brief ID 为 `brief-{owner-id}-{purpose}-v{version}`，manifest 文件为 `{asset-id}-v{version}.yml`，仓库内 source rendition 文件为 `{owner-id}-{role}-{slot-id}-v{version}-{usage}-{width}w.{ext}`，例如 `brief-zhong-kui-visual-package-v1` 与 `zhong-kui-hero-primary-v1-hero-mobile-1600w.avif`。不得使用 `final`、`latest` 或省略版本/用途的文件名代替 current 选择；Astro 在 `dist/` 生成的哈希响应式文件不是长期命名合同。
 12. 禁止使用无职责语义的长期文件名：`utils.ts`、`helpers.ts`、`data.ts`、`misc.ts`、`new-*`、`final-*`、`latest-*`。共享能力必须按领域命名。
 13. 新文件名表达稳定业务对象或技术职责，不使用日期和对话轮次作为长期身份。
 

@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 文件形态、身份、状态、关系子集与 Schema 已在本地实现并通过工程门禁，生产内容、资产与页面仍按后续里程碑推进。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。当前七个 local master、七份 repository source、两份 production record 与五份 manifest 版本记录均通过门禁，四个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从三份 current responsive source 实际生成和解码验证全部 22 个 AVIF/WebP 目标；M3 已完成，页面仍属于 M4。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -14,6 +14,12 @@
 - 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
 - M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
 - M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容；`Chinese Underworld Guide (Working Draft)` 只是内部工作标题，不是已冻结的公开标题。
+
+### 0.2 M3-U3 视觉记录与加载合同
+
+- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前存在一份 approved brief 与五份 manifest 版本记录；其中四份 approved/current 分别服务 Hero、Lead、OG、Social，Hero v1 为 approved/non-current。
+- `src/assets/images` 只保存尺寸锁定的 repository source rendition。当前七份 approved source 均被 manifest 唯一引用并通过真实 metadata/hash、权利与人工审核门禁；Hero v1 的两份 source 作为非 current 版本历史保留。metadata registry 忽略 `.gitkeep`，但不会静默忽略其他文件；未被 manifest 唯一引用的图片、非批准扩展名、符号链接、禁入签名、超过 10 MiB 或无法读取 metadata 的文件均使构建失败。
+- Zod 负责单记录字段和局部条件；纯 visual graph validator 负责 owner/Claim/Source、brief target、asset version/current、内容 Hero 外键、路径、文件 metadata 与 inventory。resolver 只读取显式 `isCurrent`，绝不按最高 version 或文件名猜测。
 
 ## 1. 编辑分类
 
@@ -34,6 +40,8 @@
 ### 2.1 Entry
 
 人物、异兽、地点、故事和指南共用一个内容集合，以 `entryType` 控制模板差异。
+
+下例只展示 Entry Schema 形状，不代表当前 `src/content/entries/zhong-kui.md` 记录；M3 完成后的真实钟馗 draft Entry 已填写视觉所需的 Source/Claim 关系，并把 `heroAssetId` 绑定到 approved/current Hero。
 
 ```yaml
 entryId: zhong-kui
@@ -73,7 +81,7 @@ status: draft
 - `claimIds`：已发布内容中的事实性文化主张必须能通过正文引用或 Claim 关联到具体 source 与 locator。
 - `terminologyRecordIds`：出现需要语境化处理的关键专名或术语时必填。
 - `earliestKnownSourceId` 与 `earliestKnownClaimId`：必须同时为 `null` 或同时填写。Claim ID 必须精确指向当前 Entry `claimIds` 中归属该 Entry 的 `verified`、`historical`、`historical-tradition` Claim；Source ID 必须出现在 `sourceIds`，并作为该 Claim 中匹配的一手文本、馆藏对象或田野记录 locator。同一 Claim 还必须包含另一条已列入 Entry 书目的独立 scholarship Source。其他 Claim 不得替被指定 Claim 完成此门禁；检索边界不足时两者都保持 `null`。
-- `heroAssetId`：draft 与 `editorial-review` 可为 `null`；进入 `visual-review` 后必须指向 M3 已建立的有效资产记录，已发布内容必须关联 approved asset。M2 不创建假 Asset Manifest 或生产图片。
+- `heroAssetId`：引用不带版本号的逻辑 `assetId`，不是 manifest 文件名或图片路径。draft 与 `editorial-review` 可为 `null`；若填写，必须属于当前 Entry、`role: hero`、`slotId: primary`，且须解析到一个非 archived current 版本。进入 `visual-review` 后 current 版本为 `in-review | approved`；`ready | published` 必须解析到 current approved 版本；`archived` 保留逻辑 ID 和至少一份 approved/archived manifest 历史，但不要求 current。M2 不创建假 Asset Manifest 或生产图片。
 - `lastFactCheckedAt`：进入 `ready` 时即必填，`published` 必须保留；`archived` 继承已发布谱系的完整性，不得通过归档清空。
 - `status`：`draft | editorial-review | visual-review | ready | published | archived`。
 - Entry 不保存 `collectionIds`；Collection 成员关系与阅读顺序只由 `Collection.entryIds` 编写，Entry 页所需的反向 Collection 入口在构建期从 Collection 记录派生，避免双向关系漂移。
@@ -85,7 +93,7 @@ M2 以状态递进校验代替“draft 也伪装完整”的默认值：
 | --- | --- |
 | `draft` | 稳定 `entryId`、`slug`、`title`、`entryType` 与 `status`；研究、开场、摘要、关系和资产字段可以显式为 `null` / `[]` |
 | `editorial-review` | `traditionType`、开场、Quick Answer、正文草稿和至少一个真实 Source 已存在；Claim/术语关系按正文实际风险逐步补齐 |
-| `visual-review` | 满足编辑审核要求；`heroAssetId` 指向 M3 建立的非 archived 资产记录，视觉 brief 与披露可审核 |
+| `visual-review` | 满足编辑审核要求；`heroAssetId` 指向 M3 建立的逻辑 Hero 资产，唯一 current 版本为 `in-review | approved`，视觉 brief、Claim、权利、披露与 renditions 可审核 |
 | `ready` | 满足第 8 节全部编辑、证据、术语、关系、视觉与无障碍门禁 |
 | `published` | 满足 `ready`，并补齐发布日期、最后事实核查日期、公开关系与 canonical 验证 |
 | `archived` | 仅从完整发布谱系进入；保留 `published` 的编辑、证据、日期和关系完整性，但退出公开静态路由 |
@@ -117,6 +125,7 @@ heroAssetId: null
 - draft、`editorial-review` 与 `visual-review` 可暂时保留空的策划路径；进入 `ready` 后（含 `published | archived`）必须至少有一个真实 Entry 成员。
 - `titleZh` 与 `pinyin` 承载 Collection 的中文身份；首发英语页面出现中文标题时两者成对必填，拼音遵循 `STYLE.md` 的带声调 Hanyu Pinyin 规则。
 - `status` 与 Entry 共用 `draft | editorial-review | visual-review | ready | published | archived` 枚举。
+- `heroAssetId` 与 Entry 一样引用 versionless 逻辑 `assetId`。draft 与 `editorial-review` 可为空；若填写，必须属于当前 Collection、`role: hero`、`slotId: primary`，并解析到非 archived current 版本。`visual-review` 要求唯一 current `in-review | approved` 版本，`ready | published` 要求唯一 current approved 版本。`archived` Collection 只要求保留 approved/archived manifest 历史，不要求 current。
 - `featuredEntryId` 可选，用于把当前重点入口与 `entryIds` 的策展阅读顺序分开；若填写，目标必须存在于同一 Collection 的 `entryIds` 中，并服从下述 Collection—Entry 状态矩阵。更换 Featured Entry 不得改变 Entry 的稳定 ID、slug 或阅读顺序。
 - `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建，只能保留指向 `published | archived` Entry 的既有发布谱系关系供历史追溯，不能借归档状态新挂 draft/未公开对象。
 - Collection 必须说明范围与限制，避免把不同时代/传统强行拼成统一体系。
@@ -218,72 +227,97 @@ reviewStatus: bilingual-approved
 
 ### 2.6 Asset Manifest
 
-Asset manifest 是所有公开视觉资产（包括 Hero、正文图与整页氛围背景）的工具无关权威记录；压缩后的 Web/社媒文件可能丢失内嵌 metadata，不能只依赖文件本身或某个生产工具。
+Asset Manifest 是所有公开视觉资产（包括 Hero、正文图与整页氛围背景）的工具无关权威记录；压缩后的 Web/社媒文件可能丢失内嵌 metadata，不能只依赖文件本身或某个生产工具。M3 的详细范围、样例规格与分批实施以 [`requirements/002-visual-asset-pipeline.md`](requirements/002-visual-asset-pipeline.md) 为准。
+
+`assetId` 保存长期逻辑身份，`manifestId` 保存某一不可混淆的版本记录。页面与内容只引用 `assetId`；构建期 resolver 根据显式 `isCurrent` 选择版本，不用最大版本号猜测。owner slot 的稳定键为 `ownerType + ownerId + role + slotId`。
+
+下例是用于说明 Schema 的假想 draft 形状，不是当前钟馗 manifest，也不表示这些字段仍未实施；真实 Hero v2 与 Lead/OG/Social v1 manifest 已为 approved/current，Hero v1 manifest 为 approved/non-current 审计历史，全部包含完整权利、制作、文件、审核与可访问性记录。示例中的 `null` 与空序列只表示 draft 允许的未完成状态，不是可进入 `in-review` 或 `approved` 的占位证据。
 
 ```yaml
-assetId: asset-meng-po-hero-v1
+assetId: asset-zhong-kui-hero-primary
+manifestId: asset-zhong-kui-hero-primary-v1
 ownerType: entry
-ownerId: meng-po
+ownerId: zhong-kui
 role: hero
-accessibilityMode: informative
-status: approved
+slotId: primary
 version: 1
-masterPath: external://visual-production/meng-po/master-v1.png
-publicDerivatives:
-  - path: src/assets/images/meng-po-hero-desktop.avif
-    widthPx: 1920
-    heightPx: 1080
-  - path: src/assets/images/meng-po-hero-mobile.avif
-    widthPx: 1600
-    heightPx: 2000
-focalPoint:
-  x: 0.68
-  y: 0.44
-referenceAssets:
-  - url: https://example.org/reference
-    authorOrOrganization: Example institution
-    rightsStatus: research-only
-    rightsUrl: https://example.org/reference-rights
-sourceClaimIds:
-  - claim-meng-po-bowl
-visualClaims:
-  canonical:
-    - statement: bowl of forgetfulness
-      claimIds:
-        - claim-meng-po-bowl
-  inferred:
-    - statement: architectural setting
-      rationale: A restrained invented setting used to stage the verified action.
-  invented:
-    - lighting and costume color palette
-production:
-  method: ai-assisted
-  tool: ComfyUI
-  recordPath: external://visual-production/meng-po/production-v1.yml
-  optionalMetadata:
-    workflowId: consistent-scene-v1
-    workflowSha256: pending
-    modelRefs:
-      - model-id-from-registry
-humanEdits:
-  - corrected hands and removed false characters
+status: draft
+isCurrent: true
+briefId: null
+accessibilityMode: null
+masterRenditions: []
+repositoryRenditions: []
+referenceAssetIds: []
+publicationRights:
+  status: pending
+  basis: null
+  rightsHolder: null
+  licenseOrPermissionId: null
+  rightsUrl: null
+  notes: null
+visualElementIds: []
+production: null
+humanEdits: []
 reviews:
-  cultural: approved
-  language: approved
-  rights: approved
-alt: Meng Po holds a bowl beside a mist-covered bridge.
-caption: AI-assisted original illustration; architectural details are an artistic interpretation.
-credit: Mythic China original illustration
-aiDisclosure: AI-assisted original illustration
+  cultural:
+    status: pending
+    reviewedBy: null
+    reviewedAt: null
+    notes: null
+  rights:
+    status: pending
+    reviewedBy: null
+    reviewedAt: null
+    notes: null
+  visual:
+    status: pending
+    reviewedBy: null
+    reviewedAt: null
+    notes: null
+  accessibility:
+    status: pending
+    reviewedBy: null
+    reviewedAt: null
+    notes: null
+  language:
+    status: pending
+    reviewedBy: null
+    reviewedAt: null
+    notes: null
+alt: null
+caption: null
+credit: null
+aiDisclosure: null
 ```
 
-- `production.method`：`in-house-original | commissioned-original | licensed-reuse | ai-assisted`；所有方法共用同一 Asset contract。
-- `ownerType`：`entry | collection | global`；`ownerId` 保存对应的稳定身份，例如 Entry ID、Collection ID 或 `site-shell`。不得用可变页面标题代替所有权关系。
-- `role`：`hero | lead | inline | page-atmosphere | og | social`；它描述编辑用途，不表示 CSS 位置或具体组件。同一 master 的不同用途仍须在 derivatives 中写明尺寸与裁切；视觉重构更换衍生图或主题资产时使用新版本 manifest 重新审核，不改写 Entry 的事实、来源或 canonical 身份。
+- `assetId` 使用 `asset-{ownerId}-{role}-{slotId}`；`manifestId` 使用 `{assetId}-v{version}`，包级 brief 使用 `brief-{ownerId}-{purpose}-v{version}`。同一 `assetId` 及同 owner/purpose brief 的 `version` 从 1 开始连续保留且不得重复；manifest/brief 文件名、loader ID 与记录内 ID 一致。
+- `status`：`draft | in-review | approved | archived`。`isCurrent` 显式决定 resolver 选择；同一逻辑资产与同一 owner slot 最多一个 current，`archived` 强制为 false，并保留 former-approved 的 brief、rendition、制作、权利、无障碍与审核谱系，不能退化为空壳。历史 approved 版本可保留 `isCurrent: false` 供明确回滚。
+- draft manifest 可暂缺 brief；`in-review | approved` 必须引用一个 approved brief，且 `visualElementIds` / `referenceAssetIds` 全部能在该 brief 中解析。
+- approved 版本除受验证的 current 切换或明确归档外不可原地改写；事实、文件、Claim、权利、制作或审核发生变化时创建新版本。
+- `ownerType`：`entry | collection | global`；`ownerId` 保存对应稳定身份。Entry 的 verified Claim 必须归属该 Entry；Collection 只能使用其当前成员 Entry 的 verified Claim；M3 的 global 资产只允许 `decorative + invented`，ownerId 固定为 `site-shell`。
+- `role`：`hero | lead | inline | page-atmosphere | og | social`；`slotId` 是同一 owner/role 下的小写 kebab-case 稳定语义键。钟馗最小样例包含 Hero、Lead、OG、Social 四个逻辑资产；Hero desktop/mobile 是同一版本下的两个独立 master rendition，四个 manifest 引用同一包级 approved visual brief 版本。
+- `repositoryRenditions` 是放入 `src/assets/images` 的已审核构建输入，每个 `usage` 只保存一份尺寸锁定的源 rendition；`usage`：`hero-desktop | hero-mobile | article-lead | open-graph | social-portrait | social-story | inline | page-atmosphere`。role/usage 固定为：hero 对应 desktop + mobile，lead 对应 article-lead，og 对应 open-graph，social 对应 portrait 与可选 story，inline 对应 inline，page-atmosphere 对应同名 usage。路径、真实格式、尺寸、SHA-256 与 focal point 均由 manifest 显式记录，不从文件名猜测。
+- 每个 repository rendition 的 `buildPlan` 记录 Astro 目标格式与 candidate widths。响应式 Web usage 默认格式为 AVIF + WebP，候选宽度取 `640 / 960 / 1440 / 1920` 中不超过源宽度的值，禁止 upscale；OG/social 保留合同规定的精确画布尺寸。页面布局相关的 `sizes` 由 M4 消费组件决定；M4 `dist/` 变体以及 M3-U5 运行期临时变体与哈希文件名都不进入 manifest，也不复制回 `src/assets/images`。
+- visual brief 是视觉元素、参考资产与目标 slot/export 的单一事实来源：每个 verified/inferred/invented 元素有小写 kebab-case `elementId`，每个 reference 有 `referenceId`；语义或 reference 未变时跨 brief 版本保持 ID。Manifest owner 必须等于 brief owner，`role + slotId` 唯一匹配 brief target，usage/画布/buildPlan 服从该 target，并只以 `visualElementIds` 与 `referenceAssetIds` 选择同一 approved brief 中实际使用的子集；不重复保存 statement、Claim 或 reference rights。
+- informative 资产以及本期钟馗 Hero/Lead/OG/Social 必须至少选择一个 verified element。只有 `decorative`、至少选择一个 invented element 且所选元素全部为 invented 的资产可以没有 Claim；它不得支撑正文事实。verified 表示有证据支持，不表示存在唯一中国神话正典。
+- verified element 的 Claim 必须存在、`certainty: verified` 且非 provisional，并列入所属 Entry 的 `claimIds`；其 Source 必须列入该 Entry 的 `sourceIds`。Collection 资产只能选择当前成员 Entry 已完整登记的 Claim；M3 不放行 factual global asset。
+- `publicationRights.status`：`pending | approved | rejected`；`basis`：`in-house-original | commission-contract | public-domain | license | permission`。approved 时除 public-domain 外 `rightsHolder` 必填；public-domain 允许 `rightsHolder: null`，但要求可审核 `rightsUrl` 与 creator/source credit。commission-contract 需要 `licenseOrPermissionId`，license/permission 同时需要 identity 与 rights URL。reference asset 的研究/参考许可不能替代成品发布授权；权利未知或未核准时不得进入 `approved`。
+- `production.method`：`in-house-original | commissioned-original | public-domain-reuse | licensed-reuse | ai-assisted`。前四者的 rights basis 分别为 in-house-original、commission-contract、public-domain、license/permission；ai-assisted 可使用 in-house-original、license 或 permission，并另行核对工具/模型许可。两类 reuse 都要求非空 credit；`ai-assisted` 必须记录实际 tool、production record 与非空披露。只有实际使用 ComfyUI 时才记录真实 workflow/model 元数据，不创建空壳或 `pending` 哈希。
+- `reviews` 分别记录 cultural、rights、visual、accessibility 与 language；状态为 `pending | approved | changes-requested | not-applicable`，每项保存 `reviewedBy`、`reviewedAt`、notes。公开资产的 cultural、rights、visual 与 accessibility 不得标为 `not-applicable`；language 审核覆盖图片内文字/专名、alt 与 caption，只有这些内容均不存在时才可写明理由并使用该状态。所有适用审核进入 `approved` 前完成；审核责任人姓名与日期属于实施事实，不能在合同阶段臆造。
 - `accessibilityMode`：`informative | decorative`。`informative` 必须有非空 alt 和相邻 caption；`decorative` 必须使用空 alt，可不逐图显示 caption，但仍需 manifest、credit、适用的 AI disclosure/页面级 visual note 与人工审核。
-- `production.tool` 与 `optionalMetadata` 只在实际使用相应工具且对复现/权利审查有帮助时记录；没有使用 ComfyUI 时不得创建空的 workflow、model 或 prompt 字段。
-- `sourceClaimIds` 与 `visualClaims` 必须先于生产核准；每个 `canonical` 项必须关联具体 `claimIds`，每个 `inferred` 项必须写明 rationale。只有全部元素均为 `invented` 且资产为纯装饰时，`sourceClaimIds` 才能为空；此类资产不得支撑正文事实。工具 metadata 只能解释图片怎么做，不能证明画面在传统中有据。
+- SHA-256 使用 64 位小写十六进制，focal point x/y 均为 0–1；`approvedAt` 与 `reviewedAt` 使用带引号的 UTC RFC 3339 时间戳。
 - 使用 ComfyUI 时可以保留 workflow JSON 等复现信息，但 sidecar manifest 仍是项目权威记录。参考：[ComfyUI Image-to-Image Workflow](https://docs.comfy.org/tutorials/basic/image-to-image)，访问于 2026-08-26。
+
+M3-U3 对此前自然语言字段冻结以下最小机器形状，后续生产记录必须沿用或先更新需求：
+
+- `masterRenditions[]` 每项严格为 `logicalUri + usage + widthPx + heightPx + sha256`；logical URI 必须有显式 scheme、不得是 `file:`、不得含反斜杠且在同 manifest 内唯一。默认 validator 只核对外部 master 的声明 metadata，不伪造在线可达性或真实哈希；M3-U5 的非默认本地 verifier 另在获授权的项目内 `/.local/` 根逐文件复核路径、目录链接、孤儿文件、格式、尺寸与 SHA-256。
+- `repositoryRenditions[]` 每项严格为 `usage + path + format + widthPx + heightPx + sha256 + focalPoint + buildPlan`；`path` 必须是 `src/assets/images/` 下的规范 POSIX 项目相对路径，文件名遵循 `STYLE.md` 的版本/usage/width 合同。visual record 与图片 inventory 从可信项目根逐级拒绝父级或嵌套 symlink/junction。
+- `production` 为 `null` 或严格对象 `method + tool + recordPath + workflow`。`recordPath` 必须是直接位于 `visual/production-records/` 的 `.yml` 文件；`workflow` 为 `null` 或 `workflowId + path + sha256 + modelRegistryIds[]`，路径固定落在 `visual/workflows/`。实际 tool 为 ComfyUI 时 workflow/model metadata 必填；未使用时不创建空壳。
+- `productionRecords` 是独立 build-time collection。每份 strict 记录包含 `productionRecordId`、`briefId`、method/tool、可空 model identity、tool terms URL、rights notes、`recordedAt`、逐 usage rendition 与 notes；逐 rendition 保存 manifest ID、实际 prompt 或 `null`、本地收到输出的 `receivedAt`、输入图片 hash/权利说明、raw output 格式/尺寸/hash、master tuple、处理工具/版本/operations 与 `verifiedAt`。AI-assisted 必须有 tool、model notes、terms URL 与非空 prompt；未暴露模型 ID 时保持 `modelId: null` 并说明，不得猜测。
+- manifest 的 `recordPath` 必须解析真实 production record；两者 brief、method、tool 一致，record 中每个 `manifestId + usage` 的 master URI/尺寸/hash 与 manifest 完全相同，并由 record rendition 反向指回该 manifest。默认 Astro build 只校验已提交记录，不读取 Git-ignored master；`.local` 缺失不能让 clone/CI 失败。
+- `humanEdits[]` 是唯一、非空的简短人工修改说明字符串列表，不复制完整生产日志。`referenceAssets[]` 使用 `organization` 与 `creator` 两个显式非空身份字段；无法确认 creator 时必须先修订研究记录或需求，不能用空值绕过。
+- 当前 Schema 没有“图片内含文字/专名”独立布尔字段；因此 language `not-applicable` 只在 decorative、显式空 alt、无 caption 且人工 review notes 给出理由时放行。只要是 informative 资产，language review 必须 approved。若 U4 需要更细的图中文字状态，先扩展本合同与测试。
+- U4 已新增 production record Schema、loader、inventory 与双向 manifest/master 关系门禁，并在首轮五个最终画布存在后落盘一份真实记录。终验 Hero v2 返修沿同一合同新增两份 master、两份 source、一份 manifest 与第二份 production record；v1 文件与记录不覆盖，只把 Hero v1 `isCurrent` 改为 `false`。Git-ignored master 的实际尺寸/hash 与真实 WebP/PNG repository source 均已在生产会话据实核验；ComfyUI workflow/model registry 本期不适用。2026-08-29 Project owner 已确认个人且非组织管理的 ImageGen 账户、发布授权，以及文化、权利、视觉、无障碍与语言五项审核；这些人工事实记录在 manifest 中，仍不能由自动门禁替代或重建。非默认 verifier 现复核七个 master，并从三个 current responsive buildPlan 实际生成、解码核对 22 个 AVIF/WebP 目标；该验证不改变 Entry 的稳定 `heroAssetId`，resolver 仅把其 current 版本解析为 Hero v2。
 
 ### 2.7 Reader Request
 
@@ -307,11 +341,11 @@ normalizedTopicId: null
 
 ## 3. 稳定 ID 与关系
 
-- ID 使用小写 kebab-case，只表达对象身份，不包含栏目、年份或状态；Entry、Collection、Source、Claim 与 Terminology 五类稳定 ID 在同一内容图内全局唯一。
-- 一文件一对象的文件名就是稳定内部 ID；Astro loader 生成的 `entry.id`、文件名和记录内对应 `*Id` 必须三者一致。frontmatter/data `slug` 不得覆盖内部身份。
+- ID 使用小写 kebab-case，只表达对象身份，不包含栏目、年份或状态；Entry、Collection、Source、Claim、Terminology 与逻辑 Asset 六类稳定 ID 在同一内容图内全局唯一。`manifestId` 是版本记录身份，不替代稳定 `assetId`。
+- Entry、Collection、Source、Claim 与 Terminology 继续一文件一对象，文件名就是稳定内部 ID；Astro loader 生成的 `entry.id`、文件名和记录内对应 `*Id` 必须三者一致。Asset Manifest 与 visual brief 是一文件一版本记录：文件 stem 和 loader ID 分别等于记录内 `manifestId` / `briefId`，其中 `assetId` 仍是跨版本逻辑身份。frontmatter/data `slug` 不得覆盖内部身份。
 - 关系只保存稳定 ID，不保存展示标题。
 - `Collection.entryIds` 是 Collection 成员关系与顺序的唯一事实来源；Entry 的反向 Collection 列表由构建期派生，不另存一份关系。
-- 构建时必须验证：五类稳定 ID 全局唯一，Entry 与 Collection 的 slug 在两类间全局唯一，关系目标存在、Collection—Entry 状态符合第 2.2 节矩阵；`featuredEntryId` 存在时必须同时出现在该 Collection 的 `entryIds` 中并通过相同状态校验。`published` Entry 的 `relatedEntryIds` 只能指向 `published` Entry；`archived` Entry 只保留指向 `published | archived` Entry 的历史关系，不能借归档状态引用 draft/未公开对象。
+- 构建时必须验证：六类稳定 ID 全局唯一，`manifestId` / `briefId` 版本记录身份分别唯一，Entry 与 Collection 的 slug 在两类间全局唯一，关系目标存在、Collection—Entry 状态符合第 2.2 节矩阵；`featuredEntryId` 存在时必须同时出现在该 Collection 的 `entryIds` 中并通过相同状态校验。`published` Entry 的 `relatedEntryIds` 只能指向 `published` Entry；`archived` Entry 只保留指向 `published | archived` Entry 的历史关系，不能借归档状态引用 draft/未公开对象。
 - 循环关系本身可以存在，但页面生成必须防止递归展开。
 - 删除已发布对象前先评估 redirect、外部链接和关联内容，不直接清除身份。
 - 所有公开列表显式按 Collection 的编辑顺序、日期或稳定键排序，不依赖 Content Layer 返回顺序。
@@ -392,8 +426,8 @@ M2 先校验 Entry `claimIds`、成对的 `earliestKnownClaimId` / `earliestKnow
 
 视觉制作只能在内容依据明确后开始，不能反过来根据漂亮画面补写传说。MVP 使用同一条工具无关管线：
 
-1. 完成 Entry 的传统分类、Claim/source locator 和关键 TerminologyRecord 审核。
-2. 形成 visual brief，把元素分为 canonical / inferred / invented，并逐项核对参考资产权利。
+1. 完整 Entry 发布视觉须先完成传统分类、Claim/source locator 和关键 TerminologyRecord 审核；M3 这类 scoped visual sample 只要求闭合画面实际涉及的 Claim/Source 与适用 Terminology，未引入新术语时可以没有 TerminologyRecord，完整 `traditionType` 留到正式 Entry 审核。
+2. 形成并人工核准 versioned visual brief，把元素分为 verified / inferred / invented，并逐项核对 Claim 与参考资产权利。
 3. 按题目需要选择站内原创绘制、委托创作、获授权素材或可选的 ComfyUI 等生成工具辅助。
 4. 人工完成文化、语言、权利、生成缺陷、裁切和披露审核，再导出 Web/社媒文件。
 
@@ -410,7 +444,10 @@ MVP 不强制维护固定数量的 ComfyUI workflow，也不让任何单一视�
 + 禁止出现的伪文字、错置文化元素和受保护造型
 ```
 
-- canonical 元素必须关联 `sourceClaimIds`；inferred 元素写明推断理由；invented 元素不得以史料口吻出现在 caption。
+- 每份 brief 使用 versioned `briefId`、正整数 version 与 `draft | in-review | approved | archived` 状态，并以 owner 和 target slots 固定 role/slot、usage、画布与构建目标；进入 approved 时必须保存真实 `approvedBy`、`approvedAt` 与 notes。approved brief 不原地改写，内容变化创建新版本；只有撤回时才归档，归档前先归档所有引用它的 `in-review | approved` manifest。`in-review | approved` manifest 必须引用 approved brief，draft 可暂缺；未核准 brief 不得启动生产。
+- 每个 visual element 有 brief 内唯一 `elementId`。verified 元素必须逐项关联 `claimIds`；inferred 元素写明推断理由；invented 元素不得以史料口吻出现在 caption。verified 只表示有证据支撑，不表示存在唯一正典。
+- 每个 reference asset 有 brief 内唯一 `referenceId`、URL、作者/机构、`rightsStatus`、rights URL、适用 license/permission identity 与 notes。`rightsStatus` 为 `research-only | public-domain | licensed | permission | unknown`；licensed/permission 必须有 identity 与 rights URL，public-domain/research-only 必须有可审核 rights URL，unknown 阻断 brief approved。research-only 只允许研究，不授予复制或衍生权。
+- verified Claim 必须存在、非 provisional、列入 owner Entry 的 `claimIds`，其 Source 列入该 Entry `sourceIds`；Collection 资产只使用成员 Entry 已闭合的 Claim/Source 链。
 - 无论采用何种工具，都要检查 pseudo-Chinese characters、错时代服饰/器物、错置日本或欧洲奇幻元素、logo、watermark 和明显生成缺陷。
 - 不得使用 `in Black Myth style`、其他受保护品牌造型或在世艺术家的名字替代可解释的视觉描述。
 
@@ -420,26 +457,25 @@ MVP 不强制维护固定数量的 ComfyUI workflow，也不让任何单一视�
 
 ```text
 visual/
-├─ characters/{slug}/bible/
-├─ manifests/
-├─ style-guides/
-├─ production-records/
-└─ model-registry.yml（仅在使用生成模型时）
+├─ briefs/                 # versioned visual brief YAML
+├─ manifests/              # versioned Asset Manifest YAML
+├─ style-guides/           # 有稳定复用价值时才创建
+├─ workflows/              # 使用 ComfyUI/经批准的可复用本地工作流时才创建
+├─ production-records/     # 适合入库的小型、versioned 生产记录
+└─ model-registry.yml      # 仅在本地管理且可稳定登记模型时创建
 
-仓库外或对象存储：
-visual-production/
-└─ episodes/{slug}/
-   ├─ references/
-   ├─ explore/
-   ├─ approved/masters/
-   ├─ exports/web/
-   └─ exports/social/
+src/assets/images/         # 已批准且尺寸锁定的 Astro 图片源 rendition
+
+当前项目根内、Git-ignored 本地生产存储：
+.local/visual-production/
+├─ explore/                # 候选与废图，不进入 Git/build
+└─ masters/{ownerId}/vN/   # 经选择的高分辨率 master；由 logical URI + SHA 追溯
 ```
 
-- 只有用途稳定、体积小且经过批准的生产记录或 workflow 才进入仓库；工具环境、模型权重、探索废图和大原图外置。
-- 使用生成模型时，在 `model-registry.yml` 记录名称、来源、版本、SHA256、许可证和商业用途判断；未使用时不创建空记录。
+- 只有用途稳定、体积小且经过批准的 Web 文件、manifest、brief、生产记录或 workflow 才进入 Git inventory；工具环境、模型权重、私有参考图、探索废图和高分辨率 master 保存在 `/.local/` 或后续对象存储，并在 manifest 中保留 logical URI 与 SHA-256。
+- 只有本地管理且实际暴露稳定模型包/版本的生成流程才在 `model-registry.yml` 记录名称、来源、版本、SHA256、许可证和商业用途判断。托管式 ImageGen 未暴露的模型身份只在 production record 如实标为未暴露，不创建猜测记录。
 - 参考图默认不公开；研究用途不自动授予衍生和发布权。
-- 压缩和最终响应式变体交给网站构建链路，避免由任一视觉工具反复重采样。
+- 压缩和最终响应式变体交给网站构建链路，避免由任一视觉工具反复重采样；仓库输入与 M4 `dist/` 可重建输出不得混为同一 manifest 文件记录。M3-U5 只把验证 `outDir`、图片缓存和 Vite cache 写入运行期 `/.local/visual-production/m3-build-check-*` 并在结束时清理；Astro 可能刷新 ignored `.astro/` 构建元数据，该缓存不是发布制品、manifest 记录或持久验证证据。
 
 ### 6.3 审核门禁
 
@@ -448,7 +484,9 @@ visual-production/
 - 文化/时代/器物审校。
 - 伪文字、额外肢体和明显生成缺陷检查。
 - 参考图、字体、授权素材及实际使用的模型/LoRA 等资产的权利状态检查。
-- canonical / inferred / invented 分类。
+- approved brief、visual element/reference ID 子集，以及 verified Claim/Entry/Source 的完整外键链。
+- 成品 publication rights；不能用 reference asset 的研究许可代替。
+- cultural、rights、visual、accessibility 与适用 language 审核均记录审核人、日期和结论。
 - 与 `accessibilityMode` 匹配的 alt / 空 alt、适用的 caption、credit、AI disclosure 和焦点坐标。
 - 桌面、移动、OG 和社媒裁切预览。
 
@@ -478,7 +516,7 @@ draft
 - 英文编辑、双语术语审核与事实核查完成。
 - traditionType、sourceIds、claimIds、适用的 terminologyRecordIds、related IDs 和 lastFactCheckedAt 完整。
 - 所有已发布事实性文化主张都有可定位证据；`provisional` Claim 未作为事实发布，`disputed` Claim 已在页面显示分歧。
-- 所有公开视觉资产为 approved，manifest 与导出物存在。
+- 所有公开视觉资产都能解析到唯一 current approved manifest 版本，manifest、导出物、真实尺寸与 SHA-256 一致。
 - alt / 空 alt、适用的 caption、credit、AI disclosure、权利状态与生产方式一致；若后续需求引入商业入口，其披露还须通过第 7 节门禁。
 - 页面在移动、键盘、减弱动效和无 JavaScript 条件下通过验收。
 

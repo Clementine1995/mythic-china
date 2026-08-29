@@ -1,0 +1,19 @@
+claimId: claim-zhong-kui-demon-queller-role
+entryId: zhong-kui
+claimType: tradition
+evidenceContext: historical-tradition
+statement: Museum records identify Zhong Kui in Chinese artworks as a demon queller.
+certainty: verified
+sourceLinks:
+  - sourceId: source-cma-zhong-kui-lantern-night-1961-206
+    role: object-record
+    locator: Description
+    note: Identifies Zhong Kui as the demon queller in a Yuan-period Chinese handscroll.
+  - sourceId: source-met-zhong-kui-bamboo-2008-636
+    role: object-record
+    locator: Title and overview
+    note: Identifies Zhong Kui as a demon queller in a Qing-period Chinese bamboo group.
+  - sourceId: source-nmaa-zhong-kui-five-pestilences-f1909-164
+    role: object-record
+    locator: Title, date, origin, and topic metadata
+    note: Catalogues a 16th- to 17th-century Chinese painting as Zhong Kui taming the Five Pestilences without resolving every surrounding motif.

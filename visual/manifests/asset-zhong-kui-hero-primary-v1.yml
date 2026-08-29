@@ -1,0 +1,128 @@
+assetId: asset-zhong-kui-hero-primary
+manifestId: asset-zhong-kui-hero-primary-v1
+ownerType: entry
+ownerId: zhong-kui
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: false
+briefId: brief-zhong-kui-visual-package-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: e6a622d3344075122d811618e602f8e07ce3f26da170df4e5cccc5addfb35850
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: be99a2116ffd8ac17c64b3af457b17daf029fb25c31375826dd5965c767fbd35
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/zhong-kui-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 03fda7a150f75658f48b00bf98c8b9deea3bfe29777b8bcbfa572c764a1156a5
+    focalPoint:
+      x: 0.36
+      y: 0.5
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/zhong-kui-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 0e253fae9b71641c79334461e78e4cb27c7ebba77d886b483a664d165acabf3e
+    focalPoint:
+      x: 0.5
+      y: 0.48
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-zhong-kui-ren-yi-2002-208-2
+  - ref-zhong-kui-lantern-night-1961-206
+  - ref-zhong-kui-bamboo-group-2008-636
+  - ref-zhong-kui-five-pestilences-f1909-164
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner (private individual)
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: The Project owner confirmed on 2026-08-29 that the ImageGen run used a personal, non-organization-managed OpenAI account and that the Project owner is authorized to generate, save, and publish the output for Mythic China. Museum images informed only the sourced textual brief and were not supplied to ImageGen; this approval does not claim exclusivity or clear unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - protective-demon-queller
+  - bearded-robed-commanding-figure
+  - sheathed-sword
+  - subordinate-demon-retinue
+  - threshold-guardian-composition
+  - late-imperial-ink-rhythm
+  - charcoal-jade-cinnabar-palette
+  - restrained-demon-scale
+  - original-face-and-gesture
+  - abstract-threshold-space
+  - cinematic-light-and-mist
+  - original-demon-designs
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen
+  recordPath: visual/production-records/production-zhong-kui-visual-package-v1.yml
+  workflow: null
+humanEdits:
+  - Selected the desktop rendition after Project owner approval of the Hero art-direction anchor.
+  - Corrected the desktop top/right safe areas and the mobile top/bottom safe areas after final contract review.
+  - Replaced the Project-owner-rejected mobile kneeling and hand-clasped attendant poses with three wary, bracing, or recoiling non-worshipping poses, then restored the full bottom safe area.
+  - Cropped and reconstructed both Hero canvases to their exact approved dimensions, recording each operation in the production record.
+  - Encoded both repository sources as same-canvas WebP at quality 90 through Astro's built-in Sharp image service.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: Approved as a protective demon-queller composition. The final mobile attendants use wary, bracing, or recoiling poses rather than worship, and all attendants remain subordinate without assigning undocumented ranks, species, or ritual meanings.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: Approved after the Project owner confirmed a personal, non-organization-managed ImageGen account and authority to generate, save, and publish the project output; museum references were not uploaded to ImageGen.
+  visual:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: Desktop and mobile identity, anatomy, fully sheathed sword, non-worshipping attendants, focal hierarchy, and required top/right/bottom safe areas were reviewed on the final exact canvases; no embedded text, logo, watermark, or obvious fused anatomy was accepted.
+  accessibility:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: The informative alt identifies Zhong Kui, his sheathed sword, the abstract threshold, and subordinate attendants without decorative over-description; the caption clearly identifies a contemporary AI-assisted interpretation rather than a historical image.
+  language:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-29T00:20:25Z"
+    notes: No rendered text, Chinese characters, pseudo-writing, seals, or talismans are present. The English alt, caption, credit, disclosure, and Zhong Kui naming were reviewed and approved.
+alt: Zhong Kui, a bearded figure in dark green robes with a sheathed sword, stands at a misty abstract threshold above several crouching demon attendants.
+caption: A contemporary AI-assisted editorial interpretation of Zhong Kui as a protective demon-queller, with a sheathed sword and subordinate demon attendants; it is not a historical image.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

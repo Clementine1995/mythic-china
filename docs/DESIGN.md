@@ -19,7 +19,7 @@ Mythic China 是只策展中国神话、志怪、民间传说、宗教传统与�
 
 ### 0.1 成熟度与重构边界
 
-用户已经确认“中国神话传说博物馆”的系统方向、“中国阴间 + 钟馗 Entry”的首个纵切片，并于 2026-08-27 冻结 M1 工程参考。冻结时的 M1 页面外观仍未获批准；同日后续方向比较中，用户进一步确认首个真实 Home 的概念方向“以 A 为主、C 为辅”。该选择不追认旧原型，也不批准候选方向稿为最终页面或生产资产，更不自动批准其在 Collection、Entry 或共享表现层中的延展。现有原型继续只作为不可发布的工程/结构基线：阅读顺序、链接、响应式与无障碍骨架可以进入后续实现参考；表现层可沿既定替换缝重做，不得改写内容、证据、稳定身份、URL 与语义合同。
+用户已经确认“中国神话传说博物馆”的系统方向、“中国阴间 + 钟馗 Entry”的首个纵切片，并于 2026-08-27 冻结 M1 工程参考。冻结时的 M1 页面外观仍未获批准；同日后续方向比较中，用户进一步确认首个真实 Home 的概念方向“以 A 为主、C 为辅”。该选择不追认旧原型，也不批准候选方向稿为最终页面或生产资产，更不自动批准其在 Collection、Entry 或共享表现层中的延展。M3 已另行批准钟馗四个逻辑资产的五项 current 用途；终验中 Hero v1 因双手解剖缺陷被阻断，2026-08-29 定向返修并验收的 Hero v2 现为 current，Hero v1 仅保留审计历史。这些资产批准仍不批准 M4 页面接线与页面级表现。现有原型继续只作为不可发布的工程/结构基线：阅读顺序、链接、响应式与无障碍骨架可以进入后续实现参考；表现层可沿既定替换缝重做，不得改写内容、证据、稳定身份、URL 与语义合同。
 
 仅因表现层重构不得改写内容 ID、slug、canonical URL、Schema、来源/Claim/术语关系、披露、读者语义顺序与无障碍合同；若新增编辑语义确需扩展 Schema，必须另建需求与迁移。字体、色彩值、栅格细节、页面壳层、共享组件的表现、动效实现和栏目美术资产可以在用户批准后整体替换。最小工程替换缝为：
 
@@ -113,8 +113,8 @@ Collection 不得新增字体、导航、组件库、按钮形状、引用样式
 - 页面气氛：炭黑空间、冷玉色层次、少量朱砂主题/视觉强调；门、雾、远近景与向下路径建立纵深。不得把全站或全部正文做成黑红 HUD，也不得让刑罚奇观取代文化说明。
 - Collection Hero 表现阴间的入口、旅程或多层空间，不以巨幅钟馗肖像定义整个 Collection；钟馗的角色主图属于其 Entry。
 - 阅读路径：Collection 可以把 `A Guide to Chinese Underworld Traditions` 作为导览起点，同时把钟馗作为首屏 Featured Story；“重点推荐”不等于“阴间统治者”或“阅读路径中的最高层级”。
-- M1 Featured Entry：`entryId: zhong-kui`，标题 `Zhong Kui, the Demon Queller`。`At the Threshold` 是本站策展路径标签，不是历史官职或跨传统共同分类。The Met 的馆藏记录支持 `Demon Queller`；本站据此把钟馗作为驱鬼形象纳入鬼神叙事，但不把他描述为十王之一、固定阴司官员或整个阴间的统治者。参考：[The Met: Zhong Kui, the Demon Queller with Five Bats](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia: Ten Magistrates of the Underworld](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)，访问于 2026-08-27。
-- 现代接受：可在 Entry 中设置明确的 `Modern adaptations` 段落，说明读者为何在 2026 年关注钟馗；Game Science 的官网和 2026-08-20 官方实机演示只作为现代改编/关注证据，不支撑古代事实。不得使用或仿制游戏 Logo、书法标题、角色、虎、截图、配色、镜头或源码。参考：[Black Myth: Zhong Kui](https://www.gamesci.cn/zhongkui/) 与 [官方实机演示](https://www.bilibili.com/video/BV1kS8H6VERt/)，访问于 2026-08-27。
+- M1 Featured Entry：`entryId: zhong-kui`，标题 `Zhong Kui, the Demon Queller`。`At the Threshold` 是本站策展路径标签，不是历史官职或跨传统共同分类。The Met 的馆藏记录支持 `Demon Queller`；本站据此把钟馗作为驱鬼形象纳入鬼神叙事，但不把他描述为十王之一、固定阴司官员或整个阴间的统治者。参考：[The Met: Demon queller Zhong Kui with demons](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia: Ten Magistrates of the Underworld](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)，访问于 2026-08-27；The Met 对象标题已于 2026-08-28 在 M3-U2 重新核对。
+- 现代接受：可在 Entry 中设置明确的 `Modern adaptations` 段落，说明读者为何在 2026 年关注钟馗；Game Science 的官网和 2026-08-20 官方实机演示只作为现代改编/关注证据，不支撑古代事实。不得复制或仿制该游戏的 Logo、书法标题、角色与虎的具体造型、角色—虎组合、截图、配色、镜头或源码；这不等于全面禁止历史材料中的“钟馗骑虎”母题。若后续采用该母题，必须先建立能支撑具体时期/传统的 Source/Claim 和新版 visual brief，不得以游戏呈现或传闻代替证据。参考：[Black Myth: Zhong Kui](https://www.gamesci.cn/zhongkui/) 与 [官方实机演示](https://www.bilibili.com/video/BV1kS8H6VERt/)，访问于 2026-08-27。
 
 ### 3.4 历史视觉参考边界
 
@@ -363,8 +363,8 @@ Reader request
 
 | 用途 | Master | 说明 |
 | --- | --- | --- |
-| Home hero desktop | 3200×1800，16:9 | 为 4–5 栏文案保留负空间 |
-| Home hero mobile | 1600×2000，4:5 | 独立构图，不机械裁剪桌面图 |
+| Hero desktop | 3200×1800，16:9 | 按目标页面 brief 为文案与焦点保留安全区 |
+| Hero mobile | 1600×2000，4:5 | 独立构图，不机械裁剪桌面图 |
 | Article lead / scene | 2400×1600，3:2 | 文章默认主图 |
 | Cinematic scene | 2560×1440，16:9 | 专题或章节横幅 |
 | Character portrait | 2048×2560，4:5 | 人物页与静态分发 |

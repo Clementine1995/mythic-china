@@ -2,6 +2,9 @@
 coverage/
 dist/
 node_modules/
+/.local/
+/Codex 图像 *.png
+/Codex 图像 *.webp
 
 .env
 .env.*

@@ -1,0 +1,19 @@
+claimId: claim-zhong-kui-demon-retinue
+entryId: zhong-kui
+claimType: tradition
+evidenceContext: historical-tradition
+statement: Museum records document Chinese artworks in which Zhong Kui leads, commands, sits upon, or is accompanied by demon figures.
+certainty: verified
+sourceLinks:
+  - sourceId: source-cma-zhong-kui-lantern-night-1961-206
+    role: object-record
+    locator: Description
+    note: Supports a procession led and commanded by Zhong Kui in this handscroll.
+  - sourceId: source-met-zhong-kui-bamboo-2008-636
+    role: object-record
+    locator: Overview
+    note: Supports one recumbent demon beneath Zhong Kui and other demons presenting offerings in this object.
+  - sourceId: source-nmaa-zhong-kui-palace-patrol-f1982-13
+    role: object-record
+    locator: Object details, label
+    note: Supports a retinue described by the museum as subjugated demons in this late-Qing painting.

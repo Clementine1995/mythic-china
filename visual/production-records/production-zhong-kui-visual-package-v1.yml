@@ -1,0 +1,174 @@
+productionRecordId: production-zhong-kui-visual-package-v1
+briefId: brief-zhong-kui-visual-package-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen
+modelId: null
+modelNotes: The built-in ImageGen tool did not expose a model identifier in the generation response; no model name or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: On 2026-08-29 the Project owner confirmed that this production used a personal, non-organization-managed OpenAI account and that the Project owner is authorized to generate, save, and publish the outputs for Mythic China. Publication rights are recorded on an in-house-original basis with the private project owner as rights holder; this project record does not make broader copyrightability, exclusivity, or non-infringement claims.
+recordedAt: "2026-08-29T00:20:25Z"
+renditions:
+  - manifestId: asset-zhong-kui-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: precise layout correction of an approved project-original art-direction anchor. Image 1 is the edit target. Preserve Zhong Kui's exact original identity, face, beard, hair, black headpiece, dark oxidized-jade robe family, belt, fully sheathed sword, hand gesture, protective commanding mood, the restrained subordinate-demon family, misty abstract threshold, charcoal/jade/cinnabar palette, controlled contemporary ink-and-color editorial treatment, and 16:9 horizontal composition. Make only this safe-area correction: recompose and slightly reduce/lower Zhong Kui, all ribbons, the complete headpiece, the demon attendants, and the dark architectural forms so that the entire top 16 percent of the canvas is genuinely quiet, low-detail pale mineral mist with no essential anatomy, no ribbons, no headpiece, no dark frame edge, no high-contrast ornament, and no symbolic object. Keep the rightmost 38 percent quiet, pale, low-detail, and free of essential anatomy for later HTML title and navigation. Maintain Zhong Kui left of center with focal point near x 0.36/y 0.50, a clear path through the frame, and three small clearly nonhuman subordinate attendants below. Do not crop any head, hand, foot, sword, or attendant. Preserve a clearly fully sheathed sword. Do not add or remove figures. No text, Chinese characters, pseudo-writing, inscription, seal, talisman, logo, watermark, UI, title, franchise/game styling, gore, horns, armor, weapons for attendants, extra limbs, malformed hands, duplicate weapons, or fused anatomy. This is not a historical reconstruction and must not imitate a museum composition.
+    receivedAt: "2026-08-28T14:56:20Z"
+    inputImages:
+      - kind: edit-target
+        sha256: 6396886cd1ceec3e150e92696d91ec4368e2b1757421c4e001006f8293691b28
+        rightsNotes: Project-generated approved-direction Hero candidate preserved in local production storage; no third-party image was supplied.
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: eb05d1a98b967be01edf7c67651f9b386b958f91c4f3ae222168d3f4f8cdbe3a
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: e6a622d3344075122d811618e602f8e07ce3f26da170df4e5cccc5addfb35850
+    processing:
+      tool: Windows GDI+ and Astro built-in Sharp image service
+      version: System.Drawing.Common 10.0.0.0; Sharp 0.35.4
+      operations:
+        - Corrected the approved-direction candidate so the entire top 16 percent and rightmost 38 percent remain low-detail safe areas.
+        - Center-cropped the 1672x941 raw output to source rectangle x=0.00, y=0.25, width=1672.00, height=940.50.
+        - Reconstructed the exact 3200x1800 PNG master with HighQualityBicubic interpolation; the master is not described as a native ImageGen output.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 through Astro's built-in Sharp image service.
+    verifiedAt: "2026-08-28T15:02:29Z"
+  - manifestId: asset-zhong-kui-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Owner-review correction, iteration 1:
+      Use case: precise-object-edit. Asset type: Mythic China entry Hero mobile illustration, vertical 4:5. Image 1 is the sole edit target. Change only the posture and hand gestures of the three small demon attendants. They must remain visibly subordinate to Zhong Kui but must not kneel in worship, clasp their hands, pray, bow devotionally, or look like supplicants. Repose them as three wary, restrained, hornless nonhuman attendants crouching, bracing, recoiling, or watching under command, with separated hands resting naturally on the ground, knees, or at their sides. Keep exactly three demons and keep every demon fully above the bottom safe area. Preserve Zhong Kui's exact identity, face, beard, hair, black headpiece, body, pose, anatomically correct hands, dark oxidized-jade robe, belt, fully sheathed sword and tassel. Preserve the ribbons, abstract threshold architecture, stone steps, mist, charcoal/jade/cinnabar palette, controlled contemporary ink-and-color editorial style, lighting, texture, vertical 4:5 framing, and focal point. Preserve a genuinely quiet low-detail top 22 percent and bottom 14 percent with no essential anatomy or symbols. No worshipping or prayer gestures; no added or removed figures; no horns; no ordinary human attendants; no text, Chinese characters, pseudo-writing, talismans, seals, logos, watermarks, UI, franchise or game styling, gore, armor, extra limbs, malformed hands, duplicate weapons, or fused anatomy. This is not a historical reconstruction and must not imitate a museum composition.
+
+      Owner-review correction, iteration 2:
+      Use case: precise-object-edit. Asset type: Mythic China entry Hero mobile illustration, vertical 4:5. Image 1 is the sole edit target and already has the approved non-worshipping demon gestures. Change only the vertical placement and scale of the three small demon attendants. Move all three slightly upward and reduce them just enough that every hand, foot, knee, garment edge, and body part is completely above the bottom 14 percent of the canvas. The entire bottom 14 percent must be genuinely quiet, low-detail pale mist and plain stone with no essential anatomy. Preserve exactly their current wary, bracing, recoiling, non-worshipping postures with hands separated; keep exactly three demons. Keep Zhong Kui, his exact identity, face, beard, hair, headpiece, body, pose, hands, robe, belt, fully sheathed sword, tassel, ribbons, background architecture, steps, mist, palette, texture, lighting, top 22 percent safe area, vertical 4:5 framing, and all other pixels/compositional relationships as unchanged as possible. No clasped hands, prayer, bowing, worship, or supplication; no added or removed figures; no horns; no text, Chinese characters, pseudo-writing, talismans, seals, logos, watermarks, UI, franchise styling, gore, armor, extra limbs, malformed hands, duplicate weapons, or fused anatomy.
+    receivedAt: "2026-08-29T00:15:02Z"
+    inputImages:
+      - kind: edit-target
+        sha256: 785ab16bf04cd0994279ab3ff8025e0af8b48509fd48e9e4b9716b449b67a519
+        rightsNotes: Project-generated Hero mobile candidate from the earlier safe-area correction; supplied only to the first owner-review correction and preserved in local production storage.
+      - kind: edit-target
+        sha256: 9f6423ab48eee248e32e1d0307f8093ed86403d8693433d3e4462c81ed3aa652
+        rightsNotes: Project-generated preliminary owner-review correction with non-worshipping gestures; supplied only to the second safe-area correction and retained in the Codex generated-image store.
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 95e3c0c90e4d38de94a3be5f342b4caf8f095b51d3aafa4b753a13afe8be8924
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: be99a2116ffd8ac17c64b3af457b17daf029fb25c31375826dd5965c767fbd35
+    processing:
+      tool: Windows GDI+ and Astro built-in Sharp image service
+      version: System.Drawing.Common 10.0.0.0; Sharp 0.35.4
+      operations:
+        - Replaced the Project-owner-rejected kneeling and hand-clasped attendant gestures with three wary, bracing, or recoiling non-worshipping poses.
+        - Performed a second targeted correction to keep every attendant fully above the bottom 14 percent safe area while preserving the top 22 percent safe area.
+        - Center-cropped the 1122x1402 raw output to source rectangle x=0.20, y=0.00, width=1121.60, height=1402.00.
+        - Reconstructed the exact 1600x2000 PNG master with HighQualityBicubic interpolation; the master is not described as a native ImageGen output.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 through Astro's built-in Sharp image service.
+    verifiedAt: "2026-08-29T00:20:25Z"
+  - manifestId: asset-zhong-kui-lead-primary-v1
+    usage: article-lead
+    prompt: |-
+      Use case: art-direction-reference / independent recomposition.
+      Image 1 is a project-original Zhong Kui art-direction anchor. Use it only as an identity and visual-language reference. Create a completely new, independently composed illustration on a new canvas. Do not crop, stretch, mirror, extend, trace, or reuse the anchor's pose, camera framing, silhouette placement, or pixel layout. Preserve only the same original character identity: face, beard silhouette, hair, robe family, fully sheathed-sword design, charcoal / oxidized-jade / restrained-cinnabar palette, controlled brush-like edge language, tactile mineral haze, and the same restrained hornless subordinate-demon design family. The anchor is not historical evidence and must not be made to look like a museum original.
+      Create a quiet contemporary museum-editorial 3:2 article-lead illustration composed for a final 2400 × 1600 canvas, at the highest native resolution available. This is a closer, calm scholarly portrait of Zhong Kui as a protective demon-queller: imposing, bearded, robe-wearing and scholar-like, uncanny but protective rather than horrific. Use a fresh seated or standing three-quarter pose and a different invented abstract threshold geometry from the anchor. Face and anatomically correct hands are the first priority. Make the fully sheathed sword and scabbard clearly legible without implying a fixed magical function. Focal point approximately x 0.44 / y 0.46. Keep one or two small hornless nonhuman demon attendants secondary and low in the composition, never worshipping and never equal. Keep edge details expendable for narrower responsive crops. Preserve tactile mineral haze and controlled negative space, but do not leave the subject tiny. No rendered text.
+      Evidence boundaries: protective demon-queller, bearded robed commanding figure, sheathed sword, and subordinate demon retinue are supported choices. The exact face, body, expression, pose, robe details, sword fittings, threshold, light, mist, and every demon's anatomy are original inventions. The threshold and ink-and-color rhythm are contemporary editorial inference, not historical reconstruction. The minor demons have no names, ranks, species, ritual meanings, or fixed number.
+      Hard exclusions: Do not copy or closely echo any museum reference pose, procession, blossom, table setting, offering arrangement, carving outline, inscription, seal, animal grouping, or complete composition. No Black Myth or other franchise likeness, game-poster camera language, entertainment silhouette, logo, trademark, HUD, neon rim light, bloom, black-red interface, or protected character design. Do not portray Zhong Kui as one of the Ten Kings, ruler of the underworld, or a fixed bureaucratic officeholder. No claim of exact Tang dress, canonical official robe, fixed sword type, magical sword function, or historically exact underworld architecture. No five bats, Five Pestilences symbolism, peach, talisman, ritual seal, pseudo-Chinese characters, invented scripture, watermark, Japanese-specific festival motifs, Japanese or European fantasy armor, horned-devil defaults, gore, torture, skull piles, labeled demon species, extra limbs, malformed hands, duplicate weapons, or fused anatomy. The subordinate demons must not look like ordinary human petitioners, worshippers, children, European devils, Japanese oni, zombies, or franchise monsters.
+    receivedAt: "2026-08-28T13:17:43Z"
+    inputImages:
+      - kind: project-generated-anchor
+        sha256: 6396886cd1ceec3e150e92696d91ec4368e2b1757421c4e001006f8293691b28
+        rightsNotes: Project-generated Hero anchor from this production record; used only for identity and art direction.
+    rawOutput:
+      format: png
+      widthPx: 1536
+      heightPx: 1024
+      sha256: 05c920281e2d0877ddb5415a073e6c78eef125ba963245cae178548958af6e80
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-lead-primary-v1-article-lead-2400w.png
+      usage: article-lead
+      widthPx: 2400
+      heightPx: 1600
+      sha256: f6168f2e09f3b27e72ec9d93f8b4fbbd7ffd6707d851f952a94e2b29c750d637
+    processing:
+      tool: Windows GDI+ and Astro built-in Sharp image service
+      version: System.Drawing.Common 10.0.0.0; Sharp 0.35.4
+      operations:
+        - Used the complete 1536x1024 raw 3:2 canvas without crop.
+        - Reconstructed the exact 2400x1600 PNG master with HighQualityBicubic interpolation; the master is not described as a native ImageGen output.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 through Astro's built-in Sharp image service.
+    verifiedAt: "2026-08-28T13:34:52Z"
+  - manifestId: asset-zhong-kui-og-primary-v1
+    usage: open-graph
+    prompt: |-
+      Use case: art-direction-reference / independent recomposition.
+      Image 1 is a project-original Zhong Kui art-direction anchor. Use it only as an identity and visual-language reference. Create a completely new, independently composed illustration on a new canvas. Do not crop, stretch, mirror, extend, trace, or reuse the anchor's pose, camera framing, silhouette placement, or pixel layout. Preserve only the same original character identity: face, beard silhouette, hair, robe family, fully sheathed-sword design, charcoal / oxidized-jade / restrained-cinnabar palette, controlled brush-like edge language, tactile mineral haze, and the same restrained hornless subordinate-demon design family. The anchor is not historical evidence and must not be made to look like a museum original.
+      Create a contemporary museum-editorial open-graph illustration with the exact final aspect ratio 1200 × 630, at the highest native resolution available. Compose a completely new horizontal scene with Zhong Kui's strong, legible silhouette occupying the right half, focal point approximately x 0.72 / y 0.50. He is a protective demon-queller: imposing, bearded, robe-wearing and scholar-like, uncanny but protective rather than horrific. Use a fresh side-facing or three-quarter pose and a new abstract threshold geometry; keep his fully sheathed sword clearly legible. Include only one restrained, small, hornless nonhuman subordinate-demon cue below him. Keep the leftmost 48% genuinely quiet, low-contrast, low-detail and empty of essential anatomy for controlled M4 HTML typography. Do not render any title, text, logo, seal, or watermark.
+      Evidence boundaries: protective demon-queller, bearded robed commanding figure, sheathed sword, and subordinate demon retinue are supported choices. The exact face, body, expression, pose, robe details, sword fittings, threshold, light, mist, and demon anatomy are original inventions. The threshold and ink-and-color rhythm are contemporary editorial inference, not historical reconstruction. The minor demon has no name, rank, species, ritual meaning, or canonical identity.
+      Hard exclusions: Do not copy or closely echo any museum reference pose, procession, blossom, table setting, offering arrangement, carving outline, inscription, seal, animal grouping, or complete composition. No Black Myth or other franchise likeness, game-poster camera language, entertainment silhouette, logo, trademark, HUD, neon rim light, bloom, black-red interface, or protected character design. Do not portray Zhong Kui as one of the Ten Kings, ruler of the underworld, or a fixed bureaucratic officeholder. No claim of exact Tang dress, canonical official robe, fixed sword type, magical sword function, or historically exact underworld architecture. No five bats, Five Pestilences symbolism, peach, talisman, ritual seal, pseudo-Chinese characters, invented scripture, watermark, Japanese-specific festival motifs, Japanese or European fantasy armor, horned-devil defaults, gore, torture, skull piles, labeled demon species, extra limbs, malformed hands, duplicate weapons, or fused anatomy. The subordinate demon must not look like an ordinary human petitioner, worshipper, child, European devil, Japanese oni, zombie, or franchise monster.
+    receivedAt: "2026-08-28T13:19:56Z"
+    inputImages:
+      - kind: project-generated-anchor
+        sha256: 6396886cd1ceec3e150e92696d91ec4368e2b1757421c4e001006f8293691b28
+        rightsNotes: Project-generated Hero anchor from this production record; used only for identity and art direction.
+    rawOutput:
+      format: png
+      widthPx: 1730
+      heightPx: 909
+      sha256: e08ce4d510de1c0096fd63def85aadc0de630882bd34f556de64718eefb735ec
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-og-primary-v1-open-graph-1200w.png
+      usage: open-graph
+      widthPx: 1200
+      heightPx: 630
+      sha256: cbb503a92faf9fe0a8c9d76f0195d59f85a9cc129375e064cb61754f21489c4d
+    processing:
+      tool: Windows GDI+ and Astro built-in Sharp image service
+      version: System.Drawing.Common 10.0.0.0; Sharp 0.35.4
+      operations:
+        - Center-cropped the 1730x909 raw output to source rectangle x=0.00, y=0.38, width=1730.00, height=908.25.
+        - Downsampled to the exact 1200x630 PNG master with HighQualityBicubic interpolation.
+        - Copied the exact-canvas PNG master byte-for-byte as the repository rendition.
+    verifiedAt: "2026-08-28T13:34:52Z"
+  - manifestId: asset-zhong-kui-social-primary-v1
+    usage: social-portrait
+    prompt: |-
+      Use case: precise-object-and-layout-edit.
+      Image 1 is the edit target and the current Zhong Kui social-portrait candidate. Preserve Zhong Kui's identity, face, beard, hair, pose, anatomically correct hands, robe silhouette, fully sheathed sword, the single subordinate demon, vertical 4:5 framing, charcoal/oxidized-jade/restrained-cinnabar palette, mineral haze, abstract threshold, and overall contemporary museum-editorial treatment.
+      Make only these two corrections:
+      1. Remove every gold mark, stroke cluster, emblem, or ornament on the robe and sash that could resemble Chinese characters, pseudo-writing, calligraphy, scripture, talismans, seals, or symbolic glyphs. Replace them with sparse, clearly non-linguistic mineral crackle, irregular thread texture, and abstract weathered brush grain. No repeated glyph-like units and no readable or pseudo-readable marks anywhere in the image.
+      2. Recompose the lower portion so the bottom 12% is quiet, low-detail mist and plain stone with no essential anatomy, sword parts, demon body, or symbolic objects. Lift and slightly scale down Zhong Kui and the single demon together as needed while preserving their relationship and focal point near x 0.50 / y 0.46. Also keep the top 12% free of essential anatomy or symbols.
+      Do not change the number of demons: exactly one small hornless nonhuman subordinate demon, low and secondary, not worshipping. Do not add any new objects, figures, architecture, text, logo, seal, watermark, UI, or decoration. Keep the sword fully sheathed. Maintain correct hands, face, limbs, and clean anatomy. Do not introduce Black Myth/franchise/game-poster styling, historical claims, horned-devil defaults, gore, or pseudo-Chinese writing.
+    receivedAt: "2026-08-28T13:24:19Z"
+    inputImages:
+      - kind: edit-target
+        sha256: 8c7658e02bd20ed45ef05727abe71004c05b79462d0b97d95da4428f28e46734
+        rightsNotes: Project-generated social candidate; no third-party image was supplied.
+    rawOutput:
+      format: png
+      widthPx: 941
+      heightPx: 1672
+      sha256: 811935451d43ff20f2e50443027f8b4c5e07d6e68117b05687f92399399bf13b
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/zhong-kui/v1/zhong-kui-social-primary-v1-social-portrait-1080w.png
+      usage: social-portrait
+      widthPx: 1080
+      heightPx: 1350
+      sha256: 15326f3a2e0bbe9b1a32a00d20136b3d1da3b80b1b67031de95ade0c0cf9fc48
+    processing:
+      tool: Windows GDI+ and Astro built-in Sharp image service
+      version: System.Drawing.Common 10.0.0.0; Sharp 0.35.4
+      operations:
+        - Cropped the 941x1672 raw output to source rectangle x=0.00, y=130.00, width=941.00, height=1176.25 to preserve the approved 4:5 composition and safe areas.
+        - Reconstructed the exact 1080x1350 PNG master with HighQualityBicubic interpolation; the master is not described as a native ImageGen output.
+        - Copied the exact-canvas PNG master byte-for-byte as the repository rendition.
+    verifiedAt: "2026-08-28T13:36:46Z"
+notes: Museum reference images were not supplied to ImageGen; they informed the approved textual brief only. The selected Hero raw output served as the sole project-generated identity reference for the independent mobile, lead, and OG compositions. The Hero desktop received a targeted safe-area correction. At final review, the Project owner rejected the Hero mobile attendants' kneeling and hand-clasped poses; two targeted edits replaced them with non-worshipping wary poses and restored the complete bottom safe area. The rejected mobile master/source are retained in Git-ignored local production storage, and the selected social rendition was finalized through a targeted edit of a project-generated social candidate. On 2026-08-29 the Project owner confirmed the personal account, publication authority, and final cultural, rights, visual, accessibility, and language reviews recorded by the four manifests.

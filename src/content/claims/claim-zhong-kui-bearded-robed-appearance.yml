@@ -1,0 +1,11 @@
+claimId: claim-zhong-kui-bearded-robed-appearance
+entryId: zhong-kui
+claimType: tradition
+evidenceContext: historical-tradition
+statement: A Yuan-period Chinese handscroll in the Cleveland Museum of Art depicts Zhong Kui as a bearded, robe-wearing figure commanding a procession.
+certainty: verified
+sourceLinks:
+  - sourceId: source-cma-zhong-kui-lantern-night-1961-206
+    role: object-record
+    locator: Description and image description
+    note: Supports the beard, robe, raised hand, and commanding position in this specific work, not a single canonical costume.
