@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），当前提交基线为 `8c6d12`（`feat(pages): add M4 noindex review slice`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1 合同确认、单独授权 M4-U2，并在获授权的本地 preview/浏览器评审后确认 U2 页面方向。正式字体与 U5 完整页面门禁仍未完成；U3-U5、依赖、代理 Git 写入、部署与发布未获授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），当前提交基线为 `5f327b6`（`M4-u2 completed`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2 并提交 U2 收口基线，随后单独授权 M4-U3；U3 纯 published-only release 投影、fixture 与 noindex review 输出门禁已完成本地实施和验证，改动尚未提交。正式字体与 U5 完整页面门禁仍未完成；U4-U5、依赖、服务、代理 Git 写入、部署与发布未获授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
 ## 当前环境身份门禁
 
@@ -503,7 +503,7 @@ M4-U1 开始前的只读核查记录（2026-08-29）：
 
 ### M4-U2 review 构建意图
 
-M4-U2 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。本单元唯一允许值为 `review`；缺失、`public` 或其他未知值都必须失败。`public` 只有在后续单元建立 published-only 投影与 SEO 发布门禁后才能加入允许值，不能由 `NODE_ENV`、平台 URL 或内容数量推断。
+M4 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。当前唯一允许值仍为 `review`；缺失、`public` 或其他未知值都必须失败。M4-U3 已建立纯 published-only release 数据投影，但它不是 build intent 或 deployable artifact；`public` 只有在 U4 建立真实 origin/identity、SEO 输出与发布门禁后才能另行评估加入，不能由 `NODE_ENV`、平台 URL 或内容数量推断。
 
 项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但每次启动、停止或重启仍须单独授权。M4-U2 页面评审已获得并使用一次本地 preview/浏览器授权，该授权不自动延续到 U3-U5。
 
@@ -515,8 +515,19 @@ M4-U2 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。
 - `pnpm run visual:build:check` 回归通过七个 local master 与三份 current responsive rendition 的 22 个实际输出复核。
 - 获单独授权后启动本地 preview，并在真实浏览器逐页复核全部 7 页的 1440×900、768×900 与 390×844 视口；另在 Project owner 当前 411×651 视口复核 Explore。未发现横向溢出或控制台错误/警告，页面保持 `noindex, nofollow` 与零客户端 JavaScript。
 - Project owner 于 2026-08-29 明确确认 M4-U2 页面方向。该确认基于系统 fallback 字体，不构成正式字体、键盘全链、真实 200% 缩放、禁用 JavaScript、reduced-motion、图片失败、性能、跨平台 fallback、U5 最终视觉或发布批准。
-- U1/U2 主体已由用户提交为 `8c6d12cabce11741bb83941904993f4d8831c818`；代理未执行 Git 写入、部署或发布。后续 U3-U5 与服务控制仍须逐项授权。
+- U1/U2 最终收口已由用户提交为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`）；`8c6d12cabce11741bb83941904993f4d8831c818` 保留为 U2 主体历史基线。代理未执行 Git 写入、部署或发布。
 - 未改内容、Schema、manifest、production record、repository source、依赖或 lockfile。未来 Hero 版本切换必须同步受控页面图片 registry；不一致时构建失败，不静默回退。
+
+### M4-U3 release 投影与探索入口门禁
+
+Project owner 于 2026-08-29 单独授权 M4-U3，并确认采用纯 release 投影、继续拒绝 public build、沿用现有 About 四段静态文案。授权只覆盖已列明的 release/review 投影、site 测试、既有输出 verifier 与四份收口文档；不包含页面/CSS、内容/Schema、资产、依赖、服务、浏览器、Git 写入、部署或发布。
+
+- 新增纯 `createReleaseProjection()`：只从已验证内容图选择 `published` Entry/Collection；Entry 按 `publishedAt` 降序并以稳定 ID 打破同日并列，Collection 按英文标题再按稳定 ID 排序；published Entry 缺日期时失败。它不承担 public build、SEO、最小发布内容量、关系复验或 Home 配置。
+- review 投影继续负责全部 non-archived 评审路由和固定 Home draft 例外，并委托 release 投影提供 Explore/Collections/Related Entries 的 published-only view model；现有页面 API 与 7 页 review inventory 不变。
+- fixture 覆盖空、六状态单项、多项排序、并列和缺日期失败；review wrapper 另有薄接线断言。输出 verifier 扩展为真实空状态、About 四节、`lang`、skip link、唯一 main target、桌面/原生 details 移动导航、内部链接、无 inline handler/`javascript:` URL 与零客户端 JavaScript 检查。
+- 固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、14 个测试文件/90 项测试、`astro check`（55 个文件，0 error、0 warning、0 hint）与 7 页静态 build。输出仍为 7 页 `noindex, nofollow`、14 个 Hero v2 AVIF/WebP、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并通过 release 真实空状态与静态导航语义门禁。空 Terminology 提示符合当前 inventory。
+- U3 没有改视觉链，因此没有重跑非默认 `visual:build:check`；U2 已记录的七个 local master 与 22 个 current 响应式输出证据不被改写。静态门禁只证明键盘语义基线和无 JS 输出，不证明真实 Tab 顺序、details 操作、焦点可见/遮挡或回返；这些仍属于 U5。
+- 写入前 HEAD、`main` 与本地 `origin/main` 均为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`，工作树干净，未执行 fetch。U3 改动尚未提交；未启动服务或浏览器，未执行 Git 写入、部署或发布。
 
 ## 数据库、外部服务与真实写入口
 

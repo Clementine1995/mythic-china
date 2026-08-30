@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已由用户提交为历史基线 `f258227`（`feat: complete M2 content foundation`）。M3-U1/U2/U3/U4/U5 已完成并形成历史基线 `c606f5`（`M3 completed`）。M3 终验曾因 Hero v1 双手解剖缺陷重开；2026-08-29 Project owner 明确验收定向返修候选后，Hero v2 已成为 approved/current，Hero v1 保留为 approved/non-current 审计历史。当前版本化 inventory 共七个精确画布 master、七份 repository source rendition、两份真实 production record 与五份 manifest 版本记录，其中四份为 approved/current。M4-U1/U2 已由用户提交为当前基线 `8c6d12`（`feat(pages): add M4 noindex review slice`）；U2 页面在获授权的本地 preview 中完成 7 页三档浏览器复核，并经 Project owner 确认页面方向。正式字体与 U5 的完整无障碍、性能和最终视觉门禁仍未完成。既有 M1 原型仍不可发布。
+- 阶段：M1 已于 2026-08-27 按用户明确决定完成并冻结为首个工程参考基线；M2 工程与内容核心已由用户提交为历史基线 `f258227`（`feat: complete M2 content foundation`）。M3-U1/U2/U3/U4/U5 已完成并形成历史基线 `c606f5`（`M3 completed`）。M3 终验曾因 Hero v1 双手解剖缺陷重开；2026-08-29 Project owner 明确验收定向返修候选后，Hero v2 已成为 approved/current，Hero v1 保留为 approved/non-current 审计历史。当前版本化 inventory 共七个精确画布 master、七份 repository source rendition、两份真实 production record 与五份 manifest 版本记录，其中四份为 approved/current。M4-U1/U2 已由用户提交为当前基线 `5f327b6`（`M4-u2 completed`）；U2 页面在获授权的本地 preview 中完成 7 页三档浏览器复核，并经 Project owner 确认页面方向。M4-U3 已在该基线上完成纯 published-only release 投影、fixture 与静态输出门禁，改动尚未提交。正式字体与 U5 的完整无障碍、性能和最终视觉门禁仍未完成。既有 M1 原型仍不可发布。
 - 视觉方向：冻结时的 M1 页面外观仍未获批准；2026-08-27，用户在后续仓库外 Home 方向稿中确认“以 A 为主、C 为辅”。首个真实 Home 以 A 的现代文化展览式中性母体、图片主导的非对称策展构图为主，并以 C 的抽象雕塑、地形、路径和裁切为辅助语汇。2026-08-29，Project owner 在实际浏览器查看并要求收敛字号与排版后，明确确认 M4-U2 页面方向；该确认不追认旧原型，也不批准正式字体、U5 最终页面门禁或发布。
 - 工作名称：`Mythic China`；目录名与未来包名使用 `mythic-china`。
 - 当前权威日期：2026-08-29。
-- Project owner 已确认 M4 合同第 1–9 项、单独授权 M4-U2，并在获授权的 preview/浏览器评审后确认 U2 页面方向。U2 可以按当前系统 fallback 字体状态收口；该结论不是正式字体批准或 U5 最终页面验收。U3-U5、依赖调整、后续服务控制、代理 Git 写入、部署或发布仍未授权。制作方式保持 AI-assisted OpenAI ImageGen，本期不使用 ComfyUI。
+- Project owner 已确认 M4 合同第 1–9 项、单独授权 M4-U2，并在获授权的 preview/浏览器评审后确认 U2 页面方向。U2 可以按当前系统 fallback 字体状态收口；该结论不是正式字体批准或 U5 最终页面验收。Project owner 随后单独授权 M4-U3，确认采用纯 release 投影且继续拒绝 public build，并沿用现有 About 四段静态文案。U4-U5、依赖调整、后续服务控制、代理 Git 写入、部署或发布仍未授权。制作方式保持 AI-assisted OpenAI ImageGen，本期不使用 ComfyUI。
 
 ## 项目负责
 
@@ -26,7 +26,7 @@
 
 ## 当前主链路
 
-M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复核链路：`Entry Markdown / 结构化 YAML + visual brief / production record / versioned manifest -> 严格 Schema -> 纯内容图与视觉资产图/文件校验 -> 显式 current resolver -> review 投影 -> Astro 静态路由 -> dist/`。当前真实 inventory 包含一份 approved brief、两份 production record、五份 manifest 版本记录与七份 repository source rendition；四个逻辑资产各有且仅有一份 approved/current manifest，Hero v1 的两份 source 与版本记录保留为 approved/non-current 历史。默认 review 构建生成 Home、Explore、Collections、About、一个 Collection 与两个 Entry 共 7 个 `noindex, nofollow` 页面；Explore/Collections 只列 published 内容，因此当前显示真实空状态，固定 Home 纵切片是唯一 draft 选择例外。钟馗 Hero 从 versionless `assetId` 经过 approved/current 门禁解析 v2，并生成 14 个页面实际使用的 AVIF/WebP 输出；Collection 使用无图 CSS realm surface。两个 Entry 仍为 draft，钟馗缺失的 opening、summary 与正文不会被 fallback 或 Claim 补写。非默认 `visual:build:check` 继续复核七个 local master，并按三份 current responsive buildPlan 实际生成和解码验证 22 个 AVIF/WebP 目标。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 继续组成冻结的 M1 独立原型，不属于应用构建输入。目标体验与内部生产仍必须分开理解：
+M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复核链路：`Entry Markdown / 结构化 YAML + visual brief / production record / versioned manifest -> 严格 Schema -> 纯内容图与视觉资产图/文件校验 -> 显式 current resolver -> 纯 published-only release 投影 / review 投影 -> Astro 静态路由 -> dist/`。当前真实 inventory 包含一份 approved brief、两份 production record、五份 manifest 版本记录与七份 repository source rendition；四个逻辑资产各有且仅有一份 approved/current manifest，Hero v1 的两份 source 与版本记录保留为 approved/non-current 历史。默认 review 构建生成 Home、Explore、Collections、About、一个 Collection 与两个 Entry 共 7 个 `noindex, nofollow` 页面；Explore/Collections 通过 release 投影只列 published 内容，因此当前显示真实空状态，固定 Home 纵切片是唯一 draft 选择例外。release 投影只建立数据/view-model 与 fixture 门禁，不开放 deployable public build；缺失、`public` 或未知 build intent 仍失败，SEO 发布输出留给 U4。钟馗 Hero 从 versionless `assetId` 经过 approved/current 门禁解析 v2，并生成 14 个页面实际使用的 AVIF/WebP 输出；Collection 使用无图 CSS realm surface。两个 Entry 仍为 draft，钟馗缺失的 opening、summary 与正文不会被 fallback 或 Claim 补写。非默认 `visual:build:check` 继续复核七个 local master，并按三份 current responsive buildPlan 实际生成和解码验证 22 个 AVIF/WebP 目标。`prototypes/m1-home.html`、`prototypes/m1-collection.html`、`prototypes/entry-reader-flow.html`、`prototypes/m1-review-board.html` 与 `prototypes/m1-type-specimen.html` 继续组成冻结的 M1 独立原型，不属于应用构建输入。目标体验与内部生产仍必须分开理解：
 
 - 读者阅读：`主视觉 + 故事问题 -> opening 故事入口 -> Quick Answer -> 核心故事 -> 原典写了什么 -> 后世传统与版本 -> 本站解释 -> 完整 Sources -> Related Entries -> Reader Request -> 全站 Footer`。轻量出处随相关主张出现；完整来源在正文收束后、继续探索之前列出，newsletter 只在全站 Footer 出现。
 - 编辑生产：`研究问题 -> claim map 与可定位来源 -> 术语/译文审核 -> 英文叙事与视觉 brief -> 编辑/视觉审核 -> 内容 Schema 校验 -> 静态构建 -> CDN 网站`。
@@ -39,7 +39,7 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
-| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | 当前提交基线为 `8c6d12`（`feat(pages): add M4 noindex review slice`）；HEAD、`main` 与本地 `origin/main` 对齐，未执行 fetch 核验远端服务器；当前未提交改动属于已授权的 U2 页面调整与收口文档 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、一份 approved brief、两份 production record、五份 manifest 版本记录、七份 approved repository source rendition、不可发布 M1 原型与 prototype-only 图片；其中 Hero v1 为非 current 审计历史，无数据库或真实外部写入口 | M4-U2 noindex review、页面方向收口与经单独授权的本地评审；不含 U3-U5、远端部署或发布 |
+| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | 当前提交基线为 `5f327b6`（`M4-u2 completed`）；HEAD、`main` 与本地 `origin/main` 对齐，未执行 fetch 核验远端服务器；当前未提交改动属于已授权的 M4-U3 release 投影、测试、输出门禁与收口文档 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 draft 内容、一份 approved brief、两份 production record、五份 manifest 版本记录、七份 approved repository source rendition、不可发布 M1 原型与 prototype-only 图片；其中 Hero v1 为非 current 审计历史，无数据库或真实外部写入口 | M4-U3 纯数据 release 投影与 noindex review 静态验证；不含 public build、U4-U5、远端部署或发布 |
 
 ## 项目构建与运行
 
@@ -77,7 +77,7 @@ rg -n '\{\{[^}]+\}\}' .
 - `docs/CONTENT_MODEL.md`：内容分类、声明与术语记录、工具无关的视觉资产及读者反馈模型。
 - `docs/REFERENCES.md`：本轮外部参考、视觉 Skill/工具采用边界与用途说明。
 - `docs/requirements/`：`001` 保存 MVP/M1–M7 总合同，`002` 保存 M3 视觉资产管线合同，`003` 保存 M4 页面、探索与 SEO 的详细合同、状态投影、实施单元和验收门禁。
-- `src/`：Content Layer、视觉资产加载/校验/current resolver、review 投影、共享生产壳、真实页面模板与静态路由。
+- `src/`：Content Layer、视觉资产加载/校验/current resolver、纯 release/review 投影、共享生产壳、真实页面模板与静态路由。
 - `tests/`：内容、视觉资产、页面投影、resolver、运行时和架构边界 Vitest。
 - `scripts/verify-runtime.mjs`：固定 Node 子进程身份门禁。
 - `prototypes/`：不可发布的静态视觉评审原型；不代表应用实现或已核准内容，工作母版与探索废图不应进入正式代码仓库。

@@ -16,7 +16,7 @@ import {
 } from "../content/fixtures";
 
 describe("M4 review content projection", () => {
-  it("includes every non-archived state while index lists stay published-only", () => {
+  it("includes every non-archived state in direct review routes", () => {
     const statuses = [
       "draft",
       "editorial-review",
@@ -40,96 +40,37 @@ describe("M4 review content projection", () => {
       );
     });
 
-    const projection = createReviewProjection({ entries, collections: [] });
+    const publishedCollection = makeRecord(
+      "published-collection",
+      "collections",
+      makeCollectionData({
+        collectionId: "published-collection",
+        slug: "published-collection",
+        title: "Published Collection",
+        titleZh: null,
+        pinyin: null,
+        featuredEntryId: null,
+        entryIds: [],
+        status: "published",
+      }),
+    );
+    const projection = createReviewProjection({
+      entries,
+      collections: [publishedCollection],
+    });
 
     expect(projection.entries.map((entry) => entry.data.status)).toEqual(
       statuses.slice(0, -1),
     );
-    expect(
-      projection.publishedEntries.map((entry) => entry.data.status),
-    ).toEqual(["published"]);
-  });
-
-  it("keeps published index ordering deterministic", () => {
-    const entries = [
-      makeEntryRecord(
-        makeEntryData({
-          entryId: "entry-b",
-          slug: "entry-b",
-          title: "Entry B",
-          nameZh: null,
-          pinyin: null,
-          status: "published",
-          publishedAt: "2026-08-28",
-        }),
-      ),
-      makeEntryRecord(
-        makeEntryData({
-          entryId: "entry-a",
-          slug: "entry-a",
-          title: "Entry A",
-          nameZh: null,
-          pinyin: null,
-          status: "published",
-          publishedAt: "2026-08-29",
-        }),
-      ),
-      makeEntryRecord(
-        makeEntryData({
-          entryId: "entry-c",
-          slug: "entry-c",
-          title: "Entry C",
-          nameZh: null,
-          pinyin: null,
-          status: "published",
-          publishedAt: "2026-08-29",
-        }),
-      ),
-    ];
-    const collections = [
-      makeRecord(
-        "collection-b",
-        "collections",
-        makeCollectionData({
-          collectionId: "collection-b",
-          slug: "collection-b",
-          title: "B Collection",
-          titleZh: null,
-          pinyin: null,
-          featuredEntryId: null,
-          entryIds: [],
-          status: "published",
-        }),
-      ),
-      makeRecord(
-        "collection-a",
-        "collections",
-        makeCollectionData({
-          collectionId: "collection-a",
-          slug: "collection-a",
-          title: "A Collection",
-          titleZh: null,
-          pinyin: null,
-          featuredEntryId: null,
-          entryIds: [],
-          status: "published",
-        }),
-      ),
-    ];
-
-    const projection = createReviewProjection({ entries, collections });
-
     expect(projection.publishedEntries.map((entry) => entry.id)).toEqual([
-      "entry-a",
-      "entry-c",
-      "entry-b",
+      "entry-5",
     ]);
     expect(
       projection.publishedCollections.map((collection) => collection.id),
-    ).toEqual(["collection-a", "collection-b"]);
+    ).toEqual(["published-collection"]);
   });
 
-  it("rejects even one published Entry without a publication date", () => {
+  it("preserves the review error contract for an invalid published date", () => {
     const entry = makeEntryRecord(
       makeEntryData({
         entryId: "published-without-date",
@@ -141,10 +82,16 @@ describe("M4 review content projection", () => {
         publishedAt: null,
       }),
     );
+    let caughtError: unknown;
 
-    expect(() =>
-      createReviewProjection({ entries: [entry], collections: [] }),
-    ).toThrow(ReviewProjectionError);
+    try {
+      createReviewProjection({ entries: [entry], collections: [] });
+    } catch (error) {
+      caughtError = error;
+    }
+
+    expect(caughtError).toBeInstanceOf(ReviewProjectionError);
+    expect(caughtError).toMatchObject({ code: "invalid-published-date" });
   });
 
   it("requires the fixed Home slice and preserves Collection.entryIds order", () => {

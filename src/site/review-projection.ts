@@ -3,6 +3,10 @@ import type {
   ContentStatus,
   EntryData,
 } from "../content/content-schemas";
+import {
+  createReleaseProjection,
+  ReleaseProjectionError,
+} from "./release-projection";
 
 // Review-only vertical slice; a future public Home must choose independently.
 export const reviewHomeCollectionId = "chinese-underworld";
@@ -49,17 +53,6 @@ function isReviewVisible(status: ContentStatus): boolean {
   return status !== "archived";
 }
 
-function requirePublishedDate(entry: EntryRecordLike): string {
-  const publishedAt = entry.data.publishedAt;
-  if (publishedAt === null) {
-    throw new ReviewProjectionError(
-      "invalid-published-date",
-      `Published Entry ${entry.id} is missing publishedAt.`,
-    );
-  }
-  return publishedAt;
-}
-
 export function createReviewProjection<
   TEntry extends EntryRecordLike,
   TCollection extends CollectionRecordLike,
@@ -74,36 +67,21 @@ export function createReviewProjection<
   const collections = input.collections.filter((collection) =>
     isReviewVisible(collection.data.status),
   );
-  const publishedEntries = entries
-    .filter((entry) => entry.data.status === "published")
-    .map((entry) => {
-      requirePublishedDate(entry);
-      return entry;
-    })
-    .sort((left, right) => {
-      const dateOrder = requirePublishedDate(right).localeCompare(
-        requirePublishedDate(left),
-        "en",
-      );
-      return dateOrder !== 0
-        ? dateOrder
-        : left.id.localeCompare(right.id, "en");
-    });
-  const publishedCollections = collections
-    .filter((collection) => collection.data.status === "published")
-    .sort((left, right) => {
-      const titleOrder = left.data.title.localeCompare(right.data.title, "en");
-      return titleOrder !== 0
-        ? titleOrder
-        : left.id.localeCompare(right.id, "en");
-    });
+  try {
+    const releaseProjection = createReleaseProjection(input);
 
-  return {
-    entries,
-    collections,
-    publishedEntries,
-    publishedCollections,
-  };
+    return {
+      entries,
+      collections,
+      publishedEntries: releaseProjection.entries,
+      publishedCollections: releaseProjection.collections,
+    };
+  } catch (error) {
+    if (error instanceof ReleaseProjectionError) {
+      throw new ReviewProjectionError(error.code, error.message);
+    }
+    throw error;
+  }
 }
 
 export function getReviewHomeSlice<

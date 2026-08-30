@@ -23,7 +23,9 @@ if (resolve(process.cwd()) !== projectRoot) {
   throw new Error(`Unexpected workspace: ${process.cwd()}`);
 }
 if (!existsSync(outputRoot)) {
-  throw new Error("M4-U2 output verification requires an existing dist build.");
+  throw new Error(
+    "M4 review output verification requires an existing dist build.",
+  );
 }
 
 async function listFiles(directory) {
@@ -52,7 +54,9 @@ const imageFiles = outputFiles.filter((path) =>
 );
 
 if (htmlFiles.join("|") !== expectedHtmlFiles.join("|")) {
-  throw new Error(`Unexpected M4-U2 HTML inventory:\n${htmlFiles.join("\n")}`);
+  throw new Error(
+    `Unexpected M4 review HTML inventory:\n${htmlFiles.join("\n")}`,
+  );
 }
 if (
   imageFiles.length !== 14 ||
@@ -63,7 +67,7 @@ if (
   )
 ) {
   throw new Error(
-    `Unexpected M4-U2 image artifact inventory:\n${imageFiles.join("\n")}`,
+    `Unexpected M4 review image artifact inventory:\n${imageFiles.join("\n")}`,
   );
 }
 
@@ -106,6 +110,8 @@ for (const relativePath of htmlFiles) {
     /<meta[^>]+property="og:/iu,
     /application\/ld\+json/iu,
     /<script(?:\s|>)/iu,
+    /\son[a-z]+\s*=/iu,
+    /\b(?:href|src)="javascript:/iu,
     /M2 semantic debug/iu,
   ]) {
     if (forbidden.test(html)) {
@@ -123,6 +129,24 @@ for (const relativePath of htmlFiles) {
         `${relativePath} links to missing navigation target ${target}.`,
       );
     }
+  }
+  for (const requiredSemanticShell of [
+    '<html lang="en">',
+    '<a class="skip-link" href="#main-content">',
+    '<main id="main-content" tabindex="-1">',
+    '<nav class="desktop-navigation" aria-label="Primary navigation">',
+    '<details class="mobile-navigation">',
+    "<summary>Menu</summary>",
+    '<nav aria-label="Mobile primary navigation">',
+  ]) {
+    if (!html.includes(requiredSemanticShell)) {
+      throw new Error(
+        `${relativePath} is missing static navigation semantics.`,
+      );
+    }
+  }
+  if ((html.match(/id="main-content"/gu) ?? []).length !== 1) {
+    throw new Error(`${relativePath} must have one skip-link target.`);
   }
   for (const match of html.matchAll(/href="([^"]+)"/giu)) {
     const href = match[1];
@@ -142,10 +166,15 @@ for (const relativePath of htmlFiles) {
   }
 }
 
-for (const forbiddenArtifact of ["rss.xml", "sitemap.xml"]) {
-  if (existsSync(join(outputRoot, forbiddenArtifact))) {
-    throw new Error(`Review build must not emit ${forbiddenArtifact}.`);
-  }
+const forbiddenReleaseArtifacts = outputFiles.filter((path) =>
+  /\.(?:atom|rss|xml)(?:\.gz)?$/iu.test(path),
+);
+if (forbiddenReleaseArtifacts.length > 0) {
+  throw new Error(
+    `Review build must not emit release feed or XML artifacts:\n${forbiddenReleaseArtifacts
+      .map((path) => relative(outputRoot, path).replaceAll("\\", "/"))
+      .join("\n")}`,
+  );
 }
 if (outputFiles.some((path) => /\.(?:[cm]?js)$/iu.test(path))) {
   throw new Error("M4-U2 review pages must not emit client JavaScript.");
@@ -160,15 +189,17 @@ const homeHtml = htmlByPath.get("index.html");
 const guideHtml = htmlByPath.get("explore/chinese-underworld-guide/index.html");
 const exploreIndexHtml = htmlByPath.get("explore/index.html");
 const collectionsIndexHtml = htmlByPath.get("collections/index.html");
+const aboutHtml = htmlByPath.get("about/index.html");
 if (
   zhongKuiHtml === undefined ||
   collectionHtml === undefined ||
   homeHtml === undefined ||
   guideHtml === undefined ||
   exploreIndexHtml === undefined ||
-  collectionsIndexHtml === undefined
+  collectionsIndexHtml === undefined ||
+  aboutHtml === undefined
 ) {
-  throw new Error("M4-U2 focal page output is incomplete.");
+  throw new Error("M4 review focal page output is incomplete.");
 }
 if (
   guideHtml.includes("manifest-hero-picture") ||
@@ -178,6 +209,28 @@ if (
   throw new Error(
     "Review index or Guide output leaks an ineligible visual slice.",
   );
+}
+if (
+  !exploreIndexHtml.includes("No published entries yet") ||
+  exploreIndexHtml.includes('class="editorial-index"')
+) {
+  throw new Error("Explore must render the honest empty release state.");
+}
+if (
+  !collectionsIndexHtml.includes("No published collections yet") ||
+  collectionsIndexHtml.includes('class="editorial-index"')
+) {
+  throw new Error("Collections must render the honest empty release state.");
+}
+for (const heading of [
+  "Scope",
+  "Editorial method",
+  "Images",
+  "The museum metaphor",
+]) {
+  if (!aboutHtml.includes(`<h2>${heading}</h2>`)) {
+    throw new Error(`About is missing the approved section: ${heading}.`);
+  }
 }
 function collectReferencedHeroOutputs(html) {
   return new Set(
@@ -300,5 +353,5 @@ if (
 }
 
 process.stdout.write(
-  `Verified ${htmlFiles.length} noindex M4-U2 pages, navigation, Hero art direction, and zero client JavaScript.\n`,
+  `Verified ${htmlFiles.length} noindex M4 review pages, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
 );
