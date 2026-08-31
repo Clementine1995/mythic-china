@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "browser-review-pending",
+  "recordedAt": "2026-08-30",
+  "replaceability": {
+    "displayAlias": "Mythic Display",
+    "storyAlias": "Mythic Story",
+    "consumerTokens": ["--font-display", "--font-story"],
+    "rule": "Pages and components consume stable role tokens; upstream families are isolated to fonts.css and this inventory."
+  },
+  "families": [
+    {
+      "familyId": "geist-sans",
+      "role": "display",
+      "cssAlias": "Mythic Display",
+      "upstreamFamily": "Geist",
+      "version": "1.7.2",
+      "releaseUrl": "https://github.com/vercel/geist-font/releases/tag/v1.7.2",
+      "archiveUrl": "https://github.com/vercel/geist-font/releases/download/v1.7.2/geist-font-v1.7.2.zip",
+      "archiveSha256": "7fc800d2ac6b92844895196e5041aca55d814c15db70c44f79b3b83ab82b04e2",
+      "licensePath": "geist-sans/1.7.2/OFL.txt",
+      "licenseUrl": "https://github.com/vercel/geist-font/blob/v1.7.2/OFL.txt",
+      "licenseSha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+      "reservedFontName": null,
+      "files": [
+        {
+          "assetId": "font-geist-sans-variable-roman",
+          "path": "geist-sans/1.7.2/geist-sans-variable-roman.woff2",
+          "bytes": 69652,
+          "sha256": "a369fcf5628ea2aa4e1b9e2ec6a5b3624e365bda588e1f0f2f12b564f728fbb8",
+          "style": "normal",
+          "weight": "100 900",
+          "preload": "all-pages",
+          "registryKey": "displayRoman"
+        }
+      ]
+    },
+    {
+      "familyId": "source-serif-4",
+      "role": "story",
+      "cssAlias": "Mythic Story",
+      "upstreamFamily": "Source Serif 4",
+      "version": "4.005R",
+      "releaseUrl": "https://github.com/adobe-fonts/source-serif/releases/tag/4.005R",
+      "archiveUrl": "https://github.com/adobe-fonts/source-serif/releases/download/4.005R/source-serif-4.005_WOFF2.zip",
+      "archiveSha256": "af10e80dcd2296748b04cb9917db9f7ba0ae65101165fd2f0c16b9812d9abd28",
+      "archiveSha256Source": "locally-computed; the upstream release does not publish a digest",
+      "licensePath": "source-serif-4/4.005R/LICENSE.md",
+      "licenseUrl": "https://github.com/adobe-fonts/source-serif/blob/4.005R/LICENSE.md",
+      "licenseSha256": "75784a295293a8992f5a8d99210566e0064a012e6dab6731305e3787f15896c7",
+      "reservedFontName": "Source",
+      "files": [
+        {
+          "assetId": "font-source-serif-4-regular",
+          "path": "source-serif-4/4.005R/source-serif-4-regular.woff2",
+          "bytes": 76260,
+          "sha256": "6b053e98f0838afe81f3e784727be4583a7c13bb42f198dc5202ecffee0aaee0",
+          "style": "normal",
+          "weight": "400",
+          "preload": "entry-pages",
+          "registryKey": "storyRoman"
+        },
+        {
+          "assetId": "font-source-serif-4-semibold",
+          "path": "source-serif-4/4.005R/source-serif-4-semibold.woff2",
+          "bytes": 80732,
+          "sha256": "457a13ac92e977d82e376038a2daac7fdb5433610910bf5787bdf6c1c3781865",
+          "style": "normal",
+          "weight": "600",
+          "preload": "on-demand",
+          "registryKey": null
+        },
+        {
+          "assetId": "font-source-serif-4-italic",
+          "path": "source-serif-4/4.005R/source-serif-4-italic.woff2",
+          "bytes": 59716,
+          "sha256": "ca3b17ed1e3e668ffd9e03385cfd46e1b095df783de53710d25d41241496026b",
+          "style": "italic",
+          "weight": "400",
+          "preload": "on-demand",
+          "registryKey": null
+        }
+      ]
+    }
+  ]
+}

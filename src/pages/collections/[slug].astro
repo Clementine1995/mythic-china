@@ -10,11 +10,14 @@ import {
   getReviewFeaturedEntry,
 } from "../../site/review-projection";
 import CollectionTemplate from "../../templates/CollectionTemplate.astro";
+import { resolveApprovedPageAssetById } from "../../visual/resolve-approved-page-asset";
+import type { ResolvedAssetRecord } from "../../visual/resolve-visual-assets";
 
 interface Props {
   collection: CollectionEntry<"collections">;
   entries: CollectionEntry<"entries">[];
   featuredEntry: CollectionEntry<"entries"> | null;
+  heroAsset: ResolvedAssetRecord | null;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -22,20 +25,37 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const graph = await loadValidatedContentGraph();
   const projection = createReviewProjection(graph);
 
-  return projection.collections.map((collection) => ({
-    params: { slug: collection.data.slug },
-    props: {
-      collection,
-      entries: getReviewCollectionEntries(
-        collection.data.entryIds,
-        projection.entries,
-      ),
-      featuredEntry: getReviewFeaturedEntry(
-        collection.data.featuredEntryId,
-        projection.entries,
-      ),
-    } satisfies Props,
-  }));
+  return projection.collections.map((collection) => {
+    const heroAsset = collection.data.heroAssetId
+      ? resolveApprovedPageAssetById(
+          graph.assets,
+          collection.data.heroAssetId,
+          {
+            ownerType: "collection",
+            ownerId: collection.id,
+            role: "hero",
+            slotId: "primary",
+            accessibilityMode: "informative",
+          },
+        )
+      : null;
+
+    return {
+      params: { slug: collection.data.slug },
+      props: {
+        collection,
+        entries: getReviewCollectionEntries(
+          collection.data.entryIds,
+          projection.entries,
+        ),
+        featuredEntry: getReviewFeaturedEntry(
+          collection.data.featuredEntryId,
+          projection.entries,
+        ),
+        heroAsset,
+      } satisfies Props,
+    };
+  });
 };
 
 const props = Astro.props;

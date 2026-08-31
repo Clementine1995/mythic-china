@@ -197,7 +197,7 @@ excluded_motifs
 
 字体是全站一致性的核心资产，也是消除“旧报纸感”的首要门禁。首版采用“现代 sans 建立场馆与标题，克制 serif 只承担长文与原典”的组合：
 
-- **Geist Sans**：英文 Display、H1/H2、导航、metadata、按钮与拼音；使用 400/500/600，不使用全大写宽字距制造机构感。
+- **Geist Sans**：英文 Display、H1/H2、导航、metadata、按钮与拼音；当前 UI/标题按变量轴使用 400–650 的连续权重，Hero 仍限制为 400–600，不使用全大写宽字距制造机构感。
 - **Source Serif 4**：英文长文、引文与原典/译文片段；正文 400，真实 Italic。它不再承担 Hero、Article H1 或全站章节标题。
 - **Source Han Sans SC**：中文名称、中文显示标题和未来中文 UI；MVP 根据已批准字形制作 400/500/600 子集。
 - **Source Han Serif SC**：仅用于有语义的短中文引文、古籍名或原文对照；不得扩展成全站中文皮肤。
@@ -222,23 +222,27 @@ excluded_motifs
 - 公开正文默认横排。竖排只允许用于桌面端 4–8 个汉字的短题签或边注，移动端回到横排；英文与拼音不得旋转成伪竖排。
 - 简体、繁体与排版区域是不同维度：现代简体中文名用 `lang="zh-Hans"`；保留原貌的繁体引文按来源使用 `lang="zh-Hant"`，必要时进一步记录地区。标点、行首行尾禁则和中西混排遵循对应区域，而不是仅靠换字体处理。W3C 指出中文排版的地区差异往往大于繁简差异。参考：[W3C 中文排版需求](https://www.w3.org/TR/clreq/)，访问于 2026-08-26。
 - 中文典籍连同书名号放在中文元素内，例如 `《山海经》`；内容统一为 NFC Unicode normalization。
-- 全局设置 `font-synthesis: none`；Source Serif 4 使用 `font-optical-sizing: auto`。
+- 全局设置 `font-synthesis: none`。当前 Source Serif 4 落库为无 `opsz` 轴的 static text faces，不声明 `font-optical-sizing: auto`；未来只有切换到经审校的 optical/variable face 后才按真实轴启用。
 - Hero weight 仅在 400–600 之间；tracking 仅在 `-0.03em` 至 `0.04em`；字号偏离品牌基准最多 ±10%。
 
-建议 fallback 按语言与角色分离：
+建议 fallback 按语言与角色分离。页面、模板和组件只消费稳定角色 token；具体上游字体通过独立 `@font-face` 文件映射为项目内部 CSS family alias：
 
 ```css
---font-display: "Geist Sans", Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
---font-story: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
---font-zh-display: "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+--font-display: "Mythic Display", Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+--font-story: "Mythic Story", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+--font-zh-display: system-ui, sans-serif;
+--font-zh-hans-display: "Mythic Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+--font-zh-hant-display: "Mythic Han Sans TC", "Noto Sans CJK TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
 --font-zh-text: "Mythic Han Serif", "Noto Serif CJK SC", "Songti SC", STSong, SimSun, serif;
 ```
+
+`Mythic Display` / `Mythic Story` 是 CSS 映射层，不是对未修改上游字体二进制的改名声明；Adobe Source 系一旦实际子集化、实例化或转换，仍按 OFL RFN 要求在字体内部使用不含 `Source` 的衍生家族名。上游替换只能修改字体资产、许可证/来源记录、`font-assets.json` role/alias/registry 映射、独立 `@font-face` 和经实测的 metrics override；不得修改页面模板、内容、Collection 主题、组件 API 或字体门禁代码。业务 CSS 不得出现 Geist、Source Serif 或 Source Han 的具体 family 名。
 
 加载规则：
 
 - 自托管 WOFF2，不让用户浏览器运行时请求 Google Fonts 或其他字体 CDN。
-- 所有页面最多 preload Geist Sans Roman；Article 路由再按需要 preload Source Serif 4 Roman，Italic 延后加载。
-- 不 preload 完整 CJK 变量字体。MVP 根据已批准内容制作 400/500/600 中文子集，并在构建时检查缺字。
+- 所有页面只 preload display Roman；Article 路由再按需要 preload story Roman 400，Semibold 与真实使用的 Italic 按命中延后加载。preload URL 只能从中央 registry 取得，不得在模板硬编码具体上游文件名。
+- 不 preload 完整 CJK 变量字体。MVP 先核定中文文本的 Hans/Hant 标记，再为实际使用分别制作所需 SC/TC 子集并在构建时检查缺字；工具或 locale 证据未闭合时继续使用明确的 system fallback，不落全量字体。
 - Source 系列许可证包含 Reserved Font Name；如果实际修改或子集化字体，必须按 OFL 重命名衍生字体、保存版本、来源、校验值与许可证。
 - 使用 `font-display: swap`；字体确定后实测 `size-adjust` 和各 metrics override，不凭经验填写。
 

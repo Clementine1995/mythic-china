@@ -1,0 +1,11 @@
+claimId: claim-chinese-underworld-song-court-painting
+entryId: chinese-underworld-guide
+claimType: historical
+evidenceContext: historical-tradition
+statement: A Southern Song painting dated before 1195 depicts one of the Ten Kings assisted by a scribe and officials while demons punish the wicked below.
+certainty: verified
+sourceLinks:
+  - sourceId: source-met-ten-kings-hell-44509
+    role: object-record
+    locator: Overview and object information
+    note: Supports the date, set identity, court hierarchy, and depicted actions in this specific scroll.

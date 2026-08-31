@@ -1,0 +1,15 @@
+claimId: claim-zhong-kui-healing-dream-legend
+entryId: zhong-kui
+claimType: tradition
+evidenceContext: historical-tradition
+statement: Current museum interpretations repeat a legend in which a Tang emperor recovered after dreaming that Zhong Kui destroyed or consumed a harmful demon, after which Zhong Kui's portrait was commissioned or promoted.
+certainty: verified
+sourceLinks:
+  - sourceId: source-met-zhong-kui-bamboo-2008-636
+    role: object-record
+    locator: Overview
+    note: Supports the museum's bounded summary of the Tang-emperor healing dream associated with the demon-queller tale.
+  - sourceId: source-nmaa-zhong-kui-lunar-new-year
+    role: reference
+    locator: Zhong Kui legend
+    note: Supplies the fuller modern museum retelling; this supplementary source is not treated as a primary Tang account.

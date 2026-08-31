@@ -20,11 +20,18 @@ const hasBody = Boolean(entry.body?.trim());
 const hasChineseIdentity = entry.data.nameZh !== null;
 const entryTypeLabel =
   entry.data.entryType.charAt(0).toUpperCase() + entry.data.entryType.slice(1);
+const factCheckedLabel = entry.data.lastFactCheckedAt
+  ? new Intl.DateTimeFormat("en-US", {
+      dateStyle: "long",
+      timeZone: "UTC",
+    }).format(new Date(`${entry.data.lastFactCheckedAt}T00:00:00Z`))
+  : null;
 ---
 
 <SiteLayout
   title={entry.data.title}
   description={entry.data.summary ?? undefined}
+  preloadStoryFont
 >
   <article
     class:list={[
@@ -80,6 +87,22 @@ const entryTypeLabel =
       )
     }
 
+    <div class="entry-attribution page-shell">
+      <p>
+        By <span>Mythic China Editorial</span>
+      </p>
+      {
+        entry.data.lastFactCheckedAt && factCheckedLabel && (
+          <p>
+            Fact checked{" "}
+            <time datetime={entry.data.lastFactCheckedAt}>
+              {factCheckedLabel}
+            </time>
+          </p>
+        )
+      }
+    </div>
+
     <div class="entry-reading page-shell section-space">
       {
         entry.data.opening.length > 0 && (
@@ -124,7 +147,10 @@ const entryTypeLabel =
                   </p>
                   <h3>{source.data.title}</h3>
                   {source.data.titleZh && (
-                    <p class="source-list__chinese-title" lang="zh-Hant">
+                    <p
+                      class="source-list__chinese-title"
+                      lang={source.data.titleZhLang}
+                    >
                       {source.data.titleZh}
                     </p>
                   )}

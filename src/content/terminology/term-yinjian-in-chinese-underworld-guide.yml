@@ -1,0 +1,15 @@
+termId: term-yinjian-in-chinese-underworld-guide
+entryId: chinese-underworld-guide
+hanzi: 阴间
+pinyin: yīnjiān
+sourceContext: Collection title, Entry identity, and the guide's broad label for the realm of the dead
+chosenEnglish: the underworld
+firstUseGloss: yīnjiān (阴间), a broad term for the realm of the dead
+alternativesRejected:
+  - hell
+  - Diyu
+rationale: Underworld preserves the broad lexical scope and avoids making eternal punishment or one fixed court system part of every use; Diyu is a different Chinese term and is not used as an automatic synonym.
+sourceIds:
+  - source-moe-yinjian
+  - source-afe-ten-magistrates-underworld
+reviewStatus: source-checked

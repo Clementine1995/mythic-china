@@ -1,0 +1,15 @@
+claimId: claim-chinese-underworld-ritual-and-rebirth
+entryId: chinese-underworld-guide
+claimType: tradition
+evidenceContext: historical-tradition
+statement: In the ten-magistrate model described by the cited sources, judgment is part of a passage toward rebirth, and mourning or funerary rites can be directed toward helping the deceased through that passage.
+certainty: verified
+sourceLinks:
+  - sourceId: source-afe-ten-magistrates-underworld
+    role: scholarship
+    locator: The Soul's Journey Through the Underworld Realm; The Tenth Court of Hell
+    note: Supports the connection among courts, ritual assistance, non-eternal punishment, and rebirth in this bounded model.
+  - sourceId: source-met-ten-kings-hell-44509
+    role: object-record
+    locator: Overview
+    note: Supports the timed court sequence and its stated movement toward transmigration in this object record.

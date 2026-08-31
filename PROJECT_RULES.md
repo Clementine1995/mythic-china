@@ -4,7 +4,7 @@
 
 本文件保存 Mythic China 特有、违反后会破坏内容可信度、资产可追溯性、静态架构或读者体验的红线。通用授权边界见 `AGENTS.md`，工程风格见 `STYLE.md`，执行命令见 `DEV_WORKFLOW.md`。
 
-当前已完成 M2 静态工程、内容 Schema、内容图校验与自动门禁；下列规则继续作为整个项目的目标合同生效。M2 范围内红线已经落为 Schema、静态检查或自动化测试，M3–M7 的资产、生产页面、外部服务与发布门禁仍须在 `001-mvp-foundation` 关闭前逐步落地，不能仅靠人工记忆。
+当前已完成 M2、M3 与 M4-U1/U2/U3/U4A；静态工程、内容与视觉 Schema、内容/视觉图校验、current resolver、review 输出及 public 纯 builder 的适用红线已经落为 Schema、静态检查或自动化测试。M4-U5、M4-U4B 以及 M5–M7 的外部服务与发布门禁仍须在 `001-mvp-foundation` 关闭前按需求逐步落地，不能仅靠人工记忆。
 
 ## 项目定位
 

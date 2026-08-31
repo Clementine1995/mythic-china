@@ -1,0 +1,15 @@
+termId: term-zhong-kui-demon-queller
+entryId: zhong-kui
+hanzi: 钟馗
+pinyin: Zhōng Kuí
+sourceContext: Entry title and first identifying use in the article body
+chosenEnglish: Zhong Kui
+firstUseGloss: Zhong Kui (钟馗, Zhōng Kuí), the demon queller
+alternativesRejected:
+  - Chung Kuei
+  - translated personal name
+rationale: The article preserves the established pinyin name and uses demon queller as a sourced role gloss rather than replacing the name or inventing an underworld office.
+sourceIds:
+  - source-met-zhong-kui-bamboo-2008-636
+  - source-nmaa-zhong-kui-lunar-new-year
+reviewStatus: source-checked

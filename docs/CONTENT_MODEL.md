@@ -17,9 +17,14 @@
 
 ### 0.2 M3-U3 视觉记录与加载合同
 
-- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前存在一份 approved brief 与五份 manifest 版本记录；其中四份 approved/current 分别服务 Hero、Lead、OG、Social，Hero v1 为 approved/non-current。
+- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前存在两份 approved brief（Zhong Kui 与 Chinese Underworld Collection）和五份 manifest 版本记录；其中四份 approved/current 分别服务 Zhong Kui Hero、Lead、OG、Social，Hero v1 为 approved/non-current。Project owner 已从 Collection brief 的 Git-ignored local explore 输出中选中 desktop 02/mobile 01 进入生产准备，但仍没有 asset/manifest，不产生 current 资产。
 - `src/assets/images` 只保存尺寸锁定的 repository source rendition。当前七份 approved source 均被 manifest 唯一引用并通过真实 metadata/hash、权利与人工审核门禁；Hero v1 的两份 source 作为非 current 版本历史保留。metadata registry 忽略 `.gitkeep`，但不会静默忽略其他文件；未被 manifest 唯一引用的图片、非批准扩展名、符号链接、禁入签名、超过 10 MiB 或无法读取 metadata 的文件均使构建失败。
 - Zod 负责单记录字段和局部条件；纯 visual graph validator 负责 owner/Claim/Source、brief target、asset version/current、内容 Hero 外键、路径、文件 metadata 与 inventory。resolver 只读取显式 `isCurrent`，绝不按最高 version 或文件名猜测。
+
+### 0.3 字体资产边界
+
+- 字体不是 visual Asset Manifest，也不复用 brief/production record/current resolver。自托管字体只进入 `src/assets/fonts/` 的版本目录，由 `font-assets.json` 固定 release、archive/file hash、许可证与 preload 角色；页面只通过中央 preload registry 和 CSS role token 消费。
+- 当前字体 inventory 为 4 份上游未修改英文 WOFF2 与两份许可证；CJK 文件仍为空。CJK 子集、内部 RFN 改名、字符表、cmap 和跨平台检查在其工具与语言证据闭合前保持阻断。
 
 ## 1. 编辑分类
 
@@ -41,7 +46,7 @@
 
 人物、异兽、地点、故事和指南共用一个内容集合，以 `entryType` 控制模板差异。
 
-下例只展示 Entry Schema 形状，不代表当前 `src/content/entries/zhong-kui.md` 记录；M3 完成后的真实钟馗 draft Entry 已填写视觉所需的 Source/Claim 关系，并把 `heroAssetId` 绑定到 approved/current Hero。
+下例只展示 Entry Schema 形状，不代表当前 `src/content/entries/zhong-kui.md` 记录；当前真实钟馗 Entry 已形成 `editorial-review` 内容候选，填写完整正文、Source/Claim/Terminology 与 fact-check 日期，并把 `heroAssetId` 绑定到 approved/current Hero。Project owner 已把当前编辑形态作为阶段候选接受，但内容状态仍不是 `ready/published`。
 
 ```yaml
 entryId: zhong-kui
@@ -95,10 +100,12 @@ M2 以状态递进校验代替“draft 也伪装完整”的默认值：
 | `editorial-review` | `traditionType`、开场、Quick Answer、正文草稿和至少一个真实 Source 已存在；Claim/术语关系按正文实际风险逐步补齐 |
 | `visual-review` | 满足编辑审核要求；`heroAssetId` 指向 M3 建立的逻辑 Hero 资产，唯一 current 版本为 `in-review | approved`，视觉 brief、Claim、权利、披露与 renditions 可审核 |
 | `ready` | 满足第 8 节全部编辑、证据、术语、关系、视觉与无障碍门禁 |
-| `published` | 满足 `ready`，并补齐发布日期、最后事实核查日期、公开关系与 canonical 验证 |
+| `published` | 满足 `ready`，由 Project owner 在 M6 完整本地 inventory 上明确决定可进入 public artifact，并补齐发布日期、最后事实核查日期与公开关系；它不等于已经部署、远端预览或生产上线，canonical/origin/output 仍由全局 U4B 门禁验证 |
 | `archived` | 仅从完整发布谱系进入；保留 `published` 的编辑、证据、日期和关系完整性，但退出公开静态路由 |
 
-正文门禁要求真实可见的 Markdown 内容；空白、单个或多个 HTML 注释以及未闭合的纯注释不能让 Entry 进入 `editorial-review` 或更后状态。M2 不把这项最小门禁描述成完整 Markdown 可见性分析，复杂渲染语义仍由后续真实正文模板验收。
+正文门禁要求真实可见的 Markdown 正文；空白、单个或多个 HTML 注释、未闭合的纯注释、只有空 HTML 标签或只有图片的 body 不能让 Entry 进入 `editorial-review` 或更后状态。带读者可见文本的普通 Markdown 或 raw HTML 可以通过最小文本门禁；ARIA、CSS 隐藏与完整渲染语义不由正则模拟，继续由真实页面的 U5 验收负责。普通正文不得用远端图片、iframe、object/embed、form 或远端 CSS 绕开 Asset Manifest、权利和 output policy。
+
+`publishedAt` 表示 Project owner 批准的目标公开日期；为形成 M6 protected preview 候选，它可以是尚未到达的未来日期，但不得用构建日、预览日或部署日代填。`updatedAt` 只表示目标公开当日或之后的真实公开修改日期，不能早于 `publishedAt`。目标日期变化会使受影响页面、SEO 与 release artifact 证据失效并要求重验；构建时间不是内容更新时间。Schema、独立 SEO builder 与 release artifact builder 都必须分别阻断倒序日期。
 
 Zod 负责一条记录的字段与同记录条件，独立内容图校验器负责跨对象存在性、状态矩阵、唯一性和循环展开保护；不得在页面模板中用默认值掩盖失败。
 
@@ -140,6 +147,7 @@ sourceId: source-example
 sourceType: primary-text
 title: Example Source Title
 titleZh: 示例来源
+titleZhLang: zh-Hans
 authorOrOrganization: Example Author
 publicationOrEdition: Example edition
 editionBasisOrObjectId: Qing woodblock edition / museum object number
@@ -167,6 +175,8 @@ notes: Why this source is used and its limitations.
 - `modern-adaptation`
 
 网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。M2 的最小可追溯组合是：`primary-text` 至少有版次/底本身份；`scholarship` 与 `modern-adaptation` 有作者/机构及出版物、年份或 URL 身份；`museum-or-library` 与 `fieldwork-or-community-archive` 有负责机构及对象号、档案/版次或 URL 身份。`translation` 记录必须填写 `translator`、`publicationOrEdition`、`pageOrSection`、`rightsStatus` 与 `rightsUrl`，任何填写了 `rightsUrl` 的记录也必须填写 `rightsStatus`。数字影像同样需要两项权利信息，但 M2 Source 尚无可靠的数字影像判别字段，因此不得凭现有字段臆测并自动放行；首次接入此类记录前先扩充合同与 Schema。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。
+
+`Source.language` 描述整份来源，不自动描述可选 `titleZh` 的正字区域。`titleZhLang` 与 `titleZh` 成对必填，受控值为 `zh | zh-Hans | zh-Hant`：generic `zh` 明确表示已知为中文但正字区域尚未核定，不是脚本猜测或 fallback。当前只有教育部词典记录自身能证明 `titleZhLang: zh-Hant`；四条英文馆藏记录保持 `zh`，不得按字符外形猜 Hans/Hant。`editorial-review` 可保留 generic `zh`；`ready | published | archived` Entry 引用的 Source 必须先经来源核对/双语审校改为精确 `zh-Hans | zh-Hant`，内容图会拒绝绕过。
 
 M2 的 Entry/Source 日期字段只接受带引号的 ISO calendar date 字符串 `"YYYY-MM-DD"`。未加引号的 YAML 日期会被 loader 解析为 `Date`，时间戳还可能因时区跨日；Schema 一律拒绝 `Date` 与 timestamp，不做静默截断或日期迁移。
 
@@ -514,10 +524,11 @@ draft
 进入 `ready` 前必须满足：
 
 - 英文编辑、双语术语审核与事实核查完成。
+- Entry 引用的中文 Source 标题已完成来源核对/双语审校，`titleZhLang` 不再保留 generic `zh`。
 - traditionType、sourceIds、claimIds、适用的 terminologyRecordIds、related IDs 和 lastFactCheckedAt 完整。
-- 所有已发布事实性文化主张都有可定位证据；`provisional` Claim 未作为事实发布，`disputed` Claim 已在页面显示分歧。
+- 所有拟公开的事实性文化主张都有可定位证据；`provisional` Claim 未作为事实发布，`disputed` Claim 已在页面显示分歧。
 - 所有公开视觉资产都能解析到唯一 current approved manifest 版本，manifest、导出物、真实尺寸与 SHA-256 一致。
 - alt / 空 alt、适用的 caption、credit、AI disclosure、权利状态与生产方式一致；若后续需求引入商业入口，其披露还须通过第 7 节门禁。
-- 页面在移动、键盘、减弱动效和无 JavaScript 条件下通过验收。
+- 每个待提升 Entry / Collection 及其适用页面都已在 noindex review 直达页完成适用的 M4-U5 候选预检，包括移动、键盘、减弱动效、无 JavaScript、字体/图片失败和视觉检查；Explore/Collections 此时可以保持真实空状态。首个纵切片只是批量扩展前的首次预检，M6 新对象不得借用旧对象的证据；这些预检只支持各自内容进入 `ready`，不关闭完整 M4-U5。
 
-状态变更不允许靠修改一个字段绕过验证；M2 已建立本地工程门禁与命令，实际预览和发布仍须在对应里程碑开始前继续补齐 `DEV_WORKFLOW.md` 并取得独立授权。
+状态变更不允许靠修改一个字段绕过验证。M5/M6 完成 6 篇 Entry、至少 2 个 Collection 与全部资产后，Project owner 才在完整 inventory 上逐项作出 `published` 决定并批准目标公开日期；随后必须在真实非空 Home/Explore/Collections 与受影响动态页上最终关闭 M4-U5，再确认 origin 并进入 U4B。M2 已建立本地工程门禁与命令，实际服务、远端预览和发布仍须在对应里程碑开始前继续补齐 `DEV_WORKFLOW.md` 并取得独立授权。

@@ -6,7 +6,6 @@ import {
   readFileSync,
   readSync,
   readdirSync,
-  realpathSync,
 } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import process from "node:process";
@@ -104,16 +103,16 @@ function hasForbiddenWeightSignature(relativePath: string): boolean {
 }
 
 describe("M2 application and M3 U5 production boundaries", () => {
-  it("runs tests under the fixed project Node identity", () => {
-    const expectedNode = realpathSync.native(
-      "D:\\Program Files\\nvm\\v24.16.0\\node.exe",
-    );
+  it("runs tests within the portable project Node range", () => {
+    const [major, minor] = process.versions.node.split(".").map(Number);
+    const runtimeGuard = readProjectFile("scripts/verify-runtime.mjs");
 
-    expect(realpathSync.native(process.execPath).toLowerCase()).toBe(
-      expectedNode.toLowerCase(),
-    );
-    expect(process.version).toBe("v24.16.0");
+    expect(major).toBe(24);
+    expect(minor).toBeGreaterThanOrEqual(16);
     expect(readProjectFile(".node-version").trim()).toBe("24.16.0");
+    expect(runtimeGuard).toContain("process.versions.node");
+    expect(runtimeGuard).not.toContain("process.execPath");
+    expect(runtimeGuard).not.toMatch(/[A-Z]:\\\\/u);
   });
 
   it("pins the package manager, engines, and direct dependency whitelist", () => {
@@ -208,6 +207,7 @@ describe("M2 application and M3 U5 production boundaries", () => {
       .sort();
 
     expect(visualFiles).toEqual([
+      "briefs/brief-chinese-underworld-hero-primary-v1.yml",
       "briefs/brief-zhong-kui-visual-package-v1.yml",
       "manifests/.gitkeep",
       "manifests/asset-zhong-kui-hero-primary-v1.yml",

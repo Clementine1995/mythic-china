@@ -1,0 +1,11 @@
+claimId: claim-chinese-underworld-transitory-realm
+entryId: chinese-underworld-guide
+claimType: interpretation
+evidenceContext: historical-tradition
+statement: In the popular-religious model summarized by Myron L. Cohen, the Chinese underworld is a transitory realm of judgment rather than a place of eternal punishment for a permanent, unchanging self.
+certainty: verified
+sourceLinks:
+  - sourceId: source-afe-ten-magistrates-underworld
+    role: scholarship
+    locator: The Soul's Journey Through the Underworld Realm
+    note: Supports this bounded description of the model presented in the source, not a universal claim about every Chinese tradition.

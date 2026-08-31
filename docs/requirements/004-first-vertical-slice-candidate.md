@@ -1,0 +1,183 @@
+# 首个纵切片编辑/视觉候选合同
+
+## 0. 文档职责与当前状态
+
+本文负责：把 *The Chinese Underworld* 的首个 Collection、首发 Guide、Featured Entry、Collection Hero 方向和生产字体方案推进到 Project owner 可人工判断的候选检查点。
+
+本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策已单独授权 Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又选中 desktop 02/mobile 01 进入生产准备。构图选择不扩展到 CJK 工具依赖、publication rights/五审、exact-canvas master、visual manifest、状态提升或发布。
+
+| 维度 | 当前状态 | 证据或阻塞项 |
+| --- | --- | --- |
+| 需求状态 | Project owner 阶段性通过；Hero 构图已选中 | 2026-08-30，Project owner 接受当前内容、署名/日期、模板排版与 CSS 无图 Hero，并选择 Hero A、接受字体方案；2026-08-31 又选中 desktop 02/mobile 01 进入生产准备。资产批准与正式字体页面效果仍未闭合 |
+| 内容状态 | `editorial-review` | 两篇 Entry 有正文、80–120 词摘要、来源、Claim、source-checked 术语与 fact-check 日期；Collection 为 `editorial-review` |
+| 视觉状态 | Hero A brief `approved`；desktop 02/mobile 01 已选中 | desktop 01 已预筛退回；所选两图仍只是 Git-ignored local explore 输出。Collection `heroAssetId` 仍为 `null`，没有 exact-canvas master、production record、manifest 或 current asset |
+| 字体状态 | 英文候选已落库；CJK 阻断 | 4 份上游未修改 WOFF2、OFL、hash inventory、稳定 alias/token 和分层 preload 已接线；CJK 无子集文件，正式字体浏览器验收未执行 |
+| 发布状态 | 未授权 | 0 published Entry / 0 published Collection；无 public dist、Vercel 项目或部署 |
+
+## 1. 目标、不做范围与完成标准
+
+### 1.1 目标
+
+1. 让 Project owner 能逐项判断字体、Collection Hero、Collection 模板和两篇首发内容，而不是面对空占位或已越权的“成品”。
+2. 让文化陈述从 Entry 正文回到 Source/Claim/Terminology，并明确哪些是事实、编辑选择和未决风险。
+3. 在 M4-U5 前建立可执行门禁：brief 与生产授权不能替代具体字体/成图人工批准；内容状态提升和 public build 仍须各自满足后续合同。
+
+### 1.2 初始候选准备不做范围（历史边界）
+
+以下条目描述进入第一次 Project owner 检查点前的边界；后续已获授权的例外与结果见第 7–8 节：
+
+- 初始批次未增加第三方依赖，未执行字体工具或外部生成服务。
+- 初始批次未把研究候选图、字体二进制、production master 或探索废图写入仓库。
+- 初始批次未批准 Collection Hero brief，也未创建虚假 asset ID 或 manifest。
+- Entry/Collection 始终未提升到 `visual-review`、`ready` 或 `published`。
+- 初始批次未启动 dev/preview/browser 服务；后续浏览器评审获得单独授权并已停止服务。
+- public release 下限不变：M4-U4B 仍只建立本地 public 构建能力；M6/M7 的内容量与发布门禁不前移。
+
+### 1.3 候选检查点完成标准
+
+- 两篇 Entry 都通过 Content Layer editorial-review 条件和关系图校验。
+- 每个正文事实可由正文附近链接和结构化 Claim 回到真实来源；无“AI 补齐”的文化事实。
+- Terminology 只到 `source-checked`，等待双语人工批准。
+- Collection Hero 有一份已批准方向、但未批准任何成图的 brief；verified/inferred/invented、权利与排除项分开。
+- Collection 模板只具备未来独立 approved Hero 的插槽；当前仍显示无图候选，不借用 Zhong Kui Hero。
+- 页面可见 `By Mythic China Editorial` 与 fact-check 日期，但没有 publication date。
+- 固定运行时完整工程门禁与 Markdown/UTF-8/链接/占位符/diff 门禁在每次实质修改后重跑；英文正式字体页面效果和 Hero 成图另等人工评审。
+
+## 2. 已确认事实
+
+- 当前 HEAD、`main` 与未 fetch 的本地 `origin/main` 在接管时均为 `e94eacaad989652c7f71ae50276652cc3f54997a`；工作树已有 M4-U4A 与治理文档未提交改动，本批次不覆盖或丢弃它们。
+- 本批次开始前真实 inventory 为 0 published Entry、0 published Collection、0 Collection Hero asset、0 font file；后续英文字体单元新增 4 份 WOFF2，但 published 与 Collection Hero asset inventory 仍为 0。
+- Zhong Kui 已有 approved/current Entry Hero v2；该资产属于 Entry，不能作为 Collection Hero。
+- Collection Hero brief 现已 approved，但发布仍必须另有自己的 asset/manifest、publication rights 与五类人工审核；批准 brief 与 local explore 候选都不满足该条件。
+- 现有 M4 review build 为 noindex 内部评审输出；public runner、Layout/route/endpoint 接线、public dist 和 Vercel 身份仍不存在。
+
+## 3. 编辑候选
+
+### 3.1 *A Guide to the Chinese Underworld*
+
+- 定位：给非专业读者提供一个有边界的入口，不制作“十八层地狱大全”或跨时期总地图。
+- 采用的窄模型：Columbia Asia for Educators 所述的十位审判者、官僚化法庭、非永恒惩罚、仪式援助与轮回；The Met 南宋《十王图》只支持该对象中的王、书记、官员、判决和惩罚层级。
+- 翻译选择：`阴间 / yīnjiān` 首次释为 “the underworld”；拒绝用 “hell” 覆盖全部语义，也不把 `Diyu` 当作自动同义替换。
+- 保留边界：不宣称一套自古统一的中国阴间体系；不指定未核实的法院、道路、刑罚、神名或仪式。
+
+### 3.2 *Zhong Kui, the Demon Queller*
+
+- 定位：通过具体馆藏比较保护者、驱鬼者、鬼从首领和文雅士人的不同表达。
+- 采用事实：对象记录支持有胡须/袍服、鬼从、入鞘佩剑、节令保护与馆方复述的治病梦传说。
+- 保留边界：梦故事明确写作 legend；当前没有满足项目 earliest-known 双重证据门禁的原典与独立研究，因此 `earliestKnownSourceId/ClaimId` 保持 `null`。
+- Collection 关系：钟馗是本站策展的 threshold figure，不是十王之一、阴间统治者或跨传统固定官员。
+
+### 3.3 可见署名与日期
+
+- 候选 byline 固定为 `Mythic China Editorial`，与现有 Organization 作者身份一致，不虚构个人作者。
+- 页面显示 `lastFactCheckedAt`，标签为 `Fact checked`；两篇候选日期为 `2026-08-30`。
+- `publishedAt` 与 `updatedAt` 保持 `null`；当前日期不是 publication date。
+- M6 若逐项批准 `published`，还须明确目标公开日期；protected preview 可使用未来日期，但不得把构建日、预览日或部署日代填为 `publishedAt`。目标日期变化后重验受影响页面、SEO 与 release artifact。
+- Project owner 若修改事实，应在实际完成复核后更新 `lastFactCheckedAt`，不得把评审日期自动当作事实核查日期。
+
+## 4. Collection Hero 与模板候选
+
+### 4.1 候选 A：原创抽象门槛（Project owner 已选择）
+
+- brief：`brief-chinese-underworld-hero-primary-v1`，Project owner 于 2026-08-30 批准方向并授权下一候选生产任务；2026-08-31 又选中 desktop 02/mobile 01 的构图进入生产准备。brief/构图选择仍不等于资产批准。
+- 核心：从可读的入口下行到两三层远景法庭，以路径、记录桌和小型官员轮廓表达“审判是通往轮回的过程”。
+- 不做：不画钟馗、不指定阎王、不展示酷刑、不绘制十殿/十八层地图、不写伪汉字。
+- 优点：能建立 Collection 自己的阈限/深度视觉，不把单件文物误装成整个传统，也不与 Zhong Kui 人物 Hero 竞争。
+- 风险：所选候选已用 OpenAI ImageGen 生成，且没有上传馆藏或其他第三方参考图；但当前工具条款、账户 authority、publication rights、exact-canvas master 与五类人工审核仍未闭合，不能写成 production asset。
+
+当前 local explore inventory：
+
+- desktop candidate 01：`1672×941`，已因左侧安全区过亮和无来源灯具预筛退回；
+- desktop candidate 02：`1672×941`，SHA-256 `64f51d3697d2ca6e7e1e7c253906bbb5dca39f5541aa6dacd13f2dd7ae100866`，Project owner 于 2026-08-31 选中；
+- independently composed mobile candidate 01：`1122×1402`，SHA-256 `e891e2abbf71c4c03624e0d8ba0eeb59852e39500b630fc16b07923756dbb35c`，Project owner 于 2026-08-31 选中。
+
+三张图和真实 prompt/input/hash metadata 只在 Git-ignored `.local/visual-production/explore/chinese-underworld/hero-a-v1-review/`；这些 native 输出不是 `3200×1800` / `1600×2000` master。
+
+### 4.2 候选 B：公共领域对象直接复用（后备路径）
+
+- 来源候选：The Met `Ten Kings of Hell`, object 30.76.293，页面标注 Public Domain/Open Access。
+- 约束：必须作为“南宋具体对象”清楚 caption/credit，不得当作阴间真实照片或唯一标准图；移动裁切不能删除对象语境或制造新叙事。
+- 优点：来源、年代与权利边界清楚，减少生成式视觉风险。
+- 风险：竖幅对象适配宽 Hero 的裁切空间有限，且容易让读者把一件佛教绘画误读成全 Collection 的唯一图解。
+- 当前状态：仅作比较路径；未下载、未建立资产记录、未获选择。
+
+### 4.3 模板候选
+
+- Collection 路由只在 `heroAssetId` 非空时调用现有 approved page-asset resolver，并要求 `ownerType: collection`、当前 approved、`hero/primary`、informative accessibility。
+- 模板有独立 `ManifestHeroPicture` 插槽与 caption/credit/disclosure；`heroAssetId: null` 时保留现有抽象 surface。
+- 该代码能力不把任何图片变成候选或批准资产，也不改变 public release projection。
+
+## 5. 正式字体、许可证与子集方案
+
+### 5.1 2026-08-30 核对的上游候选
+
+| 角色 | 上游版本候选 | 许可/RFN 事实 | 本轮决定候选 |
+| --- | --- | --- | --- |
+| 英文 Display/UI | Geist Sans v1.7.2 | OFL 1.1；当前 OFL 版权头未声明 Reserved Font Name | 已从官方 release 落一份未修改 Roman variable WOFF2；全站只 preload 这一份 |
+| 英文正文 | Source Serif 4 v4.005R | OFL 1.1；Reserved Font Name 为 `Source` | 已落官方未修改 Roman 400/600 与 Italic 400；Entry 只 preload Roman 400，Semibold/Italic 按真实命中加载 |
+| 中文 Display/UI | Source Han Sans 2.005R SC/TC 候选 | OFL 1.1；Reserved Font Name 为 `Source` | 先闭合中文标题 Hans/Hant 来源与字符表，再分别生成所需 SC/TC 子集；修改版 primary family 使用 `Mythic Han Sans SC/TC`，当前仍为 system fallback |
+| 短中文引文 | Source Han Serif 2.003R SC | OFL 1.1；Reserved Font Name 为 `Source` | 首个纵切片没有需 serif 的中文原文，先批准家族方向但不落文件；首次真实使用时再生成 400/600 子集并命名 `Mythic Han Serif` |
+
+版本号是本次查询事实，不是自动升级策略。英文资产已固定到 `src/assets/fonts/font-assets.json` 的 release/tag、archive URL、SHA-256、文件 hash 与许可证；不得静默追随 latest。Source Serif 上游 release 未公布 archive digest，inventory 明确把该值标为本地计算，不冒充上游校验值。
+
+### 5.2 子集、命名与替换缝
+
+1. 字符输入只能来自 Project owner 已批准进入 public candidate 的真实内容与固定 UI 字符；研究笔记、废稿和未来假想词不进入集合。
+2. CJK 子集必须按已核定的 `zh-Hans` / `zh-Hant` 分开字符表，覆盖真实内容、所需中文标点和显式 fallback 测试串；构建门禁比较渲染文本、批准字符表与 font cmap，缺字即失败。`titleZhLang` 与 Source `titleZh` 成对，四条馆藏中文标题的 script 目前缺来源记录，不得按字形猜测；它们明确保存为 generic `zh`，内容图机器阻断引用它们的 Entry 提升到 `ready | published | archived`。
+3. 生成子集、实例化 weight 或转换格式均视为修改。由于 Adobe 的 OFL 声明保留 `Source`，修改版 primary family 不使用 `Source` 名称；许可证、版权、原始上游、修改步骤和生成日期写入 `FONTLOG`。
+4. Geist 和 Source Serif 优先使用上游直接提供的 WOFF2，不做不必要子集；若后续性能要求必须修改，也要重新评估 RFN、改名和 FONTLOG。
+5. 每个实际分发字体随仓库保存适用 OFL 全文与版权声明；CSS 使用 `font-display: swap`、`font-synthesis: none`，`size-adjust`/metrics override 只在实测后填写。
+6. 页面、模板和组件只能消费 `--font-display`、`--font-story`、`--font-zh-display`、`--font-zh-text` 等稳定角色 token，不得硬编码 Geist、Source Serif 或 Source Han 上游名称。
+7. `@font-face` 使用项目内部 CSS family alias 映射具体上游文件；替换字体时只更新字体资产、许可证/来源记录、alias 声明与经实测的 metrics，不修改页面模板、内容或 Collection 主题。内部 alias 不是对上游二进制的改名声明；实际修改/子集字体仍必须遵守 RFN 改名合同。
+
+### 5.3 加载候选
+
+- 所有页面：preload display Roman；具体上游 URL 只由中央 registry 提供，Source Han 字体不 preload。
+- Entry 页面：按实际正文需要额外 preload story Roman 400；Semibold、Italic 和 CJK 按 CSS 命中加载。
+- CJK 使用窄 `unicode-range` 与本地 fallback 链；不加载完整 CJK 变量字体。
+- 每个 WOFF2 的文件大小、首次渲染、CLS、命中字形、慢加载和禁用字体表现必须记录实际证据，不预填预算通过。
+
+### 5.4 字体落库授权与依赖停止点
+
+Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，并授权下一本地候选任务继续；字体必须通过稳定角色 token 与内部 family alias 保持可替换。该授权允许核对并下载已确认的官方上游文件、写入批准字体资产/许可证、更新 CSS 与执行匹配风险的本地验证，但不自动授权安装字体工具或其他依赖。本机若缺少可信子集工具，CJK 文件继续阻断，不安装依赖，也不用不透明在线子集服务代替。
+
+## 6. `ready` 候选与 M4-U5 预检前门禁
+
+| 门禁 | 当前事实 | 进入下一状态所需 |
+| --- | --- | --- |
+| 内容编辑 | 两篇为 `editorial-review` | Project owner 逐篇接受标题、开头、摘要、正文、来源边界与 Collection 关系 |
+| 事实核查 | 当前来源与 Claim 已本地闭合 | 人工核对每个正文主张/locator；任何新增事实先新增来源，不让 AI 补空 |
+| 双语术语 | 两份 Terminology 为 `source-checked` | 具名 bilingual reviewer 把适用记录提升为 `bilingual-approved` |
+| Source 标题 locale | 教育部词条为 `zh-Hant`；四条馆藏标题因来源未核定而明确为 generic `zh` | 经来源核对/双语审校写入精确 `zh-Hans | zh-Hant`；内容图已机器阻断 generic `zh` 被 ready lineage 引用 |
+| Collection Hero | Hero A brief 已批准，desktop 02/mobile 01 构图已选中，Hero ID 为 null | 闭合工具/账户/publication rights、生成并核验 exact-canvas master；文化、权利、视觉、无障碍、语言五类审核后才可建立 approved/current 资产 |
+| Guide Hero | Guide `heroAssetId` 为 null | `visual-review | ready | published` 前必须有自己的 Hero；不得借用 Collection 或钟馗 Hero |
+| 字体 | 4 份英文 WOFF2、OFL/hash、alias/token 与 preload 已接线；CJK 仍为 system fallback | 完整工程门禁通过后由 Project owner 看正式字体页面；CJK 仍需获准工具、Hans/Hant 来源/字符表、cmap 与跨平台浏览器门禁 |
+| 页面 | review-only；系统 fallback 的三档视口已通过；Collection 当前无图 | 新英文字体与最终 Hero 接线后再做 200% zoom、键盘、reduced motion、慢字体、图片失败、裁切和跨平台检查 |
+| 状态 | 0 published | Entry 到 `ready` 仍需 Hero、完整 Claim/fact-check、双语术语、Source 标题 locale 与 noindex U5 候选预检；Collection 到 `ready` 需自己的 Hero 且只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
+
+## 7. Project owner 决策记录
+
+2026-08-30，Project owner 在真实本地 review 页面可见后确认“目前来看可以”，随后明确：
+
+1. 当前两篇 Entry、Collection、`Mythic China Editorial` byline、可见 `Fact checked` 日期、页面模板排版与 CSS 无图 Collection Hero 作为阶段性候选通过；不把该反馈扩大为 `ready` / `published` 或 M4-U5 通过。
+2. Collection Hero 选择候选 A：原创抽象门槛；批准 brief 并授权候选生产任务，但任何生成图仍须另行人工审核。该任务现已形成 desktop 02 与 mobile 01 两张首选待审图。
+3. 接受四个字体家族/版本方向、Adobe 修改版改名与 Source Han Serif 延迟落库，并新增“字体必须保留可替换空间”的硬门禁。
+4. 授权下一本地候选任务继续，并授权停止本次 preview；不授权依赖安装、Git 写入、Vercel、部署或发布。
+
+2026-08-31，Project owner 明确“确认采用”所展示的 desktop 02 与 mobile 01：
+
+5. 两张构图进入生产准备；本轮未提出定向修图要求。mobile 右下可见纹理继续留在后续视觉五审中观察，不据此推断任何文化含义或提前写成批准细节。
+6. 本次确认只选择 local composition，不自动确认当前工具条款、账户 authority、publication rights、五类审核、exact-canvas master、alt/caption/disclosure、manifest、Collection 绑定、状态提升或 public use。
+
+## 8. 本批次验证与收口记录
+
+- 2026-08-30 已按 `DEV_WORKFLOW.md` 使用固定 Node 24.16.0、Corepack 与 pnpm 11.22.0 执行完整 `pnpm run check`：Prettier、ESLint、19 个测试文件/160 项测试、Astro check（65 个文件，0 error、0 warning、0 hint）、7 页 review build 与输出 verifier 全部通过。
+- 输出审计为 7 个 `noindex, nofollow` 页面、14 个 Zhong Kui Hero v2 AVIF/WebP、4 个按 inventory SHA-256 核验的 WOFF2，零 public canonical/OG/JSON-LD/XML、零远端字体资源与零客户端 JavaScript；Collection 没有借用 Entry Hero。
+- 21 份 Markdown 的严格 UTF-8、相对链接、原模板占位符与 `git diff --check` 通过；`git diff --check` 仅报告现有 Windows 行尾转换提示，没有 whitespace error。
+- 获单独授权后，本地 preview 在固定 Node 24.16.0 下确认由 Astro 7.2.8 监听 `127.0.0.1:4321`；浏览器复核 Home、Collection、两篇 Entry 的 1440×900、768×900、390×844 与 411×651 视口，未发现横向溢出、破图或控制台错误/警告。两篇 Entry 的 byline/fact-check 日期可见，Collection 保持 0 图片且没有借用 Zhong Kui Hero。
+- 移动菜单点击开启与可见焦点通过；当前浏览器控制面未能可靠证明原生 `summary` 的真实 Enter/Space 全链，因此保留为 M4-U5 人工键盘项，不误报为页面缺陷或通过。
+- 浏览器证据只验证当前系统 fallback；正式字体、慢加载、真实 200% 缩放、reduced motion、跨平台 fallback 与 Collection Hero 成图仍未验证。
+- 验收后按 Project owner 单独授权停止 preview；PID `22316` 已退出，`127.0.0.1:4321` 不可达。
+- 后续候选任务已把 3 张生成输出及 trace metadata 保存到 Git-ignored `.local`；2026-08-31 的 owner decision 已在 metadata 中把 desktop 02/mobile 01 记录为 selected-for-production-prep。没有上传馆藏/历史参考图，没有创建 master、production record、manifest、repository source、Collection 绑定或 approved/current 图片。
+- 英文字体候选已从官方 release 固定 4 份未修改 WOFF2 与许可证，并通过 `font-assets.json`、中央 alias/token、`?no-inline` preload registry 和输出 hash 门禁保留可替换缝；CJK 未下载、未子集、未改名。
+- Git：不执行 add/commit/push/fetch，不创建分支或 worktree。

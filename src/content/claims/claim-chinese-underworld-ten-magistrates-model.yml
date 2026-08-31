@@ -1,0 +1,15 @@
+claimId: claim-chinese-underworld-ten-magistrates-model
+entryId: chinese-underworld-guide
+claimType: tradition
+evidenceContext: historical-tradition
+statement: One influential model organizes judgment after death through ten kings or magistrates and presents the courts through a Chinese bureaucratic framework.
+certainty: verified
+sourceLinks:
+  - sourceId: source-afe-ten-magistrates-underworld
+    role: scholarship
+    locator: The Soul's Journey Through the Underworld Realm
+    note: Supports the ten-magistrate and popular-religious bureaucracy model with an explicit Buddhist derivation boundary.
+  - sourceId: source-met-ten-kings-hell-44509
+    role: object-record
+    locator: Overview
+    note: Supports a Southern Song visual example in which kings, scribes, and officials administer judgment.

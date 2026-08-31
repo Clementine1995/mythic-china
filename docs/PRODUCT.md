@@ -2,9 +2,9 @@
 
 ## 0. 文档状态
 
-- 状态：草拟；设计体系、首发主题、M2 技术/内容方向与 M3 资产管线已确认，M2 本地实施及 M3-U1–U5 钟馗研究、approved brief、生产资产、人工审核与构建验证已完成；M4 及其余列明事项待确认。
-- 日期：2026-08-29。
-- 当前事实：用户具备 ComfyUI 等静态生图能力，暂不具备视频制作能力；本次 M3 实际采用个人且非组织管理账户下的 OpenAI ImageGen，没有使用 ComfyUI。M1 Home、Collection、Entry、Review Board、3×2 探针与字体验收页已冻结为不可发布的工程参考基线。M2 已完成本地应用、依赖、Content Layer 与工程门禁；M3 终验曾因 Hero v1 双手解剖缺陷重开，Project owner 于 2026-08-29 验收定向修正后的 Hero v2。当前版本化 inventory 为七个 production master、七份 repository source rendition、两份 production record 与五份 manifest 记录；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。中性调试页仍不是生产页面，M1 页面风格也未获批准；M3 资产批准不等于 M4 页面或整体设计批准，当前没有启动服务或发布。
+- 状态：草拟；设计体系、首发主题、M2 技术/内容方向与 M3 资产管线已确认，M2 本地实施、M3-U1–U5 以及 M4-U1/U2/U3 与 M4-U4A 已完成；首个纵切片的本地编辑/视觉/英文字体候选准备已获授权并执行，Hero desktop 02/mobile 01 已由 Project owner 选中进入生产准备。当前待闭合 Hero 权利/五审/exact-canvas 与正式字体页面人工检查；M4-U5、M4-U4B 及其余列明事项仍须按合同另行授权。
+- 日期：2026-08-31。
+- 当前事实：用户具备 ComfyUI 等静态生图能力，暂不具备视频制作能力；本次 M3 实际采用个人且非组织管理账户下的 OpenAI ImageGen，没有使用 ComfyUI。M1 Home、Collection、Entry、Review Board、3×2 探针与字体验收页已冻结为不可发布的工程参考基线。M2 已完成本地应用、依赖、Content Layer 与工程门禁；M3 终验曾因 Hero v1 双手解剖缺陷重开，Project owner 于 2026-08-29 验收定向修正后的 Hero v2。当前版本化 inventory 为七个 production master、七份 repository source rendition、两份 production record 与五份 manifest 记录；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。M4-U2 已用 7 个 noindex review 页面替换中性调试页，并获 Project owner 页面方向确认；M4-U3 已完成 published-only 探索投影，M4-U4A 已完成不接页面/output 的 public SEO 纯基础设施。两篇 Entry/Collection 编辑候选、Project owner 已选中的 Hero A desktop/mobile local composition 与四份自托管英文 WOFF2 已形成，但 Hero rights/五审/exact-canvas/资产批准、英文字体页面效果、CJK、M4-U5 预检/最终关闭、真实 published 内容、M4-U4B public build 与发布仍未完成；当前没有可复用的服务授权或远端发布环境。
 - 已确认产品方向：newsletter 只在全站 footer 提供，不在每篇末尾重复；文章末尾保留读者选题建议；ComfyUI 是可选视觉辅助，人物、传说、译名和画面依据必须先完成来源核查。
 - 已确认设计方向：全站采用“中国神话传说博物馆”体验体系——现代中性文化平台母体、每个 Collection 独立美术主题、全站统一的可信 Entry 阅读器。“博物馆”是策展与阅读隐喻，不扩展为世界神话平台，也不宣称实体馆藏或公共机构身份。国风不等于水墨、古籍或旧报纸皮肤；整页背景不足不阻断内容、导航、Schema 与阅读功能基础。
 - 已确认首发主题：第一个正式 Collection 为 `The Chinese Underworld / 中国阴间`；`Zhong Kui, the Demon Queller` 是 M1 Featured Entry 与首批重点发布入口，但不代表整个中国阴间，也不被描述为阴间统治者。
@@ -156,13 +156,13 @@ Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者�
 - 可选 1 组桌面/移动主题背景；它是非阻断的页面气氛资产，不得替代正文插图或承担唯一事实信息。
 - 2–3 张正文插图。
 - 3–5 张静态故事卡或视觉切片。
-- 1 张 Open Graph 分享图。
+- 可选 1 张用途匹配的 Open Graph 分享图；当前已确认采用 text-only Open Graph，不为每篇强制生产图片。只有页面具备权利、文化与用途审核通过的 approved/current 资产时，后续单元才可另行启用。
 - 1 个下一步阅读入口。
 - 可追溯的主张—来源记录、关键术语决策、图片披露和内部资产记录。
 
 ### 5.4 首发建议
 
-不必等待 12 篇再上线。第一个正式 Collection 已确认为 `The Chinese Underworld / 中国阴间`；M1 先以钟馗作为 Featured Entry 验证“当前关注入口 -> Collection 阅读路径 -> 可信长文”的纵切片。首批 6 篇的生产优先级候选为：
+不必等待 12 篇再上线。第一个正式 Collection 已确认为 `The Chinese Underworld / 中国阴间`；M1 先以钟馗作为 Featured Entry 验证“当前关注入口 -> Collection 阅读路径 -> 可信长文”的纵切片。下列 6 篇目前只是该首个 Collection 的研究/生产优先级候选，不是满足 M6 两个 Collection 门槛的最终六篇分配：
 
 1. Zhong Kui, the Demon Queller（首批重点发布与 M1 Featured Entry）
 2. A Guide to Chinese Underworld Traditions
@@ -175,7 +175,7 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
 
 这 6 个题目是编辑候选，不是已经完成研究的事实清单。进入写作前每篇都必须先通过 claim map、版本/locator、专业研究和关键术语门禁；中国阴间必须呈现为多时期、多地域、多文本与多传统叠加，而不是唯一地图或组织架构。The Met 的馆藏记录支持把钟馗称为 `Demon Queller`；本站将他作为驱鬼形象策展进中国阴间 Collection，但不默认写成十王之一、全中国共同认可的阴司官员或阴间统治者。边界入口见 [The Met 的钟馗馆藏记录](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia 教学资料](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)。现代游戏只能进入明确的现代改编/接受史层。`Meng Po`、`Black and White Impermanence` 等晚期或地方复合传统若找不到足够证据，就缩小主张、明确争议或替换选题，不能用“ancient”“自古统一”等叙事填空。
 
-若后续另行确认第二个 Collection，可在 8–12 周扩展到 12 篇时，从 `Defying Heaven`、`Strange Tales After Dark` 等候选中选择一个测试相邻兴趣；当前不形成路线承诺。
+第二个 Collection 必须在 M6 内容规划前由 Project owner 根据研究证据另行确认，并同步修订最终六篇分配，使两个 Collection 都有完整、可来源追溯的公开阅读路径；在身份、成员与视觉候选确定前，M6 远端预览保持阻塞。扩展到 12 篇时可再评估 `Defying Heaven`、`Strange Tales After Dark` 等相邻兴趣方向，但这些名称当前都不是既定路线承诺。
 
 ## 6. Success Metrics
 
@@ -322,7 +322,9 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
 - 能提供版本与具体定位的原典/馆藏、专业研究和现代资料来源。
 - 能核对中文/古汉语的研究校对，以及英文编辑或母语读者的质量反馈。
 - 若使用生成式视觉工具，可商用且许可清楚的模型、LoRA、字体和参考资产。
-- M2 技术与内容合同、固定运行时、依赖安装和本地应用初始化已经完成并由用户提交为本地基线 `f258227`；M3-U1/U2/U3/U4/U5 已完成。M3-U4 的五个最终画布、四份 approved/current manifest 与首份 production record 是历史完成事实；终验发现 Hero v1 手部缺陷后，Project owner 又验收 Hero v2，v1 作为非 current 历史保留。当前七个 local master、七份 repository source、两份 production record 与五份 manifest 版本记录均通过自动门禁；四个逻辑资产仍各有唯一 approved/current，钟馗 Entry 的稳定 Hero ID 解析到 v2。`sharp@0.35.4` 仍是唯一新增直接依赖，22 个 current 响应式 AVIF/WebP 目标已重新实际生成/解码验证，完整工程门禁通过。M4、dev/preview 服务与任何版本控制写入均未获本次授权。托管在首次远端预览前确认；邮件、分析、表单与未来商业服务在各自独立里程碑前确认。
+- M2 技术与内容合同、固定运行时、依赖安装和本地应用初始化已经完成并由用户提交为本地基线 `f258227`；M3-U1–U5 已完成。M3-U4 的五个最终画布、四份 approved/current manifest 与首份 production record 是历史完成事实；终验发现 Hero v1 手部缺陷后，Project owner 又验收 Hero v2，v1 作为 non-current 历史保留。当前七个 local master、七份 repository source、两份 production record 与五份 manifest 版本记录均通过自动门禁；四个逻辑资产仍各有唯一 approved/current，钟馗 Entry 的稳定 Hero ID 解析到 v2。`sharp@0.35.4` 仍是唯一新增直接依赖，22 个 current 响应式 AVIF/WebP 目标已重新实际生成/解码验证，完整工程门禁通过。M4-U1/U2/U3 与 M4-U4A 已完成；M4-U2 的一次性 preview 已停止，首个纵切片的本地编辑/视觉/英文字体候选准备也已获授权并执行；Project owner 已选中 Hero desktop 02/mobile 01 进入生产准备，但 publication rights、五审、exact-canvas 与资产批准仍未闭合。运行时路径、日期时序、正文可见性和 review 远端子资源门禁已完成本地加固；正式字体浏览器评审、U5 候选预检/最终关闭、M4-U4B、后续服务控制与任何代理版本控制写入仍未获授权。推荐顺序为闭合 Hero 当前工具条款/账户 authority/publication rights、exact-canvas 与五审，同时完成 Guide 自有 Hero、双语术语、Source 标题 locale、正式字体页面人工检查和 CJK 工具/字符门禁 → non-published noindex 直达页 U5 候选预检并进入 `ready` → M5 外部交互边界 → M6 的 6 篇内容、至少 2 个合集页、全部资产与人工 `published` 决定 → 真实非空索引上的最终 U5 → 真实 HTTPS origin 与 M4-U4B 本地 public 构建能力 → 经独立授权的 M6 Vercel 预览 → M7 生产发布。没有自有域名时，可在 U4B 前另行授权建立 Vercel 项目身份，以确认稳定 production alias/hostname；这不等于预览或部署授权。public-release 的一个 Entry + 一个 Collection 只是技术门禁，不替代 M6/M7 产品验收；邮件、分析、表单与未来商业服务在各自独立里程碑前确认。
+
+上述推荐路线中的“M7 生产发布”同时包含发布后只读基线与检查，不以成功触发部署作为里程碑收口。
 
 ### 主要风险与缓解
 
@@ -340,8 +342,8 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
 以下问题不阻塞本轮文档生成，但会影响后续实现或发布：
 
 - `Mythic China` 的公开品牌名、域名和商标可用性是否通过正式核查。
-- 首次远端预览采用哪一静态托管服务、账户由谁持有，以及预览/生产授权和退出路径；M2 不预选或配置托管，Vercel 与 Cloudflare 仅为后续候选。
-- 第二个首发 Collection 尚未确认；需决定是从现有候选中选择，还是把 MVP 的“至少 2 个合集页”门槛调整为一个完整 Collection 加一个候选预览页。
+- 首次远端预览所用 Vercel 账户/项目由谁持有，以及稳定 production alias/hostname、预览保护、预览/生产授权、回滚和退出路径；经 Project owner 确认后，其 HTTPS origin 才能写入 `MYTHIC_CHINA_SITE_ORIGIN`。当前没有 Vercel 项目或部署。
+- 第二个首发 Collection 的身份尚未确认；须在 M6 前从经研究验证的候选中另行选择，但当前不降低“至少 2 个完整合集页”的预览门槛。
 - 后续正式 Entry 内容及 M6 批量资产的英文编辑、研究校对和图片文化审校由谁承担最终签字；M3 钟馗样例的五项资产审核已由 Project owner 完成。
 - 订阅、分析和选题表单分别采用哪一服务，以及适用隐私政策和地区要求。
 - 首版是否在英语根路径发布；多语言 URL 结构应在中文版本进入近期路线时再确认。

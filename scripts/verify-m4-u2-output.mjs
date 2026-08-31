@@ -1,9 +1,15 @@
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import process from "node:process";
 import { fileURLToPath, URL } from "node:url";
 import { imageMetadata } from "astro/assets/utils";
+
+import {
+  assertReviewCssResourcePolicy,
+  assertReviewHtmlResourcePolicy,
+} from "./review-output-policy.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
@@ -18,6 +24,15 @@ const expectedHtmlFiles = [
   "index.html",
 ];
 const navigationTargets = ["/", "/explore/", "/collections/", "/about/"];
+const fontInventory = JSON.parse(
+  await readFile(
+    resolve(projectRoot, "src", "assets", "fonts", "font-assets.json"),
+    "utf8",
+  ),
+);
+const fontAssetRecords = fontInventory.families.flatMap(
+  (family) => family.files,
+);
 
 if (resolve(process.cwd()) !== projectRoot) {
   throw new Error(`Unexpected workspace: ${process.cwd()}`);
@@ -43,6 +58,21 @@ function toOutputPath(urlPath) {
   return `${urlPath.replace(/^\/+|\/+$/gu, "")}/index.html`;
 }
 
+function sha256(buffer) {
+  return createHash("sha256").update(buffer).digest("hex");
+}
+
+function readHtmlAttribute(tag, name) {
+  const match = tag.match(
+    new RegExp(
+      `\\b${name}(?:\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+)))?`,
+      "iu",
+    ),
+  );
+  if (match === null) return null;
+  return match[1] ?? match[2] ?? match[3] ?? "";
+}
+
 // Inventory HTML and raster artifacts before checking their rendered content.
 const outputFiles = await listFiles(outputRoot);
 const htmlFiles = outputFiles
@@ -52,6 +82,7 @@ const htmlFiles = outputFiles
 const imageFiles = outputFiles.filter((path) =>
   /\.(?:avif|jpe?g|png|webp)$/iu.test(path),
 );
+const fontFiles = outputFiles.filter((path) => path.endsWith(".woff2"));
 
 if (htmlFiles.join("|") !== expectedHtmlFiles.join("|")) {
   throw new Error(
@@ -68,6 +99,38 @@ if (
 ) {
   throw new Error(
     `Unexpected M4 review image artifact inventory:\n${imageFiles.join("\n")}`,
+  );
+}
+if (
+  fontFiles.length !== fontAssetRecords.length ||
+  fontFiles.some(
+    (path) =>
+      !relative(outputRoot, path).replaceAll("\\", "/").startsWith("_astro/"),
+  )
+) {
+  throw new Error(
+    `Unexpected M4 review font artifact inventory:\n${fontFiles.join("\n")}`,
+  );
+}
+const fontRecordByOutputPath = new Map();
+const unmatchedFontRecords = new Set(
+  fontAssetRecords.map(({ assetId }) => assetId),
+);
+for (const fontPath of fontFiles) {
+  const digest = sha256(await readFile(fontPath));
+  const record = fontAssetRecords.find(
+    ({ sha256: expected }) => digest === expected,
+  );
+  if (record === undefined || !unmatchedFontRecords.delete(record.assetId)) {
+    throw new Error(
+      `Untracked or duplicate M4 review font artifact: ${fontPath}`,
+    );
+  }
+  fontRecordByOutputPath.set(fontPath, record);
+}
+if (unmatchedFontRecords.size > 0) {
+  throw new Error(
+    `M4 review output is missing font assets: ${Array.from(unmatchedFontRecords).join(", ")}`,
   );
 }
 
@@ -118,6 +181,7 @@ for (const relativePath of htmlFiles) {
       throw new Error(`${relativePath} contains forbidden review output.`);
     }
   }
+  assertReviewHtmlResourcePolicy(html, relativePath);
   for (const target of navigationTargets) {
     if (!html.includes(`href="${target}"`)) {
       throw new Error(
@@ -147,6 +211,58 @@ for (const relativePath of htmlFiles) {
   }
   if ((html.match(/id="main-content"/gu) ?? []).length !== 1) {
     throw new Error(`${relativePath} must have one skip-link target.`);
+  }
+  const fontPreloadTags = (html.match(/<link\b[^>]*>/giu) ?? []).filter(
+    (tag) =>
+      readHtmlAttribute(tag, "rel") === "preload" &&
+      readHtmlAttribute(tag, "as") === "font",
+  );
+  const preloadRecords = [];
+  for (const tag of fontPreloadTags) {
+    const href = readHtmlAttribute(tag, "href");
+    const crossOrigin = readHtmlAttribute(tag, "crossorigin");
+    if (
+      href === null ||
+      readHtmlAttribute(tag, "type") !== "font/woff2" ||
+      !["", "anonymous"].includes(crossOrigin ?? "missing")
+    ) {
+      throw new Error(`${relativePath} has an invalid font preload: ${tag}`);
+    }
+    const preloadUrl = new URL(href, "https://review.invalid");
+    if (
+      preloadUrl.origin !== "https://review.invalid" ||
+      !preloadUrl.pathname.startsWith("/_astro/") ||
+      !preloadUrl.pathname.endsWith(".woff2") ||
+      preloadUrl.search !== "" ||
+      preloadUrl.hash !== ""
+    ) {
+      throw new Error(`${relativePath} preloads an unsafe font URL: ${href}`);
+    }
+    const preloadPath = resolve(
+      outputRoot,
+      decodeURIComponent(preloadUrl.pathname).replace(/^\/+/, ""),
+    );
+    const record = fontRecordByOutputPath.get(preloadPath);
+    if (record === undefined) {
+      throw new Error(`${relativePath} preloads a missing font: ${href}`);
+    }
+    preloadRecords.push(record);
+  }
+  const isEntryPage =
+    relativePath.startsWith("explore/") &&
+    relativePath !== "explore/index.html";
+  const expectedPreloadIds = fontAssetRecords
+    .filter(
+      ({ preload }) =>
+        preload === "all-pages" || (isEntryPage && preload === "entry-pages"),
+    )
+    .map(({ assetId }) => assetId)
+    .sort();
+  const actualPreloadIds = preloadRecords.map(({ assetId }) => assetId).sort();
+  if (actualPreloadIds.join("|") !== expectedPreloadIds.join("|")) {
+    throw new Error(
+      `${relativePath} has an unexpected font preload policy: ${actualPreloadIds.join(", ")}`,
+    );
   }
   for (const match of html.matchAll(/href="([^"]+)"/giu)) {
     const href = match[1];
@@ -178,6 +294,13 @@ if (forbiddenReleaseArtifacts.length > 0) {
 }
 if (outputFiles.some((path) => /\.(?:[cm]?js)$/iu.test(path))) {
   throw new Error("M4-U2 review pages must not emit client JavaScript.");
+}
+for (const outputFile of outputFiles.filter((path) => path.endsWith(".css"))) {
+  const content = await readFile(outputFile, "utf8");
+  assertReviewCssResourcePolicy(
+    content,
+    relative(outputRoot, outputFile).replaceAll("\\", "/"),
+  );
 }
 
 // Focal-route checks keep draft exceptions out of published-only indexes.
@@ -211,6 +334,18 @@ if (
   );
 }
 if (
+  !guideHtml.includes(
+    '<p class="source-list__chinese-title" lang="zh-Hant">陰間</p>',
+  ) ||
+  !guideHtml.includes(
+    '<p class="source-list__chinese-title" lang="zh">十王图</p>',
+  )
+) {
+  throw new Error(
+    "Guide Source titles must preserve verified locale and keep unverified script generic.",
+  );
+}
+if (
   !exploreIndexHtml.includes("No published entries yet") ||
   exploreIndexHtml.includes('class="editorial-index"')
 ) {
@@ -231,6 +366,36 @@ for (const heading of [
   if (!aboutHtml.includes(`<h2>${heading}</h2>`)) {
     throw new Error(`About is missing the approved section: ${heading}.`);
   }
+}
+const publisherAnchorCount =
+  aboutHtml.match(/\sid="publisher"/giu)?.length ?? 0;
+const publisherHeader = aboutHtml.match(
+  /<header\b[^>]*\bid="publisher"[^>]*>[\s\S]*?<\/header>/iu,
+)?.[0];
+if (
+  publisherAnchorCount !== 1 ||
+  publisherHeader === undefined ||
+  !publisherHeader.includes("About Mythic China") ||
+  !publisherHeader.includes("Mythic China introduces")
+) {
+  throw new Error(
+    "About must keep one publisher identity anchor on the visible Mythic China header.",
+  );
+}
+const editorialAnchorCount =
+  aboutHtml.match(/\sid="editorial"/giu)?.length ?? 0;
+const editorialSection = aboutHtml.match(
+  /<section\b[^>]*\bid="editorial"[^>]*>[\s\S]*?<\/section>/iu,
+)?.[0];
+if (
+  editorialAnchorCount !== 1 ||
+  editorialSection === undefined ||
+  !editorialSection.includes("<h2>Editorial method</h2>") ||
+  !editorialSection.includes("Mythic China Editorial is the publication")
+) {
+  throw new Error(
+    "About must keep the editorial identity anchor, heading, and visible team statement in the same section.",
+  );
 }
 function collectReferencedHeroOutputs(html) {
   return new Set(
@@ -315,9 +480,8 @@ for (const html of [homeHtml, zhongKuiHtml]) {
   }
 }
 
-// Missing editorial fields stay absent rather than becoming template prose.
+// Editorial candidates render real copy rather than template fallbacks.
 for (const forbiddenText of [
-  "Quick Answer",
   "Article body",
   "Structured Claims",
   "Not supplied at draft status",
@@ -327,10 +491,25 @@ for (const forbiddenText of [
   }
 }
 if (
-  (zhongKuiHtml.match(/class="source-metadata"/gu) ?? []).length !== 5 ||
-  (zhongKuiHtml.match(/<dt>Accessed<\/dt>/gu) ?? []).length !== 5
+  !zhongKuiHtml.includes("Quick Answer") ||
+  !zhongKuiHtml.includes("By <span>Mythic China Editorial</span>") ||
+  !zhongKuiHtml.includes('datetime="2026-08-30"') ||
+  (zhongKuiHtml.match(/class="source-metadata"/gu) ?? []).length !== 6 ||
+  (zhongKuiHtml.match(/<dt>Accessed<\/dt>/gu) ?? []).length !== 6
 ) {
-  throw new Error("Zhong Kui must render five complete web Source records.");
+  throw new Error(
+    "Zhong Kui must render editorial copy, attribution, and six complete web Source records.",
+  );
+}
+if (
+  !guideHtml.includes("Quick Answer") ||
+  !guideHtml.includes("By <span>Mythic China Editorial</span>") ||
+  (guideHtml.match(/class="source-metadata"/gu) ?? []).length !== 3 ||
+  (guideHtml.match(/<dt>Accessed<\/dt>/gu) ?? []).length !== 3
+) {
+  throw new Error(
+    "Underworld guide must render editorial copy, attribution, and three complete web Source records.",
+  );
 }
 if (collectionHtml.includes(manifestAlt)) {
   throw new Error("Collection must not borrow the Zhong Kui Entry Hero.");
@@ -339,7 +518,7 @@ const guidedPathStart = collectionHtml.indexOf('id="guided-path-heading"');
 const guidedPathEnd = collectionHtml.indexOf('class="collection-browse"');
 const guidedPathHtml = collectionHtml.slice(guidedPathStart, guidedPathEnd);
 const guidePosition = guidedPathHtml.indexOf(
-  "Chinese Underworld Guide (Working Draft)",
+  "A Guide to the Chinese Underworld",
 );
 const zhongKuiPosition = guidedPathHtml.indexOf("Zhong Kui, the Demon Queller");
 if (

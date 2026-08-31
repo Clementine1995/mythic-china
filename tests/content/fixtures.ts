@@ -67,6 +67,7 @@ export function makeSourceData(
     sourceType: "primary-text",
     title: "Source One",
     titleZh: null,
+    titleZhLang: null,
     authorOrOrganization: null,
     publicationOrEdition: "Example critical edition",
     editionBasisOrObjectId: null,

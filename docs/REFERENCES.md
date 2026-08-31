@@ -56,6 +56,14 @@
 - [Source Han Sans](https://github.com/adobe-fonts/source-han-sans) — Adobe Fonts。用途：中文名称、显示标题和未来中文 UI 的 sans 候选；[SC designspace](https://github.com/adobe-fonts/source-han-sans/blob/master/Masters/designspaces/SourceHanSansSC-VF.designspace)；[OFL 1.1](https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt)。
 - [CSS Fonts Module Level 4](https://www.w3.org/TR/css-fonts-4/) 与 [Level 5](https://www.w3.org/TR/css-fonts-5/) — W3C。用途：`font-display`、`unicode-range`、font synthesis 和字体度量覆盖的实现依据。
 
+以下版本与许可证细节于 2026-08-30 重新核对。Geist 与 Source Serif 已按固定 release 落为上游未修改的英文候选；Source Han 仍只形成方案，不表示已有 CJK 文件或批准子集：
+
+- [Geist v1.7.2](https://github.com/vercel/geist-font/releases/tag/v1.7.2) — 官方 release archive 的 GitHub SHA-256 与本地下载一致；[OFL 原文](https://github.com/vercel/geist-font/blob/main/OFL.txt) 的当前版权头未列 Reserved Font Name。
+- [Source Serif 4.005R](https://github.com/adobe-fonts/source-serif/releases/tag/4.005R) — 官方 release 提供 WOFF2；该 WOFF2 archive 本身不含许可证且上游未公布 digest，因此项目另从同一 tag 保存 [LICENSE](https://github.com/adobe-fonts/source-serif/blob/4.005R/LICENSE.md)，archive digest 明确标为本地计算。LICENSE 保留 `Source` 字体名。
+- [Source Han Sans releases](https://github.com/adobe-fonts/source-han-sans/releases) — 最新 release 标记为 2.005R，列出 Variable WOFF2 与 SC 资产；[LICENSE](https://github.com/adobe-fonts/source-han-sans/blob/release/LICENSE.txt) 保留 `Source` 字体名。
+- [Source Han Serif releases](https://github.com/adobe-fonts/source-han-serif/releases) — 最新 release 标记为 2.003R；[LICENSE](https://github.com/adobe-fonts/source-han-serif/blob/release/LICENSE.txt) 保留 `Source` 字体名。
+- [OFL FAQ](https://openfontlicense.org/ofl-faq/) — SIL。用途：核对网页分发、修改、子集与 Reserved Font Name 义务；本项目把 CJK glyph subsetting/weight instancing 当作修改，并计划为 Adobe Source 系修改版使用不含 `Source` 的 primary family name、保留 OFL/copyright 与 FONTLOG。
+
 ## 2. 竞品与相邻标杆
 
 详细观察、可借鉴项、不采用项和方向性评分见 [`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md)。
@@ -107,6 +115,17 @@
 
 本期 primary reference family 固定为“晚清中国钟馗人物画中的文雅士人表达与入鞘佩剑”；其他元/明清对象只用于交叉核对人物、鬼从、群像与构图边界。所有公开资产都必须重新构图，不复制任何一件馆藏的完整姿态、题跋、印章或版式。
 
+### 首个纵切片正文与 Collection Hero 候选
+
+以下资料访问于 2026-08-30，已进入 `A Guide to the Chinese Underworld`、`Zhong Kui, the Demon Queller` 的 Source/Claim/Terminology 或 Collection Hero approved brief 与候选 trace metadata：
+
+- [The Ten Magistrates of the Underworld Realm](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm) — Myron L. Cohen / Asia for Educators, Columbia University。用途：一个有边界的十位审判者、官僚化法庭、非永恒惩罚、仪式援助和轮回模型；不代表所有中国时期、地区或传统。
+- [Ten Kings of Hell](https://www.metmuseum.org/art/collection/search/44509) — Jin Chushi / The Met，Southern Song，before 1195，object 30.76.293。用途：具体对象中的王、书记、官员、审判、惩罚和十卷组画语境；页面标注 Public Domain，权利入口为 [The Met Image and Data Resources](https://www.metmuseum.org/policies/image-resources)。它不是通用阴间地图。
+- [“阴间”](https://dict.revised.moe.edu.tw/dictView.jsp?ID=156490&q=1&word=%E9%99%B0) — 教育部《重编国语辞典修订本》。用途：`yīnjiān` 的拼音与宽泛“死后魂灵所在”词义；不支持完整宗教体系。
+- [Zhong Kui and the Lunar New Year](https://asia.si.edu/whats-on/blog/posts/zhong-kui-and-the-lunar-new-year/) — Yue Shu / Smithsonian National Museum of Asian Art，2021。用途：馆方对考试、治病梦与新年保护传统的现代复述；不是唐代原典，也不单独承担 earliest-known 判断。
+
+Collection Hero 候选 A 只从上述 Claim 抽取“法庭/记录层级”和“审判通往轮回”的结构，并把门槛、建筑、光雾和人物轮廓明确列为 inferred/invented；其 approved brief 已生成三张 Git-ignored local explore 输出，Project owner 于 2026-08-31 选中 desktop 02/mobile 01 进入生产准备。它们仍未闭合当前工具/账户 authority、publication rights、exact-canvas master、五类审核、production record、repository source 或 manifest，因此不是 approved/current 资产。候选 B 仅保留 The Met 公共领域对象直接复用路径，尚未下载或生产。
+
 ### 通用原典、数据库与翻译研究入口
 
 - [Chinese Text Project](https://ctext.org/)、[FAQ](https://ctext.org/faq) 与 [Citation guidance](https://ctext.org/faq/cite) — 用途：古籍发现、文本定位与版本线索。局限：平台自述并非权威底本，部分译文为 AI/协作生成；只能用于发现并须回到可靠版本与人工译本复核。
@@ -144,14 +163,14 @@
 
 ### Hosting and Dynamic Boundary
 
-- [Deploy Astro to Vercel](https://docs.astro.build/en/guides/deploy/vercel/) — Astro 官方文档。用途：Astro 静态站的低配置 MVP 托管候选。
-- [Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls) 与 [Add a custom domain](https://vercel.com/docs/domains/working-with-domains/add-a-domain) — Vercel。用途：分支预览、平台子域名与第三方自有域名接入。
+- [Deploy Astro to Vercel](https://docs.astro.build/en/guides/deploy/vercel/) — Astro 官方文档。用途：Astro 静态站的零 adapter 托管实现依据。
+- [Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls)、[System environment variables](https://vercel.com/docs/environment-variables/system-environment-variables) 与 [Add a custom domain](https://vercel.com/docs/domains/working-with-domains/add-a-domain) — Vercel。用途：区分 generated/branch URL 与 production domain、确认平台环境变量边界及第三方自有域名接入；环境变量文档于 2026-08-30 核对。
 - [Cloudflare Pages: Astro](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/)、[Preview deployments](https://developers.cloudflare.com/pages/configuration/preview-deployments/) 与 [Custom domains](https://developers.cloudflare.com/pages/configuration/custom-domains/) — Cloudflare。用途：Astro 静态托管、预览和域名备选。
 - [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/) — Cloudflare。用途：未来轻量服务端边界候选，不代表当前已采用。
 - [Next.js Static Exports](https://nextjs.org/docs/app/guides/static-exports)、[MDX](https://nextjs.org/docs/app/guides/mdx/) 与 [Backend for Frontend](https://nextjs.org/docs/app/guides/backend-for-frontend) — Next.js 官方文档。用途：Next.js 静态能力、限制和未来后端边界比较。
 - [Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare caching](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Lab and field data differences](https://web.dev/articles/lab-and-field-data-differences) — 用途：全球交付候选与海外实测原则；供应商宣传不替代真实页面测试。
 
-MVP 当前只确认 Astro 的供应商中立静态输出；Vercel 与 Cloudflare 都只是首次远端预览前需要比较的托管候选，尚未形成推荐顺序。Next.js 仅在动态产品需求被验证后再重评。当前没有托管项目、账号授权、域名或部署事实。
+Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标；Astro 输出与 SEO 核心仍保持供应商中立，不新增 adapter。当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、账号操作授权或部署事实；经 Project owner 确认后，该 alias/hostname 的 HTTPS origin 才能写入 `MYTHIC_CHINA_SITE_ORIGIN`，每次 deployment 的 generated/branch URL 不得成为 canonical。Cloudflare 保留为历史比较资料，不是当前实施目标。Next.js 仅在动态产品需求被验证后再重评。
 
 ### Newsletter
 
@@ -176,7 +195,7 @@ MVP 当前只确认 Astro 的供应商中立静态输出；Vercel 与 Cloudflare
 | [Zeejay0 / gathered-scenes-zine-skill](https://github.com/Zeejay0/gathered-scenes-zine-skill) | [个人非商业许可证](https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/LICENSE)，明确限制商业工作流及相关输出 | 不采用 | 项目保留订阅、广告和产品化路线，与许可证不兼容；除非未来取得明确书面商业许可，否则不安装、不使用其输出。 |
 | [liyue-aigc / xianxia-visual-director](https://github.com/liyue-aigc/xianxia-visual-director) | 仓库明确未附开源许可证 | 不采用 | 其固定仙侠巨构、建筑、人物与服装 house rules 是幻想设定，不是历史/宗教依据；不复制 Skill 文本或资产，也不让其发明具体人物、建筑、仪式和神系。镜头层级、尺度参照等通用构图常识只能自行表述。 |
 | [LiamGvchi / gc-minimal-zine-poster](https://github.com/LiamGvchi/gc-minimal-zine-poster) | [MIT](https://github.com/LiamGvchi/gc-minimal-zine-poster/blob/main/LICENSE) | 仅借方法 | 可借 observed vs interpretation、fixed/variable/sample residue、输入图保留等级及 full/thumbnail QA；不采用其日韩 indie-zine、旧纸、高彩点色和默认 3:5 外观。 |
-| built-in `imagegen` | 当前环境内置图片生成能力；[OpenAI Terms of Use](https://openai.com/policies/terms-of-use/) 于 2026-08-28 核对，实际适用账户关系由 Project owner 据实确认 | 条件可用 | 只在画面实际涉及的 Claim/Source、适用 Terminology 与 visual brief 核准后执行原型或资产探索；未引入新术语的 scoped visual sample 可以没有 TerminologyRecord。输出进入公开站点前必须有 manifest、权利判断、人工文化/语言审核和披露。2026-08-29 Project owner 确认钟馗 U4 使用个人且非组织管理账户并拥有项目发布授权；该记录不替代可版权性、唯一性或第三方权利判断。 |
+| built-in `imagegen` | 当前环境内置图片生成能力；[OpenAI Terms of Use](https://openai.com/policies/terms-of-use/) 于 2026-08-28 为钟馗任务核对，实际适用账户关系由 Project owner 据实确认 | 条件可用 | 只在画面实际涉及的 Claim/Source、适用 Terminology 与 visual brief 核准后执行原型或资产探索；未引入新术语的 scoped visual sample 可以没有 TerminologyRecord。输出进入公开站点前必须有 manifest、权利判断、人工文化/语言审核和披露。2026-08-29 钟馗任务的个人账户/发布授权记录不自动继承到 2026-08-30 Chinese Underworld 候选；本轮只生成 Git-ignored 待审图，未上传馆藏或第三方参考图，当前条款、账户 authority 与 publication rights 仍须在选图进入生产链前闭合。 |
 | local `design-taste-frontend` | 当前环境的设计审计指令；不复制或随项目分发其文本 | 条件可用，仅作 QA | 只借 brief inference、布局重复、移动折叠、对比、reduced motion 与性能检查；其默认技术栈、双主题和营销页规则不得覆盖本项目的 Astro 推荐、编辑长文和中国文化主题合同。 |
 
 采用分组：**条件可用**为 `ink-wash-poster`、built-in `imagegen`、`design-taste-frontend`；**仅借方法**为 `scene-distillation-zine-v1-3`、`gc-minimal-zine-poster`；**不采用**为 `gathered-scenes-zine-skill`、`xianxia-visual-director`。没有任何 Skill 可以绕过 `CONTENT_MODEL.md` 的 Claim、适用 TerminologyRecord、visual brief、Asset Manifest 与权利审核。

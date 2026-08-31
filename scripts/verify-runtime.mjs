@@ -1,17 +1,9 @@
-import { realpathSync } from "node:fs";
 import process from "node:process";
 
-const expectedPath = realpathSync.native(
-  "D:\\Program Files\\nvm\\v24.16.0\\node.exe",
-);
-const actualPath = realpathSync.native(process.execPath);
-const expectedVersion = "v24.16.0";
+const [major, minor] = process.versions.node.split(".").map(Number);
 
-if (
-  actualPath.toLowerCase() !== expectedPath.toLowerCase() ||
-  process.version !== expectedVersion
-) {
+if (major !== 24 || !Number.isInteger(minor) || minor < 16) {
   throw new Error(
-    `Mythic China requires ${expectedPath} ${expectedVersion}; received ${actualPath} ${process.version}.`,
+    `Mythic China requires Node.js >=24.16.0 <25; received ${process.version}.`,
   );
 }

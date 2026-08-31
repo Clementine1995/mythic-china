@@ -1,0 +1,36 @@
+/* Upstream font names and files are isolated here so consumers keep stable role aliases. */
+@font-face {
+  font-family: "Mythic Display";
+  src: url("../assets/fonts/geist-sans/1.7.2/geist-sans-variable-roman.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mythic Story";
+  src: url("../assets/fonts/source-serif-4/4.005R/source-serif-4-regular.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mythic Story";
+  src: url("../assets/fonts/source-serif-4/4.005R/source-serif-4-semibold.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mythic Story";
+  src: url("../assets/fonts/source-serif-4/4.005R/source-serif-4-italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}

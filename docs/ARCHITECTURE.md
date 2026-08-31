@@ -2,11 +2,11 @@
 
 ## 0. 状态与结论
 
-- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为当前本地基线 `f258227`。M3-U1/U2/U3/U4/U5 已完成。U4/U5 的首轮历史交付为一份 production record、四份 approved/current manifest、五份 repository source 与五个 local master；终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2。当前版本化 inventory 为两份 production record、五份 manifest 记录、七份 repository source 与七个 Git-ignored local master；Hero v2 是唯一 current Hero，Hero v1 保留为 approved/non-current，其他三个逻辑资产仍为 v1 current。`sharp@0.35.4` 非默认验证入口已重新完成七个 master 复核和三份 current responsive rendition 的 22 个 AVIF/WebP 目标实际生成与解码验证。外部服务、托管与发布尚未实施。
+- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成。M3-U4/M3-U5 的首轮历史交付为一份 production record、四份 approved/current manifest、五份 repository source 与五个 local master；终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2。当前版本化 inventory 为两份 production record、五份 manifest 记录、七份 repository source 与七个 Git-ignored local master；Hero v2 是唯一 current Hero，Hero v1 保留为 approved/non-current，其他三个逻辑资产仍为 v1 current。`sharp@0.35.4` 非默认验证入口已重新完成七个 master 复核和三份 current responsive rendition 的 22 个 AVIF/WebP 目标实际生成与解码验证。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，但尚未接入 public build；外部服务、托管项目与发布仍未实施。
 - 决策：**Astro 7 静态模式 + TypeScript strict + Git 内 Entry Markdown / 结构化 YAML + 构建期内容图校验 + 外部服务承接后续少量交互**。M2 不选择托管、不安装 adapter、MDX、React/Vue/Svelte、Tailwind 或商业依赖。
 - 核心判断：这是内容出版物，不是先造平台。首版的复杂度应集中在内容、出处、图片和设计，而不是账号、数据库和运行时服务。
-- 当前没有创建 Vercel/Cloudflare 项目、平台子域名、自有域名、DNS 记录或任何生产托管配置；纯静态 `dist/` 保持供应商中立，首次远端预览前再选择托管。
-- 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准当前页面风格，不能把其视觉皮肤整份移入未来应用。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
+- Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标；当前没有创建 Vercel 项目、稳定 production alias/hostname、自有域名、DNS 记录或任何生产托管配置。纯静态 `dist/` 与 SEO 核心保持供应商中立，托管选择不等于账户、配置、部署或发布授权。
+- 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准这些 M1 原型的视觉皮肤，不能把其表现整份移入未来应用。M4-U2 只确认当时系统 fallback 字体下的页面方向；本轮虽已接入英文正式字体候选，具体页面效果与 M4-U5 最终页面仍未批准。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
 
 Astro 默认将页面预渲染为静态 HTML，并允许未来只把个别路由改为按需渲染，因此适合“静态核心、局部动态升级”的路线。来源：[Astro On-demand Rendering](https://docs.astro.build/en/guides/on-demand-rendering/)，访问于 2026-08-27。
 
@@ -53,18 +53,21 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 
 | 层 | MVP 推荐 | 选择原因 | 当前状态 |
 | --- | --- | --- | --- |
-| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M2 已实施并生成 3 个 `noindex` debug 页面 |
+| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M4 review 已实施 7 个 `noindex, nofollow` 页面；public intent 尚未开放 |
 | 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | M2 Schema 与 2 Entry + 1 Collection draft 已实施 |
 | 内容约束 | Astro Content Layer + Zod 单记录 Schema + 独立内容图校验器 | Schema 校验字段；纯函数校验器负责跨集合关系、状态矩阵、ID 与 slug | M2 已实施并由 Vitest/build 覆盖 |
-| UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | M2 仅实施中性 debug templates；生产表现层属 M4 |
-| 图片 | `src/assets/images` 保存尺寸锁定的 approved source renditions；Astro `Image/Picture` 消费 | M4 构建期生成 AVIF/WebP、多宽度与哈希输出，`dist/` 不反写 manifest | M3-U5 隔离构建已从三份 responsive source 实际生成并解码验证 22 个 AVIF/WebP 目标；页面接线仍未实施 |
+| UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | M4-U2/M4-U3 已实施共享表现层与六类页面，M4-U5 最终门禁未完成 |
+| 图片 | `src/assets/images` 保存尺寸锁定的 approved source renditions；Astro `Image/Picture` 消费 | M4 构建期生成 AVIF/WebP、多宽度与哈希输出，`dist/` 不反写 manifest | review 页面生成 14 个 Hero v2 AVIF/WebP；M3 非默认入口的 22 个响应式目标证据保持有效 |
+| 字体 | `src/assets/fonts` 保存版本化 WOFF2/许可证/hash inventory；中央 CSS alias/token + URL registry 消费 | 自托管且保持上游替换不影响模板/内容；`?no-inline` 让 preload 永远指向真实文件 | 4 份英文 WOFF2 已接线；CJK 文件与浏览器终验仍为空 |
 | 搜索 | Pagefind（达到约 30 篇后） | 扫描构建后的静态 HTML，无搜索服务器 | 后续触发 |
-| 托管 | 供应商中立的静态输出；Vercel / Cloudflare 仅为后续候选 | M2 不需要远端运行时，不让托管决定内容、URL 或应用结构 | 首次远端预览前确认 |
+| 托管 | 供应商中立的静态输出；未来静态托管选用 Vercel | 静态 Astro 无需 adapter，且托管不决定内容、URL 或应用结构 | 方向已确认；项目、域名、origin、配置与部署均未建立 |
 | 邮件 | Buttondown 等外部邮件服务候选 | 静态表单可直接交给服务，不自建邮箱库 | 待隐私与服务确认 |
 | 反馈 | 外部表单或极小隔离接口 | 首版不引入账号和通用后端 | 待选择 |
 | 分析 | 隐私友好页面分析；自定义事件按需 | 先回答内容问题，减少跨站追踪 | 待选择 |
 
 Astro 的 `Image` / `Picture` 支持构建期优化、多格式和响应式尺寸；`src/` 中的图片可被处理，`public/` 中的文件会原样复制。来源：[Astro Images](https://docs.astro.build/en/guides/images/)，访问于 2026-08-26。
+
+字体不进入 `public/`，也不复用视觉 manifest。`src/styles/fonts.css` 是上游文件到项目内部 family alias 的唯一 CSS 映射；业务样式只使用 role token。`src/typography/font-assets.ts` 只导出稳定 preload 角色，输出 verifier 从 `font-assets.json` 的 hash/preload policy 反查构建产物，不硬编码具体上游文件名。替换字体只改字体文件、inventory、alias 与 registry；若 metrics 实测发生变化，再显式更新对应 override 并重跑浏览器门禁。
 
 Collection 主题环境仍按普通公开视觉资产管理：优先使用绝对定位、带固有尺寸的响应式 `<picture>` / 图片组件承接桌面与移动资源，不把未经优化的大图塞进 CSS `url()`。只有纯装饰层可以 `aria-hidden`；背景加载或脚本失败时，中性正文阅读表面、导航和 Sources 必须完整可读。
 
@@ -72,11 +75,11 @@ Pagefind 在静态站构建后生成随站点部署的搜索 bundle，不需要�
 
 ### 3.1 M2 运行时、包管理与版本策略
 
-长期架构约束锁定受支持的大版本；精确补丁由 `package.json`、`.node-version` 与唯一锁文件记录。初始实施快照如下，均是 2026-08-27 的决策值，不是永久最新版声明：
+长期架构约束由 `package.json` 的 engine 范围定义；`.node-version` 记录本地开发基线的精确补丁，唯一锁文件固定依赖解析。初始实施快照如下，均是 2026-08-27 的决策值，不是永久最新版声明：
 
 | 项目 | 初始精确值 | 合同 |
 | --- | --- | --- |
-| Node.js | `24.16.0` LTS | 所有会话固定调用 `D:\Program Files\nvm\v24.16.0\node.exe`；当前 `.node-version` 精确记录 `24.16.0`；`engines.node` 为 `>=24.16.0 <25` |
+| Node.js | `24.16.0` LTS | 本机工作流固定调用 `D:\Program Files\nvm\v24.16.0\node.exe`，`.node-version` 精确记录 `24.16.0`；package scripts 只校验 `engines.node` 的 `>=24.16.0 <25`，不比较机器路径，干净 clone/CI/托管环境使用其受控安装 |
 | pnpm | `11.22.0` | `packageManager` 精确记录；`engines.pnpm` 为 `>=11.22.0 <12`；只保留 `pnpm-lock.yaml` |
 | Astro | `7.2.8` | `package.json` 精确记录；默认静态输出，不安装 adapter |
 | Sharp | `0.35.4` | M3-U5 在 `MissingSharp` 后经 Project owner 单独授权为直接依赖；只提供构建期图片转换，不进入浏览器运行时 |
@@ -84,7 +87,7 @@ Pagefind 在静态站构建后生成随站点部署的搜索 bundle，不需要�
 
 Astro 精确快照以官方 [Astro changelog 7.2.8](https://github.com/withastro/astro/blob/latest/packages/astro/CHANGELOG.md#728) 为依据；TypeScript 7 的当前限制以 Astro language tools 的 [`astro check` compatibility guard](https://github.com/withastro/astro/blob/main/packages/language-tools/language-server/src/check.ts#L1018-L1044) 为准，访问于 2026-08-27。
 
-当前公开 PATH 的 Node.js `16.20.2` 已停止维护且不满足 Astro 的 Node.js `22.12.0+` 前提，因此不得用于本项目；M1 临时预览使用的 Codex bundled runtime 也不是项目运行时。用户已于 2026-08-27 固定所有会话使用 `D:\Program Files\nvm\v24.16.0\node.exe`，验证返回 `v24.16.0`；M2 已通过同目录 Corepack `0.35.0` 提供 pnpm `11.22.0` 并完成安装。后续本地命令必须先把固定目录置于当前进程 PATH 首位，再显式调用同目录 Corepack；`scripts/verify-runtime.mjs` 会拒绝子进程回落到公开 PATH 的 Node。Node 版本状态与 Astro 前提见 [Node.js releases](https://nodejs.org/en/about/previous-releases) 和 [Astro installation prerequisites](https://docs.astro.build/en/install-and-setup/#prerequisites)；pnpm 初始版本见 [pnpm 11.22.0 release](https://github.com/pnpm/pnpm/releases/tag/v11.22.0)，访问于 2026-08-27。
+当前公开 PATH 的 Node.js `16.20.2` 已停止维护且不满足 Astro 的 Node.js `22.12.0+` 前提，因此不得用于本项目；M1 临时预览使用的 Codex bundled runtime 也不是本地项目基线。用户已于 2026-08-27 固定本机工作流使用 `D:\Program Files\nvm\v24.16.0\node.exe`，验证返回 `v24.16.0`；M2 已通过同目录 Corepack `0.35.0` 提供 pnpm `11.22.0` 并完成安装。后续本机命令必须先把该目录置于当前进程 PATH 首位，再显式调用同目录 Corepack；`scripts/verify-runtime.mjs` 负责拒绝不满足 `>=24.16.0 <25` 的子进程版本，但不把开发机路径带入 CI 或托管构建。Node 版本状态与 Astro 前提见 [Node.js releases](https://nodejs.org/en/about/previous-releases) 和 [Astro installation prerequisites](https://docs.astro.build/en/install-and-setup/#prerequisites)；pnpm 初始版本见 [pnpm 11.22.0 release](https://github.com/pnpm/pnpm/releases/tag/v11.22.0)，访问于 2026-08-27。
 
 依赖安装只生成 `pnpm-lock.yaml`，不得并存 `package-lock.json` 或其他锁文件；干净环境/未来 CI 使用 `pnpm install --frozen-lockfile --ignore-scripts`，manifest 与锁文件不一致时失败，不允许验证过程静默改写依赖解析或执行第三方安装脚本。锁文件锁定依赖解析，但不声称消除操作系统或远端环境差异。来源：[pnpm install --frozen-lockfile](https://pnpm.io/cli/install#--frozen-lockfile)，访问于 2026-08-27。
 
@@ -151,7 +154,9 @@ mythic-china/
 │  ├─ layouts/              # 页面 shell 与 landmarks
 │  ├─ pages/
 │  ├─ services/            # 外部服务进入需求后才创建对应 adapter
-│  ├─ styles/              # tokens、base、components 与 realm 层
+│  ├─ assets/fonts/        # 版本化 WOFF2、许可证与 hash inventory
+│  ├─ styles/              # font alias、tokens、base、components 与 realm 层
+│  ├─ typography/          # 稳定 preload 角色到构建资产 URL 的 registry
 │  └─ content.config.ts
 ├─ public/                 # favicon、robots 等无需转换的公共文件
 ├─ tests/
@@ -186,13 +191,13 @@ M3-U3 已新增 `assets` 与 `visualBriefs` 两个 build-time collection；M3-U4
 
 M3-U3 已建立确定性的本地图片 metadata registry：按规范化项目相对路径扫描 `src/assets/images`，计算 SHA-256 与大小，并通过 Astro 的公开 `imageMetadata()` API 提取真实格式和方向感知尺寸；坏文件转为稳定校验问题，不用首个异常中止 inventory。纯 validator 再把 `repositoryRenditions[].path` 映射到 registry，校验批准目录、命名、扩展名、真实格式、尺寸、哈希、10 MiB 上限、孤儿/重复文件与禁入签名。visual record 和图片 inventory 从可信项目根逐段拒绝父级/嵌套 symlink 或 junction，避免 Astro glob 或文件扫描跟随仓库外目标。M4 只能从该 registry 把源文件交给 Astro 图片组件；多格式、多宽度和哈希文件名属于 `dist/` 可重建输出，不作为 repository rendition 写回 manifest。来源：[Astro Assets API](https://docs.astro.build/en/reference/modules/astro-assets/)，访问于 2026-08-28。
 
-U4 已让 production record 成为真实 Content Layer，并要求 manifest 路径解析、record 反向 manifest 解析，以及 brief/method/tool/master URI/尺寸/hash 一致。默认构建刻意不读取 `/.local/`，避免新 clone/CI 依赖未跟踪 master；生产会话已核验 master 实体并把证据写入 record。真实 WebP/PNG source 已通过 metadata/file 门禁；Project owner 已确认个人 ImageGen 账户、publication rights 与最终五类审核。U5 另建非默认入口，首轮核验五个 local master 并用临时 Astro route 消费 manifest buildPlan。Hero v2 返修沿同一版本合同新增两份 master、两份 source、一份 manifest 与一份 production record，并只把 Hero v1 `isCurrent` 置为 `false`；版本 resolver 无需内容层迁移即可让 Entry 解析 v2。返修后的非默认入口核验全部七个 local master，并从三份 current responsive rendition 实际生成、解码复核 22 个 AVIF/WebP 目标；默认 build/CI 边界不变。验证的 `outDir`、图片缓存与 Vite cache 位于受信任 `/.local/` 临时目录并在结束时删除；Astro 固定在项目根维护的 ignored `.astro/` 构建元数据可能刷新，但不属于发布制品或持久证据。ComfyUI workflow/model registry 因本期未使用且托管 ImageGen 未暴露稳定模型包身份而不创建。
+M3-U4 已让 production record 成为真实 Content Layer，并要求 manifest 路径解析、record 反向 manifest 解析，以及 brief/method/tool/master URI/尺寸/hash 一致。默认构建刻意不读取 `/.local/`，避免新 clone/CI 依赖未跟踪 master；生产会话已核验 master 实体并把证据写入 record。真实 WebP/PNG source 已通过 metadata/file 门禁；Project owner 已确认个人 ImageGen 账户、publication rights 与最终五类审核。M3-U5 另建非默认入口，首轮核验五个 local master 并用临时 Astro route 消费 manifest buildPlan。Hero v2 返修沿同一版本合同新增两份 master、两份 source、一份 manifest 与一份 production record，并只把 Hero v1 `isCurrent` 置为 `false`；版本 resolver 无需内容层迁移即可让 Entry 解析 v2。返修后的非默认入口核验全部七个 local master，并从三份 current responsive rendition 实际生成、解码复核 22 个 AVIF/WebP 目标；默认 build/CI 边界不变。验证的 `outDir`、图片缓存与 Vite cache 位于受信任 `/.local/` 临时目录并在结束时删除；Astro 固定在项目根维护的 ignored `.astro/` 构建元数据可能刷新，但不属于发布制品或持久证据。ComfyUI workflow/model registry 因本期未使用且托管 ImageGen 未暴露稳定模型包身份而不创建。
 
 Entry 使用 `{entryId}.md`；Collection、Source、Claim、Terminology 分别使用 `{collectionId|sourceId|claimId|termId}.yml`，一对象一文件。所有 `glob()` loader 必须显式实现 `generateId`，从规范化的相对文件名生成内部 ID；内容图校验器必须核对 loader 的 `entry.id` 与记录声明的 `entryId` / `collectionId` / `sourceId` / `claimId` / `termId` 一致。`data.slug` 只承担公开 URL，不得覆盖内部关系身份。Astro 默认 ID 可被 frontmatter/data `slug` 覆盖，因此显式 `generateId` 是本项目分离 ID 与 URL 的硬门禁。来源：[Astro custom IDs](https://docs.astro.build/en/guides/content-collections/#defining-custom-ids) 与 [`glob()` `generateId`](https://docs.astro.build/en/reference/content-loader-reference/#generateid)，访问于 2026-08-27。
 
-Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络且可由 Vitest 直接调用的纯内容图校验器负责跨集合目标存在性、ID/slug 唯一性、Collection—Entry 状态矩阵、Featured Entry 约束、来源/Claim/术语关系、Claim `evidenceContext` 与 Source 类型/role 矩阵、Entry earliest Claim/Source 成对精确绑定和明确排序。校验器先对 loader 记录副本按稳定身份排序，再生成确定性错误；不得依赖运行时 fallback 或 Content Layer 返回顺序猜测关系。Astro `getCollection()` 返回顺序不作为编辑顺序事实；所有列表按合同字段或稳定键显式排序。来源：[Astro sorting collection entries](https://docs.astro.build/en/guides/content-collections/#sorting-collection-entries)，访问于 2026-08-27。
+Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络且可由 Vitest 直接调用的纯内容图校验器负责跨集合目标存在性、ID/slug 唯一性、Collection—Entry 状态矩阵、Featured Entry 约束、来源/Claim/术语关系、Claim `evidenceContext` 与 Source 类型/role 矩阵、Entry earliest Claim/Source 成对精确绑定和明确排序。Source 的 `titleZh` / `titleZhLang` 在 Schema 中成对，generic `zh` 表示 script 未核定；内容图拒绝 `ready | published | archived` Entry 引用这类未核定标题，不能从 `Source.language` 或字符外形推断 Hans/Hant。校验器先对 loader 记录副本按稳定身份排序，再生成确定性错误；不得依赖运行时 fallback 或 Content Layer 返回顺序猜测关系。Astro `getCollection()` 返回顺序不作为编辑顺序事实；所有列表按合同字段或稳定键显式排序。来源：[Astro sorting collection entries](https://docs.astro.build/en/guides/content-collections/#sorting-collection-entries)，访问于 2026-08-27。
 
-图片最终使用独立 Asset Manifest 并由 Entry/Collection 引用；内容字段保存 versionless 逻辑 `assetId`，构建期再解析显式 current manifest 版本。M3-U3 已让任何非空 `heroAssetId` 通过 owner/hero/primary、current、状态与历史门禁解析真实 manifest，不再接受只有格式合法的假资产字符串。当前 Entry/Collection 仍为 draft；钟馗 Entry 的 `heroAssetId` 已绑定 `asset-zhong-kui-hero-primary` 并解析到 approved/current Hero manifest，另一 Entry 与 Collection 仍为 `null`。字段合同见 `docs/CONTENT_MODEL.md`，详细实施合同见 `docs/requirements/002-visual-asset-pipeline.md`。
+图片最终使用独立 Asset Manifest 并由 Entry/Collection 引用；内容字段保存 versionless 逻辑 `assetId`，构建期再解析显式 current manifest 版本。M3-U3 已让任何非空 `heroAssetId` 通过 owner/hero/primary、current、状态与历史门禁解析真实 manifest，不再接受只有格式合法的假资产字符串。当前两个 Entry 与一个 Collection 的编辑形态已获 Project owner 阶段性接受，仍保持 `editorial-review`；钟馗 Entry 的 `heroAssetId` 已绑定 `asset-zhong-kui-hero-primary` 并解析到 approved/current Hero manifest，Guide 与 Collection 仍为 `null`。Collection 的 Hero A brief 已 approved，Project owner 又选中 Git-ignored local explore 中的 desktop 02/mobile 01 进入生产准备；composition selection 仍不是 asset/manifest，不能提升为 `visual-review`。字段合同见 `docs/CONTENT_MODEL.md`，详细实施合同见 `docs/requirements/002-visual-asset-pipeline.md` 与 `docs/requirements/004-first-vertical-slice-candidate.md`。
 
 ### 5.2 新栏目如何增加
 
@@ -214,19 +219,20 @@ Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络
 
 ## 6. Ready 内容包的构建与发布数据流
 
-本节只描述内部内容包达到 `ready` 后的 build-to-release 流程，不描述读者页面顺序，也不把构建后 QA 当成首次内容审核。
+本节区分候选页面预检、完整 inventory 的发布决定与 deployable public output；不描述读者页面顺序，也不把构建后 QA 当成首次内容审核。
 
 ```text
 已通过事实、术语、英文编辑、视觉与权利审核的内容包
   -> Schema 校验
   -> 稳定 ID、关系、主张证据、术语审核、引用和资产完整性校验
-  -> Astro 静态构建
-  -> 图片多格式/多尺寸转换
-  -> Sitemap、RSS、结构化数据
-  -> 可选 Pagefind 索引
-  -> 预览部署
-  -> 页面呈现 / 响应式裁切 / 移动端 / 无障碍 QA
-  -> 同一源身份发布生产
+  -> noindex review 直达页的 M4-U5 候选预检
+  -> ready（不进入 release/index）
+  -> M5 外部交互边界 + M6 6 篇 Entry / 至少 2 个 Collection / 全部资产
+  -> Project owner 显式 published 决定（进入 public artifact 的资格，不等于部署）
+  -> 真实非空索引与最终页面的 M4-U5 最终关闭
+  -> 真实 origin + M4-U4B public build / Sitemap / RSS / JSON-LD / output verifier + local verification receipt
+  -> M6 受保护远端预览 + validated_source_identity
+  -> M7 同一已验证源身份发布生产 + 只读发布后基线
 ```
 
 ### 6.1 托管、域名与海外交付阶段
@@ -234,15 +240,24 @@ Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络
 | 阶段 | 决策 |
 | --- | --- |
 | 文档与本地开发 | 不创建托管或域名事实；先完成内容、视觉和静态构建验收 |
-| 首次在线预览 | 另立部署需求，在 Vercel、Cloudflare 或其他静态托管候选间比较账户归属、目标地区实测、预览/回滚、数据边界、成本与退出路径；本合同不预设优先项 |
-| 正式公开前 | 在品牌名与权利核查完成后购买并接入自有域名；在搜索引擎收录、公开传播和积累外链之前确定唯一 canonical 域名 |
+| 首次在线预览 | 首个纵切片先完成 noindex U5 预检；M5/M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 published 决定后，在真实非空索引上最终关闭 U5。随后确认 origin 并完成 M4-U4B 本地 public output verifier。没有自有域名时，可在 U4B 前单独授权建立 Project owner 控制的 Vercel 项目身份以确认稳定 production alias/hostname，但不得借此部署 review 输出。完整本地 public 候选通过后再另立远端预览授权，并验收账户归属、保护策略、目标地区实测、回滚、成本与退出路径 |
+| 正式公开前 | 明确配置唯一 `MYTHIC_CHINA_SITE_ORIGIN`。没有自有域名时，可以在 Project owner 确认后使用稳定的 Vercel production alias/hostname 作为阶段性 origin；每次部署变化的 generated/branch URL 永远不能作为 canonical。未来切换自有域名必须另立迁移与 canonical 决策 |
 | 出现少量动态能力 | 由后续需求先比较外部服务、Astro 官方 adapter 的隔离按需路由与独立动态表面；只有托管、安全和数据边界确认并单独授权后才接入，不因预想中的 D1、R2、KV 或 Workers 先选平台 |
 
-Vercel 与 Cloudflare Pages 均能承接 Astro 静态输出、Git 构建和预览 URL；这些能力只证明它们可以进入后续候选比较，不构成当前选择或账户授权。来源：[Astro on Vercel](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls)、[Astro on Cloudflare Pages](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/) 与 [Cloudflare Pages Preview Deployments](https://developers.cloudflare.com/pages/configuration/preview-deployments/)，访问于 2026-08-26。
+Vercel 已被选择为未来静态托管目标。Astro 静态项目可以在 Vercel 零配置部署，只有使用服务端渲染或平台运行时能力时才需要 adapter；本项目当前不新增 adapter。Vercel 为每次 deployment 生成可变 URL，并另提供 production domain 变量；由于该变量在 Preview 环境也存在，build intent 与 canonical 都不得从 Vercel 环境自动猜测，必须由后续 public runner 显式读取并校验项目自有的 `MYTHIC_CHINA_SITE_ORIGIN`。来源：[Astro on Vercel](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls) 与 [Vercel System Environment Variables](https://vercel.com/docs/environment-variables/system-environment-variables)，访问于 2026-08-30。
 
-域名注册、DNS 与托管视为三个可替换边界。自有域名可以由第三方注册商持有，再用 A/CNAME 等 DNS 记录接入 Vercel；Cloudflare Pages 的外部子域可用 CNAME 接入，但 apex 根域接入 Pages 时需要成为 Cloudflare zone 并使用 Cloudflare nameserver。更换托管时应通过 DNS 切换，不让内容 ID、canonical URL 或 Markdown 跟随平台子域变化。来源：[Vercel Adding a Domain](https://vercel.com/docs/domains/working-with-domains/add-a-domain) 与 [Cloudflare Pages Custom Domains](https://developers.cloudflare.com/pages/configuration/custom-domains/)，访问于 2026-08-26。
+域名注册、DNS 与托管仍是三个可替换边界。自有域名可以由第三方注册商持有，再用 DNS 接入 Vercel；更换托管或从阶段性 production alias/hostname 切换自有域名时，应通过显式迁移决策调整 origin，不让内容 ID、Markdown 或 slug 跟随平台变化。来源：[Vercel Adding a Domain](https://vercel.com/docs/domains/working-with-domains/add-a-domain)，访问于 2026-08-30。
 
 Vercel 与 Cloudflare 都提供全球 CDN，但节点数量或平台宣传不替代实测。上线前用首页和图片最重的文章页，从预期读者区域（至少美国东/西部与欧洲）分别测试移动/桌面、冷/暖缓存，并记录 TTFB、LCP、CLS、传输图片体积和客户端 JavaScript；上线后用真实用户数据复核第 75 百分位。来源：[Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare Global Cache](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Google Lab and Field Data](https://web.dev/articles/lab-and-field-data-differences)，访问于 2026-08-26。
+
+### 6.2 M4 public 身份与构建边界
+
+- `MYTHIC_CHINA_SITE_ORIGIN` 是未来 public 构建唯一允许的显式 origin 名称。M4-U4A 的纯校验只接受真实 HTTPS origin，拒绝缺失值、路径、query、fragment、credential、port、IP、localhost 与保留示例域；当前没有 runner 读取该变量，也没有真实值。
+- Publisher 固定为 `Mythic China / Organization`，author 固定为 `Mythic China Editorial / Organization`；两者可见身份页均为 `/about/`，并分别使用 `#publisher` 与 `#editorial` 锚点。当前不输出 `og:image`，避免借用不匹配的钟馗资产。
+- `src/site/public-release.ts` 只在 published Entry 和 Collection 各至少一项时返回 public 投影；`src/site/seo.ts` 只构造内存中的 canonical、Open Graph 与 JSON-LD view model；`src/site/release-artifacts.ts` 只在 fixture 中构造 published-only Sitemap/RSS 字符串。三者均假定输入已经通过现有 Schema/内容图门禁，并另有完整 synthetic validated content graph fixture。
+- U4B public runner 必须从正式 loader 进入 Schema、content graph、visual graph/file inventory 与 approved/current resolver，再形成 published projection；不得 raw-load 内容后直接调用这些纯 builder 绕过正式校验链。
+- M4-U4A 当时没有改变 `readBuildIntent()`、`SiteLayout`、六类页面、Astro endpoint 或默认输出；后续候选任务只为 `SiteLayout` 增加自托管字体 preload，不接入 public metadata/endpoint。`public` intent 继续失败，review `dist/` 仍为 7 个 noindex 页面、14 个 Hero v2 图片、零 XML 与零客户端 JavaScript，并新增 4 个哈希 WOFF2 产物。Collection Hero/Guide Hero、双语术语、CJK、字体/成图人工判断先在 noindex 直达页完成 U5 候选预检，Explore/Collections 可以保持真实空状态；该证据不关闭完整 U5。M5/M6 完成 6 篇 Entry / 至少 2 个 Collection 与全部资产并作出人工 published 决定后，必须在真实非空索引和最终页面上关闭 U5，再确认 origin 并接入 U4B public runner、页面 metadata、XML routes 与独立 public verifier。U4B 必须消费已批准的字体/CJK 与最终 U5 证据，并形成包含源 revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt；dirty source 一律 nondeployable。M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`；若复用不可变制品，receipt 还必须包含完整 artifact inventory/digest。pending 字体、system fallback、早期 U5 预检或 dirty-worktree `dist/` 均不得代替发布资格。该单元只建立本地 public 构建能力；一个 Entry + 一个 Collection 是纯技术 fail-closed 下限，不替代 M6 的 6 篇 Entry / 至少 2 个 Collection 预览候选或 M7 生产发布与发布后基线验收。最终 U5 后若发生实质内容、状态、模板、CSS、字体、Hero 或 manifest 变化，相关 U5 证据失效；origin、public metadata、runner 或 XML 变化通常只使 U4B 证据失效，除非同时改变可见页面渲染。
+- Review/public output 必须允许普通外部 citation anchor，但所有页面子资源必须来自单斜杠根相对本地 URL 与批准的构建 inventory；远端或 protocol-relative `src`/`srcset`/`poster`/`data`/资源型 `href`、远端 CSS `url()`/`@import`、`base`、`iframe`、`object`、`embed`、form 与 meta refresh 均由 output policy 阻断，不能绕开 Asset Manifest、权利、hash、性能和隐私门禁。
 
 ## 7. 动态能力边界
 
@@ -326,9 +341,9 @@ MVP 至少建立：
 - 键盘、焦点、减弱动效和自动化无障碍检查。
 - LCP 主图、图片尺寸预留和客户端 JavaScript 预算检查。
 
-M2 首批自动门禁固定为：Prettier check、ESLint correctness、Vitest 内容/架构测试、`astro check` 与 `astro build`。`build` script 已先运行 `astro check` 再运行 `astro build`，聚合 `check` 按格式、lint、测试、类型/内容检查、build 顺序执行；不得把单独 build 成功写成类型检查通过。历史 M2 审计基线是 2026-08-28 的 4 个测试文件/41 项测试、Astro 0 error / 0 warning / 0 hint 与 3 页静态输出。Hero v2 返修后于 2026-08-29 的当前聚合门禁结果为 10 个测试文件/72 项测试、Astro 检查 36 个文件且 0 error / 0 warning / 0 hint、静态输出 3 页；非默认 `visual:build:check` 另复核七个 local master 和三份 current responsive rendition 的 22 个响应式图片目标。来源：[Astro type checking](https://docs.astro.build/en/guides/typescript/#type-checking)，访问于 2026-08-27。
+M2 首批自动门禁固定为：Prettier check、ESLint correctness、Vitest 内容/架构测试、`astro check` 与 `astro build`。`build` script 已先运行 `astro check` 再运行 `astro build`，聚合 `check` 按格式、lint、测试、类型/内容检查、build 顺序执行；不得把单独 build 成功写成类型检查通过。历史 M2 审计基线是 2026-08-28 的 4 个测试文件/41 项测试、Astro 0 error / 0 warning / 0 hint 与 3 页静态输出；Hero v2 返修后于 2026-08-29 的历史结果为 10 个测试文件/72 项测试、Astro 检查 36 个文件且零诊断、静态输出 3 页，非默认 `visual:build:check` 另复核七个 local master 和三份 current responsive rendition 的 22 个响应式图片目标。当前聚合结果以 `DEV_WORKFLOW.md` 最新完成记录为准。来源：[Astro type checking](https://docs.astro.build/en/guides/typescript/#type-checking)，访问于 2026-08-27。
 
-Playwright、浏览器二进制与自动无障碍浏览器测试延后到 M4 出现真实 Home/Collection/Entry 纵切片后再评估引入；M2 不为尚不存在的生产页面承担浏览器依赖。M2 真实安装、定向验证、聚合门禁和未授权的 dev/preview 服务命令均记录在 `DEV_WORKFLOW.md`。
+M4-U5 的真实浏览器检查需要单独的服务/浏览器授权；当前不引入 Playwright、`tests/browser` 或浏览器二进制。任何自动浏览器依赖仍须独立的架构、依赖和验证授权。M2 真实安装、定向验证、聚合门禁和 dev/preview 服务命令均记录在 `DEV_WORKFLOW.md`。
 
 ## 12. MVP 明确不做
 
@@ -341,7 +356,7 @@ Playwright、浏览器二进制与自动无障碍浏览器测试延后到 M4 出
 
 ## 13. 待确认决策
 
-- Vercel、Cloudflare 或其他静态托管的最终选择、账户归属、Git 发布授权和回滚流程；当前未创建任何平台项目，M2 不作托管选择。
+- Vercel 已选为未来静态托管目标；仍待确认账户/项目归属、稳定 production alias/hostname、预览保护、Git 发布授权、回滚和退出路径。经 Project owner 确认后，该 alias/hostname 的 HTTPS origin 才能写入 `MYTHIC_CHINA_SITE_ORIGIN`。当前未创建任何平台项目。
 - 自有域名的品牌/权利核查、注册商、DNS 托管、canonical 主域与接入时点；当前未购买或配置域名。
 - 邮件、分析和表单提供商。
 - 本地 Git 已在 `F:\codex-project\mythic-china` 初始化；用户随后建立 `main`、M1/M2 提交与 `origin`。M3-U1 开始前，本地 HEAD、`main` 与本地 `origin/main` 对齐到 `f258227da1b5a73f22c87ec99722243742db0ba0`，工作树干净；本次未执行 fetch，因此不证明服务器端分支状态。这些事实不代表代理获得 add、commit、push 或发布授权；后续版本控制和首次预览/生产发布仍须逐次确认。

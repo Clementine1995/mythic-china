@@ -453,6 +453,32 @@ describe("validateContentGraph", () => {
     expect(() => validateContentGraph(graph)).not.toThrow();
   });
 
+  it("blocks unresolved Chinese Source title language at ready lineage", () => {
+    const graph = makeReadyEvidenceGraph({
+      source: makeSourceData({
+        titleZh: "示例来源",
+        titleZhLang: "zh",
+      }),
+      role: "primary",
+      evidenceContext: "historical-tradition",
+    });
+
+    expect(issueCodes(graph)).toContain(
+      "unresolved-ready-source-title-language",
+    );
+
+    const entry = graph.entries[0];
+    const source = graph.sources[0];
+    if (!entry || !source) throw new Error("Missing ready locale fixtures.");
+
+    entry.data.status = "editorial-review";
+    expect(() => validateContentGraph(graph)).not.toThrow();
+
+    entry.data.status = "ready";
+    source.data.titleZhLang = "zh-Hans";
+    expect(() => validateContentGraph(graph)).not.toThrow();
+  });
+
   it("requires visible editorial Markdown instead of comment-only body", () => {
     const graph = makeDraftGraph();
     const entry = graph.entries[0];
@@ -465,7 +491,25 @@ describe("validateContentGraph", () => {
     entry.body = "<!-- unfinished editorial note";
     expect(issueCodes(graph)).toContain("missing-editorial-body");
 
+    entry.body = "<div></div>";
+    expect(issueCodes(graph)).toContain("missing-editorial-body");
+
+    entry.body = '<!-- editorial note --><div aria-label="metadata"></div>';
+    expect(issueCodes(graph)).toContain("missing-editorial-body");
+
+    entry.body = '<div title=">" style="display:block"></div>';
+    expect(issueCodes(graph)).toContain("missing-editorial-body");
+
+    entry.body = '<img src="/local-image.webp" alt="Image only">';
+    expect(issueCodes(graph)).toContain("missing-editorial-body");
+
+    entry.body = "![Image only](/local-image.webp)";
+    expect(issueCodes(graph)).toContain("missing-editorial-body");
+
     entry.body = "<!-- editorial note -->\n## Core story";
+    expect(() => validateContentGraph(graph)).not.toThrow();
+
+    entry.body = "<p>Reader-visible prose.</p>";
     expect(() => validateContentGraph(graph)).not.toThrow();
 
     entry.body = "`<!-- visible code literal -->`";

@@ -31,12 +31,16 @@
   --container: 90rem;
   --measure: 68ch;
   --font-display:
-    "Geist Sans", Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    "Mythic Display", Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
   --font-story:
-    "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-zh-display:
-    "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei",
+    "Mythic Story", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-zh-display: system-ui, sans-serif;
+  --font-zh-hans-display:
+    "Mythic Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei",
     sans-serif;
+  --font-zh-hant-display:
+    "Mythic Han Sans TC", "Noto Sans CJK TC", "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --fast: 160ms;
 }
@@ -345,10 +349,16 @@ h3 {
   font-size: 0.95rem;
 }
 
-[lang="zh"],
-[lang="zh-Hans"],
-[lang="zh-Hant"] {
+[lang="zh"] {
   font-family: var(--font-zh-display);
+}
+
+[lang="zh-Hans"] {
+  font-family: var(--font-zh-hans-display);
+}
+
+[lang="zh-Hant"] {
+  font-family: var(--font-zh-hant-display);
 }
 
 .manifest-hero-picture {
@@ -578,6 +588,35 @@ h3 {
   grid-column: 8 / -1;
 }
 
+.collection-hero__figure {
+  position: relative;
+  grid-row: 1;
+  grid-column: 1 / -1;
+  align-self: stretch;
+}
+
+.collection-hero__figure .manifest-hero-picture {
+  height: 100%;
+  min-height: min(40rem, calc(100dvh - 4.5rem));
+  aspect-ratio: auto;
+}
+
+.collection-hero__figure .visual-note {
+  position: absolute;
+  inset-inline: auto var(--space-6);
+  inset-block-end: var(--space-6);
+  max-width: min(30rem, calc(100% - 3rem));
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-panel);
+  background: color-mix(in srgb, var(--realm-bg) 88%, transparent);
+  color: color-mix(in srgb, var(--realm-on-surface) 76%, transparent);
+}
+
+.collection-page--visual .collection-hero__copy {
+  grid-column: 1 / span 5;
+  text-shadow: 0 0.1rem 1.5rem var(--realm-bg);
+}
+
 .collection-hero__surface .realm-surface {
   min-height: clamp(25rem, 42vw, 39rem);
   background:
@@ -787,6 +826,22 @@ h3 {
 .entry-simple-header h1 {
   max-width: 15ch;
   margin-block-start: var(--space-6);
+}
+
+.entry-attribution {
+  display: flex;
+  min-height: 4.5rem;
+  border-block-end: 1px solid var(--rule);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-8);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.entry-attribution span {
+  color: var(--ink);
+  font-weight: 620;
 }
 
 .entry-reading {
@@ -1240,6 +1295,28 @@ h3 {
     grid-row: 2;
   }
 
+  .collection-hero__figure {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .collection-hero__figure .manifest-hero-picture {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .collection-hero__figure .visual-note {
+    position: static;
+    max-width: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  .collection-page--visual .collection-hero__copy {
+    grid-column: 1;
+    color: var(--realm-on-surface);
+  }
+
   .collection-hero__copy {
     grid-row: 1;
   }
@@ -1300,6 +1377,12 @@ h3 {
 
   .entry-reading {
     padding-block-start: var(--space-8);
+  }
+
+  .entry-attribution {
+    padding-block: var(--space-4);
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .entry-section__heading {

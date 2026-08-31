@@ -2,7 +2,9 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），当前提交基线为 `5f327b6`（`M4-u2 completed`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2 并提交 U2 收口基线，随后单独授权 M4-U3；U3 纯 published-only release 投影、fixture 与 noindex review 输出门禁已完成本地实施和验证，改动尚未提交。正式字体与 U5 完整页面门禁仍未完成；U4-U5、依赖、服务、代理 Git 写入、部署与发布未获授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），M4-U2 历史基线为 `5f327b6`（`M4-u2 completed`），最近确认的 M4-U3 实现基线为 `e94eaca`（`updatee`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2/U3 与 M4-U4A，并于 2026-08-30 自行提交 U3 实现与原收口文档；M4-U4A 完成 HTTPS origin 校验、公共身份、public inventory、SEO 与 release artifact 纯基础设施，但不开放 public build、不创建 Vercel 项目且不部署。首个纵切片的编辑形态、Hero A 方向与字体方案现已获阶段性确认；本地候选任务已获授权，形成 Git-ignored Hero 待审图与可替换英文自托管字体接线。具体图片/字体页面效果、CJK 工具、M4-U5、M4-U4B、未来服务、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+
+`docs/` 下的需求、设计和阶段材料只能引用本文件中的命令与门禁，不得复制形成第二套命令，也不得替代根目录当前事实说明或执行前现场核查。
 
 ## 当前环境身份门禁
 
@@ -28,12 +30,12 @@ M2 已在当前非空仓库根手工最小初始化；没有运行 starter/templ
 
 已实施的项目环境合同：
 
-- Node.js 24 LTS；固定绝对路径为 `D:\Program Files\nvm\v24.16.0\node.exe`，初始精确值与当前 `.node-version` 均为 `24.16.0`，`engines.node` 限制为 `>=24.16.0 <25`。所有会话和项目命令必须显式调用该路径，不依赖 PATH、`nvm use` 或 Codex bundled runtime。
+- Node.js 24 LTS；本机工作流固定绝对路径为 `D:\Program Files\nvm\v24.16.0\node.exe`，初始精确值与当前 `.node-version` 均为 `24.16.0`，`engines.node` 与 package script 守卫共同接受 `>=24.16.0 <25`。本机命令必须显式从该路径/同目录 Corepack 启动，不依赖当前公开 PATH、`nvm use` 或 Codex bundled runtime；干净 clone、CI 和未来托管构建只需在其受控 Node 安装上满足 engine 范围，不比较 Windows 路径。
 - pnpm 11；初始精确值为 `11.22.0`，当前 `packageManager` 记录 `pnpm@11.22.0`，`engines.pnpm` 限制为 `>=11.22.0 <12`，仓库只保留 `pnpm-lock.yaml`。
 - Astro 7 静态模式、TypeScript strict、Entry Markdown、结构化 YAML、Content Layer、内容图校验与 Vitest；不安装 adapter、MDX、UI/CSS/动画框架、Playwright 浏览器、CMS、数据库、认证、搜索、外部服务或商业依赖。
 - 当前非空仓库只允许在精确根目录手工建立最小 Astro 配置，不运行 starter/template 向导，不创建临时项目、旁路目录、worktree 或新仓库。
 
-固定 Node 身份只读验证：
+本机固定 Node 身份只读验证：
 
 ```powershell
 $mythicProjectNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
@@ -46,7 +48,7 @@ if ($mythicProjectNodeVersion -ne 'v24.16.0') {
 }
 ```
 
-通过标准：命令退出成功并精确返回 `v24.16.0`。不得用无路径限定的 `node` 结果替代此门禁。
+通过标准：本机命令退出成功并精确返回 `v24.16.0`。不得用当前公开 PATH 的无路径限定 `node` 结果替代本机门禁。package scripts 内的 `scripts/verify-runtime.mjs` 另只验证 `>=24.16.0 <25`，以免把本机文件路径错误地扩散到干净 clone、CI 或托管环境；两项职责不能互相替代。
 
 2026-08-27 的只读环境核查：公开 PATH 为 Node.js `16.20.2`、npm `8.19.4`、pnpm `11.19.0`、Corepack `0.17.0`。这些 PATH 工具不得用于本项目。用户随后固定所有会话使用 `D:\Program Files\nvm\v24.16.0\node.exe`；该目录已验证为 Node.js `24.16.0`，并自带 npm `11.13.0` 与 Corepack `0.35.0`，但没有现成的 `pnpm.cmd`。M1 临时预览使用的 Codex bundled Node.js `24.19.0` 只属于历史临时服务，不得当作项目长期运行时或借此跳过授权。
 
@@ -105,7 +107,7 @@ if ($LASTEXITCODE -ne 0 -or $mythicPnpmVersion -ne '11.22.0') {
 if ($LASTEXITCODE -ne 0) { throw 'M2 dependency installation failed.' }
 ```
 
-影响：`corepack install` 只把 `packageManager` 指定的 pnpm 下载到 Corepack 用户缓存；当前机器的 pnpm 内容寻址 store 实际为 `F:\.pnpm-store\v11`，项目内只生成 `node_modules` 与唯一的 `pnpm-lock.yaml`。pnpm 11 默认的一日依赖成熟期策略因 Astro `7.2.8` 为新发布的已确认精确版本，在项目根 `pnpm-workspace.yaml` 记录 `astro@7.2.8` 的 `minimumReleaseAgeExclude`；同一文件显式记录 `allowBuilds.esbuild: false`，与 `--ignore-scripts` 的既有供应链边界一致，不授权第三方生命周期脚本。该文件不声明额外工作区包。安装不创建全局 pnpm shim，不修改系统 PATH、nvm 当前选择或其他项目。上述 PATH 调整只作用于当前 PowerShell 进程，确保 pnpm 启动的 `node`、Astro、ESLint、Vitest 与 Prettier 子进程也解析到固定目录。若根目录、固定运行时/Corepack/pnpm 精确版本、manifest 白名单或锁文件种类不符，若安装要求额外依赖/构建批准，或任一命令失败，立即停止，不改用其他 Node、pnpm、lock 或 fallback。
+影响：`corepack install` 只把 `packageManager` 指定的 pnpm 下载到 Corepack 用户缓存；当前机器的 pnpm 内容寻址 store 实际为 `F:\.pnpm-store\v11`，项目内只生成 `node_modules` 与唯一的 `pnpm-lock.yaml`。pnpm 11 默认的一日依赖成熟期策略因 Astro `7.2.8` 为新发布的已确认精确版本，在项目根 `pnpm-workspace.yaml` 记录 `astro@7.2.8` 的 `minimumReleaseAgeExclude`；同一文件显式记录 `allowBuilds.esbuild: false`，与 `--ignore-scripts` 的既有供应链边界一致，不授权第三方生命周期脚本。该文件不声明额外工作区包。安装不创建全局 pnpm shim，不修改系统 PATH、nvm 当前选择或其他项目。上述 PATH 调整只作用于当前 PowerShell 进程，确保本机 pnpm 启动的 `node`、Astro、ESLint、Vitest 与 Prettier 子进程也解析到开发基线目录；package script 守卫随后验证版本仍落在 engine 范围。若根目录、本机固定运行时/Corepack/pnpm 精确版本、manifest 白名单或锁文件种类不符，若安装要求额外依赖/构建批准，或任一命令失败，立即停止，不改用当前公开 PATH、其他 pnpm、lock 或 fallback。
 
 安装后回查：
 
@@ -130,7 +132,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Project child-process runtime verification fai
 git status --short --branch
 ```
 
-初始化必须建立 `format:check`、`lint`、`test`、`typecheck`、`build` 与聚合 `check` 的真实 script；其中 `build` 必须先执行 `astro check` 再执行 `astro build`，`check` 按格式、lint、Vitest、build 的顺序执行。所有命令都通过固定 Corepack 显式调用：
+初始化必须建立 `format:check`、`lint`、`test`、`typecheck`、`build` 与聚合 `check` 的真实 script；其中 `build` 必须先执行 `astro check` 再执行 `astro build`，`check` 按格式、lint、Vitest、build 的顺序执行。本机命令都通过固定 Corepack 显式调用；package scripts 自身不编码机器路径：
 
 ```powershell
 & $mythicProjectCorepack pnpm run format:check
@@ -142,6 +144,8 @@ git status --short --branch
 ```
 
 `dev` 与 `preview` script 可以写入 manifest，但本轮没有服务启动授权，不执行。首次锁文件生成并通过门禁后，干净环境复现使用 `& $mythicProjectCorepack pnpm install --frozen-lockfile --ignore-scripts`；任何 manifest/lock 不一致必须失败，不允许在验证阶段静默更新锁文件。
+
+自动化验证默认只读取仓库、锁定依赖和本地 fixture，并写入明确的可再生构建产物；不得连接、创建、启动、重启或清空真实数据库、消息系统、缓存、对象存储或其他外部基础设施，也不得调用真实表单、邮件、分析、支付或其他写接口。未来确需隔离集成环境时，必须另列资源身份、授权、影响和真实联调入口。
 
 定向测试使用同一身份门禁和进程环境，例如：
 
@@ -158,6 +162,8 @@ git status --short --branch
 ```
 
 影响：命令会启动本地 HTTP 服务并持续占用端口，必须记录实际监听地址和 PID；验收完成、根目录/运行时身份变化、出现非预期外部监听或服务错误时立即 `Ctrl+C`，随后只读确认端口不再监听。本次 M2 没有获得或执行这项服务授权。
+
+`dev` / `preview` 属于会改变本地进程与端口状态的运行操作。端口查询、HTTP GET 或现有进程状态查询只是只读观测，不得隐式启动、重启、修复或替代上述授权；状态不可达也不能自动推导出启动许可。
 
 M2 执行记录（2026-08-27 初始化；2026-08-28 审计修复）：
 
@@ -317,6 +323,16 @@ rg -n 'https?://' docs README.md
 ```
 
 通过标准：外部链接位于明确的“来源”“参考”或正文引用语境，不存在裸链接堆叠和来源不明的视觉资产。
+
+### 差异完整性
+
+影响：只读检查当前工作树差异，不修改索引或文件。
+
+```powershell
+git diff --check
+```
+
+通过标准：命令退出成功且没有空白错误。
 
 ## Git 与版本控制
 
@@ -503,9 +519,9 @@ M4-U1 开始前的只读核查记录（2026-08-29）：
 
 ### M4-U2 review 构建意图
 
-M4 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。当前唯一允许值仍为 `review`；缺失、`public` 或其他未知值都必须失败。M4-U3 已建立纯 published-only release 数据投影，但它不是 build intent 或 deployable artifact；`public` 只有在 U4 建立真实 origin/identity、SEO 输出与发布门禁后才能另行评估加入，不能由 `NODE_ENV`、平台 URL 或内容数量推断。
+M4 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。当前唯一允许值仍为 `review`；缺失、`public` 或其他未知值都必须失败。M4-U3 已建立纯 published-only release 数据投影，M4-U4A 又建立纯 public/SEO builder，但它们都不是 build intent 或 deployable artifact；`public` 只有在 M4-U4B 获得真实 origin、published 内容、页面/output 接线与本地 public 技术门禁后才能另行加入，不能由 `NODE_ENV`、Vercel URL 或内容数量推断。该技术门禁不代表 M6 远端预览或 M7 生产发布资格。
 
-项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但每次启动、停止或重启仍须单独授权。M4-U2 页面评审已获得并使用一次本地 preview/浏览器授权，该授权不自动延续到 U3-U5。
+项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但每次启动、停止或重启仍须单独授权。M4-U2 页面评审已获得并使用一次本地 preview/浏览器授权，该授权不自动延续到 M4-U3–M4-U5。
 
 ### M4-U2 页面、静态与浏览器验证记录
 
@@ -514,20 +530,58 @@ M4 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。当
 - 固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、13 个测试文件/87 项测试、`astro check`（53 个文件，0 error、0 warning、0 hint）与 7 页静态 build。产物审计确认全部页面为 `noindex, nofollow`、全部内部链接有效、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并精确生成 14 个 Hero v2 AVIF/WebP 页面输出。
 - `pnpm run visual:build:check` 回归通过七个 local master 与三份 current responsive rendition 的 22 个实际输出复核。
 - 获单独授权后启动本地 preview，并在真实浏览器逐页复核全部 7 页的 1440×900、768×900 与 390×844 视口；另在 Project owner 当前 411×651 视口复核 Explore。未发现横向溢出或控制台错误/警告，页面保持 `noindex, nofollow` 与零客户端 JavaScript。
-- Project owner 于 2026-08-29 明确确认 M4-U2 页面方向。该确认基于系统 fallback 字体，不构成正式字体、键盘全链、真实 200% 缩放、禁用 JavaScript、reduced-motion、图片失败、性能、跨平台 fallback、U5 最终视觉或发布批准。
+- Project owner 于 2026-08-29 明确确认 M4-U2 页面方向。该确认基于系统 fallback 字体，不构成正式字体、键盘全链、真实 200% 缩放、禁用 JavaScript、reduced-motion、图片失败、性能、跨平台 fallback、M4-U5 最终视觉或发布批准。
 - U1/U2 最终收口已由用户提交为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`）；`8c6d12cabce11741bb83941904993f4d8831c818` 保留为 U2 主体历史基线。代理未执行 Git 写入、部署或发布。
 - 未改内容、Schema、manifest、production record、repository source、依赖或 lockfile。未来 Hero 版本切换必须同步受控页面图片 registry；不一致时构建失败，不静默回退。
 
 ### M4-U3 release 投影与探索入口门禁
 
-Project owner 于 2026-08-29 单独授权 M4-U3，并确认采用纯 release 投影、继续拒绝 public build、沿用现有 About 四段静态文案。授权只覆盖已列明的 release/review 投影、site 测试、既有输出 verifier 与四份收口文档；不包含页面/CSS、内容/Schema、资产、依赖、服务、浏览器、Git 写入、部署或发布。
+Project owner 于 2026-08-29 单独授权 M4-U3，并确认采用纯 release 投影、继续拒绝 public build、沿用现有 About 四节静态文案。授权只覆盖已列明的 release/review 投影、site 测试、既有输出 verifier 与四份收口文档；不包含页面/CSS、内容/Schema、资产、依赖、服务、浏览器、Git 写入、部署或发布。
 
 - 新增纯 `createReleaseProjection()`：只从已验证内容图选择 `published` Entry/Collection；Entry 按 `publishedAt` 降序并以稳定 ID 打破同日并列，Collection 按英文标题再按稳定 ID 排序；published Entry 缺日期时失败。它不承担 public build、SEO、最小发布内容量、关系复验或 Home 配置。
 - review 投影继续负责全部 non-archived 评审路由和固定 Home draft 例外，并委托 release 投影提供 Explore/Collections/Related Entries 的 published-only view model；现有页面 API 与 7 页 review inventory 不变。
 - fixture 覆盖空、六状态单项、多项排序、并列和缺日期失败；review wrapper 另有薄接线断言。输出 verifier 扩展为真实空状态、About 四节、`lang`、skip link、唯一 main target、桌面/原生 details 移动导航、内部链接、无 inline handler/`javascript:` URL 与零客户端 JavaScript 检查。
 - 固定 Node/Corepack 下 `pnpm run check` 通过 Prettier、ESLint、14 个测试文件/90 项测试、`astro check`（55 个文件，0 error、0 warning、0 hint）与 7 页静态 build。输出仍为 7 页 `noindex, nofollow`、14 个 Hero v2 AVIF/WebP、无 canonical/OG/JSON-LD/Sitemap/RSS/客户端 JavaScript，并通过 release 真实空状态与静态导航语义门禁。空 Terminology 提示符合当前 inventory。
-- U3 没有改视觉链，因此没有重跑非默认 `visual:build:check`；U2 已记录的七个 local master 与 22 个 current 响应式输出证据不被改写。静态门禁只证明键盘语义基线和无 JS 输出，不证明真实 Tab 顺序、details 操作、焦点可见/遮挡或回返；这些仍属于 U5。
-- 写入前 HEAD、`main` 与本地 `origin/main` 均为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`，工作树干净，未执行 fetch。U3 改动尚未提交；未启动服务或浏览器，未执行 Git 写入、部署或发布。
+- M4-U3 没有改视觉链，因此没有重跑非默认 `visual:build:check`；M4-U2 已记录的七个 local master 与 22 个 current 响应式输出证据不被改写。静态门禁只证明键盘语义基线和无 JS 输出，不证明真实 Tab 顺序、details 操作、焦点可见/遮挡或回返；这些仍属于 M4-U5。
+- U3 写入前 HEAD、`main` 与本地 `origin/main` 均为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`，工作树干净。Project owner 于 2026-08-30 将 U3 实现与原收口文档提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；提交后只读核对时 HEAD、`main` 与本地 `origin/main` 对齐且工作树干净。未执行 fetch，因此不能据此证明服务器端分支状态；代理未启动服务或浏览器，也未执行 Git 写入、部署或发布。
+
+### M4-U4A public SEO 纯基础设施
+
+2026-08-30，Project owner 说明当前没有正式域名、未来使用 Vercel，并授权按推荐方案继续。该授权固定以下本地范围：
+
+- 未来静态托管目标为 Vercel；当前不创建或关联 Vercel 项目，不安装 CLI/adapter，不写平台配置，不部署。
+- Publisher 为 `Mythic China / Organization`，author 为 `Mythic China Editorial / Organization`，可见身份页为 `/about/`；About 保持既有四节，只在 Editorial method 内增加一段团队身份说明，并为 publisher/editorial 增加稳定锚点。
+- 当前采用 text-only Open Graph，不输出 `og:image`，不借用钟馗 Entry 资产作为站点或 Collection 默认图。
+- `MYTHIC_CHINA_SITE_ORIGIN` 只冻结为未来 public runner 的显式配置名；当前没有真实值，也没有代码读取环境变量。纯 origin validator 拒绝缺失、非 HTTPS、credential、port、路径/query/hash、IP、localhost 与保留示例域，不从 Vercel URL 或 `NODE_ENV` 推断。
+- `public-release` 在 published Entry/Collection 任一为空时失败；`seo` 纯构建 canonical/OG/JSON-LD 并校验页面 kind/path、日期、身份、Collection published ItemList、跨页 metadata 唯一性和 script-context 序列化；`release-artifacts` 只接受固定静态路由和 published 投影，生成确定性 Sitemap/RSS 字符串，并拒绝空 feed、非法日期、重复 URL 与 XML 1.0 非法字符。
+- 四份新 site 测试包含一组经过正式 Schema 与内容图 validator 的完整 synthetic published content graph；该 fixture 未经过真实 loader 或 visual graph。其他 unit fixture 只证明对应纯函数边界，不代表真实 inventory 已发布。输出 verifier 另锁定 About 可见身份锚点。
+- M4-U4A 没有修改 `package.json`、`astro.config.mjs`、`SiteLayout`、模板、动态路由、内容状态、Schema、资产、依赖或 lockfile。`readBuildIntent("public")` 继续失败，仓库没有 public runner、Sitemap/RSS endpoint、public output verifier、Vercel 配置或 deployable public `dist/`。
+- 固定 Node/Corepack 下最终 `pnpm run check` 完整通过 Prettier、ESLint、18 个测试文件/157 项测试、Astro check（63 个文件 0 error、0 warning、0 hint）、7 页 review build 与输出 verifier；review 输出仍为 7 个 `noindex, nofollow` 页面、14 个 Hero v2 AVIF/WebP、零 XML 与零客户端 JavaScript。
+- M4-U4A 未改视觉链，因此未重跑非默认 `visual:build:check`；M3/M4-U2 的七个 local master 与 22 个 current 响应式输出证据保持不变。本单元未运行 dev/preview/browser，未执行 Git 写入、Vercel 项目操作、部署或发布。
+- 当前真实 inventory 为 0 published Entry / 0 published Collection；唯一 Collection 在进入 published 状态前还需要自己的 approved Hero 与模板接线，钟馗完整正文/研究、正式字体和 M4-U5 页面资格也未闭合。因此 M4-U4A 纯基础设施已完成，M4-U4B、部署与发布继续 fail closed。
+
+### 首个纵切片编辑、Hero A 与英文字体候选
+
+2026-08-30，Project owner 在经单独授权启动的本地 preview 中确认当前内容、byline/fact-check、模板排版与 CSS 无图 Collection Hero 可继续，并选择 Hero A、接受字体方案、要求保留字体替换空间，随后授权本地候选任务及停止 preview。
+
+- preview 评审结束后已停止 PID `22316`；`127.0.0.1:4321` 不可达。该授权已消费，不形成后续可复用服务许可。
+- Chinese Underworld Hero brief 已记录为 approved；OpenAI ImageGen 生成的 desktop 01/02 与 independently composed mobile 01 只保存在 Git-ignored `.local/visual-production/explore/chinese-underworld/hero-a-v1-review/`。desktop 01 已预筛退回；Project owner 于 2026-08-31 选中 desktop 02/mobile 01 进入生产准备。该选择不等于 publication rights、五类审核或资产批准；没有上传馆藏/历史参考图，也没有 master、production record、manifest、repository source、Collection 绑定或 approved/current 图片。
+- 从官方 release 固定 Geist v1.7.2 Roman variable 与 Source Serif 4.005R Roman 400/600、Italic 400 共 4 份未修改 WOFF2；许可证、archive/file SHA-256、preload 角色与来源保存在 `src/assets/fonts/font-assets.json`。Source Serif 上游未发布 archive digest，因此 inventory 只标记本地计算值。
+- 字体通过 `fonts.css` 的 `Mythic Display` / `Mythic Story` alias、`global.css` role token 与 `font-assets.ts` 的 `?no-inline` URL registry 接入。所有页只 preload display Roman，Entry 额外 preload story Roman 400；Semibold/Italic 按命中加载。页面与 verifier 不认识具体上游文件名；typography test 从 inventory 动态核对每个 path/role/alias/style/weight/preload 映射，因此替换只改资产、inventory、alias、registry 和经实测的 metrics，不改模板、组件或门禁代码。
+- 未安装任何依赖。本机没有获准的 CJK 子集/cmap/RFN 改名工具，因此未下载或落库 Source Han 文件；Hans/Hant 字符表和跨平台 fallback 也未闭合。Source `titleZhLang` 与 `titleZh` 现成对受控；四条英文馆藏记录的中文标题 script 缺来源证据，明确保存为 generic `zh` 而不猜简繁，已知教育部词条为 `zh-Hant`。内容图会拒绝引用 generic `zh` 标题的 Entry 提升为 `ready | published | archived`。
+- 本单元修改字体输出链但没有修改 visual master/manifest/repository source，因此未运行非默认 `visual:build:check`。固定 Node/Corepack 下完整 `pnpm run check` 已通过 Prettier、ESLint、19 个测试文件/160 项测试、Astro check（65 个文件，0 error、0 warning、0 hint）、7 页 review build 与输出 verifier；`dist/` 精确包含 14 个既有 Hero v2 图片、4 个按 inventory SHA-256 核验的 WOFF2、零 XML 与零客户端 JavaScript。
+- 内容保持 `editorial-review`；Terminology 保持 `source-checked`；Guide `heroAssetId` 与 Collection `heroAssetId` 均为 `null`；真实 published inventory 仍为 0/0。
+
+### 2026-08-31 生命周期与机器门禁加固
+
+Project owner 授权更新权威文档并执行推荐的下一本地批次；范围只包含运行时可移植性、日期时序、正文可见性、review 输出远端子资源策略、匹配测试和非服务型本地验证，不包含依赖、资产/CJK 工具、服务/浏览器、Git、Vercel 或发布。
+
+- 文档将 M4-U5 拆成 noindex 直达页候选预检与 M6 完整 published inventory 上的最终关闭；`published` 表示可进入 public artifact，不表示已部署。M6 还须由 Project owner 批准目标公开日期，不得用构建日、预览日或部署日代填。最终 U5 后才确认 origin 和接入 U4B。
+- `scripts/verify-runtime.mjs` 不再比较本机 `execPath`，只接受 `>=24.16.0 <25`；`.node-version` 与本节的 Windows 绝对路径继续固定本机开发基线。架构测试阻断机器路径重新进入 package guard。
+- Entry Schema、SEO builder 与 release artifact builder 分别阻断 `updatedAt < publishedAt`；内容图阻断只有注释、空 HTML 标签或图片的非 draft 正文。
+- `scripts/review-output-policy.mjs` 允许显式 HTTP(S)、根相对或 fragment citation anchor，但在实体解码后复核 scheme/origin；页面/CSS 子资源必须为单斜杠根相对本地 URL。quote-aware tag 扫描、CSS comment 归一化与反斜杠 escape fail-closed 及独立负例共同阻断 `base`、iframe/object/embed、form、meta refresh、anchor ping、responsive preload、SVG/legacy 资源属性、远端/内联子资源与 `image-set()` 绕过；review output verifier 消费同一策略。
+- 完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check（67 个文件，0 error、0 warning、0 hint）、7 页 review build 与输出 verifier。产物仍为 7 个 `noindex, nofollow` 页面、14 个 Hero v2 图片、4 个 WOFF2、零 XML 与零客户端 JavaScript。
+- 本批不修改 visual master/manifest/repository source，因此未运行非默认 `visual:build:check`；没有启动服务/浏览器、安装依赖、执行 Git 写入、Vercel 操作、部署或发布。
 
 ## 数据库、外部服务与真实写入口
 
@@ -538,9 +592,13 @@ Project owner 于 2026-08-29 单独授权 M4-U3，并确认采用纯 release 投
 - 真实写入影响、授权、停止条件和回查方式。
 - 隐私、数据保留和删除策略对应的可执行门禁。
 
+标准构建、自动化验证和未来静态站部署不拥有数据库、消息系统、缓存或对象存储的生命周期；除非后续架构与本文件明确纳入受控入口，否则不得创建、重建、重启、清空、迁移或轮换这些资源及其凭据。
+
 ## 发布
 
-当前不适用。没有托管项目、域名、预览环境或生产环境。任何首次预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。
+Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、一份 approved 但无资产的 Collection Hero brief、两张首选待审 Hero 图、4 份英文 WOFF2 与可见 byline/fact-check 日期；双语术语、CJK、具体 Hero/字体页面效果、Guide 自有 Hero 和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 Collection Hero asset/manifest、public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
+
+当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 
 ## 超时、中断和未知现场
 

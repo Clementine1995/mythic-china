@@ -9,27 +9,26 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | M3-U1/U2/U3/U4/U5 已完成 | M3 终验中 Hero v1 手部缺陷曾重开；Project owner 于 2026-08-29 验收 Hero v2，权利/人工审核、版本/current、Entry Hero 外键、local master 复核、响应式实际写出与工程回归重新闭合 |
-| 实施状态 | M3 已完成 | 当前一份 approved brief、七个版本化 master、七份 approved repository source rendition、两份真实 production record 与五份 manifest 记录均已建立；四个逻辑资产各有唯一 `approved + isCurrent: true`，Hero v1 保留为 `approved + isCurrent: false`；直接依赖 `sharp@0.35.4` 和非默认 `visual:build:check` 保持有效 |
+| 实施状态 | M3 已完成 | 当前 M3 的一份 approved Zhong Kui brief、七个版本化 master、七份 approved repository source rendition、两份真实 production record 与五份 manifest 记录均保留；后续 Chinese Underworld Collection Hero brief 也已 approved，desktop 02/mobile 01 已被 Project owner 从 Git-ignored local explore 候选中选中进入生产准备，但仍没有 master/asset/manifest。四个既有逻辑资产各有唯一 `approved + isCurrent: true`，Hero v1 保留为 `approved + isCurrent: false`；直接依赖 `sharp@0.35.4` 和非默认 `visual:build:check` 保持有效 |
 | 验证状态 | M3 通过 | 2026-08-29 七个 local master 的路径/尺寸/SHA-256/inventory 核验通过；三份 current responsive rendition 的 22 个 AVIF/WebP 目标全部实际生成并解码复核；完整 `pnpm run check` 通过 Prettier、ESLint、10 个测试文件/72 项测试、`astro check`（36 个文件，0 error、0 warning、0 hint）与 3 页静态 build |
 | 发布状态 | 不适用 | M3 没有远端预览或生产发布目标 |
 
-- 当前权威结论更新时间：2026-08-29。
-- 当前实现基线：`f258227da1b5a73f22c87ec99722243742db0ba0`（`feat: complete M2 content foundation`）。M3-U1 开始前的只读核查中，HEAD、`main` 与本地 `origin/main` 对齐，工作树干净；本次没有执行远端 fetch，不能据此证明服务器端状态。
+- M3 最终结论更新时间：2026-08-29；本文后续新增的跨里程碑现状只用于说明 M3 资产仍被复用，不把本需求改写为当前项目总状态。
+- M3-U1 写入前基线：`f258227da1b5a73f22c87ec99722243742db0ba0`（`feat: complete M2 content foundation`）。当时只读核查中，HEAD、`main` 与本地 `origin/main` 对齐，工作树干净；当时没有执行远端 fetch，不能据此证明服务器端状态。
 - 上位需求：[`001-mvp-foundation.md`](001-mvp-foundation.md)。
 
 ## 1. 结论与开发就绪判断
 
 - 一句话结论：M3 用一个钟馗 Entry 视觉包证明 `Source / Claim -> visual brief -> 生产 master -> versioned manifest -> approved repository source rendition -> 构建期解析与阻断` 的完整链路，不把资产样例或可转换图片源解释为页面批准。
-- 是否可以进入代码实施：M3 已完成；M4 未授权。
-- 当前阻塞项：M3 范围内无阻塞项。Entry 正文、页面接线、浏览器验收、正式字体与 SEO 属于 M4，不影响 M3 关闭。
-- 下一项允许动作：没有自动延续动作。M4、dev/preview 服务、Git 写入和发布均须 Project owner 另行授权。
+- M3 收口结论：M3 已完成；M3 范围内无阻塞项。Entry 正文、页面接线、浏览器验收、正式字体与 SEO 当时属于后续 M4，不影响 M3 关闭。
+- M3 收口时的下一动作边界：没有自动延续动作；当时的 M4、dev/preview 服务、Git 写入和发布均须 Project owner 另行授权。后续授权与当前项目状态以根目录治理文档、README、对应需求、代码、测试和执行前核查为准。
 
 ### 1.1 事实、推断与风险
 
 已确认事实：
 
 - M3 开始前的 M2 基线只有 Entry、Collection、Source、Claim、Terminology 五类 Content Layer；当时 Entry/Collection 已有 nullable `heroAssetId`，但只校验 `visual-review` 时非空，不校验真实资产外键。
-- 当前两个 Entry 与一个 Collection 均为 `draft`；钟馗 Entry 的 `heroAssetId` 为 `asset-zhong-kui-hero-primary`，另一 Entry 与 Collection 仍为 `null`。`visual/manifests` 已有五份 approved 版本记录，其中 Hero v2 与 Lead/OG/Social v1 为 current，Hero v1 为 non-current；`src/assets/images` 已有七份被其唯一引用的 approved source rendition。内容 resolver 已把 Hero 逻辑 ID 解析到显式 current v2 manifest。
+- 当前两个 Entry 与一个 Collection 的编辑形态已获阶段性接受，仍保持 `editorial-review`；钟馗 Entry 的 `heroAssetId` 为 `asset-zhong-kui-hero-primary`，Guide 与 Collection 仍为 `null`。`visual/manifests` 已有五份 approved 版本记录，其中 Hero v2 与 Lead/OG/Social v1 为 current，Hero v1 为 non-current；`src/assets/images` 已有七份被其唯一引用的 approved source rendition。内容 resolver 已把 Hero 逻辑 ID 解析到显式 current v2 manifest；Collection brief 已 approved，desktop 02/mobile 01 虽已选中进入生产准备，仍没有 manifest。
 - `docs/CONTENT_MODEL.md` 与本文已闭合逻辑资产、版本记录、current 选择、重复 role slot 和独立移动构图合同；M3-U3 已把 strict Schema、纯关系/文件 validator 和 resolver 接入真实 Astro build 调用链。
 - Astro 当前官方 Content Loader `glob()` 支持从任意本地目录加载 YAML，并通过 `base` 与 `generateId` 固定记录身份；本项目可以从 `visual/manifests` 建立构建期集合，无需为 YAML 再增加依赖。来源：[Content Loader API](https://docs.astro.build/en/reference/content-loader-reference/)，访问于 2026-08-28。
 
@@ -369,11 +368,11 @@ OG/Social 的人物与场景文字不得由生成模型烧录；若后续添加�
 - 已修改：研究内容、approved `visual/briefs`、U3 自动合同、U4 Git-ignored 本地生产边界、两份真实 production record、七份 approved source rendition、五份 manifest 版本记录、钟馗 Entry Hero 外键、U5 非默认构建验证入口、精确 Sharp 依赖与锁文件/供应链门禁。
 - 未执行：服务、ComfyUI/模型下载、M4、Git 写入和发布。
 
-## 13. 当前最终结论
+## 13. M3 最终收口结论（2026-08-29）
 
 - 需求状态：M3-U1/U2/U3/U4/U5 已确认并完成。
 - 实施状态：钟馗 approved brief、七个版本化 production master、七份 approved repository source、两份 production record、五份 manifest 记录、publication rights、五项人工审核、Hero v2 唯一 current、Entry Hero 外键、直接 `sharp@0.35.4` 依赖和 U5 非默认验证入口均已闭合；Hero v1 审计历史完整保留。
 - 验证状态：2026-08-29 固定运行时完整 `pnpm run check` 通过，含 Prettier、ESLint、10 个测试文件/72 项测试、Astro 36 个文件 0 error/0 warning/0 hint 与 3 页 build；七个 local master 通过实体复核，三份 current responsive rendition 的 22 个 AVIF/WebP 目标全部实际生成并解码复核。
 - 发布状态：不适用。
 - 是否可以关闭 M3：是。
-- 下一项允许动作：没有自动延续动作；M4、服务、Git 写入和发布均未授权，必须由 Project owner 另行决定。
+- M3 收口时的下一项允许动作：没有自动延续动作；当时的 M4、服务、Git 写入和发布均未授权，必须由 Project owner 另行决定。该历史边界不覆盖后续已取得的逐项授权。

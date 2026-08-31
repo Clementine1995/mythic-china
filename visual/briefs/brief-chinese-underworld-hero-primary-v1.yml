@@ -1,0 +1,119 @@
+briefId: brief-chinese-underworld-hero-primary-v1
+version: 1
+status: approved
+ownerType: collection
+ownerId: chinese-underworld
+purpose: hero-primary
+approvedBy: Project owner (user-confirmed)
+approvedAt: "2026-08-30T13:08:39Z"
+notes: Project owner selected candidate A and approved this original abstract-threshold brief for the candidate-production task on 2026-08-30. On 2026-08-31, the Project owner selected desktop candidate 02 and independently composed mobile candidate 01 for production preparation. The files remain only in the Git-ignored local explore area; composition selection does not approve publication rights, five-review results, exact-canvas masters, a production record, manifest, status promotion, Collection binding, or public use.
+primaryReferenceFamily: Southern Song Chinese Ten Kings court imagery, translated into an original nonliteral threshold landscape
+period: The primary object reference is dated before 1195; later popular-religious teaching is used only to bound the journey model
+region: China, with the primary object linked to Mingzhou in the Southern Song period
+medium: Candidate contemporary digital editorial illustration with layered ink-and-mineral atmosphere; not a historical reconstruction or facsimile
+culturalContext:
+  - Present one influential court-and-rebirth model without claiming a single timeless map of the Chinese underworld.
+  - Use bureaucratic court hierarchy and passage toward rebirth as sourced structural cues, while keeping named kings, punishments, buildings, garments, and ritual objects out unless separately selected and supported.
+  - Keep the Collection distinct from the Zhong Kui Entry; Zhong Kui is not the underworld ruler, one of the Ten Kings, or the Collection Hero subject.
+  - Make the threshold contemplative and legible rather than gory, punitive, game-like, or horror-led.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: A wide descending passage moves from a quiet threshold into two or three receding court-like layers; small officials or record tables may establish hierarchy without depicting a named king or explicit punishment.
+        safeArea: Keep the leftmost 42 percent and top 16 percent low-detail for HTML Collection identity and navigation; render no text into the image.
+        focalPointGoal:
+          x: 0.66
+          y: 0.5
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently composed vertical descent from threshold to distant court light, with one continuous reading path and no crop of the desktop scene.
+        safeArea: Keep the top 24 percent and lower 12 percent free of essential figures or symbols for HTML title and responsive controls; render no text into the image.
+        focalPointGoal:
+          x: 0.52
+          y: 0.5
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: court-and-record-hierarchy
+      statement: A king, scribe, and officials administer judgment in the cited Southern Song Ten Kings scroll, supporting a restrained court-and-record hierarchy.
+      claimIds:
+        - claim-chinese-underworld-song-court-painting
+        - claim-chinese-underworld-ten-magistrates-model
+    - elementId: judgment-to-rebirth-passage
+      statement: The cited ten-magistrate model presents judgment as a transitory passage toward rebirth rather than eternal punishment.
+      claimIds:
+        - claim-chinese-underworld-transitory-realm
+        - claim-chinese-underworld-ritual-and-rebirth
+  inferred:
+    - elementId: descending-threshold-path
+      statement: Organize the Hero as a descending route through layered thresholds rather than a frontal throne portrait.
+      rationale: A continuous path translates the sourced passage model into an editorial navigation metaphor without claiming a historical floor plan.
+    - elementId: distant-court-silhouettes
+      statement: Reduce court figures to small silhouettes and record-table gestures so hierarchy remains legible without inventing a named king's portrait.
+      rationale: The primary object supports kings, scribes, and officials, but this candidate must not reconstruct its individual figures or costume.
+    - elementId: charcoal-jade-cinnabar-palette
+      statement: Use charcoal depth, oxidized jade haze, warm paper light, and a restrained cinnabar wayfinding accent.
+      rationale: The palette belongs to the approved Collection design direction and is not a claim about historical pigments in the reference object.
+  invented:
+    - elementId: original-threshold-architecture
+      statement: All gates, stairs, bridges, walls, and spatial relationships are original abstract forms with no claim to a real temple or underworld map.
+    - elementId: original-light-and-weather
+      statement: Mist, directional light, mineral particles, and depth transitions are newly designed editorial atmosphere.
+    - elementId: original-figures
+      statement: Any distant human or spirit silhouettes are original, unnamed, non-portrait figures without invented ranks, species, or biographies.
+referenceAssets:
+  - referenceId: ref-ten-kings-hell-met-44509
+    url: https://www.metmuseum.org/art/collection/search/44509
+    organization: The Metropolitan Museum of Art
+    creator: Jin Chushi
+    rightsStatus: public-domain
+    rightsUrl: https://www.metmuseum.org/policies/image-resources
+    licenseOrPermissionId: cc0-1.0
+    notes: Study court hierarchy, scribe-and-official grouping, layered narrative density, and ink-and-color restraint; do not copy a king, figure, punishment, inscription, seal, throne, or complete composition.
+composition:
+  continuity: Desktop and mobile must share one original threshold world, palette, material family, and distant court language while using independently authored compositions.
+  hierarchy: The path and depth transition are primary; court silhouettes are secondary evidence cues; no demon, punishment, deity, or ruler becomes a spectacle or franchise character.
+  colorDirection: Charcoal and oxidized jade dominate, warm paper light holds the route, and cinnabar is limited to one small wayfinding accent.
+  lightingDirection: Move from readable threshold light into layered depth with one distant reveal; avoid black-red horror lighting, neon rim light, game-poster bloom, and illegible crushed shadows.
+  textPolicy: Collection title, Chinese title, pinyin, caption, credit, disclosure, and all navigation remain HTML; artwork contains no writing, pseudo-Chinese marks, seals, logos, or watermarks.
+excludedMotifs:
+  - Zhong Kui, King Yama, a named Ten King, or any figure presented as the single ruler of a universal Chinese underworld
+  - Graphic torture, gore, severed bodies, skull piles, horror spectacle, or punishment used as visual entertainment
+  - A literal ten-court floor plan, eighteen-level diagram, fixed gate sequence, or universal map without source-specific support
+  - Black Myth, game UI, entertainment franchise silhouettes, trademarks, logos, HUD elements, or copied camera compositions
+  - European fantasy armor, Japanese-specific underworld iconography presented as Chinese evidence, or generic horned-devil defaults
+  - Pseudo-Chinese writing, invented scripture, talismans, official seals, watermarks, baked-in title text, or direct copies of the reference object
+openDecisions:
+  - Current tool terms, account authority, and publication rights for any Project owner-selected output; the candidate tool did not expose a model ID
+  - Exact master storage, backup, production record, and manifest version
+  - Named cultural, rights, visual, accessibility, and language reviewers
+  - Final crop, contrast, caption, alt text, mobile fold, and Collection template browser review

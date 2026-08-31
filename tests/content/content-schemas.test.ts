@@ -160,6 +160,30 @@ describe("content schemas", () => {
         publishedAt: "2026-08-27",
       }).success,
     ).toBe(true);
+    expect(
+      entrySchema.safeParse({
+        ...ready,
+        status: "published",
+        publishedAt: "2026-08-27",
+        updatedAt: "2026-08-26",
+      }).success,
+    ).toBe(false);
+    expect(
+      entrySchema.safeParse({
+        ...ready,
+        status: "published",
+        publishedAt: "2026-08-27",
+        updatedAt: "2026-08-27",
+      }).success,
+    ).toBe(true);
+    expect(
+      entrySchema.safeParse({
+        ...ready,
+        status: "published",
+        publishedAt: "2026-08-27",
+        updatedAt: "2026-08-28",
+      }).success,
+    ).toBe(true);
   });
 
   it("validates Collection identity pairs, membership, duplicates, and assets", () => {
@@ -210,6 +234,18 @@ describe("content schemas", () => {
 
   it("keeps Source types closed and traceable", () => {
     expect(sourceSchema.safeParse(makeSourceData()).success).toBe(true);
+    expect(
+      sourceSchema.safeParse(
+        makeSourceData({ titleZh: "示例来源", titleZhLang: "zh" }),
+      ).success,
+    ).toBe(true);
+    expect(
+      sourceSchema.safeParse(makeSourceData({ titleZh: "示例来源" })).success,
+    ).toBe(false);
+    expect(
+      sourceSchema.safeParse(makeSourceData({ titleZhLang: "zh-Hans" }))
+        .success,
+    ).toBe(false);
     expect(
       sourceSchema.safeParse(
         makeSourceData({

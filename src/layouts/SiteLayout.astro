@@ -2,15 +2,18 @@
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { readBuildIntent } from "../site/build-intent";
+import { fontAssetUrls } from "../typography/font-assets";
+import "../styles/fonts.css";
 import "../styles/global.css";
 
 interface Props {
   title: string;
   description?: string;
   pageClass?: string;
+  preloadStoryFont?: boolean;
 }
 
-const { title, description, pageClass } = Astro.props;
+const { title, description, pageClass, preloadStoryFont = false } = Astro.props;
 readBuildIntent();
 // U2 is review-only; canonical, social and structured metadata wait for public identity.
 const documentTitle =
@@ -23,6 +26,24 @@ const documentTitle =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="color-scheme" content="light" />
+    <link
+      rel="preload"
+      href={fontAssetUrls.displayRoman}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    {
+      preloadStoryFont && (
+        <link
+          rel="preload"
+          href={fontAssetUrls.storyRoman}
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+      )
+    }
     {description && <meta name="description" content={description} />}
     <meta name="robots" content="noindex, nofollow" />
     <title>{documentTitle}</title>

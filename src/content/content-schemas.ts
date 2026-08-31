@@ -40,6 +40,8 @@ export const sourceTypes = [
   "modern-adaptation",
 ] as const;
 
+export const sourceTitleLanguages = ["zh", "zh-Hans", "zh-Hant"] as const;
+
 export const claimTypes = [
   "textual",
   "historical",
@@ -283,6 +285,18 @@ export const entrySchema = z
         message: "Published-lineage content requires a publication date.",
       });
     }
+
+    if (
+      entry.publishedAt !== null &&
+      entry.updatedAt !== null &&
+      entry.updatedAt < entry.publishedAt
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["updatedAt"],
+        message: "Updated date cannot precede the publication date.",
+      });
+    }
   });
 
 export const collectionSchema = z
@@ -350,6 +364,7 @@ export const sourceSchema = z
     sourceType: z.enum(sourceTypes),
     title: nonEmptyStringSchema,
     titleZh: nullableNonEmptyStringSchema,
+    titleZhLang: z.enum(sourceTitleLanguages).nullable(),
     authorOrOrganization: nullableNonEmptyStringSchema,
     publicationOrEdition: nullableNonEmptyStringSchema,
     editionBasisOrObjectId: nullableNonEmptyStringSchema,
@@ -365,10 +380,21 @@ export const sourceSchema = z
     notes: nullableNonEmptyStringSchema,
   })
   .superRefine((source, ctx) => {
+    const hasChineseTitle = source.titleZh !== null;
+    const hasChineseTitleLanguage = source.titleZhLang !== null;
     const hasPublicationIdentity =
       source.publicationOrEdition !== null ||
       source.publicationYear !== null ||
       source.url !== null;
+
+    if (hasChineseTitle !== hasChineseTitleLanguage) {
+      ctx.addIssue({
+        code: "custom",
+        path: [hasChineseTitle ? "titleZhLang" : "titleZh"],
+        message:
+          "Chinese Source title and title language must be provided together.",
+      });
+    }
     const hasArchiveIdentity =
       source.editionBasisOrObjectId !== null ||
       source.publicationOrEdition !== null ||

@@ -1,28 +1,31 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import ManifestHeroPicture from "../components/ManifestHeroPicture.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
+import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
 
 interface Props {
   collection: CollectionEntry<"collections">;
   entries: CollectionEntry<"entries">[];
   featuredEntry: CollectionEntry<"entries"> | null;
+  heroAsset: ResolvedAssetRecord | null;
 }
 
-const { collection, entries, featuredEntry } = Astro.props;
-// U2 has no approved Collection image, so a future asset claim must fail visibly.
-if (collection.data.heroAssetId !== null) {
-  throw new Error(
-    `M4-U2 Collection ${collection.id} requires its own approved Hero implementation.`,
-  );
-}
+const { collection, entries, featuredEntry, heroAsset } = Astro.props;
 ---
 
 <SiteLayout
   title={collection.data.title}
   description={collection.data.description}
 >
-  <article class="collection-page" data-realm={collection.data.collectionId}>
+  <article
+    class:list={[
+      "collection-page",
+      heroAsset ? "collection-page--visual" : "collection-page--simple",
+    ]}
+    data-realm={collection.data.collectionId}
+  >
     <header class="collection-hero">
       <div class="collection-hero__inner page-shell">
         <div class="collection-hero__copy">
@@ -38,9 +41,27 @@ if (collection.data.heroAssetId !== null) {
           }
           <p class="collection-description">{collection.data.description}</p>
         </div>
-        <div class="collection-hero__surface" aria-hidden="true">
-          <div class="realm-surface"></div>
-        </div>
+        {
+          heroAsset ? (
+            <figure class="collection-hero__figure">
+              <ManifestHeroPicture
+                asset={heroAsset}
+                sizes="(max-width: 767px) 100vw, 90vw"
+                priority
+              />
+              <figcaption class="visual-note">
+                <span>{heroAsset.data.caption}</span>
+                <span>
+                  {heroAsset.data.credit}. {heroAsset.data.aiDisclosure}
+                </span>
+              </figcaption>
+            </figure>
+          ) : (
+            <div class="collection-hero__surface" aria-hidden="true">
+              <div class="realm-surface" />
+            </div>
+          )
+        }
       </div>
     </header>
 

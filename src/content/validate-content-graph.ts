@@ -170,7 +170,15 @@ function hasVisibleEditorialBody(body: string | undefined): boolean {
     remaining = remaining.slice(commentEnd + 3).trimStart();
   }
 
-  return remaining.length > 0;
+  const visibleText = remaining
+    .replace(/<!--[\s\S]*?-->/gu, " ")
+    .replace(/<!--[\s\S]*$/gu, " ")
+    .replace(/!\[[^\]]*\]\([^\r\n)]*\)/gu, " ")
+    .replace(/!\[[^\]]*\]\[[^\]]*\]/gu, " ")
+    .replace(/<\/?[a-z][\w:-]*\b(?:[^<>"']|"[^"]*"|'[^']*')*>/giu, " ")
+    .trim();
+
+  return visibleText.length > 0;
 }
 
 function indexRecords<TData>(options: {
@@ -404,13 +412,25 @@ export function validateContentGraph(graph: ContentGraph): ContentGraph {
     const objectId = entry.id;
 
     entry.data.sourceIds.forEach((sourceId, index) => {
-      if (!sourcesById.has(sourceId)) {
+      const source = sourcesById.get(sourceId);
+      if (!source) {
         addIssue({
           code: "dangling-source",
           objectType: "entry",
           objectId,
           path: `data.sourceIds[${index}]`,
           message: `Source ${sourceId} does not exist.`,
+        });
+      } else if (
+        statusesRequiringReadyEvidence.has(entry.data.status) &&
+        source.data.titleZhLang === "zh"
+      ) {
+        addIssue({
+          code: "unresolved-ready-source-title-language",
+          objectType: "entry",
+          objectId,
+          path: `data.sourceIds[${index}]`,
+          message: `Ready content requires a script-specific Chinese title language for Source ${sourceId}.`,
         });
       }
     });
