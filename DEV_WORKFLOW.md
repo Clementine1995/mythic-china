@@ -605,6 +605,15 @@ Project owner 批准 desktop A2 与独立构图、定向修正后的 mobile 候�
 - 图片 registry、精确 inventory 测试与 output verifier 同步覆盖 Guide art direction，并对其 alt、caption、credit、disclosure 建立独立精确 oracle。固定 Node/Corepack 下 `pnpm run visual:build:check` 通过 11 个 local master、七份 current responsive rendition 与 50 个实际生成/解码的 AVIF/WebP 目标；完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断，以及默认 review build 的 7 页、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。
 - 本批未安装、升级或移除依赖，未启动服务或浏览器，未提升 Entry/Collection 状态，未执行 Git 写入、Vercel 操作、部署或发布。
 
+### 2026-08-31 馆藏中文字段来源复核
+
+Project owner 要求继续推进 M4 并把控进度；本批只沿已知 Source 标题 locale 阻塞做可审计的来源复核，不替代具名双语审校，也不进入 CJK 工具、浏览器预检、M4-U4B 或发布。
+
+- 回到四条官方馆藏页复核可见中文字段：The Met object 30.76.293 的标题词为 `十王圖`，Cleveland object 1961.206 显示 `鍾馗元夜出遊圖`，The Met object 2008.636 的对象行包含 `清早期 竹雕鍾馗群鬼`，object 2002.208.2 的对象行包含 `任頤 鍾馗像 軸`。四份 Source 更新 `accessedAt` 与复核说明；仅把旧转录 `十王图` 纠正为馆方页面的 `十王圖`，其他标题只规范既有空格。
+- 页面字形不作为本项目的 script-locale 审批。四份 Source 的 `titleZhLang` 均继续为 generic `zh`；两份 Terminology 继续为 `source-checked`，Entry/Collection 继续为 `editorial-review`。输出验证器同步锁定新转录与未核定 locale 的组合，未放宽内容图门禁。
+- 固定 Node/Corepack 下完整 `pnpm run check` 通过：Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断、7 页 review build、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。
+- 本批不修改 visual master、manifest、repository source 或字体文件，因此未重跑非默认 `visual:build:check`；没有安装、升级或移除依赖，没有启动服务/浏览器，没有改动状态或精确 locale，也没有执行 Vercel 操作、部署或发布。
+
 ## 数据库、外部服务与真实写入口
 
 当前均不适用。项目没有数据库、表单 endpoint、邮件、分析、支付或广告配置。未来接入任一能力时必须先建立需求文档，并在本文件增加：

@@ -176,7 +176,7 @@ notes: Why this source is used and its limitations.
 
 网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。M2 的最小可追溯组合是：`primary-text` 至少有版次/底本身份；`scholarship` 与 `modern-adaptation` 有作者/机构及出版物、年份或 URL 身份；`museum-or-library` 与 `fieldwork-or-community-archive` 有负责机构及对象号、档案/版次或 URL 身份。`translation` 记录必须填写 `translator`、`publicationOrEdition`、`pageOrSection`、`rightsStatus` 与 `rightsUrl`，任何填写了 `rightsUrl` 的记录也必须填写 `rightsStatus`。数字影像同样需要两项权利信息，但 M2 Source 尚无可靠的数字影像判别字段，因此不得凭现有字段臆测并自动放行；首次接入此类记录前先扩充合同与 Schema。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。
 
-`Source.language` 描述整份来源，不自动描述可选 `titleZh` 的正字区域。`titleZhLang` 与 `titleZh` 成对必填，受控值为 `zh | zh-Hans | zh-Hant`：generic `zh` 明确表示已知为中文但正字区域尚未核定，不是脚本猜测或 fallback。当前只有教育部词典记录自身能证明 `titleZhLang: zh-Hant`；四条英文馆藏记录保持 `zh`，不得按字符外形猜 Hans/Hant。`editorial-review` 可保留 generic `zh`；`ready | published | archived` Entry 引用的 Source 必须先经来源核对/双语审校改为精确 `zh-Hans | zh-Hant`，内容图会拒绝绕过。
+`Source.language` 描述整份来源，不自动描述可选 `titleZh` 的正字区域。`titleZhLang` 与 `titleZh` 成对必填，受控值为 `zh | zh-Hans | zh-Hant`：generic `zh` 明确表示已知为中文但正字区域尚未核定，不是脚本猜测或 fallback。当前只有教育部词典记录自身能证明 `titleZhLang: zh-Hant`；四条英文馆藏记录已于 2026-08-31 回到馆方页面复核可见中文字段，但馆方页没有提供足以替代本项目双语审校的 script-locale 声明，因此继续保持 `zh`，不得按字符外形猜 Hans/Hant。`editorial-review` 可保留 generic `zh`；`ready | published | archived` Entry 引用的 Source 必须先经来源核对/双语审校改为精确 `zh-Hans | zh-Hant`，内容图会拒绝绕过。
 
 M2 的 Entry/Source 日期字段只接受带引号的 ISO calendar date 字符串 `"YYYY-MM-DD"`。未加引号的 YAML 日期会被 loader 解析为 `Date`，时间戳还可能因时区跨日；Schema 一律拒绝 `Date` 与 timestamp，不做静默截断或日期迁移。
 

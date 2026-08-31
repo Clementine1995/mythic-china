@@ -56,7 +56,7 @@
 ### 3.1 *A Guide to the Chinese Underworld*
 
 - 定位：给非专业读者提供一个有边界的入口，不制作“十八层地狱大全”或跨时期总地图。
-- 采用的窄模型：Columbia Asia for Educators 所述的十位审判者、官僚化法庭、非永恒惩罚、仪式援助与轮回；The Met 南宋《十王图》只支持该对象中的王、书记、官员、判决和惩罚层级。
+- 采用的窄模型：Columbia Asia for Educators 所述的十位审判者、官僚化法庭、非永恒惩罚、仪式援助与轮回；The Met 南宋《十王圖》只支持该对象中的王、书记、官员、判决和惩罚层级。
 - 翻译选择：`阴间 / yīnjiān` 首次释为 “the underworld”；拒绝用 “hell” 覆盖全部语义，也不把 `Diyu` 当作自动同义替换。
 - 保留边界：不宣称一套自古统一的中国阴间体系；不指定未核实的法院、道路、刑罚、神名或仪式。
 
@@ -123,7 +123,7 @@
 ### 5.2 子集、命名与替换缝
 
 1. 字符输入只能来自 Project owner 已批准进入 public candidate 的真实内容与固定 UI 字符；研究笔记、废稿和未来假想词不进入集合。
-2. CJK 子集必须按已核定的 `zh-Hans` / `zh-Hant` 分开字符表，覆盖真实内容、所需中文标点和显式 fallback 测试串；构建门禁比较渲染文本、批准字符表与 font cmap，缺字即失败。`titleZhLang` 与 Source `titleZh` 成对，四条馆藏中文标题的 script 目前缺来源记录，不得按字形猜测；它们明确保存为 generic `zh`，内容图机器阻断引用它们的 Entry 提升到 `ready | published | archived`。
+2. CJK 子集必须按已核定的 `zh-Hans` / `zh-Hant` 分开字符表，覆盖真实内容、所需中文标点和显式 fallback 测试串；构建门禁比较渲染文本、批准字符表与 font cmap，缺字即失败。`titleZhLang` 与 Source `titleZh` 成对；四条馆藏中文字段已于 2026-08-31 回到馆方页面复核并记录原文，但页面字形不能替代具名双语 reviewer 的 script-locale 判断，因此继续保存为 generic `zh`。内容图机器阻断引用它们的 Entry 提升到 `ready | published | archived`。
 3. 生成子集、实例化 weight 或转换格式均视为修改。由于 Adobe 的 OFL 声明保留 `Source`，修改版 primary family 不使用 `Source` 名称；许可证、版权、原始上游、修改步骤和生成日期写入 `FONTLOG`。
 4. Geist 和 Source Serif 优先使用上游直接提供的 WOFF2，不做不必要子集；若后续性能要求必须修改，也要重新评估 RFN、改名和 FONTLOG。
 5. 每个实际分发字体随仓库保存适用 OFL 全文与版权声明；CSS 使用 `font-display: swap`、`font-synthesis: none`，`size-adjust`/metrics override 只在实测后填写。
@@ -148,7 +148,7 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 | 内容编辑 | 两篇为 `editorial-review` | Project owner 逐篇接受标题、开头、摘要、正文、来源边界与 Collection 关系 |
 | 事实核查 | 当前来源与 Claim 已本地闭合 | 人工核对每个正文主张/locator；任何新增事实先新增来源，不让 AI 补空 |
 | 双语术语 | 两份 Terminology 为 `source-checked` | 具名 bilingual reviewer 把适用记录提升为 `bilingual-approved` |
-| Source 标题 locale | 教育部词条为 `zh-Hant`；四条馆藏标题因来源未核定而明确为 generic `zh` | 经来源核对/双语审校写入精确 `zh-Hans | zh-Hant`；内容图已机器阻断 generic `zh` 被 ready lineage 引用 |
+| Source 标题 locale | 教育部词条为 `zh-Hant`；四条馆藏页的可见中文字段已复核，但尚无具名双语 script-locale 结论，继续明确为 generic `zh` | 经双语审校写入精确 `zh-Hans | zh-Hant`；内容图已机器阻断 generic `zh` 被 ready lineage 引用 |
 | Collection Hero | Hero A v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
 | Guide Hero | Guide Hero v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
 | 字体 | 4 份英文 WOFF2、OFL/hash、alias/token 与 preload 已接线；CJK 仍为 system fallback | 完整工程门禁通过后由 Project owner 看正式字体页面；CJK 仍需获准工具、Hans/Hant 来源/字符表、cmap 与跨平台浏览器门禁 |

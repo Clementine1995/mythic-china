@@ -356,7 +356,7 @@ if (
     '<p class="source-list__chinese-title" lang="zh-Hant">陰間</p>',
   ) ||
   !guideHtml.includes(
-    '<p class="source-list__chinese-title" lang="zh">十王图</p>',
+    '<p class="source-list__chinese-title" lang="zh">十王圖</p>',
   )
 ) {
   throw new Error(
