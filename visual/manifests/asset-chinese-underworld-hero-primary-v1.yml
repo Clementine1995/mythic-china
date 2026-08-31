@@ -1,0 +1,122 @@
+assetId: asset-chinese-underworld-hero-primary
+manifestId: asset-chinese-underworld-hero-primary-v1
+ownerType: collection
+ownerId: chinese-underworld
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-chinese-underworld-hero-primary-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld/v1/chinese-underworld-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 9fdb9771109da9ec0b10450fdd46e39e770fe7ac9e13a5e460ac0a3d652eb9f4
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld/v1/chinese-underworld-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: e80eac658d8f98fdd290f6278b1ffa3ff39b395b94b1d4f174c603b8c17581d7
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/chinese-underworld-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 38888eb8c57ea135c391c54fe02be449cfdae67bd7c070a8188c972dc5b3867f
+    focalPoint:
+      x: 0.66
+      y: 0.5
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/chinese-underworld-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 3a4ab04ae8793ff7c51d3d69f597b3ddd9b30ba4415f12a9bf1590c5568eab9d
+    focalPoint:
+      x: 0.52
+      y: 0.5
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-ten-kings-hell-met-44509
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner (private individual)
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: The Project owner confirmed on 2026-08-31 that the ImageGen reconstruction used a personal, non-organization-managed OpenAI account and that the Project owner is authorized to generate, save, edit, and publish the outputs for Mythic China. Only project-generated selected candidates were supplied to ImageGen; museum and historical references informed the approved textual brief only and were not uploaded. This approval does not claim exclusivity, copyrightability, or clearance of unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - court-and-record-hierarchy
+  - judgment-to-rebirth-passage
+  - descending-threshold-path
+  - distant-court-silhouettes
+  - charcoal-jade-cinnabar-palette
+  - original-threshold-architecture
+  - original-light-and-weather
+  - original-figures
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen via Codex
+  recordPath: visual/production-records/production-chinese-underworld-hero-primary-v1.yml
+  workflow: null
+humanEdits:
+  - Selected the Project-owner-approved high-fidelity desktop and independently composed mobile reconstructions after final exact-canvas review.
+  - Directed the desktop reconstruction to clarify only tiny anonymous officials and a restrained distant record-table gesture without creating named or prominent figures.
+  - Removed the mobile lower-right cinnabar-red mark-like texture and restored a neutral mineral surface without writing, seals, symbols, or blood-like detail.
+  - Reconstructed both raw outputs to the exact approved Hero canvases with centered fit-cover Lanczos3 processing and no non-uniform stretching.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the selected candidates, raw reconstruction outputs, and exact-canvas review artifacts in Git-ignored local exploration storage for audit.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T07:09:00Z"
+    notes: Approved as an original, nonliteral threshold illustration of one bounded court-and-rebirth passage model. The descending path, distant anonymous officials, and restrained record-table gesture remain secondary cues without depicting Zhong Kui, a named king, a universal underworld map, explicit punishment, or invented ranks, species, biographies, or ritual meanings.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T07:09:00Z"
+    notes: Approved after the Project owner confirmed a personal, non-organization-managed OpenAI account and authority to generate, save, edit, and publish the outputs. Only project-generated selected candidates were supplied to ImageGen; no museum, historical, or other third-party reference image was uploaded.
+  visual:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T07:09:00Z"
+    notes: The final 3200x1800 desktop and 1600x2000 mobile canvases were reviewed at full-canvas and detail scale. Desktop preserves the selected path, left and top safe areas, distant warm reveal, and restrained court cues. Mobile remains independently composed, preserves its top and bottom safe areas, and no longer contains the lower-right cinnabar mark-like texture. Both retain readable shadows and contain no embedded text, logo, watermark, obvious broken geometry, or disallowed spectacle.
+  accessibility:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T07:09:00Z"
+    notes: The informative alt accurately describes the illuminated path, dark mist, mineral structures, tiny officials, and distant court-like threshold. The caption identifies a contemporary AI-assisted interpretation and states that the route and architecture are invented rather than a historical or universal map.
+  language:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T07:09:00Z"
+    notes: No rendered text, letters, numbers, Chinese characters, pseudo-writing, calligraphy, seals, talismans, logos, or watermarks are present. The mobile lower-right mark-like texture was removed. The English alt, caption, credit, disclosure, and Chinese-underworld wording were reviewed and approved.
+alt: An illuminated stone path winds through dark, mist-filled mineral structures toward tiny officials gathered at a distant court-like threshold.
+caption: A contemporary AI-assisted editorial interpretation of the Chinese underworld as a passage through layered courts toward rebirth; its route and architecture are invented, not a historical or universal map.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

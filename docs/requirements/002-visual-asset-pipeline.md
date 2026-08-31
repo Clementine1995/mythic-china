@@ -9,7 +9,7 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | M3-U1/U2/U3/U4/U5 已完成 | M3 终验中 Hero v1 手部缺陷曾重开；Project owner 于 2026-08-29 验收 Hero v2，权利/人工审核、版本/current、Entry Hero 外键、local master 复核、响应式实际写出与工程回归重新闭合 |
-| 实施状态 | M3 已完成 | 当前 M3 的一份 approved Zhong Kui brief、七个版本化 master、七份 approved repository source rendition、两份真实 production record 与五份 manifest 记录均保留；后续 Chinese Underworld Collection Hero brief 也已 approved，desktop 02/mobile 01 已被 Project owner 从 Git-ignored local explore 候选中选中进入生产准备，但仍没有 master/asset/manifest。四个既有逻辑资产各有唯一 `approved + isCurrent: true`，Hero v1 保留为 `approved + isCurrent: false`；直接依赖 `sharp@0.35.4` 和非默认 `visual:build:check` 保持有效 |
+| 实施状态 | M3 已完成 | M3 收口的一份 approved Zhong Kui brief、七个版本化 master、七份 approved repository source rendition、两份真实 production record 与五份 manifest 记录均保留。后续 Chinese Underworld Collection Hero 与 Guide Hero 沿同一合同分别独立闭合各自的两份 master、两份 source、一份 production record、一份 manifest 及所属内容绑定；当前总量为 11 个 master/11 份 source/四份 production record/七份 manifest，六个逻辑资产各有唯一 `approved + isCurrent: true`，Zhong Kui Hero v1 保留为 `approved + isCurrent: false`；直接依赖 `sharp@0.35.4` 和非默认 `visual:build:check` 保持有效 |
 | 验证状态 | M3 通过 | 2026-08-29 七个 local master 的路径/尺寸/SHA-256/inventory 核验通过；三份 current responsive rendition 的 22 个 AVIF/WebP 目标全部实际生成并解码复核；完整 `pnpm run check` 通过 Prettier、ESLint、10 个测试文件/72 项测试、`astro check`（36 个文件，0 error、0 warning、0 hint）与 3 页静态 build |
 | 发布状态 | 不适用 | M3 没有远端预览或生产发布目标 |
 
@@ -28,7 +28,7 @@
 已确认事实：
 
 - M3 开始前的 M2 基线只有 Entry、Collection、Source、Claim、Terminology 五类 Content Layer；当时 Entry/Collection 已有 nullable `heroAssetId`，但只校验 `visual-review` 时非空，不校验真实资产外键。
-- 当前两个 Entry 与一个 Collection 的编辑形态已获阶段性接受，仍保持 `editorial-review`；钟馗 Entry 的 `heroAssetId` 为 `asset-zhong-kui-hero-primary`，Guide 与 Collection 仍为 `null`。`visual/manifests` 已有五份 approved 版本记录，其中 Hero v2 与 Lead/OG/Social v1 为 current，Hero v1 为 non-current；`src/assets/images` 已有七份被其唯一引用的 approved source rendition。内容 resolver 已把 Hero 逻辑 ID 解析到显式 current v2 manifest；Collection brief 已 approved，desktop 02/mobile 01 虽已选中进入生产准备，仍没有 manifest。
+- 当前两个 Entry 与一个 Collection 的编辑形态已获阶段性接受，仍保持 `editorial-review`；钟馗 Entry、Chinese Underworld Collection 与 Guide Entry 的 `heroAssetId` 分别为 `asset-zhong-kui-hero-primary`、`asset-chinese-underworld-hero-primary` 与 `asset-chinese-underworld-guide-hero-primary`。`visual/manifests` 已有七份 approved 版本记录，其中 Zhong Kui Hero v2、Lead/OG/Social v1、Collection Hero v1 与 Guide Hero v1 为 current，Zhong Kui Hero v1 为 non-current；`src/assets/images` 已有 11 份被其唯一引用的 approved source rendition。内容 resolver 把三个稳定 Hero 逻辑 ID 分别解析到各自显式 current manifest。
 - `docs/CONTENT_MODEL.md` 与本文已闭合逻辑资产、版本记录、current 选择、重复 role slot 和独立移动构图合同；M3-U3 已把 strict Schema、纯关系/文件 validator 和 resolver 接入真实 Astro build 调用链。
 - Astro 当前官方 Content Loader `glob()` 支持从任意本地目录加载 YAML，并通过 `base` 与 `generateId` 固定记录身份；本项目可以从 `visual/manifests` 建立构建期集合，无需为 YAML 再增加依赖。来源：[Content Loader API](https://docs.astro.build/en/reference/content-loader-reference/)，访问于 2026-08-28。
 

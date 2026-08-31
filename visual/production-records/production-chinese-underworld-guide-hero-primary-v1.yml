@@ -1,0 +1,149 @@
+productionRecordId: production-chinese-underworld-guide-hero-primary-v1
+briefId: brief-chinese-underworld-guide-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier or seed; no model identity or seed is inferred from the output files, provenance metadata, or product documentation.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: The Project owner confirmed on 2026-08-31 that this Guide production used a personal, legally controlled, non-organization-managed OpenAI account without employer, client, or organization restrictions and that the applicable tool terms and output rights allow the outputs to be saved, edited, and publicly displayed for Mythic China. The only supplied inputs were project-generated candidates. No museum, historical, or unauthorized third-party image was uploaded. The Project owner authorized publication by Mythic China with an in-house-original basis and the rights holder recorded as Mythic China project owner (private individual). This record does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain.
+recordedAt: "2026-08-31T11:58:30Z"
+renditions:
+  - manifestId: asset-chinese-underworld-guide-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: precise-object-edit
+      Asset type: Mythic China Guide Hero desktop candidate refinement
+      Input images: Image 1 is the sole edit target.
+      Primary request: Remove only the inkstone-like black object, the brush-like object, and every writing-tool or tool-rest object from the lower-left corner of the foreground table. Reconstruct those removed areas as the same bare dark matte mineral tabletop, with natural surface grain, edge wear, haze, lighting, and shadows matching the surrounding table.
+      Hard invariants: Keep every blank paper record sheet, the paper path into the distance, the doorway sequence, tiny distant anonymous silhouettes, warm reveal, mist, charcoal and oxidized-jade palette, 16:9 framing, and the calm dark right-side title area exactly unchanged. Do not move, add, crop, brighten, restyle, or redesign any other element.
+      Constraints: Add no replacement prop. No inkstone, brush, pen, writing instrument, seal, stamp, writing, text, letters, numbers, symbols, calligraphy, logo, watermark, ritual object, or decorative mark.
+    receivedAt: "2026-08-31T09:25:03Z"
+    inputImages:
+      - kind: edit-target
+        sha256: 5479c9ca299581aac49a2f4157a9dbf9b9c3f4d5105ef0bc4b996385ad0b0ec2
+        rightsNotes: Project-generated desktop candidate A from the approved Guide exploration; supplied as the sole edit target only to remove the inkstone-like object, brush-like object, and writing-tool rest. No third-party image was supplied.
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: 1a09dedb7fa60fb7a7b8f7a294e160da799e1d463b1e2f310df2ea07ba521fa6
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld-guide/v1/chinese-underworld-guide-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: d070ee61ce6a613c2903dbdbe53f2bb888f411c7d8433ecc82f5d4053c9a013b
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Selected Project-owner-approved desktop A2 after final desktop and mobile pair approval and exact-canvas review.
+        - Preserved the approved blank records, passage, tiny anonymous silhouettes, warm reveal, palette, and title-safe areas after the targeted removal of the writing-tool objects.
+        - Used centered fit-cover processing to remove approximately one output pixel vertically while preserving the approved 16:9 composition and safe areas.
+        - Reconstructed the exact 3200x1800 lossless PNG master with the Lanczos3 kernel and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-08-31T11:58:30Z"
+  - manifestId: asset-chinese-underworld-guide-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Initial independent composition:
+      Use case: stylized-concept
+      Asset type: Mythic China editorial Entry hero — independently composed mobile rendition, strict 4:5 portrait; target canvas 1600 × 2000.
+
+      Input images:
+      - Image 1: visual-language reference only. It is not an edit target. Use only its charcoal-and-oxidized-jade material world, warm blank-paper light, restrained mist, distant scale, and quiet editorial tone.
+      - Create a completely new portrait composition. Do not crop, extend, rotate, stack, reframe, trace, or reconstruct the desktop image or its layout.
+
+      Primary request:
+      Create a contemplative contemporary digital editorial illustration suggesting one bounded court-and-rebirth passage through records and administrative space. This is an original visual metaphor for a reading guide, not a historical reconstruction, religious diagram, ritual guide, or universal map of Chinese beliefs about the dead.
+
+      Scene/backdrop:
+      An invented abstract interior of matte charcoal planes, oxidized-jade architectural slabs, restrained mineral texture, thin atmospheric mist, warm paper-toned light, and one distant soft reveal. The architecture must remain non-specific and newly designed, with no identifiable temple, palace, sacred structure, historical facsimile, or copied artwork.
+
+      Subject:
+      Blank, completely unmarked administrative record surfaces are the primary foreground subject. Use original sheets, edges, folds, supports, and a low table or ledge; no writing tools. Their shapes lead the eye into the passage without becoming a literal map, chart, staircase diagram, scripture, or numbered sequence.
+
+      Composition/framing:
+      - Strict 4:5 portrait composition with a fresh, near-central depth axis and a mildly elevated oblique viewpoint, clearly distinct from the wide left-weighted desktop composition.
+      - Keep the entire top 16% as a calm, low-frequency charcoal-to-jade safe zone: no essential figures, symbols, record edges, architecture intersections, bright hotspots, or dense texture.
+      - Keep the entire bottom 10% calm and low-frequency: no essential figures, symbols, writing, paper corners, or high-detail objects.
+      - Place the main blank record surfaces in the lower half but above the bottom safe zone, with the principal visual focus near x=0.50, y=0.55.
+      - From the records, create one clear upward line of sight through only two or three restrained, receding court-like spatial layers or thresholds.
+      - End the passage in a small, soft warm-light reveal in the upper third, below the top 16% safe zone.
+      - At most three tiny anonymous human silhouettes may appear only in the middle distance as subordinate scale cues. They must have no identifiable rank, portrait, costume claim, ritual role, weapon, throne, or dramatic gesture.
+      - The records and passage remain primary; no character, ruler, deity, punishment, ritual object, or architectural monument becomes the focal subject.
+
+      Style/medium:
+      High-fidelity contemporary painterly digital editorial illustration with tactile matte surfaces, subtle paper grain, soft atmospheric depth, controlled detail, and museum-editorial restraint. Quiet, legible, source-aware, and contemplative rather than spectacular.
+
+      Lighting/mood:
+      Soft warm light moves upward through charcoal depth and oxidized-jade haze. Preserve readable shadow detail; no crushed blacks, black-red horror lighting, neon rim light, harsh theatrical spotlight, lens flare, or game-poster bloom.
+
+      Color palette:
+      Charcoal black, deep graphite, oxidized jade, desaturated mineral green, warm ivory paper, and muted amber light. No red seal or stamp.
+
+      Text:
+      None. Render absolutely no text or text-like marks anywhere.
+
+      Constraints:
+      No writing, pseudo-Chinese characters, calligraphy, numbers, seals, stamps, emblems, inscriptions, captions, logos, signatures, or watermarks.
+      No brush, inkstone, pen, writing implement, talisman, scripture, ritual implement, funerary offering, altar, incense, Buddhist icon, Daoist icon, or prescribed rite.
+      No Zhong Kui, King Yama, named Ten King, universal ruler, prominent deity, demon, monster, protector portrait, sword, or weapon.
+      No literal ten-court map, ten gates, numbered stages, eighteen levels, flowchart, infographic, fixed universal route, or religious-instruction layout.
+      No torture, punishment spectacle, gore, severed bodies, skull piles, fire pits, suffering, horror imagery, or threatening action.
+      No European fantasy armor, Japanese-specific underworld imagery, franchise design, game UI, HUD, battle staging, movie-poster composition, or heroic central character.
+      No direct copy of any museum object, historical painting, document, figure, throne, costume, ornament, punishment scene, or complete composition.
+      Avoid anatomical errors, duplicated figures, malformed hands, floating paper, impossible perspective, accidental faces in textures, and high-frequency clutter.
+
+      Targeted passage correction:
+      Use case: precise-object-edit
+      Asset type: Mythic China editorial Entry hero — mobile 4:5 candidate
+      Input images: Image 1 is the edit target.
+
+      Primary request:
+      Change only the receding architectural passage. Remove the chain of repeated concentric rectangular doorways and replace it with exactly three visually distinct, broad, restrained court-like spatial layers: (1) the foreground record room, (2) one middle-distance raised threshold or administrative ledge, and (3) one distant opening with soft warm light. Make the three layers mildly offset and spatially varied, not a perfectly symmetrical tunnel, flowchart, map, staircase diagram, or sequence of gates.
+
+      Preserve unchanged:
+      - strict 4:5 portrait canvas and all current framing
+      - the entire top 16% calm, dark, low-frequency safe zone
+      - the entire bottom 10% calm, dark, low-frequency safe zone
+      - blank, completely unmarked record surfaces in the lower half above the bottom safe zone
+      - charcoal, graphite, oxidized-jade, warm ivory paper and muted amber palette
+      - matte mineral texture, restrained mist, readable shadow detail and quiet editorial tone
+      - small distant warm reveal below the top safe zone
+      - at most three tiny anonymous middle-distance silhouettes as subordinate scale cues
+      - no writing tools
+      - no text, pseudo-Chinese marks, calligraphy, numbers, seals, stamps, emblems, inscriptions, captions, logos, signatures, or watermarks
+      - no ritual objects, religious icons, rulers, deities, demons, weapons, punishments, horror, gore, ten-court map, eighteen levels, game UI, HUD, battle staging, franchise design, historical facsimile, or museum-object copying
+
+      Do not add new objects, characters, symbols, architecture styles, props, bright hotspots, red accents, or high-frequency detail. Keep the records and passage primary. Preserve blank paper surfaces without lines or text-like stains.
+    receivedAt: "2026-08-31T10:01:44Z"
+    inputImages:
+      - kind: project-generated-anchor
+        sha256: 1a09dedb7fa60fb7a7b8f7a294e160da799e1d463b1e2f310df2ea07ba521fa6
+        rightsNotes: Project-generated desktop A2 supplied only as a visual-language reference for the initial independent mobile composition; it was explicitly not an edit target, crop, extension, trace, or reconstruction source.
+      - kind: edit-target
+        sha256: 870f52bc7999af039b55b2c21a0be8e71a5069f8ff34a02d66559b21692a51c5
+        rightsNotes: Project-generated independent mobile draft supplied only as the edit target for the final targeted passage correction. No third-party image was supplied. Its SHA-256 is recorded, but the file is not retained in current local exploration storage.
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 3928bd7bb44fcc5cc6f1a2bd5401c768e7ce45c75ab491261006220fba601231
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld-guide/v1/chinese-underworld-guide-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: 8180d0ee16f52501f2c4077e1cd039797c278dfb0429f736ebd6108663dbf48d
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Selected the Project-owner-approved independently composed mobile candidate after the targeted three-layer passage correction and final pair approval.
+        - Preserved the approved top and bottom safe areas, blank records, restrained court-like layers, tiny anonymous silhouettes, distant warm reveal, and no-writing-tools constraint.
+        - Used centered fit-cover processing to remove less than one output pixel horizontally while preserving the approved 4:5 composition and safe areas.
+        - Reconstructed the exact 1600x2000 lossless PNG master with the Lanczos3 kernel and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-08-31T11:58:30Z"
+notes: The Project owner approved desktop A2 and the independently composed, corrected mobile candidate as one final pair. Desktop A2 used only project-generated candidate A as its edit target. The initial mobile composition used A2 only as a visual-language anchor and the final correction used only the project-generated mobile draft as its edit target. Sharp then performed the minimal centered aspect normalization required for the exact Hero canvases. No museum, historical, or unauthorized third-party reference image was supplied to ImageGen. The selected final raw candidates and available desktop exploration inputs remain in Git-ignored local storage; the initial mobile correction draft identified by SHA-256 870f52bc7999af039b55b2c21a0be8e71a5069f8ff34a02d66559b21692a51c5 is not retained locally.

@@ -207,15 +207,20 @@ describe("M2 application and M3 U5 production boundaries", () => {
       .sort();
 
     expect(visualFiles).toEqual([
+      "briefs/brief-chinese-underworld-guide-hero-primary-v1.yml",
       "briefs/brief-chinese-underworld-hero-primary-v1.yml",
       "briefs/brief-zhong-kui-visual-package-v1.yml",
       "manifests/.gitkeep",
+      "manifests/asset-chinese-underworld-guide-hero-primary-v1.yml",
+      "manifests/asset-chinese-underworld-hero-primary-v1.yml",
       "manifests/asset-zhong-kui-hero-primary-v1.yml",
       "manifests/asset-zhong-kui-hero-primary-v2.yml",
       "manifests/asset-zhong-kui-lead-primary-v1.yml",
       "manifests/asset-zhong-kui-og-primary-v1.yml",
       "manifests/asset-zhong-kui-social-primary-v1.yml",
       "production-records/.gitkeep",
+      "production-records/production-chinese-underworld-guide-hero-primary-v1.yml",
+      "production-records/production-chinese-underworld-hero-primary-v1.yml",
       "production-records/production-zhong-kui-hero-primary-v2.yml",
       "production-records/production-zhong-kui-visual-package-v1.yml",
     ]);
@@ -257,6 +262,10 @@ describe("M2 application and M3 U5 production boundaries", () => {
       .sort();
     expect(repositoryImageFiles).toEqual([
       ".gitkeep",
+      "chinese-underworld-guide-hero-primary-v1-hero-desktop-3200w.webp",
+      "chinese-underworld-guide-hero-primary-v1-hero-mobile-1600w.webp",
+      "chinese-underworld-hero-primary-v1-hero-desktop-3200w.webp",
+      "chinese-underworld-hero-primary-v1-hero-mobile-1600w.webp",
       "zhong-kui-hero-primary-v1-hero-desktop-3200w.webp",
       "zhong-kui-hero-primary-v1-hero-mobile-1600w.webp",
       "zhong-kui-hero-primary-v2-hero-desktop-3200w.webp",

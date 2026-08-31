@@ -83,6 +83,18 @@ const imageFiles = outputFiles.filter((path) =>
   /\.(?:avif|jpe?g|png|webp)$/iu.test(path),
 );
 const fontFiles = outputFiles.filter((path) => path.endsWith(".woff2"));
+const allowedHeroAssetFamilies = [
+  "chinese-underworld-guide-hero-primary-v1",
+  "chinese-underworld-hero-primary-v1",
+  "zhong-kui-hero-primary-v2",
+];
+
+function resolveHeroAssetFamily(path) {
+  const matches = allowedHeroAssetFamilies.filter((family) =>
+    path.includes(family),
+  );
+  return matches.length === 1 ? matches[0] : null;
+}
 
 if (htmlFiles.join("|") !== expectedHtmlFiles.join("|")) {
   throw new Error(
@@ -90,11 +102,12 @@ if (htmlFiles.join("|") !== expectedHtmlFiles.join("|")) {
   );
 }
 if (
-  imageFiles.length !== 14 ||
+  imageFiles.length !== 42 ||
   imageFiles.some(
     (path) =>
-      !path.includes("zhong-kui-hero-primary-v2") ||
-      !/\.(?:avif|webp)$/iu.test(path),
+      resolveHeroAssetFamily(
+        relative(outputRoot, path).replaceAll("\\", "/"),
+      ) === null || !/\.(?:avif|webp)$/iu.test(path),
   )
 ) {
   throw new Error(
@@ -140,24 +153,32 @@ const expectedResponsiveWidths = {
 };
 const seenResponsiveOutputs = new Set();
 for (const imagePath of imageFiles) {
-  const usage = imagePath.includes("-hero-desktop-")
+  const outputPath = relative(outputRoot, imagePath).replaceAll("\\", "/");
+  const assetFamily = resolveHeroAssetFamily(outputPath);
+  const usage = outputPath.includes("-hero-desktop-")
     ? "hero-desktop"
-    : imagePath.includes("-hero-mobile-")
+    : outputPath.includes("-hero-mobile-")
       ? "hero-mobile"
       : null;
   const metadata = await imageMetadata(await readFile(imagePath), imagePath);
   if (
+    assetFamily === null ||
     usage === null ||
     !["avif", "webp"].includes(metadata.format) ||
     !expectedResponsiveWidths[usage].includes(metadata.width)
   ) {
     throw new Error(`Unexpected responsive output: ${imagePath}`);
   }
-  const outputKey = `${usage}:${metadata.format}:${metadata.width}`;
+  const outputKey = `${assetFamily}:${usage}:${metadata.format}:${metadata.width}`;
   if (seenResponsiveOutputs.has(outputKey)) {
     throw new Error(`Duplicate responsive output: ${outputKey}`);
   }
   seenResponsiveOutputs.add(outputKey);
+}
+if (seenResponsiveOutputs.size !== 42) {
+  throw new Error(
+    `Unexpected responsive output coverage: ${seenResponsiveOutputs.size}.`,
+  );
 }
 const htmlByPath = new Map();
 // Shared page invariants also walk every root-relative link, not only navigation.
@@ -325,13 +346,10 @@ if (
   throw new Error("M4 review focal page output is incomplete.");
 }
 if (
-  guideHtml.includes("manifest-hero-picture") ||
   exploreIndexHtml.includes("zhong-kui") ||
   collectionsIndexHtml.includes("chinese-underworld")
 ) {
-  throw new Error(
-    "Review index or Guide output leaks an ineligible visual slice.",
-  );
+  throw new Error("Review index output leaks an ineligible visual slice.");
 }
 if (
   !guideHtml.includes(
@@ -411,26 +429,50 @@ function setsEqual(left, right) {
   );
 }
 
-// Every emitted Hero file must be referenced by both visual pages, and vice versa.
+// Each owning page must reference exactly its approved Hero family, and together
+// the owning pages must cover every emitted Hero file.
 const emittedImageOutputs = new Set(
   imageFiles.map(
     (path) => `/${relative(outputRoot, path).replaceAll("\\", "/")}`,
   ),
 );
+const zhongKuiEmittedOutputs = new Set(
+  [...emittedImageOutputs].filter((path) =>
+    path.includes("zhong-kui-hero-primary-v2"),
+  ),
+);
+const underworldEmittedOutputs = new Set(
+  [...emittedImageOutputs].filter((path) =>
+    path.includes("chinese-underworld-hero-primary-v1"),
+  ),
+);
+const guideEmittedOutputs = new Set(
+  [...emittedImageOutputs].filter((path) =>
+    path.includes("chinese-underworld-guide-hero-primary-v1"),
+  ),
+);
 const homeHeroOutputs = collectReferencedHeroOutputs(homeHtml);
 const entryHeroOutputs = collectReferencedHeroOutputs(zhongKuiHtml);
+const collectionHeroOutputs = collectReferencedHeroOutputs(collectionHtml);
+const guideHeroOutputs = collectReferencedHeroOutputs(guideHtml);
 const referencedHeroOutputs = new Set([
   ...homeHeroOutputs,
   ...entryHeroOutputs,
+  ...collectionHeroOutputs,
+  ...guideHeroOutputs,
 ]);
 if (
-  referencedHeroOutputs.size !== 14 ||
-  !setsEqual(homeHeroOutputs, emittedImageOutputs) ||
-  !setsEqual(entryHeroOutputs, emittedImageOutputs) ||
-  [...referencedHeroOutputs].some(
-    (path) =>
-      !path.includes("zhong-kui-hero-primary-v2") ||
-      path.includes("zhong-kui-hero-primary-v1"),
+  zhongKuiEmittedOutputs.size !== 14 ||
+  underworldEmittedOutputs.size !== 14 ||
+  guideEmittedOutputs.size !== 14 ||
+  referencedHeroOutputs.size !== 42 ||
+  !setsEqual(homeHeroOutputs, zhongKuiEmittedOutputs) ||
+  !setsEqual(entryHeroOutputs, zhongKuiEmittedOutputs) ||
+  !setsEqual(collectionHeroOutputs, underworldEmittedOutputs) ||
+  !setsEqual(guideHeroOutputs, guideEmittedOutputs) ||
+  !setsEqual(referencedHeroOutputs, emittedImageOutputs) ||
+  [...referencedHeroOutputs].some((path) =>
+    path.includes("zhong-kui-hero-primary-v1"),
   )
 ) {
   throw new Error(
@@ -439,14 +481,30 @@ if (
 }
 
 // Keep this oracle independent from the loader so rendered evidence cannot drift silently.
-const manifestAlt =
+const zhongKuiManifestAlt =
   "Zhong Kui, a bearded figure in dark green robes with a sheathed sword, stands at a misty abstract threshold above several crouching demon attendants.";
-const manifestCaption =
+const zhongKuiManifestCaption =
   "A contemporary AI-assisted editorial interpretation of Zhong Kui as a protective demon-queller, with a sheathed sword and subordinate demon attendants; it is not a historical image.";
-const manifestCredit = "Mythic China Editorial";
-const manifestDisclosure =
+const zhongKuiManifestCredit = "Mythic China Editorial";
+const zhongKuiManifestDisclosure =
   "AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.";
-const manifestFigureEvidence = `<figcaption class="visual-note"><span>${manifestCaption}</span><span>${manifestCredit}. ${manifestDisclosure}</span></figcaption>`;
+const zhongKuiManifestFigureEvidence = `<figcaption class="visual-note"><span>${zhongKuiManifestCaption}</span><span>${zhongKuiManifestCredit}. ${zhongKuiManifestDisclosure}</span></figcaption>`;
+const underworldManifestAlt =
+  "An illuminated stone path winds through dark, mist-filled mineral structures toward tiny officials gathered at a distant court-like threshold.";
+const underworldManifestCaption =
+  "A contemporary AI-assisted editorial interpretation of the Chinese underworld as a passage through layered courts toward rebirth; its route and architecture are invented, not a historical or universal map.";
+const underworldManifestCredit = "Mythic China Editorial";
+const underworldManifestDisclosure =
+  "AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.";
+const underworldManifestFigureEvidence = `<figcaption class="visual-note"><span>${underworldManifestCaption}</span><span>${underworldManifestCredit}. ${underworldManifestDisclosure}</span></figcaption>`;
+const guideManifestAlt =
+  "Blank record sheets lead through dark charcoal-and-jade administrative spaces toward tiny anonymous figures and distant warm light.";
+const guideManifestCaption =
+  "A contemporary AI-assisted editorial interpretation of one court-and-rebirth model in Chinese underworld traditions; the blank records, layered passage, and architecture are invented, not a historical reconstruction or universal map.";
+const guideManifestCredit = "Mythic China Editorial";
+const guideManifestDisclosure =
+  "AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.";
+const guideManifestFigureEvidence = `<figcaption class="visual-note"><span>${guideManifestCaption}</span><span>${guideManifestCredit}. ${guideManifestDisclosure}</span></figcaption>`;
 function assertCandidateCount(html, media, format, expectedCount) {
   const source = html.match(
     new RegExp(
@@ -463,11 +521,31 @@ function assertCandidateCount(html, media, format, expectedCount) {
 }
 for (const html of [homeHtml, zhongKuiHtml]) {
   if (
-    !html.includes(`alt="${manifestAlt}"`) ||
-    !html.includes(manifestFigureEvidence)
+    !html.includes(`alt="${zhongKuiManifestAlt}"`) ||
+    !html.includes(zhongKuiManifestFigureEvidence)
   ) {
-    throw new Error("A Hero page is missing manifest accessibility evidence.");
+    throw new Error(
+      "A Zhong Kui Hero page is missing manifest accessibility evidence.",
+    );
   }
+}
+if (
+  !collectionHtml.includes(`alt="${underworldManifestAlt}"`) ||
+  !collectionHtml.includes(underworldManifestFigureEvidence)
+) {
+  throw new Error(
+    "The Chinese Underworld Collection is missing manifest accessibility evidence.",
+  );
+}
+if (
+  !guideHtml.includes(`alt="${guideManifestAlt}"`) ||
+  !guideHtml.includes(guideManifestFigureEvidence)
+) {
+  throw new Error(
+    "The Chinese Underworld Guide is missing manifest accessibility evidence.",
+  );
+}
+for (const html of [homeHtml, zhongKuiHtml, collectionHtml, guideHtml]) {
   if (!html.includes(".avif") || !html.includes(".webp")) {
     throw new Error("A Hero page is missing responsive AVIF/WebP output.");
   }
@@ -511,8 +589,17 @@ if (
     "Underworld guide must render editorial copy, attribution, and three complete web Source records.",
   );
 }
-if (collectionHtml.includes(manifestAlt)) {
-  throw new Error("Collection must not borrow the Zhong Kui Entry Hero.");
+if (
+  collectionHtml.includes(zhongKuiManifestAlt) ||
+  collectionHtml.includes(guideManifestAlt)
+) {
+  throw new Error("Collection must not borrow another owner's Hero copy.");
+}
+if (
+  guideHtml.includes(zhongKuiManifestAlt) ||
+  guideHtml.includes(underworldManifestAlt)
+) {
+  throw new Error("Guide must not borrow another owner's Hero copy.");
 }
 const guidedPathStart = collectionHtml.indexOf('id="guided-path-heading"');
 const guidedPathEnd = collectionHtml.indexOf('class="collection-browse"');

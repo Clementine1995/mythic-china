@@ -1,0 +1,92 @@
+productionRecordId: production-chinese-underworld-hero-primary-v1
+briefId: brief-chinese-underworld-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier; no model identity or seed is inferred from the output files, provenance metadata, or product documentation.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: The Project owner confirmed on 2026-08-31 that this production used a personal, non-organization-managed OpenAI account and that the Project owner is authorized to generate, save, edit, and publish the outputs for Mythic China. Only Project-owner-selected, project-generated candidates were supplied to ImageGen. No museum, historical, or other third-party reference image was uploaded. This record does not claim exclusivity, copyrightability, or clearance of unrelated third-party rights beyond the recorded production chain.
+recordedAt: "2026-08-31T07:12:04Z"
+renditions:
+  - manifestId: asset-chinese-underworld-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: precise-object-edit
+      Asset type: Mythic China Collection Hero production reconstruction, desktop landscape
+      Input images: Image 1 is the Project-owner-selected desktop candidate 02 and the sole edit target.
+      Primary request: Reconstruct Image 1 as a production-grade 16:9 desktop master candidate, targeting an exact 3200×1800 canvas if the tool supports it. This must be a high-fidelity detail reconstruction, not a blurred enlargement: rebuild fine matte mineral texture, clean edge transitions, mist depth, and stone-surface detail while preserving the selected composition identity.
+
+      Permitted scene clarification only: In the far mid-distance on the right-side receding layers, make two or three tiny anonymous official silhouettes and one restrained low record-table gesture just legible enough to suggest a distant court-and-record hierarchy. They must remain secondary evidence cues, not portraits, named ranks, or focal subjects.
+
+      Hard invariants: Preserve the exact descending path geometry, foreground threshold, right-side depth, distant arched warm reveal, low horizon, charcoal and oxidized-jade palette, warm paper light, matte ink-and-mineral medium, and focal reveal near x 0.66 / y 0.50. Preserve the leftmost 42 percent and top 16 percent as calm dark-to-midtone low-detail safe space for white HTML Collection identity and navigation. Preserve 16:9 framing with no border, padding, crop marks, or embedded UI.
+
+      Constraints: No text, letters, numbers, pseudo-Chinese marks, seals, talismans, calligraphy, symbols, logos, watermark, title, caption, or interface. No Zhong Kui, King Yama, named Ten King, prominent ruler, deity, demon spectacle, invented rank, explicit punishment, torture, gore, severed bodies, skull piles, fire pits, ten-court floor plan, eighteen-level diagram, fixed universal gate sequence, historical facsimile, copied museum composition, European fantasy armor, Japanese-specific underworld iconography, black-red horror lighting, neon rim light, or game-poster bloom. No freestanding torches, lamps, beacons, or glowing poles. Add no other objects or figures. Keep shadows readable rather than crushed. This remains an original contemporary editorial illustration, not a historical image.
+    receivedAt: "2026-08-31T05:58:11Z"
+    inputImages:
+      - kind: edit-target
+        sha256: 64f51d3697d2ca6e7e1e7c253906bbb5dca39f5541aa6dacd13f2dd7ae100866
+        rightsNotes: Project-generated desktop candidate 02 selected by the Project owner; supplied as the sole high-fidelity reconstruction target. No third-party image was supplied.
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: c63a01353b83f48f5cfa04df3d7807e55a51a9a7b3afb53dd959941356495616
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld/v1/chinese-underworld-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 9fdb9771109da9ec0b10450fdd46e39e770fe7ac9e13a5e460ac0a3d652eb9f4
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Selected the Project-owner-approved high-fidelity desktop reconstruction after final exact-canvas review.
+        - Preserved the selected descending-path composition and added only tiny anonymous official silhouettes and a restrained record-table gesture in the distant court layer.
+        - Used centered fit-cover processing to remove approximately one output pixel vertically while preserving the approved 16:9 composition and safe areas.
+        - Reconstructed the exact 3200x1800 lossless PNG master with the Lanczos3 kernel and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-08-31T07:12:04Z"
+  - manifestId: asset-chinese-underworld-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Use case: precise-object-edit
+      Asset type: Mythic China Collection Hero production reconstruction, mobile portrait
+      Input images: Image 1 is the Project-owner-selected independently composed mobile candidate 01 and the sole edit target.
+      Primary request: Reconstruct Image 1 as a production-grade 4:5 mobile master candidate, targeting an exact 1600×2000 canvas if the tool supports it. This must be a high-fidelity detail reconstruction, not a blurred enlargement: rebuild fine matte mineral texture, clean edge transitions, mist depth, and stone-surface detail while preserving the selected vertical composition identity.
+
+      Required correction: Remove the small cinnabar-red mark or mark-like texture on the lower-right foreground block and reconstruct that area as neutral charcoal/oxidized-jade mineral surface. It must not resemble writing, a seal, a symbol, blood, or an authored mark.
+
+      Permitted scene clarification only: Keep the existing tiny anonymous silhouettes and low record-table gesture in the distant court layer subtle but legible. Do not enlarge, multiply, name, costume, or turn them into portraits or focal subjects.
+
+      Hard invariants: Preserve the independently authored vertical descending path, foreground threshold, two or three receding spatial layers, distant warm reveal, charcoal and oxidized-jade palette, warm paper light, matte ink-and-mineral medium, and focal reveal near x 0.52 / y 0.50. Preserve the top 24 percent as calm dark-to-midtone low-detail safe space for HTML title and controls. Preserve the lower 12 percent free of essential figures or symbols. Preserve 4:5 framing with no border, padding, crop marks, or embedded UI.
+
+      Constraints: No text, letters, numbers, pseudo-Chinese marks, seals, talismans, calligraphy, symbols, logos, watermark, title, caption, or interface. No Zhong Kui, King Yama, named Ten King, prominent ruler, deity, demon spectacle, invented rank, explicit punishment, torture, gore, severed bodies, skull piles, fire pits, ten-court floor plan, eighteen-level diagram, fixed universal gate sequence, historical facsimile, copied museum composition, European fantasy armor, Japanese-specific underworld iconography, black-red horror lighting, neon rim light, or game-poster bloom. No freestanding torches, lamps, beacons, or glowing poles. Add no other objects or figures. Keep shadows readable rather than crushed. This remains an original contemporary editorial illustration, not a historical image.
+    receivedAt: "2026-08-31T05:58:13Z"
+    inputImages:
+      - kind: edit-target
+        sha256: e891e2abbf71c4c03624e0d8ba0eeb59852e39500b630fc16b07923756dbb35c
+        rightsNotes: Project-generated, independently composed mobile candidate 01 selected by the Project owner; supplied as the sole high-fidelity reconstruction target. No third-party image was supplied.
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 33e6f48ca909511938a6bc73557952b6c1c835263547b0c7bb6421460d6789fc
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld/v1/chinese-underworld-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: e80eac658d8f98fdd290f6278b1ffa3ff39b395b94b1d4f174c603b8c17581d7
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Selected the Project-owner-approved high-fidelity mobile reconstruction after final exact-canvas review.
+        - Removed the lower-right cinnabar-red mark-like texture and restored a neutral charcoal and oxidized-jade mineral surface.
+        - Preserved the independently authored mobile path, distant anonymous silhouettes, record-table gesture, focal hierarchy, and required top and bottom safe areas.
+        - Used centered fit-cover processing to remove approximately one output pixel horizontally while preserving the approved 4:5 composition and safe areas.
+        - Reconstructed the exact 1600x2000 lossless PNG master with the Lanczos3 kernel and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-08-31T07:12:04Z"
+notes: The Project-owner-selected desktop 02 and independently composed mobile 01 candidates were used only as project-generated edit targets. ImageGen produced high-fidelity reconstruction outputs; Sharp then performed the minimal centered aspect normalization required for the exact Hero canvases. No museum or historical reference image was supplied to ImageGen. The original selected candidates, raw reconstruction outputs, and exact-canvas review artifacts remain in Git-ignored local exploration storage.

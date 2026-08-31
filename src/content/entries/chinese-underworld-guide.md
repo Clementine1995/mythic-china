@@ -31,7 +31,7 @@ terminologyRecordIds:
   - term-yinjian-in-chinese-underworld-guide
 relatedEntryIds:
   - zhong-kui
-heroAssetId: null
+heroAssetId: asset-chinese-underworld-guide-hero-primary
 publishedAt: null
 updatedAt: null
 lastFactCheckedAt: "2026-08-30"

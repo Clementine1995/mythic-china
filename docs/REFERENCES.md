@@ -115,16 +115,18 @@
 
 本期 primary reference family 固定为“晚清中国钟馗人物画中的文雅士人表达与入鞘佩剑”；其他元/明清对象只用于交叉核对人物、鬼从、群像与构图边界。所有公开资产都必须重新构图，不复制任何一件馆藏的完整姿态、题跋、印章或版式。
 
-### 首个纵切片正文与 Collection Hero 候选
+### 首个纵切片正文与 Collection / Guide Hero 生产依据
 
-以下资料访问于 2026-08-30，已进入 `A Guide to the Chinese Underworld`、`Zhong Kui, the Demon Queller` 的 Source/Claim/Terminology 或 Collection Hero approved brief 与候选 trace metadata：
+以下资料访问于 2026-08-30，已进入 `A Guide to the Chinese Underworld`、`Zhong Kui, the Demon Queller` 的 Source/Claim/Terminology，或 Collection / Guide Hero 各自的 approved brief、候选 trace metadata 与最终生产记录：
 
 - [The Ten Magistrates of the Underworld Realm](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm) — Myron L. Cohen / Asia for Educators, Columbia University。用途：一个有边界的十位审判者、官僚化法庭、非永恒惩罚、仪式援助和轮回模型；不代表所有中国时期、地区或传统。
 - [Ten Kings of Hell](https://www.metmuseum.org/art/collection/search/44509) — Jin Chushi / The Met，Southern Song，before 1195，object 30.76.293。用途：具体对象中的王、书记、官员、审判、惩罚和十卷组画语境；页面标注 Public Domain，权利入口为 [The Met Image and Data Resources](https://www.metmuseum.org/policies/image-resources)。它不是通用阴间地图。
 - [“阴间”](https://dict.revised.moe.edu.tw/dictView.jsp?ID=156490&q=1&word=%E9%99%B0) — 教育部《重编国语辞典修订本》。用途：`yīnjiān` 的拼音与宽泛“死后魂灵所在”词义；不支持完整宗教体系。
 - [Zhong Kui and the Lunar New Year](https://asia.si.edu/whats-on/blog/posts/zhong-kui-and-the-lunar-new-year/) — Yue Shu / Smithsonian National Museum of Asian Art，2021。用途：馆方对考试、治病梦与新年保护传统的现代复述；不是唐代原典，也不单独承担 earliest-known 判断。
 
-Collection Hero 候选 A 只从上述 Claim 抽取“法庭/记录层级”和“审判通往轮回”的结构，并把门槛、建筑、光雾和人物轮廓明确列为 inferred/invented；其 approved brief 已生成三张 Git-ignored local explore 输出，Project owner 于 2026-08-31 选中 desktop 02/mobile 01 进入生产准备。它们仍未闭合当前工具/账户 authority、publication rights、exact-canvas master、五类审核、production record、repository source 或 manifest，因此不是 approved/current 资产。候选 B 仅保留 The Met 公共领域对象直接复用路径，尚未下载或生产。
+Collection Hero 候选 A 只从上述 Claim 抽取“法庭/记录层级”和“审判通往轮回”的结构，并把门槛、建筑、光雾和人物轮廓明确列为 inferred/invented；其 approved brief 先生成三张 Git-ignored local explore 输出，Project owner 于 2026-08-31 选中 desktop 02/mobile 01，随后确认个人账户、工具条款适用事实、publication authority、文化/权利/视觉/无障碍/语言五审及最终文案。选图经高保真 ImageGen 重建和最小 centered fit-cover Lanczos3 处理成为 exact-canvas desktop/mobile master；production record、repository source 与 `asset-chinese-underworld-hero-primary-v1` approved/current manifest 已闭合，并由 Collection 的 versionless `assetId` 消费。博物馆或历史图像没有上传到 ImageGen；候选 B 仍只保留 The Met 公共领域对象直接复用路径，尚未下载或生产。
+
+Guide Hero 只从同一来源链抽取“空白记录表面、行政法庭空间与通往轮回的有边界 passage”作为编辑转译，并把所有纸张、路线、建筑、人物和光雾明确列为 inferred/invented。Project owner 于 2026-08-31 批准 desktop A2 与独立构图、定向收敛为三层空间的 mobile 候选作为最终组合，并单独确认本 Guide 的个人非组织管理账户、输入权利、适用工具/输出使用权、Mythic China publication authority、五审与公开文案。desktop 只把项目生成 A 作为 edit target；mobile 只把 A2 作为视觉语言锚点并把项目生成 draft 作为 correction target。The Met 或其他博物馆/历史图没有上传到 ImageGen。最小 centered fit-cover Lanczos3 处理形成 exact-canvas desktop/mobile master；`production-chinese-underworld-guide-hero-primary-v1`、两份 repository source 与 `asset-chinese-underworld-guide-hero-primary-v1` approved/current manifest 已闭合，并由 Guide Entry 的 versionless `assetId` 消费。该生成资产不是文化来源、历史重建或普遍阴间地图。
 
 ### 通用原典、数据库与翻译研究入口
 
@@ -151,6 +153,13 @@ Collection Hero 候选 A 只从上述 Claim 抽取“法庭/记录层级”和�
 - [Actions](https://docs.astro.build/en/guides/actions/) 与 [Sessions](https://docs.astro.build/en/guides/sessions/) — Astro 官方文档。用途：未来少量写入、会话与 adapter 隔离边界，不代表 MVP 已采用。
 - [Images](https://docs.astro.build/en/guides/images/) — Astro 官方文档。用途：`Image` / `Picture`、AVIF/WebP 与响应式图片策略。
 - [Sitemap Integration](https://docs.astro.build/en/guides/integrations-guide/sitemap/) — Astro 官方文档。用途：未来 Sitemap 实现入口。
+
+### Multilingual URLs and Routing
+
+以下资料访问于 2026-08-31，只用于冻结未来本地化试点的产品与架构边界；当前没有 locale route、语言切换或 localized SEO 实现：
+
+- [Managing Multi-Regional and Multilingual Sites](https://developers.google.com/search/docs/advanced/crawling/managing-multi-regional-sites) — Google Search Central。用途：每种语言使用独立 URL、只为真实版本标注 `hreflang`、提供显式语言链接、避免根据猜测自动重定向，并让单页保持清楚的主要语言。
+- [Internationalization Routing](https://docs.astro.build/en/guides/internationalization/) — Astro 官方文档。用途：locale path、default locale 与显式本地化路由的未来实现入口；不表示当前已配置 Astro i18n、middleware、fallback 或服务端输出。
 
 ### Image Build
 
@@ -195,7 +204,7 @@ Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标；Astr
 | [Zeejay0 / gathered-scenes-zine-skill](https://github.com/Zeejay0/gathered-scenes-zine-skill) | [个人非商业许可证](https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/LICENSE)，明确限制商业工作流及相关输出 | 不采用 | 项目保留订阅、广告和产品化路线，与许可证不兼容；除非未来取得明确书面商业许可，否则不安装、不使用其输出。 |
 | [liyue-aigc / xianxia-visual-director](https://github.com/liyue-aigc/xianxia-visual-director) | 仓库明确未附开源许可证 | 不采用 | 其固定仙侠巨构、建筑、人物与服装 house rules 是幻想设定，不是历史/宗教依据；不复制 Skill 文本或资产，也不让其发明具体人物、建筑、仪式和神系。镜头层级、尺度参照等通用构图常识只能自行表述。 |
 | [LiamGvchi / gc-minimal-zine-poster](https://github.com/LiamGvchi/gc-minimal-zine-poster) | [MIT](https://github.com/LiamGvchi/gc-minimal-zine-poster/blob/main/LICENSE) | 仅借方法 | 可借 observed vs interpretation、fixed/variable/sample residue、输入图保留等级及 full/thumbnail QA；不采用其日韩 indie-zine、旧纸、高彩点色和默认 3:5 外观。 |
-| built-in `imagegen` | 当前环境内置图片生成能力；[OpenAI Terms of Use](https://openai.com/policies/terms-of-use/) 于 2026-08-28 为钟馗任务核对，实际适用账户关系由 Project owner 据实确认 | 条件可用 | 只在画面实际涉及的 Claim/Source、适用 Terminology 与 visual brief 核准后执行原型或资产探索；未引入新术语的 scoped visual sample 可以没有 TerminologyRecord。输出进入公开站点前必须有 manifest、权利判断、人工文化/语言审核和披露。2026-08-29 钟馗任务的个人账户/发布授权记录不自动继承到 2026-08-30 Chinese Underworld 候选；本轮只生成 Git-ignored 待审图，未上传馆藏或第三方参考图，当前条款、账户 authority 与 publication rights 仍须在选图进入生产链前闭合。 |
+| built-in `imagegen` | 当前环境内置图片生成能力；[OpenAI Terms of Use](https://openai.com/policies/terms-of-use/) 分别由 Project owner 结合实际任务与账户关系确认 | 条件可用 | 只在画面实际涉及的 Claim/Source、适用 Terminology 与 visual brief 核准后执行原型或资产探索；未引入新术语的 scoped visual sample 可以没有 TerminologyRecord。输出进入公开站点前必须有 manifest、权利判断、人工文化/语言审核和披露。2026-08-29 钟馗任务的个人账户/发布授权记录没有自动继承；Project owner 于 2026-08-31 又分别对 Chinese Underworld Collection Hero 与 Guide Hero 确认各自适用的个人、非组织管理账户、输入权利、生成/保存/编辑/公开使用权限，并批准各自五审与公开文案。每次确认只覆盖对应记录的当前生产链，不自动授权未来任务，也不主张排他性、当然可版权性或绝对不侵权。 |
 | local `design-taste-frontend` | 当前环境的设计审计指令；不复制或随项目分发其文本 | 条件可用，仅作 QA | 只借 brief inference、布局重复、移动折叠、对比、reduced motion 与性能检查；其默认技术栈、双主题和营销页规则不得覆盖本项目的 Astro 推荐、编辑长文和中国文化主题合同。 |
 
 采用分组：**条件可用**为 `ink-wash-poster`、built-in `imagegen`、`design-taste-frontend`；**仅借方法**为 `scene-distillation-zine-v1-3`、`gc-minimal-zine-poster`；**不采用**为 `gathered-scenes-zine-skill`、`xianxia-visual-director`。没有任何 Skill 可以绕过 `CONTENT_MODEL.md` 的 Claim、适用 TerminologyRecord、visual brief、Asset Manifest 与权利审核。

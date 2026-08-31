@@ -1,0 +1,124 @@
+assetId: asset-chinese-underworld-guide-hero-primary
+manifestId: asset-chinese-underworld-guide-hero-primary-v1
+ownerType: entry
+ownerId: chinese-underworld-guide
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-chinese-underworld-guide-hero-primary-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld-guide/v1/chinese-underworld-guide-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: d070ee61ce6a613c2903dbdbe53f2bb888f411c7d8433ecc82f5d4053c9a013b
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/chinese-underworld-guide/v1/chinese-underworld-guide-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 8180d0ee16f52501f2c4077e1cd039797c278dfb0429f736ebd6108663dbf48d
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/chinese-underworld-guide-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 24df40e6f9d135b50373fe0fc3552a54589de99bd5ec6c55ad0219e067e04639
+    focalPoint:
+      x: 0.34
+      y: 0.53
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/chinese-underworld-guide-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: cf51b65060db0e699c9020b8f7a08d72755f0e1b5f479dbbdbd9c8d1ff217790
+    focalPoint:
+      x: 0.5
+      y: 0.55
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-ten-kings-hell-met-44509
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner (private individual)
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: The Project owner confirmed on 2026-08-31 that this Guide production used a personal, legally controlled, non-organization-managed OpenAI account without employer, client, or organization restrictions and that the applicable tool terms and output rights allow the outputs to be saved, edited, and publicly displayed for Mythic China. Only project-generated candidates were supplied to ImageGen; museum and historical references informed the approved textual brief only and were not uploaded. The Project owner authorized publication by Mythic China with this in-house-original basis and rights-holder statement. This approval does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - guide-court-and-record-administration
+  - guide-transitory-passage-toward-rebirth
+  - blank-record-reading-path
+  - layered-nonlinear-thresholds
+  - anonymous-court-scale-cues
+  - guide-charcoal-jade-paper-palette
+  - original-guide-record-surfaces
+  - original-guide-passage-architecture
+  - original-guide-anonymous-figures
+  - original-guide-light-and-weather
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen via Codex
+  recordPath: visual/production-records/production-chinese-underworld-guide-hero-primary-v1.yml
+  workflow: null
+humanEdits:
+  - Selected Project-owner-approved desktop A2 and the independently composed corrected mobile candidate as one final pair.
+  - Directed the desktop edit to remove only the inkstone-like, brush-like, and writing-tool-rest objects while preserving the approved records, passage, figures, light, and safe areas.
+  - Directed the independent mobile composition to replace repeated concentric doorways with exactly three broad, restrained court-like spatial layers while preserving blank records and safe areas.
+  - Reconstructed both raw outputs to the exact approved Hero canvases with centered fit-cover Lanczos3 processing and no non-uniform stretching.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the selected final raw candidates and available desktop exploration inputs in Git-ignored local storage for audit; the initial mobile correction draft is identified by its recorded SHA-256 but is not retained locally.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T11:58:30Z"
+    notes: Approved as one bounded, nonliteral court-and-rebirth reading path. Blank records and the two- or three-layer passage are editorial translations; tiny figures remain anonymous and secondary. The pair depicts no universal map, named ruler, punitive spectacle, ritual prescription, or invented rank, species, or biography.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T11:58:30Z"
+    notes: Approved after the Project owner confirmed a personal, legally controlled, non-organization-managed OpenAI account without employer, client, or organization restrictions; authority to use the project-generated inputs; applicable rights to save, edit, and publicly display the outputs; and Mythic China publication authority. Desktop used only project-generated A and A2, while mobile used only A2 as a visual-language anchor and a project-generated draft as its correction target. No museum, historical, or unauthorized third-party image was uploaded.
+  visual:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T11:58:30Z"
+    notes: The final 3200x1800 desktop and 1600x2000 mobile canvases were inspected at full-canvas and original-resolution detail scale after exact-canvas processing and WebP encoding. Desktop preserves the rightmost 42 percent and top 14 percent as calm title space. The independently composed mobile preserves the top 16 percent and bottom 10 percent safe areas. Both retain blank records, restrained spatial layers, distant warm light, readable shadows, and contain no embedded text, logo, watermark, obvious broken geometry, or disallowed ritual, map, punishment, horror, or game spectacle.
+  accessibility:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T11:58:30Z"
+    notes: The informative alt accurately covers the blank record surfaces, layered charcoal-and-jade administrative spaces, tiny anonymous figures, and distant warm light. The caption identifies a contemporary AI-assisted editorial interpretation and states that the records, passage, and architecture are invented rather than a historical reconstruction or universal map. This asset review does not replace pending page-level browser accessibility review.
+  language:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-08-31T11:58:30Z"
+    notes: No rendered text, letters, numbers, Chinese characters, pseudo-writing, calligraphy, seals, talismans, emblems, logos, or watermarks are present. The English alt, caption, credit, disclosure, and bounded use of Chinese underworld were reviewed and approved.
+alt: Blank record sheets lead through dark charcoal-and-jade administrative spaces toward tiny anonymous figures and distant warm light.
+caption: A contemporary AI-assisted editorial interpretation of one court-and-rebirth model in Chinese underworld traditions; the blank records, layered passage, and architecture are invented, not a historical reconstruction or universal map.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

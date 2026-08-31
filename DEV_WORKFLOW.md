@@ -2,7 +2,9 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），M4-U2 历史基线为 `5f327b6`（`M4-u2 completed`），最近确认的 M4-U3 实现基线为 `e94eaca`（`updatee`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前七个精确画布 master、七份 repository source rendition、两份 production record 与五份 manifest 版本记录已核验；四个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，三份 current responsive rendition 的 22 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2/U3 与 M4-U4A，并于 2026-08-30 自行提交 U3 实现与原收口文档；M4-U4A 完成 HTTPS origin 校验、公共身份、public inventory、SEO 与 release artifact 纯基础设施，但不开放 public build、不创建 Vercel 项目且不部署。首个纵切片的编辑形态、Hero A 方向与字体方案现已获阶段性确认；本地候选任务已获授权，形成 Git-ignored Hero 待审图与可替换英文自托管字体接线。具体图片/字体页面效果、CJK 工具、M4-U5、M4-U4B、未来服务、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），M4-U2 历史基线为 `5f327b6`（`M4-u2 completed`），最近确认的 M4-U3 实现基线为 `e94eaca`（`updatee`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前 11 个精确画布 master、11 份 repository source rendition、四份 production record 与七份 manifest 版本记录已核验；六个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，七份 current responsive rendition 的 50 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2/U3 与 M4-U4A，并于 2026-08-30 自行提交 U3 实现与原收口文档；M4-U4A 完成 HTTPS origin 校验、公共身份、public inventory、SEO 与 release artifact 纯基础设施，但不开放 public build、不创建 Vercel 项目且不部署。首个纵切片的编辑形态与字体方案已获阶段性确认；Chinese Underworld Collection Hero 与 Guide Hero 均已完成各自的账户/权利确认、五项人工审核、exact-canvas、公开文案、approved/current 资产链及所属内容的静态接线。正式字体页面效果、CJK 工具、M4-U5、M4-U4B、未来服务、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+
+Guide Hero 生产闭环直接接续 Project owner 最新提交 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的现有未提交 Collection Hero 与本地化合同工作树；没有创建分支、worktree、旁路项目或仓库副本。本轮未执行 fetch 或任何 Git 写操作。
 
 `docs/` 下的需求、设计和阶段材料只能引用本文件中的命令与门禁，不得复制形成第二套命令，也不得替代根目录当前事实说明或执行前现场核查。
 
@@ -560,7 +562,7 @@ Project owner 于 2026-08-29 单独授权 M4-U3，并确认采用纯 release 投
 - M4-U4A 未改视觉链，因此未重跑非默认 `visual:build:check`；M3/M4-U2 的七个 local master 与 22 个 current 响应式输出证据保持不变。本单元未运行 dev/preview/browser，未执行 Git 写入、Vercel 项目操作、部署或发布。
 - 当前真实 inventory 为 0 published Entry / 0 published Collection；唯一 Collection 在进入 published 状态前还需要自己的 approved Hero 与模板接线，钟馗完整正文/研究、正式字体和 M4-U5 页面资格也未闭合。因此 M4-U4A 纯基础设施已完成，M4-U4B、部署与发布继续 fail closed。
 
-### 首个纵切片编辑、Hero A 与英文字体候选
+### 首个纵切片编辑、Hero A 与英文字体候选（历史快照）
 
 2026-08-30，Project owner 在经单独授权启动的本地 preview 中确认当前内容、byline/fact-check、模板排版与 CSS 无图 Collection Hero 可继续，并选择 Hero A、接受字体方案、要求保留字体替换空间，随后授权本地候选任务及停止 preview。
 
@@ -583,6 +585,26 @@ Project owner 授权更新权威文档并执行推荐的下一本地批次；范
 - 完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check（67 个文件，0 error、0 warning、0 hint）、7 页 review build 与输出 verifier。产物仍为 7 个 `noindex, nofollow` 页面、14 个 Hero v2 图片、4 个 WOFF2、零 XML 与零客户端 JavaScript。
 - 本批不修改 visual master/manifest/repository source，因此未运行非默认 `visual:build:check`；没有启动服务/浏览器、安装依赖、执行 Git 写入、Vercel 操作、部署或发布。
 
+### 2026-08-31 Chinese Underworld Collection Hero 生产闭环
+
+Project owner 已确认个人且非组织管理账户、无未经授权的第三方输入、无雇主/客户/其他组织限制，并同意遵守适用的当前 OpenAI 条款后公开使用；同时批准建议的 `in-house-original` 权利记录、五项人工审核与四段公开文案。审核记录时间为 `2026-08-31T07:09:00Z`；该记录不主张排他性、当然可版权性或绝对不侵权。
+
+- 使用 Codex 内置 OpenAI ImageGen 对已选 desktop 02/mobile 01 做高保真重建；没有上传馆藏、历史图像或其他第三方参考图。工具未暴露 model ID，production record 如实保持 `null`。
+- ImageGen 原始输出随后仅以 Sharp `0.35.4` 做 centered `fit: cover`、Lanczos3 精确画布处理，没有非等比拉伸，也不宣称 ImageGen 原生输出即为目标画布。正式 master 为 desktop `3200×1800` PNG（SHA-256 `9fdb9771109da9ec0b10450fdd46e39e770fe7ac9e13a5e460ac0a3d652eb9f4`）与 mobile `1600×2000` PNG（SHA-256 `e80eac658d8f98fdd290f6278b1ffa3ff39b395b94b1d4f174c603b8c17581d7`）。
+- 新增两份同画布 WebP repository source、`production-chinese-underworld-hero-primary-v1` 与 `asset-chinese-underworld-hero-primary-v1`；Collection 使用稳定 ID `asset-chinese-underworld-hero-primary` 解析自己的 approved/current Hero，不借用钟馗资产，内容状态保持 `editorial-review`。
+- 图片 registry、精确 inventory 测试与 output verifier 同步覆盖 Collection art direction，并对其 alt、caption、credit、disclosure 建立独立精确 oracle。固定 Node/Corepack 下 `pnpm run visual:build:check` 通过九个 local master、五份 current responsive rendition 与 36 个实际生成/解码的 AVIF/WebP 目标；完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断、7 页/28 个 Hero 图片/4 个 WOFF2/零 XML/零客户端 JavaScript 输出门禁。
+- 本批未安装或升级依赖，未启动服务或浏览器，未提升 Entry/Collection 状态，未执行 Git 写入、Vercel 操作、部署或发布。
+
+### 2026-08-31 Chinese Underworld Guide Hero 生产闭环
+
+Project owner 批准 desktop A2 与独立构图、定向修正后的 mobile 候选作为最终组合，并确认本 Guide 使用个人、合法控制、非组织管理且不受雇主/客户/组织限制的 OpenAI 账户；输入权利、适用工具/输出使用权与 Mythic China 公开使用权均已确认。Project owner 同时批准 `in-house-original`、`Mythic China project owner (private individual)`、五项人工审核和最终 alt/caption/credit/AI disclosure；审核记录时间为 `2026-08-31T11:58:30Z`。记录不主张排他性、当然可版权性、绝对不侵权或无关第三方权利已获清理。
+
+- desktop A2 只把项目生成候选 A 作为 edit target，移除砚台状、毛笔状和工具架物件；mobile 初始生成只把 A2 作为视觉语言锚点，随后只把项目生成的 mobile draft 作为 edit target，把重复同心门洞收敛为三层克制的行政空间。没有向 ImageGen 上传馆藏、历史图像或未经授权的第三方参考图；工具未暴露 model ID 或 seed，production record 如实保持 `null`。
+- 最终 raw output 为 desktop `1672×941` 与 mobile `1122×1402`。Sharp `0.35.4` 仅做 centered `fit: cover`、Lanczos3 等比归一化并编码同画布 WebP quality 90，没有非等比拉伸，也不宣称 ImageGen 原生输出即为目标画布。正式 lossless PNG master 为 desktop `3200×1800`（SHA-256 `d070ee61ce6a613c2903dbdbe53f2bb888f411c7d8433ecc82f5d4053c9a013b`）与 mobile `1600×2000`（SHA-256 `8180d0ee16f52501f2c4077e1cd039797c278dfb0429f736ebd6108663dbf48d`）。
+- 新增两份 Guide 同画布 WebP repository source、`production-chinese-underworld-guide-hero-primary-v1` 与 `asset-chinese-underworld-guide-hero-primary-v1`；Guide Entry 使用 versionless `asset-chinese-underworld-guide-hero-primary` 解析自己的 approved/current Hero，不借用 Collection 或 Zhong Kui 资产，状态仍为 `editorial-review`。
+- 图片 registry、精确 inventory 测试与 output verifier 同步覆盖 Guide art direction，并对其 alt、caption、credit、disclosure 建立独立精确 oracle。固定 Node/Corepack 下 `pnpm run visual:build:check` 通过 11 个 local master、七份 current responsive rendition 与 50 个实际生成/解码的 AVIF/WebP 目标；完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断，以及默认 review build 的 7 页、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。
+- 本批未安装、升级或移除依赖，未启动服务或浏览器，未提升 Entry/Collection 状态，未执行 Git 写入、Vercel 操作、部署或发布。
+
 ## 数据库、外部服务与真实写入口
 
 当前均不适用。项目没有数据库、表单 endpoint、邮件、分析、支付或广告配置。未来接入任一能力时必须先建立需求文档，并在本文件增加：
@@ -596,7 +618,7 @@ Project owner 授权更新权威文档并执行推荐的下一本地批次；范
 
 ## 发布
 
-Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、一份 approved 但无资产的 Collection Hero brief、两张首选待审 Hero 图、4 份英文 WOFF2 与可见 byline/fact-check 日期；双语术语、CJK、具体 Hero/字体页面效果、Guide 自有 Hero 和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 Collection Hero asset/manifest、public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
+Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、分别由 Collection 与 Guide 静态消费的两套 approved/current 自有 Hero、4 份英文 WOFF2 与可见 byline/fact-check 日期；双语术语、Source 标题 locale、CJK、正式字体页面效果和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 

@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。当前七个 local master、七份 repository source、两份 production record 与五份 manifest 版本记录均通过门禁，四个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从三份 current responsive source 实际生成和解码验证全部 22 个 AVIF/WebP 目标；M3 已完成，页面仍属于 M4。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -17,8 +17,8 @@
 
 ### 0.2 M3-U3 视觉记录与加载合同
 
-- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前存在两份 approved brief（Zhong Kui 与 Chinese Underworld Collection）和五份 manifest 版本记录；其中四份 approved/current 分别服务 Zhong Kui Hero、Lead、OG、Social，Hero v1 为 approved/non-current。Project owner 已从 Collection brief 的 Git-ignored local explore 输出中选中 desktop 02/mobile 01 进入生产准备，但仍没有 asset/manifest，不产生 current 资产。
-- `src/assets/images` 只保存尺寸锁定的 repository source rendition。当前七份 approved source 均被 manifest 唯一引用并通过真实 metadata/hash、权利与人工审核门禁；Hero v1 的两份 source 作为非 current 版本历史保留。metadata registry 忽略 `.gitkeep`，但不会静默忽略其他文件；未被 manifest 唯一引用的图片、非批准扩展名、符号链接、禁入签名、超过 10 MiB 或无法读取 metadata 的文件均使构建失败。
+- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前存在三份 approved brief（Zhong Kui、Chinese Underworld Collection 与 Chinese Underworld Guide）和七份 manifest 版本记录；六份 approved/current 分别服务 Zhong Kui Hero、Lead、OG、Social、Chinese Underworld Collection Hero 与 Chinese Underworld Guide Hero，Zhong Kui Hero v1 为 approved/non-current。Collection 与 Guide 分别保存 versionless `asset-chinese-underworld-hero-primary`、`asset-chinese-underworld-guide-hero-primary`，由同一 generic resolver 解析到各自的 approved/current v1。
+- `src/assets/images` 只保存尺寸锁定的 repository source rendition。当前 11 份 approved source 均被 manifest 唯一引用并通过真实 metadata/hash、权利与人工审核门禁；Zhong Kui Hero v1 的两份 source 作为非 current 版本历史保留。metadata registry 忽略 `.gitkeep`，但不会静默忽略其他文件；未被 manifest 唯一引用的图片、非批准扩展名、符号链接、禁入签名、超过 10 MiB 或无法读取 metadata 的文件均使构建失败。
 - Zod 负责单记录字段和局部条件；纯 visual graph validator 负责 owner/Claim/Source、brief target、asset version/current、内容 Hero 外键、路径、文件 metadata 与 inventory。resolver 只读取显式 `isCurrent`，绝不按最高 version 或文件名猜测。
 
 ### 0.3 字体资产边界
@@ -314,6 +314,7 @@ aiDisclosure: null
 - `publicationRights.status`：`pending | approved | rejected`；`basis`：`in-house-original | commission-contract | public-domain | license | permission`。approved 时除 public-domain 外 `rightsHolder` 必填；public-domain 允许 `rightsHolder: null`，但要求可审核 `rightsUrl` 与 creator/source credit。commission-contract 需要 `licenseOrPermissionId`，license/permission 同时需要 identity 与 rights URL。reference asset 的研究/参考许可不能替代成品发布授权；权利未知或未核准时不得进入 `approved`。
 - `production.method`：`in-house-original | commissioned-original | public-domain-reuse | licensed-reuse | ai-assisted`。前四者的 rights basis 分别为 in-house-original、commission-contract、public-domain、license/permission；ai-assisted 可使用 in-house-original、license 或 permission，并另行核对工具/模型许可。两类 reuse 都要求非空 credit；`ai-assisted` 必须记录实际 tool、production record 与非空披露。只有实际使用 ComfyUI 时才记录真实 workflow/model 元数据，不创建空壳或 `pending` 哈希。
 - `reviews` 分别记录 cultural、rights、visual、accessibility 与 language；状态为 `pending | approved | changes-requested | not-applicable`，每项保存 `reviewedBy`、`reviewedAt`、notes。公开资产的 cultural、rights、visual 与 accessibility 不得标为 `not-applicable`；language 审核覆盖图片内文字/专名、alt 与 caption，只有这些内容均不存在时才可写明理由并使用该状态。所有适用审核进入 `approved` 前完成；审核责任人姓名与日期属于实施事实，不能在合同阶段臆造。
+- 当前 manifest 的 `alt`、`caption`、`credit`、`aiDisclosure` 与 language review 是英语单 locale 标量，不代表已经存在中文页面文案。未来复用同一无文字视觉 rendition 时，可以共享 `assetId`、manifest version、像素、生产、权利与 buildPlan，但每个公开 locale 的 alt/caption、可见披露、language/accessibility 审核必须独立闭合；精确存储形状留给本地化实施需求。
 - `accessibilityMode`：`informative | decorative`。`informative` 必须有非空 alt 和相邻 caption；`decorative` 必须使用空 alt，可不逐图显示 caption，但仍需 manifest、credit、适用的 AI disclosure/页面级 visual note 与人工审核。
 - SHA-256 使用 64 位小写十六进制，focal point x/y 均为 0–1；`approvedAt` 与 `reviewedAt` 使用带引号的 UTC RFC 3339 时间戳。
 - 使用 ComfyUI 时可以保留 workflow JSON 等复现信息，但 sidecar manifest 仍是项目权威记录。参考：[ComfyUI Image-to-Image Workflow](https://docs.comfy.org/tutorials/basic/image-to-image)，访问于 2026-08-26。
@@ -327,7 +328,7 @@ M3-U3 对此前自然语言字段冻结以下最小机器形状，后续生产�
 - manifest 的 `recordPath` 必须解析真实 production record；两者 brief、method、tool 一致，record 中每个 `manifestId + usage` 的 master URI/尺寸/hash 与 manifest 完全相同，并由 record rendition 反向指回该 manifest。默认 Astro build 只校验已提交记录，不读取 Git-ignored master；`.local` 缺失不能让 clone/CI 失败。
 - `humanEdits[]` 是唯一、非空的简短人工修改说明字符串列表，不复制完整生产日志。`referenceAssets[]` 使用 `organization` 与 `creator` 两个显式非空身份字段；无法确认 creator 时必须先修订研究记录或需求，不能用空值绕过。
 - 当前 Schema 没有“图片内含文字/专名”独立布尔字段；因此 language `not-applicable` 只在 decorative、显式空 alt、无 caption 且人工 review notes 给出理由时放行。只要是 informative 资产，language review 必须 approved。若 U4 需要更细的图中文字状态，先扩展本合同与测试。
-- U4 已新增 production record Schema、loader、inventory 与双向 manifest/master 关系门禁，并在首轮五个最终画布存在后落盘一份真实记录。终验 Hero v2 返修沿同一合同新增两份 master、两份 source、一份 manifest 与第二份 production record；v1 文件与记录不覆盖，只把 Hero v1 `isCurrent` 改为 `false`。Git-ignored master 的实际尺寸/hash 与真实 WebP/PNG repository source 均已在生产会话据实核验；ComfyUI workflow/model registry 本期不适用。2026-08-29 Project owner 已确认个人且非组织管理的 ImageGen 账户、发布授权，以及文化、权利、视觉、无障碍与语言五项审核；这些人工事实记录在 manifest 中，仍不能由自动门禁替代或重建。非默认 verifier 现复核七个 master，并从三个 current responsive buildPlan 实际生成、解码核对 22 个 AVIF/WebP 目标；该验证不改变 Entry 的稳定 `heroAssetId`，resolver 仅把其 current 版本解析为 Hero v2。
+- U4 已新增 production record Schema、loader、inventory 与双向 manifest/master 关系门禁，并在首轮五个最终画布存在后落盘一份真实记录。终验 Hero v2 返修沿同一合同新增两份 master、两份 source、一份 manifest 与第二份 production record；v1 文件与记录不覆盖，只把 Hero v1 `isCurrent` 改为 `false`。截至 M3 收口，非默认 verifier 复核七个 master，并从三个 current responsive buildPlan 实际生成、解码核对 22 个 AVIF/WebP 目标。2026-08-31 Chinese Underworld Collection Hero 与 Guide Hero 又沿同一合同各新增两份 master、两份 source、一份 approved/current manifest 与一份 production record，并分别绑定 Collection 与 Guide 的稳定 `heroAssetId`；当前 verifier 复核 11 个 master，并从七个 current responsive buildPlan 核对 50 个目标。三次生产及 Hero v2 返修的 Git-ignored master 实际尺寸/hash 与真实 WebP/PNG repository source 均已据实核验；ComfyUI workflow/model registry 本期不适用。Project owner 已分别确认对应个人且非组织管理的 ImageGen 账户、发布授权，以及文化、权利、视觉、无障碍与语言五项审核；这些人工事实记录在各自 manifest 中，仍不能由自动门禁替代或重建。
 
 ### 2.7 Reader Request
 
@@ -359,6 +360,14 @@ normalizedTopicId: null
 - 循环关系本身可以存在，但页面生成必须防止递归展开。
 - 删除已发布对象前先评估 redirect、外部链接和关联内容，不直接清除身份。
 - 所有公开列表显式按 Collection 的编辑顺序、日期或稳定键排序，不依赖 Content Layer 返回顺序。
+
+### 3.1 本地化语义边界（已确认目标，尚未实现）
+
+- Entry、Collection、Source、Claim 与逻辑 Asset 的稳定 ID 表示同一内容或证据对象，不能因 locale 复制出带语言后缀的事实图。Claim 的 certainty、evidence context、Source/locator 与 Source 的书目身份、原文语言、权利继续共享；仅改变表达语言不创建新 Claim，含义或证据边界改变时才建立新的事实记录。
+- title、subtitle、opening、summary、正文、Collection description、可见术语/释义、页面 UI、SEO 文案与 structured-data language，以及 alt/caption/disclosure 的呈现按 locale 独立编写、审核和发布。一个 locale 的 `ready` / `published` 不能自动提升另一个 locale；具体状态字段和记录形状尚未冻结。
+- 现有 `Entry.nameZh`、`Collection.titleZh`、`pinyin`、`Source.titleZh/titleZhLang`、英语 `Claim.statement`、`TerminologyRecord.chosenEnglish` 与单一内容 `status` 都不是 page-locale 或 translation fallback。`titleZhLang` 只描述书目标题的正字区域，不能被解释为已有简中或繁中页面。
+- AI/机器翻译只能形成内部草稿；目标 locale 的正文、术语、SEO、alt/caption 与无障碍文案须有明确人工 reviewer 与时间。缺少完整本地化记录时不生成对应公开路由或使该 locale release fail closed，不得从英语、另一正字或未审核机器译文静默补齐。
+- 已确认的英语根路径、简中 `/zh-hans/` 试点、未来 `/zh-hant/` 预留与三页范围见 [`005-localized-content-pilot.md`](requirements/005-localized-content-pilot.md)。本节不创建 locale Schema、目录、loader、resolver 或页面。
 
 ## 4. 正文模板
 

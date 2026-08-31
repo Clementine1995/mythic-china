@@ -1,0 +1,125 @@
+briefId: brief-chinese-underworld-guide-hero-primary-v1
+version: 1
+status: approved
+ownerType: entry
+ownerId: chinese-underworld-guide
+purpose: hero-primary
+approvedBy: Project owner (user-confirmed)
+approvedAt: "2026-08-31T09:36:58Z"
+notes: Project owner authorized continuing the original Guide Hero development plan and, on 2026-08-31, approved this brief direction and selected desktop A2 `desktop-candidate-a2-record-table-no-tools.png` for production preparation. This approval covers the brief direction and desktop composition only; it does not approve the final mobile composition, publication rights, final five-review results, exact-canvas masters, production record, manifest, Entry binding, status promotion, or public use.
+primaryReferenceFamily: Southern Song Chinese Ten Kings court imagery and modern scholarship describing one bounded court-and-rebirth passage model
+period: The primary object reference is dated before 1195; modern scholarship is used only to bound the influential popular-religious route summarized by the Guide
+region: China, with the primary object linked to Mingzhou in the Southern Song period; the Guide does not claim one universal Chinese underworld map
+medium: Candidate contemporary digital editorial illustration combining blank record surfaces with an original layered passage; not a historical reconstruction, ritual diagram, or facsimile
+culturalContext:
+  - Present the Guide as a reading path through one influential transitory court-and-rebirth model, not as a complete or timeless map of Chinese beliefs about the dead.
+  - Use records, scribal administration, court hierarchy, and passage toward rebirth only as bounded structural cues supported by the cited Claim and Source records.
+  - Distinguish the Guide from the Collection Hero by bringing blank record surfaces and editorial reading order into the foreground; distinguish it from the Zhong Kui Entry by omitting Zhong Kui, demons, swords, and protector portraiture.
+  - Keep the atmosphere contemplative, legible, and source-aware rather than punitive, ritual-prescriptive, horror-led, or game-like.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: A wide oblique reading scene places blank administrative record surfaces and an original two- or three-layer passage on the left and center, with tiny anonymous court silhouettes remaining secondary; the right side stays calm and dark enough for the HTML Entry identity.
+        safeArea: Keep the rightmost 42 percent and top 14 percent low-detail, dark-to-midtone, and free of essential figures or symbols for white HTML title, dek, and navigation; render no text into the image.
+        focalPointGoal:
+          x: 0.34
+          y: 0.53
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently composed vertical sequence begins with blank record surfaces in the lower half and rises through two or three restrained court-like layers toward distant warm light, without cropping or stacking the desktop scene.
+        safeArea: Keep the top 16 percent and lower 10 percent free of essential figures, symbols, or high-frequency detail; render no text into the image.
+        focalPointGoal:
+          x: 0.5
+          y: 0.55
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: guide-court-and-record-administration
+      statement: The cited Southern Song Ten Kings scroll and modern teaching source support a court administered by a king or magistrate with scribes, officials, and records in this bounded model.
+      claimIds:
+        - claim-chinese-underworld-ten-magistrates-model
+        - claim-chinese-underworld-song-court-painting
+    - elementId: guide-transitory-passage-toward-rebirth
+      statement: The cited model presents judgment as a temporary passage through courts toward rebirth rather than eternal punishment for an unchanging self.
+      claimIds:
+        - claim-chinese-underworld-transitory-realm
+        - claim-chinese-underworld-ritual-and-rebirth
+  inferred:
+    - elementId: blank-record-reading-path
+      statement: Use blank, unmarked record surfaces as the foreground visual entry into the Guide's sourced themes of records and judgment.
+      rationale: Blank records translate the documented administrative framework into an editorial reading metaphor without inventing wording, seals, scripture, or a specific historical document format.
+    - elementId: layered-nonlinear-thresholds
+      statement: Arrange two or three receding spatial layers as a legible passage without numbering them or making a complete map.
+      rationale: Layering supports the sourced passage model while avoiding a literal ten-court sequence or universal floor plan.
+    - elementId: anonymous-court-scale-cues
+      statement: Keep any official or traveler silhouettes tiny, unnamed, and subordinate to the record surfaces and route.
+      rationale: The sources support court participants and judgment, but not an invented named portrait, rank system, or universal costume.
+    - elementId: guide-charcoal-jade-paper-palette
+      statement: Use charcoal depth, oxidized jade haze, warm paper light, and at most one restrained cinnabar wayfinding accent.
+      rationale: The palette maintains the approved Collection family while the paper-toned record surfaces give the Guide its own editorial identity; it is not a claim about historical pigments.
+  invented:
+    - elementId: original-guide-record-surfaces
+      statement: All blank record sheets, supports, edges, folds, and spatial arrangements are newly designed editorial forms rather than copies of a historical document.
+    - elementId: original-guide-passage-architecture
+      statement: All platforms, thresholds, walls, stairs, bridges, and spatial relationships are original abstract forms with no claim to a real temple, court, or afterlife map.
+    - elementId: original-guide-anonymous-figures
+      statement: Any tiny silhouettes are original, unnamed, non-portrait figures without invented ranks, species, biographies, punishments, or ritual roles.
+    - elementId: original-guide-light-and-weather
+      statement: Mist, directional light, mineral particles, paper glow, and depth transitions are newly designed editorial atmosphere.
+referenceAssets:
+  - referenceId: ref-ten-kings-hell-met-44509
+    url: https://www.metmuseum.org/art/collection/search/44509
+    organization: The Metropolitan Museum of Art
+    creator: Jin Chushi
+    rightsStatus: public-domain
+    rightsUrl: https://www.metmuseum.org/policies/image-resources
+    licenseOrPermissionId: cc0-1.0
+    notes: Study only the existence of a king, scribe, officials, records, layered narrative density, and ink-and-color restraint. Do not upload the museum image to the generation tool or copy a figure, punishment, inscription, seal, throne, document, or complete composition.
+composition:
+  continuity: Desktop and mobile share one original charcoal-jade-and-paper world, blank record language, material family, and distant court scale while using independently authored compositions.
+  hierarchy: Blank record surfaces and the passage are primary; tiny anonymous court or traveler silhouettes are secondary scale cues; no ruler, punishment, ritual object, demon, or deity becomes a focal subject.
+  colorDirection: Charcoal and oxidized jade establish depth, warm paper light identifies the records and route, and cinnabar is optional and limited to one small non-symbolic accent.
+  lightingDirection: Maintain readable dark-to-midtone title space on desktop, a soft warm route through layered haze, and one distant reveal; avoid crushed shadows, black-red horror lighting, neon rim light, and game-poster bloom.
+  textPolicy: Entry title, Chinese identity, pinyin, caption, credit, disclosure, and all navigation remain HTML; artwork contains no writing, pseudo-Chinese marks, numbers, seals, logos, or watermarks.
+excludedMotifs:
+  - A literal map of ten courts, ten numbered gates, eighteen levels, a fixed universal route, or a diagram presented as religious fact
+  - Zhong Kui, King Yama, a named Ten King, a single universal ruler, a prominent deity, or a protector portrait
+  - Graphic punishment, torture, gore, severed bodies, skull piles, fire pits, horror spectacle, or suffering used as entertainment
+  - Specific funerary offerings, ritual implements, talismans, scriptures, Buddhist or Daoist icons, or prescribed rites not separately sourced for the depicted context
+  - Legible records, pseudo-Chinese writing, invented scripture, calligraphy, seals, official emblems, numbers, captions, logos, or watermarks
+  - Direct copies of the Met object, a historical facsimile, European fantasy armor, Japanese-specific underworld iconography, franchise designs, game UI, HUD elements, or cinematic battle staging
+openDecisions:
+  - Independently composed mobile candidate and final desktop/mobile pair approval; desktop A2 is selected for production preparation
+  - Current tool terms, account authority, publication rights, and whether any selected output may enter the production chain
+  - Final desktop and independently composed mobile candidates, exact-canvas processing, master storage, backup, production record, and manifest version
+  - Named cultural, rights, visual, accessibility, and language review outcomes after inspection of the final exact-canvas images
+  - Final focal points, contrast, alt text, caption, credit, AI disclosure, mobile fold, and Entry template browser review

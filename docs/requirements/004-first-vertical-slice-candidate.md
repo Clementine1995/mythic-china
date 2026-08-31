@@ -1,16 +1,16 @@
-# 首个纵切片编辑/视觉候选合同
+# 首个纵切片编辑/视觉候选与 Collection、Guide Hero 生产闭环合同
 
 ## 0. 文档职责与当前状态
 
-本文负责：把 *The Chinese Underworld* 的首个 Collection、首发 Guide、Featured Entry、Collection Hero 方向和生产字体方案推进到 Project owner 可人工判断的候选检查点。
+本文负责：把 *The Chinese Underworld* 的首个 Collection、首发 Guide、Featured Entry、Collection Hero 方向和生产字体方案推进到 Project owner 可人工判断的候选检查点，并追溯其后经单独确认完成的 Collection 与 Guide Hero 生产闭环。
 
-本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策已单独授权 Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又选中 desktop 02/mobile 01 进入生产准备。构图选择不扩展到 CJK 工具依赖、publication rights/五审、exact-canvas master、visual manifest、状态提升或发布。
+本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策单独授权 Collection Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又先后独立确认 Collection 与 Guide 的最终组合、个人账户/权利、五审、公开文案与 exact-canvas 生产链。当前授权仍不扩展到 CJK 工具依赖、内容状态提升、服务/浏览器、Git 写入、Vercel 或发布。
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
-| 需求状态 | Project owner 阶段性通过；Hero 构图已选中 | 2026-08-30，Project owner 接受当前内容、署名/日期、模板排版与 CSS 无图 Hero，并选择 Hero A、接受字体方案；2026-08-31 又选中 desktop 02/mobile 01 进入生产准备。资产批准与正式字体页面效果仍未闭合 |
+| 需求状态 | Project owner 阶段性通过；Collection 与 Guide Hero 生产闭环已批准 | 2026-08-30，Project owner 接受当前内容、署名/日期、模板排版与 CSS 无图 Hero，并选择 Collection Hero A、接受字体方案；2026-08-31 又分别批准两组 Hero 的最终组合、个人账户/权利、五审、公开文案、exact-canvas master 与正式资产链。正式字体页面效果仍未闭合 |
 | 内容状态 | `editorial-review` | 两篇 Entry 有正文、80–120 词摘要、来源、Claim、source-checked 术语与 fact-check 日期；Collection 为 `editorial-review` |
-| 视觉状态 | Hero A brief `approved`；desktop 02/mobile 01 已选中 | desktop 01 已预筛退回；所选两图仍只是 Git-ignored local explore 输出。Collection `heroAssetId` 仍为 `null`，没有 exact-canvas master、production record、manifest 或 current asset |
+| 视觉状态 | Collection Hero v1 与 Guide Hero v1 均为 `approved/current` 并已绑定 | 两组资产各有独立 desktop/mobile master、repository source、production record 与 manifest。Collection 绑定 versionless `asset-chinese-underworld-hero-primary`，Guide 绑定 versionless `asset-chinese-underworld-guide-hero-primary`；两者仍保持 `editorial-review` |
 | 字体状态 | 英文候选已落库；CJK 阻断 | 4 份上游未修改 WOFF2、OFL、hash inventory、稳定 alias/token 和分层 preload 已接线；CJK 无子集文件，正式字体浏览器验收未执行 |
 | 发布状态 | 未授权 | 0 published Entry / 0 published Collection；无 public dist、Vercel 项目或部署 |
 
@@ -33,22 +33,22 @@
 - 初始批次未启动 dev/preview/browser 服务；后续浏览器评审获得单独授权并已停止服务。
 - public release 下限不变：M4-U4B 仍只建立本地 public 构建能力；M6/M7 的内容量与发布门禁不前移。
 
-### 1.3 候选检查点完成标准
+### 1.3 初始候选检查点完成标准（历史）
 
 - 两篇 Entry 都通过 Content Layer editorial-review 条件和关系图校验。
 - 每个正文事实可由正文附近链接和结构化 Claim 回到真实来源；无“AI 补齐”的文化事实。
 - Terminology 只到 `source-checked`，等待双语人工批准。
 - Collection Hero 有一份已批准方向、但未批准任何成图的 brief；verified/inferred/invented、权利与排除项分开。
-- Collection 模板只具备未来独立 approved Hero 的插槽；当前仍显示无图候选，不借用 Zhong Kui Hero。
+- Collection 模板在该检查点只具备未来独立 approved Hero 的插槽；当时仍显示无图候选，不借用 Zhong Kui Hero。
 - 页面可见 `By Mythic China Editorial` 与 fact-check 日期，但没有 publication date。
 - 固定运行时完整工程门禁与 Markdown/UTF-8/链接/占位符/diff 门禁在每次实质修改后重跑；英文正式字体页面效果和 Hero 成图另等人工评审。
 
 ## 2. 已确认事实
 
 - 当前 HEAD、`main` 与未 fetch 的本地 `origin/main` 在接管时均为 `e94eacaad989652c7f71ae50276652cc3f54997a`；工作树已有 M4-U4A 与治理文档未提交改动，本批次不覆盖或丢弃它们。
-- 本批次开始前真实 inventory 为 0 published Entry、0 published Collection、0 Collection Hero asset、0 font file；后续英文字体单元新增 4 份 WOFF2，但 published 与 Collection Hero asset inventory 仍为 0。
+- 本批次开始前真实 inventory 为 0 published Entry、0 published Collection、0 Collection Hero asset、0 font file；后续英文字体单元新增 4 份 WOFF2，Collection 与 Guide Hero 生产闭环各新增一个 approved/current 逻辑资产，但 published inventory 仍为 0。
 - Zhong Kui 已有 approved/current Entry Hero v2；该资产属于 Entry，不能作为 Collection Hero。
-- Collection Hero brief 现已 approved，但发布仍必须另有自己的 asset/manifest、publication rights 与五类人工审核；批准 brief 与 local explore 候选都不满足该条件。
+- Collection 与 Guide Hero 的独立 brief、asset/manifest、publication rights 与五类人工审核现已闭合；批准结果只授权两项资产在 noindex review 链中按现有内容状态消费，不满足内容 `ready/published`、M4-U5 或 public 发布条件。当前视觉 inventory 为三份 approved brief、11 个 local master、11 份 repository source、四份 production record、七份 manifest 版本记录、六个 approved/current 逻辑资产与七份 current responsive rendition。
 - 现有 M4 review build 为 noindex 内部评审输出；public runner、Layout/route/endpoint 接线、public dist 和 Vercel 身份仍不存在。
 
 ## 3. 编辑候选
@@ -79,11 +79,11 @@
 
 ### 4.1 候选 A：原创抽象门槛（Project owner 已选择）
 
-- brief：`brief-chinese-underworld-hero-primary-v1`，Project owner 于 2026-08-30 批准方向并授权下一候选生产任务；2026-08-31 又选中 desktop 02/mobile 01 的构图进入生产准备。brief/构图选择仍不等于资产批准。
+- brief：`brief-chinese-underworld-hero-primary-v1`，Project owner 于 2026-08-30 批准方向并授权下一候选生产任务；2026-08-31 又选中 desktop 02/mobile 01 的构图，随后在 exact-canvas 成品上独立批准资产、权利、五审和文案。
 - 核心：从可读的入口下行到两三层远景法庭，以路径、记录桌和小型官员轮廓表达“审判是通往轮回的过程”。
 - 不做：不画钟馗、不指定阎王、不展示酷刑、不绘制十殿/十八层地图、不写伪汉字。
 - 优点：能建立 Collection 自己的阈限/深度视觉，不把单件文物误装成整个传统，也不与 Zhong Kui 人物 Hero 竞争。
-- 风险：所选候选已用 OpenAI ImageGen 生成，且没有上传馆藏或其他第三方参考图；但当前工具条款、账户 authority、publication rights、exact-canvas master 与五类人工审核仍未闭合，不能写成 production asset。
+- 风险：所选候选使用个人且非组织管理账户下的 OpenAI ImageGen 重建，没有上传馆藏或其他第三方参考图；工具未暴露模型 ID，生产记录保持 `null`，并明确不主张排他性、当然可版权性或绝对不侵权。当前资产链已闭合，但真实页面浏览器效果与 M4-U5 仍未验证。
 
 当前 local explore inventory：
 
@@ -103,7 +103,7 @@
 
 ### 4.3 模板候选
 
-- Collection 路由只在 `heroAssetId` 非空时调用现有 approved page-asset resolver，并要求 `ownerType: collection`、当前 approved、`hero/primary`、informative accessibility。
+- Collection 路由在 `heroAssetId` 非空时调用现有 approved page-asset resolver，并要求 `ownerType: collection`、当前 approved、`hero/primary`、informative accessibility；当前稳定 ID 已解析到 Collection Hero v1。
 - 模板有独立 `ManifestHeroPicture` 插槽与 caption/credit/disclosure；`heroAssetId: null` 时保留现有抽象 surface。
 - 该代码能力不把任何图片变成候选或批准资产，也不改变 public release projection。
 
@@ -149,11 +149,11 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 | 事实核查 | 当前来源与 Claim 已本地闭合 | 人工核对每个正文主张/locator；任何新增事实先新增来源，不让 AI 补空 |
 | 双语术语 | 两份 Terminology 为 `source-checked` | 具名 bilingual reviewer 把适用记录提升为 `bilingual-approved` |
 | Source 标题 locale | 教育部词条为 `zh-Hant`；四条馆藏标题因来源未核定而明确为 generic `zh` | 经来源核对/双语审校写入精确 `zh-Hans | zh-Hant`；内容图已机器阻断 generic `zh` 被 ready lineage 引用 |
-| Collection Hero | Hero A brief 已批准，desktop 02/mobile 01 构图已选中，Hero ID 为 null | 闭合工具/账户/publication rights、生成并核验 exact-canvas master；文化、权利、视觉、无障碍、语言五类审核后才可建立 approved/current 资产 |
-| Guide Hero | Guide `heroAssetId` 为 null | `visual-review | ready | published` 前必须有自己的 Hero；不得借用 Collection 或钟馗 Hero |
+| Collection Hero | Hero A v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
+| Guide Hero | Guide Hero v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
 | 字体 | 4 份英文 WOFF2、OFL/hash、alias/token 与 preload 已接线；CJK 仍为 system fallback | 完整工程门禁通过后由 Project owner 看正式字体页面；CJK 仍需获准工具、Hans/Hant 来源/字符表、cmap 与跨平台浏览器门禁 |
-| 页面 | review-only；系统 fallback 的三档视口已通过；Collection 当前无图 | 新英文字体与最终 Hero 接线后再做 200% zoom、键盘、reduced motion、慢字体、图片失败、裁切和跨平台检查 |
-| 状态 | 0 published | Entry 到 `ready` 仍需 Hero、完整 Claim/fact-check、双语术语、Source 标题 locale 与 noindex U5 候选预检；Collection 到 `ready` 需自己的 Hero 且只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
+| 页面 | review-only；系统 fallback 的三档视口已通过；Collection 与 Guide 已静态接入各自 Hero | 完成双语/CJK/字体剩余门禁后，再对最终页面做 200% zoom、键盘、reduced motion、慢字体、图片失败、裁切和跨平台检查 |
+| 状态 | 0 published | 两篇 Entry 的 Hero 门禁已闭合；进入 `ready` 仍需完整 Claim/fact-check、双语术语、Source 标题 locale 与 noindex U5 候选预检。Collection 到 `ready` 仍只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
 
 ## 7. Project owner 决策记录
 
@@ -169,7 +169,20 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 5. 两张构图进入生产准备；本轮未提出定向修图要求。mobile 右下可见纹理继续留在后续视觉五审中观察，不据此推断任何文化含义或提前写成批准细节。
 6. 本次确认只选择 local composition，不自动确认当前工具条款、账户 authority、publication rights、五类审核、exact-canvas master、alt/caption/disclosure、manifest、Collection 绑定、状态提升或 public use。
 
-## 8. 本批次验证与收口记录
+同日，在查看两张最终 exact-canvas 评审图并阅读权利、五审与公开文案说明后，Project owner 进一步明确确认：
+
+7. 项目和本次 ImageGen 使用均为个人、非组织管理关系；账户由 Project owner 合法使用，没有无权第三方输入，也不受雇主、客户或其他组织协议限制，并同意按当前适用条款为 Mythic China 保存、编辑与公开展示输出。
+8. publication rights 采用 `in-house-original`，rights holder 记录为 `Mythic China project owner (private individual)`；该记录不主张排他性、当然可版权性或绝对不侵权。
+9. 最终 desktop `3200×1800` 与 mobile `1600×2000` 的 cultural、rights、visual、accessibility、language 五项审核均通过；alt、caption、`Mythic China Editorial` credit 与 AI disclosure 原文通过。
+
+同日，在查看 Guide desktop A2、独立构图且定向修正后的 mobile 成图及完整权利/审核/文案说明后，Project owner 回复“全部确认”：
+
+10. 批准 Guide desktop A2 与 independently composed mobile 作为最终组合，并批准等比 exact-canvas 后的 `3200×1800` / `1600×2000` lossless master 与同画布 WebP source。
+11. 确认 Guide 生产同样使用个人、合法控制、非组织管理且不受雇主、客户或组织限制的 OpenAI 账户；仅向 ImageGen 提供项目生成候选，没有上传馆藏、历史图像或未经授权的第三方图片，并授权 Mythic China 保存、编辑和公开展示输出。
+12. 批准 Guide 的 `in-house-original`、`Mythic China project owner (private individual)` 权利记录，以及 cultural、rights、visual、accessibility、language 五项审核；该记录不主张排他性、当然可版权性或绝对不侵权。
+13. 批准 Guide manifest 中的 informative alt、限定为当代 AI-assisted editorial interpretation 的 caption、`Mythic China Editorial` credit 与 AI disclosure；该确认不提升 Guide 状态，也不批准 M4-U5、public build、Git 写入或发布。
+
+## 8. 候选阶段验证与收口记录（历史快照）
 
 - 2026-08-30 已按 `DEV_WORKFLOW.md` 使用固定 Node 24.16.0、Corepack 与 pnpm 11.22.0 执行完整 `pnpm run check`：Prettier、ESLint、19 个测试文件/160 项测试、Astro check（65 个文件，0 error、0 warning、0 hint）、7 页 review build 与输出 verifier 全部通过。
 - 输出审计为 7 个 `noindex, nofollow` 页面、14 个 Zhong Kui Hero v2 AVIF/WebP、4 个按 inventory SHA-256 核验的 WOFF2，零 public canonical/OG/JSON-LD/XML、零远端字体资源与零客户端 JavaScript；Collection 没有借用 Entry Hero。
@@ -181,3 +194,27 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 - 后续候选任务已把 3 张生成输出及 trace metadata 保存到 Git-ignored `.local`；2026-08-31 的 owner decision 已在 metadata 中把 desktop 02/mobile 01 记录为 selected-for-production-prep。没有上传馆藏/历史参考图，没有创建 master、production record、manifest、repository source、Collection 绑定或 approved/current 图片。
 - 英文字体候选已从官方 release 固定 4 份未修改 WOFF2 与许可证，并通过 `font-assets.json`、中央 alias/token、`?no-inline` preload registry 和输出 hash 门禁保留可替换缝；CJK 未下载、未子集、未改名。
 - Git：不执行 add/commit/push/fetch，不创建分支或 worktree。
+
+## 9. Collection Hero 生产闭环
+
+- ImageGen 高保真重建只使用 Project owner 已选中的项目生成候选作为 edit target。desktop 补足远景匿名小官员与克制的记录桌暗示；mobile 移除右下朱红印记状纹理。没有上传馆藏、历史或其他第三方参考图。
+- 原始重建输出为 desktop `1672×941`、mobile `1122×1402`；Sharp `0.35.4` 采用居中、等比 `fit-cover` 与 Lanczos3 形成 `3200×1800` / `1600×2000` lossless PNG master，分别只需约一个输出像素的纵向/横向裁切，没有非等比拉伸，也没有声称是 ImageGen 原生画布。
+- 正式身份为 `asset-chinese-underworld-hero-primary` / `asset-chinese-underworld-hero-primary-v1` / `production-chinese-underworld-hero-primary-v1`；两份 same-canvas WebP repository source 使用 quality 90。manifest 为 `approved + isCurrent: true`，Collection 只保存 versionless asset ID。
+- 页面模块 registry 显式授权两份 source；既有 generic resolver、Collection route/template 与 `ManifestHeroPicture` 直接消费 manifest alt/caption/credit/disclosure，没有增加模板版本或路径硬编码。
+- 固定 Node/Corepack 下完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断，以及默认 review build 的 7 页、28 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。非默认 `visual:build:check` 通过 9 个 local master、5 份 current responsive rendition 与 36 个实际生成/解码的 AVIF/WebP 目标。
+- 本 Collection 闭环批次没有提升 Entry/Collection 状态，当时没有创建 Guide Hero、CJK 文件、public intent、Vercel 项目或部署；没有启动服务/浏览器、安装依赖、执行 Git 写操作或发布。Guide 后续闭环见第 10 节。
+
+## 10. Guide Hero 生产闭环
+
+- Guide 最终 desktop A2 只把项目生成 desktop A 作为 edit target，精确移除砚台状、毛笔状与工具架物件；independently composed mobile 初始生成只把 A2 作为视觉语言锚点，随后只把项目生成 mobile draft 作为 edit target，将重复同心门洞收敛为三层克制的行政空间。没有上传馆藏、历史或未经授权的第三方图片。
+- 原始最终输出为 desktop `1672×941`、mobile `1122×1402`；Sharp `0.35.4` 采用 centered `fit-cover`、Lanczos3 和无非等比拉伸的精确画布处理，形成 desktop `3200×1800` lossless PNG master（SHA-256 `d070ee61ce6a613c2903dbdbe53f2bb888f411c7d8433ecc82f5d4053c9a013b`）与 mobile `1600×2000` master（SHA-256 `8180d0ee16f52501f2c4077e1cd039797c278dfb0429f736ebd6108663dbf48d`）。
+- 正式身份为 `asset-chinese-underworld-guide-hero-primary` / `asset-chinese-underworld-guide-hero-primary-v1` / `production-chinese-underworld-guide-hero-primary-v1`；两份 same-canvas WebP repository source 使用 quality 90。manifest 为 `approved + isCurrent: true`，Guide Entry 只保存 versionless asset ID。
+- 页面模块 registry 显式授权两份 source；既有 generic resolver、Entry route/template 与 `ManifestHeroPicture` 直接消费 manifest alt/caption/credit/disclosure，没有增加模板版本或路径硬编码。默认输出 oracle 把 Guide 与 Zhong Kui、Collection 三个资产族严格隔离。
+- 固定 Node/Corepack 下完整 `pnpm run check` 通过 Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 个文件零诊断，以及默认 review build 的 7 页、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。非默认 `visual:build:check` 通过 11 个 local master、七份 current responsive rendition 与 50 个实际生成/解码的 AVIF/WebP 目标。
+- 本闭环没有提升 Guide/Collection/Zhong Kui 状态，没有新增 CJK 文件、public intent、Vercel 项目或部署；没有启动服务/浏览器、安装依赖、执行 Git 写操作或发布。
+
+## 11. 当前结论
+
+- Collection 与 Guide 已各自绑定独立的 approved/current Hero v1；Zhong Kui Entry 继续解析自己的 Hero v2。默认 review 页面不得跨 owner 借图，Guide 的视觉门禁不再是当前阻塞项。
+- 当前仍为 0 published Entry / 0 published Collection；两篇 Entry 与 Collection 均保持 `editorial-review`。下一人工/授权检查点是双语术语、Source 标题 locale、CJK/正式字体页面判断与 noindex M4-U5 候选预检。
+- 本次批准不授权内容状态提升、依赖调整、服务/浏览器、Git 写入、public runner、Vercel 操作、部署或发布。
