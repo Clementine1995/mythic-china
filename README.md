@@ -4,14 +4,14 @@
 
 ## 当前状态
 
-- 阶段：M1 已冻结为工程参考；M2 与 M3 已完成并形成历史基线 `f258227`、`c606f5`。M4-U1/U2 的历史基线为 `5f327b6`，M4-U3 历史基线为 `e94eaca`；Project owner 最新提交里程碑为 `eb6e20c`（`feat: complete first-slice release readiness gates`）。M4-U4A 的本地纯基础设施也已完成，但完整 M4、public build 与发布尚未完成。
+- 阶段：M1 已冻结为工程参考；M2 与 M3 已完成并形成历史基线 `f258227`、`c606f5`。M4-U1/U2 的历史基线为 `5f327b6`，M4-U3 历史基线为 `e94eaca`，首个纵切片 release-readiness 基线为 `eb6e20c`；本地 `main` 后续包含 `a3194d0` Hero/本地化检查点与 `d60691a` 馆藏中文字段来源复核检查点。M4-U4A 的本地纯基础设施也已完成，但完整 M4、public build 与发布尚未完成。
 - 当前实现：默认 review 构建生成 7 个 `noindex, nofollow` 页面与 42 个 Hero AVIF/WebP，其中 Home/钟馗 Entry 使用 Zhong Kui Hero v2，Chinese Underworld Collection 使用自己的 Hero v1，Guide Entry 使用自己的 Guide Hero v1；真实 inventory 仍为 0 published Entry / 0 published Collection。M4-U4A 已建立 HTTPS origin 校验合同、公共身份、public 最小 inventory 门禁及 canonical/OG/JSON-LD/Sitemap/RSS 纯 builder，但没有 public runner、Layout/路由/endpoint 接线或 public `dist/`。
 - 编辑/视觉状态：两篇首发 Entry 与唯一 Collection 的 `editorial-review` 形态已获 Project owner 阶段性接受，双语术语仍只到 `source-checked`。Collection Hero 与 Guide Hero 均已完成 Project owner 选图、Guide/Collection 各自的账户与权利确认、五类人工审核、exact-canvas master、production record、approved/current manifest、repository source 和所属内容的 versionless `assetId` 绑定；Entry/Collection 状态没有因此提升。
 - 当前验证：固定本机 Node/Corepack 下本批测试通过 20 个测试文件/196 项测试，Astro 67 文件零诊断，默认 review 构建通过 7 页/42 个 Hero 图片/4 个 WOFF2/零 XML/零客户端 JavaScript 输出门禁；非默认 `visual:build:check` 通过 11 个 local master、7 份 current responsive rendition 与 50 个实际 AVIF/WebP 输出复核。
 - 视觉/字体状态：M1 原型视觉皮肤仍未获批准；M4-U2 页面方向与本轮系统 fallback 三档视口已确认。Collection Hero 与 Guide 自有 Hero 的生产链均已闭合，4 份上游未修改英文 WOFF2 已经中央 alias/token 接线，CJK 仍为 system fallback；正式字体浏览器效果、真实键盘/缩放/媒体偏好、性能及 M4-U5 最终视觉尚未批准。
 - 国际化状态：Project owner 已确认未来采用英语根路径 `/`、简体中文 `/zh-hans/`、预留繁体中文 `/zh-hant/` 的结构，并先以 Chinese Underworld Collection、Zhong Kui 与 Guide 三页做简中试点；该目标不阻塞英语 MVP。当前仍是英语单语 review 站，没有 locale-aware Schema、中文路由、语言切换、localized metadata 或 `hreflang`，本轮不实施这些能力。
 - 托管与身份：未来静态托管目标为 Vercel；publisher 为 `Mythic China / Organization`，author 为 `Mythic China Editorial / Organization`，公共身份页为 `/about/`，当前采用 text-only Open Graph。项目仍没有稳定 Vercel production alias/hostname、真实站点 origin、远端发布环境或部署授权。
-- 版本边界：Guide Hero 生产闭环直接接续 `eb6e20c` 上现有未提交的 Collection Hero 与本地化合同工作树；没有创建分支、worktree 或仓库副本。本轮未 fetch，代理未执行 Git 写操作、Vercel 项目操作或发布。
+- 版本边界：Guide Hero 生产闭环最初直接接续 `eb6e20c` 上的未提交 Collection Hero 与本地化合同工作树；随后只读核查发现这些改动已进入本地提交 `a3194d0`，本轮经用户授权又创建来源复核提交 `d60691a`。没有创建分支、worktree 或仓库副本，未 fetch 或 push；本地 tracking ref 不能证明服务器端状态，精确 HEAD 与工作树必须按 `DEV_WORKFLOW.md` 在操作前复核。
 - 工作名称：`Mythic China`；目录名与未来包名使用 `mythic-china`。当前权威日期为 2026-08-31。
 
 ## 当前接力顺序
@@ -55,7 +55,7 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
-| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | Project owner 最新提交里程碑为 `eb6e20c`（`feat: complete first-slice release readiness gates`）；Guide Hero 接续现有未提交工作树，未执行 fetch、分支/worktree 创建或 Git 写操作 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 `editorial-review` 内容、三份 approved brief、四份 production record、七份 manifest、11 份 repository source rendition、11 个 local master、4 份英文 WOFF2，以及已分别绑定 Collection 与 Guide 的 approved/current Hero v1；CJK 文件为空，无数据库或真实外部写入口 | M4-U4A 纯门禁、首个纵切片编辑/视觉/英文字体候选与 noindex review 回归；不含 CJK 字体完成、deployable public build、M4-U5/M4-U4B、远端部署或发布 |
+| 本地应用、文档与原型工作区 | `F:\codex-project\mythic-china` | `eb6e20c` 为首个纵切片 release-readiness 基线；其后的具名本地检查点包含 `a3194d0` 与 `d60691a`，精确 HEAD、工作树及 tracking ref 以 `DEV_WORKFLOW.md` 的执行前只读核查为准 | 固定 Node、pnpm、构建、验证与 Git 命令见 `DEV_WORKFLOW.md` | 本地 `editorial-review` 内容、三份 approved brief、四份 production record、七份 manifest、11 份 repository source rendition、11 个 local master、4 份英文 WOFF2，以及已分别绑定 Collection 与 Guide 的 approved/current Hero v1；CJK 文件为空，无数据库或真实外部写入口 | M4-U4A 纯门禁、首个纵切片编辑/视觉/英文字体候选与 noindex review 回归；不含 CJK 字体完成、deployable public build、M4-U5/M4-U4B、远端部署或发布 |
 
 当前没有生产常驻进程或由站点管理的数据库、消息系统、缓存、对象存储。`dev` / `preview` 是会改变本地运行状态的临时评审操作，不是只读健康检查；端口或 HTTP 可达性检查只用于观测既有进程，不得隐式启动、修复或重启服务。未来标准静态部署也不得在未更新架构、需求与 `DEV_WORKFLOW.md` 的情况下创建、重建、重启或清空外部基础设施。
 

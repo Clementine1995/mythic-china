@@ -34,7 +34,7 @@
 | 发布状态 | 未发布 | 未来托管目标为 Vercel；未创建项目、真实 origin、域名、部署配置或 public artifact |
 
 - 当前权威结论更新时间：2026-08-31。
-- M4-U3 实现与原收口文档已由 Project owner 提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；M4-U2 历史基线为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`），U2 主体历史基线为 `8c6d12cabce11741bb83941904993f4d8831c818`，M3 历史基线为 `c606f5aab92d908ff2935c5b7212ad5066636a50`，M2 历史基线为 `f258227da1b5a73f22c87ec99722243742db0ba0`。Guide Hero 生产闭环直接接续 Project owner 最新提交 `eb6e20c7c2ae5eda895e5a70f547140163877456` 上现有未提交的 Collection Hero 与本地化合同工作树；没有创建分支、worktree 或仓库副本。未执行 fetch，不能据此证明服务器端状态。
+- M4-U3 实现与原收口文档已由 Project owner 提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；M4-U2 历史基线为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`），U2 主体历史基线为 `8c6d12cabce11741bb83941904993f4d8831c818`，M3 历史基线为 `c606f5aab92d908ff2935c5b7212ad5066636a50`，M2 历史基线为 `f258227da1b5a73f22c87ec99722243742db0ba0`。Guide Hero 生产闭环最初直接接续 `eb6e20c7c2ae5eda895e5a70f547140163877456` 上的未提交 Collection Hero 与本地化合同工作树；后续只读核查发现这些改动已进入本地提交 `a3194d0d59b605cf7a5fcfc5d2d55166c374e13b`，来源复核另形成 `d60691a`。没有创建分支、worktree 或仓库副本，未执行 fetch 或 push；精确 HEAD 与远端关系须在执行前复核。
 
 ## 1. 结论与开发就绪判断
 
@@ -433,7 +433,7 @@ M2 的真实本地命令与执行证据已写入 `../../DEV_WORKFLOW.md`；M5/M6
 | 动作 | 环境 | 影响 | 所需授权 | 当前状态 |
 | --- | --- | --- | --- | --- |
 | 本轮文档整理 | 本地文档工作区 | 修改既有项目 Markdown | 用户已明确授权 | 已执行并完成文档验证 |
-| 本地 Git 初始化与用户基线 | 当前项目根 `F:\codex-project\mythic-china` | 代理在初始化会话只执行 plain `git init`；用户随后建立 `main`、提交与 `origin` | 用户分别确认初始化与其自行 Git 操作 | M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U1/U2 历史基线为 `5f327b6`；`8c6d12` 保留为 U2 主体历史基线，M4-U3 为 `e94eaca`。Project owner 最新提交里程碑为 `eb6e20c`；本轮未 fetch，代理未执行 add/commit/push |
+| 本地 Git 初始化与用户基线 | 当前项目根 `F:\codex-project\mythic-china` | 代理在初始化会话只执行 plain `git init`；用户随后建立 `main`、提交与 `origin` | 用户分别确认初始化与其自行 Git 操作；来源复核提交另由 Project owner 明确授权 | M2 历史基线为 `f258227`，M3 为 `c606f5`，M4-U1/U2 为 `5f327b6`，U2 主体历史基线为 `8c6d12`，M4-U3 为 `e94eaca`，首个纵切片 release-readiness 为 `eb6e20c`；后续具名本地检查点包括 `a3194d0` 与来源复核 `d60691a`。未 fetch 或 push，精确 HEAD、工作树与 tracking ref 以执行前只读核查为准 |
 | M2 pnpm、依赖安装与应用初始化 | 当前项目根及本地开发环境 | 固定使用已验证的 `D:\Program Files\nvm\v24.16.0\node.exe`；提供 pnpm `11.22.0`，新增依赖目录、唯一锁文件、配置、源码和测试 | 用户已明确开始 M2，并单独确认固定 Node、pnpm、依赖与原地初始化授权 | 已执行并通过冻结安装与全量门禁；M2 实施会话未启动服务或由代理执行 Git 写入/发布，用户随后提交 `f258227` |
 | M3-U1 合同与基线收口 | 当前项目文档 | 新增详细 M3 需求并同步资产、架构、命名、流程和当前状态 | 用户已明确开始并随后确认 M3 第一步 | 文档交付、验证与六项核心决定确认完成；不含 M3-U2 至 U5、依赖、服务、Git 写入或发布 |
 | M3-U2 最小研究与 visual brief | 当前项目内容、`visual/briefs` 与必要架构边界测试 | 钟馗真实 Source/Claim、权利清单、证据分层与四资产 brief | 用户明确回复“确认这 6 点，开始 M3-U2” | 5 份 Source、5 份 Claim 与一份当时为 `in-review` 的 brief 已完成；该 brief 随后在 U3 获项目所有者批准；Entry 保持 draft，无 Terminology、manifest 或图片 |
@@ -476,7 +476,7 @@ M7 生产发布前必须：
 
 - 结果：M1 工程参考、M2/M3 基线及 M4-U1/U2/U3 均已收口；M4-U4A public SEO 纯基础设施、2026-08-31 机器门禁加固、Chinese Underworld Collection Hero 与 Guide Hero 生产闭环也已完成本地实施与验证。M4-U4A 的实现、正反门禁和精确未执行项以 [`003-pages-exploration-seo.md` 的 12.4 节](003-pages-exploration-seo.md#124-m4-u4a) 为准，命令与运行证据以 `../../DEV_WORKFLOW.md` 为准。
 - 未完成/风险：真实 public origin、published 内容、public runner/Layout/页面/endpoint、M4-U5 预检/最终关闭、M4-U4B output verifier、Vercel 项目与部署均未建立。两篇完整编辑候选仍需双语术语、Source 标题 locale 与 Project owner 状态审核；正式字体浏览器效果和 CJK 也未闭合。
-- 版本身份：M4-U3 历史基线为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；Project owner 最新提交里程碑为 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`），Guide Hero 直接接续该提交上的现有未提交工作树。未执行 fetch，代理未执行 Git 写操作或发布。
+- 版本身份：M4-U3 历史基线为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`），首个纵切片 release-readiness 基线为 `eb6e20c7c2ae5eda895e5a70f547140163877456`；Guide Hero/本地化改动后续进入本地检查点 `a3194d0d59b605cf7a5fcfc5d2d55166c374e13b`，馆藏中文字段来源复核形成 `d60691a`。未执行 fetch、push 或发布；精确 HEAD、工作树与 tracking ref 以执行前只读核查为准。
 
 ## 13. 当前最终结论
 

@@ -36,7 +36,7 @@
 - 当前权威结论更新时间：2026-08-31。
 - M4-U3 实现与原收口文档已由 Project owner 提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；M4-U2 历史基线为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`），U2 主体历史基线为 `8c6d12cabce11741bb83941904993f4d8831c818`，M3 历史基线为 `c606f5aab92d908ff2935c5b7212ad5066636a50`。
 - U3 写入前，HEAD、`main` 与本地 `origin/main` 均指向 `5f327b63f7a227e54773718d140e7295ef6ed3c9`，工作树干净；2026-08-30 提交后只读核对时三者均指向 `e94eacaad989652c7f71ae50276652cc3f54997a` 且工作树干净。未执行 fetch，因此不能据此证明服务器端分支状态。
-- Guide Hero 生产闭环直接接续 Project owner 最新提交 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的现有未提交 Collection Hero 与本地化合同工作树；没有创建分支、worktree 或仓库副本。本轮未执行 fetch 或任何 Git 写操作。
+- Guide Hero 生产闭环最初直接接续历史基线 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的未提交 Collection Hero 与本地化合同工作树；该生产批次没有创建分支、worktree 或仓库副本，也未执行 fetch 或 Git 写操作。后续版本身份与执行前核查以根目录 `README.md`、`DEV_WORKFLOW.md` 和 MVP 总合同为准。
 
 ## 1. 结论与开发就绪判断
 
