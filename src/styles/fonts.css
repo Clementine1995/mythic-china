@@ -34,3 +34,99 @@
   font-weight: 400;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Mythic Han Sans SC";
+  src: url("../assets/fonts/mythic-han-sans/2.005R-subset-v1/mythic-han-sans-sc-400.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range:
+    U+3002, U+3008, U+3009, U+300A, U+300B, U+300C, U+300D, U+300E, U+300F,
+    U+4E2D, U+5415, U+55BE, U+56FD, U+5914, U+5947, U+5973, U+5A25, U+5A32,
+    U+5A46, U+5AE6, U+5B5F, U+5BBE, U+5C71, U+5E1D, U+5E38, U+5F02, U+5FD7,
+    U+641C, U+658B, U+65E0, U+674C, U+68BC, U+6D1E, U+6D77, U+72B4, U+72F4,
+    U+736C, U+738B, U+767D, U+795E, U+7A77, U+7ECF, U+7F57, U+804A, U+8BB0,
+    U+8C78, U+90FD, U+9146, U+949F, U+95F4, U+960E, U+9634, U+987C, U+989B,
+    U+992E, U+9955, U+9997, U+9CB2, U+9E4F, U+9ED1, U+FF01, U+FF0C, U+FF1A,
+    U+FF1B, U+FF1F;
+}
+
+@font-face {
+  font-family: "Mythic Han Sans SC";
+  src: url("../assets/fonts/mythic-han-sans/2.005R-subset-v1/mythic-han-sans-sc-500.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  unicode-range:
+    U+3002, U+3008, U+3009, U+300A, U+300B, U+300C, U+300D, U+300E, U+300F,
+    U+4E2D, U+5415, U+55BE, U+56FD, U+5914, U+5947, U+5973, U+5A25, U+5A32,
+    U+5A46, U+5AE6, U+5B5F, U+5BBE, U+5C71, U+5E1D, U+5E38, U+5F02, U+5FD7,
+    U+641C, U+658B, U+65E0, U+674C, U+68BC, U+6D1E, U+6D77, U+72B4, U+72F4,
+    U+736C, U+738B, U+767D, U+795E, U+7A77, U+7ECF, U+7F57, U+804A, U+8BB0,
+    U+8C78, U+90FD, U+9146, U+949F, U+95F4, U+960E, U+9634, U+987C, U+989B,
+    U+992E, U+9955, U+9997, U+9CB2, U+9E4F, U+9ED1, U+FF01, U+FF0C, U+FF1A,
+    U+FF1B, U+FF1F;
+}
+
+@font-face {
+  font-family: "Mythic Han Sans SC";
+  src: url("../assets/fonts/mythic-han-sans/2.005R-subset-v1/mythic-han-sans-sc-600.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  unicode-range:
+    U+3002, U+3008, U+3009, U+300A, U+300B, U+300C, U+300D, U+300E, U+300F,
+    U+4E2D, U+5415, U+55BE, U+56FD, U+5914, U+5947, U+5973, U+5A25, U+5A32,
+    U+5A46, U+5AE6, U+5B5F, U+5BBE, U+5C71, U+5E1D, U+5E38, U+5F02, U+5FD7,
+    U+641C, U+658B, U+65E0, U+674C, U+68BC, U+6D1E, U+6D77, U+72B4, U+72F4,
+    U+736C, U+738B, U+767D, U+795E, U+7A77, U+7ECF, U+7F57, U+804A, U+8BB0,
+    U+8C78, U+90FD, U+9146, U+949F, U+95F4, U+960E, U+9634, U+987C, U+989B,
+    U+992E, U+9955, U+9997, U+9CB2, U+9E4F, U+9ED1, U+FF01, U+FF0C, U+FF1A,
+    U+FF1B, U+FF1F;
+}
+
+@font-face {
+  font-family: "Mythic Han Sans TC";
+  src: url("../assets/fonts/mythic-han-sans/2.005R-subset-v1/mythic-han-sans-tc-400.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range:
+    U+3002, U+3008, U+3009, U+300A, U+300B, U+300C, U+300D, U+300E, U+300F,
+    U+4EFB, U+50CF, U+5143, U+51FA, U+5341, U+5716, U+591C, U+65E9, U+671F,
+    U+6E05, U+738B, U+7AF9, U+7FA4, U+8EF8, U+904A, U+937E, U+9593, U+9670,
+    U+96D5, U+9824, U+9997, U+9B3C, U+FF01, U+FF0C, U+FF1A, U+FF1B, U+FF1F;
+}
+
+@font-face {
+  font-family: "Mythic Han Sans TC";
+  src: url("../assets/fonts/mythic-han-sans/2.005R-subset-v1/mythic-han-sans-tc-500.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  unicode-range:
+    U+3002, U+3008, U+3009, U+300A, U+300B, U+300C, U+300D, U+300E, U+300F,
+    U+4EFB, U+50CF, U+5143, U+51FA, U+5341, U+5716, U+591C, U+65E9, U+671F,
+    U+6E05, U+738B, U+7AF9, U+7FA4, U+8EF8, U+904A, U+937E, U+9593, U+9670,
+    U+96D5, U+9824, U+9997, U+9B3C, U+FF01, U+FF0C, U+FF1A, U+FF1B, U+FF1F;
+}
+
+@font-face {
+  font-family: "Mythic Han Sans TC";
+  src: url("../assets/fonts/mythic-han-sans/2.005R-subset-v1/mythic-han-sans-tc-600.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  unicode-range:
+    U+3002, U+3008, U+3009, U+300A, U+300B, U+300C, U+300D, U+300E, U+300F,
+    U+4EFB, U+50CF, U+5143, U+51FA, U+5341, U+5716, U+591C, U+65E9, U+671F,
+    U+6E05, U+738B, U+7AF9, U+7FA4, U+8EF8, U+904A, U+937E, U+9593, U+9670,
+    U+96D5, U+9824, U+9997, U+9B3C, U+FF01, U+FF0C, U+FF1A, U+FF1B, U+FF1F;
+}

@@ -42,7 +42,7 @@ status: editorial-review
 
 ## A protector drawn as a threat
 
-The name Zhong Kui (钟馗, _Zhōng Kuí_) is usually kept rather than translated. The identifying gloss comes after it: **the demon queller**. That wording appears across the museum records used here and describes his role without turning the name itself into an English title.
+The name Zhong Kui (<span lang="zh-Hans">钟馗</span>, _Zhōng Kuí_) is usually kept rather than translated. The identifying gloss comes after it: **the demon queller**. That wording appears across the museum records used here and describes his role without turning the name itself into an English title.
 
 His visual force often comes from reversal. Demons that would threaten ordinary people become his followers, captives, mounts, or bearers. In the [Cleveland Museum of Art’s Yuan-period handscroll](https://www.clevelandart.org/art/1961.206), a bearded, robed Zhong Kui leads a night procession. A [Qing-period bamboo group at The Met](https://www.metmuseum.org/art/collection/search/75262) places him on the back of a recumbent demon while other demons present offerings. These works share hierarchy, not one fixed pose or costume.
 

@@ -1,0 +1,84 @@
+FONTLOG for Mythic Han Sans SC / TC 2.005R-subset-v1
+=====================================================
+
+2026-09-01 - Initial subset release
+
+Upstream
+--------
+
+Source Han Sans 2.005R by Adobe, released under the SIL Open Font
+License 1.1. The Reserved Font Name is "Source".
+
+Release: https://github.com/adobe-fonts/source-han-sans/releases/tag/2.005R
+Tag commit: 6c709ca72d3d7c46ab42ebecc1a26e7d69595a37
+
+SC input:
+https://raw.githubusercontent.com/adobe-fonts/source-han-sans/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/Variable/TTF/SourceHanSansSC-VF.ttf
+SHA-256: 68f866374d8ff04d2103c5b2907f1cab2dbec91ac0fb6ad0b801c6db0c1faa80
+
+TC input:
+https://raw.githubusercontent.com/adobe-fonts/source-han-sans/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/Variable/TTF/SourceHanSansTC-VF.ttf
+SHA-256: 1a273a56aa47250c7af95e461ee0c8236c60d7141e14a37bd18baccb1e851b19
+
+The two individual file digests are locally computed from the fixed commit
+URLs; Adobe does not publish separate digests for these repository files.
+
+Production inputs and tools
+---------------------------
+
+Character set: src/assets/fonts/cjk-character-sets.json
+Character-set SHA-256: 8dfd1760fa83b504347db9f6d561e7ba67d86f954b5b183ff944a4d3b489ccf2
+Generator: scripts/build-cjk-font-subsets.py
+Pinned requirements: scripts/font-production-requirements.txt
+Python: 3.13.13
+fontTools: 4.63.0
+Brotli: 1.2.0
+
+Modifications
+-------------
+
+1. Instantiated the upstream wght variable axis independently at 400, 500,
+   and 600 for SC and TC.
+2. Subset SC to the approved 65-code-point Hans set and TC to the approved
+   36-code-point Hant set. The fallback-only probes U+6D4B and U+6E2C were
+   intentionally excluded.
+3. Removed variable tables and the obsolete STAT naming references.
+4. Renamed all primary family, full, unique, and PostScript records so the
+   Modified Version uses Mythic Han Sans SC / TC and does not use the Reserved
+   Font Name. Original copyright, trademark, author, vendor, and OFL records
+   remain embedded.
+5. Encoded deterministic WOFF2 output through fontTools subset.save_font with
+   timestamp recalculation and the optional HarfBuzz repacker disabled. The
+   generator rejects Python, fontTools, or Brotli versions outside the exact
+   production record before reading either source font.
+
+No glyph outlines were redrawn. Two independent output directories were built
+from the same locked inputs; every corresponding file had the same byte length
+and SHA-256 digest.
+
+Outputs
+-------
+
+mythic-han-sans-sc-400.woff2
+  18,248 bytes
+  SHA-256 a928af71b2976d0bdbc8f8385e925d5e514724e5f243e26a1e1e053ef66bc2e2
+
+mythic-han-sans-sc-500.woff2
+  18,324 bytes
+  SHA-256 d7c1a79ebe953cc469f89c716d432fcb8efb9170c60e759331f296f4776ba69c
+
+mythic-han-sans-sc-600.woff2
+  18,400 bytes
+  SHA-256 70c507c7849a400ee8488ef55164687d48986d112f6ec8803d67dd04a8bf8cd7
+
+mythic-han-sans-tc-400.woff2
+  9,392 bytes
+  SHA-256 5c9672feb8414b31c9c261b1c2ad0c60efb5cacffd5104167b4168cb1613e3bd
+
+mythic-han-sans-tc-500.woff2
+  9,516 bytes
+  SHA-256 6204b520c6fe6d235bd5fb7262d1fd8e676615db671d29d33eca3376ea15bcf0
+
+mythic-han-sans-tc-600.woff2
+  9,524 bytes
+  SHA-256 0b975d121ff46b883c6c41015473b8823df66914a95c410bf61a332a47e31bc5

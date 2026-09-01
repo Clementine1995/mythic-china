@@ -56,13 +56,16 @@
 - [Source Han Sans](https://github.com/adobe-fonts/source-han-sans) — Adobe Fonts。用途：中文名称、显示标题和未来中文 UI 的 sans 候选；[SC designspace](https://github.com/adobe-fonts/source-han-sans/blob/master/Masters/designspaces/SourceHanSansSC-VF.designspace)；[OFL 1.1](https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt)。
 - [CSS Fonts Module Level 4](https://www.w3.org/TR/css-fonts-4/) 与 [Level 5](https://www.w3.org/TR/css-fonts-5/) — W3C。用途：`font-display`、`unicode-range`、font synthesis 和字体度量覆盖的实现依据。
 
-以下版本与许可证细节于 2026-08-30 重新核对。Geist 与 Source Serif 已按固定 release 落为上游未修改的英文候选；Source Han 仍只形成方案，不表示已有 CJK 文件或批准子集：
+以下版本与许可证细节最初于 2026-08-30 核对，Source Han 与生成工具又于 2026-09-01 复核。Geist 与 Source Serif 按固定 release 落为上游未修改的英文候选；Source Han 则从固定 2.005R commit 生成具备 RFN/FONTLOG 与 cmap 门禁的派生子集：
 
 - [Geist v1.7.2](https://github.com/vercel/geist-font/releases/tag/v1.7.2) — 官方 release archive 的 GitHub SHA-256 与本地下载一致；[OFL 原文](https://github.com/vercel/geist-font/blob/main/OFL.txt) 的当前版权头未列 Reserved Font Name。
 - [Source Serif 4.005R](https://github.com/adobe-fonts/source-serif/releases/tag/4.005R) — 官方 release 提供 WOFF2；该 WOFF2 archive 本身不含许可证且上游未公布 digest，因此项目另从同一 tag 保存 [LICENSE](https://github.com/adobe-fonts/source-serif/blob/4.005R/LICENSE.md)，archive digest 明确标为本地计算。LICENSE 保留 `Source` 字体名。
-- [Source Han Sans releases](https://github.com/adobe-fonts/source-han-sans/releases) — 最新 release 标记为 2.005R，列出 Variable WOFF2 与 SC 资产；[LICENSE](https://github.com/adobe-fonts/source-han-sans/blob/release/LICENSE.txt) 保留 `Source` 字体名。
+- [Source Han Sans 2.005R](https://github.com/adobe-fonts/source-han-sans/releases/tag/2.005R) — Adobe 官方 release；生产输入进一步固定到 tag commit `6c709ca72d3d7c46ab42ebecc1a26e7d69595a37` 的 [SC variable TTF](https://github.com/adobe-fonts/source-han-sans/blob/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/Variable/TTF/SourceHanSansSC-VF.ttf)、[TC variable TTF](https://github.com/adobe-fonts/source-han-sans/blob/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/Variable/TTF/SourceHanSansTC-VF.ttf) 与 [LICENSE](https://github.com/adobe-fonts/source-han-sans/blob/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/LICENSE.txt)。上游没有为两个仓库单文件公布摘要，项目明确记录 locally-computed SHA-256，不冒充 upstream-published digest。
 - [Source Han Serif releases](https://github.com/adobe-fonts/source-han-serif/releases) — 最新 release 标记为 2.003R；[LICENSE](https://github.com/adobe-fonts/source-han-serif/blob/release/LICENSE.txt) 保留 `Source` 字体名。
-- [OFL FAQ](https://openfontlicense.org/ofl-faq/) — SIL。用途：核对网页分发、修改、子集与 Reserved Font Name 义务；本项目把 CJK glyph subsetting/weight instancing 当作修改，并计划为 Adobe Source 系修改版使用不含 `Source` 的 primary family name、保留 OFL/copyright 与 FONTLOG。
+- [OFL FAQ](https://openfontlicense.org/ofl-faq/) — SIL。用途：核对网页分发、修改、子集与 Reserved Font Name 义务；本项目把 CJK glyph subsetting/weight instancing 当作修改，已为 Adobe Source 系修改版使用不含 `Source` 的 primary family name，并保留 OFL/copyright/trademark/author records 与 FONTLOG。
+- [fontTools 4.63.0](https://github.com/fonttools/fonttools/releases/tag/4.63.0)、[Subsetting 文档](https://fonttools.readthedocs.io/en/latest/subset/index.html) 与 [Variable font instancer 文档](https://fonttools.readthedocs.io/en/latest/varLib/instancer.html) — 用途：固定 400/500/600 静态实例、精确 Unicode 子集、name/cmap/变量表验证和确定性选项；项目隔离生产环境同时锁定 [Brotli 1.2.0](https://github.com/google/brotli/releases/tag/v1.2.0) 作为 WOFF2 编码依赖。
+- [fontkitten 1.0.3](https://www.npmjs.com/package/fontkitten/v/1.0.3) — 用途：默认 Node/Vitest/build verifier 直接读取落库与 `dist` WOFF2 的内部 family、weight、variable axes 与 cmap；它只作为开发依赖，不进入浏览器运行时。
+- [parse5 8.0.1](https://github.com/inikulin/parse5) — WHATWG HTML 解析器，MIT；访问于 2026-09-01。用途：默认 Node/Vitest/build verifier 按浏览器 HTML5 树语义核对实际可见 CJK 的 `lang` 继承，覆盖隐式结束标签、table foster parenting 与实体解析；它只作为开发依赖，不进入浏览器运行时。
 
 ## 2. 竞品与相邻标杆
 

@@ -24,7 +24,7 @@
 ### 0.3 字体资产边界
 
 - 字体不是 visual Asset Manifest，也不复用 brief/production record/current resolver。自托管字体只进入 `src/assets/fonts/` 的版本目录，由 `font-assets.json` 固定 release、archive/file hash、许可证与 preload 角色；页面只通过中央 preload registry 和 CSS role token 消费。
-- 当前字体 inventory 为 4 份上游未修改英文 WOFF2 与两份许可证；CJK 文件仍为空。CJK 子集、内部 RFN 改名、字符表、cmap 和跨平台检查在其工具与语言证据闭合前保持阻断。
+- 当前字体 inventory 为 4 份上游未修改英文 WOFF2，以及 Source Han Sans 2.005R 派生的 SC/TC × 400/500/600 六份静态 WOFF2。后者已绑定批准字符集、固定上游输入/hash、OFL/RFN-safe internal names、FONTLOG、精确 `unicode-range` 与源码/`dist` cmap 门禁；`测`/`測` 保持为不进入子集的 fallback-only probe。正式字体页面观感、真实命中、慢加载与跨平台 fallback 仍是 M4-U5 人工阻塞，不能由静态 cmap 替代。
 
 ## 1. 编辑分类
 
@@ -176,7 +176,7 @@ notes: Why this source is used and its limitations.
 
 网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。M2 的最小可追溯组合是：`primary-text` 至少有版次/底本身份；`scholarship` 与 `modern-adaptation` 有作者/机构及出版物、年份或 URL 身份；`museum-or-library` 与 `fieldwork-or-community-archive` 有负责机构及对象号、档案/版次或 URL 身份。`translation` 记录必须填写 `translator`、`publicationOrEdition`、`pageOrSection`、`rightsStatus` 与 `rightsUrl`，任何填写了 `rightsUrl` 的记录也必须填写 `rightsStatus`。数字影像同样需要两项权利信息，但 M2 Source 尚无可靠的数字影像判别字段，因此不得凭现有字段臆测并自动放行；首次接入此类记录前先扩充合同与 Schema。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。
 
-`Source.language` 描述整份来源，不自动描述可选 `titleZh` 的正字区域。`titleZhLang` 与 `titleZh` 成对必填，受控值为 `zh | zh-Hans | zh-Hant`：generic `zh` 明确表示已知为中文但正字区域尚未核定，不是脚本猜测或 fallback。教育部词典记录自身证明 `titleZhLang: zh-Hant`；四条英文馆藏记录于 2026-08-31 回到馆方页面复核可见中文字段后，又由 `Project owner (user-confirmed)` 作为 bilingual reviewer 核定为 `zh-Hant`。该结论来自明确人工审校，不是按字符外形自动猜测；未来未审校记录仍须保留 generic `zh`。`editorial-review` 可保留 generic `zh`；`ready | published | archived` Entry 引用的 Source 必须先经来源核对/双语审校改为精确 `zh-Hans | zh-Hant`，内容图会拒绝绕过。
+`Source.language` 描述整份来源，不自动描述可选 `titleZh` 的正字区域。`titleZhLang` 与 `titleZh` 成对必填，受控值为 `zh | zh-Hans | zh-Hant`：generic `zh` 明确表示已知为中文但正字区域尚未核定，不是脚本猜测或 fallback。教育部词典记录自身证明 `titleZhLang: zh-Hant`；四条英文馆藏记录于 2026-08-31 回到馆方页面复核可见中文字段后，又由 `Project owner (user-confirmed)` 作为 bilingual reviewer 核定为 `zh-Hant`。该结论来自明确人工审校，不是按字符外形自动猜测；未来未审校记录仍须保留 generic `zh`。`editorial-review` 可保留 generic `zh`；`ready | published | archived` Entry 引用的 Source 必须先经来源核对/双语审校改为精确 `zh-Hans | zh-Hant`，内容图会拒绝绕过。可见 HTML 另有独立门禁：任何 Han 文本必须继承精确 `zh-Hans | zh-Hant`，不能因字符已在字体中就留在 `lang="en"` 或 generic `zh`；混合中英字段优先拆成语义片段，单处 Source 英文标题不为此扩展 Schema。
 
 M2 的 Entry/Source 日期字段只接受带引号的 ISO calendar date 字符串 `"YYYY-MM-DD"`。未加引号的 YAML 日期会被 loader 解析为 `Date`，时间戳还可能因时区跨日；Schema 一律拒绝 `Date` 与 timestamp，不做静默截断或日期迁移。
 

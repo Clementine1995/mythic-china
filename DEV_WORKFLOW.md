@@ -2,7 +2,7 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），M4-U2 历史基线为 `5f327b6`（`M4-u2 completed`），最近确认的 M4-U3 实现基线为 `e94eaca`（`updatee`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前 11 个精确画布 master、11 份 repository source rendition、四份 production record 与七份 manifest 版本记录已核验；六个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，七份 current responsive rendition 的 50 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2/U3 与 M4-U4A，并于 2026-08-30 自行提交 U3 实现与原收口文档；M4-U4A 完成 HTTPS origin 校验、公共身份、public inventory、SEO 与 release artifact 纯基础设施，但不开放 public build、不创建 Vercel 项目且不部署。首个纵切片的编辑形态与字体方案已获阶段性确认；Chinese Underworld Collection Hero 与 Guide Hero 均已完成各自的账户/权利确认、五项人工审核、exact-canvas、公开文案、approved/current 资产链及所属内容的静态接线。正式字体页面效果、CJK 工具、M4-U5、M4-U4B、未来服务、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`（`M3 completed`），M4-U2 历史基线为 `5f327b6`（`M4-u2 completed`），最近确认的 M4-U3 实现基线为 `e94eaca`（`updatee`）。M3 终验中发现的 Hero v1 手部解剖缺陷已按版本合同返修为 Hero v2，并由 Project owner 于 2026-08-29 明确验收。当前 11 个精确画布 master、11 份 repository source rendition、四份 production record 与七份 manifest 版本记录已核验；六个逻辑资产各有唯一 approved/current，Hero v1 保留为 approved/non-current 审计历史。严格视觉 Schema、loader、validator、metadata registry、current resolver 与非默认 local master/响应式构建验证入口均保持有效；`sharp@0.35.4` 仍是项目直接依赖，七份 current responsive rendition 的 50 个目标已实际生成并解码复核。Project owner 已完成 M4-U1/U2/U3 与 M4-U4A，并于 2026-08-30 自行提交 U3 实现与原收口文档；M4-U4A 完成 HTTPS origin 校验、公共身份、public inventory、SEO 与 release artifact 纯基础设施，但不开放 public build、不创建 Vercel 项目且不部署。首个纵切片的编辑形态与字体方案已获阶段性确认；Chinese Underworld Collection Hero 与 Guide Hero 均已完成各自的账户/权利确认、五项人工审核、exact-canvas、公开文案、approved/current 资产链及所属内容的静态接线。2026-09-01 又完成 CJK 字符输入、Source Han Sans SC/TC 六份静态子集、RFN/FONTLOG、精确 `unicode-range` 与实际 HTML/cmap 默认门禁；正式字体页面效果、跨平台 fallback、M4-U5、M4-U4B、未来服务、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权。项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
 Guide Hero 生产闭环最初直接接续历史基线 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的未提交 Collection Hero 与本地化合同工作树；该生产批次没有创建分支、worktree、旁路项目或仓库副本，也未执行 fetch 或 Git 写操作。后续只读核查发现这些改动已进入本地提交 `a3194d0d59b605cf7a5fcfc5d2d55166c374e13b`；Project owner 随后授权继续并创建来源复核提交 `d60691a`。未执行 fetch 或 push，精确 HEAD、工作树和 tracking ref 每次仍须按本文件只读复核。
 
@@ -56,7 +56,7 @@ if ($mythicProjectNodeVersion -ne 'v24.16.0') {
 
 固定 Node.js `24.16.0` 的选择与只读验证已经完成，不再安装或切换其他 Node。用户于 2026-08-27 明确授权：使用该固定 Node 自带的 Corepack 提供项目固定的 pnpm `11.22.0`，下载 M2 白名单依赖，并在当前非空仓库根手工建立最小应用。授权不包含启动 dev/preview 服务、Git 写操作或发布。
 
-执行安装前，先由文件修改建立 `.node-version`、`package.json`、Astro/TypeScript/ESLint/Prettier 配置与应用源码；不运行 starter/template。M2 初始依赖白名单固定为：运行依赖 `astro@7.2.8`；开发依赖 `@astrojs/check@0.9.10`、`@eslint/js@10.0.1`、`@types/node@24.13.3`、`eslint@10.9.1`、`eslint-plugin-astro@3.1.0`、`prettier@3.6.2`、`prettier-plugin-astro@0.14.1`、`typescript@6.0.3`、`typescript-eslint@8.68.0` 与 `vitest@4.1.11`。M3-U5 经 Project owner 单独授权后增加唯一运行依赖 `sharp@0.35.4`，用于 Astro 构建期响应式 AVIF/WebP 编码。Prettier 暂停在 `3.6.2`，因为稳定的 `prettier-plugin-astro@0.14.1` 与 Prettier `3.7+` 存在尚未进入稳定版插件的 Astro 条件内联脚本解析回归；插件发布兼容版后再独立升级。不得在安装时静默增加 adapter、MDX、UI/CSS/动画框架、Playwright、CMS、数据库、认证、搜索、外部服务或商业依赖。
+执行安装前，先由文件修改建立 `.node-version`、`package.json`、Astro/TypeScript/ESLint/Prettier 配置与应用源码；不运行 starter/template。M2 初始依赖白名单固定为：运行依赖 `astro@7.2.8`；开发依赖 `@astrojs/check@0.9.10`、`@eslint/js@10.0.1`、`@types/node@24.13.3`、`eslint@10.9.1`、`eslint-plugin-astro@3.1.0`、`prettier@3.6.2`、`prettier-plugin-astro@0.14.1`、`typescript@6.0.3`、`typescript-eslint@8.68.0` 与 `vitest@4.1.11`。M3-U5 经 Project owner 单独授权后增加唯一运行依赖 `sharp@0.35.4`，用于 Astro 构建期响应式 AVIF/WebP 编码；2026-09-01 的 CJK 门禁批次又把既有传递包 `fontkitten@1.0.3` 固定为直接开发依赖，用于读取 WOFF2 name/cmap，并增加 MIT 许可的 `parse5@8.0.1`，用于按 HTML5 实际树语义核对 CJK `lang` 继承；二者都不进入浏览器运行时。Prettier 暂停在 `3.6.2`，因为稳定的 `prettier-plugin-astro@0.14.1` 与 Prettier `3.7+` 存在尚未进入稳定版插件的 Astro 条件内联脚本解析回归；插件发布兼容版后再独立升级。不得在安装时静默增加 adapter、MDX、UI/CSS/动画框架、Playwright、CMS、数据库、认证、搜索、外部服务或商业依赖。
 
 安装身份、命令与停止条件：
 
@@ -154,6 +154,79 @@ git status --short --branch
 ```powershell
 & $mythicProjectCorepack pnpm exec vitest run tests/content/content-schemas.test.ts
 ```
+
+### CJK 字体子集生产
+
+CJK 子集生产是非默认、可删除的本地构建步骤，不属于日常 `pnpm check` 的环境前置条件。只有需要从锁定上游输入重新生成派生 WOFF2 时，才在仓库已忽略的 `.local/font-production/` 中使用 Python 隔离环境；站点运行依赖、系统 Python、全局 site-packages、用户字体目录与浏览器字体配置都不得修改。默认 Node 门禁使用直接开发依赖 `fontkitten@1.0.3` 读取已经落库且受 SHA-256 约束的 WOFF2，并用 `parse5@8.0.1` 解析实际 HTML5 树；不调用 Python。
+
+首次准备或显式重建前，必须再次取得依赖/网络授权，并只从 Adobe Source Han Sans `2.005R` 对应的固定 commit `6c709ca72d3d7c46ab42ebecc1a26e7d69595a37` 下载 SC/TC 变量 TTF。单文件上游未公布独立摘要，因此首次下载值只可标为本地计算；摘要经人工复核并写入 `font-assets.json` 后，生成脚本必须在处理前精确比较，不能追随 `latest`、tag 漂移、重定向后的其他版本或未锁定本地文件。
+
+```powershell
+$mythicFontRoot = (Resolve-Path -LiteralPath '.').Path
+$mythicFontPython = 'C:\Program Files\Python313\python.exe'
+$mythicFontWork = Join-Path $mythicFontRoot '.local\font-production'
+$mythicFontVenv = Join-Path $mythicFontWork 'venv'
+$mythicFontSource = Join-Path $mythicFontWork 'source'
+
+if ($mythicFontRoot -ne 'F:\codex-project\mythic-china') {
+  throw "Unexpected workspace: $mythicFontRoot"
+}
+if (-not (Test-Path -LiteralPath $mythicFontPython)) {
+  throw 'Mythic China font-production Python runtime not found.'
+}
+New-Item -ItemType Directory -Force -Path $mythicFontSource | Out-Null
+& $mythicFontPython -m venv $mythicFontVenv
+if ($LASTEXITCODE -ne 0) { throw 'Font-production virtual environment creation failed.' }
+
+$mythicFontVenvPython = Join-Path $mythicFontVenv 'Scripts\python.exe'
+& $mythicFontVenvPython -m pip install --disable-pip-version-check --requirement scripts/font-production-requirements.txt
+if ($LASTEXITCODE -ne 0) { throw 'Pinned font-production tool installation failed.' }
+
+$mythicFontScInput = Join-Path $mythicFontSource 'SourceHanSansSC-VF.ttf'
+$mythicFontTcInput = Join-Path $mythicFontSource 'SourceHanSansTC-VF.ttf'
+Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/adobe-fonts/source-han-sans/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/Variable/TTF/SourceHanSansSC-VF.ttf' -OutFile $mythicFontScInput
+Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/adobe-fonts/source-han-sans/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/Variable/TTF/SourceHanSansTC-VF.ttf' -OutFile $mythicFontTcInput
+$mythicFontScHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $mythicFontScInput).Hash.ToLowerInvariant()
+$mythicFontTcHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $mythicFontTcInput).Hash.ToLowerInvariant()
+if ($mythicFontScHash -ne '68f866374d8ff04d2103c5b2907f1cab2dbec91ac0fb6ad0b801c6db0c1faa80') {
+  throw "Unexpected Source Han Sans SC input: $mythicFontScHash"
+}
+if ($mythicFontTcHash -ne '1a273a56aa47250c7af95e461ee0c8236c60d7141e14a37bd18baccb1e851b19') {
+  throw "Unexpected Source Han Sans TC input: $mythicFontTcHash"
+}
+```
+
+输入摘要通过后，以两个独立目录重建并比较全部六份输出；任一文件名、长度或 SHA-256 不同即停止，不写正式资产目录。两次输出一致后，再从同一锁定输入生成正式目录：
+
+```powershell
+$mythicFontReproA = Join-Path $mythicFontWork 'repro-a'
+$mythicFontReproB = Join-Path $mythicFontWork 'repro-b'
+$mythicFontOutput = Join-Path $mythicFontRoot 'src\assets\fonts\mythic-han-sans\2.005R-subset-v1'
+
+& $mythicFontVenvPython scripts/build-cjk-font-subsets.py --sc-input $mythicFontScInput --tc-input $mythicFontTcInput --output-directory $mythicFontReproA
+if ($LASTEXITCODE -ne 0) { throw 'First CJK subset reproduction failed.' }
+& $mythicFontVenvPython scripts/build-cjk-font-subsets.py --sc-input $mythicFontScInput --tc-input $mythicFontTcInput --output-directory $mythicFontReproB
+if ($LASTEXITCODE -ne 0) { throw 'Second CJK subset reproduction failed.' }
+
+$mythicFontReproAFiles = Get-ChildItem -LiteralPath $mythicFontReproA -File | Sort-Object Name
+$mythicFontReproBFiles = Get-ChildItem -LiteralPath $mythicFontReproB -File | Sort-Object Name
+if (($mythicFontReproAFiles.Name -join '|') -ne ($mythicFontReproBFiles.Name -join '|')) {
+  throw 'CJK subset reproduction inventory mismatch.'
+}
+foreach ($mythicFontReproFile in $mythicFontReproAFiles) {
+  $mythicFontOtherFile = Join-Path $mythicFontReproB $mythicFontReproFile.Name
+  $mythicFontLeftHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $mythicFontReproFile.FullName).Hash
+  $mythicFontRightHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $mythicFontOtherFile).Hash
+  if ($mythicFontLeftHash -ne $mythicFontRightHash) {
+    throw "CJK subset reproduction mismatch: $($mythicFontReproFile.Name)"
+  }
+}
+
+& $mythicFontVenvPython scripts/build-cjk-font-subsets.py --sc-input $mythicFontScInput --tc-input $mythicFontTcInput --output-directory $mythicFontOutput
+if ($LASTEXITCODE -ne 0) { throw 'Committed CJK subset generation failed.' }
+```
+
+影响：网络请求只包含公开包名、版本及上述两个 Adobe 固定文件 URL，不上传仓库、内容或用户数据；临时写入范围只有已忽略的 `.local/font-production/`，正式写入范围只有清单列出的六份 WOFF2。退出策略是删除已只读确认位于该精确目录内的 `.local/font-production/`；稳定仓库保留锁定 requirements、生成器、字符集、OFL、FONTLOG、派生 WOFF2 与 Node 门禁。默认 `pnpm check` 不需要 Python 或这些临时源文件；它使用 `fontkitten` 直接核对落库/构建 WOFF2 的 hash、内部 name、静态字重与 cmap，并用 `parse5` 按浏览器 HTML5 树语义核对可见字符的精确语言继承。
 
 只有获得单独服务启动授权后，才可在已经通过上述根目录、Node、PATH 子进程与 pnpm 身份门禁的同一 PowerShell 会话中运行：
 
@@ -560,7 +633,7 @@ Project owner 于 2026-08-29 单独授权 M4-U3，并确认采用纯 release 投
 - M4-U4A 没有修改 `package.json`、`astro.config.mjs`、`SiteLayout`、模板、动态路由、内容状态、Schema、资产、依赖或 lockfile。`readBuildIntent("public")` 继续失败，仓库没有 public runner、Sitemap/RSS endpoint、public output verifier、Vercel 配置或 deployable public `dist/`。
 - 固定 Node/Corepack 下最终 `pnpm run check` 完整通过 Prettier、ESLint、18 个测试文件/157 项测试、Astro check（63 个文件 0 error、0 warning、0 hint）、7 页 review build 与输出 verifier；review 输出仍为 7 个 `noindex, nofollow` 页面、14 个 Hero v2 AVIF/WebP、零 XML 与零客户端 JavaScript。
 - M4-U4A 未改视觉链，因此未重跑非默认 `visual:build:check`；M3/M4-U2 的七个 local master 与 22 个 current 响应式输出证据保持不变。本单元未运行 dev/preview/browser，未执行 Git 写入、Vercel 项目操作、部署或发布。
-- 当前真实 inventory 为 0 published Entry / 0 published Collection；唯一 Collection 在进入 published 状态前还需要自己的 approved Hero 与模板接线，钟馗完整正文/研究、正式字体和 M4-U5 页面资格也未闭合。因此 M4-U4A 纯基础设施已完成，M4-U4B、部署与发布继续 fail closed。
+- M4-U4A 收口当时的真实 inventory 为 0 published Entry / 0 published Collection；唯一 Collection 在进入 published 状态前还需要自己的 approved Hero 与模板接线，钟馗完整正文/研究、正式字体和 M4-U5 页面资格也未闭合。因此 M4-U4A 纯基础设施已完成，M4-U4B、部署与发布继续 fail closed。
 
 ### 首个纵切片编辑、Hero A 与英文字体候选（历史快照）
 
@@ -624,6 +697,17 @@ Project owner 回复“全部批准”，并明确以 `Project owner (user-confi
 - 固定 Node/Corepack 下完整 `pnpm run check` 通过：Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断、7 页 review build、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。
 - 本批没有修改 visual master、manifest、repository source 或字体文件，因此未重跑非默认 `visual:build:check`；没有安装、升级或移除依赖，没有启动服务/浏览器，没有提升 Entry/Collection 状态，也没有执行 Git 写入、Vercel 操作、部署或发布。
 
+### 2026-09-01 CJK 字符集、子集工具与 cmap 门禁
+
+Project owner 先后要求继续推进、批准并确认执行 CJK 字符集、子集工具与 cmap 门禁。本批只关闭正式字体浏览器判断前的静态生产链，不启动服务/浏览器，不进入 M4-U5/U4B，不提升内容状态，也不执行 Git 写入或发布。
+
+- `cjk-character-sets.json` 冻结 6 个真实 Hans 内容字、22 个真实 Hant 内容字、DESIGN 样张的 47 个额外 Hans 验收字与 14 个共享中文标点；最终 SC required 为 65 个码位、TC required 为 36 个码位。`测`/`測` 是故意缺字的 fallback-only probe，不进入 `unicode-range` 或 cmap。两处 Markdown 简体词补上 `lang="zh-Hans"`，混合中英 Source 标题改为纯英文，独立 `titleZh: 陰間` / `zh-Hant` 保持不变。
+- 从 Adobe Source Han Sans `2.005R` 固定 commit 下载 SC/TC 变量 TTF 到 Git-ignored `.local/font-production/source/`，锁定 SHA-256 `68f866…faa80` / `1a273a…51b19`；隔离环境固定 Python `3.13.13`、fontTools `4.63.0` 与 Brotli `1.2.0`。SC/TC 分别实例化 400/500/600、子集化、移除变量表、按 OFL RFN 把 primary names 改为 `Mythic Han Sans SC/TC` 系列并输出六份 WOFF2；许可证、版权、来源、步骤和摘要进入 LICENSE/FONTLOG。
+- 两个独立临时目录各自完整生成六份产物，逐文件长度与 SHA-256 全等。SC 三份分别为 18,248 / 18,324 / 18,400 bytes，TC 三份为 9,392 / 9,516 / 9,524 bytes；每份 cmap 与对应 65/36 required 集精确相等，且没有变量表或 fallback-only probe。
+- 既有传递包 `fontkitten@1.0.3` 以离线 store 提升为直接开发依赖；最终审查又按已授权的 CJK 工具/依赖范围增加 MIT `parse5@8.0.1`，安装保持 `--ignore-scripts`。默认 Node 门禁直接解析源码及 `dist` WOFF2，锁定 hash、内部 name、400/500/600、无变量轴、OFL 和只计真实 glyph 映射的 cmap；CSS `unicode-range` 必须与批准集合精确相等，所有 CJK 仍为 `on-demand` 且禁止 preload。输出验证器还复核生成器/requirements/字符集/LICENSE/FONTLOG 来源摘要和构建后六个 CJK face，再遍历 parse5 生成的真实 HTML5 树扫描可见文本/alt/title/aria-label，拒绝属性值内伪 `lang`、`data-lang`、隐式 `p`/`li` 闭合、table foster parenting、继承 `en` 或 generic `zh` 的 Han，并比较真实 7 页字符与批准 content set。
+- 首轮定向字体测试通过 2 个文件/6 项测试；最终加固另补一项 `.notdef` cmap 负例。固定 Node/Corepack 下最终完整 `pnpm run check` 通过 Prettier、ESLint、21 个测试文件/201 项测试、Astro check 69 文件零诊断，以及默认 review build 的 7 页、42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML、零客户端 JavaScript 与生产来源/构建后 CSS/实际 HTML/lang/cmap 输出门禁。第一次聚合检查准确暴露架构直接依赖白名单仍缺 `fontkitten`，补齐精确名称/版本 oracle 后完整重跑通过；这不是产品运行失败。最终审查先修正属性边界、有效 glyph cmap、生成器保存路径与独立 build provenance/CSS oracle，随后又用隐式闭合负例证明 XML 式手写标签栈与浏览器语义不等价，故改由 parse5 遍历 HTML5 实际树并增加 `p`/`li`/table 负例；替换后完整检查再次通过。新版生成器在两个新目录的独立重建及正式六文件 inventory 逐字节一致。本批未改 visual master、manifest 或 repository source，因此没有重跑非默认 `visual:build:check`，其最近证据仍为 11 个 local master、七份 current responsive rendition 与 50 个实际输出。
+- 本批没有启动服务或浏览器，没有执行 M4-U5 的真实字体命中、慢加载、200% 缩放或跨平台检查；没有提升 Entry/Collection 状态，没有执行 Git 写入、Vercel 操作、部署或发布。
+
 ## 数据库、外部服务与真实写入口
 
 当前均不适用。项目没有数据库、表单 endpoint、邮件、分析、支付或广告配置。未来接入任一能力时必须先建立需求文档，并在本文件增加：
@@ -637,7 +721,7 @@ Project owner 回复“全部批准”，并明确以 `Project owner (user-confi
 
 ## 发布
 
-Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、分别由 Collection 与 Guide 静态消费的两套 approved/current 自有 Hero、4 份英文 WOFF2 与可见 byline/fact-check 日期；双语术语与 Source 标题 locale 已闭合，CJK、正式字体页面效果和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
+Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、分别由 Collection 与 Guide 静态消费的两套 approved/current 自有 Hero、4 份英文 WOFF2、6 份 CJK 派生 WOFF2 与可见 byline/fact-check 日期；双语术语、Source 标题 locale、CJK 字符/子集/RFN/cmap 静态门禁已闭合，正式字体页面效果、慢加载/跨平台 fallback 和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 

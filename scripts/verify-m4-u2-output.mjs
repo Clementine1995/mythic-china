@@ -10,6 +10,14 @@ import {
   assertReviewCssResourcePolicy,
   assertReviewHtmlResourcePolicy,
 } from "./review-output-policy.mjs";
+import {
+  assertCjkCssFontFaces,
+  assertCjkFontFile,
+  assertFontProductionProvenance,
+  assertRenderedCjkPolicy,
+  readHtmlAttribute,
+  readCjkCharacterPolicy,
+} from "./cjk-font-policy.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
@@ -30,8 +38,14 @@ const fontInventory = JSON.parse(
     "utf8",
   ),
 );
-const fontAssetRecords = fontInventory.families.flatMap(
-  (family) => family.files,
+const cjkCharacterPolicy = await readCjkCharacterPolicy(projectRoot);
+await assertFontProductionProvenance(
+  projectRoot,
+  fontInventory,
+  cjkCharacterPolicy,
+);
+const fontAssetRecords = fontInventory.families.flatMap((family) =>
+  family.files.map((file) => ({ ...file, family })),
 );
 
 if (resolve(process.cwd()) !== projectRoot) {
@@ -60,17 +74,6 @@ function toOutputPath(urlPath) {
 
 function sha256(buffer) {
   return createHash("sha256").update(buffer).digest("hex");
-}
-
-function readHtmlAttribute(tag, name) {
-  const match = tag.match(
-    new RegExp(
-      `\\b${name}(?:\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+)))?`,
-      "iu",
-    ),
-  );
-  if (match === null) return null;
-  return match[1] ?? match[2] ?? match[3] ?? "";
 }
 
 // Inventory HTML and raster artifacts before checking their rendered content.
@@ -140,6 +143,15 @@ for (const fontPath of fontFiles) {
     );
   }
   fontRecordByOutputPath.set(fontPath, record);
+  if (record.family.characterSetLocale !== undefined) {
+    await assertCjkFontFile(
+      fontPath,
+      record.family,
+      record,
+      cjkCharacterPolicy.byLocale[record.family.characterSetLocale]
+        .requiredCodePoints,
+    );
+  }
 }
 if (unmatchedFontRecords.size > 0) {
   throw new Error(
@@ -316,13 +328,37 @@ if (forbiddenReleaseArtifacts.length > 0) {
 if (outputFiles.some((path) => /\.(?:[cm]?js)$/iu.test(path))) {
   throw new Error("M4-U2 review pages must not emit client JavaScript.");
 }
+const outputCss = [];
 for (const outputFile of outputFiles.filter((path) => path.endsWith(".css"))) {
   const content = await readFile(outputFile, "utf8");
+  outputCss.push(content);
   assertReviewCssResourcePolicy(
     content,
     relative(outputRoot, outputFile).replaceAll("\\", "/"),
   );
 }
+assertCjkCssFontFaces(
+  outputCss.join("\n"),
+  fontInventory,
+  cjkCharacterPolicy,
+  (sourceUrl) => {
+    const url = new URL(sourceUrl, "https://review.invalid");
+    if (
+      url.origin !== "https://review.invalid" ||
+      url.search !== "" ||
+      url.hash !== ""
+    ) {
+      return null;
+    }
+    const outputPath = resolve(
+      outputRoot,
+      decodeURIComponent(url.pathname).replace(/^\/+/, ""),
+    );
+    return fontRecordByOutputPath.get(outputPath)?.assetId ?? null;
+  },
+  "review output CSS",
+);
+assertRenderedCjkPolicy(htmlByPath, cjkCharacterPolicy);
 
 // Focal-route checks keep draft exceptions out of published-only indexes.
 const zhongKuiHtml = htmlByPath.get("explore/zhong-kui/index.html");
@@ -630,5 +666,5 @@ if (
 }
 
 process.stdout.write(
-  `Verified ${htmlFiles.length} noindex M4 review pages, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
+  `Verified ${htmlFiles.length} noindex M4 review pages, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
 );

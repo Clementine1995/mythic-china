@@ -199,8 +199,10 @@ excluded_motifs
 
 - **Geist Sans**：英文 Display、H1/H2、导航、metadata、按钮与拼音；当前 UI/标题按变量轴使用 400–650 的连续权重，Hero 仍限制为 400–600，不使用全大写宽字距制造机构感。
 - **Source Serif 4**：英文长文、引文与原典/译文片段；正文 400，真实 Italic。它不再承担 Hero、Article H1 或全站章节标题。
-- **Source Han Sans SC**：中文名称、中文显示标题和未来中文 UI；MVP 根据已批准字形制作 400/500/600 子集。
-- **Source Han Serif SC**：仅用于有语义的短中文引文、古籍名或原文对照；不得扩展成全站中文皮肤。
+- **Source Han Sans SC/TC**：中文名称、中文显示标题和未来中文 UI；首个纵切片已按核定的 Hans/Hant 输入分别制作 400/500/600 静态子集，具体页面观感仍须浏览器与跨平台验收。
+- **Source Han Serif SC**：仅作为未来有语义的短中文引文、古籍名或原文对照候选；当前未落库，不计入现有 10 份 WOFF2，也不得扩展成全站中文皮肤。
+
+当前稳定 inventory 为 4 份上游未修改英文 WOFF2 与 6 份具备 OFL/RFN/FONTLOG、精确字符集和 cmap 门禁的 CJK 派生 WOFF2。该静态资产链不等于页面级正式字体判断；慢加载、macOS/iOS/Android fallback、开发者工具逐字形命中和真实 200% 缩放仍属于 M4-U5 候选预检。
 
 字体家族及角色不得随 Collection 变化。Collection Hero 只允许在同一 sans 中改变 weight、tracking、断行与对齐；Article H1、正文、来源和图注完全固定。禁止伪书法字体、中文合成斜体、伪粗体和把历史题签当作可访问 HTML 标题。
 
@@ -242,7 +244,7 @@ excluded_motifs
 
 - 自托管 WOFF2，不让用户浏览器运行时请求 Google Fonts 或其他字体 CDN。
 - 所有页面只 preload display Roman；Article 路由再按需要 preload story Roman 400，Semibold 与真实使用的 Italic 按命中延后加载。preload URL 只能从中央 registry 取得，不得在模板硬编码具体上游文件名。
-- 不 preload 完整 CJK 变量字体。MVP 先核定中文文本的 Hans/Hant 标记，再为实际使用分别制作所需 SC/TC 子集并在构建时检查缺字；工具或 locale 证据未闭合时继续使用明确的 system fallback，不落全量字体。
+- 不 preload 完整 CJK 变量字体。当前 SC required 为 65 个码位、TC required 为 36 个码位，分别覆盖已批准真实内容、冻结样张字符和 14 个中文标点；`测`/`測` 作为 fallback-only probe 明确排除。六份静态 WOFF2 使用窄 `unicode-range` 按命中加载，默认构建把实际 HTML 字符、批准集合与源/产物 cmap 相互比较；新增字符必须先更新并审校字符输入，不得靠粗放 `U+4E00-9FFF` 或静默 system fallback 掩盖。
 - Source 系列许可证包含 Reserved Font Name；如果实际修改或子集化字体，必须按 OFL 重命名衍生字体、保存版本、来源、校验值与许可证。
 - 使用 `font-display: swap`；字体确定后实测 `size-adjust` 和各 metrics override，不凭经验填写。
 
@@ -268,7 +270,7 @@ Zhōng Kuí 钟馗 · Hēibái Wúcháng 黑白无常
 《山海经》《搜神记》《聊斋志异》
 ```
 
-M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows 环境的 system fallback 检查有记录。正式自托管 WOFF2/CJK 子集、正常/禁用/慢速字体加载、Windows/macOS/iOS/Android 实机 fallback、开发者工具实际命中字形与浏览器真实 200% 缩放属于首个真实纵切片进入批量页面/插画制作前的生产字体门禁；未执行项必须保留为未验证，不能因 M1 冻结写成通过。
+M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows 环境的 system fallback 检查有记录。正式自托管 WOFF2 与 CJK 字符/子集/cmap 静态门禁现已建立；正常/禁用/慢速字体加载、Windows/macOS/iOS/Android 实机 fallback、开发者工具实际命中字形与浏览器真实 200% 缩放仍属于首个真实纵切片进入批量页面/插画制作前的生产字体门禁。未执行项必须保留为未验证，不能由静态 cmap 或 M1 fallback 结果替代。
 
 ### 5.3 Spacing, Grid and Shape
 
@@ -504,8 +506,8 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 
 - 用户为结束长期停留在 M1 的探索循环，明确决定冻结当前原型，同时明确说明页面风格仍不是其想要的方向。因此本次冻结是带设计保留意见的工程参考基线接受，不是“视觉满意”或生产视觉终稿批准。
 - 本次可继承的是页面职责、Home → Collection → Entry 真实链路、Entry 语义阅读顺序、来源与现代改编边界、响应式断点、渐进增强和无障碍骨架；未来应用不得把当前独立 HTML/CSS 整份复制为永久表现层，也不得把当前图片、排版或色彩当作不可更换的品牌资产。
-- 当前环境实际完成了核心三页 390/768/1440px、链接与历史、锚点与焦点回归、Escape、对比与触控目标、无图/灰度、系统 fallback、等效窄视口放大、控制台和本地资源检查。真实 Tab/Shift+Tab/Enter 全链、操作系统 `prefers-reduced-motion`、禁用 JavaScript、浏览器真实 200% 缩放及开发者工具逐字形命中仍未由本次工具可靠执行；这些是明确延期项，不得改写为通过。
-- M1 已建立完整字体验收样张，但仓库仍无批准的自托管 WOFF2。正式字体文件、慢加载、macOS/iOS/Android fallback、字形命中和真实 200% 缩放移至首个真实纵切片进入批量页面/插画制作前的硬门禁；这项延期不等于取消第 5.2 节的生产字体合同。
+- 2026-08-27 冻结现场实际完成了核心三页 390/768/1440px、链接与历史、锚点与焦点回归、Escape、对比与触控目标、无图/灰度、system fallback、等效窄视口放大、控制台和本地资源检查。真实 Tab/Shift+Tab/Enter 全链、操作系统 `prefers-reduced-motion`、禁用 JavaScript、浏览器真实 200% 缩放及开发者工具逐字形命中仍未由本次工具可靠执行；这些是明确延期项，不得改写为通过。
+- M1 冻结现场只建立了完整字体验收样张并使用 system fallback；正式字体下载、子集、许可证、逐字形命中和跨平台判断当时均留给后续纵切片。当前字体增量与仍未完成的人工门禁以第 5.2 节为准，不属于 M1 冻结证据。
 - 首个真实 Home 须按已确认的 A 主、C 辅概念方向完成页面级实现；Collection 与 Entry 继续按既有三层系统单独设计，并在同一纵切片中确认 A/C 语言是否需要延展。三页都须提交用户检查实际页面、响应式、字体、生产资产、无障碍和整体完成度，不把 Home 概念方向选择重新开放成无边界探索；若实际页面仍不符合目标，应只重构共享表现层，不改写内容、证据关系、稳定身份、URL 或语义阅读顺序。
 
 M1 冻结后仍不批量制作首批 6 篇全部插画；应先在首个真实纵切片关闭上述设计与字体保留项，以免页面比例和裁切规则变化造成返工。

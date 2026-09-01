@@ -14,26 +14,45 @@ interface FontFileRecord {
   weight: string;
   preload: "all-pages" | "entry-pages" | "on-demand";
   registryKey: string | null;
+  legacyFamily?: string;
+  typographicFamily?: string;
+  typographicSubfamily?: string;
+  postscriptName?: string;
+  cmapCodePointCount?: number;
 }
 
 interface FontFamilyRecord {
   familyId: string;
-  role: "display" | "story";
+  role: "display" | "story" | "zh-hans-display" | "zh-hant-display";
   cssAlias: string;
   upstreamFamily: string;
   licensePath: string;
   licenseUrl: string;
   licenseSha256: string;
   reservedFontName: string | null;
+  fontlogPath?: string;
+  fontlogSha256?: string;
+  modified?: boolean;
+  characterSetLocale?: "zh-Hans" | "zh-Hant";
   files: FontFileRecord[];
 }
 
 interface FontInventory {
   schemaVersion: number;
   status: string;
+  fontProduction: {
+    characterSetPath: string;
+    characterSetSha256: string;
+    generatorPath: string;
+    generatorSha256: string;
+    requirementsPath: string;
+    requirementsSha256: string;
+  };
   replaceability: {
     displayAlias: string;
     storyAlias: string;
+    hansDisplayAlias: string;
+    hantDisplayAlias: string;
     consumerTokens: string[];
   };
   families: FontFamilyRecord[];
@@ -73,18 +92,31 @@ async function readInventory(): Promise<FontInventory> {
 describe("font asset boundary", () => {
   it("locks the exact candidate inventory, hashes, licenses, and preload roles", async () => {
     const inventory = await readInventory();
-    expect(inventory.schemaVersion).toBe(1);
+    expect(inventory.schemaVersion).toBe(2);
     expect(inventory.status).toBe("browser-review-pending");
     expect(inventory.replaceability).toEqual(
       expect.objectContaining({
         displayAlias: "Mythic Display",
         storyAlias: "Mythic Story",
-        consumerTokens: ["--font-display", "--font-story"],
+        hansDisplayAlias: "Mythic Han Sans SC",
+        hantDisplayAlias: "Mythic Han Sans TC",
+        consumerTokens: [
+          "--font-display",
+          "--font-story",
+          "--font-zh-display",
+          "--font-zh-hans-display",
+          "--font-zh-hant-display",
+        ],
       }),
     );
 
     const familyRoles = inventory.families.map((family) => family.role).sort();
-    expect(familyRoles).toEqual(["display", "story"]);
+    expect(familyRoles).toEqual([
+      "display",
+      "story",
+      "zh-hans-display",
+      "zh-hant-display",
+    ]);
     expect(new Set(familyRoles).size).toBe(familyRoles.length);
 
     const fontRecords = inventory.families.flatMap((family) =>
@@ -116,20 +148,50 @@ describe("font asset boundary", () => {
       },
     ]);
 
+    for (const [path, expectedHash, root] of [
+      [
+        inventory.fontProduction.characterSetPath,
+        inventory.fontProduction.characterSetSha256,
+        fontRoot,
+      ],
+      [
+        inventory.fontProduction.generatorPath,
+        inventory.fontProduction.generatorSha256,
+        projectRoot,
+      ],
+      [
+        inventory.fontProduction.requirementsPath,
+        inventory.fontProduction.requirementsSha256,
+        projectRoot,
+      ],
+    ] as const) {
+      expect(sha256(await readFile(resolve(root, path))), path).toBe(
+        expectedHash,
+      );
+    }
+
     for (const family of inventory.families) {
-      const expectedAlias =
-        family.role === "display"
-          ? inventory.replaceability.displayAlias
-          : inventory.replaceability.storyAlias;
+      const expectedAlias = {
+        display: inventory.replaceability.displayAlias,
+        story: inventory.replaceability.storyAlias,
+        "zh-hans-display": inventory.replaceability.hansDisplayAlias,
+        "zh-hant-display": inventory.replaceability.hantDisplayAlias,
+      }[family.role];
       expect(family.cssAlias).toBe(expectedAlias);
       expect(new URL(family.licenseUrl).protocol).toBe("https:");
       const license = await readFile(resolve(fontRoot, family.licensePath));
       expect(sha256(license)).toBe(family.licenseSha256);
       expect(license.toString("utf8")).toContain("SIL OPEN FONT LICENSE");
       if (family.reservedFontName !== null) {
-        expect(license.toString("utf8")).toContain(
-          `Reserved Font Name ‘${family.reservedFontName}’`,
-        );
+        expect(license.toString("utf8")).toContain("Reserved Font Name");
+        expect(license.toString("utf8")).toContain(family.reservedFontName);
+      }
+      if (family.fontlogPath !== undefined) {
+        const fontlog = await readFile(resolve(fontRoot, family.fontlogPath));
+        expect(sha256(fontlog)).toBe(family.fontlogSha256);
+        expect(fontlog.toString("utf8")).toContain("Modified Version");
+        expect(family.modified).toBe(true);
+        expect(family.characterSetLocale).toMatch(/^zh-Han[st]$/u);
       }
 
       for (const record of family.files) {
@@ -149,10 +211,14 @@ describe("font asset boundary", () => {
       .map((path) => relative(fontRoot, path).replaceAll("\\", "/"))
       .sort();
     const expectedFiles = [
-      "font-assets.json",
-      ...inventory.families.flatMap((family) => [
-        family.licensePath,
-        ...family.files.map((record) => record.path),
+      ...new Set([
+        "font-assets.json",
+        inventory.fontProduction.characterSetPath,
+        ...inventory.families.flatMap((family) => [
+          family.licensePath,
+          ...(family.fontlogPath === undefined ? [] : [family.fontlogPath]),
+          ...family.files.map((record) => record.path),
+        ]),
       ]),
     ].sort();
     expect(actualFiles).toEqual(expectedFiles);

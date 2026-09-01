@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "input-approved",
+  "recordedAt": "2026-09-01",
+  "approvedBy": "Project owner (user-confirmed)",
+  "normalization": "NFC",
+  "sharedPunctuation": "《》〈〉「」『』，。；：？！",
+  "policy": {
+    "contentSource": "Visible text in the seven-page M4 review projection with explicit zh-Hans or zh-Hant semantics.",
+    "requiredProbeSource": "The frozen typography acceptance strings in docs/DESIGN.md; no repository-wide text scan is allowed.",
+    "fallbackOnlyRule": "Fallback-only probes must remain outside required subsets, CSS unicode-range declarations, and self-hosted font cmap tables."
+  },
+  "locales": {
+    "zh-Hans": {
+      "fontRole": "zh-hans-display",
+      "contentStrings": ["中国阴间", "阴间", "钟馗"],
+      "requiredProbeStrings": [
+        "女娲吕洞宾嫦娥",
+        "酆都阎罗王孟婆",
+        "钟馗黑白无常",
+        "饕餮夔獬豸狴犴梼杌穷奇颛顼帝喾鲲鹏",
+        "山海经搜神记聊斋志异"
+      ],
+      "fallbackOnlyProbe": "测",
+      "expectedContentCodePointCount": 6,
+      "expectedRequiredCodePointCount": 65
+    },
+    "zh-Hant": {
+      "fontRole": "zh-hant-display",
+      "contentStrings": [
+        "陰間",
+        "十王圖",
+        "鍾馗元夜出遊圖",
+        "清早期竹雕鍾馗群鬼",
+        "任頤鍾馗像軸"
+      ],
+      "requiredProbeStrings": [],
+      "fallbackOnlyProbe": "測",
+      "expectedContentCodePointCount": 22,
+      "expectedRequiredCodePointCount": 36
+    }
+  }
+}

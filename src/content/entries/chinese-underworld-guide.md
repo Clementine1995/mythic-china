@@ -40,7 +40,7 @@ status: editorial-review
 
 ## Begin with the word “underworld”
 
-Mythic China uses **underworld** for _yīnjiān_ (阴间), a broad Chinese term for the place entered by the spirits of the dead. The [Ministry of Education dictionary](https://dict.revised.moe.edu.tw/dictView.jsp?ID=156490&q=1&word=%E9%99%B0) defines the term at that general level and lists other names, but a dictionary gloss does not turn those names into one complete religious system.
+Mythic China uses **underworld** for _yīnjiān_ (<span lang="zh-Hans">阴间</span>), a broad Chinese term for the place entered by the spirits of the dead. The [Ministry of Education dictionary](https://dict.revised.moe.edu.tw/dictView.jsp?ID=156490&q=1&word=%E9%99%B0) defines the term at that general level and lists other names, but a dictionary gloss does not turn those names into one complete religious system.
 
 “Hell” can be useful when a particular source emphasizes punishment. It is too narrow for the collection as a whole. In the model summarized by [Asia for Educators at Columbia University](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm), the underworld is temporary rather than a place of eternal punishment for an unchanging self. Judgment, punishment, release, and rebirth belong to a sequence.
 
