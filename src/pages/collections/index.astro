@@ -2,11 +2,16 @@
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { readBuildIntent } from "../../site/build-intent";
-import { createReviewProjection } from "../../site/review-projection";
+import {
+  createReviewProjection,
+  getReviewIndexPreview,
+} from "../../site/review-projection";
 
 readBuildIntent();
 const graph = await loadValidatedContentGraph();
-const { publishedCollections } = createReviewProjection(graph);
+const projection = createReviewProjection(graph);
+const { publishedCollections } = projection;
+const { collection: reviewCollection } = getReviewIndexPreview(projection);
 ---
 
 <SiteLayout
@@ -17,10 +22,41 @@ const { publishedCollections } = createReviewProjection(graph);
     <p class="section-context">Collections</p>
     <h1>Curated reading paths</h1>
     <p>
-      Collections bring related entries into an intentional order while keeping
-      periods, regions, texts, and traditions distinct.
+      Follow curated reading paths. Current editorial candidates are shown
+      separately from the published index.
     </p>
   </header>
+
+  <section
+    class="review-preview page-shell section-space"
+    aria-labelledby="collection-review-preview-heading"
+    data-review-preview="collections"
+  >
+    <header class="review-preview__heading">
+      <h2 id="collection-review-preview-heading">Local review preview</h2>
+      <p>
+        <strong>Not published.</strong> This reading path remains under editorial
+        review and may change before release.
+      </p>
+    </header>
+
+    <ol class="review-preview-list">
+      <li>
+        <p class="review-preview-list__type">Curated collection</p>
+        <h3>
+          <a
+            href={`/collections/${reviewCollection.data.slug}/`}
+            data-review-candidate="collection"
+          >
+            {reviewCollection.data.title}
+          </a>
+        </h3>
+        <p class="review-preview-list__summary">
+          {reviewCollection.data.description}
+        </p>
+      </li>
+    </ol>
+  </section>
 
   <section class="index-results page-shell section-space" aria-live="polite">
     {

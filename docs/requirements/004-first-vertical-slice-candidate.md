@@ -4,14 +4,14 @@
 
 本文负责：把 *The Chinese Underworld* 的首个 Collection、首发 Guide、Featured Entry、Collection Hero 方向和生产字体方案推进到 Project owner 可人工判断的候选检查点，并追溯其后经单独确认完成的 Collection 与 Guide Hero 生产闭环。
 
-本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策单独授权 Collection Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又先后独立确认 Collection 与 Guide 的最终组合、个人账户/权利、五审、公开文案与 exact-canvas 生产链，以及两份 Terminology 和四条馆藏标题 locale。2026-09-01，Project owner 再次要求继续、批准并确认执行 CJK 字符集、隔离子集工具与 cmap 静态门禁；该新增授权仍不包含内容状态提升、服务/浏览器、M4-U5/U4B、Git 写入、Vercel 或发布。
+本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策单独授权 Collection Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又先后独立确认 Collection 与 Guide 的最终组合、个人账户/权利、五审、公开文案与 exact-canvas 生产链，以及两份 Terminology 和四条馆藏标题 locale。2026-09-01，Project owner 再次要求继续、批准并确认执行 CJK 字符集、隔离子集工具与 cmap 静态门禁；该批授权不包含内容状态提升、服务/浏览器、M4-U5/U4B、Git 写入、Vercel 或发布。同日 CJK 本地检查点完成后，Project owner 又单独确认下一步为 noindex M4-U5 候选预检并要求按计划继续；该后续授权只覆盖 Windows/local preview/browser、直接缺陷修复、匹配测试和证据同步。
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
-| 需求状态 | Project owner 阶段性通过；Collection 与 Guide Hero 生产闭环已批准 | 2026-08-30，Project owner 接受当前内容、署名/日期、模板排版与 CSS 无图 Hero，并选择 Collection Hero A、接受字体方案；2026-08-31 又分别批准两组 Hero 的最终组合、个人账户/权利、五审、公开文案、exact-canvas master 与正式资产链。正式字体页面效果仍未闭合 |
+| 需求状态 | Project owner 阶段性通过；Collection 与 Guide Hero 生产闭环已批准；M4-U5 Windows/local 部分预检已执行 | 2026-08-30，Project owner 接受当前内容、署名/日期、模板排版与 CSS 无图 Hero，并选择 Collection Hero A、接受字体方案；2026-08-31 又分别批准两组 Hero 的最终组合、个人账户/权利、五审、公开文案、exact-canvas master 与正式资产链。2026-09-01 正式页面三档矩阵和三个功能页反馈复看完成各自范围，但专用字体样张、故障/偏好/缩放/跨平台证据仍未闭合 |
 | 内容状态 | `editorial-review` | 两篇 Entry 有正文、80–120 词摘要、来源、Claim、`bilingual-approved` 术语与 fact-check 日期；四条馆藏标题为 `zh-Hant`，Collection 为 `editorial-review` |
 | 视觉状态 | Collection Hero v1 与 Guide Hero v1 均为 `approved/current` 并已绑定 | 两组资产各有独立 desktop/mobile master、repository source、production record 与 manifest。Collection 绑定 versionless `asset-chinese-underworld-hero-primary`，Guide 绑定 versionless `asset-chinese-underworld-guide-hero-primary`；两者仍保持 `editorial-review` |
-| 字体状态 | 英文与 CJK 静态候选已落库；浏览器验收阻断 | 4 份上游未修改英文 WOFF2 与 SC/TC × 400/500/600 六份派生 WOFF2 已接线；CJK 字符集、OFL/RFN/FONTLOG、精确 `unicode-range`、hash/name/cmap 与 HTML lang 门禁通过，正式字体页面/慢加载/跨平台浏览器验收未执行 |
+| 字体状态 | 英文与 CJK 静态候选已落库；Windows/local 正式页面部分命中；完整浏览器验收仍阻断 | 4 份上游未修改英文 WOFF2 与 SC/TC × 400/500/600 六份派生 WOFF2 已接线；CJK 字符集、OFL/RFN/FONTLOG、精确 `unicode-range`、hash/name/cmap 与 HTML lang 门禁通过。正式页面已观察英文角色字体、SC 400、TC 400 与 `font-synthesis: none`，但缺少 CJK 500/600/困难及 fallback probe 样张、慢/阻断加载和跨平台证据 |
 | 发布状态 | 未授权 | 0 published Entry / 0 published Collection；无 public dist、Vercel 项目或部署 |
 
 ## 1. 目标、不做范围与完成标准
@@ -115,7 +115,7 @@
 | --- | --- | --- | --- |
 | 英文 Display/UI | Geist Sans v1.7.2 | OFL 1.1；当前 OFL 版权头未声明 Reserved Font Name | 已从官方 release 落一份未修改 Roman variable WOFF2；全站只 preload 这一份 |
 | 英文正文 | Source Serif 4 v4.005R | OFL 1.1；Reserved Font Name 为 `Source` | 已落官方未修改 Roman 400/600 与 Italic 400；Entry 只 preload Roman 400，Semibold/Italic 按真实命中加载 |
-| 中文 Display/UI | Source Han Sans 2.005R SC/TC 候选 | OFL 1.1；Reserved Font Name 为 `Source` | 已从固定 2.005R commit 的 SC/TC variable TTF 分别生成 400/500/600 静态子集；修改版 primary family 使用 `Mythic Han Sans SC/TC`，不 preload，页面效果仍待浏览器判断 |
+| 中文 Display/UI | Source Han Sans 2.005R SC/TC 候选 | OFL 1.1；Reserved Font Name 为 `Source` | 已从固定 2.005R commit 的 SC/TC variable TTF 分别生成 400/500/600 静态子集；修改版 primary family 使用 `Mythic Han Sans SC/TC`，不 preload。Windows/local 页面已观察 SC/TC 400 命中，完整字重、困难字形、故障与跨平台效果仍待判断 |
 | 短中文引文 | Source Han Serif 2.003R SC | OFL 1.1；Reserved Font Name 为 `Source` | 首个纵切片没有需 serif 的中文原文，先批准家族方向但不落文件；首次真实使用时再生成 400/600 子集并命名 `Mythic Han Serif` |
 
 版本号是本次查询事实，不是自动升级策略。英文资产已固定到 `src/assets/fonts/font-assets.json` 的 release/tag、archive URL、SHA-256、文件 hash 与许可证；不得静默追随 latest。Source Serif 上游 release 未公布 archive digest，inventory 明确把该值标为本地计算，不冒充上游校验值。
@@ -151,9 +151,9 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 | Source 标题 locale | 教育部词条与四条已复核馆藏标题均为 `zh-Hant`；四条馆藏记录已获同一 reviewer 明确批准 | 保持精确 locale；内容图继续机器阻断未来 generic `zh` 被 ready lineage 引用 |
 | Collection Hero | Hero A v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
 | Guide Hero | Guide Hero v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
-| 字体 | 4 份英文 WOFF2 与 6 份 CJK 静态 WOFF2 已接线；CJK 字符/RFN/FONTLOG/`unicode-range`/cmap/HTML lang 静态门禁通过 | Project owner 另行授权服务/浏览器并判断正式英/CJK 字体页面、慢加载、真实命中与 Windows/macOS/iOS/Android fallback |
-| 页面 | review-only；此前 system fallback 的三档视口已通过；Collection 与 Guide 已静态接入各自 Hero | 在当前正式字体资产上对最终页面做 200% zoom、键盘、reduced motion、慢字体、图片失败、裁切和跨平台检查 |
-| 状态 | 0 published | 两篇 Entry 的 Hero、双语术语、Source 标题 locale 与 CJK 静态门禁已闭合；进入 `ready` 仍需完整 Claim/fact-check、正式字体页面与 noindex U5 候选预检。Collection 到 `ready` 仍只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
+| 字体 | 4 份英文 WOFF2 与 6 份 CJK 静态 WOFF2 已接线；CJK 静态门禁通过；Windows/local 正式页面已观察英文、SC 400、TC 400 与禁用字体合成 | 建立能自然覆盖 SC/TC 400/500/600、困难字形与故意 fallback probe 的 noindex 样张；补慢/阻断字体和 Windows/macOS/iOS/Android fallback，并由 Project owner 判断页面效果 |
+| 页面 | review-only；四条直达页及 Explore/Collections/About 已在 390/768/1440 完成作用域内的基础矩阵；功能页现有精确 review 候选架、收紧字号与首屏可见 About 四节，Project owner 已结束本轮复看 | 再补真实 200% zoom、Tab/Enter/Space、reduced motion、禁用 JS、慢字体、图片失败、性能与跨平台 |
+| 状态 | 0 published；仍为 `editorial-review` | review 索引可见性不构成状态提升。两篇 Entry 的 Hero、双语术语、Source 标题 locale 与 CJK 静态门禁已闭合；Windows/local 部分预检与功能页修正不支持进入 `ready`。仍须完整 Claim/fact-check、专用字体/故障/跨平台证据与完整 noindex U5 候选预检。Collection 到 `ready` 仍只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
 
 ## 7. Project owner 决策记录
 
@@ -182,6 +182,8 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 12. 批准 Guide 的 `in-house-original`、`Mythic China project owner (private individual)` 权利记录，以及 cultural、rights、visual、accessibility、language 五项审核；该记录不主张排他性、当然可版权性或绝对不侵权。
 13. 批准 Guide manifest 中的 informative alt、限定为当代 AI-assisted editorial interpretation 的 caption、`Mythic China Editorial` credit 与 AI disclosure；该确认不提升 Guide 状态，也不批准 M4-U5、public build、Git 写入或发布。
 14. Project owner 随后回复“全部批准”，并以 `Project owner (user-confirmed)` bilingual reviewer 身份批准 `阴间 / yīnjiān` 使用 “the underworld”、拒绝把 “hell” 或 `Diyu` 当自动同义词；批准 `钟馗 / Zhōng Kuí` 保留 “Zhong Kui” 并以 “the demon queller” 作角色释义；同时把 `十王圖`、`鍾馗元夜出遊圖`、`清早期竹雕鍾馗群鬼`、`任頤鍾馗像軸` 四条馆藏标题核定为 `zh-Hant`。该批准只闭合双语术语与 Source 标题 locale，不提升内容状态或授权 CJK 工具、服务/浏览器、Git、public build、Vercel、部署或发布。
+15. 2026-09-01，Project owner 在新一轮本地 preview 中确认总体页面观感，同时指出 Explore、Collections 缺少可点击内容、About 首屏过空和部分字号偏大，并要求先修改。该反馈授权 review 候选架、About 四节扩写、作用域排版及匹配验证；不批准修正后页面、不提升状态，也不授权依赖、Git、public/Vercel、部署或发布。
+16. 修正完成并由执行者通过完整自动门禁与三档浏览器矩阵复核后，Project owner 要求停止服务并询问下一开发单元。该决定关闭本轮功能页复看并授权停止 PID `20084`；不提升内容状态、不关闭完整 M4-U5，也不授权依赖、Git、public/Vercel、部署或发布。
 
 ## 8. 候选阶段验证与收口记录（历史快照）
 
@@ -217,6 +219,6 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 ## 11. 当前结论
 
 - Collection 与 Guide 已各自绑定独立的 approved/current Hero v1；Zhong Kui Entry 继续解析自己的 Hero v2。默认 review 页面不得跨 owner 借图，Guide 的视觉门禁不再是当前阻塞项。
-- 当前仍为 0 published Entry / 0 published Collection；两篇 Entry 与 Collection 均保持 `editorial-review`，双语术语、Source 标题 locale 与 CJK 字符/子集/RFN/cmap 静态门禁已闭合。下一人工/授权检查点是正式英/CJK 字体页面判断与 noindex M4-U5 候选预检。
-- CJK 批次最终完整 `pnpm run check` 通过 21 个测试文件/201 项测试、Astro check 69 文件零诊断，以及默认 review build 的 7 页、42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML、零客户端 JavaScript 和生产来源/构建后 CSS/实际 HTML/lang/cmap 输出门禁；HTML 语言检查使用 parse5 实际树并覆盖属性值伪 `lang`、隐式 `p`/`li` 闭合与 table foster parenting。新版生成器的两次独立重建与正式六文件 inventory 逐字节一致。本批未改视觉链，非默认视觉证据继续沿用 11 个 master 与 50 个响应式输出的最近通过结果。
-- 本次 CJK 批次只授权已记录的隔离 Python 工具、固定上游下载、直接 Node 构建期读取器和本地静态验证；不授权内容状态提升、服务/浏览器、Git 写入、public runner、Vercel 操作、部署或发布。
+- 当前仍为 0 published Entry / 0 published Collection；两篇 Entry 与 Collection 均保持 `editorial-review`。Explore/Collections 的 review-only 候选架只改善本地评审入口，不改变 published-only release 投影或内容状态。下一工程单元是专用字体样张、真实键盘/200%/偏好与故障模式、性能和跨平台 fallback。
+- 最新完整 `pnpm run check` 通过 22 个测试文件/207 项测试、Astro check 70 文件零诊断，以及默认 review build 的 7 页、42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML、零客户端 JavaScript 和生产来源/构建后 CSS/实际 HTML/lang/cmap/review candidate 输出门禁。四条直达页的既有矩阵与三个功能页 × 三档新矩阵通过各自基础 noindex、溢出、字体 loaded、零脚本和 44px 目标检查；非默认视觉证据继续沿用 11 个 master 与 50 个响应式输出。
+- 本次功能页修正授权不包含内容状态提升、依赖、Git 写入、public runner、Vercel 操作、部署或发布；Project owner 授权停止服务后，PID `20084` 已结束且端口 4321 无监听。详细执行证据与未验证项见 [`DEV_WORKFLOW.md`](../../DEV_WORKFLOW.md) 和 [`003-pages-exploration-seo.md` 的 12.10 节](003-pages-exploration-seo.md#1210-review-索引候选架与功能页排版修正)。

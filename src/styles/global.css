@@ -551,6 +551,7 @@ h3 {
 .collection-hero__copy {
   position: relative;
   z-index: 1;
+  grid-row: 1;
   grid-column: 1 / span 7;
 }
 
@@ -708,12 +709,14 @@ h3 {
 .collection-browse a,
 .related-entries a,
 .editorial-index a,
+.review-preview-list a,
 .source-list a {
   text-decoration-color: color-mix(in srgb, currentColor 34%, transparent);
 }
 
 .guided-path h3 a,
-.editorial-index h2 a {
+.editorial-index h2 a,
+.review-preview-list h3 a {
   display: inline-flex;
   min-width: 2.75rem;
   min-height: 2.75rem;
@@ -998,6 +1001,11 @@ h3 {
 }
 
 /* Explore, Collections index and About. */
+.index-hero h1,
+.about-hero h1 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+}
+
 .index-hero {
   display: grid;
   border-block-end: 1px solid var(--rule);
@@ -1027,7 +1035,7 @@ h3 {
 }
 
 .index-results {
-  min-height: 24rem;
+  min-height: 0;
   padding-block-start: var(--space-12);
 }
 
@@ -1046,6 +1054,64 @@ h3 {
 .honest-empty-state p {
   grid-column: 8 / -1;
   max-width: 34rem;
+  color: var(--muted);
+}
+
+.honest-empty-state h2,
+.about-method h2,
+.review-preview__heading h2 {
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+}
+
+.review-preview {
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.review-preview__heading {
+  max-width: 48rem;
+  margin-block-end: var(--space-8);
+}
+
+.review-preview__heading p {
+  max-width: 42rem;
+  margin-block-start: var(--space-4);
+  color: var(--muted);
+  font-family: var(--font-story);
+  font-size: 1.05rem;
+}
+
+.review-preview__heading strong {
+  color: var(--ink);
+}
+
+.review-preview-list {
+  padding: 0;
+  border-block-start: 1px solid var(--rule);
+  list-style: none;
+}
+
+.review-preview-list li {
+  display: grid;
+  padding-block: var(--space-8);
+  border-block-end: 1px solid var(--rule);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.review-preview-list__type {
+  grid-column: 1 / span 2;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.review-preview-list h3 {
+  grid-column: 3 / span 5;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+.review-preview-list__summary {
+  grid-column: 9 / -1;
   color: var(--muted);
 }
 
@@ -1081,7 +1147,7 @@ h3 {
 
 .about-hero {
   display: grid;
-  min-height: min(36rem, calc(100dvh - 4.5rem));
+  min-height: min(28rem, calc(100dvh - 4.5rem));
   border-block-end: 1px solid var(--rule);
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--space-4) var(--space-8);
@@ -1096,7 +1162,7 @@ h3 {
 .about-hero h1 {
   grid-row: 2;
   grid-column: 3 / span 8;
-  max-width: 14ch;
+  max-width: 18ch;
 }
 
 .about-hero > p:last-child {
@@ -1114,7 +1180,7 @@ h3 {
 }
 
 .about-method section {
-  min-height: 20rem;
+  min-height: 18rem;
   padding: var(--space-8);
   border-block-end: 1px solid var(--rule);
 }
@@ -1129,15 +1195,19 @@ h3 {
 }
 
 .about-method h2 {
-  margin-block-start: var(--space-8);
+  margin-block-start: 0;
 }
 
-.about-method section > p:last-child {
+.about-method section > p {
   max-width: 42rem;
   margin-block-start: var(--space-6);
   color: var(--muted);
   font-family: var(--font-story);
   font-size: 1.08rem;
+}
+
+.about-method section > p + p {
+  margin-block-start: var(--space-4);
 }
 
 /* Responsive layout. */
@@ -1160,6 +1230,10 @@ h3 {
 
   .collection-hero__surface {
     grid-column: 7 / -1;
+  }
+
+  .collection-hero__figure .visual-note {
+    max-width: 24rem;
   }
 
   .entry-hero__identity {
@@ -1253,8 +1327,9 @@ h3 {
   .index-hero,
   .honest-empty-state,
   .editorial-index li,
+  .review-preview-list li,
   .about-hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .collection-hero__inner {
@@ -1285,6 +1360,9 @@ h3 {
   .editorial-index li > p:first-child,
   .editorial-index h2,
   .editorial-index li > p:last-child,
+  .review-preview-list__type,
+  .review-preview-list h3,
+  .review-preview-list__summary,
   .about-hero .section-context,
   .about-hero h1,
   .about-hero > p:last-child {
@@ -1301,6 +1379,7 @@ h3 {
   }
 
   .collection-hero__figure .manifest-hero-picture {
+    height: auto;
     min-height: 0;
     aspect-ratio: 4 / 5;
   }
@@ -1415,6 +1494,11 @@ h3 {
   }
 
   .honest-empty-state {
+    gap: var(--space-4);
+  }
+
+  .review-preview-list li {
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-4);
   }
 

@@ -33,11 +33,20 @@ export interface ReviewProjection<
   publishedCollections: TCollection[];
 }
 
+export interface ReviewIndexPreview<
+  TEntry extends EntryRecordLike,
+  TCollection extends CollectionRecordLike,
+> {
+  collection: TCollection;
+  entries: TEntry[];
+}
+
 export class ReviewProjectionError extends Error {
   readonly code:
     | "missing-home-collection"
     | "missing-home-entry"
     | "invalid-home-membership"
+    | "ineligible-index-preview"
     | "missing-collection-entry"
     | "missing-featured-entry"
     | "invalid-published-date";
@@ -139,6 +148,31 @@ export function getReviewCollectionEntries<TEntry extends EntryRecordLike>(
     }
     return entry;
   });
+}
+
+export function getReviewIndexPreview<
+  TEntry extends EntryRecordLike,
+  TCollection extends CollectionRecordLike,
+>(
+  projection: ReviewProjection<TEntry, TCollection>,
+): ReviewIndexPreview<TEntry, TCollection> {
+  const { collection } = getReviewHomeSlice(projection);
+  const entries = getReviewCollectionEntries(
+    collection.data.entryIds,
+    projection.entries,
+  );
+
+  if (
+    collection.data.status === "published" ||
+    entries.some((entry) => entry.data.status === "published")
+  ) {
+    throw new ReviewProjectionError(
+      "ineligible-index-preview",
+      "Review index previews must contain only not-published records.",
+    );
+  }
+
+  return { collection, entries };
 }
 
 export function getReviewFeaturedEntry<TEntry extends EntryRecordLike>(

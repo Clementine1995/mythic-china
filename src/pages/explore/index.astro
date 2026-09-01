@@ -2,11 +2,16 @@
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { readBuildIntent } from "../../site/build-intent";
-import { createReviewProjection } from "../../site/review-projection";
+import {
+  createReviewProjection,
+  getReviewIndexPreview,
+} from "../../site/review-projection";
 
 readBuildIntent();
 const graph = await loadValidatedContentGraph();
-const { publishedEntries } = createReviewProjection(graph);
+const projection = createReviewProjection(graph);
+const { publishedEntries } = projection;
+const { entries: reviewEntries } = getReviewIndexPreview(projection);
 ---
 
 <SiteLayout
@@ -17,10 +22,45 @@ const { publishedEntries } = createReviewProjection(graph);
     <p class="section-context">Explore</p>
     <h1>Stories and traditions</h1>
     <p>
-      Browse published entries across myths, legends, figures, realms, and
-      cultural traditions.
+      Browse stories and cultural guides. Current editorial candidates are shown
+      separately from the published index.
     </p>
   </header>
+
+  <section
+    class="review-preview page-shell section-space"
+    aria-labelledby="entry-review-preview-heading"
+    data-review-preview="entries"
+  >
+    <header class="review-preview__heading">
+      <h2 id="entry-review-preview-heading">Local review preview</h2>
+      <p>
+        <strong>Not published.</strong> These entries remain under editorial review
+        and may change before release.
+      </p>
+    </header>
+
+    <ol class="review-preview-list">
+      {
+        reviewEntries.map((entry) => (
+          <li>
+            <p class="review-preview-list__type">{entry.data.entryType}</p>
+            <h3>
+              <a
+                href={`/explore/${entry.data.slug}/`}
+                data-review-candidate="entry"
+              >
+                {entry.data.title}
+              </a>
+            </h3>
+            {entry.data.summary && (
+              <p class="review-preview-list__summary">{entry.data.summary}</p>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </section>
 
   <section class="index-results page-shell section-space" aria-live="polite">
     {

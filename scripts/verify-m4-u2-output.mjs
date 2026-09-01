@@ -360,7 +360,8 @@ assertCjkCssFontFaces(
 );
 assertRenderedCjkPolicy(htmlByPath, cjkCharacterPolicy);
 
-// Focal-route checks keep draft exceptions out of published-only indexes.
+// Focal-route checks keep release lists empty while exposing only the fixed
+// review slice through an explicitly labeled, non-published preview.
 const zhongKuiHtml = htmlByPath.get("explore/zhong-kui/index.html");
 const collectionHtml = htmlByPath.get(
   "collections/chinese-underworld/index.html",
@@ -380,12 +381,6 @@ if (
   aboutHtml === undefined
 ) {
   throw new Error("M4 review focal page output is incomplete.");
-}
-if (
-  exploreIndexHtml.includes("zhong-kui") ||
-  collectionsIndexHtml.includes("chinese-underworld")
-) {
-  throw new Error("Review index output leaks an ineligible visual slice.");
 }
 if (
   !guideHtml.includes(
@@ -421,6 +416,83 @@ if (
   collectionsIndexHtml.includes('class="editorial-index"')
 ) {
   throw new Error("Collections must render the honest empty release state.");
+}
+
+function collectReviewPreviewKinds(html) {
+  return (html.match(/<section\b[^>]*>/giu) ?? []).flatMap((tag) => {
+    const kind = readHtmlAttribute(tag, "data-review-preview");
+    return kind === null ? [] : [kind];
+  });
+}
+
+function collectReviewCandidateHrefs(html, candidateKind) {
+  return (html.match(/<a\b[^>]*>/giu) ?? [])
+    .filter(
+      (tag) =>
+        readHtmlAttribute(tag, "data-review-candidate") === candidateKind,
+    )
+    .map((tag) => readHtmlAttribute(tag, "href"));
+}
+
+const explorePreviewKinds = collectReviewPreviewKinds(exploreIndexHtml);
+const collectionsPreviewKinds = collectReviewPreviewKinds(collectionsIndexHtml);
+const exploreEntryCandidates = collectReviewCandidateHrefs(
+  exploreIndexHtml,
+  "entry",
+);
+const exploreCollectionCandidates = collectReviewCandidateHrefs(
+  exploreIndexHtml,
+  "collection",
+);
+const collectionEntryCandidates = collectReviewCandidateHrefs(
+  collectionsIndexHtml,
+  "entry",
+);
+const collectionCandidates = collectReviewCandidateHrefs(
+  collectionsIndexHtml,
+  "collection",
+);
+
+if (
+  JSON.stringify(explorePreviewKinds) !== JSON.stringify(["entries"]) ||
+  !exploreIndexHtml.includes("Local review preview") ||
+  !exploreIndexHtml.includes("Not published") ||
+  JSON.stringify(exploreEntryCandidates) !==
+    JSON.stringify([
+      "/explore/chinese-underworld-guide/",
+      "/explore/zhong-kui/",
+    ]) ||
+  exploreCollectionCandidates.length !== 0
+) {
+  throw new Error(
+    "Explore must expose exactly the fixed, labeled review Entry preview.",
+  );
+}
+if (
+  JSON.stringify(collectionsPreviewKinds) !== JSON.stringify(["collections"]) ||
+  !collectionsIndexHtml.includes("Local review preview") ||
+  !collectionsIndexHtml.includes("Not published") ||
+  JSON.stringify(collectionCandidates) !==
+    JSON.stringify(["/collections/chinese-underworld/"]) ||
+  collectionEntryCandidates.length !== 0
+) {
+  throw new Error(
+    "Collections must expose exactly the fixed, labeled review Collection preview.",
+  );
+}
+for (const [route, html] of [
+  ["/", homeHtml],
+  ["/about/", aboutHtml],
+  ["/collections/chinese-underworld/", collectionHtml],
+  ["/explore/chinese-underworld-guide/", guideHtml],
+  ["/explore/zhong-kui/", zhongKuiHtml],
+]) {
+  if (
+    html.includes("data-review-preview") ||
+    html.includes("data-review-candidate")
+  ) {
+    throw new Error(`${route} must not render a review index preview.`);
+  }
 }
 for (const heading of [
   "Scope",
