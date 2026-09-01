@@ -2,7 +2,7 @@ sourceId: source-met-zhong-kui-bamboo-2008-636
 sourceType: museum-or-library
 title: Demon queller Zhong Kui with demons
 titleZh: 清早期竹雕鍾馗群鬼
-titleZhLang: zh
+titleZhLang: zh-Hant
 authorOrOrganization: The Metropolitan Museum of Art
 publicationOrEdition: Online collection record
 editionBasisOrObjectId: Object number 2008.636
@@ -15,4 +15,4 @@ translator: null
 pageOrSection: Overview and object information
 rightsStatus: public-domain
 rightsUrl: https://www.metmuseum.org/policies/image-resources
-notes: The record supports this object's demon-quelling group and figure hierarchy; the bamboo medium does not establish clothing colors or a standard composition. The visible Chinese object line containing 清早期 竹雕鍾馗群鬼 was rechecked on 2026-08-31; spacing is normalized in titleZh and orthographic locale remains generic zh pending bilingual review.
+notes: The record supports this object's demon-quelling group and figure hierarchy; the bamboo medium does not establish clothing colors or a standard composition. The visible Chinese object line containing 清早期 竹雕鍾馗群鬼 was rechecked on 2026-08-31, and spacing is normalized in titleZh. Project owner (user-confirmed), acting as the bilingual reviewer, approved titleZhLang as zh-Hant on 2026-08-31.

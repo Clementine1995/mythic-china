@@ -4,12 +4,12 @@
 
 本文负责：把 *The Chinese Underworld* 的首个 Collection、首发 Guide、Featured Entry、Collection Hero 方向和生产字体方案推进到 Project owner 可人工判断的候选检查点，并追溯其后经单独确认完成的 Collection 与 Guide Hero 生产闭环。
 
-本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策单独授权 Collection Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又先后独立确认 Collection 与 Guide 的最终组合、个人账户/权利、五审、公开文案与 exact-canvas 生产链。当前授权仍不扩展到 CJK 工具依赖、内容状态提升、服务/浏览器、Git 写入、Vercel 或发布。
+本文初始候选检查点不负责：字体下载或落库、字体子集实际生成、图片生成或馆藏图下载、visual manifest/production record、内容 `ready/published`、public 构建、浏览器服务、Vercel 项目、部署或发布。2026-08-30 的后续 Project owner 决策单独授权 Collection Hero A 待审候选生成、上游英文 WOFF2 落库与匹配风险的本地验证；2026-08-31 又先后独立确认 Collection 与 Guide 的最终组合、个人账户/权利、五审、公开文案与 exact-canvas 生产链，以及两份 Terminology 和四条馆藏标题 locale。当前授权仍不扩展到 CJK 工具依赖、内容状态提升、服务/浏览器、Git 写入、Vercel 或发布。
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | Project owner 阶段性通过；Collection 与 Guide Hero 生产闭环已批准 | 2026-08-30，Project owner 接受当前内容、署名/日期、模板排版与 CSS 无图 Hero，并选择 Collection Hero A、接受字体方案；2026-08-31 又分别批准两组 Hero 的最终组合、个人账户/权利、五审、公开文案、exact-canvas master 与正式资产链。正式字体页面效果仍未闭合 |
-| 内容状态 | `editorial-review` | 两篇 Entry 有正文、80–120 词摘要、来源、Claim、source-checked 术语与 fact-check 日期；Collection 为 `editorial-review` |
+| 内容状态 | `editorial-review` | 两篇 Entry 有正文、80–120 词摘要、来源、Claim、`bilingual-approved` 术语与 fact-check 日期；四条馆藏标题为 `zh-Hant`，Collection 为 `editorial-review` |
 | 视觉状态 | Collection Hero v1 与 Guide Hero v1 均为 `approved/current` 并已绑定 | 两组资产各有独立 desktop/mobile master、repository source、production record 与 manifest。Collection 绑定 versionless `asset-chinese-underworld-hero-primary`，Guide 绑定 versionless `asset-chinese-underworld-guide-hero-primary`；两者仍保持 `editorial-review` |
 | 字体状态 | 英文候选已落库；CJK 阻断 | 4 份上游未修改 WOFF2、OFL、hash inventory、稳定 alias/token 和分层 preload 已接线；CJK 无子集文件，正式字体浏览器验收未执行 |
 | 发布状态 | 未授权 | 0 published Entry / 0 published Collection；无 public dist、Vercel 项目或部署 |
@@ -37,7 +37,7 @@
 
 - 两篇 Entry 都通过 Content Layer editorial-review 条件和关系图校验。
 - 每个正文事实可由正文附近链接和结构化 Claim 回到真实来源；无“AI 补齐”的文化事实。
-- Terminology 只到 `source-checked`，等待双语人工批准。
+- Terminology 在初始候选检查点只到 `source-checked`；2026-08-31 后续已获双语人工批准，见第 7 节。
 - Collection Hero 有一份已批准方向、但未批准任何成图的 brief；verified/inferred/invented、权利与排除项分开。
 - Collection 模板在该检查点只具备未来独立 approved Hero 的插槽；当时仍显示无图候选，不借用 Zhong Kui Hero。
 - 页面可见 `By Mythic China Editorial` 与 fact-check 日期，但没有 publication date。
@@ -123,7 +123,7 @@
 ### 5.2 子集、命名与替换缝
 
 1. 字符输入只能来自 Project owner 已批准进入 public candidate 的真实内容与固定 UI 字符；研究笔记、废稿和未来假想词不进入集合。
-2. CJK 子集必须按已核定的 `zh-Hans` / `zh-Hant` 分开字符表，覆盖真实内容、所需中文标点和显式 fallback 测试串；构建门禁比较渲染文本、批准字符表与 font cmap，缺字即失败。`titleZhLang` 与 Source `titleZh` 成对；四条馆藏中文字段已于 2026-08-31 回到馆方页面复核并记录原文，但页面字形不能替代具名双语 reviewer 的 script-locale 判断，因此继续保存为 generic `zh`。内容图机器阻断引用它们的 Entry 提升到 `ready | published | archived`。
+2. CJK 子集必须按已核定的 `zh-Hans` / `zh-Hant` 分开字符表，覆盖真实内容、所需中文标点和显式 fallback 测试串；构建门禁比较渲染文本、批准字符表与 font cmap，缺字即失败。`titleZhLang` 与 Source `titleZh` 成对；四条馆藏中文字段于 2026-08-31 回到馆方页面复核并记录原文，随后由 `Project owner (user-confirmed)` bilingual reviewer 核定为 `zh-Hant`。这是显式审校结论，不是页面字形自动推断；内容图继续阻断未来 generic `zh` 记录进入 `ready | published | archived` lineage。
 3. 生成子集、实例化 weight 或转换格式均视为修改。由于 Adobe 的 OFL 声明保留 `Source`，修改版 primary family 不使用 `Source` 名称；许可证、版权、原始上游、修改步骤和生成日期写入 `FONTLOG`。
 4. Geist 和 Source Serif 优先使用上游直接提供的 WOFF2，不做不必要子集；若后续性能要求必须修改，也要重新评估 RFN、改名和 FONTLOG。
 5. 每个实际分发字体随仓库保存适用 OFL 全文与版权声明；CSS 使用 `font-display: swap`、`font-synthesis: none`，`size-adjust`/metrics override 只在实测后填写。
@@ -147,13 +147,13 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 | --- | --- | --- |
 | 内容编辑 | 两篇为 `editorial-review` | Project owner 逐篇接受标题、开头、摘要、正文、来源边界与 Collection 关系 |
 | 事实核查 | 当前来源与 Claim 已本地闭合 | 人工核对每个正文主张/locator；任何新增事实先新增来源，不让 AI 补空 |
-| 双语术语 | 两份 Terminology 为 `source-checked` | 具名 bilingual reviewer 把适用记录提升为 `bilingual-approved` |
-| Source 标题 locale | 教育部词条为 `zh-Hant`；四条馆藏页的可见中文字段已复核，但尚无具名双语 script-locale 结论，继续明确为 generic `zh` | 经双语审校写入精确 `zh-Hans | zh-Hant`；内容图已机器阻断 generic `zh` 被 ready lineage 引用 |
+| 双语术语 | 两份 Terminology 已由 `Project owner (user-confirmed)` bilingual reviewer 批准为 `bilingual-approved` | 保持当前术语、首次释义、拒绝项与来源边界；实质改写须重审 |
+| Source 标题 locale | 教育部词条与四条已复核馆藏标题均为 `zh-Hant`；四条馆藏记录已获同一 reviewer 明确批准 | 保持精确 locale；内容图继续机器阻断未来 generic `zh` 被 ready lineage 引用 |
 | Collection Hero | Hero A v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
 | Guide Hero | Guide Hero v1 已完成权利/五审、exact-canvas master、production record、approved/current manifest 与稳定 Hero ID 绑定 | 保持现有资产谱系；任何图像实质修改必须建立新版本并重跑匹配审核。页面浏览器表现仍由 M4-U5 预检判断 |
 | 字体 | 4 份英文 WOFF2、OFL/hash、alias/token 与 preload 已接线；CJK 仍为 system fallback | 完整工程门禁通过后由 Project owner 看正式字体页面；CJK 仍需获准工具、Hans/Hant 来源/字符表、cmap 与跨平台浏览器门禁 |
-| 页面 | review-only；系统 fallback 的三档视口已通过；Collection 与 Guide 已静态接入各自 Hero | 完成双语/CJK/字体剩余门禁后，再对最终页面做 200% zoom、键盘、reduced motion、慢字体、图片失败、裁切和跨平台检查 |
-| 状态 | 0 published | 两篇 Entry 的 Hero 门禁已闭合；进入 `ready` 仍需完整 Claim/fact-check、双语术语、Source 标题 locale 与 noindex U5 候选预检。Collection 到 `ready` 仍只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
+| 页面 | review-only；系统 fallback 的三档视口已通过；Collection 与 Guide 已静态接入各自 Hero | 完成 CJK/字体剩余门禁后，再对最终页面做 200% zoom、键盘、reduced motion、慢字体、图片失败、裁切和跨平台检查 |
+| 状态 | 0 published | 两篇 Entry 的 Hero、双语术语与 Source 标题 locale 门禁已闭合；进入 `ready` 仍需完整 Claim/fact-check、CJK/正式字体与 noindex U5 候选预检。Collection 到 `ready` 仍只能引用 ready/published Entry。`published` 只在 M6 完整 6 篇 Entry / 至少 2 个 Collection 本地 inventory 上由 Project owner 作出进入 public artifact 的决定，不等于部署；M7 负责经预览验收后的生产发布与发布后基线 |
 
 ## 7. Project owner 决策记录
 
@@ -181,6 +181,7 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 11. 确认 Guide 生产同样使用个人、合法控制、非组织管理且不受雇主、客户或组织限制的 OpenAI 账户；仅向 ImageGen 提供项目生成候选，没有上传馆藏、历史图像或未经授权的第三方图片，并授权 Mythic China 保存、编辑和公开展示输出。
 12. 批准 Guide 的 `in-house-original`、`Mythic China project owner (private individual)` 权利记录，以及 cultural、rights、visual、accessibility、language 五项审核；该记录不主张排他性、当然可版权性或绝对不侵权。
 13. 批准 Guide manifest 中的 informative alt、限定为当代 AI-assisted editorial interpretation 的 caption、`Mythic China Editorial` credit 与 AI disclosure；该确认不提升 Guide 状态，也不批准 M4-U5、public build、Git 写入或发布。
+14. Project owner 随后回复“全部批准”，并以 `Project owner (user-confirmed)` bilingual reviewer 身份批准 `阴间 / yīnjiān` 使用 “the underworld”、拒绝把 “hell” 或 `Diyu` 当自动同义词；批准 `钟馗 / Zhōng Kuí` 保留 “Zhong Kui” 并以 “the demon queller” 作角色释义；同时把 `十王圖`、`鍾馗元夜出遊圖`、`清早期竹雕鍾馗群鬼`、`任頤鍾馗像軸` 四条馆藏标题核定为 `zh-Hant`。该批准只闭合双语术语与 Source 标题 locale，不提升内容状态或授权 CJK 工具、服务/浏览器、Git、public build、Vercel、部署或发布。
 
 ## 8. 候选阶段验证与收口记录（历史快照）
 
@@ -216,5 +217,5 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 ## 11. 当前结论
 
 - Collection 与 Guide 已各自绑定独立的 approved/current Hero v1；Zhong Kui Entry 继续解析自己的 Hero v2。默认 review 页面不得跨 owner 借图，Guide 的视觉门禁不再是当前阻塞项。
-- 当前仍为 0 published Entry / 0 published Collection；两篇 Entry 与 Collection 均保持 `editorial-review`。下一人工/授权检查点是双语术语、Source 标题 locale、CJK/正式字体页面判断与 noindex M4-U5 候选预检。
+- 当前仍为 0 published Entry / 0 published Collection；两篇 Entry 与 Collection 均保持 `editorial-review`，双语术语与 Source 标题 locale 已闭合。下一人工/授权检查点是 CJK/正式字体页面判断与 noindex M4-U5 候选预检。
 - 本次批准不授权内容状态提升、依赖调整、服务/浏览器、Git 写入、public runner、Vercel 操作、部署或发布。

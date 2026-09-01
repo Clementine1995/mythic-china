@@ -2,7 +2,7 @@ sourceId: source-met-zhong-kui-ren-yi-2002-208-2
 sourceType: museum-or-library
 title: Zhong Kui
 titleZh: 任頤鍾馗像軸
-titleZhLang: zh
+titleZhLang: zh-Hant
 authorOrOrganization: Ren Yi; The Metropolitan Museum of Art
 publicationOrEdition: Online collection record
 editionBasisOrObjectId: Object number 2002.208.2
@@ -15,4 +15,4 @@ translator: null
 pageOrSection: Overview and object information
 rightsStatus: public-domain
 rightsUrl: https://www.metmuseum.org/policies/image-resources
-notes: The record supports a late-Qing scholar portrayal with a sheathed sword; its political interpretation and exact pose are specific to this work. The visible Chinese object line containing 任頤 鍾馗像 軸 was rechecked on 2026-08-31; spacing is normalized in titleZh and orthographic locale remains generic zh pending bilingual review.
+notes: The record supports a late-Qing scholar portrayal with a sheathed sword; its political interpretation and exact pose are specific to this work. The visible Chinese object line containing 任頤 鍾馗像 軸 was rechecked on 2026-08-31, and spacing is normalized in titleZh. Project owner (user-confirmed), acting as the bilingual reviewer, approved titleZhLang as zh-Hant on 2026-08-31.

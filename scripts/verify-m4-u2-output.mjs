@@ -356,12 +356,23 @@ if (
     '<p class="source-list__chinese-title" lang="zh-Hant">陰間</p>',
   ) ||
   !guideHtml.includes(
-    '<p class="source-list__chinese-title" lang="zh">十王圖</p>',
+    '<p class="source-list__chinese-title" lang="zh-Hant">十王圖</p>',
   )
 ) {
   throw new Error(
-    "Guide Source titles must preserve verified locale and keep unverified script generic.",
+    "Guide Source titles must preserve their approved orthographic locale.",
   );
+}
+for (const title of ["鍾馗元夜出遊圖", "清早期竹雕鍾馗群鬼", "任頤鍾馗像軸"]) {
+  if (
+    !zhongKuiHtml.includes(
+      `<p class="source-list__chinese-title" lang="zh-Hant">${title}</p>`,
+    )
+  ) {
+    throw new Error(
+      `Zhong Kui Source title must preserve approved zh-Hant locale: ${title}`,
+    );
+  }
 }
 if (
   !exploreIndexHtml.includes("No published entries yet") ||

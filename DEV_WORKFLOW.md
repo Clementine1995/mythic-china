@@ -614,6 +614,16 @@ Project owner 要求继续推进 M4 并把控进度；本批只沿已知 Source 
 - 固定 Node/Corepack 下完整 `pnpm run check` 通过：Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断、7 页 review build、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。
 - 本批不修改 visual master、manifest、repository source 或字体文件，因此未重跑非默认 `visual:build:check`；没有安装、升级或移除依赖，没有启动服务/浏览器，没有改动状态或精确 locale，也没有执行 Vercel 操作、部署或发布。
 
+### 2026-08-31 双语术语与馆藏标题 locale 批准
+
+Project owner 回复“全部批准”，并明确以 `Project owner (user-confirmed)` bilingual reviewer 身份承担本轮审校。该批准只闭合首个纵切片的双语术语与四条已复核馆藏标题 locale，不授权内容状态提升、CJK 工具/依赖、服务/浏览器、M4-U5、M4-U4B、Vercel、部署或发布。
+
+- `阴间 / yīnjiān` 保持 “the underworld”，拒绝把 “hell” 或 `Diyu` 当自动同义词；`钟馗 / Zhōng Kuí` 保持 “Zhong Kui”，以 “the demon queller” 作角色释义。两份 Terminology 均提升为 `bilingual-approved`。
+- `十王圖`、`鍾馗元夜出遊圖`、`清早期竹雕鍾馗群鬼` 与 `任頤鍾馗像軸` 四份 Source 均从 generic `zh` 改为 `zh-Hant`，并在各自 notes 记录 reviewer 身份与批准日期。未来未审校 Source 仍须保留 generic `zh`，既有内容图 fail-closed 合同不放宽。
+- 输出验证器同时锁定 Guide 的 `陰間`/`十王圖` 与 Zhong Kui 页三条馆藏标题均以 `lang="zh-Hant"` 渲染，避免只修改内容记录而遗漏页面语义。
+- 固定 Node/Corepack 下完整 `pnpm run check` 通过：Prettier、ESLint、20 个测试文件/196 项测试、Astro check 67 文件零诊断、7 页 review build、42 个 Hero 图片、4 个 WOFF2、零 XML、零客户端 JavaScript 输出门禁。
+- 本批没有修改 visual master、manifest、repository source 或字体文件，因此未重跑非默认 `visual:build:check`；没有安装、升级或移除依赖，没有启动服务/浏览器，没有提升 Entry/Collection 状态，也没有执行 Git 写入、Vercel 操作、部署或发布。
+
 ## 数据库、外部服务与真实写入口
 
 当前均不适用。项目没有数据库、表单 endpoint、邮件、分析、支付或广告配置。未来接入任一能力时必须先建立需求文档，并在本文件增加：
@@ -627,7 +637,7 @@ Project owner 要求继续推进 M4 并把控进度；本批只沿已知 Source 
 
 ## 发布
 
-Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、分别由 Collection 与 Guide 静态消费的两套 approved/current 自有 Hero、4 份英文 WOFF2 与可见 byline/fact-check 日期；双语术语、Source 标题 locale、CJK、正式字体页面效果和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
+Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。首个纵切片现有两篇 `editorial-review` Entry、一个 `editorial-review` Collection、分别由 Collection 与 Guide 静态消费的两套 approved/current 自有 Hero、4 份英文 WOFF2 与可见 byline/fact-check 日期；双语术语与 Source 标题 locale 已闭合，CJK、正式字体页面效果和 M4-U5 预检仍未闭合。仓库已经存在 published-only release projection 纯函数，但真实 published inventory 仍为 0/0，也没有 public runner、路由/endpoint 接线或 deployable public output。首个纵切片先在 noindex 直达页做 U5 候选预检并进入 `ready`；M5/M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定后，必须在真实非空索引上最终关闭 U5，再确认 public origin 并进入 U4B。U4B 的一个 Entry + 一个 Collection 只是 public 构建纯技术下限，不授权远端预览；实际预览候选为 6 篇 Entry / 至少 2 个 Collection，M7 才可进入生产发布与发布后基线。没有自有域名时，可在 U4B 前单独授权建立项目身份，以确认稳定 production alias/hostname；这不授权预览或部署。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令。U4B 只生成包含 source revision、dirty flag、lock/source digest、public intent 和 verifier 结果的本地 verification receipt，dirty source 一律 nondeployable；M6 远端预览才把 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`，复用不可变制品时还须记录完整 artifact inventory/digest。不得上传包含 non-published 路由的 review `dist/`。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 

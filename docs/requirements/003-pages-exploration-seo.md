@@ -41,19 +41,19 @@
 ## 1. 结论与开发就绪判断
 
 - 一句话结论：先冻结发布投影和首个真实纵切片，再以 noindex 的本地评审页面关闭共享表现层；不得一次铺开批量内容或把资产批准写成页面批准。
-- 是否可以进入下一工程单元：2026-08-31 授权的治理、机器门禁加固、Collection Hero 与 Guide Hero 生产闭环已完成；下一步是关闭 004 剩余的双语语言与字体人工阻塞，再另行授权 noindex U5 候选预检。M4-U4B、再次服务控制、依赖、Git 写入、Vercel 项目操作、部署或发布仍须分别授权。
+- 是否可以进入下一工程单元：2026-08-31 授权的治理、机器门禁加固、Collection Hero 与 Guide Hero 生产闭环已完成；004 的双语术语与 Source 标题 locale 已获批准，下一步是关闭 CJK 与正式字体人工阻塞，再另行授权 noindex U5 候选预检。M4-U4B、再次服务控制、依赖、Git 写入、Vercel 项目操作、部署或发布仍须分别授权。
 - U3 进入条件已满足：Project owner 单独授权推荐的纯 release 投影范围、继续拒绝 public build，并确认沿用现有 About 四节静态文案；写入前源身份与干净工作树已复核。
 - M4-U4A 进入条件已满足：Project owner 选择 Vercel 作为未来静态托管目标，确认 publisher=`Mythic China / Organization`、author=`Mythic China Editorial / Organization`、身份页 `/about/` 和当前不输出 `og:image`，并授权不含部署的推荐本地纯基础设施范围。
 - M4-U4A 纯函数/fixture 当时在稳定 Vercel production alias/hostname、真实 published inventory、Collection 专属 Hero、完整钟馗正文和正式字体均缺失时安全完成；后续 004 变化不把纯 builder 变成 deployable artifact，review 页面继续不可发布、不可索引。
-- 阻塞 M4 页面级最终验收的事项：英文字体浏览器效果、CJK 子集/locale/cmap、键盘/缩放/媒体偏好/图片失败/性能/跨平台 fallback 与双语术语。
+- 阻塞 M4 页面级最终验收的事项：英文字体浏览器效果、CJK 子集/cmap、键盘/缩放/媒体偏好/图片失败/性能与跨平台 fallback；双语术语和 Source 标题 locale 已闭合。
 - 阻塞 indexable SEO 输出的事项：真实且明确配置的站点 origin；至少一个 published Entry 与一个 published Collection；实际页面的 M4-U5 indexability/最终验收。Collection 专属 Hero 与既有模板消费链已闭合；当前采用 text-only OG，因此用途匹配 OG 图片不是阻塞项。
-- 推荐工程顺序：完成双语术语、Source 标题 locale、英文字体页面判断与 CJK 剩余门禁 → 在 non-published noindex 直达页完成 M4-U5 候选预检并进入 `ready` → M5 外部交互边界 → M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产及 Project owner 的 `published` 决定 → 在真实非空索引和最终页面上关闭 M4-U5 → 确认真实 HTTPS origin → M4-U4B 本地 public 构建能力。没有自有域名时，可在 U4B 前另行授权建立 Vercel 项目身份以确认稳定 production alias/hostname，但不得部署 review 输出。public-release 的一个 Entry + 一个 Collection 只是纯技术 fail-closed 下限；远端预览仍要求完整 6 篇 Entry / 至少 2 个 Collection public 候选并另行授权，生产发布与发布后只读基线仍属于 M7。最终 U5 后若发生实质内容、状态、模板、CSS、字体、Hero 或 manifest 变化，相关 U5 证据失效；origin、public metadata、runner 或 XML 变化通常只使 U4B 证据失效。每一步均须 Project owner 分别授权。
+- 推荐工程顺序：完成英文字体页面判断与 CJK 剩余门禁 → 在 non-published noindex 直达页完成 M4-U5 候选预检并进入 `ready` → M5 外部交互边界 → M6 完成 6 篇 Entry、至少 2 个 Collection、全部资产及 Project owner 的 `published` 决定 → 在真实非空索引和最终页面上关闭 M4-U5 → 确认真实 HTTPS origin → M4-U4B 本地 public 构建能力。没有自有域名时，可在 U4B 前另行授权建立 Vercel 项目身份以确认稳定 production alias/hostname，但不得部署 review 输出。public-release 的一个 Entry + 一个 Collection 只是纯技术 fail-closed 下限；远端预览仍要求完整 6 篇 Entry / 至少 2 个 Collection public 候选并另行授权，生产发布与发布后只读基线仍属于 M7。最终 U5 后若发生实质内容、状态、模板、CSS、字体、Hero 或 manifest 变化，相关 U5 证据失效；origin、public metadata、runner 或 XML 变化通常只使 U4B 证据失效。每一步均须 Project owner 分别授权。
 
 ### 1.1 已确认事实
 
 - 当前 review 构建精确生成 Home、Explore、Collections、About、一个 Collection 与两个 Entry 共 7 个 `noindex, nofollow` 页面；DebugLayout 已删除。
 - 当前动态路由按显式 review 投影生成全部 non-archived 记录；独立纯 release 投影只选择 published，并为 Explore/Collections/Related Entries 提供确定性 view model；固定 Home 纵切片是唯一 non-published 选择例外。M4-U4A 新增 public 最小数量与 SEO/artifact 纯函数，但 Public build intent 尚未实现且继续失败。
-- `zhong-kui`、`chinese-underworld-guide` 和 `chinese-underworld` 都是 non-published `editorial-review`；两篇 Entry 已有 opening、summary、正文、来源/Claim、`source-checked` 术语与 fact-check 日期。钟馗 earliest-known 双证据仍明确为 `null`，不由不充分材料补齐。
+- `zhong-kui`、`chinese-underworld-guide` 和 `chinese-underworld` 都是 non-published `editorial-review`；两篇 Entry 已有 opening、summary、正文、来源/Claim、`bilingual-approved` 术语与 fact-check 日期，四条馆藏标题 locale 也已核定为 `zh-Hant`。钟馗 earliest-known 双证据仍明确为 `null`，不由不充分材料补齐。
 - `zhong-kui.heroAssetId` 使用稳定逻辑 ID `asset-zhong-kui-hero-primary`，当前 resolver 明确解析 Hero v2；Hero v1 是 approved/non-current 审计历史。
 - 中国阴间 Collection 的 `heroAssetId` 为稳定逻辑 ID `asset-chinese-underworld-hero-primary`，由 generic approved/current resolver 解析到 Collection 自己的 Hero v1；钟馗 Hero 仍只属于 Entry，没有被 Collection 借用。
 - Guide Entry 的 `heroAssetId` 为稳定逻辑 ID `asset-chinese-underworld-guide-hero-primary`，由同一 generic approved/current resolver 解析到 Guide 自己的 Hero v1；Guide 没有借用 Collection 或钟馗 Hero。
@@ -78,7 +78,7 @@
 - `Mythic China` 与 `Mythic China Editorial` 的公开 Organization 身份已由 Project owner 确认，但这不是注册法人声明；实际 Article JSON-LD 仍要等 public 页面接线与可见 byline/日期一致性门禁。
 - 英文正式字体已有 WOFF2、hash、OFL、alias/token 与 preload 候选；尚未获页面效果批准。CJK 因缺获准工具、Hans/Hant 来源/字符表、cmap 和跨平台验证继续阻断。
 - 首个 Collection 与 Guide 已各有 approved Hero brief、approved/current Hero v1 与静态页面消费；原中性 surface 只保留为 `heroAssetId: null` 时的条件回退，local explore 候选与待审图仍不能绕过 manifest 被页面直接消费。
-- 当前两篇 Entry 已形成完整候选叙事与来源层级，但 Terminology 仍为 `source-checked`，钟馗 earliest-known 保持空；不等于发布就绪。
+- 当前两篇 Entry 已形成完整候选叙事与来源层级，Terminology 已为 `bilingual-approved`，四条馆藏标题 locale 已核定；钟馗 earliest-known 保持空，且 CJK/正式字体/U5 仍未闭合，因此不等于发布就绪。
 - 本轮另获一次本地 preview/浏览器授权，并完成主要页面 390/768/1440 回归；服务已停止。键盘全链、真实 200%、禁用 JavaScript、reduced motion、图片失败、性能、英文字体实测和跨平台字体仍未验证。
 - 若未来把已发布内容改为 archived，URL 迁移或重定向必须先独立决定；当前合同不静默制造 redirect。
 
@@ -375,7 +375,7 @@ Astro Content Layer
 ### M4-U5 页面级验证与收口
 
 - 目标：用同一组页面合同分两阶段完成首个纵切片预检与最终全路由关闭，不把早期候选证据冒充完整发布资格。
-- 候选预检依赖：M4-U2 页面、M4-U3 release 投影与 M4-U4A 纯 SEO 基础完成，Collection 与 Guide Hero 已闭合；完整 Entry 内容与引用层级、Article 可见 byline/日期、双语/locale/CJK 输入及正式英文字体页面仍须先另行授权完成并冻结。服务启动和浏览器验证另行授权。内容此时可以保持 non-published，Explore/Collections 保持真实空状态。
+- 候选预检依赖：M4-U2 页面、M4-U3 release 投影与 M4-U4A 纯 SEO 基础完成，Collection 与 Guide Hero、双语术语及 Source 标题 locale 已闭合；完整 Entry 内容与引用层级、Article 可见 byline/日期已经形成，CJK 输入与正式英文字体页面仍须先另行授权完成并冻结。服务启动和浏览器验证另行授权。内容此时可以保持 non-published，Explore/Collections 保持真实空状态。
 - 候选预检交付：在 noindex review 直达 Home/Collection/Entry 上完成适用的 390/768/1440、键盘/focus、禁用 JavaScript、reduced motion、真实 200%、字体命中/慢加载/跨平台 fallback、图片失败、链接、性能和人工视觉检查。通过只支持候选进入 `ready`，不关闭 M4-U5。
 - 最终关闭依赖：M5 外部交互边界已冻结；M6 已完成 6 篇 Entry、至少 2 个 Collection、全部资产和 Project owner 的 `published` 决定，Explore/Collections 呈现真实非空列表。
 - 最终关闭交付：在最终 Home/Explore/Collections、全部受影响动态页、最终字体/资产/CSS 与真实关系上重跑完整 U5。Public metadata/output 的最终验证留在 M4-U4B；最终 U5 不等待 public runner，但通过后才允许确认 origin 并进入 U4B。
@@ -496,6 +496,6 @@ M4-U4A 没有发布目标。纯 release/public/SEO/artifact builder 是数据/vi
 
 - M4-U1、M4-U2、M4-U3、M4-U4A、首个纵切片本地候选、2026-08-31 机器门禁加固、Collection Hero 与 Guide Hero 生产闭环已完成。M4-U2 页面方向、M4-U3 四节/纯 release 边界、M4-U4A 托管方向/公共身份、两组 Chinese Underworld Hero 成图资产链与字体方案已获 Project owner 确认，但这不是正式字体页面、M4-U5 预检/最终关闭、public build 或发布批准。
 - 已满足：显式 review 与纯 release/public 最小投影、7 页 noindex 静态页面、两篇完整编辑候选、Zhong Kui Hero v2、Chinese Underworld Collection Hero v1 与 Guide Hero v1 接线、自托管英文字体自动门禁、Source 展示、真实空状态、About 四节与可见 editorial identity、内部链接、静态键盘语义、零客户端 JavaScript、三档 system fallback 实际视口、M4-U2 人工方向确认，以及纯 canonical/OG/JSON-LD/Sitemap/RSS fixture 门禁。
-- 尚未满足：真实 public origin/内容/artifact，public runner/页面/endpoint 接线，双语术语与 Source 标题 locale，真实键盘/缩放/媒体偏好，正式字体浏览器效果、CJK、性能、跨平台 fallback、M4-U5 与 M4-U4B 收口。
-- 下一人工/授权检查点为双语/CJK/字体页面判断与 noindex U5 候选预检。M6 完成 6 篇 Entry / 至少 2 个 Collection inventory 与人工 `published` 决定后，在真实非空索引最终关闭 U5。真实 origin 与最终门禁满足后才进入 U4B，且 U4B 只关闭本地 public 构建能力；远端预览服从 M6 独立授权，生产发布与发布后只读基线服从 M7 独立授权。本次资产批准不自动授权状态提升、Git 写入或 Vercel 部署。
+- 尚未满足：真实 public origin/内容/artifact，public runner/页面/endpoint 接线，真实键盘/缩放/媒体偏好，正式字体浏览器效果、CJK、性能、跨平台 fallback、M4-U5 与 M4-U4B 收口；双语术语与 Source 标题 locale 已满足。
+- 下一人工/授权检查点为 CJK/字体页面判断与 noindex U5 候选预检。M6 完成 6 篇 Entry / 至少 2 个 Collection inventory 与人工 `published` 决定后，在真实非空索引最终关闭 U5。真实 origin 与最终门禁满足后才进入 U4B，且 U4B 只关闭本地 public 构建能力；远端预览服从 M6 独立授权，生产发布与发布后只读基线服从 M7 独立授权。本次语言与资产批准不自动授权状态提升、Git 写入或 Vercel 部署。
 - 是否可以关闭：M4-U1、M4-U2、M4-U3 与 M4-U4A 可以关闭；完整 U4 与 M4 总需求不能关闭。

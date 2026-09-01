@@ -124,7 +124,7 @@
 - [“阴间”](https://dict.revised.moe.edu.tw/dictView.jsp?ID=156490&q=1&word=%E9%99%B0) — 教育部《重编国语辞典修订本》。用途：`yīnjiān` 的拼音与宽泛“死后魂灵所在”词义；不支持完整宗教体系。
 - [Zhong Kui and the Lunar New Year](https://asia.si.edu/whats-on/blog/posts/zhong-kui-and-the-lunar-new-year/) — Yue Shu / Smithsonian National Museum of Asian Art，2021。用途：馆方对考试、治病梦与新年保护传统的现代复述；不是唐代原典，也不单独承担 earliest-known 判断。
 
-2026-08-31 重新核对四条馆藏页的可见中文字段：The Met object 30.76.293 的标题词为 `十王圖`，Cleveland object 1961.206 显示 `鍾馗元夜出遊圖`，The Met object 2008.636 的对象行包含 `清早期 竹雕鍾馗群鬼`，object 2002.208.2 的对象行包含 `任頤 鍾馗像 軸`。Source 记录只转录或规范空格，不把页面字形本身当作 Hans/Hant 审批；四条 `titleZhLang` 继续保持 generic `zh`，等待具名双语审校。
+2026-08-31 重新核对四条馆藏页的可见中文字段：The Met object 30.76.293 的标题词为 `十王圖`，Cleveland object 1961.206 显示 `鍾馗元夜出遊圖`，The Met object 2008.636 的对象行包含 `清早期 竹雕鍾馗群鬼`，object 2002.208.2 的对象行包含 `任頤 鍾馗像 軸`。Source 记录只转录或规范空格，不把页面字形本身当作 Hans/Hant 自动审批；Project owner 随后以 `Project owner (user-confirmed)` bilingual reviewer 身份明确批准四条 `titleZhLang: zh-Hant`。
 
 Collection Hero 候选 A 只从上述 Claim 抽取“法庭/记录层级”和“审判通往轮回”的结构，并把门槛、建筑、光雾和人物轮廓明确列为 inferred/invented；其 approved brief 先生成三张 Git-ignored local explore 输出，Project owner 于 2026-08-31 选中 desktop 02/mobile 01，随后确认个人账户、工具条款适用事实、publication authority、文化/权利/视觉/无障碍/语言五审及最终文案。选图经高保真 ImageGen 重建和最小 centered fit-cover Lanczos3 处理成为 exact-canvas desktop/mobile master；production record、repository source 与 `asset-chinese-underworld-hero-primary-v1` approved/current manifest 已闭合，并由 Collection 的 versionless `assetId` 消费。博物馆或历史图像没有上传到 ImageGen；候选 B 仍只保留 The Met 公共领域对象直接复用路径，尚未下载或生产。
 

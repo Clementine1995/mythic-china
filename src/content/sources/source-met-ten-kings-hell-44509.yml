@@ -2,7 +2,7 @@ sourceId: source-met-ten-kings-hell-44509
 sourceType: museum-or-library
 title: Ten Kings of Hell
 titleZh: 十王圖
-titleZhLang: zh
+titleZhLang: zh-Hant
 authorOrOrganization: Jin Chushi; The Metropolitan Museum of Art
 publicationOrEdition: Online collection record
 editionBasisOrObjectId: Object number 30.76.293
@@ -15,4 +15,4 @@ translator: null
 pageOrSection: Overview and object information
 rightsStatus: public-domain
 rightsUrl: https://www.metmuseum.org/policies/image-resources
-notes: Supports this scroll's bureaucratic court, officials, judgment sequence, punishment register, date, and set identity; it does not establish a universal map or fixed sequence for every Chinese underworld tradition. The visible Chinese object line was rechecked on 2026-08-31; this field preserves its title words 十王圖 while period, artist, and format descriptors remain in their dedicated metadata. Orthographic locale remains generic zh pending bilingual review.
+notes: Supports this scroll's bureaucratic court, officials, judgment sequence, punishment register, date, and set identity; it does not establish a universal map or fixed sequence for every Chinese underworld tradition. The visible Chinese object line was rechecked on 2026-08-31; this field preserves its title words 十王圖 while period, artist, and format descriptors remain in their dedicated metadata. Project owner (user-confirmed), acting as the bilingual reviewer, approved titleZhLang as zh-Hant on 2026-08-31.
