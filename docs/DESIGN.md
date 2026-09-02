@@ -202,7 +202,7 @@ excluded_motifs
 - **Source Han Sans SC/TC**：中文名称、中文显示标题和未来中文 UI；首个纵切片已按核定的 Hans/Hant 输入分别制作 400/500/600 静态子集，具体页面观感仍须浏览器与跨平台验收。
 - **Source Han Serif SC**：仅作为未来有语义的短中文引文、古籍名或原文对照候选；当前未落库，不计入现有 10 份 WOFF2，也不得扩展成全站中文皮肤。
 
-当前稳定 inventory 为 4 份上游未修改英文 WOFF2 与 6 份具备 OFL/RFN/FONTLOG、精确字符集和 cmap 门禁的 CJK 派生 WOFF2。该静态资产链不等于页面级正式字体判断；慢加载、macOS/iOS/Android fallback、开发者工具逐字形命中和真实 200% 缩放仍属于 M4-U5 候选预检。
+当前稳定 inventory 为 4 份上游未修改英文 WOFF2 与 6 份具备 OFL/RFN/FONTLOG、精确字符集和 cmap 门禁的 CJK 派生 WOFF2。该静态资产链不等于发布环境字体判断；慢加载、支持平台 fallback、实际字形可读性和真实 200% 缩放属于 M6 最终 public artifact 与受保护预览的发布候选 QA，不阻塞 M4 本地产品实现收口。
 
 字体家族及角色不得随 Collection 变化。Collection Hero 只允许在同一 sans 中改变 weight、tracking、断行与对齐；Article H1、正文、来源和图注完全固定。禁止伪书法字体、中文合成斜体、伪粗体和把历史题签当作可访问 HTML 标题。
 
@@ -270,7 +270,7 @@ Zhōng Kuí 钟馗 · Hēibái Wúcháng 黑白无常
 《山海经》《搜神记》《聊斋志异》
 ```
 
-M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows 环境的 system fallback 检查有记录。正式自托管 WOFF2 与 CJK 字符/子集/cmap 静态门禁现已建立；正常/禁用/慢速字体加载、Windows/macOS/iOS/Android 实机 fallback、开发者工具实际命中字形与浏览器真实 200% 缩放仍属于首个真实纵切片进入批量页面/插画制作前的生产字体门禁。未执行项必须保留为未验证，不能由静态 cmap 或 M1 fallback 结果替代。
+M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows 环境的 system fallback 检查有记录。正式自托管 WOFF2 与 CJK 字符/子集/cmap 静态门禁现已建立；正常/禁用/慢速字体加载、支持平台实机 fallback、实际字形可读性与浏览器真实 200% 缩放仍属于 M6 最终 public artifact 和受保护预览前的生产字体门禁。未执行项必须保留为未验证，不能由静态 cmap、M1 fallback 结果或 M4 本地页面通过替代，也不再阻塞 M6 内容制作本身。
 
 ### 5.3 Spacing, Grid and Shape
 
@@ -400,7 +400,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - 背景只能位于正文 measure 外侧、Hero 或章节过渡区。680–760px 正文栏必须保持高不透明度、高对比的中性 reading surface，不让复杂图案直接垫在长段文字后方。
 - 背景不得承担唯一事实信息。含具体人物、建筑、服饰、器物或宗教符号时，必须拥有 visual brief、asset manifest、权利与文化审核；纯氛围背景标为 `invented` / `decorative`，使用空 alt，并在页面级 visual note 中提供适用的 credit 与 AI disclosure。
 - 桌面与移动分别构图和导出；低性能、图片失败、无 JavaScript 与 `prefers-reduced-motion` 条件下退化为静态色面/纹理，不影响内容、导航和 Sources。
-- 不使用 `background-attachment: fixed`、无限循环烟雾或大图滤镜重绘。整页背景不足不阻断 Schema、阅读链与基础功能，完成时间由后续 M4/M6 视觉验收决定。
+- 不使用 `background-attachment: fixed`、无限循环烟雾或大图滤镜重绘。整页背景不足不阻断 Schema、阅读链与基础功能，完成时间由 M6 最终候选的视觉验收决定。
 
 ## 8. Motion
 
@@ -472,7 +472,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 
 ## 12. 设计验收
 
-本节清单继续作为目标设计验收合同。M1 冻结只确认现有中性 Home、`The Chinese Underworld` Collection、`Zhong Kui, the Demon Queller` Entry、六个 Collection Hero 家族探针和字体验收页足以作为工程参考，不表示本节全部通过；工程检查结果、人工未验证项和用户视觉未通过必须分开记录。首次真实纵切片仍须在 390px、768px、1440px 检查：
+本节清单继续作为目标设计验收合同。M1 冻结只确认现有中性 Home、`The Chinese Underworld` Collection、`Zhong Kui, the Demon Queller` Entry、六个 Collection Hero 家族探针和字体验收页足以作为工程参考，不表示本节全部通过；工程检查结果、人工未验证项和用户视觉未通过必须分开记录。2026-09-02 的 M4 本地设计验收已经完成 8 页 × 390px/768px/1440px 基础矩阵、四条 Hero 页 art direction、样张和 Project owner 当前页面判断。M5 最终交互进入 M6 同一最终制品；真实键盘/200%、媒体偏好、故障注入、支持平台、完整 inventory 与正式目标读者属于 M6 release-candidate gate，生产环境的 live 复核与 RUM/p75 属于 M7。未验证项不写成已通过，也不重新阻塞 M4。验收清单如下：
 
 - 首屏主次、导航和 CTA 是否清楚。
 - 正文 measure、字号、行高和来源层级是否舒适。
@@ -490,10 +490,10 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - 首页是否仍是一个完整出版物页面，而非六种主题皮肤拼贴。
 - Realm-specific CSS 是否只覆盖 `--realm-*`；是否出现栏目专属字体、功能组件或 raw hex。
 - 字体验收页是否覆盖中文、英文、拼音、困难字形、慢加载、fallback 与 200% 缩放。
-- Newsletter 是否只在全站 Footer 出现一次；Entry 正文收束后是否依次为 Sources、Related Entries 与 Reader Request。
+- M5 实现后，Newsletter 是否只在全站 Footer 出现一次；Entry 正文收束后是否依次为 Sources、Related Entries 与 Reader Request。
 - Collection 主题环境是否贴合具体题材、保留中性安静的 Entry 阅读表面、拥有桌面/移动降级，并在隐藏背景后仍保持完整阅读与来源链。
 - `The Chinese Underworld` 是否表现整个主题世界而非一张钟馗角色海报；钟馗是否被准确标为边界上的驱鬼/护佑人物而非阴间统治者；现代游戏是否只出现在 Modern adaptations 语境。
-- M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿；首个真实 Home、Collection、Entry 纵切片完成后必须用同一内容在 390px、768px、1440px 再次复核。若未通过 [`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节的比较证据、本节验收或用户人工视觉确认，先重构共享表现层，再批量制作页面和插画。
+- M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿。首个真实 Home、Collection、Entry 及其功能页现已用同一内容完成 390px、768px、1440px 基础复核并获得 Project owner 当前页面确认；尚未执行的 [`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节正式目标读者比较、真实键盘/缩放/偏好、故障、性能和跨平台检查移交 M6 最终 public artifact。M5/M6 若实质改变共享表现层、交互、内容、字体或资产，只重跑受影响证据；失败阻塞预览或发布，但不把 M4 历史实现重新标为未完成。
 - 外部 Skill 或竞品方案只能产生候选方向；不得把其类名、组件树、默认框架或视觉皮肤写成项目长期合同，也不能绕过上述复核门。
 
 以下仍是后续视觉批准标准，不是当前 M1 已达到的事实：
@@ -510,4 +510,4 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - M1 冻结现场只建立了完整字体验收样张并使用 system fallback；正式字体下载、子集、许可证、逐字形命中和跨平台判断当时均留给后续纵切片。当前字体增量与仍未完成的人工门禁以第 5.2 节为准，不属于 M1 冻结证据。
 - 首个真实 Home 须按已确认的 A 主、C 辅概念方向完成页面级实现；Collection 与 Entry 继续按既有三层系统单独设计，并在同一纵切片中确认 A/C 语言是否需要延展。三页都须提交用户检查实际页面、响应式、字体、生产资产、无障碍和整体完成度，不把 Home 概念方向选择重新开放成无边界探索；若实际页面仍不符合目标，应只重构共享表现层，不改写内容、证据关系、稳定身份、URL 或语义阅读顺序。
 
-M1 冻结后仍不批量制作首批 6 篇全部插画；应先在首个真实纵切片关闭上述设计与字体保留项，以免页面比例和裁切规则变化造成返工。
+M1 冻结时为避免页面比例和裁切规则返工，先暂停首批 6 篇全部插画并要求真实纵切片先行。该纵切片的 M4 本地页面、Hero、字体静态链、三档基础矩阵与当前页面人工判断现已闭合；其余平台、故障和性能保留项不阻塞 M6 内容制作，但必须在组装后的最终 public artifact 与受保护预览上通过后才能发布。

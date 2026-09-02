@@ -24,7 +24,7 @@
 ### 0.3 字体资产边界
 
 - 字体不是 visual Asset Manifest，也不复用 brief/production record/current resolver。自托管字体只进入 `src/assets/fonts/` 的版本目录，由 `font-assets.json` 固定 release、archive/file hash、许可证与 preload 角色；页面只通过中央 preload registry 和 CSS role token 消费。
-- 当前字体 inventory 为 4 份上游未修改英文 WOFF2，以及 Source Han Sans 2.005R 派生的 SC/TC × 400/500/600 六份静态 WOFF2。后者已绑定批准字符集、固定上游输入/hash、OFL/RFN-safe internal names、FONTLOG、精确 `unicode-range` 与源码/`dist` cmap 门禁；`测`/`測` 保持为不进入子集的 fallback-only probe。正式字体页面观感、真实命中、慢加载与跨平台 fallback 仍是 M4-U5 人工阻塞，不能由静态 cmap 替代。
+- 当前字体 inventory 为 4 份上游未修改英文 WOFF2，以及 Source Han Sans 2.005R 派生的 SC/TC × 400/500/600 六份静态 WOFF2。后者已绑定批准字符集、固定上游输入/hash、OFL/RFN-safe internal names、FONTLOG、精确 `unicode-range` 与源码/`dist` cmap 门禁；`测`/`測` 保持为不进入子集的 fallback-only probe。正式 public artifact 的字体可读性、慢/阻断加载与支持平台 fallback 仍是 M6 发布候选 QA，不能由静态 cmap 或 M4 本地页面通过替代。
 
 ## 1. 编辑分类
 
@@ -99,11 +99,11 @@ M2 以状态递进校验代替“draft 也伪装完整”的默认值：
 | `draft` | 稳定 `entryId`、`slug`、`title`、`entryType` 与 `status`；研究、开场、摘要、关系和资产字段可以显式为 `null` / `[]` |
 | `editorial-review` | `traditionType`、开场、Quick Answer、正文草稿和至少一个真实 Source 已存在；Claim/术语关系按正文实际风险逐步补齐 |
 | `visual-review` | 满足编辑审核要求；`heroAssetId` 指向 M3 建立的逻辑 Hero 资产，唯一 current 版本为 `in-review | approved`，视觉 brief、Claim、权利、披露与 renditions 可审核 |
-| `ready` | 满足第 8 节全部编辑、证据、术语、关系、视觉与无障碍门禁 |
-| `published` | 满足 `ready`，由 Project owner 在 M6 完整本地 inventory 上明确决定可进入 public artifact，并补齐发布日期、最后事实核查日期与公开关系；它不等于已经部署、远端预览或生产上线，canonical/origin/output 仍由全局 U4B 门禁验证 |
+| `ready` | 满足第 8 节全部编辑、证据、术语、关系、批准视觉资产及内容拥有的无障碍文案门禁；不消费站点运行时或平台 QA |
+| `published` | 满足 `ready`，由 Project owner 在 M6 完整本地 inventory 上明确决定可进入 public artifact，并补齐发布日期、最后事实核查日期与公开关系；它不等于已经部署、远端预览或生产上线，canonical/origin/output 仍由 M6 public artifact assembly 验证 |
 | `archived` | 仅从完整发布谱系进入；保留 `published` 的编辑、证据、日期和关系完整性，但退出公开静态路由 |
 
-正文门禁要求真实可见的 Markdown 正文；空白、单个或多个 HTML 注释、未闭合的纯注释、只有空 HTML 标签或只有图片的 body 不能让 Entry 进入 `editorial-review` 或更后状态。带读者可见文本的普通 Markdown 或 raw HTML 可以通过最小文本门禁；ARIA、CSS 隐藏与完整渲染语义不由正则模拟，继续由真实页面的 U5 验收负责。普通正文不得用远端图片、iframe、object/embed、form 或远端 CSS 绕开 Asset Manifest、权利和 output policy。
+正文门禁要求真实可见的 Markdown 正文；空白、单个或多个 HTML 注释、未闭合的纯注释、只有空 HTML 标签或只有图片的 body 不能让 Entry 进入 `editorial-review` 或更后状态。带读者可见文本的普通 Markdown 或 raw HTML 可以通过最小文本门禁；ARIA、CSS 隐藏与完整渲染语义不由正则模拟，继续由 M6 最终 public artifact 的页面 QA 负责。普通正文不得用远端图片、iframe、object/embed、form 或远端 CSS 绕开 Asset Manifest、权利和 output policy。
 
 `publishedAt` 表示 Project owner 批准的目标公开日期；为形成 M6 protected preview 候选，它可以是尚未到达的未来日期，但不得用构建日、预览日或部署日代填。`updatedAt` 只表示目标公开当日或之后的真实公开修改日期，不能早于 `publishedAt`。目标日期变化会使受影响页面、SEO 与 release artifact 证据失效并要求重验；构建时间不是内容更新时间。Schema、独立 SEO builder 与 release artifact builder 都必须分别阻断倒序日期。
 
@@ -538,6 +538,7 @@ draft
 - 所有拟公开的事实性文化主张都有可定位证据；`provisional` Claim 未作为事实发布，`disputed` Claim 已在页面显示分歧。
 - 所有公开视觉资产都能解析到唯一 current approved manifest 版本，manifest、导出物、真实尺寸与 SHA-256 一致。
 - alt / 空 alt、适用的 caption、credit、AI disclosure、权利状态与生产方式一致；若后续需求引入商业入口，其披露还须通过第 7 节门禁。
-- 每个待提升 Entry / Collection 及其适用页面都已在 noindex review 直达页完成适用的 M4-U5 候选预检，包括移动、键盘、减弱动效、无 JavaScript、字体/图片失败和视觉检查；Explore/Collections 此时可以保持真实空状态。首个纵切片只是批量扩展前的首次预检，M6 新对象不得借用旧对象的证据；这些预检只支持各自内容进入 `ready`，不关闭完整 M4-U5。
 
-状态变更不允许靠修改一个字段绕过验证。M5/M6 完成 6 篇 Entry、至少 2 个 Collection 与全部资产后，Project owner 才在完整 inventory 上逐项作出 `published` 决定并批准目标公开日期；随后必须在真实非空 Home/Explore/Collections 与受影响动态页上最终关闭 M4-U5，再确认 origin 并进入 U4B。M2 已建立本地工程门禁与命令，实际服务、远端预览和发布仍须在对应里程碑开始前继续补齐 `DEV_WORKFLOW.md` 并取得独立授权。
+`ready` 是内容包状态，不消费真实键盘、缩放、媒体偏好、JavaScript 开关、字体/图片故障、LCP/CLS 或操作系统 fallback 等站点运行时证据。上述能力必须在 M6 把最终内容、M5 交互与 public 输出组装为同一候选后验证；M4 纵切片证据可作为共享实现基线，但新增对象、实质内容、模板、CSS、字体或资产变化不得借用不适用的旧证据。
+
+状态变更不允许靠修改一个字段绕过验证。M5 外部交互边界冻结后，由 M6 完成 6 篇 Entry、至少 2 个 Collection 与全部资产；Project owner 才在完整 inventory 上逐项作出 `published` 决定并批准目标公开日期。随后确认真实 HTTPS origin，执行 M6 public artifact assembly，生成真实非空 Home/Explore/Collections、受影响动态页、metadata、Sitemap 与 RSS。assembly 实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重建同一 public artifact 并执行最终自动门禁、键盘/缩放/偏好、故障、字体/跨平台、性能与人工视觉 QA；通过后才生成可用于受保护预览的 clean-source verification receipt。dirty source 上的结果只能是 nondeployable 诊断，提交后不得直接沿用。M2 已建立本地工程门禁与命令，实际服务、远端预览和发布仍须在对应里程碑开始前继续补齐 `DEV_WORKFLOW.md` 并取得独立授权。

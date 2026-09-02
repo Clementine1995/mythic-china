@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { readFile, readdir } from "node:fs/promises";
+import { lstat, readFile, readdir } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import process from "node:process";
 import { fileURLToPath, URL } from "node:url";
@@ -9,6 +9,10 @@ import { imageMetadata } from "astro/assets/utils";
 import {
   assertReviewCssResourcePolicy,
   assertReviewHtmlResourcePolicy,
+  assertReviewOutputArtifactExtensions,
+  assertReviewResourceInventory,
+  classifyReviewOutputEntry,
+  readReviewHtmlStyleResources,
 } from "./review-output-policy.mjs";
 import {
   assertCjkCssFontFaces,
@@ -18,19 +22,25 @@ import {
   readHtmlAttribute,
   readCjkCharacterPolicy,
 } from "./cjk-font-policy.mjs";
+import {
+  assertExactReviewNavigation,
+  assertExactReviewSemanticShell,
+  assertFontSpecimenCss,
+  assertFontSpecimenHtml,
+  assertFontSpecimenResourcePolicy,
+  assertFontSpecimenGlobalCss,
+  assertFontSpecimenFontFaces,
+  assertNoFontSpecimenLinks,
+  assertReviewHtmlInventory,
+  expectedReviewHtmlFiles,
+  fontSpecimenOutputPath,
+  fontSpecimenRoute,
+  readInternalReviewLinks,
+} from "./font-specimen-policy.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
 const outputRoot = resolve(projectRoot, "dist");
-const expectedHtmlFiles = [
-  "about/index.html",
-  "collections/chinese-underworld/index.html",
-  "collections/index.html",
-  "explore/chinese-underworld-guide/index.html",
-  "explore/index.html",
-  "explore/zhong-kui/index.html",
-  "index.html",
-];
 const navigationTargets = ["/", "/explore/", "/collections/", "/about/"];
 const fontInventory = JSON.parse(
   await readFile(
@@ -56,13 +66,29 @@ if (!existsSync(outputRoot)) {
     "M4 review output verification requires an existing dist build.",
   );
 }
+if (
+  classifyReviewOutputEntry(await lstat(outputRoot), "dist") !== "directory"
+) {
+  throw new Error("M4 review output root must be a real directory.");
+}
 
 async function listFiles(directory) {
   const files = [];
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const absolutePath = join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...(await listFiles(absolutePath)));
-    else if (entry.isFile()) files.push(absolutePath);
+  for (const name of (await readdir(directory)).sort()) {
+    const absolutePath = join(directory, name);
+    const relativePath = relative(outputRoot, absolutePath).replaceAll(
+      "\\",
+      "/",
+    );
+    const entryType = classifyReviewOutputEntry(
+      await lstat(absolutePath),
+      relativePath,
+    );
+    if (entryType === "directory") {
+      files.push(...(await listFiles(absolutePath)));
+    } else {
+      files.push(absolutePath);
+    }
   }
   return files;
 }
@@ -78,14 +104,43 @@ function sha256(buffer) {
 
 // Inventory HTML and raster artifacts before checking their rendered content.
 const outputFiles = await listFiles(outputRoot);
+const outputRelativeFiles = outputFiles.map((path) =>
+  relative(outputRoot, path).replaceAll("\\", "/"),
+);
+assertReviewOutputArtifactExtensions(outputRelativeFiles);
+const outputFileByUrlPath = new Map();
+function registerOutputUrlPath(urlPath, outputFile) {
+  const existing = outputFileByUrlPath.get(urlPath);
+  if (existing !== undefined && existing !== outputFile) {
+    throw new Error(`Review output has an ambiguous URL path: ${urlPath}`);
+  }
+  outputFileByUrlPath.set(urlPath, outputFile);
+}
+for (const [index, outputFile] of outputFiles.entries()) {
+  const relativePath = outputRelativeFiles[index];
+  registerOutputUrlPath(`/${relativePath}`, outputFile);
+  if (relativePath === "index.html") {
+    registerOutputUrlPath("/", outputFile);
+  } else if (relativePath.endsWith("/index.html")) {
+    registerOutputUrlPath(
+      `/${relativePath.slice(0, -"index.html".length)}`,
+      outputFile,
+    );
+  }
+}
 const htmlFiles = outputFiles
-  .filter((path) => path.endsWith(".html"))
+  .filter((path) => /\.html$/iu.test(path))
   .map((path) => relative(outputRoot, path).replaceAll("\\", "/"))
   .sort();
+const invalidHtmlArtifacts = outputFiles.filter(
+  (path) =>
+    /\.htm$/iu.test(path) ||
+    (/\.html$/iu.test(path) && !path.endsWith(".html")),
+);
 const imageFiles = outputFiles.filter((path) =>
   /\.(?:avif|jpe?g|png|webp)$/iu.test(path),
 );
-const fontFiles = outputFiles.filter((path) => path.endsWith(".woff2"));
+const fontFiles = outputFiles.filter((path) => /\.woff2$/iu.test(path));
 const allowedHeroAssetFamilies = [
   "chinese-underworld-guide-hero-primary-v1",
   "chinese-underworld-hero-primary-v1",
@@ -99,11 +154,12 @@ function resolveHeroAssetFamily(path) {
   return matches.length === 1 ? matches[0] : null;
 }
 
-if (htmlFiles.join("|") !== expectedHtmlFiles.join("|")) {
+if (invalidHtmlArtifacts.length > 0) {
   throw new Error(
-    `Unexpected M4 review HTML inventory:\n${htmlFiles.join("\n")}`,
+    `Review output contains non-canonical HTML artifacts:\n${invalidHtmlArtifacts.join("\n")}`,
   );
 }
+assertReviewHtmlInventory(htmlFiles);
 if (
   imageFiles.length !== 42 ||
   imageFiles.some(
@@ -118,9 +174,12 @@ if (
   );
 }
 if (
+  fontAssetRecords.length !== 10 ||
+  fontFiles.length !== 10 ||
   fontFiles.length !== fontAssetRecords.length ||
   fontFiles.some(
     (path) =>
+      !path.endsWith(".woff2") ||
       !relative(outputRoot, path).replaceAll("\\", "/").startsWith("_astro/"),
   )
 ) {
@@ -193,57 +252,35 @@ if (seenResponsiveOutputs.size !== 42) {
   );
 }
 const htmlByPath = new Map();
+const resourceRecordsByHtmlPath = new Map();
+const styleResourcesByPath = new Map();
 // Shared page invariants also walk every root-relative link, not only navigation.
 for (const relativePath of htmlFiles) {
   const html = await readFile(join(outputRoot, relativePath), "utf8");
   htmlByPath.set(relativePath, html);
 
-  if (!/<meta name="robots" content="noindex, nofollow">/u.test(html)) {
-    throw new Error(`${relativePath} is missing the review robots policy.`);
+  if (/M2 semantic debug/iu.test(html)) {
+    throw new Error(`${relativePath} contains forbidden review output.`);
   }
-  for (const forbidden of [
-    /<link[^>]+rel="canonical"/iu,
-    /<meta[^>]+property="og:/iu,
-    /application\/ld\+json/iu,
-    /<script(?:\s|>)/iu,
-    /\son[a-z]+\s*=/iu,
-    /\b(?:href|src)="javascript:/iu,
-    /M2 semantic debug/iu,
-  ]) {
-    if (forbidden.test(html)) {
-      throw new Error(`${relativePath} contains forbidden review output.`);
-    }
-  }
-  assertReviewHtmlResourcePolicy(html, relativePath);
+  resourceRecordsByHtmlPath.set(
+    relativePath,
+    assertReviewHtmlResourcePolicy(html, relativePath),
+  );
+  styleResourcesByPath.set(relativePath, readReviewHtmlStyleResources(html));
+  assertExactReviewNavigation(html, relativePath);
+  assertExactReviewSemanticShell(html, relativePath);
+  assertNoFontSpecimenLinks(html, relativePath);
   for (const target of navigationTargets) {
     if (!html.includes(`href="${target}"`)) {
       throw new Error(
         `${relativePath} is missing navigation target ${target}.`,
       );
     }
-    if (!expectedHtmlFiles.includes(toOutputPath(target))) {
+    if (!expectedReviewHtmlFiles.includes(toOutputPath(target))) {
       throw new Error(
         `${relativePath} links to missing navigation target ${target}.`,
       );
     }
-  }
-  for (const requiredSemanticShell of [
-    '<html lang="en">',
-    '<a class="skip-link" href="#main-content">',
-    '<main id="main-content" tabindex="-1">',
-    '<nav class="desktop-navigation" aria-label="Primary navigation">',
-    '<details class="mobile-navigation">',
-    "<summary>Menu</summary>",
-    '<nav aria-label="Mobile primary navigation">',
-  ]) {
-    if (!html.includes(requiredSemanticShell)) {
-      throw new Error(
-        `${relativePath} is missing static navigation semantics.`,
-      );
-    }
-  }
-  if ((html.match(/id="main-content"/gu) ?? []).length !== 1) {
-    throw new Error(`${relativePath} must have one skip-link target.`);
   }
   const fontPreloadTags = (html.match(/<link\b[^>]*>/giu) ?? []).filter(
     (tag) =>
@@ -297,23 +334,22 @@ for (const relativePath of htmlFiles) {
       `${relativePath} has an unexpected font preload policy: ${actualPreloadIds.join(", ")}`,
     );
   }
-  for (const match of html.matchAll(/href="([^"]+)"/giu)) {
-    const href = match[1];
-    if (
-      href === undefined ||
-      !href.startsWith("/") ||
-      href.startsWith("/_astro/")
-    ) {
-      continue;
-    }
-    const pathname = new URL(href, "https://review.invalid").pathname;
-    if (!expectedHtmlFiles.includes(toOutputPath(pathname))) {
+  for (const { href, pathname } of readInternalReviewLinks(
+    html,
+    relativePath,
+  )) {
+    if (pathname.startsWith("/_astro/")) continue;
+    if (!expectedReviewHtmlFiles.includes(toOutputPath(pathname))) {
       throw new Error(
         `${relativePath} links to missing internal route ${href}.`,
       );
     }
   }
 }
+assertReviewResourceInventory(
+  [...resourceRecordsByHtmlPath.values()].flat(),
+  outputFileByUrlPath.keys(),
+);
 
 const forbiddenReleaseArtifacts = outputFiles.filter((path) =>
   /\.(?:atom|rss|xml)(?:\.gz)?$/iu.test(path),
@@ -328,37 +364,142 @@ if (forbiddenReleaseArtifacts.length > 0) {
 if (outputFiles.some((path) => /\.(?:[cm]?js)$/iu.test(path))) {
   throw new Error("M4-U2 review pages must not emit client JavaScript.");
 }
-const outputCss = [];
-for (const outputFile of outputFiles.filter((path) => path.endsWith(".css"))) {
-  const content = await readFile(outputFile, "utf8");
-  outputCss.push(content);
-  assertReviewCssResourcePolicy(
-    content,
-    relative(outputRoot, outputFile).replaceAll("\\", "/"),
-  );
+const outputCssFiles = outputFiles.filter((path) => /\.css$/iu.test(path));
+if (outputCssFiles.some((path) => !path.endsWith(".css"))) {
+  throw new Error("Review output contains a non-canonical CSS extension.");
 }
-assertCjkCssFontFaces(
-  outputCss.join("\n"),
-  fontInventory,
-  cjkCharacterPolicy,
-  (sourceUrl) => {
-    const url = new URL(sourceUrl, "https://review.invalid");
+const referencedStylesheets = new Set();
+for (const [relativePath, resources] of styleResourcesByPath) {
+  for (const stylesheet of resources.stylesheets) {
+    if (
+      stylesheet.href === null ||
+      stylesheet.rel !== "stylesheet" ||
+      JSON.stringify(stylesheet.attributes) !== JSON.stringify(["href", "rel"])
+    ) {
+      throw new Error(`${relativePath} has a conditional stylesheet link.`);
+    }
+    const url = new URL(stylesheet.href, "https://review.invalid");
+    const outputFile = outputFileByUrlPath.get(url.pathname);
     if (
       url.origin !== "https://review.invalid" ||
       url.search !== "" ||
-      url.hash !== ""
+      url.hash !== "" ||
+      outputFile === undefined ||
+      !outputFile.endsWith(".css")
     ) {
-      return null;
+      throw new Error(`${relativePath} links to a missing stylesheet.`);
     }
-    const outputPath = resolve(
-      outputRoot,
-      decodeURIComponent(url.pathname).replace(/^\/+/, ""),
+    referencedStylesheets.add(outputFile);
+  }
+}
+if (
+  referencedStylesheets.size !== outputCssFiles.length ||
+  outputCssFiles.some((path) => !referencedStylesheets.has(path))
+) {
+  throw new Error("Review output contains an unreferenced stylesheet.");
+}
+const cssByOutputFile = new Map();
+const resourceRecordsByCssFile = new Map();
+for (const outputFile of referencedStylesheets) {
+  const content = await readFile(outputFile, "utf8");
+  cssByOutputFile.set(outputFile, content);
+  resourceRecordsByCssFile.set(
+    outputFile,
+    assertReviewCssResourcePolicy(
+      content,
+      relative(outputRoot, outputFile).replaceAll("\\", "/"),
+    ),
+  );
+}
+assertReviewResourceInventory(
+  [...resourceRecordsByCssFile.values()].flat(),
+  outputFileByUrlPath.keys(),
+);
+const specimenStyleResources = styleResourcesByPath.get(fontSpecimenOutputPath);
+if (
+  specimenStyleResources === undefined ||
+  specimenStyleResources.inlineStyles.length !== 1 ||
+  JSON.stringify(specimenStyleResources.inlineStyles[0]?.attributes) !== "[]" ||
+  specimenStyleResources.stylesheets.length < 1
+) {
+  throw new Error("The type specimen has a stale applied stylesheet contract.");
+}
+const specimenLinkedCss = specimenStyleResources.stylesheets.map(({ href }) => {
+  const url = new URL(href, "https://review.invalid");
+  const outputFile = outputFileByUrlPath.get(url.pathname);
+  const css =
+    outputFile === undefined ? undefined : cssByOutputFile.get(outputFile);
+  if (css === undefined) {
+    throw new Error("The type specimen links to missing review CSS.");
+  }
+  return css;
+});
+assertFontSpecimenResourcePolicy([
+  ...(resourceRecordsByHtmlPath.get(fontSpecimenOutputPath) ?? []),
+  ...specimenStyleResources.stylesheets.flatMap(({ href }) => {
+    const outputFile = outputFileByUrlPath.get(
+      new URL(href, "https://review.invalid").pathname,
     );
-    return fontRecordByOutputPath.get(outputPath)?.assetId ?? null;
-  },
+    return outputFile === undefined
+      ? []
+      : (resourceRecordsByCssFile.get(outputFile) ?? []);
+  }),
+]);
+const specimenLinkedCssText = specimenLinkedCss.join("\n");
+for (const css of [
+  ...specimenLinkedCss,
+  ...specimenStyleResources.inlineStyles.map(({ css }) => css),
+]) {
+  assertFontSpecimenCss(css, {
+    allowAppliedGlobalCss: true,
+    requireMappings: false,
+  });
+}
+const specimenAppliedCssText = [
+  specimenLinkedCssText,
+  ...specimenStyleResources.inlineStyles.map(({ css }) => css),
+].join("\n");
+const resolveOutputFontAssetId = (sourceUrl) => {
+  const url = new URL(sourceUrl, "https://review.invalid");
+  if (
+    url.origin !== "https://review.invalid" ||
+    url.search !== "" ||
+    url.hash !== ""
+  ) {
+    return null;
+  }
+  const outputPath = resolve(
+    outputRoot,
+    decodeURIComponent(url.pathname).replace(/^\/+/, ""),
+  );
+  return fontRecordByOutputPath.get(outputPath)?.assetId ?? null;
+};
+assertFontSpecimenCss(specimenAppliedCssText, { allowAppliedGlobalCss: true });
+assertFontSpecimenGlobalCss(specimenLinkedCssText);
+assertFontSpecimenFontFaces(
+  specimenLinkedCssText,
+  fontInventory,
+  resolveOutputFontAssetId,
   "review output CSS",
 );
-assertRenderedCjkPolicy(htmlByPath, cjkCharacterPolicy);
+assertCjkCssFontFaces(
+  specimenLinkedCssText,
+  fontInventory,
+  cjkCharacterPolicy,
+  resolveOutputFontAssetId,
+  "review output CSS",
+);
+const contentHtmlByPath = new Map(
+  [...htmlByPath].filter(
+    ([relativePath]) => relativePath !== fontSpecimenOutputPath,
+  ),
+);
+assertRenderedCjkPolicy(contentHtmlByPath, cjkCharacterPolicy);
+const typeSpecimenHtml = htmlByPath.get(fontSpecimenOutputPath);
+if (typeSpecimenHtml === undefined) {
+  throw new Error("The M4-U5A type specimen output is missing.");
+}
+assertFontSpecimenHtml(typeSpecimenHtml, cjkCharacterPolicy);
 
 // Focal-route checks keep release lists empty while exposing only the fixed
 // review slice through an explicitly labeled, non-published preview.
@@ -378,7 +519,8 @@ if (
   guideHtml === undefined ||
   exploreIndexHtml === undefined ||
   collectionsIndexHtml === undefined ||
-  aboutHtml === undefined
+  aboutHtml === undefined ||
+  typeSpecimenHtml === undefined
 ) {
   throw new Error("M4 review focal page output is incomplete.");
 }
@@ -486,6 +628,7 @@ for (const [route, html] of [
   ["/collections/chinese-underworld/", collectionHtml],
   ["/explore/chinese-underworld-guide/", guideHtml],
   ["/explore/zhong-kui/", zhongKuiHtml],
+  [fontSpecimenRoute, typeSpecimenHtml],
 ]) {
   if (
     html.includes("data-review-preview") ||
@@ -738,5 +881,5 @@ if (
 }
 
 process.stdout.write(
-  `Verified ${htmlFiles.length} noindex M4 review pages, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
+  `Verified ${htmlFiles.length} noindex M4 review pages including the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
 );

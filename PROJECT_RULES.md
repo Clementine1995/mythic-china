@@ -4,7 +4,7 @@
 
 本文件保存 Mythic China 特有、违反后会破坏内容可信度、资产可追溯性、静态架构或读者体验的红线。通用授权边界见 `AGENTS.md`，工程风格见 `STYLE.md`，执行命令见 `DEV_WORKFLOW.md`。
 
-当前已完成 M2、M3 与 M4-U1/U2/U3/U4A；静态工程、内容与视觉 Schema、内容/视觉图校验、current resolver、review 输出及 public 纯 builder 的适用红线已经落为 Schema、静态检查或自动化测试。M4-U5、M4-U4B 以及 M5–M7 的外部服务与发布门禁仍须在 `001-mvp-foundation` 关闭前按需求逐步落地，不能仅靠人工记忆。
+当前已完成 M2、M3 与 M4 本地产品实现；静态工程、内容与视觉 Schema、内容/视觉图校验、current resolver、review 输出及 public 纯 builder 的适用红线已经落为 Schema、静态检查或自动化测试。M4 的完成不表示已有 public artifact、`ready/published` 内容、远端预览或发布。M5 外部交互、M6 public artifact assembly 与发布候选 QA、M7 生产发布及发布后基线仍须在 `001-mvp-foundation` 关闭前按需求逐步落地，不能仅靠人工记忆。
 
 ## 项目定位
 
@@ -53,6 +53,8 @@
 | 15 | `docs/ARCHITECTURE.md` 的“可替换表现层合同” | 内容/身份快照 + 语义、链接、静态输出和无障碍回归 | 视觉重构不要求改写内容文件、稳定 ID、证据关系、slug 或 canonical URL |
 
 当前文档与工程命令见 `DEV_WORKFLOW.md`。`001-mvp-foundation` 关闭前，若上表中的“必须具备”项没有真实测试入口，该需求不得标记完成。
+
+上表中的真实键盘、减弱动效、JavaScript 失败、故障注入、支持平台与最终制品性能/视觉验收属于 M6 release-candidate gate；M7 只承接生产身份、live smoke、回滚、线上地区复核与 RUM/p75。两者都不定义 M4 本地产品实现是否完成，也不应重复写入单条内容的 `ready` 状态。移动验证时点不降低通过标准。
 
 ## 变更规则
 

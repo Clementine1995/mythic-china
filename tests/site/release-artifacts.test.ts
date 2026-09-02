@@ -121,6 +121,8 @@ describe("public release artifacts", () => {
       `${fixtureOrigin}/collections/collection-one/`,
     ]);
     expect(artifacts.rss).not.toContain("draft-entry");
+    expect(artifacts.sitemap).not.toContain("/review/type-specimen/");
+    expect(artifacts.rss).not.toContain("/review/type-specimen/");
     const rssLinks = [...artifacts.rss.matchAll(/<link>([^<]+)<\/link>/gu)].map(
       (match) => match[1],
     );
@@ -233,6 +235,10 @@ describe("public release artifacts", () => {
   it.each([
     {
       staticPages: [...fixedStaticPages, { path: "/draft/" }],
+      feedDescription: "Published entries.",
+    },
+    {
+      staticPages: [...fixedStaticPages, { path: "/review/type-specimen/" }],
       feedDescription: "Published entries.",
     },
     {

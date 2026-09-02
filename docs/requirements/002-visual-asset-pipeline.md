@@ -46,7 +46,7 @@
 - 钟馗已有最小视觉 Source/Claim、approved brief 与经终审的 M3 生产资产，但这不是完整 Entry 研究、正式正文审核或 M4 页面批准；无新增 Terminology 是因为本期未引入既有 `钟馗 / Zhōng Kuí / Zhong Kui` 之外的新术语决定。
 - 本期实际生成工具是 OpenAI ImageGen；没有使用 ComfyUI、模型下载、LoRA、字体烧录或馆藏图片输入。OpenAI 个人与业务条款已于 2026-08-28 从官方页面核对；2026-08-29 Project owner 确认本轮使用个人且非组织管理的账户，并确认有权为 Mythic China 生成、保存和发布输出。全部五份 manifest 按 `in-house-original` 记录 private individual 权利主体；该双方相对权利记录不构成可版权性、唯一性、不侵权或未记录第三方权利的保证。
 - master 物理位置已确认在项目根 `/.local/visual-production/masters/`，由 `/.local/` 锚定 Git ignore，且不进入 Astro Content Layer、默认 build 或仓库 inventory；logical URI 使用 `project-local://mythic-china/.local/visual-production/masters/...`。当前没有独立备份，丢失时只能按生产记录重新生成。
-- 当前已用 Astro 公开 `imageMetadata()` API 对七份真实 WebP/PNG repository source 验证解码、格式、方向感知尺寸、SHA-256 与大小。隔离构建从三份 current responsive buildPlan 消费真实 manifest，并通过直接依赖 `sharp@0.35.4` 实际生成和解码复核全部 22 个目标变体；临时 `outDir`、图片缓存与 Vite cache 在验证后清理，不进入 manifest、默认 `dist/` 或仓库。Astro 仍可能刷新项目内 ignored `.astro/` 构建元数据；它不是发布制品或持久验证证据。M4 尚未把这些 buildPlan 接入生产页面，因此页面级响应式选择、浏览器表现与 SEO 输出仍待后续验证。
+- M3 收口时已用 Astro 公开 `imageMetadata()` API 对七份真实 WebP/PNG repository source 验证解码、格式、方向感知尺寸、SHA-256 与大小。隔离构建从三份 current responsive buildPlan 消费真实 manifest，并通过直接依赖 `sharp@0.35.4` 实际生成和解码复核全部 22 个目标变体；临时 `outDir`、图片缓存与 Vite cache 在验证后清理，不进入 manifest、默认 `dist/` 或仓库。Astro 仍可能刷新项目内 ignored `.astro/` 构建元数据；它不是发布制品或持久验证证据。在 2026-08-29 的 M3 收口时，M4 尚未把这些 buildPlan 接入生产页面，因此当时的页面级响应式选择、浏览器表现与 SEO 输出仍待后续验证；后续 M4 实现与现状以 003、README 和当前代码为准。
 - 两份实际 production record 都是 Content Layer 实体并通过 manifest 双向外键及 master tuple 校验；本期未使用 ComfyUI，因此没有 workflow/model registry 实体或外键。Git-ignored local master 不成为默认 clone/CI 依赖，其七个物理文件已在生产会话单独核验并把结果写入对应 record。
 
 ### 1.2 用户已确认的实施选择
@@ -138,7 +138,7 @@ M3-U5 当前已实现：
   -> 非默认 U5 verifier 复核 master 并实际生成/解码响应式目标
 ```
 
-M4 再由生产页面消费逻辑 `assetId`，确定 `sizes`、LCP priority、浏览器裁切与正式 `dist/` 输出；该页面链路尚未授权或实施。
+在 M3 收口时，后续 M4 计划由生产页面消费逻辑 `assetId`，确定 `sizes`、LCP priority、浏览器裁切与正式 `dist/` 输出；该页面链路当时尚未授权或实施。后续 M4 已完成的 review 页面消费与仍未建立的 public artifact 边界以 003、README 和当前代码为准。
 
 ## 5. 最终业务与资产合同
 

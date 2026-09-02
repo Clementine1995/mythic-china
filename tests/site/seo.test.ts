@@ -173,6 +173,12 @@ describe("public SEO metadata", () => {
       updatedAt: null,
     },
     {
+      kind: "about",
+      path: "/review/type-specimen/",
+      title: "Type specimen",
+      description: "Review-only font validation.",
+    },
+    {
       kind: "collection",
       path: "/collections/../about/",
       title: "Collection One",

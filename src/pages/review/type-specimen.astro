@@ -1,0 +1,344 @@
+---
+import cjkCharacterSets from "../../assets/fonts/cjk-character-sets.json";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../../site/build-intent";
+import "../../styles/type-specimen.css";
+
+if (readBuildIntent() !== "review") {
+  throw new Error("The type specimen is available only in review builds.");
+}
+
+const upperLatin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const lowerLatin = "abcdefghijklmnopqrstuvwxyz";
+const digitsAndAmbiguousForms = "0123456789 1IlO0";
+const punctuation = "“ ” ‘ ’ ' — – - … · / & @ % ( ) [ ] 《 》 〈 〉 ： ；";
+const pinyinLower = "ā á ǎ à ē é ě è ī í ǐ ì ō ó ǒ ò ū ú ǔ ù ǖ ǘ ǚ ǜ ü ê";
+const pinyinUpper = "Ā Á Ǎ À Ē É Ě È Ī Í Ǐ Ì Ō Ó Ǒ Ò Ū Ú Ǔ Ù Ǖ Ǘ Ǚ Ǜ Ü Ê";
+const pinyinToneSpecimen = `${pinyinLower} ${pinyinUpper}`;
+const pinyinMixedRows = [
+  [
+    { text: "Nǚwā ", language: null },
+    { text: "女娲", language: "zh-Hans" },
+    { text: " · Lǚ Dòngbīn ", language: null },
+    { text: "吕洞宾", language: "zh-Hans" },
+    { text: " · Cháng’é ", language: null },
+    { text: "嫦娥", language: "zh-Hans" },
+  ],
+  [
+    { text: "Fēngdū ", language: null },
+    { text: "酆都", language: "zh-Hans" },
+    { text: " · Yánluó Wáng ", language: null },
+    { text: "阎罗王", language: "zh-Hans" },
+    { text: " · Mèng Pó ", language: null },
+    { text: "孟婆", language: "zh-Hans" },
+  ],
+  [
+    { text: "Zhōng Kuí ", language: null },
+    { text: "钟馗", language: "zh-Hans" },
+    { text: " · Hēibái Wúcháng ", language: null },
+    { text: "黑白无常", language: "zh-Hans" },
+  ],
+  [
+    {
+      text: "饕餮 夔 獬豸 狴犴 梼杌 穷奇 颛顼 帝喾 鲲鹏",
+      language: "zh-Hans",
+    },
+  ],
+  [
+    {
+      text: "《山海经》《搜神记》《聊斋志异》",
+      language: "zh-Hans",
+    },
+  ],
+] as const;
+
+const displaySamples = [
+  {
+    id: "display-hero-400",
+    contentRole: "hero",
+    weight: "400",
+    language: "en",
+    label: "Display · hero · 400",
+    text: upperLatin,
+  },
+  {
+    id: "display-ui-560",
+    contentRole: "ui",
+    weight: "560",
+    language: "en",
+    label: "Display · UI · 560",
+    text: lowerLatin,
+  },
+  {
+    id: "display-pinyin-600",
+    contentRole: "pinyin",
+    weight: "600",
+    language: "zh-Latn-pinyin",
+    label: "Display · pinyin · 600",
+    text: pinyinToneSpecimen,
+  },
+  {
+    id: "display-metadata-650",
+    contentRole: "metadata",
+    weight: "650",
+    language: "en",
+    label: "Display · metadata · 650",
+    text: `${digitsAndAmbiguousForms} ${punctuation}`,
+  },
+] as const;
+
+const storySamples = [
+  {
+    id: "story-400",
+    contentRole: "story",
+    weight: "400",
+    style: "normal",
+    label: "Story · reading text · 400",
+    text: "A river of names becomes a map when every source stays visible.",
+  },
+  {
+    id: "story-600",
+    contentRole: "story",
+    weight: "600",
+    style: "normal",
+    label: "Story · emphasis · 600",
+    text: "Semibold story emphasis keeps the reading path clear.",
+  },
+  {
+    id: "story-italic-400",
+    contentRole: "story",
+    weight: "400",
+    style: "italic",
+    label: "Story · quotation · 400 italic",
+    text: "Italic distinguishes a quoted voice without manufacturing emphasis.",
+  },
+  {
+    id: "body-400",
+    contentRole: "body",
+    weight: "400",
+    style: "normal",
+    label: "Body use · story role · 400",
+    text: "Body copy uses the story role at a measured width for sustained reading.",
+  },
+] as const;
+
+function uniqueCharacters(values: readonly string[]): string {
+  return [...new Set([...values.join("").normalize("NFC")])].join("");
+}
+
+const cjkSamples = [
+  {
+    locale: "zh-Hans",
+    label: "Simplified Chinese",
+    fontRole: "zh-hans-display",
+    requiredText: uniqueCharacters([
+      ...cjkCharacterSets.locales["zh-Hans"].contentStrings,
+      ...cjkCharacterSets.locales["zh-Hans"].requiredProbeStrings,
+      cjkCharacterSets.sharedPunctuation,
+    ]),
+    fallbackText: cjkCharacterSets.locales["zh-Hans"].fallbackOnlyProbe,
+  },
+  {
+    locale: "zh-Hant",
+    label: "Traditional Chinese",
+    fontRole: "zh-hant-display",
+    requiredText: uniqueCharacters([
+      ...cjkCharacterSets.locales["zh-Hant"].contentStrings,
+      ...cjkCharacterSets.locales["zh-Hant"].requiredProbeStrings,
+      cjkCharacterSets.sharedPunctuation,
+    ]),
+    fallbackText: cjkCharacterSets.locales["zh-Hant"].fallbackOnlyProbe,
+  },
+] as const;
+const cjkWeights = ["400", "500", "600"] as const;
+---
+
+<SiteLayout title="Type specimen" pageClass="type-specimen-document">
+  <article
+    class="type-specimen page-shell"
+    data-review-utility="type-specimen"
+    data-review-only="true"
+  >
+    <header class="type-specimen__hero section-space">
+      <p class="section-context">M4-U5A review utility</p>
+      <h1>Production type specimen</h1>
+      <p class="type-specimen__intro">
+        A direct, noindex validation surface for the exact self-hosted font
+        roles, approved CJK character sets, and intentional fallback probes.
+      </p>
+      <nav class="type-specimen__jump-nav" aria-label="Specimen sections">
+        <ul>
+          <li><a href="#display">Display</a></li>
+          <li><a href="#story">Story and body</a></li>
+          <li><a href="#simplified-chinese">Simplified Chinese</a></li>
+          <li><a href="#traditional-chinese">Traditional Chinese</a></li>
+          <li><a href="#validation-controls">Validation controls</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="display" class="type-specimen__section section-space">
+      <header class="type-specimen__section-heading">
+        <p class="section-context">Roman display face</p>
+        <h2>Display roles</h2>
+      </header>
+      <div class="type-specimen__grid">
+        {
+          displaySamples.map((sample) => (
+            <article class="type-specimen__card">
+              <p class="type-specimen__label">{sample.label}</p>
+              <p
+                class="type-specimen__sample"
+                data-font-sample={sample.id}
+                data-font-role="display"
+                data-content-role={sample.contentRole}
+                data-font-weight={sample.weight}
+                data-font-style="normal"
+                lang={sample.language}
+              >
+                {sample.text}
+                {sample.id === "display-pinyin-600" && (
+                  <>
+                    {" "}
+                    <span class="type-specimen__mixed-rows type-specimen__mixed-inherit">
+                      {pinyinMixedRows.map((row, rowIndex) => (
+                        <>
+                          {rowIndex > 0 && " "}
+                          <span class="type-specimen__mixed-row type-specimen__mixed-inherit">
+                            {row.map((segment) =>
+                              segment.language === "zh-Hans" ? (
+                                <span
+                                  class="type-specimen__sample type-specimen__inline-cjk"
+                                  data-inline-cjk="true"
+                                  data-font-role="zh-hans-display"
+                                  data-font-weight="600"
+                                  data-font-style="normal"
+                                  lang="zh-Hans"
+                                >
+                                  {segment.text}
+                                </span>
+                              ) : (
+                                segment.text
+                              ),
+                            )}
+                          </span>
+                        </>
+                      ))}
+                    </span>
+                  </>
+                )}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="story" class="type-specimen__section section-space">
+      <header class="type-specimen__section-heading">
+        <p class="section-context">Roman story face</p>
+        <h2>Story and body roles</h2>
+      </header>
+      <div class="type-specimen__grid">
+        {
+          storySamples.map((sample) => (
+            <article class="type-specimen__card">
+              <p class="type-specimen__label">{sample.label}</p>
+              <p
+                class="type-specimen__sample"
+                data-font-sample={sample.id}
+                data-font-role="story"
+                data-content-role={sample.contentRole}
+                data-font-weight={sample.weight}
+                data-font-style={sample.style}
+                lang="en"
+              >
+                {sample.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      cjkSamples.map((group) => (
+        <section
+          id={
+            group.locale === "zh-Hans"
+              ? "simplified-chinese"
+              : "traditional-chinese"
+          }
+          class="type-specimen__section section-space"
+        >
+          <header class="type-specimen__section-heading">
+            <p class="section-context">Approved subset and natural fallback</p>
+            <h2>{group.label}</h2>
+          </header>
+          <div class="type-specimen__cjk-grid">
+            {cjkWeights.map((weight) => (
+              <article class="type-specimen__card type-specimen__card--cjk">
+                <p class="type-specimen__label">
+                  {group.locale} · {weight} · required
+                </p>
+                <p
+                  class="type-specimen__sample type-specimen__sample--cjk"
+                  data-font-sample={`${group.locale.toLowerCase()}-required-${weight}`}
+                  data-font-role={group.fontRole}
+                  data-content-role="required"
+                  data-font-weight={weight}
+                  data-font-style="normal"
+                  lang={group.locale}
+                >
+                  {group.requiredText}
+                </p>
+                <div class="type-specimen__fallback">
+                  <p class="type-specimen__label">
+                    Intentional fallback-only probe
+                  </p>
+                  <p
+                    class="type-specimen__sample type-specimen__sample--fallback"
+                    data-font-sample={`${group.locale.toLowerCase()}-fallback-${weight}`}
+                    data-font-role={group.fontRole}
+                    data-content-role="fallback"
+                    data-font-weight={weight}
+                    data-font-style="normal"
+                    data-fallback-only="true"
+                    lang={group.locale}
+                  >
+                    {group.fallbackText}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <section
+      id="validation-controls"
+      class="type-specimen__section section-space"
+    >
+      <header class="type-specimen__section-heading">
+        <p class="section-context">Static interaction surface</p>
+        <h2>Validation controls</h2>
+      </header>
+      <details class="type-specimen__details">
+        <summary>Open the keyboard and preference checklist</summary>
+        <div>
+          <p>
+            Tab to this control, toggle it with Enter and Space, then follow the
+            return link without a pointer.
+          </p>
+          <p>
+            Browser zoom, reduced-motion, JavaScript-disabled, and blocked-font
+            checks are recorded independently; this static checklist does not
+            claim that they passed.
+          </p>
+          <a href="#display">Return to display samples</a>
+        </div>
+      </details>
+    </section>
+  </article>
+</SiteLayout>
