@@ -1,0 +1,47 @@
+---
+interface Props {
+  pageId: string;
+}
+
+const { pageId } = Astro.props;
+const headingId = `reader-request-${pageId}-heading`;
+---
+
+<section
+  class="entry-section reader-request"
+  aria-labelledby={headingId}
+  data-review-interaction="reader-request"
+  data-review-state="inactive"
+  data-page-id={pageId}
+>
+  <p class="section-context">Reader request</p>
+  <h2 id={headingId}>
+    What Chinese myth or strange tale should we explore next?
+  </h2>
+  <p class="reader-request__purpose">
+    Send an editorial suggestion. We may combine similar requests and cannot
+    promise publication.
+  </p>
+  <div class="reader-request__details">
+    <p>
+      Topic or tale is required on the future hosted form. Email is optional and
+      will only be used to follow up about that suggestion.
+    </p>
+    <p>
+      The separate email consent will state: “I agree that Mythic China may use
+      this email only to follow up about this suggestion. This does not
+      subscribe me to the newsletter.”
+    </p>
+  </div>
+  <div class="reader-request__actions interaction-preview">
+    <button type="button" disabled>Reader Requests are not open</button>
+    <p class="interaction-review-status">
+      Review preview — this page will not send or store a suggestion.
+    </p>
+  </div>
+  <p class="interaction-privacy-copy">
+    The planned hosted form will use Tally, including its persistent browser
+    identifier. Read our <a href="/privacy/">Privacy Notice</a> before the service
+    opens.
+  </p>
+</section>

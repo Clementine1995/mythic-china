@@ -51,6 +51,12 @@ const resourceAttributes = new Map([
   ["use", ["href", "xlink:href"]],
   ["html", ["manifest"]],
 ]);
+const inactiveProviderHosts = Object.freeze([
+  "buttondown.com",
+  "buttondown.email",
+  "plausible.io",
+  "tally.so",
+]);
 
 function attributeName(attribute) {
   return `${attribute.prefix === undefined ? "" : `${attribute.prefix}:`}${attribute.name}`.toLowerCase();
@@ -82,9 +88,320 @@ function textContent(node) {
   return (node.childNodes ?? []).map((child) => textContent(child)).join("");
 }
 
+function normalizedText(node) {
+  return textContent(node).replace(/\s+/gu, " ").trim();
+}
+
+function classNames(node) {
+  return new Set(
+    (readElementAttribute(node, "class") ?? "")
+      .split(/\s+/u)
+      .filter((className) => className !== ""),
+  );
+}
+
+function isDescendantOf(node, ancestor) {
+  for (
+    let current = node.parentNode;
+    current !== undefined;
+    current = current.parentNode
+  ) {
+    if (current === ancestor) return true;
+    if (current === null) return false;
+  }
+  return false;
+}
+
+function descendantsOf(elements, ancestor) {
+  return elements.filter((node) => isDescendantOf(node, ancestor));
+}
+
+function usesInactiveProviderHost(value) {
+  try {
+    const hostname = new URL(value).hostname.toLowerCase().replace(/\.$/u, "");
+    return inactiveProviderHosts.some(
+      (providerHost) =>
+        hostname === providerHost || hostname.endsWith(`.${providerHost}`),
+    );
+  } catch {
+    return false;
+  }
+}
+
 function parseReviewHtml(html) {
   const document = parseHtml(html, { scriptingEnabled: true });
   return { document, elements: elementRecords(document) };
+}
+
+export function assertReviewInteractionSurface(
+  html,
+  relativePath,
+  expectedEntryId = null,
+) {
+  const { elements } = parseReviewHtml(html);
+  const interactionRoots = elements.filter(
+    (node) => readElementAttribute(node, "data-review-interaction") !== null,
+  );
+  if (
+    interactionRoots.some(
+      (node) =>
+        !["newsletter", "reader-request"].includes(
+          readElementAttribute(node, "data-review-interaction"),
+        ),
+    )
+  ) {
+    throw new Error(`${relativePath} contains an unknown review interaction.`);
+  }
+  if (
+    elements.some(
+      (node) =>
+        ["a", "area"].includes(node.tagName) &&
+        usesInactiveProviderHost(readElementAttribute(node, "href") ?? ""),
+    )
+  ) {
+    throw new Error(`${relativePath} links to an inactive provider.`);
+  }
+  const newsletterRoots = elements.filter(
+    (node) =>
+      readElementAttribute(node, "data-review-interaction") === "newsletter",
+  );
+  const footers = elements.filter(
+    (node) => node.tagName === "footer" && classNames(node).has("site-footer"),
+  );
+  const newsletter = newsletterRoots[0];
+  const footer = footers[0];
+  if (
+    newsletterRoots.length !== 1 ||
+    newsletter === undefined ||
+    newsletter.tagName !== "section" ||
+    !classNames(newsletter).has("newsletter-form") ||
+    !classNames(newsletter).has("page-shell") ||
+    readElementAttribute(newsletter, "data-review-state") !== "inactive" ||
+    footers.length !== 1 ||
+    footer === undefined ||
+    !isDescendantOf(newsletter, footer)
+  ) {
+    throw new Error(
+      `${relativePath} must contain one inactive Newsletter inside the global Footer.`,
+    );
+  }
+
+  const newsletterElements = descendantsOf(elements, newsletter);
+  const emailInputs = newsletterElements.filter(
+    (node) => node.tagName === "input",
+  );
+  const email = emailInputs[0];
+  const newsletterButtons = newsletterElements.filter(
+    (node) => node.tagName === "button",
+  );
+  const newsletterButton = newsletterButtons[0];
+  const newsletterLinks = newsletterElements.filter((node) =>
+    ["a", "area"].includes(node.tagName),
+  );
+  const emailId = email && readElementAttribute(email, "id");
+  const emailLabels = newsletterElements.filter(
+    (node) =>
+      node.tagName === "label" &&
+      emailId !== null &&
+      readElementAttribute(node, "for") === emailId,
+  );
+  const newsletterCopy = normalizedText(newsletter);
+  if (
+    emailInputs.length !== 1 ||
+    email === undefined ||
+    emailId !== "footer-newsletter-email" ||
+    readElementAttribute(email, "type") !== "email" ||
+    readElementAttribute(email, "autocomplete") !== "email" ||
+    readElementAttribute(email, "disabled") === null ||
+    readElementAttribute(email, "name") !== null ||
+    readElementAttribute(email, "value") !== null ||
+    emailLabels.length !== 1 ||
+    normalizedText(emailLabels[0]) !== "Email address" ||
+    newsletterButtons.length !== 1 ||
+    newsletterButton === undefined ||
+    readElementAttribute(newsletterButton, "type") !== "button" ||
+    readElementAttribute(newsletterButton, "disabled") === null ||
+    readElementAttribute(newsletterButton, "name") !== null ||
+    readElementAttribute(newsletterButton, "formaction") !== null ||
+    newsletterElements.some((node) =>
+      ["form", "select", "textarea"].includes(node.tagName),
+    ) ||
+    newsletterLinks.length !== 1 ||
+    readElementAttribute(newsletterLinks[0], "href") !== "/privacy/" ||
+    !newsletterCopy.includes("new Mythic China stories") ||
+    !newsletterCopy.includes("occasional editorial selections") ||
+    !newsletterCopy.includes("no more than twice a month") ||
+    !newsletterCopy.includes("confirm your subscription") ||
+    !newsletterCopy.includes("unsubscribe from any email") ||
+    !newsletterCopy.includes("subscriptions are not open") ||
+    newsletterCopy.toLowerCase().includes("successfully subscribed")
+  ) {
+    throw new Error(
+      `${relativePath} has a stale or potentially active Newsletter review contract.`,
+    );
+  }
+
+  const readerRoots = elements.filter(
+    (node) =>
+      readElementAttribute(node, "data-review-interaction") ===
+      "reader-request",
+  );
+  const controlsOutsideNewsletter = elements.filter(
+    (node) =>
+      ["button", "input", "select", "textarea"].includes(node.tagName) &&
+      !isDescendantOf(node, newsletter),
+  );
+  if (expectedEntryId === null) {
+    if (readerRoots.length !== 0 || controlsOutsideNewsletter.length !== 0) {
+      throw new Error(
+        `${relativePath} must not render a Reader Request or extra control outside an Entry.`,
+      );
+    }
+    return;
+  }
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(expectedEntryId)) {
+    throw new Error(`Invalid expected Entry ID: ${expectedEntryId}.`);
+  }
+
+  const reader = readerRoots[0];
+  const entryArticles = elements.filter(
+    (node) => node.tagName === "article" && classNames(node).has("entry-page"),
+  );
+  if (
+    readerRoots.length !== 1 ||
+    reader === undefined ||
+    reader.tagName !== "section" ||
+    !classNames(reader).has("entry-section") ||
+    !classNames(reader).has("reader-request") ||
+    readElementAttribute(reader, "data-review-state") !== "inactive" ||
+    readElementAttribute(reader, "data-page-id") !== expectedEntryId ||
+    entryArticles.length !== 1 ||
+    entryArticles[0] === undefined ||
+    !isDescendantOf(reader, entryArticles[0])
+  ) {
+    throw new Error(
+      `${relativePath} must contain one inactive Reader Request for ${expectedEntryId}.`,
+    );
+  }
+
+  const readerElements = descendantsOf(elements, reader);
+  const readerButtons = readerElements.filter(
+    (node) => node.tagName === "button",
+  );
+  const readerButton = readerButtons[0];
+  const readerLinks = readerElements.filter((node) =>
+    ["a", "area"].includes(node.tagName),
+  );
+  const readerCopy = normalizedText(reader);
+  if (
+    readerElements.some((node) =>
+      ["form", "input", "select", "textarea"].includes(node.tagName),
+    ) ||
+    readerButtons.length !== 1 ||
+    readerButton === undefined ||
+    readElementAttribute(readerButton, "type") !== "button" ||
+    readElementAttribute(readerButton, "disabled") === null ||
+    readElementAttribute(readerButton, "formaction") !== null ||
+    readerLinks.length !== 1 ||
+    readElementAttribute(readerLinks[0], "href") !== "/privacy/" ||
+    !readerCopy.includes("Topic or tale is required") ||
+    !readerCopy.includes("Email is optional") ||
+    !readerCopy.includes("This does not subscribe me to the newsletter.") ||
+    !readerCopy.includes("Reader Requests are not open") ||
+    readerCopy.toLowerCase().includes("successfully submitted") ||
+    controlsOutsideNewsletter.length !== 1 ||
+    controlsOutsideNewsletter[0] !== readerButton
+  ) {
+    throw new Error(
+      `${relativePath} has a stale or potentially active Reader Request contract.`,
+    );
+  }
+
+  const readerPosition = elements.indexOf(reader);
+  const requiredPredecessors = elements.filter(
+    (node) =>
+      classNames(node).has("source-section") ||
+      ["collections-heading", "related-heading"].includes(
+        readElementAttribute(node, "id"),
+      ),
+  );
+  if (
+    requiredPredecessors.some(
+      (node) => elements.indexOf(node) >= readerPosition,
+    ) ||
+    elements.indexOf(footer) <= readerPosition ||
+    elements.indexOf(newsletter) <= readerPosition
+  ) {
+    throw new Error(
+      `${relativePath} must order Sources and reading paths before Reader Request and Footer.`,
+    );
+  }
+}
+
+export function assertReviewPrivacyNotice(html, relativePath) {
+  const { elements } = parseReviewHtml(html);
+  const roots = elements.filter(
+    (node) => readElementAttribute(node, "data-review-notice") === "privacy",
+  );
+  const root = roots[0];
+  const mainRoots = elements.filter(
+    (node) =>
+      node.tagName === "main" &&
+      readElementAttribute(node, "id") === "main-content",
+  );
+  if (
+    roots.length !== 1 ||
+    root === undefined ||
+    root.tagName !== "article" ||
+    !classNames(root).has("privacy-page") ||
+    !classNames(root).has("page-shell") ||
+    mainRoots.length !== 1 ||
+    !isDescendantOf(root, mainRoots[0])
+  ) {
+    throw new Error(`${relativePath} must contain one Privacy notice root.`);
+  }
+  const rootElements = descendantsOf(elements, root);
+  const addresses = rootElements.filter((node) => node.tagName === "address");
+  const noticeCopy = normalizedText(root);
+  const requiredCopy = [
+    "Mythic China is a site brand operated by hyc",
+    "China",
+    "huyichen2019@gmail.com",
+    "60 days after a request is closed",
+    "unless a longer retention period is required by law",
+    "not currently accepting newsletter sign-ups",
+    "not currently accepting Reader Requests",
+    "buttondown.com",
+    "open and click tracking will remain off before the first send",
+    "persistent Respondent ID",
+    "tally.so",
+    "Google Cloud Belgium",
+    "does not remove a Respondent ID",
+    "every 28 days",
+    "delete records that are at least 60 days old",
+    "empty Tally Trash in the same operation",
+    "60 to 88 days",
+    "sole operator is hyc",
+    "no independent backup",
+    "a missed operation can extend that period",
+    "Plausible is not enabled",
+    "plausible.io",
+  ];
+  if (
+    addresses.length !== 1 ||
+    !normalizedText(addresses[0]).includes("huyichen2019@gmail.com") ||
+    requiredCopy.some((copy) => !noticeCopy.includes(copy)) ||
+    /\[(?:TODO|TBD|填写|待确认)\]/iu.test(noticeCopy) ||
+    rootElements.some(
+      (node) =>
+        ["a", "area"].includes(node.tagName) &&
+        (readElementAttribute(node, "href") ?? "")
+          .toLowerCase()
+          .startsWith("mailto:"),
+    )
+  ) {
+    throw new Error(`${relativePath} has an incomplete Privacy notice.`);
+  }
 }
 
 function decodeUrlEntities(value) {

@@ -102,7 +102,7 @@ function hasForbiddenWeightSignature(relativePath: string): boolean {
   return false;
 }
 
-describe("M2 application and M3 U5 production boundaries", () => {
+describe("application and production boundaries", () => {
   it("runs tests within the portable project Node range", () => {
     const [major, minor] = process.versions.node.split(".").map(Number);
     const runtimeGuard = readProjectFile("scripts/verify-runtime.mjs");
@@ -180,20 +180,56 @@ describe("M2 application and M3 U5 production boundaries", () => {
     );
   });
 
-  it("keeps Astro static and limits M3 U4 to approved production directories", () => {
+  it("keeps Astro static and limits external interaction services", () => {
     const astroConfig = readProjectFile("astro.config.mjs");
     expect(astroConfig).toContain('output: "static"');
     expect(astroConfig).not.toMatch(/\badapter\s*:/u);
 
     for (const relativePath of [
       "public",
-      "src/services",
       "src/components/commercial",
       "tests/browser",
     ]) {
       expect(existsSync(join(projectRoot, relativePath)), relativePath).toBe(
         false,
       );
+    }
+
+    expect(readdirSync(join(projectRoot, "src/services")).sort()).toEqual([
+      "analytics.ts",
+      "newsletter.ts",
+      "reader-request.ts",
+    ]);
+    expect(readdirSync(join(projectRoot, "tests/services")).sort()).toEqual([
+      "external-interactions.test.ts",
+    ]);
+
+    const serviceImportAllowlist = {
+      "src/services/analytics.ts": ["astro/zod", "../site/public-site"],
+      "src/services/newsletter.ts": ["astro/zod"],
+      "src/services/reader-request.ts": [
+        "astro/zod",
+        "../content/content-schemas",
+      ],
+    } as const;
+
+    for (const [relativePath, allowedImports] of Object.entries(
+      serviceImportAllowlist,
+    )) {
+      const source = readProjectFile(relativePath);
+      const imports = [...source.matchAll(/from ["']([^"']+)["']/gu)].map(
+        (match) => match[1],
+      );
+
+      expect(imports, relativePath).toEqual(allowedImports);
+      expect(source, relativePath).not.toMatch(/\bimport\s*\(|\brequire\s*\(/u);
+      expect(source, relativePath).not.toMatch(
+        /\b(?:fetch|WebSocket|XMLHttpRequest|EventSource|sendBeacon|localStorage|sessionStorage|indexedDB)\b/u,
+      );
+      expect(source, relativePath).not.toMatch(
+        /\b(?:process\.env|import\.meta\.env|console\.(?:log|info|warn|error))\b/u,
+      );
+      expect(source, relativePath).not.toMatch(/https?:\/\//u);
     }
 
     const visualRoot = join(projectRoot, "visual");

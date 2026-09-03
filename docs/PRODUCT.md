@@ -2,10 +2,10 @@
 
 ## 0. 文档状态
 
-- 状态：草拟；设计体系、首发主题、M2 技术/内容方向与 M3 资产管线已确认，M2 本地实施、M3-U1–U5 与 M4 本地产品实现已完成。M4 包含 U1–U3、U4A public/SEO 纯基础设施、首个纵切片、两组 Hero、正式字体静态链、U5A noindex 字体样张、最终三档基础矩阵及当前 8 页人工视觉判断；不包含 public artifact、内容状态提升、远端预览或发布。真实键盘/200%/媒体偏好、故障/性能与跨平台收口改由 M6 最终 public artifact 和受保护预览承担，原计划 M4-U4B 的 public 接线也迁入 M6。
-- 日期：2026-09-02。
-- 当前事实：用户具备 ComfyUI 等静态生图能力，暂不具备视频制作能力；M3、Collection Hero 与 Guide Hero 的实际生产采用 Project owner 分别确认的个人、非组织管理 OpenAI ImageGen 账户，没有使用 ComfyUI。M1 Home、Collection、Entry、Review Board、3×2 探针与字体验收页已冻结为不可发布的工程参考基线。M2 已完成本地应用、依赖、Content Layer 与工程门禁；M3 终验曾因 Hero v1 双手解剖缺陷重开，Project owner 于 2026-08-29 验收定向修正后的 Hero v2。当前版本化 inventory 为 11 个 production master、11 份 repository source rendition、四份 production record 与七份 manifest 记录；六个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current 审计历史。M4-U2 原 7 个 noindex review 页面现增加一个 direct-only type specimen，共 8 页；M4-U3 已完成 published-only 探索投影，M4-U4A 已完成不接页面/output 的 public SEO 纯基础设施。Chinese Underworld Collection Hero 与 Guide Hero 已分别完成权利/五审/exact-canvas/资产批准及所属内容绑定；4 份英文 WOFF2 与 6 份 Source Han Sans SC/TC 静态子集已接线并通过生产来源、CSS、hash/name/weight、cmap 与 HTML5 语言边界门禁。U5A 最终样张现覆盖 English display/story/body、生产 pinyin 语言与 DESIGN 冻结混排行、SC/TC 400/500/600、困难字形与 fallback-only `测`/`測`，完整自动门禁与 2026-09-02 的最终 Windows/local 三档基础矩阵均已通过；8 页 × 3 档共 24 个实际组合无横向溢出、破图、样张错配或 console 问题，样张观测到 10 个字体资源。Project owner 随后检查全部 8 个页面路由并明确回复“这些页面通过”，闭合当前样张、Hero 裁切与页面阅读观感的人工判断。真实键盘/200%、启用 reduced motion、JavaScript-disabled、慢/阻断字体、图片失败、LCP/CLS、实际 fallback face 与跨平台 fallback 仍未验证，现归 M6 发布候选 QA；真实 published 内容、public artifact、远端预览与发布也仍未完成。验收标签已清理，PID `31960` 已停止且 4321 无监听，不形成可复用服务或远端发布环境。
-- 已确认产品方向：newsletter 只在全站 footer 提供，不在每篇末尾重复；文章末尾保留读者选题建议；ComfyUI 是可选视觉辅助，人物、传说、译名和画面依据必须先完成来源核查。
+- 状态：草拟；设计体系、首发主题、M2 技术/内容方向与 M3 资产管线已确认，M2 本地实施、M3-U1–U5、M4 本地产品实现及 M5-U2/U3 已完成。M4 包含 U1–U3、U4A public/SEO 纯基础设施、首个纵切片、两组 Hero、正式字体静态链、U5A noindex 字体样张、最终三档基础矩阵及当时 8 页人工视觉判断；M5-U3 另把当前 noindex review inventory 增至 9 页，增加 inert Newsletter、Reader Request 与 Privacy，不构成 public artifact。真实键盘/200%/媒体偏好、故障/性能与跨平台收口改由 M6 最终 public artifact 和受保护预览承担，原计划 M4-U4B 的 public 接线也迁入 M6。
+- 日期：2026-09-03。
+- 当前事实：用户具备 ComfyUI 等静态生图能力，暂不具备视频制作能力；M3、Collection Hero 与 Guide Hero 的实际生产采用 Project owner 分别确认的个人、非组织管理 OpenAI ImageGen 账户，没有使用 ComfyUI。M1 Home、Collection、Entry、Review Board、3×2 探针与字体验收页已冻结为不可发布的工程参考基线。M2 已完成本地应用、依赖、Content Layer 与工程门禁；M3 终验曾因 Hero v1 双手解剖缺陷重开，Project owner 于 2026-08-29 验收定向修正后的 Hero v2。当前版本化 inventory 为 11 个 production master、11 份 repository source rendition、四份 production record 与七份 manifest 记录；六个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current 审计历史。M4-U2 原 7 个 noindex review 页面增加 direct-only type specimen 后形成 8 页历史基线；M5-U3 新增 `/privacy/` 后，当前 review inventory 为 9 页，并在全站 Footer 与两个 Entry 增加不可提交的交互预览。M4-U3 已完成 published-only 探索投影，M4-U4A 已完成不接页面/output 的 public SEO 纯基础设施。Chinese Underworld Collection Hero 与 Guide Hero 已分别完成权利/五审/exact-canvas/资产批准及所属内容绑定；4 份英文 WOFF2 与 6 份 Source Han Sans SC/TC 静态子集已接线并通过生产来源、CSS、hash/name/weight、cmap 与 HTML5 语言边界门禁。U5A 最终样张现覆盖 English display/story/body、生产 pinyin 语言与 DESIGN 冻结混排行、SC/TC 400/500/600、困难字形与 fallback-only `测`/`測`，完整自动门禁与 2026-09-02 的最终 Windows/local 三档基础矩阵均已通过；8 页 × 3 档共 24 个实际组合无横向溢出、破图、样张错配或 console 问题，样张观测到 10 个字体资源。Project owner 随后检查当时全部 8 个页面路由并明确回复“这些页面通过”，闭合 M4 样张、Hero 裁切与页面阅读观感的人工判断；该历史判断不自动覆盖 U3 新页面。真实键盘/200%、启用 reduced motion、JavaScript-disabled、慢/阻断字体、图片失败、LCP/CLS、实际 fallback face 与跨平台 fallback 仍未验证，现归 M6 发布候选 QA；真实 published 内容、public artifact、远端预览与发布也仍未完成。验收标签已清理，PID `31960` 已停止且 4321 无监听，不形成可复用服务或远端发布环境。
+- 已确认产品方向：newsletter 只在全站 footer 提供，不在每篇末尾重复，只发送新文章与偶尔的编辑精选且每月不超过两次；文章末尾保留独立 Reader Request，选填邮件只用于该建议的后续联系，不得自动订阅 newsletter；ComfyUI 是可选视觉辅助，人物、传说、译名和画面依据必须先完成来源核查。
 - 已确认设计方向：全站采用“中国神话传说博物馆”体验体系——现代中性文化平台母体、每个 Collection 独立美术主题、全站统一的可信 Entry 阅读器。“博物馆”是策展与阅读隐喻，不扩展为世界神话平台，也不宣称实体馆藏或公共机构身份。国风不等于水墨、古籍或旧报纸皮肤；整页背景不足不阻断内容、导航、Schema 与阅读功能基础。
 - 已确认首发主题：第一个正式 Collection 为 `The Chinese Underworld / 中国阴间`；`Zhong Kui, the Demon Queller` 是 M1 Featured Entry 与首批重点发布入口，但不代表整个中国阴间，也不被描述为阴间统治者。
 - 已确认国际化方向：英语继续使用根路径 `/`；未来简体中文试点使用 `/zh-hans/`，并只预留、不生成 `/zh-hant/`。试点先覆盖 Chinese Underworld Collection、Zhong Kui 与 Guide，按 locale 独立审核且不阻塞英语 MVP；当前未实施中文页面、语言切换、locale Schema 或 localized SEO。
@@ -123,7 +123,7 @@ Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者�
 
 - **The Chinese Underworld / 中国阴间**（已确认）
 - Defying Heaven（候选）
-- Strange Tales After Dark（候选）
+- Strange Tales from Liaozhai（只读研究推荐工作名，尚未确认；`Strange Tales After Dark` 最多作为候选副标题）
 
 ### 5.2 站内发现与单篇阅读链路
 
@@ -163,20 +163,15 @@ Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者�
 
 ### 5.4 首发建议
 
-不必等待 12 篇再上线。第一个正式 Collection 已确认为 `The Chinese Underworld / 中国阴间`；M1 先以钟馗作为 Featured Entry 验证“当前关注入口 -> Collection 阅读路径 -> 可信长文”的纵切片。下列 6 篇目前只是该首个 Collection 的研究/生产优先级候选，不是满足 M6 两个 Collection 门槛的最终六篇分配：
+不必等待 12 篇再上线。第一个正式 Collection 已确认为 `The Chinese Underworld / 中国阴间`；M1 先以钟馗作为 Featured Entry 验证“当前关注入口 -> Collection 阅读路径 -> 可信长文”的纵切片。当前真实 inventory 只有 `A Guide to the Chinese Underworld` 与 `Zhong Kui, the Demon Queller` 两篇 Entry，以及一个 Chinese Underworld Collection，三者都保持 `editorial-review`；published inventory 仍为 0/0。
 
-1. Zhong Kui, the Demon Queller（首批重点发布与 M1 Featured Entry）
-2. A Guide to Chinese Underworld Traditions
-3. Fengdu: The City of Ghosts
-4. Yanluo and the Ten Kings
-5. Meng Po and the Soup of Forgetfulness
-6. Black and White Impermanence
+[`007-second-collection-decision.md`](requirements/007-second-collection-decision.md) 已形成只读研究决策包。它建议把 `Strange Tales from Liaozhai` 作为第二 Collection 工作名，并将六篇 MVP 暂按 3+3 分配：Chinese Underworld 采用 Guide、Ten Kings 深入篇与 Zhong Kui；Liaozhai 采用文本导读、`Painted Skin` 与 `The Fighting Cricket`。这是编辑推荐，不是 Project owner 已确认决定，也没有创建新 Collection/Entry、稳定 ID、slug、关系、状态或视觉资产。
 
-Collection 的公开阅读顺序由最终研究结果决定，不必等同于生产优先级；体系导览可以在阅读路径中先于钟馗。MVP 仍计划至少 2 个合集页，但第二个 Collection 尚未确认，不得把候选自动升级为决定。
+Collection 的公开阅读顺序由最终研究结果决定，不必等同于生产优先级；当前建议分别为“Guide → Ten Kings → Zhong Kui”和“Liaozhai 导读 → Painted Skin → The Fighting Cricket”。Zhong Kui 可以继续作为 Featured Entry，不必位于公开阅读顺序首项。`The Fighting Cricket` 存在版本/底本风险，若 M6 前不能闭合，决策包建议以 `Nie Xiaoqian` 替换。Project owner 仍须确认 Collection 正式身份、六篇成员、工作标题、Featured 与顺序。
 
-这 6 个题目是编辑候选，不是已经完成研究的事实清单。进入写作前每篇都必须先通过 claim map、版本/locator、专业研究和关键术语门禁；中国阴间必须呈现为多时期、多地域、多文本与多传统叠加，而不是唯一地图或组织架构。The Met 的馆藏记录支持把钟馗称为 `Demon Queller`；本站将他作为驱鬼形象策展进中国阴间 Collection，但不默认写成十王之一、全中国共同认可的阴司官员或阴间统治者。边界入口见 [The Met 的钟馗馆藏记录](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia 教学资料](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)。现代游戏只能进入明确的现代改编/接受史层。`Meng Po`、`Black and White Impermanence` 等晚期或地方复合传统若找不到足够证据，就缩小主张、明确争议或替换选题，不能用“ancient”“自古统一”等叙事填空。
+所有新题目都是编辑候选，不是已经完成研究的事实清单。进入写作前每篇都必须先通过 claim map、版本/locator、专业研究和关键术语门禁；中国阴间必须呈现为多时期、多地域、多文本与多传统叠加，而不是唯一地图或组织架构。The Met 的馆藏记录支持把钟馗称为 `Demon Queller`；本站将他作为驱鬼形象策展进中国阴间 Collection，但不默认写成十王之一、全中国共同认可的阴司官员或阴间统治者。边界入口见 [The Met 的钟馗馆藏记录](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia 教学资料](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)。现代游戏只能进入明确的现代改编/接受史层。原候选 `Fengdu`、`Meng Po` 与 `Black and White Impermanence` 现建议延后；后两者等晚期或地方复合传统若找不到足够证据，就缩小主张、明确争议或替换选题，不能用“ancient”“自古统一”等叙事填空。
 
-第二个 Collection 必须在 M6 内容规划前由 Project owner 根据研究证据另行确认，并同步修订最终六篇分配，使两个 Collection 都有完整、可来源追溯的公开阅读路径；在身份、成员与视觉候选确定前，M6 远端预览保持阻塞。扩展到 12 篇时可再评估 `Defying Heaven`、`Strange Tales After Dark` 等相邻兴趣方向，但这些名称当前都不是既定路线承诺。
+第二个 Collection 必须在 M6 内容规划前由 Project owner 根据研究证据另行确认，才能修订最终六篇分配并建立两个可来源追溯的公开阅读路径；在身份、成员与视觉候选确定前，M6 远端预览保持阻塞。`Defying Heaven` 仍是后续候选；`Shan Hai Jing: An Illustrated Field Guide` 继续留在 Phase 2，而非仅凭视觉潜力提前挤入三篇 MVP 路径。
 
 ## 6. Success Metrics
 
@@ -275,7 +270,7 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
 
 - 增加静态站内搜索、筛选、术语表和来源索引。
 - 一次只增加一个相邻栏目，例如 *Shan Hai Jing: An Illustrated Field Guide*。
-- newsletter 每月给出 3 个候选题供投票。
+- 若未来希望通过 newsletter 做候选题投票，必须先作为新的用途扩展更新 consent、Privacy 和发送文案并取得独立授权；当前只同意“新文章与编辑精选”的订阅不得直接用于投票。
 - 可以测试少量联盟链接，但只推荐实际核查过的译本、研究书和相关作品；参考来源与购买推荐必须视觉分离并显示 disclosure。
 
 ### Phase 3：内容产品化（约 40–60 篇）
@@ -307,7 +302,7 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
   -> 合并同义请求
   -> 按合集、人物和类型归类
   -> 每月形成候选池
-  -> newsletter 投票
+  -> 编辑内部筛选；newsletter 投票仅在未来用途扩展另获 consent 后可选
   -> 编辑选择并发布
   -> 通知曾请求的读者（仅在其明确同意时）
   -> 比较阅读、分享、相关文章点击和订阅
@@ -325,8 +320,8 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
 - 能提供版本与具体定位的原典/馆藏、专业研究和现代资料来源。
 - 能核对中文/古汉语的研究校对，以及英文编辑或母语读者的质量反馈。
 - 若使用生成式视觉工具，可商用且许可清楚的模型、LoRA、字体和参考资产。
-- M2 技术与内容合同、固定运行时、依赖安装和本地应用初始化已经完成并由用户提交为本地基线 `f258227`；M3-U1–U5 已完成。M3-U4 的五个最终画布、四份 approved/current manifest 与首份 production record 是历史完成事实；终验发现 Hero v1 手部缺陷后，Project owner 又验收 Hero v2，v1 作为 non-current 历史保留。随后 Chinese Underworld Collection Hero 与 Guide Hero 以各自的 approved brief 闭合 desktop/mobile 构图、权利与五审、exact-canvas master、production record、repository source、approved/current manifest 与 versionless asset ID 绑定。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过自动门禁；六个逻辑资产各有唯一 approved/current，钟馗 Entry 的稳定 Hero ID 解析到 v2，Collection 与 Guide 的稳定 Hero ID 分别解析到自己的 v1。`sharp@0.35.4` 仍是唯一新增运行依赖，七份 current responsive rendition 的 50 个 AVIF/WebP 目标已实际生成/解码验证；CJK 默认门禁另把 `fontkitten@1.0.3` 与 `parse5@8.0.1` 固定为直接开发依赖，不进入浏览器运行时。M4 本地产品实现已经完成；U5A direct-only noindex 字体样张保持 42 图、10 字体、零 XML/JS 与 public 负边界，最终 8 页 × 三档基础浏览器矩阵及 Project owner 对全部 8 个页面的视觉判断也已通过。两份 Terminology 与四条馆藏标题 locale 已由 `Project owner (user-confirmed)` bilingual reviewer 批准；CJK 字符输入、SC/TC × 400/500/600 六份静态子集、OFL/RFN/FONTLOG、精确 `unicode-range`、hash/name/weight/cmap 与 HTML5 `lang` 门禁已经闭合。推荐顺序现为：先为 M5 建立独立详细需求并完成外部交互边界；再由 M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 `published` 决定，确认真实 HTTPS origin，实施 public artifact assembly；随后针对同一最终 public artifact 完成键盘/200%/偏好、故障、字体/跨平台、目标读者、视觉及本地性能 QA，生成 clean-source receipt，再经独立授权进入受保护 Vercel 预览；M7 承接生产发布、live smoke、回滚和真实流量基线。没有自有域名时，可在 M6 单独授权建立 Vercel 项目身份以确认稳定 production alias/hostname；这不等于预览或部署授权。public-release 的一个 Entry + 一个 Collection 只是技术门禁，不替代 M6/M7 产品验收；邮件、分析、表单与未来商业服务在各自独立里程碑前确认。
-- 上述 M6 最终 QA 与 receipt 必须从同一 clean committed revision 重新构建并执行；dirty source 上的检查只能形成 nondeployable 诊断记录，提交后不得复用。M5 详细需求还须明确 Web Vitals/RUM 的数据生产者、字段、同意、保留与退出边界，或把该能力显式列为 M7 独立实现，避免 M7 的 p75 基线没有来源。
+- M2 技术与内容合同、固定运行时、依赖安装和本地应用初始化已经完成并由用户提交为本地基线 `f258227`；M3-U1–U5 已完成。M3-U4 的五个最终画布、四份 approved/current manifest 与首份 production record 是历史完成事实；终验发现 Hero v1 手部缺陷后，Project owner 又验收 Hero v2，v1 作为 non-current 历史保留。随后 Chinese Underworld Collection Hero 与 Guide Hero 以各自的 approved brief 闭合 desktop/mobile 构图、权利与五审、exact-canvas master、production record、repository source、approved/current manifest 与 versionless asset ID 绑定。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过自动门禁；六个逻辑资产各有唯一 approved/current，钟馗 Entry 的稳定 Hero ID 解析到 v2，Collection 与 Guide 的稳定 Hero ID 分别解析到自己的 v1。`sharp@0.35.4` 仍是唯一新增运行依赖，七份 current responsive rendition 的 50 个 AVIF/WebP 目标已实际生成/解码验证；CJK 默认门禁另把 `fontkitten@1.0.3` 与 `parse5@8.0.1` 固定为直接开发依赖，不进入浏览器运行时。M4 本地产品实现已经完成；U5A direct-only noindex 字体样张保持 42 图、10 字体、零 XML/JS 与 public 负边界，最终 8 页 × 三档基础浏览器矩阵及 Project owner 对当时全部 8 个页面的视觉判断也已通过。两份 Terminology 与四条馆藏标题 locale 已由 `Project owner (user-confirmed)` bilingual reviewer 批准；CJK 字符输入、SC/TC × 400/500/600 六份静态子集、OFL/RFN/FONTLOG、精确 `unicode-range`、hash/name/weight/cmap 与 HTML5 `lang` 门禁已经闭合。M5-U2 provider-neutral 合同/Fake 与 M5-U3 inert Newsletter、Reader Request、Privacy 已完成；Buttondown 审核中账户与 Tally Free 未发布草稿只完成 U4 账户准备，下一停点是 [`006-external-interactions.md`](requirements/006-external-interactions.md) 规定的 Buttondown 审核结果，以及对 Tally 发布、精确 action/link、合成数据、回查与删除的独立授权。其后再由 M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 `published` 决定，确认真实 HTTPS origin，实施 public artifact assembly；随后针对同一最终 public artifact 完成键盘/200%/偏好、故障、字体/跨平台、目标读者、视觉及本地性能 QA，生成 clean-source receipt，再经独立授权进入受保护 Vercel 预览；M7 承接生产发布、live smoke、回滚和真实流量基线。Project owner 当前明确不购买自定义域名；M6 可在单独授权下建立 Vercel 项目身份并确认稳定 production alias/hostname，这不等于预览或部署授权，generated preview/commit URL 也不得成为 canonical。public-release 的一个 Entry + 一个 Collection 只是技术门禁，不替代 M6/M7 产品验收；Buttondown/Tally 均未接入或启用，Plausible 仍留 U5。
+- 上述 M6 最终 QA 与 receipt 必须从同一 clean committed revision 重新构建并执行；dirty source 上的检查只能形成 nondeployable 诊断记录，提交后不得复用。M5 推荐合同当前把 Web Vitals/RUM 显式列为 M7 的独立单一生产者，并在 [`006-external-interactions.md`](requirements/006-external-interactions.md) 记录候选、字段、同意、保留与退出边界；provider-neutral 上限已确认，RUM 供应商选择与真实账户验收仍待 M7，不能把 Plausible 或实验室性能数据冒充生产 p75。
 
 上述推荐路线中的“M7 生产发布”同时包含发布后只读基线与检查，不以成功触发部署作为里程碑收口。
 
@@ -345,9 +340,9 @@ Collection 的公开阅读顺序由最终研究结果决定，不必等同于生
 
 以下问题不阻塞本轮文档生成，但会影响后续实现或发布：
 
-- `Mythic China` 的公开品牌名、域名和商标可用性是否通过正式核查。
+- `Mythic China` 的公开品牌名和商标可用性是否通过正式核查；Project owner 当前明确不购买自定义域名，未来迁移另行决策。
 - 首次远端预览所用 Vercel 账户/项目由谁持有，以及稳定 production alias/hostname、预览保护、预览/生产授权、回滚和退出路径；经 Project owner 确认后，其 HTTPS origin 才能写入 `MYTHIC_CHINA_SITE_ORIGIN`。当前没有 Vercel 项目或部署。
-- 第二个首发 Collection 的身份尚未确认；须在 M6 前从经研究验证的候选中另行选择，但当前不降低“至少 2 个完整合集页”的预览门槛。
+- 第二个首发 Collection 的身份尚未确认；[`007-second-collection-decision.md`](requirements/007-second-collection-decision.md) 推荐 `Strange Tales from Liaozhai` 与 3+3 六篇分配，但 Collection 名称/ID、成员、Featured、顺序及《促织》/聂小倩取舍仍须 Project owner 决定，当前不降低“至少 2 个完整合集页”的预览门槛。
 - 后续正式 Entry 内容及 M6 批量资产的英文编辑、研究校对和图片文化审校由谁承担最终签字；M3 钟馗样例的五项资产审核已由 Project owner 完成。
-- 订阅、分析和选题表单分别采用哪一服务，以及适用隐私政策和地区要求。
+- [`006-external-interactions.md`](requirements/006-external-interactions.md) 已把 Buttondown/Tally 条件接受为 U4 的 Newsletter/Reader Request transport 方向，并记录公开联系、美国处理/DPA 边界、持久 Respondent ID 与人工清理风险。Buttondown `mythic-china` 账户仍在人工审核；Tally Free 账户和未发布草稿结构已由 Project owner 确认。真实 action/link、账户级条款、发布、导出/删除和供应商行为仍待 U4 实证；Plausible 继续留在 U5，M7 RUM 生产者仍未选择，三者均未接入或启用。
 - 本地化实施仍待确认的细节包括内容存储形状、localized slug、逐 locale 状态字段、简中试点之外的页面范围、`x-default`/feed 规则、切换器位置与偏好持久化，以及完整简中页面所需的字符集扩展、子集规模、逐 locale 审校与跨平台字体策略；当前英语 review 投影内少量 CJK 的工具、字符集和 cmap 门禁已经闭合。已确认的路径与语义边界见 [`005-localized-content-pilot.md`](requirements/005-localized-content-pilot.md)。

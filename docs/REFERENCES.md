@@ -105,6 +105,21 @@
 
 稳定内容结论：`The Chinese Underworld / 中国阴间` 是首个正式 Collection；The Met 支持 `Zhong Kui, the Demon Queller` 这一身份，本站据此把钟馗作为驱鬼形象策展为 Featured Entry。该收录关系不表示他是阴间统治者、十王之一或跨传统固定阴司官员；`At the Threshold` 仅是本站策展标签。具体文本若赋予其判官、鬼王或其他职司，必须限定到该文本、时期和传统。
 
+### 第二个 MVP Collection 决策研究
+
+以下资料访问于 2026-09-03，用于 [`007-second-collection-decision.md`](requirements/007-second-collection-decision.md) 的候选级只读比较；它们没有创建 Collection/Entry、Source/Claim、译文、图片或状态：
+
+- [Library of Congress: The Strange Tales from Liaozhai](https://blogs.loc.gov/international-collections/2018/10/the-strange-tales-from-liaozhai/) — 用途：蒲松龄、早清文学语境、题材范围、具体篇目与馆藏版本入口；不是逐篇原典 locator 或完整学术结论。
+- [CText《聊斋志异》影印资源](https://ctext.org/library.pl?if=en&remap=gb&res=107844)、[OCR 文本](https://ctext.org/wiki.pl?if=en&res=948427)、[〈促织〉](https://ctext.org/wiki.pl?chapter=762770&if=en)与[〈聂小倩〉](https://ctext.org/wiki.pl?chapter=957720&if=en) — 用途：底本发现与篇目定位。CText 明示 OCR 可能含错，英语层也不能作为公开译文；必须回到页图/可靠批校本和人工双语复核。
+- [Judith Zeitlin, *Historian of the Strange*](https://www.degruyterbrill.com/document/doi/10.1515/9780804765954/html?lang=en) — Stanford University Press 专著页面。用途：Liaozhai 文类、叙事与文化语境的研究入口；受版权保护内容只按许可引用与概述。
+- [Project Gutenberg: Giles 两卷合本](https://www.gutenberg.org/ebooks/43629) — 用途：旧英译比较；页面只声明美国公版，不形成全球复用结论，也不把该译本当作本站可靠译文底稿。
+- [HSUHK: Giles 英译与性别解释研究](https://scholars.hsu.edu.hk/en/publications/repressed-sexual-modernity-a-case-study-of-herbert-giles1845-1935/) — 同行评审论文记录。用途：证明 `Painted Skin` 的翻译层需要单独审查，不将旧英译视为中性容器。
+- [Liu, “The poetics of power and submission”](https://www.tandfonline.com/doi/full/10.1080/23311983.2026.2626662) — 2026 开放获取论文。用途：提出《促织》离魂/变形情节可能属于后出版本这一待交叉验证主张；单篇近期研究不能直接成为本站定论，正式采用前仍须可靠批校本/手稿研究。
+- [LOC 1628–1644《山海经》图本](https://www.loc.gov/item/2001530410/)、[CText《山海经》](https://ctext.org/shan-hai-jing/zh)与 UC Press [*A Chinese Bestiary*](https://www.ucpress.edu/books/a-chinese-bestiary) — 用途：核对 Shan Hai Jing 候选的文本、图本与研究可行性；晚明图像不能伪装成先秦原典插图，现代译文/图版受版权保护。该栏目继续按 PRODUCT 留在 Phase 2。
+- University of Chicago Press [Anthony C. Yu《西游记》卷一](https://press.uchicago.edu/ucp/books/book/chicago/J/bo12079590.html)与 Project Gutenberg [《西游记》中文本](https://www.gutenberg.org/ebooks/23962) — 用途：评估 `Defying Heaven` 中单一《西游记》路径的来源可行性；现代英译受版权保护，跨悟空/哪吒等对象仍会引入多套文本、宗教与接受史边界。
+
+研究推荐为 `Strange Tales from Liaozhai`，并提出两个 Collection 各三篇的阅读路径；推荐、工作标题和《促织》/聂小倩取舍均待 Project owner 决策。来源可访问不等于内容已研究完成或图片可复用。
+
 ### M3-U2 钟馗视觉证据与参考权利
 
 以下资料访问于 2026-08-28，已物化为钟馗 Source/Claim 与随后在 M3-U3 获批的 visual brief；对象记录只证明对应作品呈现了什么，不建立唯一正典、固定服制或绝对起源：
@@ -184,11 +199,14 @@ Guide Hero 只从同一来源链抽取“空白记录表面、行政法庭空间
 - [Next.js Static Exports](https://nextjs.org/docs/app/guides/static-exports)、[MDX](https://nextjs.org/docs/app/guides/mdx/) 与 [Backend for Frontend](https://nextjs.org/docs/app/guides/backend-for-frontend) — Next.js 官方文档。用途：Next.js 静态能力、限制和未来后端边界比较。
 - [Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare caching](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Lab and field data differences](https://web.dev/articles/lab-and-field-data-differences) — 用途：全球交付候选与海外实测原则；供应商宣传不替代真实页面测试。
 
-Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标；Astro 输出与 SEO 核心仍保持供应商中立，不新增 adapter。当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、账号操作授权或部署事实；经 Project owner 确认后，该 alias/hostname 的 HTTPS origin 才能写入 `MYTHIC_CHINA_SITE_ORIGIN`，每次 deployment 的 generated/branch URL 不得成为 canonical。Cloudflare 保留为历史比较资料，不是当前实施目标。Next.js 仅在动态产品需求被验证后再重评。
+Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并于 2026-09-02 明确当前不购买自定义域名；Astro 输出与 SEO 核心仍保持供应商中立，不新增 adapter。当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、账号操作授权或部署事实；M6 可在单独授权后确认稳定 production hostname 并将其 HTTPS origin 写入 `MYTHIC_CHINA_SITE_ORIGIN`，每次 deployment 的 generated preview/commit URL 不得成为 canonical。未来自定义域名与邮箱迁移另行决策。Cloudflare 保留为历史比较资料，不是当前实施目标。Next.js 仅在动态产品需求被验证后再重评。
 
-### Newsletter
+### M5 外部交互与隐私
 
-- [Building your subscriber base](https://docs.buttondown.com/building-your-subscriber-base) — Buttondown 官方文档。用途：静态订阅表单候选。正式选择前仍需核对隐私、价格、导出和地区要求。
+- [Gmail 删除与清空 Trash](https://support.google.com/mail/answer/7401?hl=en_as) 与 [Google 数据保留与删除过程](https://policies.google.com/technologies/retention?hl=en-US) — Google 官方资料。用途：区分活动邮箱/Trash 的人工删除动作与 Google 系统级删除过程；项目采用“请求关闭 60 天后删除活动邮箱与 Trash，法律要求除外”的运营期限，不把它表述成 Google 备份级硬删除 SLA。
+- [Building your subscriber base](https://docs.buttondown.com/building-your-subscriber-base)、[Double opt-in](https://docs.buttondown.com/double-opt-in)、[Data Processing Agreement](https://buttondown.com/legal/data-processing-agreement)、[Subscriber cleanup](https://docs.buttondown.com/subscriber-cleanup)、[Open tracking](https://docs.buttondown.com/open-tracking) 与 [Click tracking](https://docs.buttondown.com/click-tracking) — Buttondown 官方文档。用途：核对静态订阅表单、double opt-in、美国处理/DPA、soft/hard delete 与 tracking 边界；访问于 2026-09-02。Project owner 已有条件接受 Buttondown、DPA 与美国数据处理方向；double opt-in 必须开启，open/click tracking 从首次发送前并在之后保持关闭。另据 Project owner 于 2026-09-03 提供的账户现场事实，`mythic-china` 已创建但仍在人工审核，没有导入订阅者、发送邮件或连接站点；该现场事实不是官网证据，也不提供真实 action、provider mapping 或实际处理验证。
+- [Tally GDPR and DPA](https://tally.so/help/gdpr)、[Respondent ID](https://tally.so/help/prevent-duplicate-submissions)、[Submissions data retention](https://tally.so/help/submissions-data-retention)、[Delete and recover form data](https://tally.so/help/how-to-delete-and-recover-form-data) 与 [Plans and pricing](https://tally.so/help/plans-and-pricing) — Tally 官方文档。用途：核对比利时/Google Cloud Belgium 数据位置、跨同 workspace 的 localStorage Respondent ID、自动/人工 retention、Trash/Empty Trash 与计划边界；访问于 2026-09-02。Project owner 已有条件接受持久 Respondent ID 与低成本人工清理方案：hyc 每 28 天删除所有已满 60 天的提交并同次 Empty Trash，按时执行时形成约 60–88 天操作窗口；hyc 是唯一负责人且没有独立备份，接受漏执行会延长保留时间的风险。另据 Project owner 于 2026-09-03 提供的账户现场事实，Tally 使用 Free 计划且 Reader Request 草稿仍未发布；字段结构已准备，但 hosted link、submission、通知/集成、导出/删除和 Respondent ID 真实行为均未验证。该现场事实与官网供应商能力证据分开。
+- [Plausible compliance](https://plausible.io/docs/compliance)、[Data policy](https://plausible.io/data-policy) 与 [Script options](https://plausible.io/docs/script-extensions) — Plausible 官方文档。用途：记录无 Cookie 宣称、URL/referrer/日级访客哈希、数据地区和脚本选项边界；访问于 2026-09-02。Plausible 明确留在 U5，U3 未接任何脚本、事件、远端请求或账户。
 
 ## 6. 可选视觉辅助（ComfyUI）
 

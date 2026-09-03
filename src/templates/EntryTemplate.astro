@@ -2,6 +2,7 @@
 import { render, type CollectionEntry } from "astro:content";
 
 import ManifestHeroPicture from "../components/ManifestHeroPicture.astro";
+import ReaderRequest from "../components/ReaderRequest.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
 
@@ -277,6 +278,8 @@ const factCheckedLabel = entry.data.lastFactCheckedAt
           </nav>
         )
       }
+
+      <ReaderRequest pageId={entry.id} />
     </div>
   </article>
 </SiteLayout>

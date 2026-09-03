@@ -9,7 +9,9 @@ import { imageMetadata } from "astro/assets/utils";
 import {
   assertReviewCssResourcePolicy,
   assertReviewHtmlResourcePolicy,
+  assertReviewInteractionSurface,
   assertReviewOutputArtifactExtensions,
+  assertReviewPrivacyNotice,
   assertReviewResourceInventory,
   classifyReviewOutputEntry,
   readReviewHtmlStyleResources,
@@ -42,6 +44,10 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
 const outputRoot = resolve(projectRoot, "dist");
 const navigationTargets = ["/", "/explore/", "/collections/", "/about/"];
+const reviewEntryIdsByOutputPath = new Map([
+  ["explore/chinese-underworld-guide/index.html", "chinese-underworld-guide"],
+  ["explore/zhong-kui/index.html", "zhong-kui"],
+]);
 const fontInventory = JSON.parse(
   await readFile(
     resolve(projectRoot, "src", "assets", "fonts", "font-assets.json"),
@@ -265,6 +271,11 @@ for (const relativePath of htmlFiles) {
   resourceRecordsByHtmlPath.set(
     relativePath,
     assertReviewHtmlResourcePolicy(html, relativePath),
+  );
+  assertReviewInteractionSurface(
+    html,
+    relativePath,
+    reviewEntryIdsByOutputPath.get(relativePath) ?? null,
   );
   styleResourcesByPath.set(relativePath, readReviewHtmlStyleResources(html));
   assertExactReviewNavigation(html, relativePath);
@@ -512,6 +523,7 @@ const guideHtml = htmlByPath.get("explore/chinese-underworld-guide/index.html");
 const exploreIndexHtml = htmlByPath.get("explore/index.html");
 const collectionsIndexHtml = htmlByPath.get("collections/index.html");
 const aboutHtml = htmlByPath.get("about/index.html");
+const privacyHtml = htmlByPath.get("privacy/index.html");
 if (
   zhongKuiHtml === undefined ||
   collectionHtml === undefined ||
@@ -520,10 +532,12 @@ if (
   exploreIndexHtml === undefined ||
   collectionsIndexHtml === undefined ||
   aboutHtml === undefined ||
+  privacyHtml === undefined ||
   typeSpecimenHtml === undefined
 ) {
   throw new Error("M4 review focal page output is incomplete.");
 }
+assertReviewPrivacyNotice(privacyHtml, "privacy/index.html");
 if (
   !guideHtml.includes(
     '<p class="source-list__chinese-title" lang="zh-Hant">陰間</p>',
@@ -625,6 +639,7 @@ if (
 for (const [route, html] of [
   ["/", homeHtml],
   ["/about/", aboutHtml],
+  ["/privacy/", privacyHtml],
   ["/collections/chinese-underworld/", collectionHtml],
   ["/explore/chinese-underworld-guide/", guideHtml],
   ["/explore/zhong-kui/", zhongKuiHtml],
@@ -881,5 +896,5 @@ if (
 }
 
 process.stdout.write(
-  `Verified ${htmlFiles.length} noindex M4 review pages including the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
+  `Verified ${htmlFiles.length} noindex review pages including Privacy and the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, inactive reader interactions, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
 );

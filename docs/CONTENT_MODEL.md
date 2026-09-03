@@ -332,7 +332,14 @@ M3-U3 对此前自然语言字段冻结以下最小机器形状，后续生产�
 
 ### 2.7 Reader Request
 
-首版不在网站仓库保存真实请求；以下是外部表单或未来隔离接口的最小合同：
+首版不在网站仓库保存真实请求。浏览器 submission 与 provider/internal record 必须分开；浏览器只可提交：
+
+```yaml
+pageId: meng-po
+requestedTopic: A short reader suggestion
+```
+
+外部表单或未来隔离接口生成的最小 record 为：
 
 ```yaml
 requestId: provider-generated-id
@@ -346,9 +353,11 @@ normalizedTopicId: null
 ```
 
 - `requestedTopic` 设置明确长度上限，不允许富文本或上传。
-- `email` 可选；填写邮箱必须显示用途并要求 `emailConsent: true`。
+- `email` 可选；填写邮箱必须显示用途并要求 `emailConsent: true`。该同意只用于就本次 Reader Request 后续联系，不构成 Newsletter 订阅同意。
+- `requestId`、`createdAt`、`status` 与 `normalizedTopicId` 不得成为浏览器字段；其中时间由 provider/server 受信任时钟生成。
 - analytics 事件不包含建议原文或邮箱。
 - 归一化、票数和编辑排期属于内部流程，不自动承诺发布。
+- M5 的精确字段限制、传输与保留边界见 [`006-external-interactions.md`](requirements/006-external-interactions.md)；U2 provider-neutral 字段合同与 U3 inactive review UI 已完成。Tally 已被 Project owner 有条件接受为 U4 transport 方向，其持久 Respondent ID 与人工清理风险也已接受：hyc 每 28 天删除所有已满 60 天的提交并在同次操作中 Empty Trash，按时执行时形成约 60–88 天操作窗口；hyc 是唯一负责人且没有独立备份，漏执行会延长保留时间。外部 Tally Free 账户和匹配字段合同的未发布草稿已准备，但 hosted link、供应商记录、提交和真实处理仍未建立；草稿结构不证明供应商行为，Tally ID 继续不得进入 canonical Record 或 analytics。
 
 ## 3. 稳定 ID 与关系
 

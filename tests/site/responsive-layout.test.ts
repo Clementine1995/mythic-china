@@ -119,4 +119,32 @@ describe("responsive review layout", () => {
       "grid-template-columns: minmax(0, 1fr);",
     );
   });
+
+  it("keeps inert interaction controls legible and shrinkable", async () => {
+    const globalCss = await readFile(
+      resolve(projectRoot, "src", "styles", "global.css"),
+      "utf8",
+    );
+
+    expect(globalCss).toMatch(
+      /\.interaction-field input,\s*\.interaction-preview button\s*\{[^}]*min-height: 2\.75rem;/su,
+    );
+    expect(globalCss).toMatch(
+      /\.interaction-preview :disabled\s*\{[^}]*opacity: 1;/su,
+    );
+
+    const mobileStart = globalCss.indexOf("@media (max-width: 47.99rem)");
+    const mobileEnd = globalCss.indexOf(
+      "/* Motion accessibility. */",
+      mobileStart,
+    );
+    const mobileCss = globalCss.slice(mobileStart, mobileEnd);
+    const newsletterControls = mobileCss.match(
+      /\.newsletter-form__controls\s*\{([^}]*)\}/u,
+    );
+
+    expect(newsletterControls?.[1]).toContain(
+      "grid-template-columns: minmax(0, 1fr);",
+    );
+  });
 });

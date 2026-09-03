@@ -8,7 +8,9 @@ import { describe, expect, it } from "vitest";
 import {
   assertReviewCssResourcePolicy,
   assertReviewHtmlResourcePolicy,
+  assertReviewInteractionSurface,
   assertReviewOutputArtifactExtensions,
+  assertReviewPrivacyNotice,
   assertReviewResourceInventory,
   classifyReviewOutputEntry,
 } from "../../scripts/review-output-policy.mjs";
@@ -17,7 +19,200 @@ function reviewDocument(body, head = "") {
   return `<!doctype html><html lang="en"><head>${head}<meta name="robots" content="noindex, nofollow"></head><body>${body}</body></html>`;
 }
 
+function newsletterFooter() {
+  return `<footer class="site-footer">
+    <section class="newsletter-form page-shell" data-review-interaction="newsletter" data-review-state="inactive">
+      <label for="footer-newsletter-email">Email address</label>
+      <input id="footer-newsletter-email" type="email" autocomplete="email" disabled>
+      <button type="button" disabled>Subscribe</button>
+      <p>Receive new Mythic China stories and occasional editorial selections, no more than twice a month.</p>
+      <p>subscriptions are not open. When they open, confirm your subscription and unsubscribe from any email.</p>
+      <a href="/privacy/">Privacy Notice</a>
+    </section>
+  </footer>`;
+}
+
+function readerRequest(pageId = "entry-one", extra = "") {
+  return `<section class="entry-section reader-request" data-review-interaction="reader-request" data-review-state="inactive" data-page-id="${pageId}">
+    <p>What should we explore next? Topic or tale is required. Email is optional.</p>
+    <p>This does not subscribe me to the newsletter.</p>
+    ${extra}
+    <button type="button" disabled>Reader Requests are not open</button>
+    <a href="/privacy/">Privacy Notice</a>
+  </section>`;
+}
+
 describe("review output resource policy", () => {
+  it("accepts the exact inactive interaction surfaces", () => {
+    const entryHtml = reviewDocument(`
+      <main>
+        <article class="entry-page">
+          <section class="source-section">Sources</section>
+          <nav><h2 id="collections-heading">Collection</h2></nav>
+          <nav><h2 id="related-heading">Related</h2></nav>
+          ${readerRequest()}
+        </article>
+      </main>
+      ${newsletterFooter()}
+    `);
+    const ordinaryHtml = reviewDocument(
+      `<main>Ordinary page</main>${newsletterFooter()}`,
+    );
+
+    expect(() =>
+      assertReviewInteractionSurface(
+        entryHtml,
+        "explore/entry-one/index.html",
+        "entry-one",
+      ),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewInteractionSurface(ordinaryHtml, "about/index.html"),
+    ).not.toThrow();
+  });
+
+  it.each([
+    [
+      "missing Newsletter",
+      reviewDocument('<main>Page</main><footer class="site-footer"></footer>'),
+      null,
+    ],
+    [
+      "Newsletter outside Footer",
+      reviewDocument(
+        `<main>Page</main>${newsletterFooter().replace('<footer class="site-footer">', '<footer class="site-footer"></footer>')}`,
+      ),
+      null,
+    ],
+    [
+      "Reader Request outside Entry",
+      reviewDocument(`<main>${readerRequest()}</main>${newsletterFooter()}`),
+      null,
+    ],
+    [
+      "wrong Reader Request page ID",
+      reviewDocument(
+        `<main><article class="entry-page">${readerRequest("other-entry")}</article></main>${newsletterFooter()}`,
+      ),
+      "entry-one",
+    ],
+    [
+      "Reader Request before Sources",
+      reviewDocument(
+        `<main><article class="entry-page">${readerRequest()}<section class="source-section">Sources</section></article></main>${newsletterFooter()}`,
+      ),
+      "entry-one",
+    ],
+    [
+      "Reader Request with local fields",
+      reviewDocument(
+        `<main><article class="entry-page">${readerRequest("entry-one", '<input type="text" disabled>')}</article></main>${newsletterFooter()}`,
+      ),
+      "entry-one",
+    ],
+    [
+      "Newsletter with an extra provider link",
+      reviewDocument(
+        `<main>Page</main>${newsletterFooter().replace("</section>", '<a href="https://buttondown.example/subscribe">Subscribe</a></section>')}`,
+      ),
+      null,
+    ],
+    [
+      "Newsletter with an extra field type",
+      reviewDocument(
+        `<main>Page</main>${newsletterFooter().replace("</section>", "<select disabled><option>List</option></select></section>")}`,
+      ),
+      null,
+    ],
+    [
+      "unknown interaction marker",
+      reviewDocument(
+        `<main><section data-review-interaction="provider-signup"></section></main>${newsletterFooter()}`,
+      ),
+      null,
+    ],
+    [
+      "unregistered control outside Newsletter",
+      reviewDocument(
+        `<main><button type="button">Unexpected</button></main>${newsletterFooter()}`,
+      ),
+      null,
+    ],
+    [
+      "provider link outside an interaction marker",
+      reviewDocument(
+        `<main><a href="https://forms.tally.so/r/example">Open form</a></main>${newsletterFooter()}`,
+      ),
+      null,
+    ],
+    [
+      "capitalized fake Newsletter success",
+      reviewDocument(
+        `<main>Page</main>${newsletterFooter().replace("subscriptions are not open", "Successfully subscribed; subscriptions are not open")}`,
+      ),
+      null,
+    ],
+    [
+      "capitalized fake Reader Request success",
+      reviewDocument(
+        `<main><article class="entry-page"><section class="source-section">Sources</section>${readerRequest("entry-one", "<p>Successfully submitted</p>")}</article></main>${newsletterFooter()}`,
+      ),
+      "entry-one",
+    ],
+  ])("rejects %s", (_label, html, expectedEntryId) => {
+    expect(() =>
+      assertReviewInteractionSurface(
+        html,
+        "fixture/index.html",
+        expectedEntryId,
+      ),
+    ).toThrow();
+  });
+
+  it("accepts the visible Privacy review contract and rejects a mailto surface", () => {
+    const privacyCopy = `
+      <article class="privacy-page page-shell" data-review-notice="privacy">
+        <p>Mythic China is a site brand operated by hyc in China.</p>
+        <address>huyichen2019@gmail.com</address>
+        <p>Retain correspondence for 60 days after a request is closed, unless a longer retention period is required by law.</p>
+        <p>We are not currently accepting newsletter sign-ups and are not currently accepting Reader Requests.</p>
+        <p>Buttondown uses buttondown.com; open and click tracking will remain off before the first send.</p>
+        <p>Tally uses tally.so, stores form data in Google Cloud Belgium, and creates a persistent Respondent ID. Deleting provider records does not remove a Respondent ID. every 28 days, delete records that are at least 60 days old and empty Tally Trash in the same operation, producing an expected 60 to 88 days window. The sole operator is hyc, with no independent backup; a missed operation can extend that period.</p>
+        <p>Plausible is not enabled; its planned service domain is plausible.io.</p>
+      </article>`;
+    const validHtml = reviewDocument(
+      `<main id="main-content">${privacyCopy}</main>${newsletterFooter()}`,
+    );
+    const mailtoHtml = reviewDocument(
+      `<main id="main-content">${privacyCopy.replace("huyichen2019@gmail.com", '<a href="mailto:huyichen2019@gmail.com">huyichen2019@gmail.com</a>')}</main>${newsletterFooter()}`,
+    );
+    const outsideMainHtml = reviewDocument(
+      `${privacyCopy}<main id="main-content"></main>${newsletterFooter()}`,
+    );
+    const trackingEnabledHtml = reviewDocument(
+      `<main id="main-content">${privacyCopy.replace("open and click tracking will remain off before the first send", "tracking may be enabled")}</main>${newsletterFooter()}`,
+    );
+    const retainedTrashHtml = reviewDocument(
+      `<main id="main-content">${privacyCopy.replace("empty Tally Trash in the same operation", "leave deleted records in Trash")}</main>${newsletterFooter()}`,
+    );
+
+    expect(() =>
+      assertReviewPrivacyNotice(validHtml, "privacy/index.html"),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(mailtoHtml, "privacy/index.html"),
+    ).toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(outsideMainHtml, "privacy/index.html"),
+    ).toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(trackingEnabledHtml, "privacy/index.html"),
+    ).toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(retainedTrashHtml, "privacy/index.html"),
+    ).toThrow();
+  });
+
   it("allows only the fixed review artifact extension inventory", () => {
     expect(() =>
       assertReviewOutputArtifactExtensions([

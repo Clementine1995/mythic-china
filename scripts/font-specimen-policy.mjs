@@ -13,6 +13,7 @@ export const expectedReviewHtmlFiles = Object.freeze(
     "explore/index.html",
     "explore/zhong-kui/index.html",
     "index.html",
+    "privacy/index.html",
     fontSpecimenOutputPath,
   ].sort(),
 );

@@ -2,7 +2,9 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；当前 11 个精确画布 master、11 份 repository source rendition、四份 production record、七份 manifest 版本记录、六个 approved/current 逻辑资产及七份 current responsive rendition 的 50 个目标均有既有验证证据。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当前 8 页判断均已闭合。当前完成事实绑定未提交工作树；`public` intent、runner、页面/endpoint、deployable artifact、`ready/published` 内容、远端环境和发布都不存在。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 只承接生产、live smoke、回滚、线上地区复核与 RUM/p75。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；当前 11 个精确画布 master、11 份 repository source rendition、四份 production record、七份 manifest 版本记录、六个 approved/current 逻辑资产及七份 current responsive rendition 的 50 个目标均有既有验证证据。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当前 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`，当前 HEAD、`main` 与 tracking ref 对齐；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。`public` intent、runner、页面/endpoint、deployable artifact、`ready/published` 内容、远端环境和发布都不存在。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 只承接生产、live smoke、回滚、线上地区复核与 RUM/p75。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+
+M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已在当前工作树完成；当前 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。Buttondown `mythic-china` 已创建但仍在人工审核，Tally Free 账户与未发布 Reader Request 草稿已准备；两者仍只是 U4 条件方向，均未接入站点、提供 action/link 或处理数据。Plausible 留 U5；项目仍没有真实 supplier transport、网络请求或 public artifact。
 
 Guide Hero 生产闭环最初直接接续历史基线 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的未提交 Collection Hero 与本地化合同工作树；该生产批次没有创建分支、worktree、旁路项目或仓库副本，也未执行 fetch 或 Git 写操作。后续只读核查发现这些改动已进入本地提交 `a3194d0d59b605cf7a5fcfc5d2d55166c374e13b`；Project owner 随后授权继续并创建来源复核提交 `d60691a`。上述历史批次未执行 fetch 或 push。M4-U5A 开始时，只读核查确认 HEAD、`main` 与本地 `origin/main` 已在本任务前由 Project owner 对齐到 `e2893d14d4960f71fe75bd240971aaa88656511c`（`update`），工作树干净；本任务不重复或改写该提交，也未执行 fetch 或任何 Git 写操作。精确 HEAD、工作树和 tracking ref 每次仍须按本文件只读复核；本地 tracking ref 不单独证明后续服务器端状态。
 
@@ -152,7 +154,7 @@ git status --short --branch
 定向测试使用同一身份门禁和进程环境，例如：
 
 ```powershell
-& $mythicProjectCorepack pnpm exec vitest run tests/content/content-schemas.test.ts
+& $mythicProjectCorepack pnpm run test tests/content/content-schemas.test.ts
 ```
 
 ### CJK 字体子集生产
@@ -777,9 +779,48 @@ Project owner 要求在不降低打磨标准的前提下总检项目进度，并
 - 本次只修改权威文档，不新增命令，不运行 test/build/service，不改变内容状态、依赖、配置、资产或代码，也不执行 Git、Vercel、部署或发布写操作。
 - 固定 Node/Corepack 的 `pnpm run format:check` 通过；22 份 Markdown 的严格 UTF-8 与相对链接检查通过，原模板占位符检查无输出，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。
 
+### 2026-09-02 M5-U1 外部交互推荐合同
+
+Project owner 在提交 M4 后授权按原路线进入下一阶段。执行前只读复核确认 HEAD 与本地 `main` 为 `3983bee91ada4a286613ec702a8009a4f528af3f`，工作树、暂存区和未跟踪文件均为空；未 fetch 的本地 `origin/main` 仍为 `e2893d1`，因此本地只显示 ahead 1，不能据此判断服务器端状态。
+
+- 本单元只修改文档：新增 [M5 外部交互详细需求](docs/requirements/006-external-interactions.md)，并同步 README、PROJECT_RULES、PRODUCT、ARCHITECTURE、CONTENT_MODEL、001、003 与本文件中的 M4 clean baseline、Submission/Record、output allowlist、阶段顺序和指标责任；不修改业务代码、依赖、配置、运行入口或输出策略。
+- 当前推荐为 Buttondown 原生 newsletter POST；Tally 因跨同一 workspace 的持久 Respondent ID 降为有条件 Reader Request 候选；Plausible Hosted 是付费且带 URL/referrer/日级访客哈希与三年 dashboard 保留的最小分析候选。RUM/p75 明确延后 M7。上述选择仍待 Project owner 确认，不代表已创建账户、接受 DPA、购买计划或启用服务。
+- 当前没有新增真实命令。供应商账户、计划、域名、DPA、数据地区、公开隐私联系邮箱和 newsletter 频率未确认前，不创建可提交占位表单、不写生产 action/token、不安装 SDK，也不运行供应商联调。
+- 真实表单、邮件与 analytics 仍无可执行入口；自动测试在 M5-U2 建立后也只能使用 Fake/Mock，并必须让任何意外网络访问失败。
+- 当前固定 Node/Corepack 的 `pnpm run format:check` 通过；新增 006 后共 23 份 Markdown，严格 UTF-8、相对链接和原模板占位符检查通过，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。
+
+### 2026-09-02 M5-U2 纯合同与 Mock
+
+Project owner 要求先评估改动量，范围大时才新开同目录会话，并确认按 provider-neutral 方案继续 M5-U2。只读评估确认本单元只涉及三个纯 service 模块、一份集中单测、一个既有架构 inventory 断言与状态文档，不需要新会话、worktree、依赖、配置、页面或运行服务。
+
+- `src/services/newsletter.ts` 只接受读者 email；Buttondown 的 `embed="1"`、action 与账户后置 transport mapping。`reader-request.ts` 分开严格 Submission 与初始 provider-neutral Record，注入 published Entry ID allowlist，固定 trim 后 3–240 Unicode code point、email 254 字符/consent 配对，并拒绝浏览器伪造 provider 字段或 Tally Respondent ID。`analytics.ts` 只允许三个无 properties 事件，将当前站点 HTTPS URL 清洗为 origin + pathname 并清空 referrer；Plausible adapter/脚本和 reading state 均未提前实现。
+- 三类 Fake 只返回 accepted/recorded、validation-error、unavailable、rate-limited 或 timeout/unknown-result，不存储输入、不自动重试，也不包含真实 transport。集中测试用 fetch trap 证明零网络，并验证序列化失败结果不回显 email、建议或 query/token。
+- 定向命令使用受运行时守卫保护的 `pnpm run test tests/services/external-interactions.test.ts tests/architecture/project-boundaries.test.ts`，通过 2 个文件/26 项测试。旧的 `pnpm exec vitest` 示例在当前 Windows/Corepack 布局未解析到可执行名，故本文件将定向入口统一改为 package script；一次带额外 `--` 的尝试实际执行了全套 Vitest，不作为定向数字。
+- 最终固定 Node/Corepack 的完整 `pnpm run check` 通过 Prettier、ESLint、24 个测试文件/301 项测试、Astro check 77 文件零诊断、8 页 review build 与既有 output verifier；产物仍为 42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML 与零客户端 JavaScript。23 份 Markdown 的严格 UTF-8、相对链接、原模板占位符与 `git diff --check` 通过。
+- U2 执行期间只读回查发现本地 `origin/main` tracking ref 于 2026-09-02 14:04:40 +0800 由外部 push 从 `e2893d1` 更新到 `3983bee`，因此当前 HEAD、`main` 与 tracking ref 对齐；代理没有执行 fetch、add、commit、push、amend、分支或 worktree，也没有把该外部变化当作本批提交。
+- 本单元未修改页面、内容、Source/Claim/Terminology、视觉资产、字体、依赖、lockfile、Astro/运行配置或 output allowlist；未启动 dev/preview、创建账户、接受 DPA、访问真实供应商、写入数据、执行 Git 写操作、操作 Vercel、部署或发布。截至 U2 收口时，M5-U3 仍以公开隐私邮箱、页面文案和 supplier transport 决定为进入条件；后续决定和结果见下一节。
+
+### 2026-09-02 M5-U3 页面入口与隐私
+
+Project owner 指定 `Mythic China` 为站点品牌、`hyc` 为公开数据控制者标签、China（`CN`）为所在地区，并同意公开 `huyichen2019@gmail.com`。隐私权利通信在请求关闭 60 天后从活动邮箱与 Trash 删除，法律要求继续保留的情况除外；该期限不是 Google 底层/备份硬删除 SLA。Newsletter 只发送新文章与偶尔的编辑精选、每月不超过两次，使用 double opt-in 并每封可退订。Reader Request 使用独立 email consent，不得自动订阅。
+
+- Buttondown/Tally 被条件接受为 U4 transport 方向，但本单元不创建账户、action/link 或真实记录；Buttondown open/click tracking 从首次发送前并在之后保持关闭。Tally 规则为 `hyc` 每 28 天删除所有年龄不少于 60 天的提交并同次 Empty Trash，按时执行时约为 60–88 天；唯一负责人、无独立备份与漏执行风险已由 Project owner 接受。Plausible 留 U5，当前不接脚本、hook、事件或远端请求。
+- 新增 `src/components/NewsletterForm.astro`、`ReaderRequest.astro`、`src/pages/privacy.astro` 与 `tests/site/external-interactions-ui.test.ts`；修改 Footer、Entry template、全局 CSS、review page inventory、HTML5 output policy/verifier 和匹配 site tests。原生 disabled 控件有意不进入焦点顺序；可用的本地 Privacy link 继承全站可见 focus，页面没有 form、name/value、action、provider link、script 或 success 假状态。
+- output oracle 逐页要求 Footer 内恰有一个 Newsletter，只允许两个 Entry 在 Sources 与 Collection/Related reading paths 后各有一个匹配稳定 page ID 的 Reader Request，并拒绝未知 interaction marker、额外字段/控件、Buttondown/Tally/Plausible provider link、大小写假成功、不完整 Privacy、`mailto:` 与根外 Privacy notice。`/privacy/` 仍是 noindex review route，不进入 public SEO、Sitemap 或 RSS。
+- 固定 Node/Corepack 的定向入口通过 3 个文件/79 项测试；最终完整 `pnpm run check` 通过 Prettier、ESLint、25 文件/320 项测试、Astro 81 文件零诊断、9 页 build/output verifier，以及 42 Hero、10 WOFF2、零 XML 与零客户端 JavaScript 门禁。
+- 本单元不改内容、Source/Claim/Terminology、视觉资产、字体、内容状态、依赖、lockfile、配置或 public SEO/artifact 代码；未启动 dev/preview/browser、创建外部账户、接受账户级条款、提交表单、发送邮件、写分析、执行 Git 写操作、操作 Vercel、部署或发布。
+
+### 2026-09-03 M5-U4 账户准备现场同步
+
+Project owner 提供了在本任务前完成的 Buttondown/Tally 账户准备现场事实；详细且唯一的账户/草稿记录见 [`006-external-interactions.md`](docs/requirements/006-external-interactions.md#124-2026-09-03-账户准备与未发布草稿现场同步)。Buttondown `mythic-china` 仍在人工审核，没有导入订阅者、发送邮件或连接站点；Tally 使用 Free 计划，Reader Request 草稿仍未发布且没有 submission。该草稿的字段、条件 consent、CTA 与 thank-you page 与 provider-neutral 合同表面一致，但尚未通过发布后行为、导出或删除验证。
+
+本次仅同步文档，没有记录 Tally edit link、Buttondown action、token、凭据或恢复码；没有发布草稿、提交测试/真实数据、启用通知/集成、修改账户、启动服务、执行 Git 写操作、部署或发布。U4 只完成账户准备快照，仍须等待 Buttondown 审核结果，以及对 Tally 发布、精确 action/link、合成数据写入、停止、回查和删除的独立授权。
+
+- 匹配验证：固定 Node/Corepack 的 `pnpm run format:check` 通过；新增 007 后共 24 份 Markdown，严格 UTF-8、相对链接和原模板占位符检查通过，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。本次只修改文档，未改业务代码、内容对象、资产或 output policy，因此未重复运行 test/build。
+
 ## 数据库、外部服务与真实写入口
 
-当前均不适用。项目没有数据库、表单 endpoint、邮件、分析、支付或广告配置。未来接入任一能力时必须先建立需求文档，并在本文件增加：
+站点运行期当前均不适用。外部已有审核中 Buttondown 账户和 Tally Free 未发布草稿，但项目没有数据库、表单 endpoint、邮件、分析、支付、广告配置或任何可执行外部写入口。未来接入任一能力时必须先建立需求文档，并在本文件增加：
 
 - 环境和实际身份校验。
 - Mock/隔离测试入口。
@@ -790,7 +831,7 @@ Project owner 要求在不降低打磨标准的前提下总检项目进度，并
 
 ## 发布
 
-Vercel 已被选为未来静态托管目标，但当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、预览环境、生产环境或可执行部署命令。M4 已完成 noindex 本地产品实现、published-only 投影、U4A public/SEO 纯 builder、两组 approved/current Hero、正式字体静态链、U5A 样张、最终三档基础矩阵与当前 8 页人工视觉判断；真实 published inventory 仍为 0/0，`public` intent、runner、路由/endpoint、deployable output 和远端环境均不存在。下一路线是先为 M5 建立详细需求并完成外部交互边界；M6 再完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定，确认真实 origin，并实施 public artifact assembly。实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一最终 artifact，运行独立 output verifier，并执行真实键盘/200%、偏好、字体/图片故障、支持平台、最终视觉/目标读者与本地性能 QA；通过后才生成绑定 clean source revision、lock/source digest、public intent、verifier/QA 结果与 `dirty: false` 的 clean-source verification receipt。dirty source 只允许 nondeployable 诊断记录，提交后必须重建、重验并重发 receipt。没有自有域名时，可在 M6 单独授权建立项目身份以确认稳定 production alias/hostname，但这不授权预览或部署。完整本地候选通过后，M6 远端预览再把该 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`；复用不可变制品时还须记录完整 artifact inventory/digest。M7 才可进入生产发布、live smoke、回滚与发布后基线。任何首次项目创建、关联、预览部署和生产发布都需要用户逐次授权，并先更新本文件为真实命令；不得上传包含 non-published 路由的 review `dist/`。
+Vercel 已被选为未来静态托管目标，Project owner 当前明确不购买自定义域名；项目仍没有稳定 production alias/hostname、真实 origin、预览/生产环境或可执行部署命令。M4 的 noindex 本地产品实现与当时 8 页人工判断已完成；M5-U2 provider-neutral 合同/Fake 及 M5-U3 当前 9 页 inert review UI/Privacy 也已完成，但真实 published inventory 仍为 0/0，`public` intent、runner、路由/endpoint、deployable output 和远端环境均不存在。M5-U4 只完成 Buttondown 审核中账户与 Tally Free 未发布草稿的准备快照；下一停点是等待 Buttondown 审核结果，以及 `docs/requirements/006-external-interactions.md` 对 Tally 发布、精确 action/link、合成数据、回查与删除的独立授权。M6 再完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定，并在单独授权下建立 Vercel 项目身份、确认稳定 production hostname 作为阶段性 origin，generated preview/commit URL 不得成为 canonical。随后才实施 public artifact assembly，并从另行授权的 clean committed source 重建同一最终 artifact，执行 output verifier、真实键盘/200%、偏好、字体/图片故障、支持平台、最终视觉/目标读者与本地性能 QA，生成 clean-source verification receipt。dirty source 只允许 nondeployable 诊断记录；M6 远端预览和 M7 生产/live smoke/RUM 仍逐次授权。任何首次项目创建、关联、预览部署和生产发布都必须先把真实命令、身份与回滚写入本文件；不得上传包含 non-published 路由的 review `dist/`。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 

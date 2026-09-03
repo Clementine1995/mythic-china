@@ -30,7 +30,7 @@
 6. **视觉资产可追溯。** 每张公开视觉资产必须关联 asset manifest 与所属 Entry、Collection 或全站位置；所有 factual/canonical 视觉主张必须关联 source/claim，纯装饰的 invented 氛围背景不得充当文化证据。资产必须按 accessibility mode 提供 alt 或空 alt，并具备适用的 caption、credit、AI disclosure 和人工审校状态。
 7. **禁止运行时生图。** 网站构建和访问链路不得调用 ComfyUI、模型推理或提示词生成；模型权重、探索废图与未授权参考图不得进入网站代码仓库。
 8. **动态能力隔离。** 表单、分析、邮件、广告、联盟和未来支付必须通过单一 adapter/component 边界接入；内容页面不得散落第三方 endpoint、脚本和密钥。
-9. **读者数据最小化。** 选题建议默认只收 `pageId + requestedTopic + createdAt`；`email + emailConsent` 必须可选并成对出现。MVP 不建立用户画像、公开投稿页或跨站追踪。
+9. **读者数据最小化。** 浏览器端选题建议默认只提交 `pageId + requestedTopic`；`email + emailConsent` 必须可选并成对出现。`createdAt`、request ID、处理状态和归一化结果只能由供应商/服务端或内部流程生成，不接受客户端伪造。MVP 不建立用户画像、公开投稿页或跨站追踪。
 10. **编辑与商业分离。** 学术/编辑来源不得因佣金排序；affiliate、sponsor、ad 和 paid product 必须使用独立字段与可见 disclosure，不能伪装成参考资料。
 11. **可访问阅读优先。** 正文、来源和导航不得依赖动画出现；必须尊重 `prefers-reduced-motion`，提供键盘操作、可见焦点、语义标题、合适对比度和有意义图片文本。
 12. **不复制参考品牌。** 黑神话、Apple、WIRED、SpaceX 等只用于抽取构图、留白、层级和动效纪律；不得复制商标、专有字体、角色造型、图片、文案或页面源码。

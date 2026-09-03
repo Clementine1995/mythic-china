@@ -1,0 +1,156 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../site/build-intent";
+
+readBuildIntent();
+---
+
+<SiteLayout
+  title="Privacy"
+  description="How Mythic China handles personal information in the current review state and planned reader services."
+>
+  <article class="privacy-page page-shell" data-review-notice="privacy">
+    <header class="privacy-hero section-space">
+      <p class="section-context">Privacy Notice</p>
+      <h1>Clear boundaries for reader information.</h1>
+      <p>
+        This notice distinguishes what is available now from services that are
+        still planned and inactive.
+      </p>
+      <p class="privacy-updated">
+        Last updated <time datetime="2026-09-02">September 2, 2026</time>
+      </p>
+    </header>
+
+    <div class="privacy-content section-space">
+      <section id="controller" aria-labelledby="controller-heading">
+        <h2 id="controller-heading">Controller and contact</h2>
+        <p>
+          Mythic China is a site brand operated by hyc. For this notice, hyc is
+          the named data controller and is based in China.
+        </p>
+        <address>
+          Privacy and data-rights contact:
+          <span class="privacy-address">huyichen2019@gmail.com</span>
+        </address>
+        <p>
+          Use the subject “Privacy request” for access, correction, deletion, or
+          complaint requests. The address is plain text and does not create an
+          automatic email action.
+        </p>
+      </section>
+
+      <section id="current-state" aria-labelledby="current-state-heading">
+        <h2 id="current-state-heading">Current review state</h2>
+        <p>
+          This noindex review is not currently accepting newsletter sign-ups and
+          is not currently accepting Reader Requests. Its disabled controls do
+          not send or store information.
+        </p>
+        <p>
+          The only current contact route described here is a message that you
+          independently choose to send to the public Gmail address above.
+        </p>
+      </section>
+
+      <section id="contact-data" aria-labelledby="contact-data-heading">
+        <h2 id="contact-data-heading">Privacy-request correspondence</h2>
+        <p>
+          A message may include your email address, its contents, attachments
+          you choose to send, and delivery metadata. We use it only to handle
+          and document your request.
+        </p>
+        <p>
+          Google provides the Gmail mailbox. Our operating rule is to retain the
+          correspondence for 60 days after a request is closed, then delete it
+          from the active mailbox and Trash, unless a longer retention period is
+          required by law. Google’s underlying deletion and backup processes
+          follow its own retention terms and may take longer; 60 days is not a
+          supplier-level hard-deletion guarantee.
+        </p>
+      </section>
+
+      <section id="newsletter" aria-labelledby="newsletter-heading">
+        <h2 id="newsletter-heading">Planned Newsletter</h2>
+        <p>
+          If activated after separate account verification, the Newsletter will
+          use Buttondown to process an email address for new stories and
+          occasional editorial selections, no more than twice a month.
+          Subscription will require email confirmation, every message will
+          include an unsubscribe route, and open and click tracking will remain
+          off before the first send and afterward.
+        </p>
+        <p>
+          Buttondown is a United States provider, and its planned service domain
+          is buttondown.com. No Buttondown account, exact action, subscriber
+          record, or verified deletion workflow is active in this review. This
+          notice will be updated before sign-ups open.
+        </p>
+      </section>
+
+      <section id="reader-request" aria-labelledby="reader-request-heading">
+        <h2 id="reader-request-heading">Planned Reader Request</h2>
+        <p>
+          If activated after separate form verification, the hosted Tally form
+          will process the Entry page ID and required topic suggestion. An email
+          address will be optional and will require separate consent used only
+          to follow up about that suggestion; it will not subscribe the reader
+          to the Newsletter.
+        </p>
+        <p>
+          Tally creates a persistent Respondent ID in browser localStorage and
+          may reuse it across forms in the same Tally workspace. That provider
+          identifier will not become a Mythic China content ID, analytics
+          property, or internal grouping key. Submission email notifications
+          will remain off.
+        </p>
+        <p>
+          Tally is a Belgian provider whose planned service domain is tally.so;
+          its documentation states that form data is stored in Google Cloud
+          Belgium. No exact hosted-form link or account is active here. Deleting
+          submissions and Trash does not remove a Respondent ID already stored
+          in a visitor’s browser; the account-level behavior and exit path must
+          be verified before activation.
+        </p>
+        <p>
+          The planned low-cost operating rule is to review submissions every 28
+          days, delete records that are at least 60 days old, and empty Tally
+          Trash in the same operation. When performed on time, this produces an
+          expected retention window of about 60 to 88 days. The sole operator is
+          hyc, with no independent backup; a missed operation can extend that
+          period. Tally is not active in this review.
+        </p>
+      </section>
+
+      <section id="analytics-hosting" aria-labelledby="analytics-heading">
+        <h2 id="analytics-heading">Analytics and hosting</h2>
+        <p>
+          Plausible is not enabled. This review contains no analytics script,
+          event producer, cookie banner, or remote analytics request. If later
+          approved, the planned provider is Plausible at plausible.io; exact
+          script and request domains must be verified before activation.
+        </p>
+        <p>
+          No Vercel project or production origin is configured. A stable Vercel
+          production hostname may be adopted during a separately authorized
+          public-release stage, while generated preview and commit URLs will not
+          be used as canonical URLs.
+        </p>
+      </section>
+
+      <section id="rights" aria-labelledby="rights-heading">
+        <h2 id="rights-heading">Your choices and complaints</h2>
+        <p>
+          Contact the address above to ask what personal information we hold, to
+          request correction or deletion, to withdraw an optional follow-up
+          consent, or to raise a privacy complaint. We may ask for only the
+          information needed to verify and complete the request.
+        </p>
+        <p>
+          This notice will be revised before any planned provider becomes active
+          and again if the site adopts a custom domain or a different processor.
+        </p>
+      </section>
+    </div>
+  </article>
+</SiteLayout>
