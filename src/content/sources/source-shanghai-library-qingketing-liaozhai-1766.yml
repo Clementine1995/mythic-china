@@ -5,7 +5,7 @@ titleZh: null
 titleZhLang: null
 authorOrOrganization: Pu Songling; Shanghai Library; Wikimedia Commons
 publicationOrEdition: Qingketing woodblock edition, Qianlong 31 (1766), sixteen juan
-editionBasisOrObjectId: Shanghai Library 線普長266652-67
+editionBasisOrObjectId: Shanghai Library record 266652-67
 originalPeriod: Qing dynasty; Qianlong 31 (1766)
 publicationYear: 1766
 url: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
@@ -16,4 +16,4 @@ pageOrSection: Juan 7, Cuzhi; Commons digital pages 427–432; visible left-side
 usesDigitalImageEvidence: true
 rightsStatus: public-domain
 rightsUrl: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
-notes: Supports only the specified Shanghai Library Qingketing witness. Each digital image spans two printed pages; right-side block-center text is folded or cropped, so a/b faces must not be invented. This Source cannot establish manuscript readings, authorship of variants, or which witness first added the explicit transformation ending. Its Public Domain Mark closes research citation rights only and does not add the page images as project Assets.
+notes: The exact Shanghai Library shelfmark recorded by the source is 線普長266652-67; the rendered Record field uses the ASCII label Shanghai Library record 266652-67 pending an approved CJK display path. Supports only the specified Shanghai Library Qingketing witness. Each digital image spans two printed pages; right-side block-center text is folded or cropped, so a/b faces must not be invented. This Source cannot establish manuscript readings, authorship of variants, or which witness first added the explicit transformation ending. Its Public Domain Mark closes research citation rights only and does not add the page images as project Assets.

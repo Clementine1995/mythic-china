@@ -153,7 +153,7 @@
 
 #### 已确认结论与保留边界
 
-Project owner 已确认 `Strange Tales from Liaozhai` 方向、两个 Collection 各三篇的分配和公开顺序，Zhong Kui 继续作为 Featured，《促织》保留；随后又确认任笃行 2016 主/张友鹤 2011 对校路线和《促织》青柯亭单见证路线。四篇 claim map 及底本/书目/locator 证据闭合已分层完成，后续独立授权物化了证据已闭合的最小子集：新增 4 个 draft Entry owner、5 Source、9 Claim 与 3 `source-checked` Terminology。Ten Kings 只纳入 S.3961/CBETA 的限域对象/文本证据，现已消费对应 2 Source / 3 Claim / 1 Terminology 并形成证据受限首稿；Liaozhai 只纳入 Luo 2009 直接页码；Painted Skin 只纳入 Tso 2017 的具名解释；《促织》只纳入上海图书馆青柯亭单见证。CText/Giles、未取得实际册页的任/张、`孽鬼`，以及《促织》跨见证、作者归属与“首次增写”均未物化；没有译文、图片、Collection 关系或内容状态变化。
+Project owner 已确认 `Strange Tales from Liaozhai` 方向、两个 Collection 各三篇的分配和公开顺序，Zhong Kui 继续作为 Featured，《促织》保留；随后又确认任笃行 2016 主/张友鹤 2011 对校路线和《促织》青柯亭单见证路线。四篇 claim map 及底本/书目/locator 证据闭合已分层完成，后续独立授权物化了证据已闭合的最小子集：新增 4 个 draft Entry owner、5 Source、9 Claim 与 3 `source-checked` Terminology。Ten Kings 只纳入 S.3961/CBETA 的限域对象/文本证据，现已消费对应 2 Source / 3 Claim / 1 Terminology 并形成证据受限首稿；Liaozhai 只纳入 Luo 2009 直接页码；Painted Skin 只纳入 Tso 2017 的具名解释；Fighting Cricket 只纳入并消费上海图书馆青柯亭单见证的 1 Source / 3 Claim / 1 Terminology，形成证据受限英语首稿。CText/Giles、未取得实际册页的任/张、`孽鬼`，以及《促织》跨见证、作者归属与“首次增写”均未物化；没有图片、Collection 关系或内容状态变化。
 
 ### M3-U2 钟馗视觉证据与参考权利
 
