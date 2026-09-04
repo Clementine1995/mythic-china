@@ -2,11 +2,11 @@
 
 ## 0. 文档职责与状态
 
-Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-second-collection-decision.md) 的推荐方向，先授权四篇候选的 claim map 与来源研究，随后又单独授权只做实际见证/版次、正式书目和页/叶/canvas locator 闭合。本文件合并记录这两个连续但互不扩权的研究批次，并在第 10 节另行记录 2026-09-04 后续独立授权的编辑路线确认、最小 Entry owner 与证据物化。
+Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-second-collection-decision.md) 的推荐方向，先授权四篇候选的 claim map 与来源研究，随后又单独授权只做实际见证/版次、正式书目和页/叶/canvas locator 闭合。本文件合并记录这两个连续但互不扩权的研究批次，并在第 10–11 节另行记录 2026-09-04 后续独立授权的编辑路线确认、最小证据物化、检查点提交与 Ten Kings 单篇纵切片。
 
 本文负责：
 
-- 为 `The Ten Kings: Judgment, Records, and Rebirth`、`How to Read Liaozhai`、`Painted Skin: What Pu Songling’s Tale Says` 与 `The Fighting Cricket: A Strange Tale of Power and Survival` 建立候选 claim map。
+- 为 `The Ten Kings: Dates, Records, and Judgment`、`How to Read Liaozhai`、`Painted Skin: What Pu Songling’s Tale Says` 与 `The Fighting Cricket: A Strange Tale of Power and Survival` 建立候选 claim map。
 - 分开原典/馆藏对象、专业研究、发现工具和编辑推断，记录可用 locator 与仍需取得的证据。
 - 判断每篇是否具备独立读者价值，以及下一内容批次开始前的停止条件。
 
@@ -17,14 +17,14 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 - 选择、下载、生成或批准图片与其他资产。
 - 启动服务、安装依赖、执行 Git 写操作、远端同步、部署或发布。
 
-上述“不负责”限定前两次研究批；后续内容对象与 Schema 变化只有在 Project owner 另行授权后发生，并由第 10 节单独记录，不能倒推为原研究授权的一部分。
+上述“不负责”限定前两次研究批；后续内容对象、Schema 变化与 Ten Kings 首稿只有在 Project owner 另行授权后发生，并由第 10–11 节单独记录，不能倒推为原研究授权的一部分。
 
 | 维度 | 当前状态 | 结论或边界 |
 | --- | --- | --- |
 | 方向决定 | 已确认 | 007 的 Liaozhai 第二 Collection 方向、3+3 分配、两条公开阅读顺序、Zhong Kui Featured 与《促织》保留均获确认；后续又确认任笃行 2016 主/张友鹤 2011 对校的工作路线，以及《促织》青柯亭单见证路线；第二 Collection 名仍是工作标题 |
 | 研究状态 | 本轮证据闭合完成，结果分层 | Ten Kings 的馆藏对象、IIIF canvas、CBETA 行号及核心书目已闭合；Painted Skin 的指定数字见证与 Giles 1880 页码已核作研究账本，但权利门禁阻止其进入本次 Source 子集；Liaozhai 仍缺任/张实际册页；《促织》只闭合上海图书馆青柯亭见证，跨见证门禁仍未闭合 |
-| 写作准备度 | 未就绪 | 最小证据对象已建立，但四个 Entry 的正文与证据消费数组仍为空；任/张实际册页、翻译策略、术语批准及逐篇人工审核仍须后续闭合 |
-| 实施状态 | 证据最小物化完成 | 当前新增四个空 `draft` Entry owner、5 Source、9 Claim 与 3 `source-checked` Terminology；未创建第二 Collection、正文、资产、Entry 反向关系或状态变化 |
+| 写作准备度 | Ten Kings 限域首稿已形成；其余三篇未就绪 | Ten Kings 只使用已物化的 2 Source / 3 Claim / 1 Terminology，仍须双语、编辑与目标读者审核；任/张实际册页、其余逐篇翻译策略、术语批准及人工审核仍须后续闭合 |
+| 实施状态 | 证据最小物化与 Ten Kings 单篇纵切片完成 | 当前有四个 `draft` Entry owner、5 Source、9 Claim 与 3 `source-checked` Terminology；只有 Ten Kings 已建立消费关系与正文。未创建第二 Collection、资产、Collection/related 关系或状态变化 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本批不改变状态或 public artifact |
 
 本文中的 `TK-*`、`LZ-*`、`PS-*`、`FC-*` 只是研究表格内的局部标签，不是 Content Layer 稳定 ID，也不得复制进 `src/content` 后直接充当 Claim ID。表中的“可写”表示证据路线足以支持后续起草，不表示主张已完成双语、文化、版权或 Project owner 审校。
@@ -33,12 +33,12 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 
 | 候选篇 | 独立读者问题 | 研究结论 | 进入正文前最小门禁 |
 | --- | --- | --- | --- |
-| Ten Kings | 一部中世纪中国佛教文本及其图像，如何把死亡至再生之间组织成有日期、卷宗、审查与在世者参与的程序？ | **证据可物化候选**；S.3961 与 CBETA 是两个不同见证，直接 locator 已闭合 | 后续只可按具体见证建 Claim；Teiser/Kwon 的目录页只是章节入口，历史展示/诵读方式与图片商用权仍不得写成已闭合 |
+| Ten Kings | 两个有边界的图文见证如何分别呈现十王序列、日期、卷宗与审查机制？ | **证据受限首稿已完成**；S.3961 与 CBETA 是两个不同见证，正文只消费已闭合的 2 Source / 3 Claim / 1 Terminology | 不补写形成史、rebirth、跨见证重建或普遍实践；历史展示/诵读方式与图片商用权仍不得写成已闭合 |
 | How to Read Liaozhai | 为什么读《聊斋》前必须先问版本、文类、计数与译本，而不能把它当成一套透明的民间信仰记录？ | **部分闭合，限域证据已物化**；版本史与计数差异已有 Luo 直接研究页码 | 任 2016 主/张 2011 对校路线已确认，但实际册页未取得，故两书未建 Source、不得补篇级页码或把目录记录当正文 |
 | Painted Skin | 蒲松龄文本如何用“可穿戴的外表”、误认、身体恐怖与评语组织故事；后来的翻译和改编改变了什么？ | **仅归因解释已物化**；Tso 2017 的具名性别/翻译解读可安全建 Claim | CText 数字见证与 Giles 旧译的目标地区复用权未闭合，均未建 Source；不建 `孽鬼` Terminology，不写自译或一手文本事实 |
 | Fighting Cricket | 征求压力如何沿权力链进入家庭；儿子与蟋蟀的联系在不同文本见证中如何变化？ | **单见证路线已确认并限域物化**；上海图书馆青柯亭见证可直接定位 | 只按该见证建立三条 Claim；辽宁手稿、两种权威校记与早期抄本未得，跨见证、作者归属和“首次增写”继续阻塞 |
 
-研究批最初停止在证据闭合账本，而不是正文；Project owner 随后分别确认底本/单见证路线、授权四个最小 Entry owner，并另行授权只物化证据已闭合的 Source/Claim/Terminology。该后续实施记录见第 10 节，仍不得从本文跳到 Entry 正文、图片、Collection 关系或 `ready/published`。
+研究批最初停止在证据闭合账本，而不是正文；Project owner 随后分别确认底本/单见证路线、授权四个最小 Entry owner，并另行授权只物化证据已闭合的 Source/Claim/Terminology。该后续实施记录见第 10 节；再后的 Ten Kings 单篇授权见第 11 节。前述任一批次都不得自动扩为其他 Entry 正文、图片、Collection 关系或 `ready/published`。
 
 ### 1.1 证据闭合账本
 
@@ -76,7 +76,7 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 - 现代书刊：`作者 + 标题 + 版次/卷期 + 页码或章节 + DOI/稳定页面`。
 - 网页：`机构 + 页面标题 + 小节/对象字段 + 访问日期`；动态网页不能替代页级学术引用。
 
-## 3. `The Ten Kings: Judgment, Records, and Rebirth`
+## 3. `The Ten Kings: Dates, Records, and Judgment`
 
 ### 3.1 与现有 Guide 的重叠审计
 
@@ -277,11 +277,12 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 1. 已完成：Project owner 确认 Liaozhai 现代中文工作底本路线为任笃行 2016 修订本为主、张友鹤 2011 第二版为对校；实际册次、页码和全站篇数口径仍待取得后再冻结。
 2. 已完成：Project owner 选择《促织》只按已核上海图书馆青柯亭见证叙事；跨见证主线、作者归属与首次增写判断继续排除。
 3. 已完成：在独立授权下，只把证据已闭合的最小子集物化为 5 Source、9 Claim 与 3 Terminology，并建立四个空 draft Entry owner；未闭合项没有一起带入。
-4. 下一步仍须另行授权：取得任/张实际册页，或把已物化证据写入 Entry 消费清单并进入逐篇正文、翻译、术语审校、Collection 关系与视觉资产；本批不推导这些权限。
+4. 已完成：按后续单篇授权，只把 Ten Kings 已物化的 2 Source / 3 Claim / 1 Terminology 写入其消费清单并形成证据受限首稿；不扩到其他三篇。
+5. 下一步仍须另行选择并授权：Ten Kings 编辑/双语审校、取得任/张实际册页，或其余三篇的逐篇证据受限写作；Collection 关系、视觉资产与状态继续独立门禁。
 
 ## 9. 本批最终状态
 
-- 四篇候选的 claim map、正式书目、可取得的精确 locator、术语与不可写边界已完成分层研究；后续又建立最小 draft owner 与证据对象，但结果仍不是四篇一律“通过”或可写作。
+- 四篇候选的 claim map、正式书目、可取得的精确 locator、术语与不可写边界已完成分层研究；后续又建立最小 draft owner 与证据对象，并只为 Ten Kings 形成限域首稿。结果仍不是四篇一律“通过”或可写作。
 - Ten Kings 的 S.3961 对象/IIIF canvas 与 CBETA 行号中，证据闭合的三条对象/文本 Claim、两份 Source 与 `十王` Terminology 已物化；图片复用权利与个别二手页内细节仍须在资产/写作阶段单独核验。
 - Liaozhai 导读已物化 Luo 2009 Source、两条归因/计数 Claim 与 `志怪` Terminology；任 2016 主/张 2011 对校路线虽已确认，实际册页未取得，故两书没有进入 Source。
 - Painted Skin 的研究账本已固定 CText、Giles 与 Tso locator，但本批只物化 Tso 2017 Source 与一条明确归因 Claim；CText/Giles 权利、`孽鬼/孽魅` 异文来源、现代译本独立核页及电影一手时间码仍未闭合。
@@ -309,3 +310,22 @@ Project owner 先确认任笃行 2016 主/张友鹤 2011 对校的 Liaozhai 工�
 - 不建立 CText/Giles Painted Skin Source、不建立 `孽鬼` Terminology；不建立尚无实际册页的任/张 Source；不建立 FC-08–FC-10、跨见证、作者归属、“首次增写”或起源 Claim。
 - 四个 draft 依既有动态路由生成 direct-only noindex review 页面，但不进入 Header、Explore/Collections 候选架、现有 Collection 或 public 投影；模板行为未改变，六个 Entry 页均保留现有 inactive Reader Request。
 - 输出 inventory 与匹配验证结果以 [`DEV_WORKFLOW.md`](../../DEV_WORKFLOW.md) 的本批执行记录为准；研究来源网页可访问不替代 Schema、内容图、构建与 output verifier。
+
+## 11. 2026-09-04 证据检查点与 Ten Kings 单篇纵切片
+
+### 11.1 授权与版本停点
+
+Project owner 接受建议：先把第 10 节及其关联研究、状态同步形成一次本地检查点，再只推进 Ten Kings 单篇。证据批已提交为 `9914dd3`；Project owner 随后通过 Ten Kings 首稿并授权本地提交，该纵切片已进入当前 HEAD。两次提交均未 fetch 或 push。
+
+### 11.2 Entry 实际结果
+
+- 标题由 `The Ten Kings: Judgment, Records, and Rebirth` 收窄为 `The Ten Kings: Dates, Records, and Judgment`；当前 Claim 没有承担 rebirth，故不把它留在标题。
+- `sourceIds` 精确为 `source-idp-ten-kings-s3961`、`source-cbeta-ten-kings-x01n0021`；`claimIds` 精确为对象身份/数字序列、十个时间节点、记录与衡量装置三条；`terminologyRecordIds` 只含 `term-shi-wang-in-ten-kings`。
+- Entry 形成两段 opening、110 词 summary 与 “One illustrated scroll”“Ten intervals in one textual witness”“Judgment through records and instruments”“Keep the name bounded” 四节正文；`lastFactCheckedAt` 为 `2026-09-04`，`status` 保持 `draft`。
+- 正文分别限定 S.3961 数字对象与 CBETA 电子文本，明确不宣称 earliest、普遍日程、超自然实在、现实行政制度逐项复制、历史展示/诵读/受众、形成史、跨见证重建或 rebirth。
+
+### 11.3 CJK 与验证边界
+
+- 完整检查先后正确拦截了英语语言上下文中的可见中文及未进入当前 hash-locked `zh-Hans` 内容字符集的 `十王`。为避免未经授权扩展 CJK 字体资产与哈希链，Entry 继续使用英语可见文本，`nameZh` / `pinyin` 保持空值；中文形式与拼音只保留在现有 `source-checked` Terminology，等待后续双语审核。未修改字符集、字体文件、manifest 或字体哈希。
+- 修正后完整 `pnpm run check` 通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 review build 与 output verifier；输出仍为 42 Hero、10 个 hash-locked WOFF2、0 XML、0 客户端 JavaScript。
+- 本批没有图片、Collection/`relatedEntryIds`、状态、Schema、测试、外部服务、服务进程、public artifact、push、部署或发布；其余三个新增 Entry 仍为空 draft。浏览器、键盘、缩放、双语、目标读者与页面级人工审核仍未执行。

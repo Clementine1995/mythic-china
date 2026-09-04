@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。2026-09-04 经后续逐项授权，四篇候选已建立最小 draft Entry owner，并只物化证据已闭合的 Source、Claim 与 Terminology；正文、Collection 关系、视觉资产和内容状态均未改变。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。2026-09-04 经后续逐项授权，四篇候选已建立最小 draft Entry owner，并只物化证据已闭合的 Source、Claim 与 Terminology；随后 Ten Kings 只消费已闭合的 2 Source / 3 Claim / 1 Terminology 并形成证据受限首稿，其余三篇保持空 draft。Collection 关系、视觉资产和内容状态均未改变。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -14,7 +14,7 @@
 - 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
 - M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
 - M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容；`Chinese Underworld Guide (Working Draft)` 只是内部工作标题，不是已冻结的公开标题。
-- 当前内容 inventory 为 6 篇 Entry（2 篇 `editorial-review`、4 篇 `draft`）、1 个 `editorial-review` Collection、14 份 Source、19 份 Claim 与 5 份 Terminology；published Entry / Collection 仍为 0/0。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`，其正文及 Entry 反向 `sourceIds` / `claimIds` / `terminologyRecordIds` 仍为空，证据对象只先保存 owner 外键，构成研究阶段的过渡形态而非可写作或可发布状态。
+- 当前内容 inventory 为 6 篇 Entry（2 篇 `editorial-review`、4 篇 `draft`）、1 个 `editorial-review` Collection、14 份 Source、19 份 Claim 与 5 份 Terminology；published Entry / Collection 仍为 0/0。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`；Ten Kings 已有正文及 2 Source / 3 Claim / 1 Terminology 反向消费关系，其余三个的正文与反向数组仍为空。四篇均处于研究/写作阶段的 `draft`，不是可发布状态。
 
 ### 0.2 M3-U3 视觉记录与加载合同
 

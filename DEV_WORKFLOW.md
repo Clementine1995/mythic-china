@@ -4,7 +4,7 @@
 
 本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；当前 11 个精确画布 master、11 份 repository source rendition、四份 production record、七份 manifest 版本记录、六个 approved/current 逻辑资产及七份 current responsive rendition 的 50 个目标均有既有验证证据。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当前 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。Project owner 后续把 M5-U1–U3、U4 账户准备快照与第二 Collection 决策包提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；2026-09-03 四篇研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为该提交，工作树干净。`public` intent、runner、页面/endpoint、deployable artifact、`ready/published` 内容、远端环境和发布都不存在。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 只承接生产、live smoke、回滚、线上地区复核与 RUM/p75。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
-M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已进入 `3fa46d5`；当时 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。2026-09-04 的四篇证据最小物化又建立 4 个空 draft Entry、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁，并通过当前 13 页 review inventory 完整门禁；published inventory 仍为 0/0。Project owner 同日确认 Buttondown `mythic-china` 账户审核已通过，Tally Free 账户与未发布 Reader Request 草稿已准备；两者仍只是 U4 条件方向，均未接入站点、提供 action/link 或处理数据。Plausible 留 U5；项目仍没有正文/图片/Collection 新关系、状态提升、真实 supplier transport、网络请求或 public artifact。
+M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已进入 `3fa46d5`；当时 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。2026-09-04 的四篇证据最小物化又建立 4 个 draft Entry、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁，并通过当前 13 页 review inventory 完整门禁；这些结果与 Buttondown 审核事实同步已形成本地检查点 `9914dd3`，未 push。随后 Ten Kings 只消费已闭合的 2 Source / 3 Claim / 1 Terminology 并形成证据受限英语首稿，仍为 `draft`；其余三个新增 Entry 为空。Project owner 同日确认 Buttondown `mythic-china` 账户审核已通过，Tally Free 账户与未发布 Reader Request 草稿已准备；两者仍只是 U4 条件方向，均未接入站点、提供 action/link 或处理数据。Plausible 留 U5；项目仍没有图片、Collection 新关系、状态提升、真实 supplier transport、网络请求或 public artifact。
 
 Guide Hero 生产闭环最初直接接续历史基线 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的未提交 Collection Hero 与本地化合同工作树；该生产批次没有创建分支、worktree、旁路项目或仓库副本，也未执行 fetch 或 Git 写操作。后续只读核查发现这些改动已进入本地提交 `a3194d0d59b605cf7a5fcfc5d2d55166c374e13b`；Project owner 随后授权继续并创建来源复核提交 `d60691a`。上述历史批次未执行 fetch 或 push。M4-U5A 开始时，只读核查确认 HEAD、`main` 与本地 `origin/main` 已在本任务前由 Project owner 对齐到 `e2893d14d4960f71fe75bd240971aaa88656511c`（`update`），工作树干净；本任务不重复或改写该提交，也未执行 fetch 或任何 Git 写操作。精确 HEAD、工作树和 tracking ref 每次仍须按本文件只读复核；本地 tracking ref 不单独证明后续服务器端状态。
 
@@ -861,6 +861,16 @@ Project owner 先确认 Liaozhai 采用任笃行 2016 主、张友鹤 2011 对�
 
 本批未运行 dev/preview/browser 或非默认 `visual:build:check`；未修改图片、manifest 或 master。四个新增页面没有真实浏览器、键盘或缩放证据，完整工程通过不替代这些后续人工门禁。
 
+### 2026-09-04 证据检查点与 Ten Kings 单篇内容纵切片
+
+Project owner 接受“先提交当前证据批，再完成一篇纵切片”的建议。执行前只读复核确认此前工作树恰为四个已授权批次的 48 条路径；固定运行时完整 `pnpm run check`、暂存 diff 范围与 `git diff --cached --check` 通过后，证据批已提交为本地 `9914dd304467118b2c32f7f8ac192cc00344fb92`（`feat: materialize four-entry evidence checkpoint`）。该提交没有 fetch 或 push；提交后 `main` 相对本地 `origin/main` tracking ref 显示 ahead 1。
+
+- 后续只修改 `src/content/entries/ten-kings.md` 与直接负责当前内容状态的权威/领域文档。Ten Kings 标题收窄为 `The Ten Kings: Dates, Records, and Judgment`，只绑定 2 Source / 3 verified Claim / 1 `source-checked` Terminology，形成两段 opening、110 词摘要和四节正文；`lastFactCheckedAt` 为 `2026-09-04`，状态保持 `draft`。
+- 文本把 S.3961 对象/数字序列与 CBETA 时间节点/记录机制分别限定，不声称 earliest、普遍日程、超自然实在、历史使用、现实行政制度逐项复制、形成史、跨见证重建或 rebirth。
+- 初次完整检查正确拦截英语语言上下文中的中文及当前 hash-locked `zh-Hans` 内容字符集未覆盖的 `十王`。本批未扩展字符集、字体文件、manifest 或字体哈希；可见文本保持英语，`nameZh` / `pinyin` 保持空值，中文形式与拼音留在现有 `source-checked` Terminology 等待双语审核。
+- 修正后完整 `pnpm run check` 通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 review build 与 output verifier；输出仍为 42 Hero、10 个 hash-locked WOFF2、0 XML、0 客户端 JavaScript。
+- 本批没有修改 Schema、测试、图片、Collection/`relatedEntryIds`、状态、外部服务或配置，没有启动服务、提交外部数据、fetch/push、建立 public artifact、部署或发布。Project owner 通过 Ten Kings 首稿并授权本地提交后，该纵切片与相关状态文档已进入当前 HEAD；提交后工作树与暂存区应保持为空。
+
 ## 数据库、外部服务与真实写入口
 
 站点运行期当前均不适用。外部已有审核已通过的 Buttondown 账户和 Tally Free 未发布草稿，但项目没有数据库、表单 endpoint、邮件、分析、支付、广告配置或任何可执行外部写入口。未来接入任一能力时必须先建立需求文档，并在本文件增加：
@@ -874,7 +884,13 @@ Project owner 先确认 Liaozhai 采用任笃行 2016 主、张友鹤 2011 对�
 
 ## 发布
 
+### 证据物化检查点时的交接
+
 Vercel 已被选为未来静态托管目标，Project owner 当前明确不购买自定义域名；项目仍没有稳定 production alias/hostname、真实 origin、预览/生产环境或可执行部署命令。M4 的 noindex 本地产品实现与当时 8 页人工判断已完成；M5-U2 provider-neutral 合同/Fake 及 M5-U3 的 9 页 inert review UI/Privacy 历史基线也已完成。本轮四个 draft Entry 将当前 review 合同扩为 13 页，并物化 5 Source、9 Claim 与 3 Terminology，但 published inventory 仍为 0/0，`public` intent、runner、路由/endpoint、deployable output 和远端环境均不存在。Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布；M5-U4 仍未完成，其下一停点须按 `docs/requirements/006-external-interactions.md` 分别授权 Buttondown 账户级配置与真实 action 核查、合成订阅联调，以及 Tally 发布、精确 hosted link、合成数据写入、回查和删除。M6 的第二 Collection 方向、3+3 路径、Liaozhai 任 2016 主/张 2011 对校路线、《促织》青柯亭单见证路线、四篇 claim map/证据账本及最小证据物化均已完成；下一内容停点须另行授权取得任/张实际册页，或把已物化证据写入 Entry 消费清单并进入逐篇正文/翻译/术语审核。M6 后续仍须完成 6 篇正文、至少 2 个 Collection、关系、全部资产和人工 `published` 决定，并在单独授权下建立 Vercel 项目身份、确认稳定 production hostname 作为阶段性 origin，generated preview/commit URL 不得成为 canonical。随后才实施 public artifact assembly，并从另行授权的 clean committed source 重建同一最终 artifact，执行 output verifier、真实键盘/200%、偏好、字体/图片故障、支持平台、最终视觉/目标读者与本地性能 QA，生成 clean-source verification receipt。dirty source 只允许 nondeployable 诊断记录；M6 远端预览和 M7 生产/live smoke/RUM 仍逐次授权。任何首次项目创建、关联、预览部署和生产发布都必须先把真实命令、身份与回滚写入本文件；不得上传包含 non-published 路由的 review `dist/`。
+
+### 当前交接
+
+上述证据批已形成本地检查点 `9914dd3`；Ten Kings 又完成并获 Project owner 通过单篇证据受限首稿，现已进入当前本地 HEAD，但状态仍为 `draft`，published inventory 仍为 0/0。当前 `main` 相对未 fetch 的本地 `origin/main` tracking ref ahead 2，两次本地提交均未 push。下一内容停点须另行选择 Ten Kings 双语审校、取得任/张实际册页，或其余三篇的逐篇写作；图片、第二 Collection/`entryIds`、状态、public artifact 与发布仍各自受独立门禁。M5-U4、Vercel、最终 clean-source QA、远端预览和 M7 生产边界均未改变。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 

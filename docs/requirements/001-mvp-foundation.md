@@ -28,13 +28,13 @@
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
-| 需求状态 | 草拟；M1、M2、M3、M4 与 M5-U2/U3 已完成，M5-U4 账户准备事实已同步；第二 Collection 方向、Liaozhai 工作底本路线、《促织》单见证路线、四篇 claim map/证据账本及证据最小物化已确认并实施；U4/U5、M6 正文/资产/关系/状态与 public artifact assembly、M7 待后续门禁 | M4 详细合同见 [`003-pages-exploration-seo.md`](003-pages-exploration-seo.md)；M5 边界见 [`006-external-interactions.md`](006-external-interactions.md)；第二 Collection 决策与四篇研究/物化分别见 [`007-second-collection-decision.md`](007-second-collection-decision.md)、[`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) |
-| 实施状态 | M1 已冻结；M2、M3、M4 本地产品实现、M5-U2/U3 与四篇证据最小物化已完成；U4 未完成 | 三个 provider-neutral service/Fake、inert review UI/Privacy、四个空 draft Entry owner、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁与 13 页 review inventory 支持已建立；正文、图片、Collection/Entry 消费关系、状态、真实供应商 transport、public artifact 与 M7 生产均未实施 |
-| 验证状态 | M1 工程/结构证据保留；M3/M4 适用证据通过；M5-U2/U3 完整本地门禁通过；本轮内容/Schema/output 完整门禁通过 | 本轮定向 3 文件/35 测试及完整 Prettier/ESLint/25 文件/321 测试/Astro 81 文件零诊断/13 页 build/output verifier 通过；42 Hero、10 WOFF2、零 XML/客户端 JS。浏览器、外部服务与 M7 live/RUM 未验证 |
+| 需求状态 | 草拟；M1、M2、M3、M4 与 M5-U2/U3 已完成，M5-U4 账户准备事实已同步；第二 Collection 方向、Liaozhai 工作底本路线、《促织》单见证路线、四篇 claim map/证据账本、证据最小物化及 Ten Kings 单篇纵切片已确认并实施；U4/U5、其余三篇正文、资产/Collection 关系/状态与 public artifact assembly、M7 待后续门禁 | M4 详细合同见 [`003-pages-exploration-seo.md`](003-pages-exploration-seo.md)；M5 边界见 [`006-external-interactions.md`](006-external-interactions.md)；第二 Collection 决策与四篇研究/物化/首篇纵切片分别见 [`007-second-collection-decision.md`](007-second-collection-decision.md)、[`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) |
+| 实施状态 | M1 已冻结；M2、M3、M4 本地产品实现、M5-U2/U3、四篇证据最小物化与 Ten Kings 证据受限首稿已完成；U4 未完成 | 三个 provider-neutral service/Fake、inert review UI/Privacy、4 个 draft Entry owner、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁与 13 页 review inventory 支持已建立；Ten Kings 已绑定 2 Source / 3 Claim / 1 Terminology 并保持 `draft`，其余三个新增 Entry 仍为空。图片、Collection/related 关系、状态、真实供应商 transport、public artifact 与 M7 生产均未实施 |
+| 验证状态 | M1 工程/结构证据保留；M3/M4 适用证据通过；M5-U2/U3 完整本地门禁通过；本轮内容/Schema/output 完整门禁通过 | Ten Kings 纵切片后完整 Prettier/ESLint/25 文件/321 测试/Astro 81 文件零诊断/13 页 build/output verifier 通过；42 Hero、10 WOFF2、零 XML/客户端 JS。浏览器、外部服务与 M7 live/RUM 未验证 |
 | 发布状态 | 未发布 | 未来托管目标为 Vercel；当前不购买自定义域名，且未创建项目、稳定 production hostname、真实 origin、部署配置或 public artifact |
 
 - 当前权威结论更新时间：2026-09-04。
-- M4-U3 实现与原收口文档已由 Project owner 提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；M4-U2 历史基线为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`），M3/M2 历史基线为 `c606f5a` / `f258227`。U5A 开始时 HEAD、`main` 与未 fetch 的本地 `origin/main` 均为 `e2893d14d4960f71fe75bd240971aaa88656511c`；reflog 记录该提交已在任务前由 push 更新 tracking ref。Project owner 随后把 M4 完成状态提交为 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前工作树干净，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 期间 tracking ref 由外部 push 对齐到 `3983bee`，Project owner 后续又把 M5-U1–U3、U4 准备快照与 007 提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`。本研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为 `3fa46d5`，工作树干净；本批未执行 fetch、add、commit、push、amend、分支或 worktree，tracking ref 仍不单独证明服务器端状态。
+- M4-U3 实现与原收口文档已由 Project owner 提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；M4-U2 历史基线为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`），M3/M2 历史基线为 `c606f5a` / `f258227`。Project owner 后续把 M4 完成状态提交为 `3983bee91ada4a286613ec702a8009a4f528af3f`，又把 M5-U1–U3、U4 准备快照与 007 提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`。2026-09-04 按用户确认的建议，把四篇研究、证据最小物化及相关状态同步提交为本地检查点 `9914dd304467118b2c32f7f8ac192cc00344fb92`；Ten Kings 纵切片随后以 `feat: draft Ten Kings evidence slice` 进入当前本地 HEAD。当前 `main` 相对未 fetch 的本地 `origin/main` 显示 ahead 2，提交后工作树与暂存区为空。未 fetch、push、建分支或 worktree；tracking ref 仍不单独证明服务器端状态。
 
 ## 1. 结论与开发就绪判断
 
@@ -46,8 +46,8 @@
 
 - 是否可以立即执行工程开发：2026-09-02 的最终 U5 browser/人工证据授权已用于完整自动门禁、24 个实际视口组合、12 个 Hero 组合及三档样张人工交接；Project owner 检查全部 8 个页面后明确回复“这些页面通过”，临时 preview 随后停止且 4321 无监听，不成为后续可复用服务授权。当前控制面未覆盖的真实键盘/200%/偏好、故障/性能/实际 fallback face/跨平台仍需相应可控环境或人工验证。后续若改变内容状态、引入依赖、开放 public/Vercel、远端预览或发布，仍须分别授权。
 - M2 执行记录：按 `../ARCHITECTURE.md` 与 `../../DEV_WORKFLOW.md` 使用固定 Node 绝对路径和 pnpm `11.22.0`，在当前非空仓库根完成手工最小初始化与冻结依赖安装。M1 冻结只为 M2 提供语义、结构和替换边界；首个真实 Home 可以 A 主、C 辅作为实现目标，但不得整份移植旧原型或候选方向稿。U2 当时已获得共享表现层方向确认；正式字体与当前页面人工判断后来随 M4 闭合，真实 200%、目标读者、故障和支持平台仍是 M6 最终 artifact 门禁，M7 只承接生产与 live/RUM 基线。
-- 推荐工程顺序：M4 已闭合；M5-U2 provider-neutral 合同/Fake 与 U3 inert review UI/Privacy 已实现，Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布，U4 仍未完成。其外部交互下一停点须分别授权 Buttondown 账户级配置与真实 action 核查/合成订阅，以及 Tally 发布/hosted link/合成数据/回查/删除。第二 Collection 方向、3+3 分配、公开顺序、Liaozhai 任 2016 主/张 2011 对校路线、《促织》青柯亭单见证路线、四篇 claim map/证据账本与最小证据物化均已完成；内容下一停点须另行授权取得任/张实际册页，或把已物化证据写入 Entry 消费清单并逐篇进入正文/翻译/术语审核。其后才由 M6 完成 6 篇正文、至少 2 个 Collection、关系、全部资产与逐项 `ready`，再由 Project owner 作出 `published` 决定；确认 HTTPS origin、public artifact、clean-source QA、预览与 M7 生产/live/RUM 均继续逐次授权。public-release 的一个 Entry + 一个 Collection 只是技术下限，不是实际预览资格。
-- 当前动作边界：历史 U5 浏览器与人工证据授权已经消费，PID `9628` / `31960` 均已停止且 4321 无监听；Project owner 随后把 M4 结果提交为本地 `3983bee`，并把 M5 与 007 状态提交为 `3fa46d5`。M5-U2/U3 与两次只读研究批的历史范围保持不变；2026-09-04 后续又在独立授权下确认底本/单见证路线，建立四个最小 draft Entry owner，并物化证据已闭合的 5 Source、9 Claim 与 3 Terminology。当前不包含正文、译文、图片、Collection/Entry 消费关系、状态、依赖、服务、供应商账户/action/link 或真实写入、Git、public/Vercel、远端预览或发布。
+- 推荐工程顺序：M4 已闭合；M5-U2 provider-neutral 合同/Fake 与 U3 inert review UI/Privacy 已实现，Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布，U4 仍未完成。其外部交互下一停点须分别授权 Buttondown 账户级配置与真实 action 核查/合成订阅，以及 Tally 发布/hosted link/合成数据/回查/删除。第二 Collection 方向、3+3 分配、公开顺序、Liaozhai 任 2016 主/张 2011 对校路线、《促织》青柯亭单见证路线、四篇 claim map/证据账本、最小证据物化与 Ten Kings 单篇纵切片均已完成。内容下一停点应单独选择 Ten Kings 编辑/双语审校、取得任/张实际册页，或其余三篇的逐篇证据受限写作；图片、Collection 关系和状态不得由首稿自动推进。其后才由 M6 完成 6 篇正文、至少 2 个 Collection、关系、全部资产与逐项 `ready`，再由 Project owner 作出 `published` 决定；确认 HTTPS origin、public artifact、clean-source QA、预览与 M7 生产/live/RUM 均继续逐次授权。public-release 的一个 Entry + 一个 Collection 只是技术下限，不是实际预览资格。
+- 当前动作边界：历史 U5 浏览器与人工证据授权已经消费，PID `9628` / `31960` 均已停止且 4321 无监听；Project owner 随后把 M4 结果提交为本地 `3983bee`，把 M5 与 007 状态提交为 `3fa46d5`，并授权形成本地证据检查点 `9914dd3`。M5-U2/U3 与两次只读研究批的历史范围保持不变；2026-09-04 后续又在独立授权下确认底本/单见证路线，建立四个最小 draft Entry owner、物化 5 Source / 9 Claim / 3 Terminology，并只为 Ten Kings 建立 2 Source / 3 Claim / 1 Terminology 的消费关系与证据受限首稿。当前不包含图片、Collection/related 关系、状态、依赖、服务、供应商账户/action/link 或真实写入、push、public/Vercel、远端预览或发布。
 
 ### 1.3 事实、推断与风险
 
@@ -80,13 +80,13 @@
 
 待验证假设：
 
-- 英语优先、单人配合 AI 维护和指标阈值仍需通过真实读者验证；第二 Collection、公开阅读顺序、Liaozhai 任 2016 主/张 2011 对校工作路线与《促织》青柯亭单见证路线均已确认，四篇 claim map 和本轮证据最小物化已完成。任/张实际册页、译文与文化审校仍有门禁；《促织》跨见证、作者归属与“首次增写”继续排除，且全部新增选题尚未经过目标读者验证。
+- 英语优先、单人配合 AI 维护和指标阈值仍需通过真实读者验证；第二 Collection、公开阅读顺序、Liaozhai 任 2016 主/张 2011 对校工作路线与《促织》青柯亭单见证路线均已确认，四篇 claim map、证据最小物化与 Ten Kings 证据受限首稿已完成。任/张实际册页、译文与文化审校仍有门禁；《促织》跨见证、作者归属与“首次增写”继续排除，且全部新增选题尚未经过目标读者验证。
 
 未验证风险：
 
 - `Mythic China` 已确认为当前站点品牌，公开数据控制者名称为 `hyc`；品牌商标与未来自定义域名可用性尚未核查。
 - 首批英文文案、SEO 主题和新视觉执行尚未经过目标读者测试；方向已确认不等于原型效果已验证。
-- 首批四个新增选题已形成原典/对象、学术解释与关键术语的候选 map，并完成本轮可取得见证、正式书目与 locator 的分层闭合；证据已闭合子集已物化为 Source、Claim 与 Terminology，但尚未写入 Entry 反向消费清单或完成逐篇审核。Ten Kings 的不同文本见证不能互作转录，《促织》的单一青柯亭见证也不能外推为跨见证或作者归属结论。
+- 首批四个新增选题已形成原典/对象、学术解释与关键术语的候选 map，并完成本轮可取得见证、正式书目与 locator 的分层闭合；证据已闭合子集已物化为 Source、Claim 与 Terminology。Ten Kings 已建立精确消费清单与证据受限首稿，但尚未完成双语、图片、目标读者或状态审核；其两个见证不能互作转录。《促织》的单一青柯亭见证也不能外推为跨见证或作者归属结论。
 - ComfyUI 当前模型、LoRA、字体和参考素材的商业许可证尚未登记。
 - Buttondown 与 Tally 已分别作为 U4 的有条件 transport 方向，Plausible 明确留在 U5；Project owner 于 2026-09-04 确认 Buttondown `mythic-china` 账户审核已通过，Tally Free 账户和未发布草稿已准备。两者均未接入站点或处理数据，真实 action/link、账户级配置、供应商行为与数据边界仍未验证。托管供应商已选 Vercel，但项目、账户、稳定 production alias/hostname 与实际部署仍未确认。
 
@@ -107,13 +107,14 @@
 11. 2026-09-03 的账户准备事实为：Buttondown `mythic-china` 已创建但仍在人工审核；Tally Free 账户与未发布 Reader Request 草稿已准备。没有 subscriber import、邮件、submission、站点接线、action/link 或真实联调；详细安全与草稿现场只记录在 [`006-external-interactions.md`](006-external-interactions.md)。
 12. Project owner 于 2026-09-04 确认 Buttondown `mythic-china` 账户审核已通过。该用户提供的现场事实只关闭等待审核门槛，不证明或授权登录、账户级配置/条款、真实 action、订阅写入或供应商行为；U4 仍未完成。
 13. Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-second-collection-decision.md) 的 Liaozhai 第二 Collection 方向、3+3 分配、两条公开顺序、Zhong Kui Featured 与《促织》条件保留，并授权四篇 claim map/来源研究；随后又单独授权实际见证、正式书目与精确 locator 证据闭合。2026-09-04 后续独立授权又确认任 2016 主/张 2011 对校及《促织》青柯亭单见证路线，并建立 4 draft Entry / 5 Source / 9 Claim / 3 Terminology 最小子集。每次授权只覆盖自身范围，不自动授权正文、图片、关系或状态。
+14. Project owner 于 2026-09-04 接受“先提交证据检查点，再做 Ten Kings 单篇纵切片”的建议：前一批形成本地提交 `9914dd3`，随后只为 Ten Kings 写入已闭合的 2 Source / 3 Claim / 1 Terminology 消费关系与证据受限英语首稿，保持 `draft`；图片、Collection/related 关系、状态、外部服务、push 与发布均未授权。
 
 仍待确认：
 
 1. `Mythic China` 的商标与未来自定义域名可用性，以及如需调整公开名时的迁移方案。
 2. 首次远端预览所用 Vercel 账户/项目归属、稳定 production alias/hostname、预览保护、发布授权、回滚和退出路径。
 3. 任笃行 2016 与张友鹤 2011 的实际册页、篇级 locator 和最终篇数计数口径；《促织》的辽宁手稿、现代校记与早期抄本若未来恢复跨见证叙事仍须另行取得。当前已确认的工作路线与青柯亭单见证选择不把这些材料写成已得。
-4. 四个新增内容的正文、Entry 证据消费关系、第二 Collection 对象/`entryIds`、最终公开标题、翻译、视觉资产与状态；稳定 Entry ID/slug 及证据最小子集虽已建立，但不降低“至少 2 个完整合集页”的 M6 预览门槛。
+4. 其余三个新增内容的正文与 Entry 证据消费关系，以及四篇的第二 Collection 对象/`entryIds`、最终公开标题、翻译、视觉资产与状态；Ten Kings 虽已有证据受限首稿，仍须双语/编辑/目标读者审核，也不降低“至少 2 个完整合集页”的 M6 预览门槛。
 5. 由谁承担中文/古汉语事实与译文复核、英文可读性编辑和图片文化审校的最终签字。
 
 ## 2. 背景、目标与成功标准
@@ -470,6 +471,7 @@ M2 的真实本地命令与执行证据已写入 `../../DEV_WORKFLOW.md`；M5/M6
 | 2026-09-04 Buttondown 审核状态同步 | Project owner 提供的 Buttondown 审核结果与当前项目文档 | 只把审核已通过同步为用户提供的当前事实；不登录、配置、联调、提交数据或写 Git | Project owner 明确授权该窄范围 | 已关闭等待审核门槛；未核账户级设置、真实 action、double opt-in/tracking、删除/导出或供应商行为，Tally 草稿仍未发布，U4 未完成 |
 | 第二 Collection 确认、四篇 claim map 与证据闭合 | 007、008、REFERENCES 及权威状态文档 | 确认 Liaozhai 方向与 3+3 路径；只研究 Ten Kings、Liaozhai 导读、Painted Skin、《促织》的主张、实际见证、正式书目、locator、术语与译文风险 | Project owner 明确“确认 007 推荐，并授权下一批只做四篇 claim map 与来源研究”，随后单独授权底本/书目/locator 证据闭合 | 已停在分层证据账本：Ten Kings 与 Painted Skin 有限域可物化证据；Liaozhai 待主校勘本决定；《促织》青柯亭单见证已核、跨见证仍阻塞。未创建 Collection/Entry/Source/Claim/Terminology，未写正文、处理资产、改状态、安装依赖、启动服务、写 Git、部署或发布 |
 | 2026-09-04 四篇证据最小物化 | 四个 Entry owner、证据已闭合的 Source/Claim/Terminology、Source Schema/旧数据迁移、review inventory、测试与文档 | 只建立空 draft owner 与证据子集；不写正文、图片、Collection/Entry 消费关系、状态、外部服务或 Git | Project owner 先确认任 2016 主/张 2011 对校及《促织》青柯亭单见证路线，再分别授权 Entry owner 和证据物化 | 已建立 4 draft Entry、5 Source、9 Claim、3 Terminology 与 `usesDigitalImageEvidence` fail-closed 门禁；定向 3 文件/35 测试及完整 25 文件/321 测试、Astro 81 文件零诊断、13 页/42 Hero/10 WOFF2/0 XML/0 JS 输出通过 |
+| 2026-09-04 证据检查点与 Ten Kings 单篇纵切片 | 本地证据批、`ten-kings` Entry、008 与权威状态文档 | 先形成可回退的本地检查点，再只绑定 Ten Kings 已闭合证据并写英语首稿；不处理图片、Collection/related 关系、状态或外部服务 | Project owner 接受推荐顺序、通过首稿并授权本地提交 | 证据批已本地提交为 `9914dd3`、未 push；Ten Kings 使用 2 Source / 3 Claim / 1 source-checked Terminology，形成两段 opening、110 词摘要和四节正文并保持 `draft`。完整 25 文件/321 测试、Astro 81 文件零诊断与 13 页 output verifier 通过；纵切片已进入当前本地 HEAD，未 push |
 | M1 临时 Express 预览/浏览器测试 | 当前本地工作区；仅 `127.0.0.1:4173` | 系统临时目录安装 Express；短时改变本地进程状态；不写项目运行时 | 执行前说明影响 | 2026-08-27 本次已授权并执行；浏览器检查完成后服务已停止，端口不可达，项目未产生运行时依赖文件 |
 | 外部表单、邮件、分析真实联调 | 未来测试环境 | 发送数据/改变第三方状态 | 单独授权 | 未授权 |
 | 预览部署 | 未来预览环境 | 远端构建与可访问 URL | 单独授权或已定义流水线 | 未授权 |
@@ -497,17 +499,17 @@ M7 生产发布前必须：
 
 ## 12. 当前完成记录
 
-- 结果：M1 工程参考、M2/M3 基线及 M4 本地产品实现已收口。M4 包括 U1/U2/U3、U4A public SEO 纯基础设施、机器门禁、Chinese Underworld Collection/Guide Hero、CJK 静态链、Windows/local 部分预检、review 功能页修正、U5A noindex 字体样张、最终三档基础矩阵及当时 8 页人工视觉判断。M5-U2 又完成 provider-neutral 合同/Fake，U3 完成 inert Newsletter / Reader Request review UI、Privacy 页面和匹配 output oracle，形成 9 页历史基线；本轮四个 draft Entry 通过既有动态路由把当前 review inventory 扩为 13 页。四篇证据最小物化现为 4 draft Entry / 5 Source / 9 Claim / 3 Terminology；更早 M4 证据见 `003-pages-exploration-seo.md`，M5 证据见 [`006-external-interactions.md`](006-external-interactions.md)，命令与运行证据以 `../../DEV_WORKFLOW.md` 为准。
-- 未完成/风险：M5-U4 的 Buttondown 账户级配置/真实 action/合成订阅联调、Tally 草稿发布与真实联调、U5 Plausible hook，以及真实 public origin、published 内容、M6 public runner/Layout metadata/endpoint、最终 release-candidate QA、verification receipt、Vercel 项目与部署均未建立。两篇 `editorial-review` 候选仍需 Project owner 内容/状态审核；四篇新增 Entry 仍是空 draft，尚无消费关系、正文、资产或状态审核。真实键盘/200%/偏好、慢/阻断加载、图片失败、LCP/CLS、实际 fallback face 与跨平台 fallback 尚未闭合。
-- 版本身份：U5A 开始时 HEAD、`main` 与本地 `origin/main` 均为 `e2893d14d4960f71fe75bd240971aaa88656511c`，reflog 记录该 ref 在任务前由 push 更新。Project owner 后续把 M4 完成状态提交为 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前工作树干净，本地 `main` 相对当时未 fetch 的 tracking ref ahead 1，U2 期间该 ref 由外部 push 对齐到 `3983bee`。Project owner 又把 M5 与 007 状态提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；本研究批开始前 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为 `3fa46d5`，工作树干净。本批未 fetch、add、commit、push、amend 或发布；tracking ref 不单独证明服务器端状态，精确身份仍以执行前只读核查为准。
+- 结果：M1 工程参考、M2/M3 基线及 M4 本地产品实现已收口。M4 包括 U1/U2/U3、U4A public SEO 纯基础设施、机器门禁、Chinese Underworld Collection/Guide Hero、CJK 静态链、Windows/local 部分预检、review 功能页修正、U5A noindex 字体样张、最终三档基础矩阵及当时 8 页人工视觉判断。M5-U2 又完成 provider-neutral 合同/Fake，U3 完成 inert Newsletter / Reader Request review UI、Privacy 页面和匹配 output oracle，形成 9 页历史基线；本轮四个 draft Entry 通过既有动态路由把当前 review inventory 扩为 13 页。四篇证据最小物化现为 4 draft Entry / 5 Source / 9 Claim / 3 Terminology，Ten Kings 又完成 2 Source / 3 Claim / 1 Terminology 消费关系与证据受限首稿；更早 M4 证据见 `003-pages-exploration-seo.md`，M5 证据见 [`006-external-interactions.md`](006-external-interactions.md)，命令与运行证据以 `../../DEV_WORKFLOW.md` 为准。
+- 未完成/风险：M5-U4 的 Buttondown 账户级配置/真实 action/合成订阅联调、Tally 草稿发布与真实联调、U5 Plausible hook，以及真实 public origin、published 内容、M6 public runner/Layout metadata/endpoint、最终 release-candidate QA、verification receipt、Vercel 项目与部署均未建立。两篇 `editorial-review` 候选仍需 Project owner 内容/状态审核；其余三个新增 Entry 仍是空 draft。Ten Kings 及其余三篇均无资产、Collection/related 关系或状态审核；Ten Kings 还未完成双语、目标读者与页面级人工审核。真实键盘/200%/偏好、慢/阻断加载、图片失败、LCP/CLS、实际 fallback face 与跨平台 fallback 尚未闭合。
+- 版本身份：Project owner 把 M4 完成状态提交为 `3983bee91ada4a286613ec702a8009a4f528af3f`，后续把 M5 与 007 状态提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`。2026-09-04 按用户确认的建议，把四篇研究、证据最小物化及相关状态同步提交为本地检查点 `9914dd304467118b2c32f7f8ac192cc00344fb92`；Ten Kings 纵切片随后以 `feat: draft Ten Kings evidence slice` 进入当前本地 HEAD。当前 `main` 相对未 fetch 的本地 `origin/main` ahead 2，工作树与暂存区为空。未 fetch、push 或发布；tracking ref 不单独证明服务器端状态，精确身份仍以执行前只读核查为准。
 
 ## 13. 当前最终结论
 
-- 需求状态：草拟；M1 工程冻结决策、设计体系、A 主 C 辅的 Home 概念方向、首个 Collection、钟馗 Featured Entry、M2 技术/内容合同、M4 第 1–9 项、M4-U4A 的未来 Vercel 托管方向/公共身份/text-only OG、M5-U2/U3 合同，以及第二 Collection 方向与 3+3 分配均已确认；U4 账户准备事实、四篇 claim map/分层证据、Liaozhai 工作底本路线、《促织》单见证路线及证据最小物化已记录，后置决定仍按对应单元确认。
-- 实施状态：M1 已完成并冻结为工程参考基线；M2、M3、M4 本地产品实现、M5-U2/U3 及四篇证据最小物化已完成。Buttondown 账户审核已通过、Tally 草稿仍未发布；U4 的真实 provider transport/联调、U5、M6 正文/翻译/资产/关系/状态与 public artifact assembly、M7 尚未开始。
-- 验证状态：M3/M4 历史工程、视觉与浏览器证据保留；M5-U3 的 3 文件/79 测试、25 文件/320 测试、Astro 81 文件零诊断与 9 页输出保留为历史基线。2026-09-04 证据物化批的定向 3 文件/35 项测试及最终完整 Prettier、ESLint、25 文件/321 项测试、Astro 81 文件零诊断、13 页 build/output verifier 已通过；实际输出为 42 Hero、10 WOFF2、零 XML、零客户端 JavaScript，六个 Entry 的 inactive Reader Request 与每页唯一 Newsletter 均由 oracle 验证。Project owner 提供的审核/账户/草稿状态不是供应商行为验证；Ten Kings 图片权利、任/张实际册页、《促织》跨见证异文、Painted Skin CText/Giles 权利、真实 public output、供应商行为、新页面浏览器/键盘/缩放、偏好/故障模式、本地/预览性能、实际 fallback face 与支持平台仍未验证，归相应后续门禁。
+- 需求状态：草拟；M1 工程冻结决策、设计体系、A 主 C 辅的 Home 概念方向、首个 Collection、钟馗 Featured Entry、M2 技术/内容合同、M4 第 1–9 项、M4-U4A 的未来 Vercel 托管方向/公共身份/text-only OG、M5-U2/U3 合同，以及第二 Collection 方向与 3+3 分配均已确认；U4 账户准备事实、四篇 claim map/分层证据、Liaozhai 工作底本路线、《促织》单见证路线、证据最小物化及 Ten Kings 单篇纵切片已记录，后置决定仍按对应单元确认。
+- 实施状态：M1 已完成并冻结为工程参考基线；M2、M3、M4 本地产品实现、M5-U2/U3、四篇证据最小物化及 Ten Kings 证据受限首稿已完成。Buttondown 账户审核已通过、Tally 草稿仍未发布；U4 的真实 provider transport/联调、U5、其余三篇正文、全部图片/Collection 关系/状态与 public artifact assembly、M7 尚未开始。
+- 验证状态：M3/M4 历史工程、视觉与浏览器证据保留；M5-U3 的 3 文件/79 测试、25 文件/320 测试、Astro 81 文件零诊断与 9 页输出保留为历史基线。2026-09-04 Ten Kings 纵切片后的最终完整 Prettier、ESLint、25 文件/321 项测试、Astro 81 文件零诊断、13 页 build/output verifier 已通过；实际输出为 42 Hero、10 WOFF2、零 XML、零客户端 JavaScript，六个 Entry 的 inactive Reader Request 与每页唯一 Newsletter 均由 oracle 验证。Project owner 提供的审核/账户/草稿状态不是供应商行为验证；Ten Kings 图片权利、双语/页面人工审核、任/张实际册页、《促织》跨见证异文、Painted Skin CText/Giles 权利、真实 public output、供应商行为、新页面浏览器/键盘/缩放、偏好/故障模式、本地/预览性能、实际 fallback face 与支持平台仍未验证，归相应后续门禁。
 - 发布状态：未发布。
 - 已满足：项目范围、M2 目标架构与内容合同、引用/资产边界、实施拆分，以及“中国神话传说博物馆 + A 主 C 辅 Home 概念方向 + 中国阴间 + 钟馗 Entry”的工程参考与表现层替换边界已形成；未来商业化只保留隔离出口，不进入 M2 实现。
-- 尚未满足：任笃行/张友鹤实际册页、《促织》跨见证材料、四篇 Entry 的证据消费关系、正文/翻译/资产/状态和人工审校，M5-U4 的 Buttondown 账户级配置/真实 action/合成订阅联调、Tally 草稿发布与真实联调、U5 Plausible hook，以及真实 public origin、M6 public runner/Layout metadata/endpoint、最终 release-candidate QA、verification receipt、Vercel 项目与部署等后续门禁。CText/Giles Painted Skin 权利、`孽鬼/孽魅` 异文来源、真实键盘/200%/偏好、慢/阻断加载、图片失败、LCP/CLS、实际 fallback face、跨平台 fallback，以及 U3 与最终 inventory 的页面级人工/目标读者批准也尚未闭合。未验证项没有被改写成通过。本期未使用 ComfyUI，因此按 M3 合同不需要 workflow/model registry。
-- Collection/Guide 资产、双语/CJK 门禁、M4 页面与人工判断已闭合各自范围；M5-U2 provider-neutral 合同/Fake 与 U3 inert review UI/Privacy 已落地。Buttondown 审核已通过只关闭等待审核门槛；U4 仍须分别授权并验证 Buttondown 账户级配置、真实 action 与合成订阅，以及 Tally 发布、精确 hosted link、合成数据写入、回查和删除。M6 内容方向、四篇研究、底本/单见证路线与证据最小物化已经建立；下一内容停点须另行选择并授权取得任/张实际册页，或把已物化证据写入 Entry 消费清单并进入逐篇正文/翻译/术语审核。本批不自动授权正文、资产、真实联调、内容状态提升、Git 写入、fetch/push、public/Vercel、远端预览或发布。
+- 尚未满足：任笃行/张友鹤实际册页、《促织》跨见证材料、其余三篇 Entry 的证据消费关系与正文，以及四篇的翻译/资产/Collection 关系/状态和人工审校；M5-U4 的 Buttondown 账户级配置/真实 action/合成订阅联调、Tally 草稿发布与真实联调、U5 Plausible hook，以及真实 public origin、M6 public runner/Layout metadata/endpoint、最终 release-candidate QA、verification receipt、Vercel 项目与部署等后续门禁。CText/Giles Painted Skin 权利、`孽鬼/孽魅` 异文来源、真实键盘/200%/偏好、慢/阻断加载、图片失败、LCP/CLS、实际 fallback face、跨平台 fallback，以及 U3 与最终 inventory 的页面级人工/目标读者批准也尚未闭合。未验证项没有被改写成通过。本期未使用 ComfyUI，因此按 M3 合同不需要 workflow/model registry。
+- Collection/Guide 资产、双语/CJK 门禁、M4 页面与人工判断已闭合各自范围；M5-U2 provider-neutral 合同/Fake 与 U3 inert review UI/Privacy 已落地。Buttondown 审核已通过只关闭等待审核门槛；U4 仍须分别授权并验证 Buttondown 账户级配置、真实 action 与合成订阅，以及 Tally 发布、精确 hosted link、合成数据写入、回查和删除。M6 内容方向、四篇研究、底本/单见证路线、证据最小物化与 Ten Kings 单篇纵切片已经建立；下一内容停点须另行选择并授权 Ten Kings 编辑/双语审核、取得任/张实际册页，或其余三篇逐篇写作。本批不自动授权图片、Collection/related 关系、真实联调、内容状态提升、Git 提交/push、public/Vercel、远端预览或发布。
 - 是否可以关闭需求：否。
