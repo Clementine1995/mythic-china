@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。2026-09-04 经后续逐项授权，四篇候选已建立最小 draft Entry owner，并只物化证据已闭合的 Source、Claim 与 Terminology；正文、Collection 关系、视觉资产和内容状态均未改变。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -14,6 +14,7 @@
 - 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
 - M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
 - M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容；`Chinese Underworld Guide (Working Draft)` 只是内部工作标题，不是已冻结的公开标题。
+- 当前内容 inventory 为 6 篇 Entry（2 篇 `editorial-review`、4 篇 `draft`）、1 个 `editorial-review` Collection、14 份 Source、19 份 Claim 与 5 份 Terminology；published Entry / Collection 仍为 0/0。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`，其正文及 Entry 反向 `sourceIds` / `claimIds` / `terminologyRecordIds` 仍为空，证据对象只先保存 owner 外键，构成研究阶段的过渡形态而非可写作或可发布状态。
 
 ### 0.2 M3-U3 视觉记录与加载合同
 
@@ -137,7 +138,7 @@ heroAssetId: null
 - `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建，只能保留指向 `published | archived` Entry 的既有发布谱系关系供历史追溯，不能借归档状态新挂 draft/未公开对象。
 - Collection 必须说明范围与限制，避免把不同时代/传统强行拼成统一体系。
 - Topic 是可复用筛选标签；Collection 是有导语、有顺序、有结论的产品页面。
-- 上述 M2 draft Collection 只引用两个已确认 demo；其余首发候选在创建真实 Entry 后再加入，不能用悬空 ID 预占阅读路径。
+- 当前唯一 Collection 仍只引用两个已确认 demo；四个新增 draft Entry 尚未加入任何 Collection。只有后续明确授权并复核成员、顺序与状态矩阵后，才能更新 `entryIds`，不能用研究方向自动补关系。
 - Collection 的 realm token、纹理、构图和主题资产属于表现层/Asset Manifest，不写入本内容对象。
 
 ### 2.3 Source
@@ -158,6 +159,7 @@ accessedAt: "2026-08-26"
 language: en
 translator: null
 pageOrSection: chapter 1
+usesDigitalImageEvidence: false
 rightsStatus: citation-only
 rightsUrl: https://example.org/rights
 notes: Why this source is used and its limitations.
@@ -174,7 +176,9 @@ notes: Why this source is used and its limitations.
 - `reference-website`
 - `modern-adaptation`
 
-网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。M2 的最小可追溯组合是：`primary-text` 至少有版次/底本身份；`scholarship` 与 `modern-adaptation` 有作者/机构及出版物、年份或 URL 身份；`museum-or-library` 与 `fieldwork-or-community-archive` 有负责机构及对象号、档案/版次或 URL 身份。`translation` 记录必须填写 `translator`、`publicationOrEdition`、`pageOrSection`、`rightsStatus` 与 `rightsUrl`，任何填写了 `rightsUrl` 的记录也必须填写 `rightsStatus`。数字影像同样需要两项权利信息，但 M2 Source 尚无可靠的数字影像判别字段，因此不得凭现有字段臆测并自动放行；首次接入此类记录前先扩充合同与 Schema。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。
+网页来源必须包含 `title`、`authorOrOrganization`、`url`、`accessedAt`。M2 的最小可追溯组合是：`primary-text` 至少有版次/底本身份；`scholarship` 与 `modern-adaptation` 有作者/机构及出版物、年份或 URL 身份；`museum-or-library` 与 `fieldwork-or-community-archive` 有负责机构及对象号、档案/版次或 URL 身份。`translation` 记录必须填写 `translator`、`publicationOrEdition`、`pageOrSection`、`rightsStatus` 与 `rightsUrl`，任何填写了 `rightsUrl` 的记录也必须填写 `rightsStatus`。
+
+`usesDigitalImageEvidence` 是所有 Source 必填的显式布尔值，表示当前 Claim / Terminology locator 是否依赖数字页图、IIIF canvas 或馆藏对象图像。值为 `true` 时，`rightsStatus` 与 `rightsUrl` 必须同时非空；值为 `false` 只表示当前证据路径不依赖图像，不表示来源网页没有图片，也不能按 `sourceType`、URL 或文件格式自动推断。该权利对只让研究/引用审查保持可追溯，不授权把图像纳入 Asset、复制、衍生或商用；图片复用仍须走独立视觉资产合同。网页可访问、原作已进入公版和数字文件允许复用是三种不同状态，不能互相替代。
 
 `Source.language` 描述整份来源，不自动描述可选 `titleZh` 的正字区域。`titleZhLang` 与 `titleZh` 成对必填，受控值为 `zh | zh-Hans | zh-Hant`：generic `zh` 明确表示已知为中文但正字区域尚未核定，不是脚本猜测或 fallback。教育部词典记录自身证明 `titleZhLang: zh-Hant`；四条英文馆藏记录于 2026-08-31 回到馆方页面复核可见中文字段后，又由 `Project owner (user-confirmed)` 作为 bilingual reviewer 核定为 `zh-Hant`。该结论来自明确人工审校，不是按字符外形自动猜测；未来未审校记录仍须保留 generic `zh`。`editorial-review` 可保留 generic `zh`；`ready | published | archived` Entry 引用的 Source 必须先经来源核对/双语审校改为精确 `zh-Hans | zh-Hant`，内容图会拒绝绕过。可见 HTML 另有独立门禁：任何 Han 文本必须继承精确 `zh-Hans | zh-Hant`，不能因字符已在字体中就留在 `lang="en"` 或 generic `zh`；混合中英字段优先拆成语义片段，单处 Source 英文标题不为此扩展 Schema。
 

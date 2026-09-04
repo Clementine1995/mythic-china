@@ -1,0 +1,11 @@
+claimId: claim-ten-kings-recording-apparatus
+entryId: ten-kings
+claimType: textual
+evidenceContext: historical-tradition
+statement: CBETA witness X01n0021_001 organizes judgment through petitions and case records together with a karma ledger, karma scale, and karma mirror.
+certainty: verified
+sourceLinks:
+  - sourceId: source-cbeta-ten-kings-x01n0021
+    role: primary
+    locator: "[0408b23–0408c07]; [0409b23–0409c04]"
+    note: Supports these terms in this witness; it does not prove that supernatural courts existed or reproduced historical administration exactly.

@@ -1,0 +1,11 @@
+claimId: claim-fighting-cricket-son-shen-hua
+entryId: fighting-cricket
+claimType: textual
+evidenceContext: historical-tradition
+statement: In the specified Qingketing witness, more than a year later the son says that he had taken the form of the cricket and had only now recovered.
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 7; Commons digital page 431; visible left-side block-center folio 8
+    note: Limited to this witness. The passage does not establish who first created or inserted the ending, and its timing is more than a year rather than exactly one year.

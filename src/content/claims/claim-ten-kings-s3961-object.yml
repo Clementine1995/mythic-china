@@ -1,0 +1,11 @@
+claimId: claim-ten-kings-s3961-object
+entryId: ten-kings
+claimType: historical
+evidenceContext: historical-tradition
+statement: British Library pressmark Or.8210/S.3961 identifies an illustrated Chinese manuscript scroll dated approximately 900–1000, found at Dunhuang Mogao Cave 17, whose Ten Kings sequence occupies adjacent IIIF canvases.
+certainty: verified
+sourceLinks:
+  - sourceId: source-idp-ten-kings-s3961
+    role: object-record
+    locator: Object metadata; IIIF manifest items/7–15
+    note: Supports this object's identity and digital layout only, not an earliest-surviving claim, historical performance, or image reuse.

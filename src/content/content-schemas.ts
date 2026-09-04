@@ -375,6 +375,7 @@ export const sourceSchema = z
     language: nonEmptyStringSchema,
     translator: nullableNonEmptyStringSchema,
     pageOrSection: nullableNonEmptyStringSchema,
+    usesDigitalImageEvidence: z.boolean(),
     rightsStatus: nullableNonEmptyStringSchema,
     rightsUrl: httpUrlSchema.nullable(),
     notes: nullableNonEmptyStringSchema,
@@ -491,6 +492,24 @@ export const sourceSchema = z
         path: ["rightsStatus"],
         message: "A rights URL requires an explicit rights status.",
       });
+    }
+
+    if (source.usesDigitalImageEvidence) {
+      if (source.rightsStatus === null) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["rightsStatus"],
+          message: "Digital image evidence requires an explicit rights status.",
+        });
+      }
+
+      if (source.rightsUrl === null) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["rightsUrl"],
+          message: "Digital image evidence requires a rights URL.",
+        });
+      }
     }
 
     if (source.sourceType === "translation") {

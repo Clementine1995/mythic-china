@@ -1,0 +1,11 @@
+claimId: claim-liaozhai-compilation-period-in-luo
+entryId: liaozhai-reading-guide
+claimType: historical
+evidenceContext: historical-tradition
+statement: Luo Hui places the compilation of Liaozhai approximately between 1670 and 1700 and treats the 1679 authorial preface as evidence that a substantial collection existed by then, not that every tale was final.
+certainty: verified
+sourceLinks:
+  - sourceId: source-luo-ghost-of-liaozhai-2009
+    role: scholarship
+    locator: Print page 154; PDF frame 158
+    note: Verifies Luo's attributed chronology; it does not establish a single completion date for every tale.

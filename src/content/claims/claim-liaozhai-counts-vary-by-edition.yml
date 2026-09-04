@@ -1,0 +1,11 @@
+claimId: claim-liaozhai-counts-vary-by-edition
+entryId: liaozhai-reading-guide
+claimType: textual
+evidenceContext: historical-tradition
+statement: Luo Hui reports 431 items in the sixteen-juan Qingketing arrangement and 491 items in Zhang Youhe's twelve-juan arrangement with appendices, showing that Liaozhai counts depend on edition and counting unit.
+certainty: verified
+sourceLinks:
+  - sourceId: source-luo-ghost-of-liaozhai-2009
+    role: scholarship
+    locator: Print page 160; PDF frame 165
+    note: Supports these two attributed counts only; juan, physical volumes, tales, and appended texts must not be treated as interchangeable units.

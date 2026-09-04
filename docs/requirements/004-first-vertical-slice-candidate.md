@@ -174,7 +174,7 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 
 2026-08-30，Project owner 在真实本地 review 页面可见后确认“目前来看可以”，随后明确：
 
-1. 当前两篇 Entry、Collection、`Mythic China Editorial` byline、可见 `Fact checked` 日期、页面模板排版与 CSS 无图 Collection Hero 作为阶段性候选通过；不把该反馈扩大为 `ready` / `published` 或 M4-U5 通过。
+1. 当时两篇 Entry、Collection、`Mythic China Editorial` byline、可见 `Fact checked` 日期、页面模板排版与 CSS 无图 Collection Hero 作为阶段性候选通过；不把该反馈扩大为 `ready` / `published` 或 M4-U5 通过。
 2. Collection Hero 选择候选 A：原创抽象门槛；批准 brief 并授权候选生产任务，但任何生成图仍须另行人工审核。该任务现已形成 desktop 02 与 mobile 01 两张首选待审图。
 3. 接受四个字体家族/版本方向、Adobe 修改版改名与 Source Han Serif 延迟落库，并新增“字体必须保留可替换空间”的硬门禁。
 4. 授权下一本地候选任务继续，并授权停止本次 preview；不授权依赖安装、Git 写入、Vercel、部署或发布。
@@ -248,7 +248,7 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 ## 12. 当前结论
 
 - Collection 与 Guide 已各自绑定独立的 approved/current Hero v1；Zhong Kui Entry 继续解析自己的 Hero v2。默认 review 页面不得跨 owner 借图，Guide 的视觉门禁不再是当前阻塞项。
-- 当前仍为 0 published Entry / 0 published Collection；两篇 Entry 与 Collection 均保持 `editorial-review`。Explore/Collections 的 review-only 候选架与直达字体样张只改善本地评审入口，不改变 published-only release 投影或内容状态。Project owner 已通过本批三档样张和全部 8 个页面，因此本候选支持 M4 本地实现关闭；真实键盘/200%、偏好与故障模式、本地性能、实际 fallback 可读性与支持平台证据明确移交 M6 release-candidate gate，不改写成已通过。M7 只承接生产与 live/RUM 基线。
-- 最新完整 `pnpm run check` 通过 23 个测试文件/279 项测试、Astro check 73 文件零诊断，以及默认 review build 的 8 页、42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML、零客户端 JavaScript 和精确样张/生产来源/构建后 CSS/实际 HTML/lang/cmap、活跃语义壳、emitted-resource closure、输出链接项与 review candidate 门禁。最终 pinyin/mixed DOM 与 CSS 又通过 2026-09-02 的 24 个真实视口组合和 12 个 Hero 组合；非默认视觉证据继续沿用 11 个 master 与 50 个响应式输出。
+- 当前仍为 0 published Entry / 0 published Collection；原两篇 Entry 与 Collection 保持 `editorial-review`，2026-09-04 后续内容批新增四个无正文/资产/关系的 `draft` Entry。Explore/Collections 的 review-only 候选架仍只消费原有 Collection 及两篇成员，不改变 published-only release 投影或内容状态。Project owner 已通过本批三档样张和当时全部 8 个页面，因此本候选支持 M4 本地实现关闭；该判断不覆盖后来 Privacy 与四个 draft 页面。真实键盘/200%、偏好与故障模式、本地性能、实际 fallback 可读性与支持平台证据明确移交 M6 release-candidate gate，不改写成已通过。M7 只承接生产与 live/RUM 基线。
+- 本纵切片当时的完整 `pnpm run check` 通过 23 个测试文件/279 项测试、Astro check 73 文件零诊断，以及默认 review build 的 8 页、42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML、零客户端 JavaScript，并通过精确样张/生产来源/构建后 CSS/实际 HTML/lang/cmap、活跃语义壳、emitted-resource closure、输出链接项与 review candidate 门禁。最终 pinyin/mixed DOM 与 CSS 又通过 2026-09-02 的 24 个真实视口组合和 12 个 Hero 组合；非默认视觉证据继续沿用 11 个 master 与 50 个响应式输出。后续证据物化批的当前完整结果为 25 文件/321 测试、Astro 81 文件零诊断及 13 页输出，未改变本纵切片资产。
 - M4-U5A 与本次 browser 授权均不包含内容状态提升、依赖、Git 写入、public runner、Vercel 操作、部署或发布；Project owner 判断后验收标签已清理，PID `31960` 已停止且 4321 无监听。详细执行证据与未验证项见 [`DEV_WORKFLOW.md`](../../DEV_WORKFLOW.md)、[`003-pages-exploration-seo.md` 的 12.11 节](003-pages-exploration-seo.md#1211-m4-u5anoindex-字体样张与可控验证入口)、[12.12 加固记录](003-pages-exploration-seo.md#1212-m4-u5a-verifier-fail-closed-加固)与[12.13 最终三档记录](003-pages-exploration-seo.md#1213-m4-u5-最终三档与人工验收交接)。
-- 当前交接：先为 M5 建立独立详细需求；M6 再完成剩余内容、第二个 Collection、`published` 决定、public artifact assembly、最终 release-candidate QA、receipt 与受保护预览。`font-assets.json: browser-review-pending` 继续表达发布 QA 待完成，不表示 M4 本地实现未完成。
+- 当前交接：M5-U2/U3 与四篇证据最小物化已完成；M6 仍须完成正文、证据消费关系、第二个 Collection、资产、`published` 决定、public artifact assembly、最终 release-candidate QA、receipt 与受保护预览。`font-assets.json: browser-review-pending` 继续表达发布 QA 待完成，不表示 M4 本地实现未完成。

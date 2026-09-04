@@ -1,0 +1,11 @@
+claimId: claim-fighting-cricket-son-rescue-state
+entryId: fighting-cricket
+claimType: textual
+evidenceContext: historical-tradition
+statement: In the specified Qingketing witness, Chengming's son crushes the cricket, falls into a well, is recovered with breath remaining, and afterward is described as dazed in spirit, feeble, and wanting to sleep.
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 7; Commons digital page 429; visible left-side block-center folio 6
+    note: The witness-specific wording must not be medicalized as death, coma, resurrection, or a reading shared by every textual witness.

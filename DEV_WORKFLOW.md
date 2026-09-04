@@ -2,9 +2,9 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；当前 11 个精确画布 master、11 份 repository source rendition、四份 production record、七份 manifest 版本记录、六个 approved/current 逻辑资产及七份 current responsive rendition 的 50 个目标均有既有验证证据。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当前 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`，当前 HEAD、`main` 与 tracking ref 对齐；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。`public` intent、runner、页面/endpoint、deployable artifact、`ready/published` 内容、远端环境和发布都不存在。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 只承接生产、live smoke、回滚、线上地区复核与 RUM/p75。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；当前 11 个精确画布 master、11 份 repository source rendition、四份 production record、七份 manifest 版本记录、六个 approved/current 逻辑资产及七份 current responsive rendition 的 50 个目标均有既有验证证据。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当前 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。Project owner 后续把 M5-U1–U3、U4 账户准备快照与第二 Collection 决策包提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；2026-09-03 四篇研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为该提交，工作树干净。`public` intent、runner、页面/endpoint、deployable artifact、`ready/published` 内容、远端环境和发布都不存在。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 只承接生产、live smoke、回滚、线上地区复核与 RUM/p75。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
-M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已在当前工作树完成；当前 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。Buttondown `mythic-china` 已创建但仍在人工审核，Tally Free 账户与未发布 Reader Request 草稿已准备；两者仍只是 U4 条件方向，均未接入站点、提供 action/link 或处理数据。Plausible 留 U5；项目仍没有真实 supplier transport、网络请求或 public artifact。
+M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已进入 `3fa46d5`；当时 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。2026-09-04 的四篇证据最小物化又建立 4 个空 draft Entry、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁，并通过当前 13 页 review inventory 完整门禁；published inventory 仍为 0/0。Project owner 同日确认 Buttondown `mythic-china` 账户审核已通过，Tally Free 账户与未发布 Reader Request 草稿已准备；两者仍只是 U4 条件方向，均未接入站点、提供 action/link 或处理数据。Plausible 留 U5；项目仍没有正文/图片/Collection 新关系、状态提升、真实 supplier transport、网络请求或 public artifact。
 
 Guide Hero 生产闭环最初直接接续历史基线 `eb6e20c7c2ae5eda895e5a70f547140163877456`（`feat: complete first-slice release readiness gates`）上的未提交 Collection Hero 与本地化合同工作树；该生产批次没有创建分支、worktree、旁路项目或仓库副本，也未执行 fetch 或 Git 写操作。后续只读核查发现这些改动已进入本地提交 `a3194d0d59b605cf7a5fcfc5d2d55166c374e13b`；Project owner 随后授权继续并创建来源复核提交 `d60691a`。上述历史批次未执行 fetch 或 push。M4-U5A 开始时，只读核查确认 HEAD、`main` 与本地 `origin/main` 已在本任务前由 Project owner 对齐到 `e2893d14d4960f71fe75bd240971aaa88656511c`（`update`），工作树干净；本任务不重复或改写该提交，也未执行 fetch 或任何 Git 写操作。精确 HEAD、工作树和 tracking ref 每次仍须按本文件只读复核；本地 tracking ref 不单独证明后续服务器端状态。
 
@@ -818,9 +818,52 @@ Project owner 提供了在本任务前完成的 Buttondown/Tally 账户准备现
 
 - 匹配验证：固定 Node/Corepack 的 `pnpm run format:check` 通过；新增 007 后共 24 份 Markdown，严格 UTF-8、相对链接和原模板占位符检查通过，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。本次只修改文档，未改业务代码、内容对象、资产或 output policy，因此未重复运行 test/build。
 
+### 2026-09-03 第二 Collection 确认与四篇 claim map/来源研究
+
+Project owner 明确确认 [`007-second-collection-decision.md`](docs/requirements/007-second-collection-decision.md) 的推荐，并授权下一批只做 Ten Kings、Liaozhai 导读、Painted Skin 与《促织》的 claim map 和来源研究。执行前只读复核确认 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`，工作树、暂存区和未跟踪文件均为空；未执行 fetch，因此 tracking ref 不单独证明服务器端状态。
+
+- 本批新增 [`008-four-entry-claim-maps.md`](docs/requirements/008-four-entry-claim-maps.md)，并同步 007、001、PRODUCT、REFERENCES、README 与本文件；只记录方向确认、候选主张、原典/馆藏/专业研究角色、locator 路径、术语/译文风险、权利边界和停止条件。正式书目、底本与部分精确 locator 仍未闭合。
+- Ten Kings 已证明可围绕日期、卷宗、预修/追荐及图文媒介形成独立问题，但 S.3961、CBETA X0021 与专业研究底本的对应、精确图像 locator 和图片权利仍未闭合。Liaozhai 导读与 Painted Skin 的来源链有条件可行，仍须冻结实际校勘本、页/叶和自译策略。
+- 《促织》继续保留但版本硬门禁未通过：当前只可归因记录专项研究所报告的见证差异，不能把具体馆藏异文写成本站已直接确认，也不能写谁首次创造或增补魂化结尾。只有逐字核验青柯亭具体页叶后，才可在其余版本材料仍不可得时另行决定只按该见证叙事；若该页叶也未核验，则继续阻塞或另行授权切换聂小倩。
+- 本批没有新增或修改 `src/content`、Schema、页面、业务代码、测试、output policy、资产、依赖、lockfile 或配置；没有写正文/译文、启动本地 dev/preview、执行站点浏览器测试、提交外部数据、执行 Git 写操作、操作 Vercel、部署或发布。没有新增执行命令。
+- 匹配验证：固定 Node/Corepack 的 `pnpm run format:check` 通过；新增 008 后共 25 份 Markdown，严格 UTF-8、相对链接和原模板占位符检查通过，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。外部来源角色、关键 URL 与权利边界已只读复核；CText 的抓取限制不被误记为失效链接。由于本批只修改文档且未改业务代码、内容对象、资产或 output policy，未运行 test/build。
+
+### 2026-09-04 四篇底本、正式书目与 locator 证据闭合
+
+Project owner 在 2026-09-03 的 claim map/来源研究之后，单独授权下一批仍只处理 Ten Kings、Liaozhai 导读、Painted Skin 与《促织》的实际见证/版次、正式书目和页/叶/canvas locator。当前批次修改 [`008-four-entry-claim-maps.md`](docs/requirements/008-four-entry-claim-maps.md)、[`REFERENCES.md`](docs/REFERENCES.md)、007、001、PRODUCT、README 与本文件；不进入 Source/Claim/Terminology、Collection/Entry、正文、翻译、图片、状态、Schema、业务代码、测试或运行配置。
+
+- Ten Kings 已固定 British Library / IDP `Or.8210/S.3961`、37 个 IIIF canvas 与核心 `items/7–15`，并将 CBETA `X01n0021_001` 固定为另一文本见证、locator `[0408b13–0409c22]`；Teiser 1994、Kwon 2019、Wang 2023/2024、Schmid 2008 与 Met/British Museum 对象补成正式书目和限域权利记录。目录起页不冒充二手论断逐页核验，S.3961 与 CBETA 不互作转录，IDP/BM 图片未获本批复用批准。
+- Liaozhai 导读已补 Luo 2009 可核页码、Barr 1983 正式学位论文记录、辽宁稿本 2019 影印候选，以及任笃行 2016 / 张友鹤 2011 两个现代校勘本候选；推荐任 2016 为主、张 2011 对校，但 Project owner 尚未确认且实际册页未取得，所以主底本与全站篇数口径仍未冻结。
+- Painted Skin 已固定 CText 北大—CADAL 数字见证卷一文件 `46700`、数字图像 160–165、文本锚点 `#p171–#p174`（`#p175` 为下一篇边界），Giles 1880 vol. I pp.76–84 与 Tso 2017 pp.15–18；历史版次/原叶、`孽鬼/孽魅` 异文来源、现代译本独立核页与电影一手时间码仍未闭合。
+- 《促织》已直接核验上海图书馆 `線普長266652-67` 青柯亭见证卷七、Commons 数字页 427–432 与可见叶码四至九；关键 `後歲餘…身化促織` 和 `異史氏曰` 在数字页 431，不是 430。每张图跨两个书页且右侧版心裁切，故不补造 a/b。Project owner 可另行选择只按这一见证叙事；辽宁手稿、现代校记和早期抄本未得，跨见证与“谁首次增写”仍阻塞。
+- 本批没有新增或修改 `src/content`、Schema、页面、业务代码、测试、output policy、资产、依赖、lockfile 或配置；没有启动 dev/preview、提交外部数据、执行 Git 写操作、操作 Vercel、部署或发布。
+- 匹配验证：固定 Node 24.16.0 / Corepack 的 `pnpm run format:check` 通过；25 份 Markdown 的严格 UTF-8、相对链接与原模板占位符检查通过，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。由于本批只修改文档且未改业务代码、内容对象、资产或 output policy，未运行 test/build。
+
+### 2026-09-04 Buttondown 审核状态同步
+
+Project owner 确认 Buttondown `mythic-china` 账户审核已通过，并明确授权只把该事实同步到项目文档。本批更新 M5 详细需求、README、PRODUCT、ARCHITECTURE、001、003、REFERENCES 与本文件；不登录 Buttondown、不查看或修改账户后台、不配置 action/条款/tracking、不联调、不提交订阅或其他数据，也不执行 Git 写操作。
+
+- 该用户提供的现场事实只关闭“等待 Buttondown 审核结果”门槛，不证明账户级 DPA/设置、真实 action、double opt-in、open/click tracking、删除/导出或供应商行为已经核验。
+- 站点与仓库继续没有 Buttondown action/link、provider mapping、凭据、subscriber、邮件或真实 transport；Tally Free 草稿继续未发布，M5-U4 仍未完成。
+- 下一外部交互停点须另行授权：Buttondown 账户级配置与真实 action 的只读核查、合成订阅写入/回查/清理，以及 Tally 发布、hosted link、合成数据写入、回查和删除。当前授权不包含这些动作。
+- 匹配验证：固定 Node 24.16.0 / Corepack 的 `pnpm run format:check` 通过；25 份 Markdown 的严格 UTF-8、相对链接与原模板占位符检查通过，`git diff --check` 无 whitespace error（仅现有 Windows LF→CRLF 提示）。本批未改业务代码、内容对象、资产或 output policy，因此未运行 test/build。
+
+### 2026-09-04 四篇证据最小物化
+
+Project owner 先确认 Liaozhai 采用任笃行 2016 主、张友鹤 2011 对校的工作路线及《促织》青柯亭单见证路线；随后授权为 Claim / Terminology 建立四个最小 draft Entry owner，并最终明确授权只物化证据已闭合的 Source、Claim 与 Terminology。本批不写正文、不处理图片、不改状态/Collection 关系、不接外部服务、不启动服务，也不执行 Git 写操作。
+
+- 新增 `ten-kings`、`liaozhai-reading-guide`、`painted-skin`、`fighting-cricket` 四个空 `draft` Entry；正文、反向证据数组、Collection/related 关系、日期与视觉字段均为空。
+- 新增 5 份 Source、9 份 verified Claim 与 3 份 `source-checked` Terminology；当前总 inventory 为 6 Entry / 1 Collection / 14 Source / 19 Claim / 5 Terminology，published 仍为 0/0。
+- Source Schema 新增必填 `usesDigitalImageEvidence`；值为 `true` 时 `rightsStatus` 与 `rightsUrl` 同时必填。9 份既有 Source 已按当前 Claim/Terminology locator 是否依赖数字页图、IIIF canvas 或对象图像显式迁移；`false` 不等于网页无图，权利对也不授予 Asset 复用。
+- 明确排除 CText/Giles Painted Skin Source、`孽鬼` Terminology、尚无实际册页的任/张 Source，以及《促织》跨见证、作者归属、FC-08–FC-10、“首次增写”与起源 Claim。
+- 四个 draft 经既有动态路由增加四个 direct-only noindex review 页面；页面模板未改。`font-specimen-policy.mjs` 与 `verify-m4-u2-output.mjs` 已把当前精确清单扩为 13 HTML，六个 Entry 各保留一个 inactive Reader Request；Hero 仍为 42、WOFF2 仍为 10、XML 与客户端 JavaScript 仍为 0。Explore/Collections 固定候选架不变。
+- 匹配验证：定向 3 个文件/35 项测试通过；最终完整 `pnpm run check` 通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 build 与 output verifier。实际输出为 42 Hero、10 个 hash-locked WOFF2、0 XML、0 客户端 JavaScript；13 页各一个 inactive Newsletter，六个 Entry 各一个匹配稳定 ID 的 inactive Reader Request。29 份 Markdown 的严格 UTF-8、相对链接与原模板占位符检查通过，授权范围文本无尾随空白，`git diff --check` 无 whitespace error（仅 Windows LF→CRLF 提示）。
+
+本批未运行 dev/preview/browser 或非默认 `visual:build:check`；未修改图片、manifest 或 master。四个新增页面没有真实浏览器、键盘或缩放证据，完整工程通过不替代这些后续人工门禁。
+
 ## 数据库、外部服务与真实写入口
 
-站点运行期当前均不适用。外部已有审核中 Buttondown 账户和 Tally Free 未发布草稿，但项目没有数据库、表单 endpoint、邮件、分析、支付、广告配置或任何可执行外部写入口。未来接入任一能力时必须先建立需求文档，并在本文件增加：
+站点运行期当前均不适用。外部已有审核已通过的 Buttondown 账户和 Tally Free 未发布草稿，但项目没有数据库、表单 endpoint、邮件、分析、支付、广告配置或任何可执行外部写入口。未来接入任一能力时必须先建立需求文档，并在本文件增加：
 
 - 环境和实际身份校验。
 - Mock/隔离测试入口。
@@ -831,7 +874,7 @@ Project owner 提供了在本任务前完成的 Buttondown/Tally 账户准备现
 
 ## 发布
 
-Vercel 已被选为未来静态托管目标，Project owner 当前明确不购买自定义域名；项目仍没有稳定 production alias/hostname、真实 origin、预览/生产环境或可执行部署命令。M4 的 noindex 本地产品实现与当时 8 页人工判断已完成；M5-U2 provider-neutral 合同/Fake 及 M5-U3 当前 9 页 inert review UI/Privacy 也已完成，但真实 published inventory 仍为 0/0，`public` intent、runner、路由/endpoint、deployable output 和远端环境均不存在。M5-U4 只完成 Buttondown 审核中账户与 Tally Free 未发布草稿的准备快照；下一停点是等待 Buttondown 审核结果，以及 `docs/requirements/006-external-interactions.md` 对 Tally 发布、精确 action/link、合成数据、回查与删除的独立授权。M6 再完成 6 篇 Entry、至少 2 个 Collection、全部资产和人工 `published` 决定，并在单独授权下建立 Vercel 项目身份、确认稳定 production hostname 作为阶段性 origin，generated preview/commit URL 不得成为 canonical。随后才实施 public artifact assembly，并从另行授权的 clean committed source 重建同一最终 artifact，执行 output verifier、真实键盘/200%、偏好、字体/图片故障、支持平台、最终视觉/目标读者与本地性能 QA，生成 clean-source verification receipt。dirty source 只允许 nondeployable 诊断记录；M6 远端预览和 M7 生产/live smoke/RUM 仍逐次授权。任何首次项目创建、关联、预览部署和生产发布都必须先把真实命令、身份与回滚写入本文件；不得上传包含 non-published 路由的 review `dist/`。
+Vercel 已被选为未来静态托管目标，Project owner 当前明确不购买自定义域名；项目仍没有稳定 production alias/hostname、真实 origin、预览/生产环境或可执行部署命令。M4 的 noindex 本地产品实现与当时 8 页人工判断已完成；M5-U2 provider-neutral 合同/Fake 及 M5-U3 的 9 页 inert review UI/Privacy 历史基线也已完成。本轮四个 draft Entry 将当前 review 合同扩为 13 页，并物化 5 Source、9 Claim 与 3 Terminology，但 published inventory 仍为 0/0，`public` intent、runner、路由/endpoint、deployable output 和远端环境均不存在。Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布；M5-U4 仍未完成，其下一停点须按 `docs/requirements/006-external-interactions.md` 分别授权 Buttondown 账户级配置与真实 action 核查、合成订阅联调，以及 Tally 发布、精确 hosted link、合成数据写入、回查和删除。M6 的第二 Collection 方向、3+3 路径、Liaozhai 任 2016 主/张 2011 对校路线、《促织》青柯亭单见证路线、四篇 claim map/证据账本及最小证据物化均已完成；下一内容停点须另行授权取得任/张实际册页，或把已物化证据写入 Entry 消费清单并进入逐篇正文/翻译/术语审核。M6 后续仍须完成 6 篇正文、至少 2 个 Collection、关系、全部资产和人工 `published` 决定，并在单独授权下建立 Vercel 项目身份、确认稳定 production hostname 作为阶段性 origin，generated preview/commit URL 不得成为 canonical。随后才实施 public artifact assembly，并从另行授权的 clean committed source 重建同一最终 artifact，执行 output verifier、真实键盘/200%、偏好、字体/图片故障、支持平台、最终视觉/目标读者与本地性能 QA，生成 clean-source verification receipt。dirty source 只允许 nondeployable 诊断记录；M6 远端预览和 M7 生产/live smoke/RUM 仍逐次授权。任何首次项目创建、关联、预览部署和生产发布都必须先把真实命令、身份与回滚写入本文件；不得上传包含 non-published 路由的 review `dist/`。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 

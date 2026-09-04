@@ -1,0 +1,11 @@
+claimId: claim-fighting-cricket-levy-pressure
+entryId: fighting-cricket
+claimType: textual
+evidenceContext: historical-tradition
+statement: In the specified Shanghai Library Qingketing witness, the tale opens with a court demand for fighting crickets and traces the resulting exaction through local authority to Chengming and his household.
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 7; Commons digital page 427 left half and page 428 right half; visible left-side block-center folios 4–5
+    note: This is the tale's fictional setup, not direct evidence for a historical Ming tax system or universal local practice.

@@ -1,0 +1,15 @@
+termId: term-zhiguai-in-liaozhai-reading-guide
+entryId: liaozhai-reading-guide
+hanzi: 志怪
+pinyin: zhìguài
+sourceContext: Genre discussion in Luo Hui, print pages 157–161
+chosenEnglish: zhiguai
+firstUseGloss: zhiguai (志怪, zhìguài), accounts or records of anomalies
+alternativesRejected:
+  - horror
+  - ghost stories
+  - mythology
+rationale: Retaining zhiguai avoids collapsing a historically situated literary category into a modern entertainment genre or a universal body of belief.
+sourceIds:
+  - source-luo-ghost-of-liaozhai-2009
+reviewStatus: source-checked

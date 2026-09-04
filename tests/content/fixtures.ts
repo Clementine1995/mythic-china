@@ -78,6 +78,7 @@ export function makeSourceData(
     language: "zh",
     translator: null,
     pageOrSection: null,
+    usesDigitalImageEvidence: false,
     rightsStatus: null,
     rightsUrl: null,
     notes: null,

@@ -1,0 +1,15 @@
+termId: term-shi-wang-in-ten-kings
+entryId: ten-kings
+hanzi: 十王
+pinyin: shí wáng
+sourceContext: S.3961 object identity and CBETA X01n0021_001 judgment sequence
+chosenEnglish: Ten Kings
+firstUseGloss: the Ten Kings (十王, Shí Wáng), ten postmortem judges in this textual and visual tradition
+alternativesRejected:
+  - Ten Gods of Hell
+  - universal rulers of the Chinese underworld
+rationale: Ten Kings preserves the conventional name while avoiding claims that the figures were always treated as gods or formed one universal Chinese system.
+sourceIds:
+  - source-idp-ten-kings-s3961
+  - source-cbeta-ten-kings-x01n0021
+reviewStatus: source-checked

@@ -362,6 +362,65 @@ describe("content schemas", () => {
     ).toBe(false);
   });
 
+  it("fails closed when a Source relies on digital image evidence", () => {
+    const missingEvidenceMode: Partial<ReturnType<typeof makeSourceData>> = {
+      ...makeSourceData(),
+    };
+    delete missingEvidenceMode.usesDigitalImageEvidence;
+
+    expect(sourceSchema.safeParse(missingEvidenceMode).success).toBe(false);
+    expect(
+      sourceSchema.safeParse({
+        ...makeSourceData(),
+        usesDigitalImageEvidence: null,
+      }).success,
+    ).toBe(false);
+    expect(
+      sourceSchema.safeParse({
+        ...makeSourceData(),
+        usesDigitalImageEvidence: "yes",
+      }).success,
+    ).toBe(false);
+    expect(
+      sourceSchema.safeParse(makeSourceData({ usesDigitalImageEvidence: true }))
+        .success,
+    ).toBe(false);
+    expect(
+      sourceSchema.safeParse(
+        makeSourceData({
+          usesDigitalImageEvidence: true,
+          rightsStatus: "research-only",
+        }),
+      ).success,
+    ).toBe(false);
+    expect(
+      sourceSchema.safeParse(
+        makeSourceData({
+          usesDigitalImageEvidence: true,
+          rightsUrl: "https://example.org/rights",
+        }),
+      ).success,
+    ).toBe(false);
+    expect(
+      sourceSchema.safeParse(
+        makeSourceData({
+          usesDigitalImageEvidence: true,
+          rightsStatus: "research-only",
+          rightsUrl: "https://example.org/rights",
+        }),
+      ).success,
+    ).toBe(true);
+    expect(
+      sourceSchema.safeParse(
+        makeSourceData({
+          usesDigitalImageEvidence: false,
+          rightsStatus: null,
+          rightsUrl: null,
+        }),
+      ).success,
+    ).toBe(true);
+  });
+
   it("accepts ISO calendar strings and rejects Date or timestamp coercion", () => {
     expect(
       sourceSchema.parse(makeSourceData({ accessedAt: "2028-02-29" }))

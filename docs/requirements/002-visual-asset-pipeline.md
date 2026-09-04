@@ -28,7 +28,7 @@
 已确认事实：
 
 - M3 开始前的 M2 基线只有 Entry、Collection、Source、Claim、Terminology 五类 Content Layer；当时 Entry/Collection 已有 nullable `heroAssetId`，但只校验 `visual-review` 时非空，不校验真实资产外键。
-- 当前两个 Entry 与一个 Collection 的编辑形态已获阶段性接受，仍保持 `editorial-review`；钟馗 Entry、Chinese Underworld Collection 与 Guide Entry 的 `heroAssetId` 分别为 `asset-zhong-kui-hero-primary`、`asset-chinese-underworld-hero-primary` 与 `asset-chinese-underworld-guide-hero-primary`。`visual/manifests` 已有七份 approved 版本记录，其中 Zhong Kui Hero v2、Lead/OG/Social v1、Collection Hero v1 与 Guide Hero v1 为 current，Zhong Kui Hero v1 为 non-current；`src/assets/images` 已有 11 份被其唯一引用的 approved source rendition。内容 resolver 把三个稳定 Hero 逻辑 ID 分别解析到各自显式 current manifest。
+- 当前与视觉生产链有关的两个 `editorial-review` Entry 与一个 `editorial-review` Collection 已获阶段性接受；另有四个不含 `heroAssetId`、正文或视觉关系的 draft Entry，不消费任何 Asset Manifest。钟馗 Entry、Chinese Underworld Collection 与 Guide Entry 的 `heroAssetId` 分别为 `asset-zhong-kui-hero-primary`、`asset-chinese-underworld-hero-primary` 与 `asset-chinese-underworld-guide-hero-primary`。`visual/manifests` 已有七份 approved 版本记录，其中 Zhong Kui Hero v2、Lead/OG/Social v1、Collection Hero v1 与 Guide Hero v1 为 current，Zhong Kui Hero v1 为 non-current；`src/assets/images` 已有 11 份被其唯一引用的 approved source rendition。内容 resolver 把三个稳定 Hero 逻辑 ID 分别解析到各自显式 current manifest。
 - `docs/CONTENT_MODEL.md` 与本文已闭合逻辑资产、版本记录、current 选择、重复 role slot 和独立移动构图合同；M3-U3 已把 strict Schema、纯关系/文件 validator 和 resolver 接入真实 Astro build 调用链。
 - Astro 当前官方 Content Loader `glob()` 支持从任意本地目录加载 YAML，并通过 `base` 与 `generateId` 固定记录身份；本项目可以从 `visual/manifests` 建立构建期集合，无需为 YAML 再增加依赖。来源：[Content Loader API](https://docs.astro.build/en/reference/content-loader-reference/)，访问于 2026-08-28。
 

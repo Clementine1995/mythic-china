@@ -1,0 +1,11 @@
+claimId: claim-painted-skin-tso-gender-translation-reading
+entryId: painted-skin
+claimType: interpretation
+evidenceContext: historical-tradition
+statement: Tso argues that Pu Songling's Painted Skin can be read as a parody of gender performativity and that Giles's 1880 translation suppresses elements of that transgression.
+certainty: verified
+sourceLinks:
+  - sourceId: source-tso-repressed-sexual-modernity-2017
+    role: scholarship
+    locator: Pages 15–18
+    note: Supports Tso's attributed interpretation only, not a unique theme, an independently verified Chinese variant, or a replacement for a located primary witness.

@@ -1,0 +1,11 @@
+claimId: claim-ten-kings-ten-intervals
+entryId: ten-kings
+claimType: textual
+evidenceContext: historical-tradition
+statement: In CBETA witness X01n0021_001, seven seven-day observances are followed by a hundredth-day observance, a first-anniversary observance, and a tenth observance in the third year.
+certainty: verified
+sourceLinks:
+  - sourceId: source-cbeta-ten-kings-x01n0021
+    role: primary
+    locator: "[0409b14–0409c22]"
+    note: Supports the sequence in this electronic-text witness only; it does not establish one schedule for every period or region.

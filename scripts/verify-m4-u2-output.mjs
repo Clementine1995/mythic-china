@@ -46,6 +46,10 @@ const outputRoot = resolve(projectRoot, "dist");
 const navigationTargets = ["/", "/explore/", "/collections/", "/about/"];
 const reviewEntryIdsByOutputPath = new Map([
   ["explore/chinese-underworld-guide/index.html", "chinese-underworld-guide"],
+  ["explore/fighting-cricket/index.html", "fighting-cricket"],
+  ["explore/liaozhai-reading-guide/index.html", "liaozhai-reading-guide"],
+  ["explore/painted-skin/index.html", "painted-skin"],
+  ["explore/ten-kings/index.html", "ten-kings"],
   ["explore/zhong-kui/index.html", "zhong-kui"],
 ]);
 const fontInventory = JSON.parse(
