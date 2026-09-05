@@ -2,7 +2,7 @@
 
 ## 0. 文档职责与状态
 
-Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-second-collection-decision.md) 的推荐方向，先授权四篇候选的 claim map 与来源研究，随后又单独授权只做实际见证/版次、正式书目和页/叶/canvas locator 闭合。本文件合并记录这两个连续但互不扩权的研究批次，并在第 10–12 节另行记录 2026-09-04 后续独立授权的编辑路线确认、最小证据物化、检查点提交与 Ten Kings / Fighting Cricket 两篇纵切片。
+Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-second-collection-decision.md) 的推荐方向，先授权四篇候选的 claim map 与来源研究，随后又单独授权只做实际见证/版次、正式书目和页/叶/canvas locator 闭合。本文件合并记录这两个连续但互不扩权的研究批次，并在第 10–13 节另行记录 2026-09-04 后续独立授权的编辑路线确认、最小证据物化、检查点提交与 Ten Kings、Fighting Cricket、Liaozhai Reading Guide 三篇纵切片。
 
 本文负责：
 
@@ -17,14 +17,14 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 - 选择、下载、生成或批准图片与其他资产。
 - 启动服务、安装依赖、执行 Git 写操作、远端同步、部署或发布。
 
-上述“不负责”限定前两次研究批；后续内容对象、Schema 变化与 Ten Kings / Fighting Cricket 首稿只有在 Project owner 另行授权后发生，并由第 10–12 节单独记录，不能倒推为原研究授权的一部分。
+上述“不负责”限定前两次研究批；后续内容对象、Schema 变化与三篇首稿只有在 Project owner 另行授权后发生，并由第 10–13 节单独记录，不能倒推为原研究授权的一部分。
 
 | 维度 | 当前状态 | 结论或边界 |
 | --- | --- | --- |
 | 方向决定 | 已确认 | 007 的 Liaozhai 第二 Collection 方向、3+3 分配、两条公开阅读顺序、Zhong Kui Featured 与《促织》保留均获确认；后续又确认任笃行 2016 主/张友鹤 2011 对校的工作路线，以及《促织》青柯亭单见证路线；第二 Collection 名仍是工作标题 |
 | 研究状态 | 本轮证据闭合完成，结果分层 | Ten Kings 的馆藏对象、IIIF canvas、CBETA 行号及核心书目已闭合；Painted Skin 的指定数字见证与 Giles 1880 页码已核作研究账本，但权利门禁阻止其进入本次 Source 子集；Liaozhai 仍缺任/张实际册页；《促织》只闭合上海图书馆青柯亭见证，跨见证门禁仍未闭合 |
-| 写作准备度 | Ten Kings 与 Fighting Cricket 限域首稿已形成；其余两篇未就绪 | Ten Kings 只使用已物化的 2 Source / 3 Claim / 1 Terminology，Fighting Cricket 只使用已物化的 1 Source / 3 Claim / 1 Terminology；两篇仍须双语、编辑与目标读者审核，任/张实际册页、其余逐篇翻译策略、术语批准及人工审核仍须后续闭合 |
-| 实施状态 | 证据最小物化与 Ten Kings / Fighting Cricket 两篇纵切片完成 | 当前有四个 `draft` Entry owner、5 Source、9 Claim 与 3 `source-checked` Terminology；Ten Kings 与 Fighting Cricket 已建立消费关系与正文，另外两篇仍为空。未创建第二 Collection、资产、Collection/related 关系或状态变化 |
+| 写作准备度 | Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 限域首稿已形成；Painted Skin 未就绪 | 三篇分别只使用已物化的 2 Source / 3 Claim / 1 Terminology、1 Source / 3 Claim / 1 Terminology 与 1 Source / 2 Claim / 1 Terminology；三篇仍须双语、编辑与目标读者审核，任/张实际册页、Painted Skin 的逐篇翻译策略、术语批准及人工审核仍须后续闭合 |
+| 实施状态 | 证据最小物化与三篇纵切片完成 | 当前有四个 `draft` Entry owner、5 Source、9 Claim 与 3 `source-checked` Terminology；Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 已建立消费关系与正文，只有 Painted Skin 仍为空。未创建第二 Collection、资产、Collection/related 关系或状态变化 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本批不改变状态或 public artifact |
 
 本文中的 `TK-*`、`LZ-*`、`PS-*`、`FC-*` 只是研究表格内的局部标签，不是 Content Layer 稳定 ID，也不得复制进 `src/content` 后直接充当 Claim ID。表中的“可写”表示证据路线足以支持后续起草，不表示主张已完成双语、文化、版权或 Project owner 审校。
@@ -34,11 +34,11 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 | 候选篇 | 独立读者问题 | 研究结论 | 进入正文前最小门禁 |
 | --- | --- | --- | --- |
 | Ten Kings | 两个有边界的图文见证如何分别呈现十王序列、日期、卷宗与审查机制？ | **证据受限首稿已完成**；S.3961 与 CBETA 是两个不同见证，正文只消费已闭合的 2 Source / 3 Claim / 1 Terminology | 不补写形成史、rebirth、跨见证重建或普遍实践；历史展示/诵读方式与图片商用权仍不得写成已闭合 |
-| How to Read Liaozhai | 为什么读《聊斋》前必须先问版本、文类、计数与译本，而不能把它当成一套透明的民间信仰记录？ | **部分闭合，限域证据已物化**；版本史与计数差异已有 Luo 直接研究页码 | 任 2016 主/张 2011 对校路线已确认，但实际册页未取得，故两书未建 Source、不得补篇级页码或把目录记录当正文 |
+| How to Read Liaozhai | 为什么读《聊斋》前必须先问版本、文类、计数与译本，而不能把它当成一套透明的民间信仰记录？ | **证据受限首稿已完成**；正文只消费 Luo 2009 的 1 Source / 2 Claim / 1 Terminology，限定编纂时间、版次计数与 `zhiguai` 的当前证据边界 | 任 2016 主/张 2011 对校路线已确认，但实际册页未取得，故两书未建 Source、不得补篇级页码、终本判断或把目录记录当正文 |
 | Painted Skin | 蒲松龄文本如何用“可穿戴的外表”、误认、身体恐怖与评语组织故事；后来的翻译和改编改变了什么？ | **仅归因解释已物化**；Tso 2017 的具名性别/翻译解读可安全建 Claim | CText 数字见证与 Giles 旧译的目标地区复用权未闭合，均未建 Source；不建 `孽鬼` Terminology，不写自译或一手文本事实 |
 | Fighting Cricket | 征求压力如何沿权力链进入家庭；指定青柯亭见证如何叙述儿子与蟋蟀的联系？ | **证据受限单见证首稿已完成**；只消费上海图书馆青柯亭 Source、3 Claim 与 1 Terminology | 不补写未物化情节；辽宁手稿、两种权威校记与早期抄本未得，跨见证、作者归属和“首次增写”继续阻塞 |
 
-研究批最初停止在证据闭合账本，而不是正文；Project owner 随后分别确认底本/单见证路线、授权四个最小 Entry owner，并另行授权只物化证据已闭合的 Source/Claim/Terminology。该后续实施记录见第 10 节；再后的 Ten Kings 与 Fighting Cricket 单篇授权分别见第 11、12 节。前述任一批次都不得自动扩为其他 Entry 正文、图片、Collection 关系或 `ready/published`。
+研究批最初停止在证据闭合账本，而不是正文；Project owner 随后分别确认底本/单见证路线、授权四个最小 Entry owner，并另行授权只物化证据已闭合的 Source/Claim/Terminology。该后续实施记录见第 10 节；再后的 Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 单篇授权分别见第 11–13 节。前述任一批次都不得自动扩为其他 Entry 正文、图片、Collection 关系或 `ready/published`。
 
 ### 1.1 证据闭合账本
 
@@ -279,13 +279,14 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 3. 已完成：在独立授权下，只把证据已闭合的最小子集物化为 5 Source、9 Claim 与 3 Terminology，并建立四个空 draft Entry owner；未闭合项没有一起带入。
 4. 已完成：按后续单篇授权，只把 Ten Kings 已物化的 2 Source / 3 Claim / 1 Terminology 写入其消费清单并形成证据受限首稿；不扩到其他三篇。
 5. 已完成：按后续单篇授权，只把 Fighting Cricket 已物化的 1 Source / 3 Claim / 1 Terminology 写入其消费清单并形成证据受限首稿；可见 Source 记录按独立最小例外改为 ASCII，精确馆藏号仍留在内部 notes。
-6. 下一步仍须另行选择并授权：现有两篇编辑/双语审校、取得任/张实际册页，或 Liaozhai Reading Guide / Painted Skin 的逐篇证据受限写作；Collection 关系、视觉资产与状态继续独立门禁。
+6. 已完成：只为 Liaozhai Reading Guide 写入 1 Source / 2 Claim / 1 Terminology 消费关系和证据受限首稿；任/张实际册页仍未取得，Entry 保持 `draft`。
+7. 下一步仍须另行选择并授权：现有三篇编辑/双语审校、取得任/张实际册页，或 Painted Skin 的证据受限写作；Collection 关系、视觉资产与状态继续独立门禁。
 
 ## 9. 本批最终状态
 
-- 四篇候选的 claim map、正式书目、可取得的精确 locator、术语与不可写边界已完成分层研究；后续又建立最小 draft owner 与证据对象，并只为 Ten Kings / Fighting Cricket 形成限域首稿。结果仍不是四篇一律“通过”或可写作。
+- 四篇候选的 claim map、正式书目、可取得的精确 locator、术语与不可写边界已完成分层研究；后续又建立最小 draft owner 与证据对象，并只为 Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 形成限域首稿。结果仍不是四篇一律“通过”或可写作。
 - Ten Kings 的 S.3961 对象/IIIF canvas 与 CBETA 行号中，证据闭合的三条对象/文本 Claim、两份 Source 与 `十王` Terminology 已物化；图片复用权利与个别二手页内细节仍须在资产/写作阶段单独核验。
-- Liaozhai 导读已物化 Luo 2009 Source、两条归因/计数 Claim 与 `志怪` Terminology；任 2016 主/张 2011 对校路线虽已确认，实际册页未取得，故两书没有进入 Source。
+- Liaozhai 导读已消费物化的 Luo 2009 Source、两条归因/计数 Claim 与 `志怪` Terminology 并形成首稿；任 2016 主/张 2011 对校路线虽已确认，实际册页未取得，故两书没有进入 Source，正文也不写成终本、唯一计数或完整传播史。
 - Painted Skin 的研究账本已固定 CText、Giles 与 Tso locator，但本批只物化 Tso 2017 Source 与一条明确归因 Claim；CText/Giles 权利、`孽鬼/孽魅` 异文来源、现代译本独立核页及电影一手时间码仍未闭合。
 - Fighting Cricket 已按确认的单见证路线消费上海图书馆青柯亭 Source、三条见证限定 Claim 与 `身化` Terminology，并形成首稿；手稿/校记/早期抄本未得，跨见证、作者归属与“谁首次增写魂化结尾”仍阻塞。
 - 研究批本身没有写正文、创建内容对象、变更状态、处理资产、运行服务、写 Git、部署或发布；随后独立授权的证据物化同样没有写正文、处理资产、改状态、接外部服务、运行服务或写 Git。
@@ -355,3 +356,26 @@ Project owner 授权只为 `fighting-cricket` 编写证据受限英语首稿，�
 - 当前总 inventory 保持 6 Entry / 1 Collection / 14 Source / 19 Claim / 5 Terminology，published Entry / Collection 仍为 0/0。Ten Kings 与 Fighting Cricket 分别形成 2/3/1 与 1/3/1 的消费关系及首稿；Liaozhai Reading Guide 与 Painted Skin 仍为空 draft。
 - 当前英语 draft 只消费 Terminology 的 chosen English；`Cùzhī / 促织` 与 `shēn huà (身化)` 的可见首见格式仍待 bilingual-approved 与 CJK 字符门禁，不因本次反向消费而视为通过。
 - 未运行 dev/preview/browser 或非默认 `visual:build:check`；未处理图片、关系、状态、外部服务、public artifact、部署或发布。Project owner 通过中文概要确认内容符合预期并另行授权本地提交，本批随该检查点进入当前 HEAD；`main` 相对未 fetch 的本地 `origin/main` ahead 3，未 fetch 或 push。
+
+## 13. 2026-09-04 Liaozhai Reading Guide 证据受限内容纵切片
+
+### 13.1 授权与证据消费
+
+Project owner 授权只为 `liaozhai-reading-guide` 编写证据受限英语首稿并同步必要状态，只消费既有 1 Source / 2 Claim / 1 Terminology，保持 `draft`；不新增或修改证据对象，不把任笃行 2016、张友鹤 2011 写成已核来源，不处理图片、不建 Collection/related 关系、不改状态、不扩 CJK 字体、不接外部服务、不做 Git 写入。
+
+- `sourceIds` 只含 `source-luo-ghost-of-liaozhai-2009`；`claimIds` 只含 `claim-liaozhai-compilation-period-in-luo` 与 `claim-liaozhai-counts-vary-by-edition`；`terminologyRecordIds` 只含 `term-zhiguai-in-liaozhai-reading-guide`。
+- Entry 形成两段 opening、96 词 summary 与 “Begin with a range, not a finish date”“Ask what the number counts”“Keep zhiguai bounded”“What this draft does not settle” 四节英语正文；`lastFactCheckedAt` 为 `2026-09-04`，`status` 保持 `draft`。
+
+### 13.2 事实与语言边界
+
+- 正文把约 1670–1700 的编纂范围与 1679 作者序言的证据意义明确归因给 Luo，不把 1679 写成每篇均已定稿的单一完成日。
+- 431 items / 16 `juan` Qingketing arrangement 与 491 items / 12 `juan` arrangement with appendices 同样只作为 Luo 的版次相关计数；正文明确不把 `juan`、physical volumes、tales 与 appended texts 当作可互换单位，也不宣布一个脱离版次的唯一总数。
+- `zhiguai` 只按既有 `source-checked` Terminology 作为 working English term，并限义为 accounts or records of anomalies；不把 horror、ghost stories 或 mythology 写成精确同义词。
+- 当前可见 Entry 只使用 ASCII `Liaozhai`、`Qingketing`、`juan` 与 `zhiguai`。`志怪` 和 `zhìguài` 仍只存在于既有内部 Terminology 记录；没有扩展 CJK 字符集、字体文件、manifest 或字体哈希。
+- 任 2016 / 张 2011 的实际册页与篇级 locator 仍未取得，两书仍未进入 Source。正文不据目录记录宣称终本，不重建完整手稿/刻本传播史，不为单篇定年，也不比较英译。
+
+### 13.3 验证与停点
+
+- 固定 Node/Corepack 的完整 `pnpm run check` 第一次在任何断言失败前因 Vitest worker 意外退出而中断；没有修改文件或降低门禁，原命令重跑后通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 review build 与 output verifier。输出仍为 42 Hero、10 个 hash-locked WOFF2、0 XML、0 客户端 JavaScript。
+- 当前总 inventory 保持 6 Entry / 1 Collection / 14 Source / 19 Claim / 5 Terminology，published Entry / Collection 仍为 0/0。Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 分别形成 2/3/1、1/3/1 与 1/2/1 的消费关系及首稿；只有 Painted Skin 仍为空 draft。
+- 未运行 dev/preview/browser 或非默认 `visual:build:check`；未新增或修改证据对象，未处理图片、Collection/related 关系、状态、外部服务、public artifact、部署或发布。上一检查点 `7c0cb3f` 已由 Project owner 推送；本批开始时 HEAD、`main` 与本地 `origin/main` tracking ref 对齐。Project owner 于 2026-09-05 通过中文概要确认内容符合预期并单独授权验证通过后本地提交；本纵切片与必要状态同步随当前本地检查点进入 HEAD，本检查点未执行 fetch 或 push。
