@@ -22,6 +22,7 @@ export function makeEntryData(overrides: Partial<EntryData> = {}): EntryData {
     nameZh: "钟馗",
     pinyin: "Zhōng Kuí",
     aliases: [],
+    contentNote: null,
     opening: [],
     summary: null,
     periodLabel: null,

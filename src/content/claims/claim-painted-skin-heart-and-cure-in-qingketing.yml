@@ -1,0 +1,11 @@
+claimId: claim-painted-skin-heart-and-cure-in-qingketing
+entryId: painted-skin
+claimType: textual
+evidenceContext: historical-tradition
+statement: In the specified Qingketing witness, the figure tears open Wang's abdomen and carries off his heart. Later, after a beggar makes Wang's wife swallow his phlegm and spittle, a mass surges out and falls into Wang's open body cavity while she tends him; only then does she see that it is a human heart. She binds the opening, and the tale says Wang is breathing at midnight and alive by dawn.
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 1; Commons digital pages 73–75; visible left-side block-center folios 36–38
+    note: This is the tale's narrated sequence. Wang's wife does not intentionally cough up or return the heart, and the scene must not be presented as medicine, organ transplantation, or evidence for a physical resurrection.

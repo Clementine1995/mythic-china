@@ -340,8 +340,10 @@ Home 是所有 Collection 的中性宿主，不是第一期“中国阴间”的
 Eyebrow / 中文名 / 拼音
 H1 + dek
 3:2 lead image + caption + disclosure
+署名 / 核查日期（轻量 metadata）
+可选 Content note
+Opening
 Quick answer
-类型 / 时期 / 核查日期（轻量 metadata）
 Story body
 What the text says
 Later traditions / versions
@@ -353,6 +355,7 @@ Reader request
 ```
 
 - 主体占 8 栏，正文约 680–760px；右侧 3 栏可放目录和 source notes。
+- `contentNote` 非空时在署名之后、Opening 之前始终可见，以统一的具名文本区块呈现；不折叠、不使用警报动效，也不随 Collection 更换语义或交互。
 - 每 600–900 词安排一个视觉节拍，但不为了插图打断论证。
 - `What the text says / Later traditions / Our interpretation` 使用排版和细线区分，不使用满页彩色 callout。
 - 来源、caption 和 AI disclosure 在图外作为 HTML 文本，不烧录进图片；轻量 source note 贴近对应主张，完整 Sources 在正文收束后集中列出。

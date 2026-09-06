@@ -9,6 +9,7 @@ nameZh: 阴间
 pinyin: Yīnjiān
 aliases:
   - the realm of the dead
+contentNote: null
 opening:
   - There is no single, timeless map of a Chinese underworld. Texts, images, temples, and local practices have described the fate of the dead in different ways, and the names and number of courts are not uniform across every period or community.
   - >-

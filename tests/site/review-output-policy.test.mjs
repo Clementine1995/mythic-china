@@ -6,13 +6,17 @@ import process from "node:process";
 import { describe, expect, it } from "vitest";
 
 import {
+  assertReviewCollectionReadingPath,
   assertReviewCssResourcePolicy,
+  assertReviewEntryCollectionMembership,
+  assertReviewEntryContentNote,
   assertReviewHtmlResourcePolicy,
   assertReviewInteractionSurface,
   assertReviewOutputArtifactExtensions,
   assertReviewPrivacyNotice,
   assertReviewResourceInventory,
   classifyReviewOutputEntry,
+  indexReviewRelationshipContracts,
 } from "../../scripts/review-output-policy.mjs";
 
 function reviewDocument(body, head = "") {
@@ -42,7 +46,495 @@ function readerRequest(pageId = "entry-one", extra = "") {
   </section>`;
 }
 
+function guidedPath(hrefs) {
+  return `<section class="guided-path" aria-labelledby="guided-path-heading">
+    <h2 id="guided-path-heading">Follow the guided path</h2>
+    <ol>${hrefs.map((href) => `<li><a href="${href}">Entry</a></li>`).join("")}</ol>
+  </section>`;
+}
+
+function collectionReadingPath(hrefs, collectionId = "collection-internal-id") {
+  return `<article class="collection-page" data-realm="${collectionId}">
+    ${guidedPath(hrefs)}
+  </article>`;
+}
+
+function membershipNav(href) {
+  return `<nav class="entry-section" aria-labelledby="collections-heading">
+    <h2 id="collections-heading">Part of a collection</h2>
+    <ul><li><a href="${href}">Collection</a></li></ul>
+  </nav>`;
+}
+
+function collectionMembership(href) {
+  return `<article class="entry-page">${membershipNav(href)}</article>`;
+}
+
+function entryWithContentNote(note = null) {
+  const contentNote =
+    note === null
+      ? ""
+      : `<aside class="entry-section entry-content-note" aria-labelledby="content-note-heading">
+          <p class="section-context">Before reading</p>
+          <h2 id="content-note-heading">Content note</h2>
+          <p>${note}</p>
+        </aside>`;
+  return `<article class="entry-page">
+    <div class="entry-attribution"><p>By Mythic China Editorial</p></div>
+    <div class="entry-reading">
+      ${contentNote}
+      <section class="entry-opening" aria-label="Opening"><p>Opening.</p></section>
+      <section class="entry-section" aria-labelledby="quick-answer-heading"><h2 id="quick-answer-heading">Quick Answer</h2></section>
+      <section class="entry-prose" aria-label="Story"><p>Story.</p></section>
+    </div>
+  </article>`;
+}
+
 describe("review output resource policy", () => {
+  it("accepts exact reading paths and memberships with independent public slugs", () => {
+    const contracts = [
+      {
+        collectionId: "collection-internal-id",
+        outputPath: "collections/public-collection-slug/index.html",
+        href: "/collections/public-collection-slug/",
+        entries: [
+          {
+            entryId: "guide-internal-id",
+            outputPath: "explore/public-guide-slug/index.html",
+            href: "/explore/public-guide-slug/",
+          },
+          {
+            entryId: "tale-internal-id",
+            outputPath: "explore/public-tale-slug/index.html",
+            href: "/explore/public-tale-slug/",
+          },
+        ],
+      },
+    ];
+    const { collectionIdsByOutputPath, entryIdsByOutputPath } =
+      indexReviewRelationshipContracts(contracts);
+
+    expect(
+      collectionIdsByOutputPath.get(
+        "collections/public-collection-slug/index.html",
+      ),
+    ).toBe("collection-internal-id");
+    expect(
+      entryIdsByOutputPath.get("explore/public-guide-slug/index.html"),
+    ).toBe("guide-internal-id");
+    expect(() =>
+      assertReviewCollectionReadingPath(
+        reviewDocument(
+          collectionReadingPath([
+            "/explore/public-guide-slug/",
+            "/explore/public-tale-slug/",
+          ]),
+        ),
+        "collections/public-collection-slug/index.html",
+        "collection-internal-id",
+        ["/explore/public-guide-slug/", "/explore/public-tale-slug/"],
+      ),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewEntryCollectionMembership(
+        reviewDocument(
+          `<header><nav><a href="/">Home</a><a href="/explore/">Explore</a><a href="/collections/">Collections</a><a href="/about/">About</a></nav></header>${collectionMembership("/collections/public-slug/")}`,
+        ),
+        "explore/internal-entry-id/index.html",
+        "/collections/public-slug/",
+      ),
+    ).not.toThrow();
+  });
+
+  it("accepts an exact named content note before all Entry reading content", () => {
+    const note = "This article includes difficult material.";
+    expect(() =>
+      assertReviewEntryContentNote(
+        reviewDocument(entryWithContentNote(note)),
+        "explore/entry-one/index.html",
+        note,
+      ),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewEntryContentNote(
+        reviewDocument(entryWithContentNote()),
+        "explore/entry-two/index.html",
+        null,
+      ),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewEntryContentNote(
+        reviewDocument(
+          entryWithContentNote(note)
+            .replace(
+              '<section class="entry-opening" aria-label="Opening"><p>Opening.</p></section>',
+              "",
+            )
+            .replace(
+              '<section class="entry-section" aria-labelledby="quick-answer-heading"><h2 id="quick-answer-heading">Quick Answer</h2></section>',
+              "",
+            )
+            .replace(
+              '<section class="entry-prose" aria-label="Story"><p>Story.</p></section>',
+              "",
+            ),
+        ),
+        "explore/entry-three/index.html",
+        note,
+      ),
+    ).not.toThrow();
+  });
+
+  it.each([
+    ["wrong copy", entryWithContentNote("Different copy."), "Expected copy."],
+    [
+      "wrong reading order",
+      entryWithContentNote("Expected copy.")
+        .replace(
+          '<section class="entry-opening" aria-label="Opening"><p>Opening.</p></section>',
+          '<section class="entry-opening" aria-label="Opening"><p>Opening.</p></section><aside class="entry-section entry-content-note" aria-labelledby="content-note-heading"><p class="section-context">Before reading</p><h2 id="content-note-heading">Content note</h2><p>Expected copy.</p></aside>',
+        )
+        .replace(
+          '<aside class="entry-section entry-content-note" aria-labelledby="content-note-heading">\n          <p class="section-context">Before reading</p>\n          <h2 id="content-note-heading">Content note</h2>\n          <p>Expected copy.</p>\n        </aside>',
+          "",
+        ),
+      "Expected copy.",
+    ],
+    [
+      "wrong accessible name",
+      entryWithContentNote("Expected copy.").replace(
+        'aria-labelledby="content-note-heading"',
+        'aria-labelledby="missing-heading"',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "duplicate opening without the other required reading sections",
+      entryWithContentNote("Expected copy.")
+        .replace(
+          '<section class="entry-section" aria-labelledby="quick-answer-heading"><h2 id="quick-answer-heading">Quick Answer</h2></section>',
+          '<section class="entry-opening" aria-label="Opening"><p>Second opening.</p></section>',
+        )
+        .replace(
+          '<section class="entry-prose" aria-label="Story"><p>Story.</p></section>',
+          '<section class="entry-opening" aria-label="Opening"><p>Third opening.</p></section>',
+        ),
+      "Expected copy.",
+    ],
+    [
+      "nested heading",
+      entryWithContentNote("Expected copy.").replace(
+        '<h2 id="content-note-heading">Content note</h2>',
+        '<div><h2 id="content-note-heading">Content note</h2></div>',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "linked body copy",
+      entryWithContentNote("Expected copy.").replace(
+        "<p>Expected copy.</p>",
+        '<p><a href="/more/">Expected copy.</a></p>',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "direct text outside the named children",
+      entryWithContentNote("Expected copy.").replace(
+        '<p class="section-context">Before reading</p>',
+        'Unexpected text.<p class="section-context">Before reading</p>',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "alert semantics",
+      entryWithContentNote("Expected copy.").replace(
+        '<aside class="entry-section entry-content-note"',
+        '<aside role="alert" aria-live="assertive" class="entry-section entry-content-note"',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "hidden state",
+      entryWithContentNote("Expected copy.").replace(
+        '<aside class="entry-section entry-content-note"',
+        '<aside hidden class="entry-section entry-content-note"',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "hidden heading",
+      entryWithContentNote("Expected copy.").replace(
+        '<h2 id="content-note-heading">',
+        '<h2 hidden id="content-note-heading">',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "aria-hidden body",
+      entryWithContentNote("Expected copy.").replace(
+        "<p>Expected copy.</p>",
+        '<p aria-hidden="true">Expected copy.</p>',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "inline style on a child",
+      entryWithContentNote("Expected copy.").replace(
+        '<p class="section-context">',
+        '<p style="display: none" class="section-context">',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "alert and live semantics on a child",
+      entryWithContentNote("Expected copy.").replace(
+        "<p>Expected copy.</p>",
+        '<p role="alert" aria-live="assertive">Expected copy.</p>',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "reading before attribution",
+      entryWithContentNote("Expected copy.").replace(
+        '<div class="entry-attribution"><p>By Mythic China Editorial</p></div>\n    <div class="entry-reading">',
+        '<div class="entry-reading"><div class="entry-attribution"><p>By Mythic China Editorial</p></div>',
+      ),
+      "Expected copy.",
+    ],
+    [
+      "visibly named note with its selectors removed",
+      entryWithContentNote("Expected copy.")
+        .replace(" entry-content-note", "")
+        .replace(' id="content-note-heading"', "")
+        .replace(' aria-labelledby="content-note-heading"', ""),
+      null,
+    ],
+    ["unexpected note", entryWithContentNote("Expected copy."), null],
+  ])("rejects an Entry content note with %s", (_case, body, expected) => {
+    expect(() =>
+      assertReviewEntryContentNote(
+        reviewDocument(body),
+        "explore/entry-one/index.html",
+        expected,
+      ),
+    ).toThrow();
+  });
+
+  it.each([
+    ["Collection ID", "collectionId"],
+    ["Collection output path", "outputPath"],
+    ["Collection href", "href"],
+  ])("rejects a duplicate %s in relationship contracts", (_label, field) => {
+    const first = {
+      collectionId: "collection-one",
+      outputPath: "collections/collection-one/index.html",
+      href: "/collections/collection-one/",
+      entries: [
+        {
+          entryId: "entry-one",
+          outputPath: "explore/entry-one/index.html",
+          href: "/explore/entry-one/",
+        },
+      ],
+    };
+    const second = {
+      collectionId: "collection-two",
+      outputPath: "collections/collection-two/index.html",
+      href: "/collections/collection-two/",
+      entries: [
+        {
+          entryId: "entry-two",
+          outputPath: "explore/entry-two/index.html",
+          href: "/explore/entry-two/",
+        },
+      ],
+    };
+    second[field] = first[field];
+
+    expect(() => indexReviewRelationshipContracts([first, second])).toThrow();
+  });
+
+  it.each([
+    ["Entry ID", "entryId"],
+    ["Entry output path", "outputPath"],
+    ["Entry href", "href"],
+  ])("rejects a duplicate %s in relationship contracts", (_label, field) => {
+    const firstEntry = {
+      entryId: "entry-one",
+      outputPath: "explore/entry-one/index.html",
+      href: "/explore/entry-one/",
+    };
+    const secondEntry = {
+      entryId: "entry-two",
+      outputPath: "explore/entry-two/index.html",
+      href: "/explore/entry-two/",
+    };
+    secondEntry[field] = firstEntry[field];
+
+    expect(() =>
+      indexReviewRelationshipContracts([
+        {
+          collectionId: "collection-one",
+          outputPath: "collections/collection-one/index.html",
+          href: "/collections/collection-one/",
+          entries: [firstEntry, secondEntry],
+        },
+      ]),
+    ).toThrow();
+  });
+
+  it.each([
+    [
+      "wrong reading order",
+      collectionReadingPath(["/explore/tale/", "/explore/guide/"]),
+    ],
+    ["missing reading-path member", collectionReadingPath(["/explore/guide/"])],
+    [
+      "duplicate reading-path link",
+      collectionReadingPath([
+        "/explore/guide/",
+        "/explore/tale/",
+        "/explore/tale/",
+      ]),
+    ],
+    [
+      "duplicate guided-path section",
+      collectionReadingPath(["/explore/guide/", "/explore/tale/"]).replace(
+        "</article>",
+        `${guidedPath(["/explore/guide/", "/explore/tale/"])}</article>`,
+      ),
+    ],
+    [
+      "duplicate guided-path heading",
+      `${collectionReadingPath(["/explore/guide/", "/explore/tale/"])}<h2 id="guided-path-heading">Duplicate</h2>`,
+    ],
+    [
+      "extra guided-path heading with another ID",
+      collectionReadingPath(["/explore/guide/", "/explore/tale/"]).replace(
+        "<ol>",
+        '<h2 id="other-heading">Duplicate</h2><ol>',
+      ),
+    ],
+    [
+      "duplicate ordered list",
+      collectionReadingPath(["/explore/guide/", "/explore/tale/"]).replace(
+        "</section>",
+        '<ol><li><a href="/explore/guide/">Duplicate</a></li></ol></section>',
+      ),
+    ],
+    [
+      "reading-path link outside a list item",
+      collectionReadingPath(["/explore/guide/", "/explore/tale/"]).replace(
+        '<li><a href="/explore/guide/">Entry</a></li>',
+        '<a href="/explore/guide/">Entry</a>',
+      ),
+    ],
+    [
+      "multiple reading-path links in one list item",
+      collectionReadingPath(["/explore/guide/", "/explore/tale/"]).replace(
+        "</li>",
+        '<a href="/explore/guide/">Duplicate</a></li>',
+      ),
+    ],
+    [
+      "wrapped reading-path list item",
+      collectionReadingPath(["/explore/guide/", "/explore/tale/"]).replace(
+        '<li><a href="/explore/guide/">Entry</a></li>',
+        '<div><li><a href="/explore/guide/">Entry</a></li></div>',
+      ),
+    ],
+    [
+      "wrong Collection ID",
+      collectionReadingPath(
+        ["/explore/guide/", "/explore/tale/"],
+        "other-collection-id",
+      ),
+    ],
+  ])("rejects %s", (_label, body) => {
+    expect(() =>
+      assertReviewCollectionReadingPath(
+        reviewDocument(body),
+        "collections/collection/index.html",
+        "collection-internal-id",
+        ["/explore/guide/", "/explore/tale/"],
+      ),
+    ).toThrow();
+  });
+
+  it.each([
+    [
+      "duplicate membership nav",
+      collectionMembership("/collections/path/").replace(
+        "</article>",
+        `${membershipNav("/collections/path/")}</article>`,
+      ),
+    ],
+    [
+      "duplicate membership heading",
+      `${collectionMembership("/collections/path/")}<h2 id="collections-heading">Duplicate</h2>`,
+    ],
+    [
+      "duplicate membership link",
+      collectionMembership("/collections/path/").replace(
+        "</ul>",
+        '<li><a href="/collections/path/">Duplicate</a></li></ul>',
+      ),
+    ],
+    [
+      "extra membership heading with another ID",
+      collectionMembership("/collections/path/").replace(
+        "<ul>",
+        '<h2 id="other-heading">Duplicate</h2><ul>',
+      ),
+    ],
+    [
+      "malformed duplicate membership nav",
+      collectionMembership("/collections/path/").replace(
+        "</article>",
+        '<nav><a href="/collections/path/">Duplicate</a></nav></article>',
+      ),
+    ],
+    [
+      "duplicate unordered list",
+      collectionMembership("/collections/path/").replace(
+        "</nav>",
+        '<ul><li><a href="/collections/path/">Duplicate</a></li></ul></nav>',
+      ),
+    ],
+    [
+      "wrapped membership list item",
+      collectionMembership("/collections/path/").replace(
+        '<li><a href="/collections/path/">Collection</a></li>',
+        '<div><li><a href="/collections/path/">Collection</a></li></div>',
+      ),
+    ],
+    [
+      "membership outside the Entry article",
+      `<article class="entry-page"></article>${membershipNav("/collections/path/")}`,
+    ],
+    ["wrong membership href", collectionMembership("/collections/other/")],
+    ["missing membership href", collectionMembership("")],
+    [
+      "membership href with a query",
+      collectionMembership("/collections/path/?draft=1"),
+    ],
+    [
+      "membership link outside a list item",
+      collectionMembership("/collections/path/").replace(
+        '<li><a href="/collections/path/">Collection</a></li>',
+        '<a href="/collections/path/">Collection</a>',
+      ),
+    ],
+  ])("rejects %s", (_label, body) => {
+    expect(() =>
+      assertReviewEntryCollectionMembership(
+        reviewDocument(body),
+        "explore/entry/index.html",
+        "/collections/path/",
+      ),
+    ).toThrow();
+  });
+
   it("accepts the exact inactive interaction surfaces", () => {
     const entryHtml = reviewDocument(`
       <main>

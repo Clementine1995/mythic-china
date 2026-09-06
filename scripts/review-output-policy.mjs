@@ -116,6 +116,12 @@ function descendantsOf(elements, ancestor) {
   return elements.filter((node) => isDescendantOf(node, ancestor));
 }
 
+function directElementChildren(node) {
+  return (node.childNodes ?? []).filter(
+    (child) => typeof child.tagName === "string",
+  );
+}
+
 function usesInactiveProviderHost(value) {
   try {
     const hostname = new URL(value).hostname.toLowerCase().replace(/\.$/u, "");
@@ -131,6 +137,362 @@ function usesInactiveProviderHost(value) {
 function parseReviewHtml(html) {
   const document = parseHtml(html, { scriptingEnabled: true });
   return { document, elements: elementRecords(document) };
+}
+
+export function indexReviewRelationshipContracts(contracts) {
+  const collectionIds = new Set();
+  const collectionHrefs = new Set();
+  const collectionOutputPaths = new Set();
+  const collectionIdsByOutputPath = new Map();
+  const entryIds = new Set();
+  const entryHrefs = new Set();
+  const entryOutputPaths = new Set();
+  const entryIdsByOutputPath = new Map();
+
+  function registerUnique(seen, value, label) {
+    if (typeof value !== "string" || value === "" || seen.has(value)) {
+      throw new Error(
+        `Review relationship contracts require a unique ${label}.`,
+      );
+    }
+    seen.add(value);
+  }
+
+  for (const contract of contracts) {
+    registerUnique(collectionIds, contract.collectionId, "Collection ID");
+    registerUnique(collectionHrefs, contract.href, "Collection href");
+    registerUnique(
+      collectionOutputPaths,
+      contract.outputPath,
+      "Collection output path",
+    );
+    if (!Array.isArray(contract.entries) || contract.entries.length === 0) {
+      throw new Error(
+        `Review Collection ${contract.collectionId} requires at least one Entry contract.`,
+      );
+    }
+    collectionIdsByOutputPath.set(contract.outputPath, contract.collectionId);
+
+    for (const entry of contract.entries) {
+      registerUnique(entryIds, entry.entryId, "Entry ID");
+      registerUnique(entryHrefs, entry.href, "Entry href");
+      registerUnique(entryOutputPaths, entry.outputPath, "Entry output path");
+      entryIdsByOutputPath.set(entry.outputPath, entry.entryId);
+    }
+  }
+
+  return { collectionIdsByOutputPath, entryIdsByOutputPath };
+}
+
+export function assertReviewCollectionReadingPath(
+  html,
+  relativePath,
+  expectedCollectionId,
+  expectedEntryHrefs,
+) {
+  const { elements } = parseReviewHtml(html);
+  const collectionPages = elements.filter(
+    (node) =>
+      node.tagName === "article" && classNames(node).has("collection-page"),
+  );
+  const collectionPage = collectionPages[0];
+  const paths = elements.filter(
+    (node) => node.tagName === "section" && classNames(node).has("guided-path"),
+  );
+  const path = paths[0];
+  const headings = elements.filter(
+    (node) => readElementAttribute(node, "id") === "guided-path-heading",
+  );
+  const heading = headings[0];
+  const pathElements = path === undefined ? [] : descendantsOf(elements, path);
+  const pathHeadings = pathElements.filter((node) => node.tagName === "h2");
+  const orderedLists = pathElements.filter((node) => node.tagName === "ol");
+  const orderedList = orderedLists[0];
+  const pathAnchors = pathElements.filter((node) => node.tagName === "a");
+  const orderedListAnchors =
+    orderedList === undefined
+      ? []
+      : descendantsOf(elements, orderedList).filter(
+          (node) => node.tagName === "a",
+        );
+  const orderedListChildren =
+    orderedList === undefined ? [] : directElementChildren(orderedList);
+  const orderedListItems = orderedListChildren.filter(
+    (node) => node.tagName === "li",
+  );
+  const actualEntryHrefs = pathAnchors.map((node) =>
+    readElementAttribute(node, "href"),
+  );
+
+  if (
+    collectionPages.length !== 1 ||
+    collectionPage === undefined ||
+    readElementAttribute(collectionPage, "data-realm") !==
+      expectedCollectionId ||
+    paths.length !== 1 ||
+    path === undefined ||
+    !isDescendantOf(path, collectionPage) ||
+    readElementAttribute(path, "aria-labelledby") !== "guided-path-heading" ||
+    headings.length !== 1 ||
+    heading === undefined ||
+    heading.tagName !== "h2" ||
+    !isDescendantOf(heading, path) ||
+    pathHeadings.length !== 1 ||
+    pathHeadings[0] !== heading ||
+    orderedLists.length !== 1 ||
+    orderedList === undefined ||
+    orderedListAnchors.length !== pathAnchors.length ||
+    orderedListChildren.length !== expectedEntryHrefs.length ||
+    orderedListItems.length !== expectedEntryHrefs.length ||
+    orderedListItems.some(
+      (item) =>
+        descendantsOf(elements, item).filter((node) => node.tagName === "a")
+          .length !== 1,
+    ) ||
+    JSON.stringify(actualEntryHrefs) !== JSON.stringify(expectedEntryHrefs)
+  ) {
+    throw new Error(
+      `${relativePath} must render Collection ${expectedCollectionId} with one guided reading path and exact hrefs ${JSON.stringify(expectedEntryHrefs)}; received ${JSON.stringify(actualEntryHrefs)}.`,
+    );
+  }
+}
+
+export function assertReviewEntryCollectionMembership(
+  html,
+  relativePath,
+  expectedCollectionHref,
+) {
+  const { elements } = parseReviewHtml(html);
+  const entryPages = elements.filter(
+    (node) => node.tagName === "article" && classNames(node).has("entry-page"),
+  );
+  const entryPage = entryPages[0];
+  const navs = elements.filter((node) => node.tagName === "nav");
+  const memberships = navs.filter((node) => {
+    const descendants = descendantsOf(elements, node);
+    return (
+      readElementAttribute(node, "aria-labelledby") === "collections-heading" ||
+      descendants.some(
+        (descendant) =>
+          readElementAttribute(descendant, "id") === "collections-heading",
+      ) ||
+      descendants.some(
+        (descendant) =>
+          descendant.tagName === "a" &&
+          readElementAttribute(descendant, "href") === expectedCollectionHref,
+      )
+    );
+  });
+  const membership = memberships[0];
+  const headings = elements.filter(
+    (node) => readElementAttribute(node, "id") === "collections-heading",
+  );
+  const heading = headings[0];
+  const membershipElements =
+    membership === undefined ? [] : descendantsOf(elements, membership);
+  const membershipHeadings = membershipElements.filter(
+    (node) => node.tagName === "h2",
+  );
+  const unorderedLists = membershipElements.filter(
+    (node) => node.tagName === "ul",
+  );
+  const unorderedList = unorderedLists[0];
+  const membershipAnchors = membershipElements.filter(
+    (node) => node.tagName === "a",
+  );
+  const unorderedListAnchors =
+    unorderedList === undefined
+      ? []
+      : descendantsOf(elements, unorderedList).filter(
+          (node) => node.tagName === "a",
+        );
+  const unorderedListChildren =
+    unorderedList === undefined ? [] : directElementChildren(unorderedList);
+  const unorderedListItems = unorderedListChildren.filter(
+    (node) => node.tagName === "li",
+  );
+  const actualCollectionHrefs = membershipAnchors.map((node) =>
+    readElementAttribute(node, "href"),
+  );
+  const expectedCollectionHrefs = [expectedCollectionHref];
+
+  if (
+    entryPages.length !== 1 ||
+    entryPage === undefined ||
+    memberships.length !== 1 ||
+    membership === undefined ||
+    !isDescendantOf(membership, entryPage) ||
+    !classNames(membership).has("entry-section") ||
+    readElementAttribute(membership, "aria-labelledby") !==
+      "collections-heading" ||
+    headings.length !== 1 ||
+    heading === undefined ||
+    heading.tagName !== "h2" ||
+    !isDescendantOf(heading, membership) ||
+    membershipHeadings.length !== 1 ||
+    membershipHeadings[0] !== heading ||
+    unorderedLists.length !== 1 ||
+    unorderedList === undefined ||
+    unorderedListAnchors.length !== membershipAnchors.length ||
+    unorderedListChildren.length !== 1 ||
+    unorderedListItems.length !== 1 ||
+    descendantsOf(elements, unorderedListItems[0]).filter(
+      (node) => node.tagName === "a",
+    ).length !== 1 ||
+    JSON.stringify(actualCollectionHrefs) !==
+      JSON.stringify(expectedCollectionHrefs)
+  ) {
+    throw new Error(
+      `${relativePath} must contain one Collection membership with exact href ${JSON.stringify(expectedCollectionHref)}; received ${JSON.stringify(actualCollectionHrefs)}.`,
+    );
+  }
+}
+
+export function assertReviewEntryContentNote(html, relativePath, expectedText) {
+  const { elements } = parseReviewHtml(html);
+  const entryPages = elements.filter(
+    (node) => node.tagName === "article" && classNames(node).has("entry-page"),
+  );
+  const entryReadings = elements.filter(
+    (node) => node.tagName === "div" && classNames(node).has("entry-reading"),
+  );
+  const notes = elements.filter((node) =>
+    classNames(node).has("entry-content-note"),
+  );
+  const noteHeadings = elements.filter(
+    (node) => readElementAttribute(node, "id") === "content-note-heading",
+  );
+  const visiblyNamedNoteHeadings = elements.filter(
+    (node) => node.tagName === "h2" && normalizedText(node) === "Content note",
+  );
+  const entryReadingAsides = elements.filter(
+    (node) =>
+      node.tagName === "aside" &&
+      entryReadings.some((entryReading) => isDescendantOf(node, entryReading)),
+  );
+
+  if (expectedText === null) {
+    if (
+      notes.length !== 0 ||
+      noteHeadings.length !== 0 ||
+      visiblyNamedNoteHeadings.length !== 0 ||
+      entryReadingAsides.length !== 0
+    ) {
+      throw new Error(`${relativePath} must not render an Entry content note.`);
+    }
+    return;
+  }
+  if (
+    typeof expectedText !== "string" ||
+    expectedText.trim() !== expectedText
+  ) {
+    throw new Error(`${relativePath} has an invalid expected content note.`);
+  }
+
+  const entryPage = entryPages[0];
+  const entryReading = entryReadings[0];
+  const note = notes[0];
+  const heading = noteHeadings[0];
+  const entryPageChildren =
+    entryPage === undefined ? [] : directElementChildren(entryPage);
+  const readingChildren =
+    entryReading === undefined ? [] : directElementChildren(entryReading);
+  const noteChildren = note === undefined ? [] : directElementChildren(note);
+  const attributions = entryPageChildren.filter(
+    (node) =>
+      node.tagName === "div" && classNames(node).has("entry-attribution"),
+  );
+  const contexts = noteChildren.filter(
+    (node) => node.tagName === "p" && classNames(node).has("section-context"),
+  );
+  const bodyParagraphs = noteChildren.filter(
+    (node) => node.tagName === "p" && !classNames(node).has("section-context"),
+  );
+  const openings = readingChildren.filter((node) =>
+    classNames(node).has("entry-opening"),
+  );
+  const quickAnswers = readingChildren.filter(
+    (node) =>
+      readElementAttribute(node, "aria-labelledby") === "quick-answer-heading",
+  );
+  const proseSections = readingChildren.filter((node) =>
+    classNames(node).has("entry-prose"),
+  );
+  const noteDescendants =
+    note === undefined ? [] : descendantsOf(elements, note);
+  const noteElements = note === undefined ? [] : [note, ...noteDescendants];
+  const hiddenContainers = [
+    entryPage,
+    entryReading,
+    attributions[0],
+    ...noteElements,
+  ].filter(
+    (node) =>
+      node !== undefined &&
+      (readElementAttribute(node, "hidden") !== null ||
+        readElementAttribute(node, "inert") !== null ||
+        readElementAttribute(node, "aria-hidden") !== null),
+  );
+  const disallowedNoteAttributes = noteElements.filter(
+    (node) =>
+      readElementAttribute(node, "aria-live") !== null ||
+      readElementAttribute(node, "role") !== null ||
+      readElementAttribute(node, "style") !== null,
+  );
+  const hasDirectText = (note?.childNodes ?? []).some(
+    (node) => node.nodeName === "#text" && node.value.trim() !== "",
+  );
+  const attributionIndex = entryPageChildren.indexOf(attributions[0]);
+  const readingIndex = entryPageChildren.indexOf(entryReading);
+  const noteIndex = readingChildren.indexOf(note);
+  const laterContentIndexes = [openings[0], quickAnswers[0], proseSections[0]]
+    .filter((node) => node !== undefined)
+    .map((node) => readingChildren.indexOf(node));
+
+  if (
+    entryPages.length !== 1 ||
+    entryPage === undefined ||
+    entryReadings.length !== 1 ||
+    entryReading === undefined ||
+    entryReading.parentNode !== entryPage ||
+    attributions.length !== 1 ||
+    attributionIndex < 0 ||
+    readingIndex <= attributionIndex ||
+    notes.length !== 1 ||
+    entryReadingAsides.length !== 1 ||
+    note === undefined ||
+    note.tagName !== "aside" ||
+    note.parentNode !== entryReading ||
+    !classNames(note).has("entry-section") ||
+    readElementAttribute(note, "aria-labelledby") !== "content-note-heading" ||
+    hiddenContainers.length !== 0 ||
+    disallowedNoteAttributes.length !== 0 ||
+    noteHeadings.length !== 1 ||
+    visiblyNamedNoteHeadings.length !== 1 ||
+    heading === undefined ||
+    heading.tagName !== "h2" ||
+    heading.parentNode !== note ||
+    normalizedText(heading) !== "Content note" ||
+    noteChildren.length !== 3 ||
+    noteChildren[0] !== contexts[0] ||
+    noteChildren[1] !== heading ||
+    noteChildren[2] !== bodyParagraphs[0] ||
+    noteDescendants.length !== 3 ||
+    hasDirectText ||
+    contexts.length !== 1 ||
+    normalizedText(contexts[0]) !== "Before reading" ||
+    bodyParagraphs.length !== 1 ||
+    normalizedText(bodyParagraphs[0]) !== expectedText ||
+    noteIndex !== 0 ||
+    openings.length > 1 ||
+    quickAnswers.length > 1 ||
+    proseSections.length > 1 ||
+    laterContentIndexes.some((index) => index <= noteIndex)
+  ) {
+    throw new Error(
+      `${relativePath} must render one named Entry content note before opening, Quick Answer, and body with exact text ${JSON.stringify(expectedText)}.`,
+    );
+  }
 }
 
 export function assertReviewInteractionSurface(

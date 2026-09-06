@@ -1,5 +1,9 @@
 # 007 第二个 MVP Collection：只读研究决策包
 
+## 当前接线状态（2026-09-06）
+
+Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-collection-reading-paths.md) 已将本文件确认的两条 3 篇路径接入 Collection。新增 liaozhai draft，工作标题为 Strange Tales from Liaozhai；阴间保持 editorial-review 和 Zhong Kui Featured。当前共 6 Entry / 2 Collection，published 0/0；六篇均有对应合集反向入口，未新增 related 关系或图片。下文仍保留接线前的决策与分批实施记录；其中“唯一 Collection”“尚未加入”均描述对应批次当时状态，带 009 后续说明的段落反映后来的接线结果。当前实现以 009、README 和实际内容文件为准。
+
 ## 0. 文档职责与状态
 
 本文负责：
@@ -20,12 +24,12 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 决策状态 | Project owner 已确认 | 2026-09-03 确认 `Strange Tales from Liaozhai` 方向、3+3 分配、两条公开顺序、Zhong Kui Featured 与《促织》条件保留；新标题仍是工作标题 |
-| 实施状态 | 证据最小物化与三篇纵切片已完成 | 当前为 6 篇 Entry：原 2 篇保持 `editorial-review`，新增 `ten-kings`、`liaozhai-reading-guide`、`painted-skin`、`fighting-cricket` 四个 `draft` owner；Ten Kings 已绑定 2 Source / 3 Claim / 1 Terminology，Fighting Cricket 已绑定 1 Source / 3 Claim / 1 Terminology，Liaozhai Reading Guide 已绑定 1 Source / 2 Claim / 1 Terminology，三篇均形成证据受限首稿，只有 Painted Skin 仍为空。唯一 Collection、资产、Collection/related 关系与状态均未改 |
-| 研究状态 | 候选比较、四篇 claim map 及本轮证据闭合完成 | [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 已分层记录实际见证、正式书目与精确 locator；Liaozhai 任 2016 主/张 2011 对校路线已确认，但实际册页与篇级 locator 仍缺；《促织》青柯亭单见证路线已确认，跨见证、作者归属与“首次增写”继续排除 |
+| 实施状态 | 证据最小物化、四篇纵切片与两个合集路径接线已完成 | 当前为 6 篇 Entry：原 2 篇保持 `editorial-review`，新增 `ten-kings`、`liaozhai-reading-guide`、`painted-skin`、`fighting-cricket` 四个 `draft`；四篇均有证据受限首稿。009 已建立 Liaozhai draft Collection，并把六篇接入两个三篇路径；资产、`relatedEntryIds` 与状态均未改 |
+| 研究状态 | 候选比较、四篇 claim map 及当前可用证据闭合完成 | [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 已分层记录实际见证、正式书目与精确 locator；Painted Skin 当前采用上海图书馆 1766 青柯亭单见证，任 2016 / 张 2011 与现代译本/影视直接比较延期；《促织》青柯亭单见证路线已确认，跨见证、作者归属与“首次增写”继续排除 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本文不改变内容或发布状态 |
 
-- 当前权威结论更新时间：2026-09-05。
-- 本文保存原始推荐依据与 owner approval，并在第 9–11 节及 008 第 13 节记录后续独立授权的证据物化与三篇纵切片；方向确认本身仍不等于其他内容实现、写作完成或发布批准。
+- 当前权威结论更新时间：2026-09-06。
+- 本文保存原始推荐依据与 owner approval，并在第 9–11 节及 008 第 13–14、5.10 节记录后续独立授权的证据物化、四篇纵切片与审核边界；方向确认本身仍不等于其他内容实现、写作完成或发布批准。
 
 ## 1. 推荐结论
 
@@ -42,20 +46,20 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 
 ### 1.2 结论性质
 
-- **事实**：当前唯一 Collection 仍是 `chinese-underworld`，成员顺序仍为 Guide → Zhong Kui；这两个 Entry 与 Collection 都是 `editorial-review`。另有四个不属于任何 Collection 的 `draft` Entry owner，其中 Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 已有证据受限首稿，只有 Painted Skin 为空。
+- **009 接线前事实**：当时唯一 Collection 是 `chinese-underworld`，成员顺序为 Guide → Zhong Kui；这两个 Entry 与 Collection 都是 `editorial-review`。另有四个不属于任何 Collection 的 `draft` Entry owner，其中 Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 已有证据受限首稿，只有 Painted Skin 为空。
 - **研究判断**：Liaozhai 在文本边界、三篇路径完整度与当前阶段匹配度上优于另外两个候选。
 - **已确认编辑方向**：采用 Liaozhai、3+3 分配及第 5 节顺序，Zhong Kui 继续作为 Featured；四个新增标题仍是工作标题。
-- **研究与物化结果**：四篇候选 claim map 及本轮证据闭合已完成，详见 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md)。Project owner 随后确认 Liaozhai 任笃行 2016 主/张友鹤 2011 对校路线与《促织》青柯亭单见证路线，并另行授权只物化证据已闭合子集；当前已建立 4 draft Entry、5 Source、9 Claim 与 3 `source-checked` Terminology。Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 又分别只消费其中已闭合的 2 Source / 3 Claim / 1 Terminology、1 Source / 3 Claim / 1 Terminology 和 1 Source / 2 Claim / 1 Terminology，并形成首稿。
-- **未决风险**：任笃行/张友鹤实际册页、《促织》手稿/现代校记/早期抄本、Painted Skin 一手文本权利、最终译文、术语批准、图片权利与人工审校仍未闭合；没有内容状态因此改变。
+- **研究与物化结果**：四篇候选 claim map 及本轮证据闭合已完成，详见 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md)。初始物化批建立 4 draft Entry、5 Source、9 Claim 与 3 Terminology；后续四篇均建立消费关系、草稿并通过人工双语审核。Painted Skin 当前只用上海图书馆 1766 青柯亭本作为文本见证，另消费 Tso 具名解释，总关系为 2 Source / 7 Claim / 1 `bilingual-approved` Terminology；本站短译 Claim 已为 `verified`。青柯亭页 74 实际作 `業魅`，与 Tso `孽魅`、CText 关联未具名见证 `孽鬼` 分开记录。全库当前为 14 Source / 25 Claim / 6 Terminology。
+- **未决风险**：《促织》手稿/现代校记/早期抄本、图片权利与四篇目标读者/状态审校仍未闭合；任笃行/张友鹤实页、现代译本与影视证据只在未来恢复比较时再成为阻塞。没有内容状态因此改变。
 
-## 2. 当前事实与硬约束
+## 2. 009 接线前事实与持续硬约束
 
-- [`chinese-underworld.yml`](../../src/content/collections/chinese-underworld.yml) 是当前唯一 Collection；其 `entryIds` 为 `chinese-underworld-guide` → `zhong-kui`，Featured 为 `zhong-kui`。
+- 009 接线前，[`chinese-underworld.yml`](../../src/content/collections/chinese-underworld.yml) 是唯一 Collection；其 `entryIds` 当时为 `chinese-underworld-guide` → `zhong-kui`，Featured 为 `zhong-kui`。
 - [`chinese-underworld-guide.md`](../../src/content/entries/chinese-underworld-guide.md) 的实际标题是 `A Guide to the Chinese Underworld`，不是旧产品候选表中的 `A Guide to Chinese Underworld Traditions`。
 - [`zhong-kui.md`](../../src/content/entries/zhong-kui.md) 的实际标题是 `Zhong Kui, the Demon Queller`。
 - Collection 是策展阅读路径，不是 Topic/tag 聚合；成员与顺序只由 `Collection.entryIds` 定义。Featured Entry 与公开阅读顺序可以不同。
 - M6 仍要求 6 篇 Entry、至少 2 个完整 Collection、逐项内容门禁与 Project owner `published` 决定。技术层的一个 Entry + 一个 Collection 只是不生成空 public artifact 的下限，不是 MVP 预览资格。
-- 新四篇已建立稳定 Entry 身份与 draft owner；Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 已在后续各自明确授权下写入 2 Source / 3 Claim / 1 Terminology、1 Source / 3 Claim / 1 Terminology 和 1 Source / 2 Claim / 1 Terminology 的消费清单与证据受限首稿，只有 Painted Skin 仍为空。四篇都尚未加入 Collection 或绑定资产；只有后续明确授权并通过相应门禁后，才能继续写入其他 `entryIds`、关系、页面内容或状态。
+- 本决策记录形成时，新四篇已建立稳定 Entry 身份与 draft owner；Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 已在后续各自明确授权下写入 2 Source / 3 Claim / 1 Terminology、1 Source / 3 Claim / 1 Terminology 和 1 Source / 2 Claim / 1 Terminology 的消费清单与证据受限首稿，只有 Painted Skin 仍为空。四篇当时尚未加入 Collection 或绑定资产；009 后续只接入 `entryIds` 路径，资产与其他关系继续受独立门禁。
 - 2026-09-03 的确认只关闭 Collection 方向、3+3 分配、公开顺序与 Featured 等编辑决策；2026-09-04 的研究、底本选择、Entry owner 与证据物化均来自后续各自独立授权，彼此不自动扩权。
 
 ## 3. 候选比较
@@ -80,7 +84,7 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 - `The Fighting Cricket / 促織` 已直接核验上海图书馆 `線普長266652-67` 青柯亭见证：卷七、Commons 数字页 427–432、左侧可见叶码四至九；数字页 431 有 `後歲餘…身化促織` 与篇末 `異史氏曰`。Project owner 后续已选择只按该见证叙事，但辽宁手稿、任笃行/张友鹤校记和早期抄本仍未取得，因而不能证明“青柯亭编者首次增写整个魂化结尾”。安全措辞和硬门禁见 008 第 6 节。
 - 在 Project owner 确认青柯亭单见证路线前，[`Nie Xiaoqian / 聶小倩`](https://ctext.org/wiki.pl?chapter=957720&if=en)曾是版本风险无法闭合时的替换候选；当前不启动该替换，若以后重开仍须同样完成底本、研究、译文与改编分层并另行授权。
 
-可行性结论：四篇的来源链、候选 claim map 与本轮可取得的底本/locator 已分层闭合，但仍不能直接采用 CText OCR/协作英译、现代译本文字或影视叙事。Liaozhai 已确认任笃行 2016 主、张友鹤 2011 对校的工作路线，但仍须取得实际册页；《促织》已确认单一青柯亭见证路线，跨见证、作者归属与“首次增写”不进入当前内容；译文策略和双语人工复核均未授权。
+历史研究批可行性结论：四篇的来源链、候选 claim map 与当时可取得的底本/locator 已分层闭合，但仍不能直接采用 CText OCR/协作英译、现代译本文字或影视叙事。Liaozhai 已确认任笃行 2016 主、张友鹤 2011 对校的工作路线，但仍须取得实际册页；《促织》已确认单一青柯亭见证路线，跨见证、作者归属与“首次增写”不进入当前内容。当时译文策略和双语人工复核尚未授权；后续四篇均已形成证据受限草稿并通过人工双语审核，当前状态见第 1 节与 008。
 
 ### 4.2 Shan Hai Jing
 
@@ -107,7 +111,7 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 
 ## 5. 推荐六篇分配与公开阅读路径
 
-以下名称除两篇原有对象外均为工作标题；本表最初决策时的“候选”不创建状态字段或内容对象。后续独立授权已建立四个 draft owner，当前物化与三篇首稿事实见第 9–11 节及 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 第 13 节。
+以下名称除两篇原有对象外均为工作标题；本表最初决策时的“候选”不创建状态字段或内容对象。后续独立授权已建立四个 draft owner，当前物化与四篇首稿事实见第 9–11 节及 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 第 5.10、13–14 节。
 
 | Collection | 推荐公开顺序 | Entry | 当前事实或候选职责 |
 | --- | --- | --- | --- |
@@ -115,7 +119,7 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 | `The Chinese Underworld` | 2 | `The Ten Kings: Dates, Records, and Judgment` | 工作标题；移除当前 Claim 不支持的 “Rebirth”，收窄旧候选 “Yanluo and the Ten Kings”，深入一个有限审判模型，不把它写成全中国统一死后观 |
 | `The Chinese Underworld` | 3 | `Zhong Kui, the Demon Queller` | 现有 `editorial-review`；以策展边界案例收束，不写成十王或阴间统治者；建议继续作为 Featured |
 | `Strange Tales from Liaozhai`（已确认方向；工作名） | 1 | `How to Read Liaozhai` | 工作标题；说明作者、文学文本、版本、翻译与改编层次，不冒充普遍民间信仰 |
-| `Strange Tales from Liaozhai` | 2 | `Painted Skin: What Pu Songling’s Tale Says` | 工作标题；高识别度入口，区分原篇、旧英译与影视改编，谨慎处理性别/欲望/道德解释 |
+| `Strange Tales from Liaozhai` | 2 | `Painted Skin: What Pu Songling’s Tale Says` | 工作标题；当前按 1766 青柯亭单见证讲原篇并保留一条 Tso 具名解释，现代译本与影视直接比较移出当前 MVP；谨慎处理性别、欲望与道德解释 |
 | `Strange Tales from Liaozhai` | 3 | `The Fighting Cricket: A Strange Tale of Power and Survival` | 工作标题；扩展到权力、家庭伤害与官僚压力；Project owner 已选择只按已核青柯亭单见证叙事，跨见证/作者归属/首次增写继续阻塞，聂小倩只作另行替换候选 |
 
 推荐逻辑：
@@ -137,17 +141,20 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 6. 已完成：先把上述证据批形成本地检查点 `9914dd3`，再只为 Ten Kings 写入 2 Source / 3 Claim / 1 Terminology 消费关系和证据受限首稿；仍保持 `draft`。
 7. 已完成：只为 Fighting Cricket 写入 1 Source / 3 Claim / 1 Terminology 消费关系和青柯亭单见证证据受限首稿；Source 可见馆藏记录仅按独立例外改为 ASCII，精确中文馆藏号留在内部 notes，Entry 仍保持 `draft`。
 8. 已完成：只为 Liaozhai Reading Guide 写入 1 Source / 2 Claim / 1 Terminology 消费关系和证据受限首稿；任/张实际册页仍未取得，Entry 保持 `draft`。Project owner 于 2026-09-05 通过中文概要确认内容符合预期，并单独授权验证通过后本地提交。
-9. 下一步仍须另行选择并授权：现有三篇编辑/双语审校、取得任/张实际册页，或 Painted Skin 的证据受限写作；之后再建立第二 Collection 并复核 `entryIds`、Featured、显式 `relatedEntryIds` 与最终公开顺序。
+9. 009 后续已建立第二 Collection，并按已确认顺序接入两个三篇 `entryIds` 路径；Liaozhai 的 Featured 与 Hero 仍为空，六篇 `relatedEntryIds` 仍为空。
+10. 已完成：前三篇纠偏稿通过人工双语审核；Painted Skin 又按上海图书馆 1766 青柯亭本形成 2 Source / 7 Claim / 1 Terminology 的单见证草稿。
+11. 已完成：Project owner 于 2026-09-06 确认 Painted Skin 人工双语审核通过；短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
+12. 当前下一步：分别处理四篇目标读者、视觉资产与内容状态；任/张及现代比较仅在未来恢复对应范围时处理。
 
-现有两篇 `editorial-review` Entry 不因本建议降级、升级或重写；四个新增 owner 保持 `draft`，其中 Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 已有证据受限首稿，本轮也未创建第二 Collection。任何后续关系、其他正文或状态变化仍须另立获授权的 M6 内容批次。
+现有两篇 `editorial-review` Entry 不因本建议降级、升级或重写；四个新增 owner 保持 `draft`，且均已有证据受限首稿。本文决策批当时未创建第二 Collection；009 后续已完成本地路径接线。任何视觉资产、`relatedEntryIds` 或状态变化仍须另立获授权的 M6 内容批次。
 
 ## 7. 风险与停止条件
 
 - **文本/版本**：OCR、通行本、手稿/刻本差异和译本删改必须各自标明；一项来源不能同时充当原典、可靠翻译和学术解释。
 - **分类**：Liaozhai 是文学文本路径，不得把篇中叙事自动写成所有古代中国人的信仰或历史事实；Underworld 也不得写成单一地图/官署。
-- **性别与猎奇化**：`Painted Skin`、聂小倩等内容须审查旧译与改编如何塑造女性/鬼魅形象，不能只复述高传播影视版本。
+- **性别与猎奇化**：当前 Painted Skin 草稿只保留 Tso 的具名学术解释，不直接比较旧译或影视；未来若恢复此类比较，仍须审查其如何塑造女性/鬼魅形象，不能只复述高传播版本。
 - **图像与权利**：网上可见、数字馆藏、公版文本和公共领域故事都不自动授权现代译文、馆藏摄影、书籍图版或影视/game 造型；本轮没有选择、生成或纳入项目图片资产，公开页图只用于核字且不构成复用授权。
-- **关系与状态**：方向确认本身不授权创建稳定 ID/slug、修改 `entryIds`、制造第二 Collection 页面或提升状态；后续虽已另行授权建立四个 draft 身份与证据子集，并为 Ten Kings、Fighting Cricket 与 Liaozhai Reading Guide 建立 Entry 消费关系，但 Painted Skin 的消费关系、全部 Collection/related 关系与任何状态变化仍未授权，悬空关系必须继续失败关闭。
+- **关系与状态**：方向确认本身不授权创建稳定 ID/slug、修改 `entryIds`、制造第二 Collection 页面或提升状态；后续独立授权已建立四个 draft 身份与证据子集，由 009 完成两个 Collection 的成员路径，并为 Painted Skin 建立证据消费关系。全部 `relatedEntryIds` 与任何状态变化仍未完成，悬空关系必须继续失败关闭。
 - **证据停点**：任一新篇无法取得可定位原典、独立研究和双语复核路径时，缩小主张、替换选题或停止，不用 AI 输出补事实空缺。
 
 ## 8. Project owner 确认与后续停点
@@ -162,7 +169,7 @@ Project owner 于 2026-09-03 首先确认：
 
 随后 Project owner 又单独授权只做四篇的实际见证/版次、正式书目与页/叶/canvas locator 证据闭合，仍不授权 Source/Claim/Terminology、正文、图片、内容对象或状态变化。此研究批由 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 执行并停在分层证据账本；其中青柯亭单见证已直接核页，跨见证判断仍维持硬门禁。Project owner 之后又分别确认工作底本/单见证路线、授权最小 draft Entry owner，并最终授权证据已闭合的 Source/Claim/Terminology 物化；这些是后续独立授权，不回溯扩大前两次研究授权。
 
-当前停点是证据最小物化与 Ten Kings、Fighting Cricket、Liaozhai Reading Guide 三篇纵切片已完成：三篇已建立证据消费关系与正文，只有 Painted Skin 仍为空 draft；资产、第二 Collection 与任何状态变化均未开始。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送，使批次开始时本地 HEAD、`main` 与本地 `origin/main` tracking ref 对齐；Liaozhai Reading Guide 在中文概要确认与独立本地提交授权后随本检查点进入当前本地 HEAD，本检查点未执行 fetch 或 push。下一内容动作仍须另行授权；上述授权均不包含外部服务、public artifact 或发布。
+当前停点是四篇证据受限纵切片、人工双语审核及 009 的两个合集路径接线已完成：四篇均已建立证据消费关系与正文并通过人工双语审核；两个 Collection 均有明确 `entryIds`，资产、`relatedEntryIds` 与状态未随接线、单见证写作或语言审核改变。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送；Liaozhai Reading Guide 检查点 `119c01c` 也已由 Project owner 确认推送。当前修改位于该基线之上，未执行 fetch、Git 写操作或发布。下一内容动作是四篇目标读者、视觉资产与状态审核；上述授权均不包含外部服务、public artifact 或发布。
 
 ## 9. 2026-09-04 后续证据物化记录
 
@@ -190,7 +197,7 @@ Project owner 接受“先提交证据检查点，再做一篇完整纵切片”
 Project owner 授权只为 `fighting-cricket` 消费既有 1 Source / 3 Claim / 1 Terminology 并形成证据受限英语首稿，保持 `draft`；不新增证据对象、不处理图片、不建 Collection/related 关系、不改状态、不接外部服务、不做 Git 写入。完整门禁暴露既有 Source 的可见中文馆藏号后，Project owner 又授权最小例外：可见记录改为 ASCII，精确馆藏号继续保存在内部 notes。
 
 - Entry 精确消费 `source-shanghai-library-qingketing-liaozhai-1766`、三条 Fighting Cricket Claim 与 `term-shen-hua-in-fighting-cricket`；形成两段 opening、104 词摘要和四节英语正文，`lastFactCheckedAt` 为 `2026-09-04`。
-- 正文只覆盖青柯亭 1766 单一见证中贡促织压力、儿子坠井获救后的状态及一年有余后的自述，并明确排除历史税制概括、死亡复活、灵魂教义、跨见证版本史、作者归属与“首次增写”。
+- 正文只覆盖青柯亭 1766 单一见证中贡促织压力、儿子捕捉逃脱蟋蟀时将其误伤致死、后来在井中被找到、家人准备草葬时发现尚有微息，以及一年有余后的自述；原文未说明他如何进入井中。正文明确排除历史税制概括、死亡复活、灵魂教义、跨见证版本史、作者归属与“首次增写”。
 - Source 的可见 `editionBasisOrObjectId` 使用 `Shanghai Library record 266652-67`；精确馆藏号 `線普長266652-67` 留在 notes。没有修改 Schema、模板、字体链或证据对象数量。
 - 最终完整 `pnpm run check` 通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 build 与 output verifier；当前仍为 42 Hero、10 WOFF2、0 XML、0 客户端 JavaScript。
 - 四个新增 Entry 均保持 `draft`，published inventory 为 0/0；本批未处理图片、关系、外部服务、public artifact、部署或发布。Project owner 随后通过中文概要确认内容符合预期并授权本地提交，纵切片随本检查点进入当前 HEAD；未 fetch 或 push。

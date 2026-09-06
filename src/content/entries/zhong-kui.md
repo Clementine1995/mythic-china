@@ -8,6 +8,7 @@ traditionType: historical-legend
 nameZh: 钟馗
 pinyin: Zhōng Kuí
 aliases: []
+contentNote: null
 opening:
   - Zhong Kui often enters Chinese art as a figure who can face what others fear. A heavy beard, long robes, a sword, and a company of demons make him immediately legible in many works, yet no one object supplies a timeless, canonical portrait.
   - Across Yuan and Qing examples in the present source set, artists make him commander, demon queller, festive protector, or cultivated scholar. Reading those differences is more revealing than reducing him to a generic “king of ghosts.”

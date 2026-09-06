@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。2026-09-04 经后续逐项授权，四篇候选已建立最小 draft Entry owner，并只物化证据已闭合的 Source、Claim 与 Terminology；随后 Ten Kings 只消费已闭合的 2 Source / 3 Claim / 1 Terminology，Fighting Cricket 只消费已闭合的 1 Source / 3 Claim / 1 Terminology，Liaozhai 导读只消费已闭合的 1 Source / 2 Claim / 1 Terminology，三篇均形成证据受限英语首稿；Painted Skin 保持空 draft。Collection 关系、视觉资产和内容状态均未改变。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。2026-09-04 经后续逐项授权，四篇候选已建立最小 draft Entry owner，并只物化证据已闭合的 Source、Claim 与 Terminology；Ten Kings、Fighting Cricket 与 Liaozhai 导读随后先形成三篇证据受限英语首稿。2026-09-05 的后续合集接线见 009；2026-09-06 Painted Skin 又在独立授权下按上海图书馆 1766 青柯亭本形成单见证草稿。四个新增 Entry 均保持 `draft`，视觉资产与既有内容状态继续不变。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -14,7 +14,7 @@
 - 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
 - M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
 - M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容；`Chinese Underworld Guide (Working Draft)` 只是内部工作标题，不是已冻结的公开标题。
-- 当前内容 inventory 为 6 篇 Entry（2 篇 `editorial-review`、4 篇 `draft`）、1 个 `editorial-review` Collection、14 份 Source、19 份 Claim 与 5 份 Terminology；published Entry / Collection 仍为 0/0。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`；Ten Kings 已有正文及 2 Source / 3 Claim / 1 Terminology 反向消费关系，Fighting Cricket 已有正文及 1 Source / 3 Claim / 1 Terminology 反向消费关系，Liaozhai 导读已有正文及 1 Source / 2 Claim / 1 Terminology 反向消费关系，只有 Painted Skin 的正文和反向数组仍为空。四篇均处于研究/写作阶段的 `draft`，不是可发布状态。
+- 当前内容 inventory 为 6 篇 Entry（2 篇 `editorial-review`、4 篇 `draft`）、2 个 Collection（1 `editorial-review` + 1 `draft`）、14 份 Source、25 份 Claim 与 6 份 Terminology；六份 Terminology 均已由 `Project owner (user-confirmed)` 分批批准为 `bilingual-approved`，published Entry / Collection 为 0/0。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`；它们分别已有 2/3/1、1/2/1、2/7/1 与 1/3/1 的 Source/Claim/Terminology 消费关系和证据受限正文。修订前锁定稿、010 后续改变的英语单元及两条 `contentNote` 均已通过 Project owner 双语确认，未改单元保留历史批准。Painted Skin 的七条 Claim 分为五条青柯亭原典、一条 `verified` 本站自译与一条 Tso 具名解释；只有青柯亭是该篇文本见证。四篇均处于 `draft`，不是可发布状态。
 
 ### 0.2 M3-U3 视觉记录与加载合同
 
@@ -59,6 +59,7 @@ traditionType: null
 nameZh: 钟馗
 pinyin: Zhōng Kuí
 aliases: []
+contentNote: null
 opening: []
 summary: null
 periodLabel: null
@@ -80,6 +81,7 @@ status: draft
 - `entryId`：稳定内部身份，发布后不得因标题和栏目变化修改。
 - `slug`：稳定 canonical URL 片段；修改必须有显式 redirect 需求。
 - `entryType`：`figure | creature | realm | tale | guide`。
+- `contentNote`：必须显式填写的 nullable 纯文本；`null` 表示无需文章级提示，非空时使用 1–2 句面向读者的敏感内容说明。模板在署名/核查日期之后、`opening` 之前以可见且具名的 `Content note` 渲染；该字段不进入卡片、SEO description、RSS/JSON-LD，不承载证据免责声明、内部研究备注或项目状态，也不自动改变 Entry 状态。
 - `opening`：字符串序列；draft 可为 `[]`，进入 `editorial-review` 时提供 1–2 个纯文本段落，承担有悬念但不虚构引语的开场；模板将其放在 Quick Answer 前。Markdown body 不重复开场，从核心故事开始。
 - `summary`：draft 可为 `null`；进入 `editorial-review` 时提供 80–120 词 Quick Answer。
 - `traditionType`：使用第 1 节枚举；draft 可为 `null`，进入 `editorial-review` 前必须确认。
@@ -138,7 +140,7 @@ heroAssetId: null
 - `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建，只能保留指向 `published | archived` Entry 的既有发布谱系关系供历史追溯，不能借归档状态新挂 draft/未公开对象。
 - Collection 必须说明范围与限制，避免把不同时代/传统强行拼成统一体系。
 - Topic 是可复用筛选标签；Collection 是有导语、有顺序、有结论的产品页面。
-- 当前唯一 Collection 仍只引用两个已确认 demo；四个新增 draft Entry 尚未加入任何 Collection。只有后续明确授权并复核成员、顺序与状态矩阵后，才能更新 `entryIds`，不能用研究方向自动补关系。
+- 2026-09-05 经下一步授权，按 [009](requirements/009-collection-reading-paths.md) 建立两个三篇路径：阴间 `chinese-underworld-guide` → `ten-kings` → `zhong-kui`，聊斋 `liaozhai-reading-guide` → `painted-skin` → `fighting-cricket`。阴间保持 `editorial-review`、Featured 为钟馗；聊斋为 `draft`，Featured/Hero 为空。Entry 状态不变，`relatedEntryIds` 不由成员关系推导。
 - Collection 的 realm token、纹理、构图和主题资产属于表现层/Asset Manifest，不写入本内容对象。
 
 ### 2.3 Source
@@ -377,7 +379,7 @@ normalizedTopicId: null
 ### 3.1 本地化语义边界（已确认目标，尚未实现）
 
 - Entry、Collection、Source、Claim 与逻辑 Asset 的稳定 ID 表示同一内容或证据对象，不能因 locale 复制出带语言后缀的事实图。Claim 的 certainty、evidence context、Source/locator 与 Source 的书目身份、原文语言、权利继续共享；仅改变表达语言不创建新 Claim，含义或证据边界改变时才建立新的事实记录。
-- title、subtitle、opening、summary、正文、Collection description、可见术语/释义、页面 UI、SEO 文案与 structured-data language，以及 alt/caption/disclosure 的呈现按 locale 独立编写、审核和发布。一个 locale 的 `ready` / `published` 不能自动提升另一个 locale；具体状态字段和记录形状尚未冻结。
+- title、subtitle、contentNote、opening、summary、正文、Collection description、可见术语/释义、页面 UI、SEO 文案与 structured-data language，以及 alt/caption/disclosure 的呈现按 locale 独立编写、审核和发布。一个 locale 的 `ready` / `published` 不能自动提升另一个 locale；具体状态字段和记录形状尚未冻结。
 - 现有 `Entry.nameZh`、`Collection.titleZh`、`pinyin`、`Source.titleZh/titleZhLang`、英语 `Claim.statement`、`TerminologyRecord.chosenEnglish` 与单一内容 `status` 都不是 page-locale 或 translation fallback。`titleZhLang` 只描述书目标题的正字区域，不能被解释为已有简中或繁中页面。
 - AI/机器翻译只能形成内部草稿；目标 locale 的正文、术语、SEO、alt/caption 与无障碍文案须有明确人工 reviewer 与时间。缺少完整本地化记录时不生成对应公开路由或使该 locale release fail closed，不得从英语、另一正字或未审核机器译文静默补齐。
 - 已确认的英语根路径、简中 `/zh-hans/` 试点、未来 `/zh-hant/` 预留与三页范围见 [`005-localized-content-pilot.md`](requirements/005-localized-content-pilot.md)。本节不创建 locale Schema、目录、loader、resolver 或页面。
@@ -388,19 +390,20 @@ normalizedTopicId: null
 
 默认 Entry 面向读者的正文顺序如下。编辑生产时仍须先完成 claim/source 与术语核查；正文中的轻量引用跟随相关主张，下面的 `Sources` 指完整书目：
 
-1. `opening` 中有悬念但不虚构引语的 1–2 段开场。
-2. 80–120 词 Quick Answer。
-3. 核心故事。
-4. `What the text says`：最早/主要文本或传统。
-5. `Later traditions and variants`：版本形成与差异。
-6. `Our interpretation`：本站视觉或叙事选择。
-7. 为什么这个故事重要。
-8. 常见误解或现代改编。
-9. Sources。
-10. Related Entries / 下一条探索路径。
-11. Reader Request。
+1. 可选 `contentNote`：只在非空时出现，并先于任何开场、摘要或正文。
+2. `opening` 中有悬念但不虚构引语的 1–2 段开场。
+3. 80–120 词 Quick Answer。
+4. 核心故事。
+5. `What the text says`：最早/主要文本或传统。
+6. `Later traditions and variants`：版本形成与差异。
+7. `Our interpretation`：本站视觉或叙事选择。
+8. 为什么这个故事重要。
+9. 常见误解或现代改编。
+10. Sources。
+11. Related Entries / 下一条探索路径。
+12. Reader Request。
 
-`opening` 与 `summary` 来自 frontmatter；Markdown body 从第 3 项核心故事开始，避免解析渲染后 HTML、按首段切割或为此引入 MDX。全站 Footer newsletter 属于页面外壳，不属于 Entry 正文模板，也不得插入上述阅读链。
+`contentNote`、`opening` 与 `summary` 来自 frontmatter；Markdown body 从第 4 项核心故事开始，避免解析渲染后 HTML、按首段切割或为此引入 MDX。全站 Footer newsletter 属于页面外壳，不属于 Entry 正文模板，也不得插入上述阅读链。
 
 历史人物额外固定：
 

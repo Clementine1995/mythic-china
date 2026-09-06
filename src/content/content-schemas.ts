@@ -165,6 +165,7 @@ export const entrySchema = z
     nameZh: nullableNonEmptyStringSchema,
     pinyin: nullableNonEmptyStringSchema,
     aliases: uniqueStringArraySchema,
+    contentNote: nullableNonEmptyStringSchema,
     opening: z.array(nonEmptyStringSchema).max(2),
     summary: nullableNonEmptyStringSchema,
     periodLabel: nullableNonEmptyStringSchema,

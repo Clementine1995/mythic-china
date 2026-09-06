@@ -1,20 +1,19 @@
 ---
 entryId: fighting-cricket
 slug: fighting-cricket
-title: "The Fighting Cricket: A Strange Tale of Power and Survival"
+title: "The Fighting Cricket: Court Pressure and a Son's Strange Account"
 subtitle: null
 entryType: tale
 traditionType: null
 nameZh: null
 pinyin: null
 aliases: []
+contentNote: This article includes a child found in a well and preparations for burial before faint breathing is detected.
 opening:
   - >-
-    A demand for fighting crickets begins at court, but its pressure does not stay there. In the specified Shanghai Library Qingketing witness, the exaction passes through local authority until it reaches one household.
-  - >-
-    Inside that household, the crisis turns on a son. He crushes the cricket, falls into a well, and is recovered with breath remaining; afterward, he is described as dazed, feeble, and wanting to sleep. More than a year later, this witness records his startling explanation: he had taken the form of the cricket and had only now recovered.
+    In this Liaozhai tale, a demand for fighting crickets moves from the court through local authorities until it reaches Chengming and his family. His son fatally injures an escaped cricket while trying to catch it. The boy is later found in a well; more than a year later, he says that he had taken the form of the cricket.
 summary: >-
-  In the specified 1766 Qingketing witness of The Fighting Cricket, a court demand for fighting crickets travels through local authority until its pressure reaches one household. A son in that household crushes the cricket and falls into a well. He is recovered with breath remaining but is afterward described as dazed, feeble, and wanting to sleep. More than a year later, he says that he had taken the form of the cricket and had only now recovered. This Entry follows that single witness and does not claim a historical tax system, death and resurrection, a doctrine of the soul, or a cross-witness version history.
+  In the Shanghai Library's 1766 Qingketing copy, a court demand for fighting crickets passes through local authorities to Chengming's household. His son fatally injures the escaped cricket while trying to catch it and is later found in a well. As the family prepares to bury him, they detect faint breathing. He revives around midnight but remains vacant and unresponsive, weak and drowsy. More than a year later, he says that he had taken the form of the cricket and had only just awakened. The copy does not explain how he entered the well, and this reading does not turn the episode into a confirmed death, resurrection, or medical diagnosis.
 periodLabel: null
 earliestKnownSourceId: null
 earliestKnownClaimId: null
@@ -34,26 +33,26 @@ lastFactCheckedAt: "2026-09-04"
 status: draft
 ---
 
-## A demand moves downward
+## A demand reaches one family
 
-The [specified Shanghai Library Qingketing witness](https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf) opens with a court demand for fighting crickets. The resulting exaction passes through local authority until its pressure reaches one household.
+The [1766 Qingketing copy](https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf) opens with a court demand for fighting crickets. The demand passes through local authorities until it reaches Chengming's household (digital pages 427–428).
 
-This is a narrative setup within the tale. It does not by itself establish a formal Ming tax category, document court supply outside the story, or make this household representative of all local practice. This draft treats the movement of the demand as the source of its pressure, not as a verified history of taxation.
+The story follows an order from court as it becomes pressure inside one family. That is the tale's framing, not independent evidence of a historical tax system.
 
 ## A crisis inside the household
 
-In the same witness, a son in that household crushes the cricket and falls into a well. He is recovered with breath remaining. Afterward, the text describes him as dazed in spirit, feeble, and wanting to sleep.
+While trying to catch the escaped cricket, Chengming's son fatally injures it. The boy is later found in a well. On digital page 429, his family discovers faint breathing as they prepare to bury him; he revives around midnight but remains vacant and unresponsive, weak and drowsy.
 
-The wording sets a hard limit on the retelling. It does not establish death, a coma, or resurrection in a modern medical sense, and this draft does not project the passage onto every version of the tale.
+The text does not say that the boy died, explain how he entered the well, or provide a basis for a modern medical diagnosis. Describing the episode as death and resurrection would therefore go beyond this passage.
 
 ## What the son says later
 
-More than a year later, the son says that he had taken the form of the cricket and had only now recovered. The interval is deliberately rendered as “more than a year,” not “exactly one year.”
+More than a year later, the son says that he had taken the form of the cricket and had only just awakened (digital page 431).
 
-The phrase is rendered here as **“took the form of.”** It is not expanded to “was reincarnated,” “was resurrected,” or “his soul became the cricket.” Those alternatives would impose a doctrine of soul, rebirth, or death that the present wording does not establish.
+We translate the phrase as **“took the form of.”** It reports what the son says without claiming that his soul left his body, that he died, or that he was reborn.
 
-## One witness, one boundary
+## Which version this article follows
 
-This draft follows only the specified Shanghai Library Qingketing woodblock witness dated 1766. The relevant passage is located in juan 7 on Commons digital pages 427–432, with visible left-side block-center folios 4–9.
+This focused reading follows the Shanghai Library's 1766 Qingketing woodblock copy, available on Commons at digital pages 427–432. It examines the three moments above rather than retelling the whole story.
 
-One witness can support what its text says. It cannot establish how surviving manuscript and printed witnesses differ, who authored any variant, or where the explicit transformation ending first appeared. This draft therefore makes no cross-witness claim and assigns no “first addition” to an author, editor, or printer.
+The son's account is the final turn in this focused reading. Additional manuscripts and editions would be needed to determine how the ending differs elsewhere or when it first appeared.

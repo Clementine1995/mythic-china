@@ -7,13 +7,17 @@ import { fileURLToPath, URL } from "node:url";
 import { imageMetadata } from "astro/assets/utils";
 
 import {
+  assertReviewCollectionReadingPath,
   assertReviewCssResourcePolicy,
+  assertReviewEntryCollectionMembership,
+  assertReviewEntryContentNote,
   assertReviewHtmlResourcePolicy,
   assertReviewInteractionSurface,
   assertReviewOutputArtifactExtensions,
   assertReviewPrivacyNotice,
   assertReviewResourceInventory,
   classifyReviewOutputEntry,
+  indexReviewRelationshipContracts,
   readReviewHtmlStyleResources,
 } from "./review-output-policy.mjs";
 import {
@@ -44,13 +48,66 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
 const outputRoot = resolve(projectRoot, "dist");
 const navigationTargets = ["/", "/explore/", "/collections/", "/about/"];
-const reviewEntryIdsByOutputPath = new Map([
-  ["explore/chinese-underworld-guide/index.html", "chinese-underworld-guide"],
-  ["explore/fighting-cricket/index.html", "fighting-cricket"],
-  ["explore/liaozhai-reading-guide/index.html", "liaozhai-reading-guide"],
-  ["explore/painted-skin/index.html", "painted-skin"],
-  ["explore/ten-kings/index.html", "ten-kings"],
-  ["explore/zhong-kui/index.html", "zhong-kui"],
+// Paths and hrefs stay explicit because stable IDs are not URL slugs.
+const collectionReadingPathContracts = [
+  {
+    collectionId: "chinese-underworld",
+    outputPath: "collections/chinese-underworld/index.html",
+    href: "/collections/chinese-underworld/",
+    entries: [
+      {
+        entryId: "chinese-underworld-guide",
+        outputPath: "explore/chinese-underworld-guide/index.html",
+        href: "/explore/chinese-underworld-guide/",
+      },
+      {
+        entryId: "ten-kings",
+        outputPath: "explore/ten-kings/index.html",
+        href: "/explore/ten-kings/",
+      },
+      {
+        entryId: "zhong-kui",
+        outputPath: "explore/zhong-kui/index.html",
+        href: "/explore/zhong-kui/",
+      },
+    ],
+  },
+  {
+    collectionId: "liaozhai",
+    outputPath: "collections/liaozhai/index.html",
+    href: "/collections/liaozhai/",
+    entries: [
+      {
+        entryId: "liaozhai-reading-guide",
+        outputPath: "explore/liaozhai-reading-guide/index.html",
+        href: "/explore/liaozhai-reading-guide/",
+      },
+      {
+        entryId: "painted-skin",
+        outputPath: "explore/painted-skin/index.html",
+        href: "/explore/painted-skin/",
+      },
+      {
+        entryId: "fighting-cricket",
+        outputPath: "explore/fighting-cricket/index.html",
+        href: "/explore/fighting-cricket/",
+      },
+    ],
+  },
+];
+const {
+  collectionIdsByOutputPath: reviewCollectionIdsByOutputPath,
+  entryIdsByOutputPath: reviewEntryIdsByOutputPath,
+} = indexReviewRelationshipContracts(collectionReadingPathContracts);
+const contentNoteByEntryId = new Map([
+  [
+    "fighting-cricket",
+    "This article includes a child found in a well and preparations for burial before faint breathing is detected.",
+  ],
+  [
+    "painted-skin",
+    "This article includes graphic bodily violence, physical abuse and humiliation, and forced ingestion of phlegm.",
+  ],
 ]);
 const fontInventory = JSON.parse(
   await readFile(
@@ -276,11 +333,15 @@ for (const relativePath of htmlFiles) {
     relativePath,
     assertReviewHtmlResourcePolicy(html, relativePath),
   );
-  assertReviewInteractionSurface(
-    html,
-    relativePath,
-    reviewEntryIdsByOutputPath.get(relativePath) ?? null,
-  );
+  const reviewEntryId = reviewEntryIdsByOutputPath.get(relativePath);
+  assertReviewInteractionSurface(html, relativePath, reviewEntryId ?? null);
+  if (reviewEntryId !== undefined) {
+    assertReviewEntryContentNote(
+      html,
+      relativePath,
+      contentNoteByEntryId.get(reviewEntryId) ?? null,
+    );
+  }
   styleResourcesByPath.set(relativePath, readReviewHtmlStyleResources(html));
   assertExactReviewNavigation(html, relativePath);
   assertExactReviewSemanticShell(html, relativePath);
@@ -620,6 +681,7 @@ if (
   JSON.stringify(exploreEntryCandidates) !==
     JSON.stringify([
       "/explore/chinese-underworld-guide/",
+      "/explore/ten-kings/",
       "/explore/zhong-kui/",
     ]) ||
   exploreCollectionCandidates.length !== 0
@@ -882,23 +944,43 @@ if (
 ) {
   throw new Error("Guide must not borrow another owner's Hero copy.");
 }
-const guidedPathStart = collectionHtml.indexOf('id="guided-path-heading"');
-const guidedPathEnd = collectionHtml.indexOf('class="collection-browse"');
-const guidedPathHtml = collectionHtml.slice(guidedPathStart, guidedPathEnd);
-const guidePosition = guidedPathHtml.indexOf(
-  "A Guide to the Chinese Underworld",
-);
-const zhongKuiPosition = guidedPathHtml.indexOf("Zhong Kui, the Demon Queller");
-if (
-  guidedPathStart < 0 ||
-  guidedPathEnd < 0 ||
-  guidePosition < 0 ||
-  zhongKuiPosition < 0 ||
-  guidePosition > zhongKuiPosition
-) {
-  throw new Error("Collection reading order no longer follows entryIds.");
+for (const collection of collectionReadingPathContracts) {
+  const { collectionId, outputPath } = collection;
+  if (reviewCollectionIdsByOutputPath.get(outputPath) !== collectionId) {
+    throw new Error(`Review Collection contract drifted for ${outputPath}.`);
+  }
+  const html = htmlByPath.get(outputPath);
+  if (html === undefined)
+    throw new Error(`Missing review Collection ${collectionId}.`);
+  assertReviewCollectionReadingPath(
+    html,
+    outputPath,
+    collectionId,
+    collection.entries.map(({ href }) => href),
+  );
+  for (const entry of collection.entries) {
+    const entryHtml = htmlByPath.get(entry.outputPath);
+    if (entryHtml === undefined)
+      throw new Error(`Missing member Entry ${entry.entryId}.`);
+    assertReviewEntryCollectionMembership(
+      entryHtml,
+      entry.outputPath,
+      collection.href,
+    );
+  }
 }
-
+const liaozhaiHtml = htmlByPath.get("collections/liaozhai/index.html");
+if (liaozhaiHtml === undefined) {
+  throw new Error("Missing review Collection liaozhai.");
+}
+if (
+  liaozhaiHtml.includes('class="collection-featured"') ||
+  liaozhaiHtml.includes('class="collection-hero__figure"')
+) {
+  throw new Error(
+    "Draft Liaozhai must not borrow a Featured Entry or Hero asset.",
+  );
+}
 process.stdout.write(
-  `Verified ${htmlFiles.length} noindex review pages including Privacy and the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, inactive reader interactions, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
+  `Verified ${htmlFiles.length} noindex review pages including Privacy and the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, exact Entry content notes, inactive reader interactions, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
 );

@@ -1,0 +1,11 @@
+claimId: claim-painted-skin-human-skin-short-translation
+entryId: painted-skin
+claimType: translation
+evidenceContext: historical-tradition
+statement: The site's translation renders 鋪人皮於榻上執采筆而繪之 as “It spread a human skin on the couch, took up a brush, and painted it.”
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 1; Commons digital page 73; visible left-side block-center folio 36
+    note: Drafted by Mythic China Editorial on 2026-09-05 from the unpunctuated Qingketing witness; punctuation is supplied, 采 is not silently normalized to 彩, no modern translation is copied, and Project owner approved the human bilingual review on 2026-09-06.

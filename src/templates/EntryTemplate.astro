@@ -106,6 +106,19 @@ const factCheckedLabel = entry.data.lastFactCheckedAt
 
     <div class="entry-reading page-shell section-space">
       {
+        entry.data.contentNote && (
+          <aside
+            class="entry-section entry-content-note"
+            aria-labelledby="content-note-heading"
+          >
+            <p class="section-context">Before reading</p>
+            <h2 id="content-note-heading">Content note</h2>
+            <p>{entry.data.contentNote}</p>
+          </aside>
+        )
+      }
+
+      {
         entry.data.opening.length > 0 && (
           <section class="entry-opening" aria-label="Opening">
             {entry.data.opening.map((paragraph) => (

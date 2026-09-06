@@ -18,11 +18,11 @@
 | --- | --- | --- |
 | 需求状态 | M5-U3 页面与隐私子合同已确认；U4 账户准备与 Buttondown 审核结果已同步 | Project owner 于 2026-09-04 确认 Buttondown `mythic-china` 账户审核已通过；Tally Free 账户和未发布 Reader Request 草稿已准备。真实 action/link、账户级配置/条款、发布、写入与供应商行为仍留 U4/U5/M6 逐项确认 |
 | 实施状态 | M5-U2 与 M5-U3 完成；U4 未完成 | 三个 `src/services/` 纯合同/Fake、全站唯一 inactive Newsletter、六个 Entry 的 inactive Reader Request、`/privacy/` review 页面与 fail-closed output oracle 已实现；四个新增 draft Entry 只复用既有模板行为。账户审核通过事实没有进入仓库配置，站点仍无真实供应商接线或网络 |
-| 验证状态 | M5-U3 历史门禁与当前 13 页内容增量完整门禁均通过；账户状态只由 Project owner 提供现场事实 | U3 历史结果为定向 3 文件/79 测试、完整 25 文件/320 测试、Astro 81 文件零诊断与 9 页输出；当前完整检查为 25 文件/321 测试、Astro 81 文件零诊断与 13 页 output verifier。账户后台、浏览器、供应商真实行为与写入均不是通过证据 |
+| 验证状态 | M5-U3 历史门禁与当前 14 页完整门禁均通过；账户状态只由 Project owner 提供现场事实 | U3 历史结果为定向 3 文件/79 测试、完整 25 文件/320 测试、Astro 81 文件零诊断与 9 页输出；当前完整检查为 25 文件/369 测试、Astro 81 文件零诊断与 14 页 output verifier。账户后台、浏览器、供应商真实行为与写入均不是通过证据 |
 | 发布状态 | 未发布 | 没有 public artifact、Vercel 项目、真实 origin、供应商生产配置或部署授权 |
 
-- 当前权威结论更新时间：2026-09-04。
-- 当前实现基线：本地 HEAD 与 `main` 为 `3983bee91ada4a286613ec702a8009a4f528af3f`，进入 M5 前工作树干净；当时未 fetch 的本地 `origin/main` 为 `e2893d1`。M5-U2 实施期间，该 tracking ref 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`，当前三者对齐；本批未执行 fetch 或 Git 写入，tracking ref 不单独证明服务器端状态。
+- 当前权威结论更新时间：2026-09-06。
+- M5 实现基线：本地 HEAD 与 `main` 当时为 `3983bee91ada4a286613ec702a8009a4f528af3f`，进入 M5 前工作树干净；当时未 fetch 的本地 `origin/main` 为 `e2893d1`。M5-U2 实施期间，该 tracking ref 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`，三者在该批结束时对齐；本批未执行 fetch 或 Git 写入，tracking ref 不单独证明服务器端状态。后续版本身份以 README 与 `DEV_WORKFLOW.md` 的当前交接为准。
 
 ## 1. 结论与开发就绪判断
 
@@ -56,7 +56,7 @@
 
 - `SiteFooter.astro` 由共享 Layout 全站唯一渲染，并在 Footer 内挂载一个 disabled、inactive 的 Newsletter review 入口。
 - `EntryTemplate.astro` 在 Sources、Collection/Related reading paths 后为全部六个 review Entry 各挂载一个 disabled、inactive 的 Reader Request；其他页面没有该入口。四个新增 draft Entry 只通过既有动态路由取得相同表面，模板未改。
-- `/privacy/` 仍是 `noindex, nofollow` review 页面；四个 draft Entry 路由加入后，当前精确 review inventory 为 13 页。Privacy 公开显示 `hyc`、China、`huyichen2019@gmail.com`、60 天邮件运营保留规则，以及尚未启用的 Buttondown/Tally/Plausible 说明。
+- `/privacy/` 仍是 `noindex, nofollow` review 页面；四个 draft Entry 路由与后续 Liaozhai Collection 页面加入后，当前精确 review inventory 为 14 页。Privacy 公开显示 `hyc`、China、`huyichen2019@gmail.com`、60 天邮件运营保留规则，以及尚未启用的 Buttondown/Tally/Plausible 说明。
 - Astro 仍为纯静态输出，没有供应商 adapter、表单 endpoint、分析依赖或浏览器测试目录；M5-U2 新增的 `src/services/` 只有 provider-neutral DTO、validator、interface 与 Fake，U3 页面没有消费这些服务。
 - review output policy 继续默认禁止 `form`、`script`、事件处理器、供应商 link/action 和非本地子资源，并新增 inactive UI、Privacy、位置、唯一性及文案的 HTML5 DOM oracle；构建 verifier 继续要求零客户端 JavaScript。
 - 本文、`CONTENT_MODEL.md`、`ARCHITECTURE.md` 与 `PROJECT_RULES.md` 已把浏览器 submission 与 provider/internal record 分开；M5-U2 的匹配 strict validator/Fake 已实现，真实 transport 尚未实现。
@@ -470,7 +470,7 @@ U3 已保持并加强 review 默认拒绝：
 | 类型 | 新增、修改或删除 | 目标文件、对象或系统 | 目标行为 | 对应验收 |
 | --- | --- | --- | --- | --- |
 | 需求 | 新增 | 本文 | M5 业务、数据、隐私、供应商与实施单元合同 | 文档门禁 |
-| 当前事实 | 当前修改 | README、DEV_WORKFLOW、001、003 | 保留 M4 历史 8 页与 U3 历史 9 页，另同步四个 draft Entry 后当前 13 页/六个 Reader Request；U4 账户准备事实与下一停点不变 | 文档状态一致性/Git 只读核查 |
+| 当前事实 | 后续内容批同步 | README、DEV_WORKFLOW、001、003、007–009 | 保留 M4 历史 8 页与 U3 历史 9 页；四个 draft Entry 与 Liaozhai Collection 后当前为 14 页/六个 Reader Request，两个三篇路径已接线；U4 账户准备事实与下一停点不变 | 文档状态一致性/Git 只读核查 |
 | 领域合同 | 当前修改 | PRODUCT、ARCHITECTURE、CONTENT_MODEL、REFERENCES | 同步已确认的公开隐私、保留、同意、供应商准备状态、无自定义域名与 canonical 边界 | 文档合同一致性/链接与格式回归 |
 | 纯合同/Mock | 当前新增 | `src/services/`、`tests/services/` | 严格 DTO、Fake adapter、脱敏失败与零网络 | M5-U2 |
 | 页面/组件 | 当前新增/修改 | Footer、Entry、Privacy、样式 | 单一 inactive Newsletter/Reader Request、review 隐私入口 | M5-U3 |
@@ -483,9 +483,9 @@ U3 已保持并加强 review 默认拒绝：
 
 后续内容批在独立授权下新增四个空 draft Entry；由于 review 动态路由与 `EntryTemplate` 对所有 non-archived Entry 使用同一结构，它们自动增加四个 direct-only review 页面，并各自继承一个既有 inactive Reader Request。本批没有修改 Newsletter、Reader Request、Privacy、CSS、service DTO、provider 边界或页面行为。
 
-- `verify-m4-u2-output.mjs` 已把四个新路径及稳定 Entry ID 纳入精确映射；当前 oracle 要求 13 页各一个 Newsletter、六个 Entry 各一个匹配 ID 的 Reader Request，其他七页零 Reader Request。
+- `verify-m4-u2-output.mjs` 在该批把四个新路径及稳定 Entry ID 纳入精确映射；当时 oracle 要求 13 页各一个 Newsletter、六个 Entry 各一个匹配 ID 的 Reader Request，其他七页零 Reader Request。009 后续将 Liaozhai Collection 纳入当前 14 页合同。
 - 仍无 `form`、action、Tally link、Buttondown link、provider script、字段、提交或网络；新增页面不扩大 U4 授权，也不把 draft 变成公开内容。
-- M5-U3 的 9 页/两个 Entry 验证继续作为当时历史证据；本批完整 `pnpm run check` 已验证当前 13 页、每页唯一 Newsletter、六个 Entry 各一个匹配 ID 的 Reader Request、42 Hero、10 WOFF2、0 XML 与 0 客户端 JavaScript。浏览器/键盘/缩放仍未执行。
+- M5-U3 的 9 页/两个 Entry 验证继续作为当时历史证据；该内容证据批的完整 `pnpm run check` 当时验证 13 页、每页唯一 Newsletter、六个 Entry 各一个匹配 ID 的 Reader Request、42 Hero、10 WOFF2、0 XML 与 0 客户端 JavaScript。后续当前门禁结果见第 9 节；浏览器/键盘/缩放仍未执行。
 ## 8. 实施拆分
 
 ### M5-U1 详细合同冻结
@@ -541,8 +541,8 @@ U3 已保持并加强 review 默认拒绝：
 | 单元 | Analytics | 允许/未知事件、provider-neutral envelope 与 PII properties | 只允许显式事件和归一化 URL/referrer，不添加应用自定义 properties | 通过；三个事件、同 origin HTTPS、query/hash/referrer 清洗与 properties/PII 负例闭合 |
 | 单元 | Analytics reading state | qualified/depth 两种顺序、hidden pause/resume、重复观察、刷新、非故事区 | 两事件各 once-only；顺序不漏记；刷新才重置；隐藏时间与非故事区不计入 | 未实施 |
 | 单元 | Adapter failure | unavailable/rate-limit/timeout/unknown | 不假成功、不盲重试、不泄露 PII | 通过；三类 Fake 均覆盖五类结果，validation result 不回显输入，fetch trap 为零调用 |
-| 输出 | Footer/Entry 唯一性、顺序与 Privacy | review HTML5 DOM fixture/静态输出 | 只有 approved inactive 入口，其他 form/script/provider link 失败 | 通过；U3 当时为 9 页 Newsletter / 2 个 Entry Reader Request，当前扩展为 13 页 Newsletter / 6 个 Entry Reader Request；Privacy 继续拒绝 mailto/占位符 |
-| 构建 | 静态/noindex/public 负边界 | 固定运行时 | review 不接真实服务；内容核心不变 | 通过；当前为 13 页、42 Hero、10 WOFF2、零 XML、零客户端 JavaScript；public artifact 仍不存在，U3 的 9 页结果只保留为历史基线 |
+| 输出 | Footer/Entry 唯一性、顺序与 Privacy | review HTML5 DOM fixture/静态输出 | 只有 approved inactive 入口，其他 form/script/provider link 失败 | 通过；U3 当时为 9 页 Newsletter / 2 个 Entry Reader Request，当前扩展为 14 页 Newsletter / 6 个 Entry Reader Request；Privacy 继续拒绝 mailto/占位符 |
+| 构建 | 静态/noindex/public 负边界 | 固定运行时 | review 不接真实服务；内容核心不变 | 通过；当前为 14 页、42 Hero、10 WOFF2、零 XML、零客户端 JavaScript；public artifact 仍不存在，U3 的 9 页结果只保留为历史基线 |
 | 浏览器 | 390/768/1440、键盘、200%、无 JS、错误恢复 | 经授权 preview | 无阻塞布局/焦点/阅读问题 | 未执行 |
 | 真实联调 | Buttondown/Tally/Plausible | 独立授权和合成数据 | 与合同一致并完成回查/删除 | 未授权 |
 
@@ -619,6 +619,6 @@ Project owner 补充确认 Buttondown `mythic-china` 账户审核已经通过。
 
 - 需求状态：M5-U3 子合同已确认；Buttondown 审核通过账户与 Tally Free 未发布草稿已形成 U4 准备事实。Buttondown/Tally 仍只是 U4 条件方向，Plausible 留 U5，真实 transport 和 public origin 按后续单元逐项确认。
 - 实施状态：M5-U2 纯合同/Fake 与 M5-U3 inert review 页面完成；U4 的 Buttondown 审核条件已满足，但账户配置核查、真实 transport、Tally 草稿发布、供应商联调、Plausible hook 与 RUM 均未开始。
-- 验证状态：U3 历史结果为定向 3 文件/79 测试、完整 25 文件/320 测试、Astro 81 文件零诊断与 9 页 build/output verifier；四个 draft Entry 增量后的完整检查通过 25 文件/321 测试、Astro 81 文件零诊断及 13 页 output verifier，并确认六个 Entry 的 inactive Reader Request。Project owner 提供的审核/账户/草稿状态不是供应商行为验证；账户后台、真实提交、浏览器视觉/键盘/缩放与网络失败未验证且未授权。
+- 验证状态：U3 历史结果为定向 3 文件/79 测试、完整 25 文件/320 测试、Astro 81 文件零诊断与 9 页 build/output verifier；四个 draft Entry 增量后的 25 文件/321 测试、Astro 81 文件零诊断及 13 页输出保留为历史快照。当前完整检查通过 25 文件/369 测试、Astro 81 文件零诊断及 14 页 output verifier，并确认六个 Entry 的 inactive Reader Request。Project owner 提供的审核/账户/草稿状态不是供应商行为验证；账户后台、真实提交、浏览器视觉/键盘/缩放与网络失败未验证且未授权。
 - 发布状态：未发布。
 - 下一停点：分别决定并授权 M5-U4 的 Buttondown 账户配置/真实 action 核查与合成订阅测试，以及 Tally 草稿发布、精确 hosted link、合成数据写入、停止、回查和删除步骤；审核通过不自动授权登录、配置、发布草稿或进入真实联调、U5、M6 与发布。

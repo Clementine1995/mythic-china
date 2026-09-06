@@ -1,20 +1,21 @@
 ---
 entryId: liaozhai-reading-guide
 slug: liaozhai-reading-guide
-title: How to Read Liaozhai
+title: "Reading Liaozhai: Dates, Editions, and Genre"
 subtitle: null
 entryType: guide
 traditionType: null
 nameZh: null
 pinyin: null
 aliases: []
+contentNote: null
 opening:
   - >-
-    A number such as 431 or 491 looks precise, but it is not useful until the reader knows what is being counted. In Luo Hui's study, the figures belong to different arrangements of Liaozhai and do not collapse into one timeless total.
+    Liaozhai is a collection of tales. Its compilation dates must be tied to the source being cited, its tale totals to an edition, and its genre labels to context. Luo Hui's 2009 study gives this guide a starting point.
   - >-
-    The collection's date needs the same care. Luo places its compilation approximately between 1670 and 1700 and treats the 1679 authorial preface as evidence that a substantial collection existed by then—not that every tale was final.
+    Luo's evidence helps separate the stages of compilation from the dates of individual tales, edition-specific totals from universal counts, and a literary term from broad modern labels.
 summary: >-
-  How to Read Liaozhai begins with two cautions from Luo Hui's study. Luo places the collection's compilation approximately between 1670 and 1700. He treats the 1679 authorial preface as evidence that a substantial collection existed by then, but not that every tale was final. Luo also reports 431 items in a sixteen-juan Qingketing arrangement and 491 in a twelve-juan arrangement with appendices. Those figures depend on edition and counting unit. This draft therefore uses zhiguai for a historically situated category of accounts or records of anomalies, rather than reducing Liaozhai to horror, ghost stories, or mythology.
+  Compare Liaozhai editions by asking three questions: What stage does a date describe? Which edition does a tale total describe? What does a genre label mean in context? Luo Hui's 2009 study places compilation approximately between 1670 and 1700 and says the main body would have taken shape by as early as 1679, when Pu Songling wrote his preface. Luo also reports 431 tales in one collection and 491 in another edition. Those figures belong to the versions he discusses. Luo treats zhiguai as one of several literary modes; here it means accounts or records of anomalies, not an exact synonym for horror, ghost stories, or mythology.
 periodLabel: null
 earliestKnownSourceId: null
 earliestKnownClaimId: null
@@ -33,26 +34,26 @@ lastFactCheckedAt: "2026-09-04"
 status: draft
 ---
 
-## Begin with a range, not a finish date
+## Read the date as a range
 
-The [cited 2009 study](https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/002/NR58980.PDF) places the compilation of Liaozhai approximately between 1670 and 1700. This is Luo Hui's chronology, not an independently established completion date for every tale.
+In his [2009 study, The Ghost of Liaozhai](https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/002/NR58980.PDF), Luo Hui places the collection's compilation approximately between 1670 and 1700 (print page 154).
 
-Luo treats the 1679 authorial preface as evidence that a substantial collection existed by then. It does not show that every tale had reached a final form, so this draft does not turn 1679 into a single completion date.
+Luo writes that the work's main body would have taken shape by as early as 1679, when Pu Songling wrote his preface. In his account, 1679 is a landmark in a longer compilation process, not a final completion date for every tale.
 
-## Ask what the number counts
+## Ask which edition a number describes
 
-On print page 160 of [the same study](https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/002/NR58980.PDF), Luo reports 431 items in a sixteen-juan Qingketing arrangement and 491 in a twelve-juan arrangement with appendices.
+On print page 160 of [the same study](https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/002/NR58980.PDF), Luo reports 431 tales in Zhao Qigao's collection and 491 in Zhang Youhe's edition.
 
-Those figures belong to different arrangements and counting units. Juan, physical volumes, tales, and appended texts should not be treated as interchangeable. This draft therefore does not give Liaozhai one exact, edition-free total.
+These are counts of tales in the two editions Luo names; neither supplies a total for every Liaozhai edition.
 
-## Keep zhiguai bounded
+## Read the genre label in context
 
-The working English term here is **zhiguai**. In this source context, it refers to accounts or records of anomalies.
+Luo discusses **zhiguai** as one of several literary modes in Liaozhai (print pages 157–161). The term refers here to accounts or records of anomalies.
 
-Calling that category simply “horror,” “ghost stories,” or “mythology” would flatten its distinctions. This draft keeps the term rather than presenting those modern labels as exact equivalents.
+“Horror,” “ghost stories,” and “mythology” carry different expectations, so none is an exact translation of zhiguai in this discussion.
 
-## What this draft does not settle
+## Three questions for any edition
 
-The currently linked source does not supply page-level evidence from the project's selected modern working and comparison editions. This Entry therefore does not call either one a definitive edition or use catalog descriptions as evidence for their text.
+For any edition in hand, ask: What does its date refer to? Which edition does its tale total describe? How does it classify its contents? Luo's study offers a starting point, not an answer for every edition.
 
-It also does not reconstruct the full manuscript and print history, date individual tales, prescribe one standard count, or compare English translations. Those questions require evidence not consumed here.
+Choosing between editions or English translations requires closer comparison of the books themselves. A catalog description can help identify a book, but cannot stand in for reading its text, notes, and editorial explanation.

@@ -1,0 +1,11 @@
+claimId: claim-painted-skin-painted-disguise-in-qingketing
+entryId: painted-skin
+claimType: textual
+evidenceContext: historical-tradition
+statement: In the specified Qingketing witness, Wang looks through a window and sees a hideous being spread a human skin on a couch, paint it with a brush, lift it as if shaking out a garment, put it on, and become a woman.
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 1; Commons digital page 73; visible left-side block-center folio 36
+    note: This Claim records the action in the selected witness. The separate translation Claim preserves the exact short Chinese span and its review status.

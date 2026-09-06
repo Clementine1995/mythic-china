@@ -9,6 +9,7 @@ export const expectedReviewHtmlFiles = Object.freeze(
     "about/index.html",
     "collections/chinese-underworld/index.html",
     "collections/index.html",
+    "collections/liaozhai/index.html",
     "explore/chinese-underworld-guide/index.html",
     "explore/fighting-cricket/index.html",
     "explore/index.html",

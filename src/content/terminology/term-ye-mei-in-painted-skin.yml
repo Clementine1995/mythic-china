@@ -1,0 +1,17 @@
+termId: term-ye-mei-in-painted-skin
+entryId: painted-skin
+hanzi: 業魅
+pinyin: yè mèi
+sourceContext: The Taoist's rebuke in the Qingketing witness, juan 1, Commons digital page 74, visible left-side block-center folio 37
+chosenEnglish: wicked apparition
+firstUseGloss: yè mèi (業魅), here rendered as the rebuke “wicked apparition”
+alternativesRejected:
+  - base-born fiend
+  - wicked creature
+  - wicked ghost
+  - demon
+  - ghoul
+rationale: Wicked apparition preserves the force of the Taoist's rebuke and some of mei's supernatural sense without silently changing the Qingketing witness's 業魅 to 孽魅 or 孽鬼, or turning a contextual insult into a fixed species label. The rendering treats 業 contextually rather than claiming a settled lexical equivalence; Project owner approved this context-specific choice in human bilingual review on 2026-09-06.
+sourceIds:
+  - source-shanghai-library-qingketing-liaozhai-1766
+reviewStatus: bilingual-approved

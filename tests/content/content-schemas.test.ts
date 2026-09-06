@@ -37,10 +37,31 @@ describe("content schemas", () => {
     const missingSummary: Partial<ReturnType<typeof makeEntryData>> = {
       ...makeEntryData(),
     };
+    const missingContentNote: Partial<ReturnType<typeof makeEntryData>> = {
+      ...makeEntryData(),
+    };
     delete missingSummary.summary;
+    delete missingContentNote.contentNote;
 
     expect(entrySchema.safeParse(missingSummary).success).toBe(false);
+    expect(entrySchema.safeParse(missingContentNote).success).toBe(false);
     expect(entrySchema.safeParse(makeEntryData()).success).toBe(true);
+  });
+
+  it("accepts a nullable content note and rejects blank copy", () => {
+    expect(
+      entrySchema.safeParse(makeEntryData({ contentNote: null })).success,
+    ).toBe(true);
+    expect(
+      entrySchema.safeParse(
+        makeEntryData({
+          contentNote: "This article includes difficult material.",
+        }),
+      ).success,
+    ).toBe(true);
+    expect(
+      entrySchema.safeParse(makeEntryData({ contentNote: " " })).success,
+    ).toBe(false);
   });
 
   it("requires explicit evidence context and paired earliest-known pointers", () => {

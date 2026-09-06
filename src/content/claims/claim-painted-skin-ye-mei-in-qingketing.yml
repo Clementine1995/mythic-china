@@ -1,0 +1,11 @@
+claimId: claim-painted-skin-ye-mei-in-qingketing
+entryId: painted-skin
+claimType: textual
+evidenceContext: historical-tradition
+statement: When confronting the figure, the Taoist uses yè mèi as a rebuke in the specified Qingketing witness. The tale also uses several expressions containing the word for ghost. From the Painted Skin title on digital page 72 to the Jia'er title on page 75, it does not label the figure a fox.
+certainty: verified
+sourceLinks:
+  - sourceId: source-shanghai-library-qingketing-liaozhai-1766
+    role: primary
+    locator: Juan 1; from the Painted Skin title on Commons digital page 72 to the Jia'er title on page 75; visible left-side block-center folios 35–38; ye mei on page 74
+    note: The page-74 image reads 業魅 in the rebuke 業魅償我拂子來; the same tale also uses 獰鬼, 鬼子, and 厲鬼. The tale boundary matters because a fox appears before the Painted Skin title on page 72. This Claim reports one witness and does not define a stable species, infer gender identity, or explain its difference from 孽魅 or 孽鬼 in other records.

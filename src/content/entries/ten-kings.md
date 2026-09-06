@@ -1,18 +1,19 @@
 ---
 entryId: ten-kings
 slug: ten-kings
-title: "The Ten Kings: Dates, Records, and Judgment"
-subtitle: One witness preserves an illustrated Ten Kings sequence; another records observances and mechanisms of judgment
+title: The Ten Kings in Two Sources
+subtitle: A Dunhuang scroll preserves an illustrated sequence; a separate text describes a ritual schedule, records, and judgment
 entryType: guide
 traditionType: null
 nameZh: null
 pinyin: null
 aliases: []
+contentNote: null
 opening:
-  - The Ten Kings are treated here as ten postmortem judges in a specific textual and visual tradition, not as universal rulers of a single Chinese underworld.
-  - This Entry follows two bounded witnesses. British Library Or.8210/S.3961 supplies an illustrated manuscript object and its digital sequence; CBETA X01n0021_001 supplies a sequence of observances and the language of records and judgment. Neither witness should be made to answer questions it does not directly support.
+  - A ledger, a scale, a mirror. In one text, these objects shape a scene of judgment after death, while another passage sets out ten ritual observances ending in the third year.
+  - Here, “Ten Kings” means ten judges of the dead. A Dunhuang scroll preserves an illustrated sequence, while the separate text describes a ritual schedule and the language of judgment.
 summary: >-
-  Rather than treating the Ten Kings as a single map of the Chinese afterlife, this Entry starts with two named witnesses. British Library Or.8210/S.3961 is an illustrated Chinese manuscript scroll dated approximately 900–1000 and found at Dunhuang's Mogao Cave 17. A separate CBETA witness, X01n0021_001, sets out seven seven-day observances followed by the hundredth day, first anniversary, and a tenth observance in the third year. It also describes judgment through petitions, case records, a karma ledger, a karma scale, and a karma mirror. These details belong to the cited witnesses; they do not establish a universal schedule, a literal supernatural bureaucracy, or a history of how the scroll was used.
+  Two sources preserve different kinds of evidence about the Ten Kings. A Chinese manuscript scroll, dated approximately 900–1000 and found at Mogao Cave 17 in Dunhuang, presents an illustrated sequence. A separate text describes ten ritual observances: seven at seven-day intervals, then one on the hundredth day, one at the first anniversary, and one in the third year. It also describes a declaration and a name entered in a register, followed later by judgment with a karma ledger, scale, and mirror. Neither source shows how every community understood or practiced these rites, and the surviving evidence does not establish how the scroll was used.
 periodLabel: null
 earliestKnownSourceId: null
 earliestKnownClaimId: null
@@ -33,26 +34,26 @@ lastFactCheckedAt: "2026-09-04"
 status: draft
 ---
 
-## One illustrated scroll
+## An illustrated scroll from Dunhuang
 
-The [International Dunhuang Programme record](https://idp.bl.uk/collection/2ED6F9800FD74DE08CBB9CB2F8E5D7BD/) identifies British Library pressmark Or.8210/S.3961 as an illustrated Chinese manuscript scroll dated approximately 900–1000 and found at Mogao Cave 17 in Dunhuang. In the IIIF presentation, its Ten Kings sequence occupies adjacent canvases, items 7–15.
+An [illustrated Chinese manuscript scroll in the British Library](https://idp.bl.uk/collection/2ED6F9800FD74DE08CBB9CB2F8E5D7BD/), dated approximately 900–1000, was found at Mogao Cave 17 in Dunhuang. Its Ten Kings sequence appears across adjacent images in the digital presentation (Or.8210/S.3961, items 7–15).
 
-That adjacency is evidence about this object's digital layout. It does not establish its historical display, chanting, or audience. This Entry also does not call S.3961 the earliest surviving Ten Kings witness.
+The digital sequence lets a reader follow the images in order. It does not tell us how people once displayed the scroll, whether they chanted from it, or who saw it.
 
-## Ten intervals in one textual witness
+## A schedule of ten ritual observances
 
-[CBETA witness X01n0021_001](https://tripitaka.cbeta.org/X01n0021_001) enumerates seven seven-day observances. It then gives a hundredth-day observance, a first-anniversary observance, and a tenth observance in the third year.
+A separate [text available through CBETA](https://tripitaka.cbeta.org/X01n0021_001) describes ten ritual observances: seven at seven-day intervals, then one on the hundredth day, one at the first anniversary, and one in the third year (X01n0021_001, lines 0409b14–0409c22).
 
-That sequence belongs to this electronic-text witness. It should not be generalized into one schedule followed in every period or region, and the CBETA witness should not be treated as a transcription of S.3961.
+This is a schedule prescribed in one text, rather than evidence of what every community practiced. The CBETA text is also a separate source, not a transcription of the Dunhuang scroll.
 
-## Judgment through records and instruments
+## Names, records, and instruments
 
-The same CBETA witness describes judgment through petitions and case records, together with a karma ledger, a karma scale, and a karma mirror. These are the mechanisms named in this witness; they should not be expanded into offices or duties absent from the present evidence.
+An earlier passage in the same [CBETA text](https://tripitaka.cbeta.org/X01n0021_001) describes rites performed in advance: a declaration is submitted and a name is entered in a register (lines 0408b23–0408c07). A later passage depicts judgment with a karma ledger, a karma scale, and a karma mirror (lines 0409b23–0409c04).
 
-The passage is textual evidence for how this witness organizes judgment. It is not proof that supernatural courts existed, and it does not establish a point-for-point copy of any historical administrative system.
+These passages connect advance preparation with later judgment through records and instruments. That is our reading of this text, not evidence that a historical administration operated in exactly this way.
 
-## Keep the name bounded
+## What the name tells us
 
-“Ten Kings” is the conventional English name used here. It should not be expanded to “Ten Gods of Hell” or treated as evidence for one universal set of rulers across all Chinese accounts of the dead. The Chinese form and its pinyin remain under bilingual review, so this draft does not present them as approved display text.
+**Ten Kings** is the conventional English name used here for these postmortem judges. The name alone does not make them universal rulers across all Chinese accounts of the dead.
 
-The current evidence securely supports a particular illustrated object, a witness-specific schedule, and a witness-specific set of judgment mechanisms. It does not yet support a history of the system's formation, a cross-witness reconstruction, or an account of rebirth.
+Read separately, the scroll preserves an illustrated sequence, while the text provides a ritual schedule and its own language of judgment. More sources are needed to explain how the two relate and to trace the wider history of the Ten Kings.
