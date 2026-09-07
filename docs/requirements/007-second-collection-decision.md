@@ -1,6 +1,6 @@
 # 007 第二个 MVP Collection：只读研究决策包
 
-## 当前接线状态（2026-09-06）
+## 当前接线状态（2026-09-07）
 
 Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-collection-reading-paths.md) 已将本文件确认的两条 3 篇路径接入 Collection。新增 liaozhai draft，工作标题为 Strange Tales from Liaozhai；阴间保持 editorial-review 和 Zhong Kui Featured。当前共 6 Entry / 2 Collection，published 0/0；六篇均有对应合集反向入口，未新增 related 关系或图片。下文仍保留接线前的决策与分批实施记录；其中“唯一 Collection”“尚未加入”均描述对应批次当时状态，带 009 后续说明的段落反映后来的接线结果。当前实现以 009、README 和实际内容文件为准。
 
@@ -28,7 +28,7 @@ Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-co
 | 研究状态 | 候选比较、四篇 claim map 及当前可用证据闭合完成 | [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 已分层记录实际见证、正式书目与精确 locator；Painted Skin 当前采用上海图书馆 1766 青柯亭单见证，任 2016 / 张 2011 与现代译本/影视直接比较延期；《促织》青柯亭单见证路线已确认，跨见证、作者归属与“首次增写”继续排除 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本文不改变内容或发布状态 |
 
-- 当前权威结论更新时间：2026-09-06。
+- 当前权威结论更新时间：2026-09-07。
 - 本文保存原始推荐依据与 owner approval，并在第 9–11 节及 008 第 13–14、5.10 节记录后续独立授权的证据物化、四篇纵切片与审核边界；方向确认本身仍不等于其他内容实现、写作完成或发布批准。
 
 ## 1. 推荐结论
@@ -50,7 +50,7 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 - **研究判断**：Liaozhai 在文本边界、三篇路径完整度与当前阶段匹配度上优于另外两个候选。
 - **已确认编辑方向**：采用 Liaozhai、3+3 分配及第 5 节顺序，Zhong Kui 继续作为 Featured；四个新增标题仍是工作标题。
 - **研究与物化结果**：四篇候选 claim map 及本轮证据闭合已完成，详见 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md)。初始物化批建立 4 draft Entry、5 Source、9 Claim 与 3 Terminology；后续四篇均建立消费关系、草稿并通过人工双语审核。Painted Skin 当前只用上海图书馆 1766 青柯亭本作为文本见证，另消费 Tso 具名解释，总关系为 2 Source / 7 Claim / 1 `bilingual-approved` Terminology；本站短译 Claim 已为 `verified`。青柯亭页 74 实际作 `業魅`，与 Tso `孽魅`、CText 关联未具名见证 `孽鬼` 分开记录。全库当前为 14 Source / 25 Claim / 6 Terminology。
-- **未决风险**：《促织》手稿/现代校记/早期抄本、图片权利与四篇目标读者/状态审校仍未闭合；任笃行/张友鹤实页、现代译本与影视证据只在未来恢复比较时再成为阻塞。没有内容状态因此改变。
+- **未决风险**：《促织》手稿/现代校记/早期抄本、图片权利与四篇状态审校仍未闭合；目标读者反馈仍为 0，并按 011 移到 Public Beta 上线后收集。任笃行/张友鹤实页、现代译本与影视证据只在未来恢复比较时再成为阻塞。没有内容状态因此改变。
 
 ## 2. 009 接线前事实与持续硬约束
 
@@ -144,7 +144,7 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 9. 009 后续已建立第二 Collection，并按已确认顺序接入两个三篇 `entryIds` 路径；Liaozhai 的 Featured 与 Hero 仍为空，六篇 `relatedEntryIds` 仍为空。
 10. 已完成：前三篇纠偏稿通过人工双语审核；Painted Skin 又按上海图书馆 1766 青柯亭本形成 2 Source / 7 Claim / 1 Terminology 的单见证草稿。
 11. 已完成：Project owner 于 2026-09-06 确认 Painted Skin 人工双语审核通过；短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
-12. 当前下一步：分别处理四篇目标读者、视觉资产与内容状态；任/张及现代比较仅在未来恢复对应范围时处理。
+12. 当前下一步：处理四篇视觉资产与内容状态；任/张及现代比较仅在未来恢复对应范围时处理。目标读者研究在 Public Beta 上线后按 R2a → R2b 的内部顺序执行。
 
 现有两篇 `editorial-review` Entry 不因本建议降级、升级或重写；四个新增 owner 保持 `draft`，且均已有证据受限首稿。本文决策批当时未创建第二 Collection；009 后续已完成本地路径接线。任何视觉资产、`relatedEntryIds` 或状态变化仍须另立获授权的 M6 内容批次。
 
@@ -169,7 +169,7 @@ Project owner 于 2026-09-03 首先确认：
 
 随后 Project owner 又单独授权只做四篇的实际见证/版次、正式书目与页/叶/canvas locator 证据闭合，仍不授权 Source/Claim/Terminology、正文、图片、内容对象或状态变化。此研究批由 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 执行并停在分层证据账本；其中青柯亭单见证已直接核页，跨见证判断仍维持硬门禁。Project owner 之后又分别确认工作底本/单见证路线、授权最小 draft Entry owner，并最终授权证据已闭合的 Source/Claim/Terminology 物化；这些是后续独立授权，不回溯扩大前两次研究授权。
 
-当前停点是四篇证据受限纵切片、人工双语审核及 009 的两个合集路径接线已完成：四篇均已建立证据消费关系与正文并通过人工双语审核；两个 Collection 均有明确 `entryIds`，资产、`relatedEntryIds` 与状态未随接线、单见证写作或语言审核改变。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送；Liaozhai Reading Guide 检查点 `119c01c` 也已由 Project owner 确认推送。当前修改位于该基线之上，未执行 fetch、Git 写操作或发布。下一内容动作是四篇目标读者、视觉资产与状态审核；上述授权均不包含外部服务、public artifact 或发布。
+当前停点是四篇证据受限纵切片、人工双语审核及 009 的两个合集路径接线已完成：四篇均已建立证据消费关系与正文并通过人工双语审核；两个 Collection 均有明确 `entryIds`，资产、`relatedEntryIds` 与状态未随接线、单见证写作或语言审核改变。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送；Liaozhai Reading Guide 检查点 `119c01c` 也已由 Project owner 确认推送。当前修改位于后续已确认基线之上，未执行 fetch、Git 写操作或发布。下一内容动作是四篇视觉资产与状态审核；目标读者 R2 只在 Public Beta 上线后按 R2a → R2b 执行。上述授权均不包含外部服务、public artifact 或发布。
 
 ## 9. 2026-09-04 后续证据物化记录
 

@@ -475,7 +475,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 
 ## 12. 设计验收
 
-本节清单继续作为目标设计验收合同。M1 冻结只确认现有中性 Home、`The Chinese Underworld` Collection、`Zhong Kui, the Demon Queller` Entry、六个 Collection Hero 家族探针和字体验收页足以作为工程参考，不表示本节全部通过；工程检查结果、人工未验证项和用户视觉未通过必须分开记录。2026-09-02 的 M4 本地设计验收已经完成 8 页 × 390px/768px/1440px 基础矩阵、四条 Hero 页 art direction、样张和 Project owner 当前页面判断。M5 最终交互进入 M6 同一最终制品；真实键盘/200%、媒体偏好、故障注入、支持平台、完整 inventory 与正式目标读者属于 M6 release-candidate gate，生产环境的 live 复核与 RUM/p75 属于 M7。未验证项不写成已通过，也不重新阻塞 M4。验收清单如下：
+本节清单继续作为目标设计验收合同。M1 冻结只确认现有中性 Home、`The Chinese Underworld` Collection、`Zhong Kui, the Demon Queller` Entry、六个 Collection Hero 家族探针和字体验收页足以作为工程参考，不表示本节全部通过；工程检查结果、人工未验证项和用户视觉未通过必须分开记录。2026-09-02 的 M4 本地设计验收已经完成 8 页 × 390px/768px/1440px 基础矩阵、四条 Hero 页 art direction、样张和 Project owner 当前页面判断。M5 最终交互进入 M6 同一最终制品；真实键盘/200%、媒体偏好、故障注入、支持平台与完整 inventory 属于 M6 release-candidate gate。M7 承担生产环境的 live 复核、RUM/p75，以及 Public Beta 上线后的正式目标读者研究。未验证项不写成已通过，也不重新阻塞 M4。
 
 - 首屏主次、导航和 CTA 是否清楚。
 - 正文 measure、字号、行高和来源层级是否舒适。
@@ -496,7 +496,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - M5 实现后，Newsletter 是否只在全站 Footer 出现一次；Entry 正文收束后是否依次为 Sources、Related Entries 与 Reader Request。
 - Collection 主题环境是否贴合具体题材、保留中性安静的 Entry 阅读表面、拥有桌面/移动降级，并在隐藏背景后仍保持完整阅读与来源链。
 - `The Chinese Underworld` 是否表现整个主题世界而非一张钟馗角色海报；钟馗是否被准确标为边界上的驱鬼/护佑人物而非阴间统治者；现代游戏是否只出现在 Modern adaptations 语境。
-- M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿。首个真实 Home、Collection、Entry 及其功能页现已用同一内容完成 390px、768px、1440px 基础复核并获得 Project owner 当前页面确认；尚未执行的 [`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节正式目标读者比较、真实键盘/缩放/偏好、故障、性能和跨平台检查移交 M6 最终 public artifact。M5/M6 若实质改变共享表现层、交互、内容、字体或资产，只重跑受影响证据；失败阻塞预览或发布，但不把 M4 历史实现重新标为未完成。
+- M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿。首个真实 Home、Collection、Entry 及其功能页现已用同一内容完成 390px、768px、1440px 基础复核并获得 Project owner 当前页面确认；尚未执行的真实键盘/缩放/偏好、故障、性能和跨平台检查移交 M6 最终 public artifact。[`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节的正式目标读者比较按 011 移到 M7 Public Beta live artifact。Public Beta 候选还须包含经 Project owner 批准、全站稳定、可见且可访问的 Beta 提示；具体英文文案与位置在 M6/M7 实施前确认。M5/M6 若实质改变共享表现层、交互、内容、字体或资产，只重跑受影响证据；失败阻塞预览或发布，但不把 M4 历史实现重新标为未完成。Public Beta 期间发现的具体视觉或无障碍缺陷按原门禁修复，必要时回滚受影响页面。
 - 外部 Skill 或竞品方案只能产生候选方向；不得把其类名、组件树、默认框架或视觉皮肤写成项目长期合同，也不能绕过上述复核门。
 
 以下仍是后续视觉批准标准，不是当前 M1 已达到的事实：

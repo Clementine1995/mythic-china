@@ -24,7 +24,7 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 | 方向决定 | 已确认 | 007 的 Liaozhai 第二 Collection 方向、3+3 分配、两条公开阅读顺序、Zhong Kui Featured 与《促织》保留均获确认；后续又确认任笃行 2016 主/张友鹤 2011 对校的工作路线，以及《促织》青柯亭单见证路线；第二 Collection 名仍是工作标题 |
 | 研究状态 | 可取得证据已分层复核，未决门禁保留 | Ten Kings 的馆藏对象、IIIF canvas、CBETA 行号及核心书目已闭合；Painted Skin 已核上海图书馆 1766 青柯亭本卷一数字页 72–75 / 左版心叶码 35–38，并区分任 2016 的部分可读电子材料与张 2011 的书目边界；《促织》只闭合上海图书馆青柯亭见证，跨见证门禁仍未闭合 |
 | 写作准备度 | 四篇均有证据受限英语草稿；修订前锁定稿及 010 当前改动单元与两条内容提示均已通过 Project owner 双语确认 | Painted Skin 当前只消费青柯亭 1766 与 Tso 2017 的 2 Source / 7 Claim / 1 `bilingual-approved` Terminology；自译只取一条短句并以 `verified` Claim 保存原文、版本、locator、译者/日期与审核记录，任/张比较及现代译本/影视直接比较移出当前 MVP |
-| 实施状态 | 证据最小物化、四篇纵切片、修订前锁定稿及 010 当前改动单元的双语确认、两个合集路径接线与当前 R1 重建完成 | 当前四个 `draft` Entry 均有正文；Painted Skin 新增 5 份原典 Claim、1 份本站自译 Claim 与 1 份 Terminology，并复用既有两份 Source。009 已把六篇接入两个三篇路径；010 聚焦确认与 R1 重建未新增资产、`relatedEntryIds` 或 Entry/Collection 状态变化，目标读者反馈仍为 0 |
+| 实施状态 | 证据最小物化、四篇纵切片、修订前锁定稿及 010 当前改动单元的双语确认、两个合集路径接线与 R1 重建完成 | 当前四个 `draft` Entry 均有正文；Painted Skin 新增 5 份原典 Claim、1 份本站自译 Claim 与 1 份 Terminology，并复用既有两份 Source。009 已把六篇接入两个三篇路径；010 聚焦确认与 R1 重建未新增资产、`relatedEntryIds` 或 Entry/Collection 状态变化。R1 已退役为 reference-only，目标读者反馈仍为 0 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本批不改变状态或 public artifact |
 
 本文中的 `TK-*`、`LZ-*`、`PS-*`、`FC-*` 只是研究表格内的局部标签，不是 Content Layer 稳定 ID，也不得复制进 `src/content` 后直接充当 Claim ID。表中的“可写”表示证据路线足以支持后续起草，不表示主张已完成双语、文化、版权或 Project owner 审校。
@@ -394,7 +394,7 @@ Project owner 在查看包含 20 组中英对照、Claim/Terminology 表和 12 �
 9. 已完成：Painted Skin 改用已核上海图书馆 1766 青柯亭本形成单见证首稿，消费 2 Source / 7 Claim / 1 Terminology；任/张比较、现代译本和影视直接比较移出当前 MVP。
 10. 已完成：Project owner 确认 Painted Skin 人工双语审核通过；本站短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
 11. 已完成：按 [`010-four-entry-reader-review.md`](010-four-entry-reader-review.md) 建立四篇目标读者文稿审核合同，并在仓库外生成当时通过静态技术检查的协调者 Markdown 与唯一参与者 HTML；该修订前 R1 快照现已因正文和模板输入改变而失效并标记为不得分发。
-12. 当前下一步：010 的四篇聚焦中英差异已确认，当前 R1 已从当前 build 重生成并通过静态检查；找到独立人选后，由 1 位不计入正式样本的目标读者试跑参与者 HTML，再收集 5–8 位正式英语目标读者反馈。视觉资产与状态仍是后续独立门禁，任/张实页只在未来恢复现代校勘比较时再成为阻塞。
+12. 当前下一步：010 的四篇聚焦中英差异已确认，R1 已从当前 build 重生成、通过静态检查并退役为 reference-only；先完成视觉资产、`relatedEntryIds` 与状态审核。Public Beta 上线后，由 1 位不计入正式样本的目标读者在 live artifact 上执行 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按预冻结规则补位。任/张实页只在未来恢复现代校勘比较时再成为阻塞。
 
 ## 9. 本批最终状态
 
@@ -551,6 +551,6 @@ Project owner 说明当前没有合适的独立目标读者，并要求 AI 先�
 
 ### 14.8 2026-09-06 聚焦双语确认与当前 R1 重建
 
-Project owner 明确回复“`四篇聚焦双语复核通过。`”。确认范围为聚焦差异包中的四篇当前英语改动单元、对应中文含义和两条 `contentNote`，并同意以当前文本重生成目标读者 R1。未改单元继续沿用历史批准；Source、Claim、Terminology、稳定 ID、slug、合集成员/顺序、事实核查日期、资产与 Entry/Collection 状态均未改，四篇继续为 `draft`。该确认不计作目标读者样本或答卷，也不关闭目标读者、视觉、状态、public artifact 或发布门禁。
+Project owner 明确回复“`四篇聚焦双语复核通过。`”。确认范围为聚焦差异包中的四篇当前英语改动单元、对应中文含义和两条 `contentNote`，并同意以当前文本重生成目标读者 R1。未改单元继续沿用历史批准；Source、Claim、Terminology、稳定 ID、slug、合集成员/顺序、事实核查日期、资产与 Entry/Collection 状态均未改，四篇继续为 `draft`。该确认不计作目标读者样本或答卷，也不产生目标读者验证结论；视觉、状态、public artifact 与发布仍按各自门禁独立推进。
 
-当前协调者 Markdown 与唯一参与者 HTML 已从当前 build 重生成，SHA-256 分别为 `3cb9de871bcd46d5b29b85fb3ebf11df14c397457ab787a7bd03331d7a714adb` 与 `22e8139439b374284c98c033e0a0318f558a5c93f86b206818811b89569586c7`。20/20 冻结输入哈希、4 篇当前可见文本、Sources `2/1/1/2`、2 条内容提示、4 个首读停点、8 个默认关闭折叠区、94 个答题区、唯一 ID/ARIA/片段引用、离线性与严格 UTF-8 检查通过；旧标题、旧问题与失效状态均已移除。当前结果为 `R1 READY FOR NON-SAMPLE PILOT — PENDING HUMAN READERS`，R2a/R2b 未开始，真人反馈仍为 0。
+当前协调者 Markdown 与冻结 R1 HTML 已从当前 build 重生成，SHA-256 分别为 `3cb9de871bcd46d5b29b85fb3ebf11df14c397457ab787a7bd03331d7a714adb` 与 `22e8139439b374284c98c033e0a0318f558a5c93f86b206818811b89569586c7`。20/20 冻结输入哈希、4 篇当前可见文本、Sources `2/1/1/2`、2 条内容提示、4 个首读停点、8 个默认关闭折叠区、94 个答题区、唯一 ID/ARIA/片段引用、离线性与严格 UTF-8 检查通过；旧标题、旧问题与失效状态均已移除。制品内遗留结果为 `R1 READY FOR NON-SAMPLE PILOT — PENDING HUMAN READERS`；011 生效后它已退役为 reference-only，不得执行 live R2。R2a/R2b 未开始，真人反馈仍为 0。

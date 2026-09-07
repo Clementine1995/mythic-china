@@ -7,7 +7,7 @@
 - 决策：**Astro 7 静态模式 + TypeScript strict + Git 内 Entry Markdown / 结构化 YAML + 构建期内容图校验 + 外部服务承接后续少量交互**。M2 不选择托管、不安装 adapter、MDX、React/Vue/Svelte、Tailwind 或商业依赖。
 - 核心判断：这是内容出版物，不是先造平台。首版的复杂度应集中在内容、出处、图片和设计，而不是账号、数据库和运行时服务。
 - Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并于 2026-09-02 明确当前不购买自定义域名；当前没有创建 Vercel 项目、稳定 production alias/hostname、自有域名、DNS 记录或任何生产托管配置。纯静态 `dist/` 与 SEO 核心保持供应商中立；M6 可在单独授权后确认稳定 production hostname，generated preview/commit URL 不得成为 canonical，托管选择仍不等于账户、配置、部署或发布授权。
-- 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准这些 M1 原型的视觉皮肤，不能把其表现整份移入未来应用。M4-U2 先确认当时系统 fallback 字体下的页面方向；正式英/CJK 字体、最终样张与 8 页三档基础矩阵随后已完成，Project owner 于 2026-09-02 明确通过当时全部 8 个页面。真实键盘、200%、偏好/故障、支持平台与本地性能仍未验证，归 M6 release-candidate gate；M7 只承接生产与 live/RUM 基线。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
+- 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准这些 M1 原型的视觉皮肤，不能把其表现整份移入未来应用。M4-U2 先确认当时系统 fallback 字体下的页面方向；正式英/CJK 字体、最终样张与 8 页三档基础矩阵随后已完成，Project owner 于 2026-09-02 明确通过当时全部 8 个页面。真实键盘、200%、偏好/故障、支持平台与本地性能仍未验证，归 M6 release-candidate gate；M7 承接 Public Beta 生产、live/RUM 基线与上线后目标读者研究。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
 
 Astro 默认将页面预渲染为静态 HTML，并允许未来只把个别路由改为按需渲染，因此适合“静态核心、局部动态升级”的路线。来源：[Astro On-demand Rendering](https://docs.astro.build/en/guides/on-demand-rendering/)，访问于 2026-08-27。
 
@@ -242,10 +242,12 @@ M4 本地产品实现完成
   -> 真实 origin + M6 public artifact assembly 实现
   -> Project owner 单独授权 clean commit
   -> 从 clean revision 重新构建 public artifact / Sitemap / RSS / JSON-LD
-  -> output verifier + 自动、键盘/缩放/偏好、故障、字体/跨平台、视觉/目标读者与本地性能 QA
+  -> output verifier + 自动、键盘/缩放/偏好、故障、字体/跨平台、视觉与本地性能 QA
   -> local clean-source verification receipt
   -> M6 受保护远端预览 + validated_source_identity
-  -> M7 同一已验证源身份发布生产 + 只读发布后基线
+  -> M7 同一已验证源身份发布可索引 Public Beta + live smoke / 回滚 / RUM 基线
+  -> live artifact R2a 非计入试跑 -> R2b 5–8 份核心全站记录 + 四篇各前 5–8 份可用深读（按冻结规则补位）
+  -> 处置关键发现并复测 -> Project owner 关闭正式 MVP 验证
 ```
 
 ### 6.1 托管、域名与海外交付阶段
@@ -253,8 +255,9 @@ M4 本地产品实现完成
 | 阶段 | 决策 |
 | --- | --- |
 | 文档与本地开发 | 不创建托管或域名事实；先完成内容、视觉和静态构建验收 |
-| 首次在线预览 | M4 noindex 本地实现已经完成。M5 边界冻结后，由 M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 published 决定，确认 origin 并完成 public artifact assembly 实现。实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一真实非空 artifact，完成 output verifier、可访问性、故障、字体/跨平台、视觉/目标读者与本地性能 QA，生成 clean-source receipt。dirty source 只能产生 nondeployable 诊断记录，提交后不得复用。没有自有域名时，可在 M6 单独授权建立 Project owner 控制的 Vercel 项目身份以确认稳定 production alias/hostname，但不得借此部署 review 输出。完整本地 public 候选通过后再另立远端预览授权，并验收账户归属、保护策略、目标地区实测、回滚、成本与退出路径 |
-| 正式公开前 | 明确配置唯一 `MYTHIC_CHINA_SITE_ORIGIN`。没有自有域名时，可以在 Project owner 确认后使用稳定的 Vercel production alias/hostname 作为阶段性 origin；每次部署变化的 generated/branch URL 永远不能作为 canonical。未来切换自有域名必须另立迁移与 canonical 决策 |
+| 首次在线预览 | M4 noindex 本地实现已经完成。M5 边界冻结后，由 M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 published 决定，确认 origin 并完成 public artifact assembly 实现。实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一真实非空 artifact，完成 output verifier、可访问性、故障、字体/跨平台、视觉与本地性能 QA，生成 clean-source receipt。dirty source 只能产生 nondeployable 诊断记录，提交后不得复用。没有自有域名时，可在 M6 单独授权建立 Project owner 控制的 Vercel 项目身份以确认稳定 production alias/hostname，但不得借此部署 review 输出。完整本地 public 候选通过后再另立远端预览授权，并验收账户归属、保护策略、目标地区实测、回滚、成本与退出路径 |
+| Public Beta 公开前 | 明确配置唯一 `MYTHIC_CHINA_SITE_ORIGIN`。没有自有域名时，可以在 Project owner 确认后使用稳定的 Vercel production alias/hostname 作为阶段性 origin；每次部署变化的 generated/branch URL 永远不能作为 canonical。未来切换自有域名必须另立迁移与 canonical 决策。R2 缺少样本不阻塞这一阶段，但所有其他发布门禁及逐次生产授权必须关闭 |
+| Public Beta 上线后 | 保持可见、可访问的 Beta 提示及内部 `Public Beta / pending human validation` 状态；先按 011 冻结并授权研究执行包和版本，再在 live artifact 上按 010 执行四篇深读与全站任务。关键发现按所属硬门禁立即修复，必要时回滚或取消发布受影响页面；重复重大问题、live/RUM 基线、研究阈值与 Project owner 结论关闭后，才认定正式 MVP 验证完成 |
 | 出现少量动态能力 | 由后续需求先比较外部服务、Astro 官方 adapter 的隔离按需路由与独立动态表面；只有托管、安全和数据边界确认并单独授权后才接入，不因预想中的 D1、R2、KV 或 Workers 先选平台 |
 
 Vercel 已被选择为未来静态托管目标。Astro 静态项目可以在 Vercel 零配置部署，只有使用服务端渲染或平台运行时能力时才需要 adapter；本项目当前不新增 adapter。Vercel 为每次 deployment 生成可变 URL，并另提供 production domain 变量；由于该变量在 Preview 环境也存在，build intent 与 canonical 都不得从 Vercel 环境自动猜测，必须由后续 public runner 显式读取并校验项目自有的 `MYTHIC_CHINA_SITE_ORIGIN`。来源：[Astro on Vercel](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls) 与 [Vercel System Environment Variables](https://vercel.com/docs/environment-variables/system-environment-variables)，访问于 2026-08-30。

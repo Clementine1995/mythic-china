@@ -8,7 +8,7 @@
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
-| 需求状态 | Project owner 阶段性通过；Collection 与 Guide Hero 生产闭环、M4-U5A、最终三档基础矩阵与当前 8 页人工视觉判断已完成 | 2026-08-30 至 09-02 的内容、Hero、双语/CJK、正式页矩阵与功能页复看保持；direct-only noindex 样张现已覆盖精确字体矩阵。最终 review 在 8 页 × 390/768/1440 共 24 个实际组合通过基础布局/字体/资源/console 检查，Project owner 随后明确通过全部 8 个页面；这支持 M4 本地实现关闭。真实键盘/200%/偏好、故障/本地性能/实际 fallback 与支持平台仍未闭合，归 M6 release-candidate gate；M7 只承接生产与 live/RUM 基线 |
+| 需求状态 | Project owner 阶段性通过；Collection 与 Guide Hero 生产闭环、M4-U5A、最终三档基础矩阵与当前 8 页人工视觉判断已完成 | 2026-08-30 至 09-02 的内容、Hero、双语/CJK、正式页矩阵与功能页复看保持；direct-only noindex 样张现已覆盖精确字体矩阵。最终 review 在 8 页 × 390/768/1440 共 24 个实际组合通过基础布局/字体/资源/console 检查，Project owner 随后明确通过全部 8 个页面；这支持 M4 本地实现关闭。真实键盘/200%/偏好、故障/本地性能/实际 fallback 与支持平台仍未闭合，归 M6 release-candidate gate；M7 承接 Public Beta 生产、live/RUM 基线与上线后目标读者研究 |
 | 内容状态 | `editorial-review` | 两篇 Entry 有正文、80–120 词摘要、来源、Claim、`bilingual-approved` 术语与 fact-check 日期；四条馆藏标题为 `zh-Hant`，Collection 为 `editorial-review` |
 | 视觉状态 | Collection Hero v1 与 Guide Hero v1 均为 `approved/current` 并已绑定 | 两组资产各有独立 desktop/mobile master、repository source、production record 与 manifest。Collection 绑定 versionless `asset-chinese-underworld-hero-primary`，Guide 绑定 versionless `asset-chinese-underworld-guide-hero-primary`；两者仍保持 `editorial-review` |
 | 字体状态 | 英文与 CJK 候选及 U5A 样张已接线；最终三档基础矩阵已通过，发布浏览器/跨平台验收仍待 M6 | 4 份英文与 SC/TC × 400/500/600 六份 WOFF2 继续受静态门禁；最终样张锁定并实际显示 20 个精确组合、生产 pinyin/冻结混排行、SC/TC required 与 fallback-only 节点，三档均观测到 10 个字体资源。真实 fallback 可读性、慢/阻断加载、200% 和跨平台证据仍缺失，inventory 状态保持 `browser-review-pending`，其含义为发布 QA 待完成而非 M4 未完成 |
@@ -83,7 +83,7 @@
 - 核心：从可读的入口下行到两三层远景法庭，以路径、记录桌和小型官员轮廓表达“审判是通往轮回的过程”。
 - 不做：不画钟馗、不指定阎王、不展示酷刑、不绘制十殿/十八层地图、不写伪汉字。
 - 优点：能建立 Collection 自己的阈限/深度视觉，不把单件文物误装成整个传统，也不与 Zhong Kui 人物 Hero 竞争。
-- 风险：所选候选使用个人且非组织管理账户下的 OpenAI ImageGen 重建，没有上传馆藏或其他第三方参考图；工具未暴露模型 ID，生产记录保持 `null`，并明确不主张排他性、当然可版权性或绝对不侵权。当前资产链、Windows/local 三档基础矩阵与本批页面人工判断已闭合各自范围；M6 最终 public artifact 的故障、性能、实际 fallback、支持平台与目标读者 QA 仍未闭合。
+- 风险：所选候选使用个人且非组织管理账户下的 OpenAI ImageGen 重建，没有上传馆藏或其他第三方参考图；工具未暴露模型 ID，生产记录保持 `null`，并明确不主张排他性、当然可版权性或绝对不侵权。当前资产链、Windows/local 三档基础矩阵与本批页面人工判断已闭合各自范围；M6 最终 public artifact 的故障、性能、实际 fallback 与支持平台 QA 仍未闭合。目标读者研究按 011 在 M7 Public Beta 上线后执行。
 
 当前 local explore inventory：
 
@@ -248,7 +248,7 @@ Project owner 于 2026-08-30 接受本节字体版本、改名与子集方向，
 ## 12. 当前结论
 
 - Collection 与 Guide 已各自绑定独立的 approved/current Hero v1；Zhong Kui Entry 继续解析自己的 Hero v2。默认 review 页面不得跨 owner 借图，Guide 的视觉门禁不再是当前阻塞项。
-- 当前仍为 0 published Entry / 0 published Collection；原两篇 Entry 与 Collection 保持 `editorial-review`，四个后续 `draft` Entry 均有证据消费关系和正文并通过人工双语审核。009 已建立 Liaozhai draft Collection，并把六篇接入两个三篇路径；四篇仍无资产、`relatedEntryIds` 或状态审核。Project owner 已通过本批三档样张和当时全部 8 个页面，因此本候选支持 M4 本地实现关闭；该判断不覆盖后来 Privacy、新增 draft 页面或 Liaozhai Collection 页面。真实键盘/200%、偏好与故障模式、本地性能、实际 fallback 可读性与支持平台证据明确移交 M6 release-candidate gate，不改写成已通过。M7 只承接生产与 live/RUM 基线。
+- 当前仍为 0 published Entry / 0 published Collection；原两篇 Entry 与 Collection 保持 `editorial-review`，四个后续 `draft` Entry 均有证据消费关系和正文并通过人工双语审核。009 已建立 Liaozhai draft Collection，并把六篇接入两个三篇路径；四篇仍无资产、`relatedEntryIds` 或状态审核。Project owner 已通过本批三档样张和当时全部 8 个页面，因此本候选支持 M4 本地实现关闭；该判断不覆盖后来 Privacy、新增 draft 页面或 Liaozhai Collection 页面。真实键盘/200%、偏好与故障模式、本地性能、实际 fallback 可读性与支持平台证据明确移交 M6 release-candidate gate，不改写成已通过。M7 承接 Public Beta 生产、live/RUM 基线与上线后目标读者研究。
 - 本纵切片当时的完整 `pnpm run check` 通过 23 个测试文件/279 项测试、Astro check 73 文件零诊断，以及默认 review build 的 8 页、42 个 Hero 图片、10 个 hash-locked WOFF2、零 XML、零客户端 JavaScript，并通过精确样张/生产来源/构建后 CSS/实际 HTML/lang/cmap、活跃语义壳、emitted-resource closure、输出链接项与 review candidate 门禁。最终 pinyin/mixed DOM 与 CSS 又通过 2026-09-02 的 24 个真实视口组合和 12 个 Hero 组合；非默认视觉证据继续沿用 11 个 master 与 50 个响应式输出。后续当前完整结果为 25 文件/369 测试、Astro 81 文件零诊断及 14 页输出，未改变本纵切片资产。
 - M4-U5A 与本次 browser 授权均不包含内容状态提升、依赖、Git 写入、public runner、Vercel 操作、部署或发布；Project owner 判断后验收标签已清理，PID `31960` 已停止且 4321 无监听。详细执行证据与未验证项见 [`DEV_WORKFLOW.md`](../../DEV_WORKFLOW.md)、[`003-pages-exploration-seo.md` 的 12.11 节](003-pages-exploration-seo.md#1211-m4-u5anoindex-字体样张与可控验证入口)、[12.12 加固记录](003-pages-exploration-seo.md#1212-m4-u5a-verifier-fail-closed-加固)与[12.13 最终三档记录](003-pages-exploration-seo.md#1213-m4-u5-最终三档与人工验收交接)。
-- 当前交接：M5-U2/U3、四篇证据物化与纵切片、人工双语审核及第二个 Collection/两个三篇路径均已完成；M6 仍须完成四篇目标读者、资产和状态审核、`published` 决定、public artifact assembly、最终 release-candidate QA、receipt 与受保护预览。`font-assets.json: browser-review-pending` 继续表达发布 QA 待完成，不表示 M4 本地实现未完成。
+- 当前交接：M5-U2/U3、四篇证据物化与纵切片、人工双语审核及第二个 Collection/两个三篇路径均已完成；M6 仍须完成四篇资产和状态审核、`published` 决定、public artifact assembly、最终 release-candidate QA、receipt 与受保护预览。`font-assets.json: browser-review-pending` 继续表达发布 QA 待完成，不表示 M4 本地实现未完成。目标读者 R2a/R2b 在 Public Beta live artifact 上执行，并用于正式 MVP 验证收口。
