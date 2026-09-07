@@ -1,0 +1,76 @@
+productionRecordId: production-liaozhai-reading-guide-hero-primary-v1
+briefId: brief-liaozhai-reading-guide-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier or seed; no model identity or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain. Mobile was text-only. Desktop candidate 04 used only project-generated desktop candidate 03 as its edit target; no third-party image was supplied.
+recordedAt: "2026-09-07T05:58:02Z"
+renditions:
+  - manifestId: asset-liaozhai-reading-guide-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: precise-object-edit
+      Asset type: Mythic China Liaozhai Reading Guide Hero candidate 04, desktop landscape
+      Input images: Image 1 is the project-generated desktop candidate 03 and the sole edit target.
+      Primary request: Preserve Image 1's exact smoke-green atmosphere, blank page-plane style, unequal Y-shaped branching logic, amber junction, 16:9 framing, and empty left side. Recompose only the placement of the page planes and junction so every plane lies below the top 18% of the canvas. Move the entire upper branch downward enough to create an uninterrupted low-detail atmospheric band across the full top 18%. Keep all active geometry on the right half and keep the leftmost 42% empty.
+      Hard invariants: Retain two unequal branches, one sparse and one dense; retain the faint early plane near the junction; retain perfectly blank surfaces; retain no ground, mountains, building, book, or characters. Do not add or remove narrative motifs. The uppermost page edge must begin below y 0.20.
+      Constraints: Change only vertical placement and necessary atmospheric fill. No text, letters, numbers, pseudo-writing, seals, logos, watermark, border, UI, aperture, window, brush, skin-like layer, cricket, or circular rim.
+    receivedAt: "2026-09-07T03:43:29Z"
+    inputImages:
+      - kind: edit-target
+        sha256: 2e7d2ff94228b3e5e72f50f0270f61615f9e65bebfda815c2c8146cc82ab2aa8
+        rightsNotes: Project-generated Reading Guide desktop candidate 03 from the same authorized production batch, supplied only as the edit target to restore the top safe area; no third-party image was supplied.
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: 86ff4bfa77e383809adf7d022c4cfcb89b4be7186b27ffcc3091068d708f9e2d
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai-reading-guide/v1/liaozhai-reading-guide-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 88baf6d90c60528035c6f180b59c9217043baab50175dc50fb41923823da4941
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved desktop candidate 04 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 3200x1800 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+  - manifestId: asset-liaozhai-reading-guide-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Liaozhai Reading Guide Hero candidate, mobile portrait
+      Primary request: Create an entirely original contemporary editorial illustration for a refined cultural publication. Semi-painterly digital image with sculptural depth, tactile matte mineral-like surfaces, restrained atmospheric haze, precise negative space, crisp silhouettes, readable shadows, and soft directional light. Mysterious but legible; cinematic without game-poster spectacle; scholarly without becoming a diagram; tactile without decorative antiquing. No photoreal historical reconstruction. No text, letters, numerals, pseudo-Chinese writing, calligraphy, seals, talismans, symbols, logos, watermarks, borders, UI, or baked-in title. No yellowed parchment, distressed-book texture, franchise design, neon rim light, or copied historical composition.
+      Create an edition-aware vertical reading landscape. Begin below the empty title zone with one faint earlier layer, then divide into two unequal but connected stacks of entirely unmarked abstract page-like planes. Give the two routes visibly different densities, heights, and endpoints while keeping their edges distinct. The subject is comparison and staged compilation, with no supernatural story.
+      Composition/framing: Portrait 4:5, independently composed for a 1600×2000 master, never a crop of a landscape. Keep the top 24% and bottom 12% calm and free of essential page edges or branch junctions for HTML title and controls. Put the branch near x 0.56, y 0.57.
+      Color palette: Smoke green and charcoal depth, warm neutral white unmarked planes, exactly one restrained amber pool at the junction.
+      Constraints: Pure text-to-image original. Every plane and spatial relation newly designed. All surfaces absolutely blank with no visible marks.
+      Avoid: Aperture, window, brush, skin-like layer, cricket, rim, ghost, fox, person, haunted room, literal bound book, page numbers, date, edition label, antique-book interface, full-frame paper, manuscript facsimile, horror imagery, equal stacks, infographic.
+    receivedAt: "2026-09-07T03:29:37Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: cdbbaa6b4cecaaa2e1ee071f6ccbc1fce3e27b9b182c355a75fc8193f47a40d0
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai-reading-guide/v1/liaozhai-reading-guide-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: c95491b46b4b4be16d8c35568f7b1b49c8c3baf1ce95c367a663c7cb533d8a63
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved mobile candidate 01 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 1600x2000 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+notes: The actual prompts and completion timestamps were recovered from the current Codex task's local event record solely to preserve production provenance; no chat transcript was copied into the repository. Raw selected candidates and exact-canvas masters remain in Git-ignored project-local storage, while the repository stores the approved same-canvas WebP sources.

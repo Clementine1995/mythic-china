@@ -1,0 +1,120 @@
+assetId: asset-ten-kings-hero-primary
+manifestId: asset-ten-kings-hero-primary-v1
+ownerType: entry
+ownerId: ten-kings
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-ten-kings-hero-primary-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/ten-kings/v1/ten-kings-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 1af33a8138482ec8e17c80706022dd721d1dc1c30ce378009a546adc22538b29
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/ten-kings/v1/ten-kings-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 23dc5876077abadcb20b370cf6e7d91d203ebfa0621024aae78740d59944a95a
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/ten-kings-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: e727a383090d45400e810d39d5113bc0b111cb4f9d996156f4fa393b7969197f
+    focalPoint:
+      x: 0.7
+      y: 0.52
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/ten-kings-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 862a58d75d013e0e3f2d687a19f66fa2c7879bb1dcca80f482acb1fe3559d400
+    focalPoint:
+      x: 0.55
+      y: 0.57
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-idp-ten-kings-s3961
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner / applicable authorizing organization
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - ten-ritual-intervals
+  - separated-recording-apparatus
+  - seven-plus-three-pause-rhythm
+  - layered-record-scale-mirror-depth
+  - charcoal-jade-cinnabar-editorial-palette
+  - original-threshold-and-record-forms
+  - original-balance-and-reflection-forms
+  - original-light-weather-and-texture
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen via Codex
+  recordPath: visual/production-records/production-ten-kings-hero-primary-v1.yml
+  workflow: null
+humanEdits:
+  - Selected Project-owner-approved desktop candidate 02 and independently composed mobile candidate 03 as one responsive pair.
+  - Reconstructed both raw outputs to the exact approved Hero canvases with centered fit-cover Lanczos3 processing and no non-uniform stretching.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the selected final raw candidates and exact-canvas masters in Git-ignored project-local storage for audit.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The approved pair uses unnumbered light pauses and separates blank record planes from abstract balance and reflection cues. It depicts no named king, universal court map, punishment, manuscript facsimile, or unsupported ritual meaning.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-09-07T05:34:08Z"
+    notes: Approved from the Project owner's account-management and public-use authorization. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+  visual:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The Project owner approved desktop candidate 02 and mobile candidate 03 as one responsive pair at 2026-09-07T05:34:08Z. After exact-canvas conversion, Codex inspected the 3200x1800 desktop and 1600x2000 mobile canvases at full-canvas and original-resolution detail scale. The required title and control safe areas, focal hierarchy, and independent desktop/mobile compositions remain intact. No visible text, pseudo-writing, logo, watermark, disallowed motif, obvious broken geometry, or encoding defect is present.
+  accessibility:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The alt identifies ten unnumbered light pauses plus separate balance and reflection forms without presenting a literal court or manuscript. The caption names the CBETA-bounded seven-plus-three editorial interpretation and states its reconstruction and universality limits. This asset review does not replace pending page-level browser accessibility review.
+  language:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: No rendered text, letters, numbers, Chinese characters, pseudo-writing, calligraphy, seals, talismans, logos, or watermarks are present. At the Project owner's request, Codex reviewed the English alt, caption, credit, disclosure, and owner naming for accuracy and scope; this attribution does not claim that the Project owner personally reviewed the English wording.
+alt: Ten warm, unnumbered light pauses recede through dark green haze, with separate abstract balance and reflection forms.
+caption: A contemporary AI-assisted editorial interpretation turns ten ritual intervals in the cited CBETA witness into a seven-plus-three rhythm, keeping blank record planes separate from abstract balance and reflection cues; it is not a manuscript reconstruction, a set of literal courts, or a universal underworld map.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

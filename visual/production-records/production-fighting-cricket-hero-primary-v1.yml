@@ -1,0 +1,75 @@
+productionRecordId: production-fighting-cricket-hero-primary-v1
+briefId: brief-fighting-cricket-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier or seed; no model identity or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+recordedAt: "2026-09-07T05:58:02Z"
+renditions:
+  - manifestId: asset-fighting-cricket-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Fighting Cricket Entry Hero candidate 02, desktop landscape
+      Primary request: Create an entirely original abstract editorial landscape about pressure and vulnerability. On the far right-lower foreground, place one small natural-looking cricket, clearly visible but not enlarged. Behind it, also within the right half, a sequence of six or seven freestanding matte charcoal threshold slabs gradually narrows and lowers from a distant elevated shadow toward a plain household-edge plane. Add one incomplete circular arc in the right-middle depth, smaller and quieter than the threshold sequence, clearly separated from the cricket. The left half is only calm smoke-green atmosphere and ground.
+      Style/medium: Contemporary semi-painterly digital editorial art with sculptural abstract geometry, matte mineral surfaces, restrained haze, warm neutral ground, crisp subject, readable shadows. Quiet and tense.
+      Composition/framing: Landscape 16:9 for a 3200×1800 master. Keep the leftmost 42% and top 16% empty, smooth, and low-detail for HTML title/navigation. Every narrative object remains on the right. Cricket focal point near x 0.75, y 0.63.
+      Color palette: Smoke green, charcoal, warm neutral ground, one restrained low amber highlight revealing the cricket without glow.
+      Constraints: Pure text-to-image original. Background must remain abstract and historically nonspecific. The arc must be incomplete and must not touch or align causally with the cricket.
+      Avoid: Tree, foliage, roof, tiled roof, wall, palace, temple, historical house, gatehouse, courtyard, Ming architecture, official, emperor, human, child, well, pit, fall, injury, corpse, burial, resurrection, soul, transformation, animal fight, arena, magic, mascot, giant insect, page, book, brush, skin, cave, portal, text, writing, seal, logo, watermark, film or game imagery.
+    receivedAt: "2026-09-07T03:33:52Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: 9164261267071d63ae231b01f9e1eba534257fdf12c37e6ad83fe6a34b84f313
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/fighting-cricket/v1/fighting-cricket-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 855a743c1abdb7fe429355b7605be57234a7365518cd08dfa816bf6c625bc33e
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved desktop candidate 02 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 3200x1800 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+  - manifestId: asset-fighting-cricket-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Fighting Cricket Entry Hero candidate 02, mobile portrait
+      Primary request: Create an entirely original abstract vertical editorial landscape about pressure and vulnerability. One small natural-looking cricket sits just below the midpoint on the right, visible yet restrained. Behind it, a sequence of six or seven freestanding matte charcoal threshold slabs gradually narrows downward from a distant abstract shadow toward one plain household-edge plane. Add one incomplete circular arc in the right-middle depth, quieter than the slabs, clearly separated from the cricket. All remaining space is smooth smoke-green atmosphere and neutral ground.
+      Style/medium: Contemporary semi-painterly digital editorial art with sculptural abstract geometry, matte mineral surfaces, restrained haze, crisp subject, readable shadows.
+      Composition/framing: Portrait 4:5 for a 1600×2000 master, independently composed, never a crop. Keep the top 24% and bottom 10% empty, smooth, and low-detail for HTML title and controls. All narrative objects stay in the middle-right. Cricket focal point near x 0.56, y 0.64.
+      Color palette: Smoke green, charcoal, warm neutral ground, one restrained amber highlight revealing the cricket without glow.
+      Constraints: Pure text-to-image original. Background entirely abstract and historically nonspecific. Arc incomplete and never touching or aligning causally with cricket.
+      Avoid: Tree, plant, foliage, roof, roofline, tiles, wall, palace, temple, house, gatehouse, courtyard, historic architecture, landscape painting, official, emperor, human, child, well, pit, fall, injury, corpse, burial, resurrection, soul, transformation, fight, arena, magic, mascot, giant insect, pages, book, brush, skin, cave, portal, text, writing, seal, logo, watermark, film or game art.
+    receivedAt: "2026-09-07T03:36:30Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 2badef2c9c17c3d1812dd3b77c6f17e565ce769cf04dd9750c609e11d61be563
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/fighting-cricket/v1/fighting-cricket-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: 0e1a3dc28de60b87983e730c711dea5591c326e00c190f2be85b3de3d409b409
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved mobile candidate 02 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 1600x2000 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+notes: The actual prompts and completion timestamps were recovered from the current Codex task's local event record solely to preserve production provenance; no chat transcript was copied into the repository. Raw selected candidates and exact-canvas masters remain in Git-ignored project-local storage, while the repository stores the approved same-canvas WebP sources.

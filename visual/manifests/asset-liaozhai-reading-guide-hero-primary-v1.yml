@@ -1,0 +1,121 @@
+assetId: asset-liaozhai-reading-guide-hero-primary
+manifestId: asset-liaozhai-reading-guide-hero-primary-v1
+ownerType: entry
+ownerId: liaozhai-reading-guide
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-liaozhai-reading-guide-hero-primary-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai-reading-guide/v1/liaozhai-reading-guide-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 88baf6d90c60528035c6f180b59c9217043baab50175dc50fb41923823da4941
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai-reading-guide/v1/liaozhai-reading-guide-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: c95491b46b4b4be16d8c35568f7b1b49c8c3baf1ce95c367a663c7cb533d8a63
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/liaozhai-reading-guide-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: beed507017fcfa3a655dfef1ecec313b25caebd27bbfca665c6022efa23896dd
+    focalPoint:
+      x: 0.69
+      y: 0.5
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/liaozhai-reading-guide-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 6abcd6471d1f1b67a9f449e8c67757c8eb2714041d934fd1d8099f4c1d3f7d09
+    focalPoint:
+      x: 0.56
+      y: 0.57
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-shanghai-library-qingketing-liaozhai-1766
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner / applicable authorizing organization
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - staged-compilation-history
+  - unequal-edition-groups
+  - layered-compilation-path
+  - branching-edition-paths
+  - smoke-green-night-reading-palette
+  - original-unmarked-page-planes
+  - original-reading-space
+  - original-light-shadow-and-texture
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen via Codex
+  recordPath: visual/production-records/production-liaozhai-reading-guide-hero-primary-v1.yml
+  workflow: null
+humanEdits:
+  - Selected Project-owner-approved desktop candidate 04 and independently composed mobile candidate 01 as one responsive pair.
+  - Directed the desktop candidate 04 edit to move the project-generated candidate 03 page-plane composition below the top safe area while preserving its atmosphere, branching logic, blank surfaces, and right-side focus.
+  - Reconstructed both raw outputs to the exact approved Hero canvases with centered fit-cover Lanczos3 processing and no non-uniform stretching.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the selected final raw candidates and exact-canvas masters in Git-ignored project-local storage for audit.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The approved pair presents two unequal blank-page groups and branching paths as an edition-aware reading metaphor. It makes no single-edition claim and copies no Qingketing text, page geometry, seal, or historical interior.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-09-07T05:34:08Z"
+    notes: Approved from the Project owner's account-management and public-use authorization. Mobile was text-only. Desktop candidate 04 used only project-generated desktop candidate 03 as its edit target; no third-party image was supplied.
+  visual:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The Project owner approved desktop candidate 04 and mobile candidate 01 as one responsive pair at 2026-09-07T05:34:08Z. After exact-canvas conversion, Codex inspected the 3200x1800 desktop and 1600x2000 mobile canvases at full-canvas and original-resolution detail scale. The required title and control safe areas, focal hierarchy, and independent desktop/mobile compositions remain intact. No visible text, pseudo-writing, logo, watermark, disallowed motif, obvious broken geometry, or encoding defect is present. At 640px grayscale without title text, the two unequal branching page groups remain distinguishable from the Liaozhai Collection's off-axis aperture and single connected path.
+  accessibility:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The alt identifies the two unequal blank-page groups, branch, and warm junction. The caption explains the edition and compilation metaphor and rules out a definitive edition or historical reading-room reconstruction. This asset review does not replace pending page-level browser accessibility review.
+  language:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: No rendered text, letters, numbers, Chinese characters, pseudo-writing, calligraphy, seals, talismans, logos, or watermarks are present. At the Project owner's request, Codex reviewed the English alt, caption, credit, disclosure, and owner naming for accuracy and scope; this attribution does not claim that the Project owner personally reviewed the English wording.
+alt: Two unequal groups of blank page planes branch from a warm junction in a misty smoke-green space.
+caption: A contemporary AI-assisted editorial interpretation uses unequal, connected page groups and a branching path to represent variant edition structures and a staged compilation history; it does not depict a definitive Liaozhai edition or a historical reading room.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

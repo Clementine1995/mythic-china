@@ -1,0 +1,126 @@
+briefId: brief-liaozhai-hero-primary-v1
+version: 1
+status: approved
+ownerType: collection
+ownerId: liaozhai
+purpose: hero-primary
+approvedBy: Project owner (user-delegated AI review)
+approvedAt: "2026-09-07T03:02:50Z"
+notes: >-
+  On 2026-09-07, the Project owner explicitly delegated review and confirmation of this English brief to Codex. Codex reviewed its member-Claim mapping, Collection differentiation, cultural boundaries, rights limits, responsive composition, and exclusions and approved the direction on that delegated basis. This approval covers only the brief; it approves neither an image nor a production method. It establishes a shared night-reading world without turning the three Entries into a character collage.
+primaryReferenceFamily: The page density, column rhythm, and page-layout spacing of the 1766 Qingketing woodblock book, translated into one original smoke-green night-reading landscape with three unequal narrative depths
+period: The material reference is a 1766 witness; the Collection spans an edition-aware guide and two tales and does not claim one reconstructed historical moment
+region: Chinese literary tradition anchored to a named witness held by Shanghai Library; the scene does not claim to document a real studio, household, locality, or folk practice
+medium: Contemporary digital editorial illustration combining unmarked page planes, occluded material transformation, and a small-scale pressure path; not a facsimile, antique-book interface, or three-panel character poster
+culturalContext:
+  - Present the Collection as a guided path through a varied literary work, not a universal Chinese ghost world or a transparent record of folklore.
+  - Give the Guide, Painted Skin, and Fighting Cricket distinct but unequal cues within one continuous space and preserve the public reading order from guide to tales.
+  - Keep the Painted Skin cue ambiguous, nonsexualized, and non-graphic; keep the Fighting Cricket cue small, nonviolent, and free of child imagery.
+  - Use the Qingketing object only for broad page rhythm and book-material context; do not reproduce its text, frames, folds, damage, or seals.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: >-
+          One large off-axis dark aperture creates the Hero's dominant silhouette and encloses a night-reading path across three unequal depths on the right: overlapping blank page planes first, a brush beside a suspended unmarked thin layer second, and a small cricket beneath narrowing thresholds third; the cues remain connected rather than boxed into panels.
+        safeArea: Keep the leftmost 42 percent and top 16 percent low-detail for the HTML Collection identity and navigation; retain all three narrative cues on the right with clear depth separation; render no text into the image.
+        focalPointGoal:
+          x: 0.7
+          y: 0.53
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently composed vertical dark aperture creates the dominant silhouette, enclosing a reading path from unequal blank page planes below the title zone, past a partly occluded brush-and-thin-layer cue, toward a small cricket and narrowing threshold at the lowest narrative depth.
+        safeArea: Keep the top 24 percent and bottom 12 percent free of essential page, brush, layer, cricket, or threshold details for the HTML title and responsive controls; render no text into the image.
+        focalPointGoal:
+          x: 0.55
+          y: 0.55
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: edition-aware-unequal-text-groups
+      statement: The Guide's cited scholarship reports different tale totals and structures for two named editions.
+      claimIds:
+        - claim-liaozhai-counts-vary-by-edition
+    - elementId: painted-wearable-appearance
+      statement: In the cited Painted Skin witness, a being spreads a human skin on a couch, paints it with a brush, puts it on, and becomes a woman.
+      claimIds:
+        - claim-painted-skin-painted-disguise-in-qingketing
+    - elementId: authority-pressure-reaches-household
+      statement: In the cited Fighting Cricket witness, a court demand for fighting crickets passes through local authority until it reaches Chengming and his household.
+      claimIds:
+        - claim-fighting-cricket-levy-pressure
+  inferred:
+    - elementId: three-depth-reading-path
+      statement: Connect unequal page planes, an occluded brush-and-thin-layer cue, and a small cricket beneath narrowing thresholds as three depths in one reading landscape.
+      rationale: The continuous path distinguishes the three member responsibilities without making their Claims interchangeable or reducing the Collection to equal story cards.
+    - elementId: off-frame-strange-presence
+      statement: Let shadow and occlusion imply that part of the reading world continues beyond the frame, without showing a named supernatural figure.
+      rationale: Off-frame presence supports the Collection's proposed after-dark editorial atmosphere while avoiding a generic monster collage.
+    - elementId: smoke-green-charcoal-amber-collection-palette
+      statement: Use smoke green, charcoal, warm neutral white, and a restrained amber reading light across all three depths.
+      rationale: This is the proposed Liaozhai Collection palette and not a claim about historical ink, paper, architecture, or nocturnal reading practice.
+  invented:
+    - elementId: original-off-axis-dark-aperture
+      statement: One large off-axis dark aperture is an original enclosing silhouette designed to distinguish the Collection at small sizes; it is not a historical doorway, cave, ritual gate, or supernatural portal.
+    - elementId: original-night-reading-world
+      statement: The complete space, path, planes, thresholds, depth transitions, and off-frame continuation are newly designed editorial forms.
+    - elementId: original-page-layer-brush-and-cricket-forms
+      statement: Every page plane, suspended layer, brush, cricket, and threshold is original and does not copy a historical page, species specimen, film, game, or illustrated scene.
+    - elementId: original-light-shadow-mist-and-texture
+      statement: All lighting, haze, ink-like atmosphere, shadow, surface texture, and motion are invented visual devices.
+referenceAssets:
+  - referenceId: ref-shanghai-library-qingketing-liaozhai-1766
+    url: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    organization: Shanghai Library; Wikimedia Commons
+    creator: Pu Songling (text author); Qingketing block cutters unidentified
+    rightsStatus: public-domain
+    rightsUrl: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    licenseOrPermissionId: public-domain-mark-1.0
+    notes: Study only broad page density, column rhythm, page-layout spacing, and the context of a named 1766 witness. Do not reproduce, trace, crop, upload, or imitate its writing, frames, folds, damage, seals, exact page geometry, or complete composition.
+composition:
+  continuity: Desktop and mobile share one large off-axis dark aperture, one reading path, three unequal depths, material family, palette, and restrained atmosphere while using independently authored compositions.
+  hierarchy: The enclosing aperture and connected reading path create the primary silhouette; blank page groups establish the Guide; the brush and thin layer establish Painted Skin; the cricket and narrowing thresholds complete the path at smaller scale; no cue becomes a standalone poster.
+  colorDirection: Smoke green and charcoal hold the shared world, warm neutral white defines unmarked surfaces, and one muted amber light connects the three depths.
+  lightingDirection: Let a quiet off-axis light move through partial occlusion toward the small final focal point; avoid sepia nostalgia, horror underlighting, spotlighted characters, neon effects, and crushed shadows.
+  textPolicy: Collection title, Chinese title, pinyin, Entry names, caption, credit, disclosure, and all navigation remain HTML; artwork contains no writing, pseudo-Chinese marks, seals, talismans, logos, or watermarks.
+excludedMotifs:
+  - A universal Chinese ghost world, one religious cosmology, or an unqualified documentary claim about folklore or Qing life
+  - Three equal cards, triptych borders, character lineup, poster collage, floating-head composition, or a literal navigation diagram
+  - A fox woman, glamorous female monster, exposed body, flaying, gore, organs, or Painted Skin as the Collection's sole identity
+  - A child, well fall, corpse, burial, resurrection, soul departure, animal injury, cricket fight, cockfight, or combat spectacle
+  - Full-frame yellowed paper, wormholes, distressed parchment, page-turning UI, antique-book chrome, or copied Qingketing page layouts
+  - Generic ghost faces, skulls, haunted-house symbols, jump-scare lighting, or entertainment-horror shorthand
+  - Film, television, game, or entertainment-franchise characters, costumes, camera compositions, UI, logos, or trademarks
+  - Readable Chinese, fake calligraphy, title slips, seals, talismans, baked-in title text, logos, or watermarks
+openDecisions:
+  - A 640-pixel grayscale, title-free review confirming that the dominant aperture remains distinguishable from the Liaozhai Reading Guide without requiring all three narrative cues to read as miniature icons
+  - A separately authorized production method, tool and account, input-rights review, candidate count, master location, and backup plan
+  - Final image selection, informative alt text, caption, credit, disclosure, responsive crops, and named cultural, rights, visual, accessibility, and language reviews

@@ -1,0 +1,122 @@
+briefId: brief-fighting-cricket-hero-primary-v1
+version: 1
+status: approved
+ownerType: entry
+ownerId: fighting-cricket
+purpose: hero-primary
+approvedBy: Project owner (user-delegated AI review)
+approvedAt: "2026-09-07T03:02:50Z"
+notes: >-
+  On 2026-09-07, the Project owner explicitly delegated review and confirmation of this English brief to Codex. Codex reviewed its evidence mapping, cultural and child-safety boundaries, rights limits, responsive composition, and exclusions and approved the direction on that delegated basis. This approval covers only the brief; it approves neither an image nor a production method. The Hero avoids depicting the child's injury, the family's burial preparations, or a literal soul transformation.
+primaryReferenceFamily: The 1766 Qingketing Fighting Cricket textual witness, translated into an original compressed path from distant authority to one household and one very small cricket
+period: The named textual witness was printed in 1766; although the tale opens in the Xuande era, the proposed scene does not claim to reconstruct Ming court, tax, village, or domestic history
+region: Chinese literary narrative anchored to a named Shanghai Library witness; no real court, district, village, or household is reconstructed
+medium: Contemporary digital editorial illustration using compressed thresholds, scale, and negative space; not a historical record painting, animal-fighting scene, or text-page facsimile
+culturalContext:
+  - Show how a demand passes through layers of authority and becomes pressure inside a household without presenting the tale as evidence for a general historical tax system.
+  - Keep the cricket visually small and vulnerable rather than turning it into a fighter, mascot, supernatural pet, or spectacle.
+  - Treat the well and the son's later account as bounded narrative details; do not depict a fall, death, resurrection, medical diagnosis, soul departure, or proven reincarnation.
+  - Keep the child's body outside the image and use spatial absence rather than harm as the emotional register.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: A single small cricket sits near the right foreground while a chain of increasingly narrow unmarked thresholds descends from a distant elevated shadow toward a quiet household edge; a partial circular rim appears only as a secondary spatial echo.
+        safeArea: Keep the leftmost 42 percent and top 16 percent low-detail for the HTML Entry identity and navigation; keep the cricket and partial rim on the right; render no text into the image.
+        focalPointGoal:
+          x: 0.75
+          y: 0.63
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently composed vertical pressure path narrows through several distant thresholds toward a small cricket below the fold midpoint, with an incomplete circular rim separated in depth and no human body or literal transformation.
+        safeArea: Keep the top 24 percent and bottom 10 percent free of essential cricket, threshold, or rim detail for the HTML title and responsive controls; render no text into the image.
+        focalPointGoal:
+          x: 0.56
+          y: 0.64
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: demand-reaches-household
+      statement: In the cited Qingketing witness, a court demand for fighting crickets passes through local authority until it reaches Chengming and his household.
+      claimIds:
+        - claim-fighting-cricket-levy-pressure
+    - elementId: child-found-in-well-with-faint-breathing
+      statement: In the cited witness, the son injures the escaped cricket, is later found in a well, and is discovered to have faint breathing while the family prepares for burial.
+      claimIds:
+        - claim-fighting-cricket-son-rescue-state
+    - elementId: sons-later-form-account
+      statement: In the cited witness, more than a year later the son says that he had taken the form of the cricket and had only just awakened.
+      claimIds:
+        - claim-fighting-cricket-son-shen-hua
+  inferred:
+    - elementId: narrowing-authority-thresholds
+      statement: Use a descending chain of increasingly narrow thresholds to connect distant authority with a household edge.
+      rationale: Spatial compression translates the sourced movement of pressure while avoiding invented officials, documents, institutions, or a claim of general historical practice.
+    - elementId: separated-cricket-and-well-cues
+      statement: Keep one small cricket in the foreground and only an incomplete circular rim in a separate depth, with the child absent.
+      rationale: The separation acknowledges bounded narrative details without illustrating a fall, injury, death, resurrection, or literal transfer between bodies.
+    - elementId: smoke-green-low-amber-palette
+      statement: Use smoke-green depth, charcoal thresholds, warm neutral ground, and a low restrained amber highlight around the cricket.
+      rationale: This proposed Liaozhai palette is an editorial choice rather than evidence for historical architecture, light, or insect coloration.
+  invented:
+    - elementId: original-threshold-household-space
+      statement: All gates, corridors, walls, household edges, circular-rim geometry, and spatial relationships are newly designed and historically nonspecific.
+    - elementId: original-cricket-depiction
+      statement: The cricket's exact species, proportions, position, markings, and behavior are invented and carry no zoological or supernatural claim.
+    - elementId: original-light-shadow-and-weather
+      statement: All shadows, haze, surface texture, distance compression, and directional light are invented editorial devices.
+referenceAssets:
+  - referenceId: ref-shanghai-library-qingketing-liaozhai-1766
+    url: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    organization: Shanghai Library; Wikimedia Commons
+    creator: Pu Songling (text author); Qingketing block cutters unidentified
+    rightsStatus: public-domain
+    rightsUrl: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    licenseOrPermissionId: public-domain-mark-1.0
+    notes: Use as the named textual and book-material reference only. Do not reproduce, trace, crop, upload, or imitate its characters, page frames, folds, damage, seals, exact page geometry, or complete composition.
+composition:
+  continuity: Desktop and mobile share the same narrowing pressure path, small cricket, separated circular-rim cue, palette, and negative-space discipline while using independently authored compositions.
+  hierarchy: The small cricket and path of pressure are primary together; household edge and partial rim are secondary; distant authority remains abstract; no child, ruler, official, burial, or fight appears.
+  colorDirection: Smoke green and charcoal dominate, warm neutral ground protects legibility, and a restrained amber highlight identifies the cricket without making it magical.
+  lightingDirection: Compress light gradually from distant elevated shadow toward the small foreground subject; avoid imperial gold spectacle, spotlighted animal combat, supernatural glow, horror lighting, and crushed detail.
+  textPolicy: Entry title, historical labels, Chinese terms, pinyin, caption, credit, disclosure, and all navigation remain HTML; artwork contains no edicts, writing, pseudo-Chinese marks, seals, talismans, logos, or watermarks.
+excludedMotifs:
+  - Presenting the tale as proof of a general Ming tax system, court procedure, village practice, or documentary history
+  - A fall into the well, a dead or injured child, a corpse, burial scene, resurrection, coma, diagnosis, or medicalized imagery
+  - A departing soul, literal reincarnation, body swap, transparent transformation, or any certainty beyond the son's reported account
+  - Cricket fighting, cockfighting, injured animals, gambling spectacle, arena framing, or triumphal combat
+  - An emperor portrait, named official, fixed Ming costume, imperial architecture, edict, tax register, official seal, or court reconstruction
+  - A glowing magical pet, cute mascot, giant monster cricket, game combatant, HUD, film character, logo, or trademark
+  - Readable Chinese, fake calligraphy, title slips, seals, talismans, baked-in title text, logos, or watermarks
+  - Direct copies or close derivatives of the Qingketing scan, including text, page frames, folds, damage, and complete composition
+openDecisions:
+  - A separately authorized production method, tool and account, input-rights review, candidate count, master location, and backup plan
+  - Final image selection, content-sensitivity review, informative alt text, caption, credit, disclosure, responsive crops, and named cultural, rights, visual, accessibility, and language reviews

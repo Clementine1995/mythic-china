@@ -26,7 +26,7 @@ claimIds:
 terminologyRecordIds:
   - term-shen-hua-in-fighting-cricket
 relatedEntryIds: []
-heroAssetId: null
+heroAssetId: asset-fighting-cricket-hero-primary
 publishedAt: null
 updatedAt: null
 lastFactCheckedAt: "2026-09-04"

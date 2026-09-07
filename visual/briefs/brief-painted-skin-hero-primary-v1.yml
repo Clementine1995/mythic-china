@@ -1,0 +1,123 @@
+briefId: brief-painted-skin-hero-primary-v1
+version: 1
+status: approved
+ownerType: entry
+ownerId: painted-skin
+purpose: hero-primary
+approvedBy: Project owner (user-delegated AI review)
+approvedAt: "2026-09-07T03:02:50Z"
+notes: >-
+  On 2026-09-07, the Project owner explicitly delegated review and confirmation of this English brief to Codex. Codex reviewed its evidence mapping, cultural and sensitivity boundaries, rights limits, responsive composition, and exclusions and approved the direction on that delegated basis. This approval covers only the brief; it approves neither an image nor a production method. The Hero deliberately excludes the later heart and cure sequence from its focal scene.
+primaryReferenceFamily: The 1766 Qingketing Painted Skin textual witness, translated into an original off-axis threshold scene centered on looking, painting, and a wearable appearance
+period: The named textual witness was printed in 1766; the proposed scene does not claim to reconstruct a precise 1766 room, costume, body, or object set
+region: Chinese literary narrative anchored to a named Shanghai Library witness; no specific real location is reconstructed
+medium: Contemporary digital editorial illustration using occlusion, an unmarked painted plane, and restrained body-horror tension; not a text-page facsimile, film still, or historical reconstruction
+culturalContext:
+  - Center the act of seeing through a window and the making of a deceptive appearance, not the later graphic attack or cure.
+  - Keep the being visually indeterminate because the selected Qingketing witness does not identify it as a fox within the tale.
+  - Treat the wife's warning and the Taoist's warning as narrative pressure around Wang's choices, not as permission to invent weapons, talismans, rituals, or a canonical monster design.
+  - Do not turn Tso's attributed gender reading into the tale's sole meaning or use a sexualized female body as shorthand for deception.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: From a quiet exterior viewpoint, a narrow window opening reveals a brush, an unfinished unmarked skin-like plane laid across a low surface, and only a partially occluded unfamiliar presence; the act of looking carries more weight than the figure.
+        safeArea: Keep the leftmost 42 percent and top 16 percent low-detail for the HTML Entry identity and navigation; keep the window reveal and ambiguous presence on the right; render no text into the image.
+        focalPointGoal:
+          x: 0.73
+          y: 0.51
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently composed vertical view places the window gap below the title zone, then leads from a brush partly held by or emerging beside the mostly hidden presence to a folded unmarked skin-like plane, with no explicit body detail.
+        safeArea: Keep the top 22 percent and bottom 12 percent free of essential figure, brush, or plane detail for the HTML title and responsive controls; render no text into the image.
+        focalPointGoal:
+          x: 0.57
+          y: 0.56
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: warnings-around-secret-shelter
+      statement: In the cited Qingketing witness, Wang shelters a stranger in secret, dismisses his wife's concern, and later receives a Taoist's warning after an ominous aura is observed.
+      claimIds:
+        - claim-painted-skin-warnings-in-qingketing
+    - elementId: window-view-painted-disguise
+      statement: In the cited witness, Wang looks through a window and sees a being spread a human skin on a couch, paint it with a brush, put it on, and become a woman.
+      claimIds:
+        - claim-painted-skin-painted-disguise-in-qingketing
+    - elementId: indeterminate-being-not-fox
+      statement: The cited witness uses yè mèi as a rebuke and does not identify the figure as a fox within the boundaries of Painted Skin.
+      claimIds:
+        - claim-painted-skin-ye-mei-in-qingketing
+  inferred:
+    - elementId: exterior-window-viewpoint
+      statement: Place the viewer outside the room and let a narrow window opening control what can be seen.
+      rationale: The off-axis viewpoint translates Wang's act of looking while limiting invented details and keeping the image about uncertain perception.
+    - elementId: unfinished-unmarked-appearance-plane
+      statement: Show the painted skin as a blank, partly folded or suspended plane whose status remains visually ambiguous.
+      rationale: A restrained material cue evokes the sourced painting and wearing actions without explicit anatomy, gore, or a copied historical image.
+    - elementId: smoke-green-warm-window-palette
+      statement: Use smoke-green night, charcoal occlusion, warm neutral surfaces, and one muted interior light.
+      rationale: This proposed Liaozhai palette is an editorial choice and not a claim about historical pigments, architecture, or lighting.
+  invented:
+    - elementId: original-room-window-and-furnishing
+      statement: The room, window, low surface, brush form, furnishing fragments, and all spatial relationships are newly designed and historically nonspecific.
+    - elementId: original-ambiguous-presence
+      statement: The partially hidden being, posture, face treatment, clothing fragments, and body proportions are original and carry no species or canonical identity.
+    - elementId: original-light-shadow-and-texture
+      statement: All night atmosphere, shadows, surface texture, motion, and directional light are invented editorial devices.
+referenceAssets:
+  - referenceId: ref-shanghai-library-qingketing-liaozhai-1766
+    url: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    organization: Shanghai Library; Wikimedia Commons
+    creator: Pu Songling (text author); Qingketing block cutters unidentified
+    rightsStatus: public-domain
+    rightsUrl: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    licenseOrPermissionId: public-domain-mark-1.0
+    notes: Use as the named textual and book-material reference only. Do not reproduce, trace, crop, upload, or imitate its characters, page frames, folds, damage, seals, exact page geometry, or complete composition.
+composition:
+  continuity: Desktop and mobile share the same exterior viewpoint, narrow reveal, unmarked appearance plane, ambiguous presence, palette, and restraint while using independently authored compositions.
+  hierarchy: The act of looking through the opening is primary; the brush and unmarked plane are secondary; the being remains partially hidden and tertiary; warning figures and the later cure do not appear.
+  colorDirection: Smoke green and charcoal dominate, warm neutral white defines the appearance plane, and muted amber light marks the interior without glamorizing the figure.
+  lightingDirection: Use a narrow off-axis interior glow against soft night occlusion; avoid beauty lighting, red-black horror lighting, jump-scare contrast, neon effects, and crushed body detail.
+  textPolicy: Entry title, Chinese terms, pinyin, caption, credit, disclosure, and all navigation remain HTML; artwork contains no writing, pseudo-Chinese marks, talismans, seals, logos, or watermarks.
+excludedMotifs:
+  - Fox ears, fox tails, fox shadows, a fixed fox-spirit identity, or any other canonical species assignment
+  - A glamorous femme fatale, eroticized nudity, voyeuristic anatomy, or a female body used as a moral symbol
+  - Flaying, exposed tissue, blood, the stolen heart, open body cavities, organs, surgical imagery, forced swallowing, or the later cure as spectacle
+  - A sword-wielding Taoist, invented ritual equipment, talismans, exorcism choreography, or unsupported costume detail
+  - A precise Qing interior, furniture set, clothing reconstruction, or historical-date claim for the depicted story world
+  - Presenting Tso's attributed gender interpretation as the only factual meaning of the tale
+  - Film, television, game, or entertainment-franchise characters, costumes, camera compositions, logos, or trademarks
+  - Readable Chinese, fake calligraphy, title slips, seals, baked-in title text, logos, or watermarks
+  - Direct copies or close derivatives of the Qingketing scan, including text, page frames, folds, damage, and complete composition
+openDecisions:
+  - A separately authorized production method, tool and account, input-rights review, candidate count, master location, and backup plan
+  - Final image selection, content-sensitivity review, informative alt text, caption, credit, disclosure, responsive crops, and named cultural, rights, visual, accessibility, and language reviews

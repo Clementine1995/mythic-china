@@ -27,7 +27,7 @@ claimIds:
 terminologyRecordIds:
   - term-zhiguai-in-liaozhai-reading-guide
 relatedEntryIds: []
-heroAssetId: null
+heroAssetId: asset-liaozhai-reading-guide-hero-primary
 publishedAt: null
 updatedAt: null
 lastFactCheckedAt: "2026-09-04"

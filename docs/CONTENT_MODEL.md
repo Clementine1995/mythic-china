@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。随后 Chinese Underworld Collection Hero 与 Guide Hero 沿相同合同分别闭合独立资产谱系。当前 11 个 local master、11 份 repository source、四份 production record 与七份 manifest 版本记录均通过门禁，六个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 已从七份 current responsive source 实际生成和解码验证全部 50 个 AVIF/WebP 目标；M3 已完成，Collection 与 Guide 的页面静态消费属于 M4。2026-09-04 经后续逐项授权，四篇候选已建立最小 draft Entry owner，并只物化证据已闭合的 Source、Claim 与 Terminology；Ten Kings、Fighting Cricket 与 Liaozhai 导读随后先形成三篇证据受限英语首稿。2026-09-05 的后续合集接线见 009；2026-09-06 Painted Skin 又在独立授权下按上海图书馆 1766 青柯亭本形成单见证草稿。四个新增 Entry 均保持 `draft`，视觉资产与既有内容状态继续不变。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。Chinese Underworld Collection Hero、Guide Hero，以及 012 的四篇 Entry 与 Liaozhai Collection 五组 Hero 后续均沿相同合同闭合独立资产谱系。当前 21 个 local master、21 份 repository source、9 份 production record 与 12 份 manifest 版本记录通过数据门禁，11 个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 从 17 份 current responsive source 生成并解码复核 120 个 AVIF/WebP 目标。四个新增 Entry 与 Liaozhai Collection 仍保持 `draft`；本次资产绑定不代表 `relatedEntryIds`、Liaozhai Featured、内容状态或发布已获批准。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -18,8 +18,8 @@
 
 ### 0.2 M3-U3 视觉记录与加载合同
 
-- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前存在三份 approved brief（Zhong Kui、Chinese Underworld Collection 与 Chinese Underworld Guide）和七份 manifest 版本记录；六份 approved/current 分别服务 Zhong Kui Hero、Lead、OG、Social、Chinese Underworld Collection Hero 与 Chinese Underworld Guide Hero，Zhong Kui Hero v1 为 approved/non-current。Collection 与 Guide 分别保存 versionless `asset-chinese-underworld-hero-primary`、`asset-chinese-underworld-guide-hero-primary`，由同一 generic resolver 解析到各自的 approved/current v1。
-- `src/assets/images` 只保存尺寸锁定的 repository source rendition。当前 11 份 approved source 均被 manifest 唯一引用并通过真实 metadata/hash、权利与人工审核门禁；Zhong Kui Hero v1 的两份 source 作为非 current 版本历史保留。metadata registry 忽略 `.gitkeep`，但不会静默忽略其他文件；未被 manifest 唯一引用的图片、非批准扩展名、符号链接、禁入签名、超过 10 MiB 或无法读取 metadata 的文件均使构建失败。
+- visual brief 使用 `visual/briefs/{briefId}.yml`，Asset Manifest 使用 `visual/manifests/{manifestId}.yml`；两者都是一文件一版本记录，由 `visualBriefs` / `assets` Content Layer collection 加载并显式生成 ID。当前八份 brief 均为 approved：既有 Zhong Kui、Chinese Underworld Collection 与 Chinese Underworld Guide 三份，以及四篇新 Entry 与 Liaozhai Collection 的五份 Hero-only brief。后五份由 Project owner 明确委托 Codex 审核英文后确认；Project owner 随后批准五组候选和公开使用权利，Codex 完成 exact-canvas 与委托英文终审。当前 12 份 manifest 中有 11 份 approved/current；Zhong Kui Hero v1 为 approved/non-current。所有所属内容都只保存 versionless `assetId`，由同一 generic resolver 解析 current 版本。
+- `src/assets/images` 只保存尺寸锁定的 repository source rendition。当前 21 份 approved source 均被 manifest 唯一引用并通过真实 metadata/hash、权利与人工审核门禁；Zhong Kui Hero v1 的两份 source 作为非 current 版本历史保留。metadata registry 忽略 `.gitkeep`，但不会静默忽略其他文件；未被 manifest 唯一引用的图片、非批准扩展名、符号链接、禁入签名、超过 10 MiB 或无法读取 metadata 的文件均使构建失败。
 - Zod 负责单记录字段和局部条件；纯 visual graph validator 负责 owner/Claim/Source、brief target、asset version/current、内容 Hero 外键、路径、文件 metadata 与 inventory。resolver 只读取显式 `isCurrent`，绝不按最高 version 或文件名猜测。
 
 ### 0.3 字体资产边界
@@ -243,7 +243,7 @@ reviewStatus: bilingual-approved
 
 ### 2.6 Asset Manifest
 
-Asset Manifest 是所有公开视觉资产（包括 Hero、正文图与整页氛围背景）的工具无关权威记录；压缩后的 Web/社媒文件可能丢失内嵌 metadata，不能只依赖文件本身或某个生产工具。M3 的详细范围、样例规格与分批实施以 [`requirements/002-visual-asset-pipeline.md`](requirements/002-visual-asset-pipeline.md) 为准。
+Asset Manifest 是所有公开视觉资产（包括 Hero、正文图与整页氛围背景）的工具无关权威记录；压缩后的 Web/社媒文件可能丢失内嵌 metadata，不能只依赖文件本身或某个生产工具。M3 的详细范围、样例规格与分批实施以 [`requirements/002-visual-asset-pipeline.md`](requirements/002-visual-asset-pipeline.md) 为准；四篇 Entry 与 Liaozhai Collection 的五份 Hero-only brief 由 [`requirements/012-five-hero-visual-briefs.md`](requirements/012-five-hero-visual-briefs.md) 实例化。
 
 `assetId` 保存长期逻辑身份，`manifestId` 保存某一不可混淆的版本记录。页面与内容只引用 `assetId`；构建期 resolver 根据显式 `isCurrent` 选择版本，不用最大版本号猜测。owner slot 的稳定键为 `ownerType + ownerId + role + slotId`。
 
@@ -334,7 +334,7 @@ M3-U3 对此前自然语言字段冻结以下最小机器形状，后续生产�
 - manifest 的 `recordPath` 必须解析真实 production record；两者 brief、method、tool 一致，record 中每个 `manifestId + usage` 的 master URI/尺寸/hash 与 manifest 完全相同，并由 record rendition 反向指回该 manifest。默认 Astro build 只校验已提交记录，不读取 Git-ignored master；`.local` 缺失不能让 clone/CI 失败。
 - `humanEdits[]` 是唯一、非空的简短人工修改说明字符串列表，不复制完整生产日志。`referenceAssets[]` 使用 `organization` 与 `creator` 两个显式非空身份字段；无法确认 creator 时必须先修订研究记录或需求，不能用空值绕过。
 - 当前 Schema 没有“图片内含文字/专名”独立布尔字段；因此 language `not-applicable` 只在 decorative、显式空 alt、无 caption 且人工 review notes 给出理由时放行。只要是 informative 资产，language review 必须 approved。若 U4 需要更细的图中文字状态，先扩展本合同与测试。
-- U4 已新增 production record Schema、loader、inventory 与双向 manifest/master 关系门禁，并在首轮五个最终画布存在后落盘一份真实记录。终验 Hero v2 返修沿同一合同新增两份 master、两份 source、一份 manifest 与第二份 production record；v1 文件与记录不覆盖，只把 Hero v1 `isCurrent` 改为 `false`。截至 M3 收口，非默认 verifier 复核七个 master，并从三个 current responsive buildPlan 实际生成、解码核对 22 个 AVIF/WebP 目标。2026-08-31 Chinese Underworld Collection Hero 与 Guide Hero 又沿同一合同各新增两份 master、两份 source、一份 approved/current manifest 与一份 production record，并分别绑定 Collection 与 Guide 的稳定 `heroAssetId`；当前 verifier 复核 11 个 master，并从七个 current responsive buildPlan 核对 50 个目标。三次生产及 Hero v2 返修的 Git-ignored master 实际尺寸/hash 与真实 WebP/PNG repository source 均已据实核验；ComfyUI workflow/model registry 本期不适用。Project owner 已分别确认对应个人且非组织管理的 ImageGen 账户、发布授权，以及文化、权利、视觉、无障碍与语言五项审核；这些人工事实记录在各自 manifest 中，仍不能由自动门禁替代或重建。
+- U4 已新增 production record Schema、loader、inventory 与双向 manifest/master 关系门禁，并在首轮五个最终画布存在后落盘一份真实记录。终验 Hero v2 返修沿同一合同新增两份 master、两份 source、一份 manifest 与第二份 production record；v1 文件与记录不覆盖，只把 Hero v1 `isCurrent` 改为 `false`。截至 M3 收口，非默认 verifier 复核七个 master，并从三个 current responsive buildPlan 实际生成、解码核对 22 个 AVIF/WebP 目标。2026-08-31 Chinese Underworld Collection Hero 与 Guide Hero 又各闭合两份 master/source、一份 manifest/production record 和内容绑定。2026-09-07 的 012 批再新增 10 个 master、10 份 source、5 份 approved/current manifest、5 份 production record 与 5 个内容绑定；当前 verifier 复核 21 个 master，并从 17 份 current responsive buildPlan 核对 120 个目标。各批 Git-ignored master 的实际尺寸/hash 与 repository source 均据实核验；ComfyUI workflow/model registry 本期不适用。旧批与本批分别保存当时真实的账户/授权措辞；本批不推断当前账户具体是个人或组织管理。人工事实记录在各自 manifest 中，不能由自动门禁替代或重建。
 
 ### 2.7 Reader Request
 

@@ -2,7 +2,7 @@
 
 ## 当前接线状态（2026-09-07）
 
-Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-collection-reading-paths.md) 已将本文件确认的两条 3 篇路径接入 Collection。新增 liaozhai draft，工作标题为 Strange Tales from Liaozhai；阴间保持 editorial-review 和 Zhong Kui Featured。当前共 6 Entry / 2 Collection，published 0/0；六篇均有对应合集反向入口，未新增 related 关系或图片。下文仍保留接线前的决策与分批实施记录；其中“唯一 Collection”“尚未加入”均描述对应批次当时状态，带 009 后续说明的段落反映后来的接线结果。当前实现以 009、README 和实际内容文件为准。
+Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-collection-reading-paths.md) 已将本文件确认的两条 3 篇路径接入 Collection。新增 liaozhai draft，工作标题为 Strange Tales from Liaozhai；阴间保持 editorial-review 和 Zhong Kui Featured。当前共 6 Entry / 2 Collection，published 0/0；六篇均有对应合集反向入口。后续 [012](012-five-hero-visual-briefs.md) 已为四篇 Entry 与 Liaozhai Collection 闭合五组 approved/current Hero，并完成所属内容绑定；`relatedEntryIds`、Liaozhai Featured 与内容状态仍未改变。下文仍保留接线前的决策与分批实施记录；其中“唯一 Collection”“尚未加入”均描述对应批次当时状态，带 009/012 后续说明的段落反映后来的实施结果。当前实现以 009、012、README 和实际内容/视觉文件为准。
 
 ## 0. 文档职责与状态
 
@@ -24,7 +24,7 @@ Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-co
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 决策状态 | Project owner 已确认 | 2026-09-03 确认 `Strange Tales from Liaozhai` 方向、3+3 分配、两条公开顺序、Zhong Kui Featured 与《促织》条件保留；新标题仍是工作标题 |
-| 实施状态 | 证据最小物化、四篇纵切片与两个合集路径接线已完成 | 当前为 6 篇 Entry：原 2 篇保持 `editorial-review`，新增 `ten-kings`、`liaozhai-reading-guide`、`painted-skin`、`fighting-cricket` 四个 `draft`；四篇均有证据受限首稿。009 已建立 Liaozhai draft Collection，并把六篇接入两个三篇路径；资产、`relatedEntryIds` 与状态均未改 |
+| 实施状态 | 证据最小物化、四篇纵切片、两个合集路径与五组 Hero 资产闭环已完成 | 当前为 6 篇 Entry：原 2 篇保持 `editorial-review`，新增四篇保持 `draft`。009 已建立 Liaozhai draft Collection 并接入两个三篇路径；012 已闭合四篇与 Liaozhai Collection 的 brief、候选/权利、master、production record、approved/current manifest、repository source 和 `heroAssetId`。`relatedEntryIds`、Liaozhai Featured 与内容状态未改 |
 | 研究状态 | 候选比较、四篇 claim map 及当前可用证据闭合完成 | [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 已分层记录实际见证、正式书目与精确 locator；Painted Skin 当前采用上海图书馆 1766 青柯亭单见证，任 2016 / 张 2011 与现代译本/影视直接比较延期；《促织》青柯亭单见证路线已确认，跨见证、作者归属与“首次增写”继续排除 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本文不改变内容或发布状态 |
 
@@ -141,12 +141,13 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 6. 已完成：先把上述证据批形成本地检查点 `9914dd3`，再只为 Ten Kings 写入 2 Source / 3 Claim / 1 Terminology 消费关系和证据受限首稿；仍保持 `draft`。
 7. 已完成：只为 Fighting Cricket 写入 1 Source / 3 Claim / 1 Terminology 消费关系和青柯亭单见证证据受限首稿；Source 可见馆藏记录仅按独立例外改为 ASCII，精确中文馆藏号留在内部 notes，Entry 仍保持 `draft`。
 8. 已完成：只为 Liaozhai Reading Guide 写入 1 Source / 2 Claim / 1 Terminology 消费关系和证据受限首稿；任/张实际册页仍未取得，Entry 保持 `draft`。Project owner 于 2026-09-05 通过中文概要确认内容符合预期，并单独授权验证通过后本地提交。
-9. 009 后续已建立第二 Collection，并按已确认顺序接入两个三篇 `entryIds` 路径；Liaozhai 的 Featured 与 Hero 仍为空，六篇 `relatedEntryIds` 仍为空。
+9. 009 后续已建立第二 Collection，并按已确认顺序接入两个三篇 `entryIds` 路径；012 后续已绑定 Liaozhai Hero。Liaozhai Featured 与六篇 `relatedEntryIds` 仍为空。
 10. 已完成：前三篇纠偏稿通过人工双语审核；Painted Skin 又按上海图书馆 1766 青柯亭本形成 2 Source / 7 Claim / 1 Terminology 的单见证草稿。
 11. 已完成：Project owner 于 2026-09-06 确认 Painted Skin 人工双语审核通过；短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
-12. 当前下一步：处理四篇视觉资产与内容状态；任/张及现代比较仅在未来恢复对应范围时处理。目标读者研究在 Public Beta 上线后按 R2a → R2b 的内部顺序执行。
+12. 已完成：012 为四篇 Entry 与 Liaozhai Collection 建立并批准五份 Hero-only brief；Project owner 随后批准五组候选与公开使用权利，Codex 完成 exact-canvas/委托英文终审，五组 master、production record、approved/current manifest、repository source 和内容绑定均已闭合。
+13. 当前下一步：另行处理四篇 `relatedEntryIds`、Liaozhai Featured 与内容状态。任/张及现代比较仅在未来恢复对应范围时处理。目标读者研究在 Public Beta 上线后按 R2a → R2b 的内部顺序执行。
 
-现有两篇 `editorial-review` Entry 不因本建议降级、升级或重写；四个新增 owner 保持 `draft`，且均已有证据受限首稿。本文决策批当时未创建第二 Collection；009 后续已完成本地路径接线。任何视觉资产、`relatedEntryIds` 或状态变化仍须另立获授权的 M6 内容批次。
+现有两篇 `editorial-review` Entry 不因本建议降级、升级或重写；四个新增 owner 保持 `draft`，且均已有证据受限首稿。本文决策批当时未创建第二 Collection；009 后续已完成本地路径接线，012 又在独立授权下完成五组 Hero 的生产、approved/current manifest、内容绑定与审校。四篇 `relatedEntryIds`、Liaozhai Featured 或内容状态变化仍须另立获授权的内容批次。
 
 ## 7. 风险与停止条件
 
@@ -169,7 +170,7 @@ Project owner 于 2026-09-03 首先确认：
 
 随后 Project owner 又单独授权只做四篇的实际见证/版次、正式书目与页/叶/canvas locator 证据闭合，仍不授权 Source/Claim/Terminology、正文、图片、内容对象或状态变化。此研究批由 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 执行并停在分层证据账本；其中青柯亭单见证已直接核页，跨见证判断仍维持硬门禁。Project owner 之后又分别确认工作底本/单见证路线、授权最小 draft Entry owner，并最终授权证据已闭合的 Source/Claim/Terminology 物化；这些是后续独立授权，不回溯扩大前两次研究授权。
 
-当前停点是四篇证据受限纵切片、人工双语审核及 009 的两个合集路径接线已完成：四篇均已建立证据消费关系与正文并通过人工双语审核；两个 Collection 均有明确 `entryIds`，资产、`relatedEntryIds` 与状态未随接线、单见证写作或语言审核改变。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送；Liaozhai Reading Guide 检查点 `119c01c` 也已由 Project owner 确认推送。当前修改位于后续已确认基线之上，未执行 fetch、Git 写操作或发布。下一内容动作是四篇视觉资产与状态审核；目标读者 R2 只在 Public Beta 上线后按 R2a → R2b 执行。上述授权均不包含外部服务、public artifact 或发布。
+当前停点是四篇证据受限纵切片、人工双语审核、009 的两个合集路径接线及 012 的五组 Hero 资产闭环已完成：四篇均已建立证据消费关系、正文和 approved/current Hero，两个 Collection 均有明确 `entryIds`，Liaozhai 也已绑定自己的 approved/current Hero。`relatedEntryIds`、Liaozhai Featured 与 Entry/Collection 状态仍未改变。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送；Liaozhai Reading Guide 检查点 `119c01c` 也已由 Project owner 确认推送。当前修改位于 `96da8db` 基线之上，未执行 fetch、Git 写操作或发布。下一内容动作是关系、Featured 与状态审核；目标读者 R2 只在 Public Beta 上线后按 R2a → R2b 执行。
 
 ## 9. 2026-09-04 后续证据物化记录
 
@@ -199,5 +200,5 @@ Project owner 授权只为 `fighting-cricket` 消费既有 1 Source / 3 Claim / 
 - Entry 精确消费 `source-shanghai-library-qingketing-liaozhai-1766`、三条 Fighting Cricket Claim 与 `term-shen-hua-in-fighting-cricket`；形成两段 opening、104 词摘要和四节英语正文，`lastFactCheckedAt` 为 `2026-09-04`。
 - 正文只覆盖青柯亭 1766 单一见证中贡促织压力、儿子捕捉逃脱蟋蟀时将其误伤致死、后来在井中被找到、家人准备草葬时发现尚有微息，以及一年有余后的自述；原文未说明他如何进入井中。正文明确排除历史税制概括、死亡复活、灵魂教义、跨见证版本史、作者归属与“首次增写”。
 - Source 的可见 `editionBasisOrObjectId` 使用 `Shanghai Library record 266652-67`；精确馆藏号 `線普長266652-67` 留在 notes。没有修改 Schema、模板、字体链或证据对象数量。
-- 最终完整 `pnpm run check` 通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 build 与 output verifier；当前仍为 42 Hero、10 WOFF2、0 XML、0 客户端 JavaScript。
+- 最终完整 `pnpm run check` 通过 Prettier、ESLint、25 个测试文件/321 项测试、Astro 81 个文件零诊断、13 页静态 build 与 output verifier；该批输出仍为 42 Hero、10 WOFF2、0 XML、0 客户端 JavaScript。
 - 四个新增 Entry 均保持 `draft`，published inventory 为 0/0；本批未处理图片、关系、外部服务、public artifact、部署或发布。Project owner 随后通过中文概要确认内容符合预期并授权本地提交，纵切片随本检查点进入当前 HEAD；未 fetch 或 push。

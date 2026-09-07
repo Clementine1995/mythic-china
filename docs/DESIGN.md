@@ -391,6 +391,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 ### 7.2 视觉语法
 
 - Hero 必须提供可读标题所需的真实安静空间，但不强制所有 Collection 使用一角式构图或固定 38%–45% 留白。人物位置、远近关系、色域和光线由该 Collection 的构图合同及具体资产 `focalPoint` 决定。
+- Entry 桌面 Hero 的 HTML identity 根据 approved desktop `focalPoint` 放在主要焦点的对侧；移动端仍把 identity 作为独立内容置于图片上方，不依赖图片内的文字安全区承载可访问标题。
 - 长页按现代策展路径组织：名称、故事问题与 Quick Answer 开场，核心故事展开，原典依据、后世版本与本站解释依次深化，完整 Sources、Related Entries 与 Reader Request 收束；来源标记仍贴近对应主张。手卷“由读者控制前进”的原则可以指导节奏，但页面不模拟卷轴、题跋、卷轴把手或古书翻页。
 - 文章使用稳定 measure、清晰标题、有限分隔、图注和 source notes 建立证据层级；不以密集 hairline、版心框、题签、假缝线、虫蛀、烧边或泛黄制造历史感。
 - 真实材质、低调光、雾和空间层次只服务于具体 Collection / Entry；用镜头、人物尺度和负空间形成戏剧性，不用 UI 粒子、发光边框和“游戏技能特效”。

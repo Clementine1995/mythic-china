@@ -1,0 +1,75 @@
+productionRecordId: production-ten-kings-hero-primary-v1
+briefId: brief-ten-kings-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier or seed; no model identity or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+recordedAt: "2026-09-07T05:58:02Z"
+renditions:
+  - manifestId: asset-ten-kings-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Ten Kings Entry Hero candidate 02, desktop landscape
+      Primary request: Create an entirely original minimalist editorial illustration built as an abstract gallery of time and records, with no literal architecture or historical objects. Across the right half, show exactly ten distinct horizontal pools of warm light embedded among floating blank matte record planes: exactly seven small pools grouped closely, followed by exactly three larger pools with visibly wider gaps. No other repeated lights, slits, pillars, doors, or marks. In a deeper right-side layer, suggest balance only through two offset matte planes around a plain central pivot, and suggest reflection through one separate dark glass plane. These two cues must be abstract sculpture, not recognizable antiques.
+      Style/medium: Contemporary semi-painterly digital editorial art, clean sculptural geometry, charcoal and oxidized-jade atmosphere, subtle mineral texture, shallow mist, precise negative space, readable shadows. Calm, restrained, intelligent.
+      Composition/framing: Landscape 16:9 for a 3200×1800 master. Keep the leftmost 42% and top 16% nearly empty, dark-to-midtone, and low-detail for HTML title/navigation. The 7+3 light rhythm runs horizontally through the right-middle, focal area near x 0.70, y 0.52.
+      Color palette: Charcoal, oxidized jade, warm neutral light; exactly one tiny flat cinnabar dash placed directly on one blank edge, not glowing and not freestanding.
+      Constraints: All record planes perfectly blank. Pure text-to-image original. No figures. No writing or decorative marks.
+      Avoid: Cavern, mountains, cliffs, building, room, corridor, columns, gates, doors, courts, map, ten vertical beams, lamp, lantern, torch, beacon, realistic balance scale, mirror frame, throne, official, king, deity, demon, punishment, ritual, gore, skull, manuscript, paper texture with writing, parchment, game art, neon, bloom, text, letters, numerals, pseudo-writing, calligraphy, seals, talismans, logo, watermark, border, UI.
+    receivedAt: "2026-09-07T03:33:52Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: d8ba8a7be094cadd05df67b73739cffe7e5cac9d841d4a8b97d11d80d576747e
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/ten-kings/v1/ten-kings-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 1af33a8138482ec8e17c80706022dd721d1dc1c30ce378009a546adc22538b29
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved desktop candidate 02 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 3200x1800 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+  - manifestId: asset-ten-kings-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Ten Kings Entry Hero candidate 03, mobile portrait
+      Primary request: Create an entirely original minimalist editorial illustration made only from abstract time, record, balance, and reflection geometry. Keep the top quarter and bottom eighth visually empty. Within the central vertical band only, show exactly ten and only ten distinct warm light pools: exactly seven small narrow pools grouped closely, then exactly three larger pools with wider gaps. Beneath the tenth pool but still well above the bottom empty zone, place one compact abstract balance cue made from two offset matte plates around a plain pivot, and one separate flat dark-glass reflection plane. No other lights or repeated objects.
+      Style/medium: Refined semi-painterly digital editorial art, charcoal and oxidized-jade atmosphere, matte mineral surfaces, restrained haze, clean sculptural geometry, readable shadow detail.
+      Composition/framing: Portrait 4:5 for 1600×2000, independently composed. The top 26% must be uninterrupted calm dark-to-midtone texture with zero objects. The bottom 14% must also contain zero objects. All ten pools and both lower cues fit between y 0.28 and y 0.82, mainly center-right. Focal area near x 0.55, y 0.56.
+      Color palette: Charcoal, oxidized jade, warm neutral light, exactly one tiny flat cinnabar dash on a matte plane edge.
+      Constraints: Count exactly ten pools, seven small plus three large. Perfectly blank surfaces, no figures, pure original.
+      Avoid: Cavern, mountain, landscape, building, room, stairs, corridor, columns, gates, doors, court, map, vertical beams, lamp, lantern, torch, realistic scale, framed mirror, throne, official, king, deity, demon, punishment, ritual, gore, manuscript, parchment, game art, text, numbers, writing, calligraphy, seals, talismans, logo, watermark, border, UI.
+    receivedAt: "2026-09-07T03:40:21Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: bcab3f9750c20c2c9fd1f20e60db28454731ea963e218d36ea4b17a1a7ee4862
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/ten-kings/v1/ten-kings-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: 23dc5876077abadcb20b370cf6e7d91d203ebfa0621024aae78740d59944a95a
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved mobile candidate 03 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 1600x2000 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+notes: The actual prompts and completion timestamps were recovered from the current Codex task's local event record solely to preserve production provenance; no chat transcript was copied into the repository. Raw selected candidates and exact-canvas masters remain in Git-ignored project-local storage, while the repository stores the approved same-canvas WebP sources.

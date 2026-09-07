@@ -80,7 +80,7 @@ Project owner 说明当前没有合适的独立目标读者，并要求 AI 先�
 
 Project owner 随后要求实施这些修订。本单元只改标题、开场、Quick Answer、正文表达与两篇内容提示，不新增或修改 Source/Claim/Terminology，不改稳定 ID、slug、合集成员/顺序、资产、事实核查日期或状态。改变含义和强调的英语单元须进入聚焦中英差异包，由 Project owner 重新确认；未改单元保留既有人工双语批准。
 
-当前实现已完成四篇文案修订，并在全部六篇 Entry 上显式迁移 `contentNote` 键；只有 Fighting Cricket 与 Painted Skin 使用非空文案。匹配 Schema、模板、fixture、单元测试与真实 build output oracle 已同步，完整本地检查结果为 25 个测试文件/369 项测试通过、Astro 81 个文件零诊断、14 页 review 输出、42 个 Hero、10 个锁定字体、零 XML 与零客户端 JavaScript。该自动证据只说明实现和输出符合合同，不构成聚焦双语确认或真人可读性结果。
+2026-09-06 当批实现已完成四篇文案修订，并在全部六篇 Entry 上显式迁移 `contentNote` 键；只有 Fighting Cricket 与 Painted Skin 使用非空文案。匹配 Schema、模板、fixture、单元测试与真实 build output oracle 已同步；该批完整本地检查结果为 25 个测试文件/369 项测试通过、Astro 81 个文件零诊断、14 页 review 输出、42 个 Hero、10 个锁定字体、零 XML 与零客户端 JavaScript。该自动证据只说明当批实现和输出符合合同，不构成聚焦双语确认或真人可读性结果；后续当前构建数量以 012 和根目录状态文档为准。
 
 ### 4.2 文章级 Content note 合同
 
@@ -193,4 +193,4 @@ Project owner 明确回复“`四篇聚焦双语复核通过。`”。该确认�
 
 ## 10. 下一停点
 
-当前项目下一停点是四篇视觉资产、`relatedEntryIds`、状态审核，以及 M5-U4/U5 与 M6 public artifact/release-candidate 工作；它们按各自合同继续推进。Public Beta 上线后，再以第 3–5 节及冻结 R1 的题目、rubric 与文稿基线准备 live R2a；材料问题关闭后，建立 5–8 份核心全站可用记录和四篇各前 5–8 份可用深读，按冻结规则补位。当前没有合适人选，R2a/R2b 保持未开始、真人反馈为 0。AI 专业审读、Project owner 单人判断和行为分析均不能替代目标读者数据；收齐反馈前须保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态，不能宣称目标读者验证或正式 MVP 验证通过。
+四篇与 Liaozhai Collection 的五组视觉资产已由 012 闭环；当前项目下一停点是四篇 `relatedEntryIds`、Liaozhai Featured、内容状态审核，以及 M5-U4/U5 与 M6 public artifact/release-candidate 工作，它们按各自合同继续推进。Public Beta 上线后，再以第 3–5 节及冻结 R1 的题目、rubric 与文稿基线准备 live R2a；材料问题关闭后，建立 5–8 份核心全站可用记录和四篇各前 5–8 份可用深读，按冻结规则补位。当前没有合适人选，R2a/R2b 保持未开始、真人反馈为 0。AI 专业审读、Project owner 单人判断和行为分析均不能替代目标读者数据；收齐反馈前须保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态，不能宣称目标读者验证或正式 MVP 验证通过。

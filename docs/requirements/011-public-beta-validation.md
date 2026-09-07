@@ -9,17 +9,17 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | 已确认 | Project owner 于 2026-09-07 确认采用“先完成非读者发布门禁，再以可索引 Public Beta 获取真实读者并关闭 R2”的路线 |
-| 实施状态 | 合同已建立；Public Beta 实现未开始 | 当前只有 noindex review build，`public` intent、完整资产、内容状态、稳定 origin、public artifact 与远端环境仍未完成 |
-| 验证状态 | PB1 文档验证通过；上线后目标读者验证未开始 | 32 份 Markdown 严格 UTF-8、101 个相对链接、零模板占位符与 `git diff --check` 已通过，两路独立只读交叉审查未发现当前合同冲突；[`010-four-entry-reader-review.md`](010-four-entry-reader-review.md) 的 R1 静态检查已通过，R2a/R2b 真人反馈仍为 0 |
+| 实施状态 | 合同已建立；PB2 已进入实施 | 012 已闭合四篇 Entry 与 Liaozhai Collection 的五组 Hero brief、候选/权利、master、production record、approved/current manifest、repository source 和内容绑定；关系、Featured、内容状态、`public` intent、稳定 origin、public artifact 与远端环境仍未完成 |
+| 验证状态 | PB1 文档验证与 PB2 Hero 数据闭环定向验证通过；上线后目标读者验证未开始 | 五组 Hero 的 Schema、production lineage、metadata/hash、owner/Claim 图、current resolver、内容外键、local master 与精确 inventory 已通过 8 个测试文件/38 项测试；最终视觉构建与全量结果见 012 第 7 节。R1 静态检查已通过，R2a/R2b 真人反馈仍为 0 |
 | 发布状态 | 未发布 | 当前 published Entry / Collection 为 0/0，没有 Vercel 项目、production hostname、受保护远端预览或生产部署 |
 
 - 当前权威结论更新时间：2026-09-07。
-- 决策基线：`f81b49fd1c288aed6c552c2e8d9926ec5a09e86c`；本次只更新路线合同，不形成可部署身份。
+- 决策基线：`f81b49fd1c288aed6c552c2e8d9926ec5a09e86c`；PB1 已提交为 `96da8db52cc384e0dc77164288d3bce16383faf0`。012 的五组 Hero 资产闭环从该基线继续；当前修改未提交，也不形成可部署身份。
 
 ## 1. 结论与开发就绪判断
 
 - 一句话结论：目标读者 R2 从 M6 上线前硬门禁改为 M7 Public Beta 上线后的验证与正式 MVP 收口门禁；缺少样本不得写成“通过”，但不再阻塞图片、状态、public artifact、受保护预览或经单独授权的 Public Beta 生产发布。
-- 是否可以进入本地后续开发：是。下一条内容主链可以进入四篇资产、`relatedEntryIds`、视觉与状态审核；M5-U4/U5 和 M6 public artifact 仍按各自授权与门禁推进。
+- 是否可以进入本地后续开发：是。四篇 Entry 与 Liaozhai Collection 的五组 Hero 资产已完成 approved/current 闭环；下一条内容主链是 `relatedEntryIds`、Liaozhai Featured 与内容状态审核。M5-U4/U5 和 M6 public artifact 仍按各自授权与门禁推进。
 - 是否可以立即发布 Public Beta：否。现有内容、外部服务、public build、最终 QA、预览和生产授权均未完成。
 - 会改变实现结果的待确认项：Public Beta 的具体可见提示文案与全站位置、目标读者招募/答卷渠道、Vercel 项目和稳定 hostname，均在对应实施单元前确认。
 
@@ -125,7 +125,7 @@ R2a 先验证这份执行包与 live 页面；只有材料问题关闭并冻结�
 ## 6. 实施拆分
 
 1. **PB1 合同同步**：新增本文并同步 README、项目规则、产品、设计、架构、总合同与相关历史需求的当前路线。状态：已完成。
-2. **PB2 非读者发布门禁**：完成 M5-U4、M5-U5 离线合同/hook、四篇资产/关系/视觉/状态及 M6 public 条件接线与 public artifact。状态：未开始。
+2. **PB2 非读者发布门禁**：完成 M5-U4、M5-U5 离线合同/hook、四篇资产/关系/视觉/状态及 M6 public 条件接线与 public artifact。状态：实施中；012 的五组 Hero 资产闭环已完成，关系、Featured、状态、交互和 public artifact 仍待后续批次。
 3. **PB3 受保护预览**：从 clean source 验证并验收受保护预览。状态：未开始。
 4. **PB4 Public Beta 生产发布**：逐次授权后把 validated source identity 发布到稳定、可索引的 production origin。状态：未开始。
 5. **PB5 上线后 R2**：先关闭第 5.1 节的研究执行与数据门禁，再在同一 live artifact 上完成 R2a、冻结研究版本、执行 R2b、处置与复测。状态：未开始。
@@ -142,4 +142,4 @@ R2a 先验证这份执行包与 live 页面；只有材料问题关闭并冻结�
 - Public Beta 路线已获确认；目标读者审核仍未执行，证据状态继续为 `PENDING HUMAN READERS`。
 - 缺少 R2 样本不再阻塞图片、`relatedEntryIds`、视觉/状态审核、M6 public artifact、受保护预览或经独立授权的 Public Beta 生产发布。
 - Public Beta 不是降低质量标准的预览替代物；除目标读者效果验证外，既有内容、资产、技术、隐私、版本身份、预览和生产门禁全部保留。
-- PB1 文档合同同步已完成；下一内容停点是四篇图片、`relatedEntryIds`、视觉与状态审核。后续任何代码、外部服务、状态、Git、Vercel 或发布动作仍须按对应范围单独授权。
+- PB1 文档合同同步已完成；PB2 已完成五组 Hero 的 brief、候选/权利、production lineage、approved/current manifest、repository source 与内容绑定。下一内容停点是四篇 `relatedEntryIds`、Liaozhai Featured 与状态审核；外部服务、public artifact、Git、Vercel 和发布仍须按对应范围单独授权。

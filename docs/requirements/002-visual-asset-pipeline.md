@@ -9,7 +9,7 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | M3-U1/U2/U3/U4/U5 已完成 | M3 终验中 Hero v1 手部缺陷曾重开；Project owner 于 2026-08-29 验收 Hero v2，权利/人工审核、版本/current、Entry Hero 外键、local master 复核、响应式实际写出与工程回归重新闭合 |
-| 实施状态 | M3 已完成 | M3 收口的一份 approved Zhong Kui brief、七个版本化 master、七份 approved repository source rendition、两份真实 production record 与五份 manifest 记录均保留。后续 Chinese Underworld Collection Hero 与 Guide Hero 沿同一合同分别独立闭合各自的两份 master、两份 source、一份 production record、一份 manifest 及所属内容绑定；当前总量为 11 个 master/11 份 source/四份 production record/七份 manifest，六个逻辑资产各有唯一 `approved + isCurrent: true`，Zhong Kui Hero v1 保留为 `approved + isCurrent: false`；直接依赖 `sharp@0.35.4` 和非默认 `visual:build:check` 保持有效 |
+| 实施状态 | M3 已完成，后续资产继续复用同一合同 | M3 收口记录完整保留；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续各自闭合独立 Hero 谱系。当前总量为 21 个 master、21 份 source、9 份 production record 与 12 份 manifest；11 个逻辑资产各有唯一 `approved + isCurrent: true`，Zhong Kui Hero v1 保留为 `approved + isCurrent: false`。直接依赖 `sharp@0.35.4` 与非默认 `visual:build:check` 现复核 17 份 current responsive source 的 120 个目标 |
 | 验证状态 | M3 通过 | 2026-08-29 七个 local master 的路径/尺寸/SHA-256/inventory 核验通过；三份 current responsive rendition 的 22 个 AVIF/WebP 目标全部实际生成并解码复核；完整 `pnpm run check` 通过 Prettier、ESLint、10 个测试文件/72 项测试、`astro check`（36 个文件，0 error、0 warning、0 hint）与 3 页静态 build |
 | 发布状态 | 不适用 | M3 没有远端预览或生产发布目标 |
 
@@ -28,7 +28,7 @@
 已确认事实：
 
 - M3 开始前的 M2 基线只有 Entry、Collection、Source、Claim、Terminology 五类 Content Layer；当时 Entry/Collection 已有 nullable `heroAssetId`，但只校验 `visual-review` 时非空，不校验真实资产外键。
-- 当前与视觉生产链有关的两个 `editorial-review` Entry 与一个 `editorial-review` Collection 已获阶段性接受；另有四个不含 `heroAssetId` 或视觉关系的 draft Entry，不消费任何 Asset Manifest。四个 draft 均有证据消费关系与正文并通过人工双语审核；目标读者反馈仍为 0，视觉资产与状态审核尚未关闭。按照 011，目标读者 R2 在 Public Beta 上线后执行，不阻塞这两项当前门禁。钟馗 Entry、Chinese Underworld Collection 与 Guide Entry 的 `heroAssetId` 分别为 `asset-zhong-kui-hero-primary`、`asset-chinese-underworld-hero-primary` 与 `asset-chinese-underworld-guide-hero-primary`。`visual/manifests` 已有七份 approved 版本记录，其中 Zhong Kui Hero v2、Lead/OG/Social v1、Collection Hero v1 与 Guide Hero v1 为 current，Zhong Kui Hero v1 为 non-current；`src/assets/images` 已有 11 份被其唯一引用的 approved source rendition。内容 resolver 把三个稳定 Hero 逻辑 ID 分别解析到各自显式 current manifest。
+- 当前 6 篇 Entry 与 2 个 Collection 均绑定自己的 approved/current Hero。两个 `editorial-review` Entry 与一个 `editorial-review` Collection 已获阶段性接受；四个 draft Entry 与 Liaozhai draft Collection 的 Hero 资产级审核已按 012 闭合，但内容状态、四篇 `relatedEntryIds`、Liaozhai Featured 和新页面级发布候选 QA 尚未关闭。按照 011，目标读者 R2 在 Public Beta 上线后执行，不阻塞这些当前门禁。`visual/manifests` 现有 12 份 approved 版本记录，其中 11 份为 current，Zhong Kui Hero v1 为 approved/non-current；`src/assets/images` 有 21 份被 manifest 唯一引用的 approved source rendition，另有 9 份 production record 与 21 个 Git-ignored local master。通用 resolver 把 11 个稳定逻辑资产分别解析到各自显式 current manifest；8 个 Hero family 覆盖 9 个所属 review 页面。
 - `docs/CONTENT_MODEL.md` 与本文已闭合逻辑资产、版本记录、current 选择、重复 role slot 和独立移动构图合同；M3-U3 已把 strict Schema、纯关系/文件 validator 和 resolver 接入真实 Astro build 调用链。
 - Astro 当前官方 Content Loader `glob()` 支持从任意本地目录加载 YAML，并通过 `base` 与 `generateId` 固定记录身份；本项目可以从 `visual/manifests` 建立构建期集合，无需为 YAML 再增加依赖。来源：[Content Loader API](https://docs.astro.build/en/reference/content-loader-reference/)，访问于 2026-08-28。
 
@@ -172,7 +172,7 @@ M3-U5 当前已实现：
 
 - `briefId` 使用 `brief-{ownerId}-{purpose}-v{version}`，例如 `brief-zhong-kui-visual-package-v1`；文件名、loader ID 与记录内 ID 一致，version 是从 1 开始的正整数。
 - status 为 `draft | in-review | approved | archived`；approved 必须保存真实 `approvedBy`、带引号的 UTC RFC 3339 `approvedAt` 与 notes。未批准 brief 不得进入生产。
-- owner 使用 `ownerType + ownerId`；`targetSlots[]` 覆盖 Hero、Lead、OG、Social，每项显式记录 role、slot、必需/可选 usage、画布尺寸与响应式构建目标，四个 manifest 引用同一包级 brief 版本。
+- owner 使用 `ownerType + ownerId`；每个 `targetSlots[]` 项显式记录 role、slot、必需/可选 usage、画布尺寸与响应式构建目标。钟馗 `visual-package-v1` 覆盖 Hero、Lead、OG、Social 并由四个 manifest 引用同一包级 brief 版本；Hero-only brief 只覆盖 `hero/primary`，四篇 Entry 与 Liaozhai Collection 的五份实例见 [`012-five-hero-visual-briefs.md`](012-five-hero-visual-briefs.md)。
 - `primaryReferenceFamily`、period、region、medium、cultural context。
 - `referenceAssets[]` 每项使用小写 kebab-case `referenceId`；同一 reference 跨 brief 版本保持 ID，保存 URL、author/organization、creator、`rightsStatus`、rights URL、适用 `licenseOrPermissionId` 与 notes。`rightsStatus` 闭合为 `research-only | public-domain | licensed | permission | unknown`；licensed/permission 必须有 identity 与 rights URL，public-domain/research-only 必须有可审核 rights URL，unknown 阻断 approved；research-only 不授予复制或衍生权。
 - `visualElements.verified / inferred / invented` 每项使用小写 kebab-case `elementId`；语义未变时跨 brief 版本保持 ID。verified 为 `statement + claimIds[]`，并关联现存、非 provisional、`certainty: verified` 的 Claim；inferred 为 `statement + rationale`；invented 为 `statement`。

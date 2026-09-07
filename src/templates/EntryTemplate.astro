@@ -27,6 +27,16 @@ const factCheckedLabel = entry.data.lastFactCheckedAt
       timeZone: "UTC",
     }).format(new Date(`${entry.data.lastFactCheckedAt}T00:00:00Z`))
   : null;
+const desktopHeroFocalX =
+  heroAsset?.data.repositoryRenditions.find(
+    (rendition) => rendition.usage === "hero-desktop",
+  )?.focalPoint.x ?? null;
+const heroIdentitySide =
+  desktopHeroFocalX === null
+    ? null
+    : desktopHeroFocalX >= 0.5
+      ? "entry-page--identity-start"
+      : "entry-page--identity-end";
 ---
 
 <SiteLayout
@@ -38,6 +48,7 @@ const factCheckedLabel = entry.data.lastFactCheckedAt
     class:list={[
       "entry-page",
       heroAsset ? "entry-page--visual" : "entry-page--simple",
+      heroIdentitySide,
     ]}
   >
     {

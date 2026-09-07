@@ -33,7 +33,7 @@ claimIds:
 terminologyRecordIds:
   - term-ye-mei-in-painted-skin
 relatedEntryIds: []
-heroAssetId: null
+heroAssetId: asset-painted-skin-hero-primary
 publishedAt: null
 updatedAt: null
 lastFactCheckedAt: "2026-09-06"

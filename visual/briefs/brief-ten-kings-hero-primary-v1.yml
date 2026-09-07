@@ -1,0 +1,124 @@
+briefId: brief-ten-kings-hero-primary-v1
+version: 1
+status: approved
+ownerType: entry
+ownerId: ten-kings
+purpose: hero-primary
+approvedBy: Project owner (user-delegated AI review)
+approvedAt: "2026-09-07T03:02:50Z"
+notes: >-
+  On 2026-09-07, the Project owner explicitly delegated review and confirmation of this English brief to Codex. Codex reviewed its evidence mapping, cultural boundaries, rights limits, responsive composition, and exclusions and approved the direction on that delegated basis. This approval covers only the brief; it approves neither an image nor a production method. The IDP reference remains research-only and must not be downloaded, copied, traced, or uploaded to a generation tool.
+primaryReferenceFamily: The continuous text-and-image sequence of the tenth-century Dunhuang S.3961 Ten Kings manuscript scroll, used only as a research reference for rhythm and object context
+period: The primary manuscript object is dated approximately 900–1000; CBETA supplies separate textual evidence and is not treated as its transcription
+region: Dunhuang in northwestern China, with the manuscript found at Mogao Cave 17; no universal Chinese underworld geography is claimed
+medium: Contemporary digital editorial illustration translating sequential manuscript rhythm and record surfaces; not a scroll facsimile, historical reconstruction, or underworld map
+culturalContext:
+  - Keep S.3961 and CBETA X01n0021_001 visibly separate as two witnesses that support different parts of the brief.
+  - Present ten ritual intervals as a temporal rhythm rather than ten numbered courts, ten portraits, or one fixed journey map.
+  - Separate the declaration and name-register layer from the later karma-ledger, scale, and mirror layer; do not collapse them into one historical apparatus.
+  - Keep judgment administrative and contemplative rather than punitive, gory, game-like, or horror-led.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: A wide horizontal visual rhythm passes through seven closely spaced unnumbered pauses and three more distant pauses; blank record planes lead toward separate abstract scale and mirror forms without depicting a named court.
+        safeArea: Keep the leftmost 42 percent and top 16 percent low-detail for the HTML Entry identity and navigation; render no text into the image.
+        focalPointGoal:
+          x: 0.7
+          y: 0.52
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently authored vertical sequence descends through seven compact light pauses before opening into three larger pauses, with blank records above and the scale and mirror cues kept in a separate lower depth.
+        safeArea: Keep the top 24 percent and bottom 12 percent free of essential figures or symbols for the HTML title and responsive controls; render no text into the image.
+        focalPointGoal:
+          x: 0.55
+          y: 0.57
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: s3961-continuous-manuscript-sequence
+      statement: The cited S.3961 object is an illustrated Chinese manuscript scroll dated approximately 900–1000 whose Ten Kings sequence occupies adjacent digital canvases.
+      claimIds:
+        - claim-ten-kings-s3961-object
+    - elementId: ten-ritual-intervals
+      statement: The cited CBETA witness presents seven seven-day observances followed by a hundredth-day observance, a first-anniversary observance, and a tenth observance in the third year.
+      claimIds:
+        - claim-ten-kings-ten-intervals
+    - elementId: separated-recording-apparatus
+      statement: The cited CBETA witness distinguishes a submitted declaration and registered name from a later judgment passage with a karma ledger, scale, and mirror.
+      claimIds:
+        - claim-ten-kings-recording-apparatus
+  inferred:
+    - elementId: seven-plus-three-pause-rhythm
+      statement: Translate the ten textual intervals into seven compact and three more widely spaced unnumbered pauses rather than literal dated labels.
+      rationale: The grouping preserves the sequence supported by the Claim while avoiding fabricated writing or a claim that S.3961 depicts this exact layout.
+    - elementId: layered-record-scale-mirror-depth
+      statement: Place blank record planes in one depth and abstract balance and reflection cues in another.
+      rationale: Spatial separation prevents two CBETA passages from being collapsed into a single documented ritual scene.
+    - elementId: charcoal-jade-cinnabar-editorial-palette
+      statement: Use charcoal depth, oxidized jade haze, warm neutral light, and one restrained cinnabar navigation accent.
+      rationale: This palette relates the Entry to the Chinese Underworld Collection while remaining an editorial choice rather than a claim about manuscript pigments.
+  invented:
+    - elementId: original-threshold-and-record-forms
+      statement: All thresholds, blank record surfaces, architectural fragments, and spatial relationships are newly designed abstract forms.
+    - elementId: original-balance-and-reflection-forms
+      statement: The scale and mirror cues are original nonfunctional silhouettes and do not reconstruct named ritual objects.
+    - elementId: original-anonymous-scale-figures
+      statement: Any small figures are original, unnamed silhouettes used only for scale, with no invented rank, costume, species, or biography.
+    - elementId: original-light-weather-and-texture
+      statement: Directional light, haze, particles, and surface texture are invented editorial atmosphere.
+referenceAssets:
+  - referenceId: ref-idp-ten-kings-s3961
+    url: https://idp.bl.uk/collection/2ED6F9800FD74DE08CBB9CB2F8E5D7BD/
+    organization: British Library; International Dunhuang Programme
+    creator: Unidentified Chinese artist(s) and scribe(s)
+    rightsStatus: research-only
+    rightsUrl: https://idp.bl.uk/copyright/
+    licenseOrPermissionId: null
+    notes: Study only the existence of a continuous text-and-image manuscript sequence and its restrained density. Do not download, reproduce, trace, crop, upload, or imitate figures, writing, seals, individual scenes, or the complete composition.
+composition:
+  continuity: Desktop and mobile share one sequence, palette, material family, and separation between record and judgment layers while using independently authored compositions.
+  hierarchy: The ten-part temporal rhythm is primary; blank record planes are secondary; abstract scale and mirror cues are tertiary; no king, official, punishment, or monster becomes the focal spectacle.
+  colorDirection: Charcoal and oxidized jade dominate, warm neutral light holds the pauses, and cinnabar appears once as a small wayfinding accent.
+  lightingDirection: Let light mark temporal pauses and increasing depth without black-red horror lighting, neon effects, game-poster bloom, or crushed shadows.
+  textPolicy: Entry title, Chinese terms, pinyin, caption, credit, disclosure, and all navigation remain HTML; artwork contains no writing, numerals, pseudo-Chinese marks, scripture, seals, logos, or watermarks.
+excludedMotifs:
+  - Treating S.3961 and CBETA X01n0021_001 as one witness, one transcription, or one shared illustrated scene
+  - Ten numbered courts, eighteen levels, a universal underworld map, or a fixed architectural itinerary
+  - A supreme King Yama, a named Ten King, Zhong Kui, or invented canonical portraits and official costumes
+  - Graphic punishment, torture, gore, severed bodies, skull piles, or suffering used as spectacle
+  - Claims about historical display, unrolling, chanting, ritual audience, or viewing behavior not established by the current evidence
+  - Direct copies or close derivatives of the IDP manuscript, including figures, writing, seals, page damage, and complete composition
+  - Black Myth, entertainment-franchise silhouettes, game UI, HUD elements, logos, or trademarks
+  - Pseudo-Chinese writing, invented scripture, talismans, seals, baked-in title text, or watermarks
+openDecisions:
+  - A separately authorized production method, tool and account, input-rights review, candidate count, master location, and backup plan
+  - Final image selection, informative alt text, caption, credit, disclosure, responsive crops, and named cultural, rights, visual, accessibility, and language reviews

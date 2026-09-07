@@ -1,0 +1,73 @@
+productionRecordId: production-liaozhai-hero-primary-v1
+briefId: brief-liaozhai-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier or seed; no model identity or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+recordedAt: "2026-09-07T05:58:02Z"
+renditions:
+  - manifestId: asset-liaozhai-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Liaozhai Collection Hero candidate 03, desktop landscape
+      Primary request: Create an entirely original abstract editorial environment dominated by one broad asymmetrical negative-space aperture cut through two overlapping matte charcoal planes on the right. The aperture is flat-edged and clearly designed, neither rectangular nor organic, and cannot resemble a cave, window, doorway, portal, animal, tail, flame, or character. Through the aperture runs one single continuous diagonal stone-and-paper path, never shelves or compartments. Along that same unbroken path, at three unequal distances: first and clearest, several overlapping perfectly blank page-like planes; farther away, exactly one brush beside one partly occluded thin blank material layer; farthest and smallest, exactly one natural cricket beneath two narrowing abstract threshold slabs. Use depth and scale, not horizontal tiers, to separate the cues.
+      Style/medium: Refined semi-painterly digital editorial illustration with planar sculpture, matte mineral texture, restrained smoke-green atmosphere, crisp silhouette, warm neutral surfaces, one muted amber light.
+      Composition/framing: Landscape 16:9 for 3200×1800. Keep the leftmost 42% and top 16% calm and low-detail for HTML identity/navigation. The large non-rectangular aperture dominates the right, focal path near x 0.70, y 0.53.
+      Constraints: Exactly one continuous path, one brush, one cricket. No shelves, floors, stacked compartments, cards, panels, or icons. All blank forms contain no marks.
+      Avoid: Shelf, cabinet, room levels, three tiers, triptych, horizontal compartments, window, door, cave, tunnel, portal ring, organic ribbons, curls, fox silhouette, animal shape, flame, collage, ghost, body, gore, child, well, animal fight, haunted house, skull, antique book, text, writing, seal, logo, watermark, film or game imagery.
+    receivedAt: "2026-09-07T03:40:21Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: 9d77baf58efa61436b825248434f0479f95859b0466d55276e78940e320cdc6b
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai/v1/liaozhai-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 7dd2af20ba70f10b7a9a786c02159ce1110d37fd35db4978666a68c256a5cd31
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved desktop candidate 03 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 3200x1800 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+  - manifestId: asset-liaozhai-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Liaozhai Collection Hero candidate 03, mobile portrait
+      Primary request: Create an entirely original abstract editorial environment dominated by one tall asymmetrical negative-space aperture cut through two overlapping matte charcoal planes. The aperture is flat-edged and designed, neither rectangular nor organic, and cannot resemble a cave, window, doorway, portal, animal, tail, flame, or character. Through it runs one single continuous slanted path, never shelves or compartments. Along that same unbroken path below the empty title zone, at three unequal distances: first and clearest, several overlapping perfectly blank page-like planes; farther down, exactly one brush beside one partly occluded thin blank material layer; farthest and smallest, exactly one natural cricket beneath two narrowing abstract threshold slabs. Use depth and scale rather than tiers.
+      Style/medium: Refined semi-painterly digital editorial illustration, planar sculpture, matte mineral texture, restrained smoke-green atmosphere, crisp silhouette, warm neutral surfaces, one muted amber light.
+      Composition/framing: Portrait 4:5 for 1600×2000, independently composed. Keep top 24% and bottom 12% calm and free of all narrative cues. Aperture dominates the middle-right; connected path focal area near x 0.55, y 0.55.
+      Constraints: Exactly one continuous path, one brush, one cricket. No shelves, floors, stacked compartments, cards, panels, tiers, or icons. No marks on blank forms.
+      Avoid: Shelf, cabinet, room levels, three tiers, triptych, horizontal compartments, rectangular window, door, cave, tunnel, portal ring, organic ribbons, curls, fox silhouette, animal shape, flame, collage, ghost, body, gore, child, well, animal fight, haunted house, skull, antique book, text, writing, seal, logo, watermark, film or game imagery.
+    receivedAt: "2026-09-07T03:40:21Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 0ddd152b5d0a389677dceed6a3c60338b4eff312dc3c13df31b5e25c1fe51843
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai/v1/liaozhai-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: 00fd77b9d6dc0866494a71cbddc4af1ce6dc76e20e6f7b661eeb3a519d63b60c
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved mobile candidate 03 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 1600x2000 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+notes: The actual prompts and completion timestamps were recovered from the current Codex task's local event record solely to preserve production provenance; no chat transcript was copied into the repository. Raw selected candidates and exact-canvas masters remain in Git-ignored project-local storage, while the repository stores the approved same-canvas WebP sources.

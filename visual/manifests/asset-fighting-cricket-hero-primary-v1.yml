@@ -1,0 +1,119 @@
+assetId: asset-fighting-cricket-hero-primary
+manifestId: asset-fighting-cricket-hero-primary-v1
+ownerType: entry
+ownerId: fighting-cricket
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-fighting-cricket-hero-primary-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/fighting-cricket/v1/fighting-cricket-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 855a743c1abdb7fe429355b7605be57234a7365518cd08dfa816bf6c625bc33e
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/fighting-cricket/v1/fighting-cricket-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 0e1a3dc28de60b87983e730c711dea5591c326e00c190f2be85b3de3d409b409
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/fighting-cricket-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 5587deb207074d79bcab6b3378aef5fecfd6999e4f63b26cf8952d9f66dd6222
+    focalPoint:
+      x: 0.75
+      y: 0.63
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/fighting-cricket-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 6296341fc59e4889963e6c859ac4ec09766c472c1271c65b2c77024412200b1c
+    focalPoint:
+      x: 0.56
+      y: 0.64
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-shanghai-library-qingketing-liaozhai-1766
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner / applicable authorizing organization
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - demand-reaches-household
+  - narrowing-authority-thresholds
+  - separated-cricket-and-well-cues
+  - smoke-green-low-amber-palette
+  - original-threshold-household-space
+  - original-cricket-depiction
+  - original-light-shadow-and-weather
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen via Codex
+  recordPath: visual/production-records/production-fighting-cricket-hero-primary-v1.yml
+  workflow: null
+humanEdits:
+  - Selected Project-owner-approved desktop candidate 02 and independently composed mobile candidate 02 as one responsive pair.
+  - Reconstructed both raw outputs to the exact approved Hero canvases with centered fit-cover Lanczos3 processing and no non-uniform stretching.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the selected final raw candidates and exact-canvas masters in Git-ignored project-local storage for audit.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The approved pair keeps one cricket small beside narrowing abstract thresholds and a separated partial ring. It shows no child, fall, injury, burial, transformation, combat, official, or historical reconstruction.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-09-07T05:34:08Z"
+    notes: Approved from the Project owner's account-management and public-use authorization. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+  visual:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The Project owner approved desktop candidate 02 and mobile candidate 02 as one responsive pair at 2026-09-07T05:34:08Z. After exact-canvas conversion, Codex inspected the 3200x1800 desktop and 1600x2000 mobile canvases at full-canvas and original-resolution detail scale. The required title and control safe areas, focal hierarchy, and independent desktop/mobile compositions remain intact. No visible text, pseudo-writing, logo, watermark, disallowed motif, obvious broken geometry, or encoding defect is present.
+  accessibility:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The alt identifies the small cricket, narrowing thresholds, and detached partial ring without assigning a transformation. The caption relates these cues to the tale's demand chain and well while explicitly excluding the child and literal transformation. This asset review does not replace pending page-level browser accessibility review.
+  language:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: No rendered text, letters, numbers, Chinese characters, pseudo-writing, calligraphy, seals, talismans, logos, or watermarks are present. At the Project owner's request, Codex reviewed the English alt, caption, credit, disclosure, and owner naming for accuracy and scope; this attribution does not claim that the Project owner personally reviewed the English wording.
+alt: A small cricket stands beside a narrowing path of dark stone thresholds, with a detached partial ring in the mist.
+caption: A contemporary AI-assisted editorial interpretation compresses the cited tale's chain of official demand into narrowing thresholds ending at one small cricket; a detached rim alludes to the well without depicting the child or a literal transformation, and the space and species details are invented.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

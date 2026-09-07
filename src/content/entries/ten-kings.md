@@ -27,7 +27,7 @@ claimIds:
 terminologyRecordIds:
   - term-shi-wang-in-ten-kings
 relatedEntryIds: []
-heroAssetId: null
+heroAssetId: asset-ten-kings-hero-primary
 publishedAt: null
 updatedAt: null
 lastFactCheckedAt: "2026-09-04"

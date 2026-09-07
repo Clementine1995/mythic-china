@@ -1,0 +1,122 @@
+assetId: asset-liaozhai-hero-primary
+manifestId: asset-liaozhai-hero-primary-v1
+ownerType: collection
+ownerId: liaozhai
+role: hero
+slotId: primary
+version: 1
+status: approved
+isCurrent: true
+briefId: brief-liaozhai-hero-primary-v1
+accessibilityMode: informative
+masterRenditions:
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai/v1/liaozhai-hero-primary-v1-hero-desktop-3200w.png
+    usage: hero-desktop
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 7dd2af20ba70f10b7a9a786c02159ce1110d37fd35db4978666a68c256a5cd31
+  - logicalUri: project-local://mythic-china/.local/visual-production/masters/liaozhai/v1/liaozhai-hero-primary-v1-hero-mobile-1600w.png
+    usage: hero-mobile
+    widthPx: 1600
+    heightPx: 2000
+    sha256: 00fd77b9d6dc0866494a71cbddc4af1ce6dc76e20e6f7b661eeb3a519d63b60c
+repositoryRenditions:
+  - usage: hero-desktop
+    path: src/assets/images/liaozhai-hero-primary-v1-hero-desktop-3200w.webp
+    format: webp
+    widthPx: 3200
+    heightPx: 1800
+    sha256: 94ba4268a31a95d6d729d5add6882520b42c891ce39167bb2d37a45e824a5c9e
+    focalPoint:
+      x: 0.7
+      y: 0.53
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+        - 1920
+      allowUpscale: false
+  - usage: hero-mobile
+    path: src/assets/images/liaozhai-hero-primary-v1-hero-mobile-1600w.webp
+    format: webp
+    widthPx: 1600
+    heightPx: 2000
+    sha256: b0c4bf26c337e6e19a4a0d070d1143bad8f9720543f2ce6d8078a79f49575c2d
+    focalPoint:
+      x: 0.55
+      y: 0.55
+    buildPlan:
+      mode: responsive
+      formats:
+        - avif
+        - webp
+      candidateWidths:
+        - 640
+        - 960
+        - 1440
+      allowUpscale: false
+referenceAssetIds:
+  - ref-shanghai-library-qingketing-liaozhai-1766
+publicationRights:
+  status: approved
+  basis: in-house-original
+  rightsHolder: Mythic China project owner / applicable authorizing organization
+  licenseOrPermissionId: null
+  rightsUrl: https://openai.com/policies/terms-of-use/
+  notes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain.
+visualElementIds:
+  - edition-aware-unequal-text-groups
+  - painted-wearable-appearance
+  - authority-pressure-reaches-household
+  - three-depth-reading-path
+  - off-frame-strange-presence
+  - smoke-green-charcoal-amber-collection-palette
+  - original-off-axis-dark-aperture
+  - original-night-reading-world
+  - original-page-layer-brush-and-cricket-forms
+  - original-light-shadow-mist-and-texture
+production:
+  method: ai-assisted
+  tool: OpenAI built-in ImageGen via Codex
+  recordPath: visual/production-records/production-liaozhai-hero-primary-v1.yml
+  workflow: null
+humanEdits:
+  - Selected Project-owner-approved desktop candidate 03 and independently composed mobile candidate 03 as one responsive pair.
+  - Reconstructed both raw outputs to the exact approved Hero canvases with centered fit-cover Lanczos3 processing and no non-uniform stretching.
+  - Encoded both repository sources as same-canvas WebP at quality 90 with Sharp 0.35.4.
+  - Retained the selected final raw candidates and exact-canvas masters in Git-ignored project-local storage for audit.
+reviews:
+  cultural:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The approved pair uses one connected path and unequal cues for the Guide, Painted Skin, and Fighting Cricket within an off-axis aperture. It avoids an equal-card collage, universal ghost-world claim, gore, child imagery, combat, and Qingketing facsimile.
+  rights:
+    status: approved
+    reviewedBy: Project owner (user-confirmed)
+    reviewedAt: "2026-09-07T05:34:08Z"
+    notes: Approved from the Project owner's account-management and public-use authorization. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+  visual:
+    status: approved
+    reviewedBy: Project owner (candidate selection) + Codex (exact-canvas final review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The Project owner approved desktop candidate 03 and mobile candidate 03 as one responsive pair at 2026-09-07T05:34:08Z. After exact-canvas conversion, Codex inspected the 3200x1800 desktop and 1600x2000 mobile canvases at full-canvas and original-resolution detail scale. The required title and control safe areas, focal hierarchy, and independent desktop/mobile compositions remain intact. No visible text, pseudo-writing, logo, watermark, disallowed motif, obvious broken geometry, or encoding defect is present.
+  accessibility:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: The alt identifies the dominant aperture and the connected page, brush, cricket, and threshold cues in visual order. The caption names the three member responsibilities and states that the combined path is invented rather than a historical interior, folklore map, or single-tale scene. This asset review does not replace pending page-level browser accessibility review.
+  language:
+    status: approved
+    reviewedBy: Codex (Project-owner-delegated English review)
+    reviewedAt: "2026-09-07T05:50:01Z"
+    notes: No rendered text, letters, numbers, Chinese characters, pseudo-writing, calligraphy, seals, talismans, logos, or watermarks are present. At the Project owner's request, Codex reviewed the English alt, caption, credit, disclosure, and owner naming for accuracy and scope; this attribution does not claim that the Project owner personally reviewed the English wording.
+alt: An angular dark aperture frames one lit path from blank pages and a brush toward a tiny cricket beneath narrowing planes.
+caption: A contemporary AI-assisted editorial illustration connects unequal blank page groups, Painted Skin's brush and unmarked layer, and Fighting Cricket's small subject within one invented reading path; it is not a historical interior, a folklore map, or a scene from one tale.
+credit: Mythic China Editorial
+aiDisclosure: AI-assisted original illustration, art-directed and reviewed by Mythic China Editorial.

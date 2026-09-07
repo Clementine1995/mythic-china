@@ -1,0 +1,75 @@
+productionRecordId: production-painted-skin-hero-primary-v1
+briefId: brief-painted-skin-hero-primary-v1
+method: ai-assisted
+tool: OpenAI built-in ImageGen via Codex
+modelId: null
+modelNotes: The built-in ImageGen tool response did not expose a model identifier or seed; no model identity or seed is inferred.
+termsUrl: https://openai.com/policies/terms-of-use/
+rightsNotes: On 2026-09-07, the Project owner confirmed that the current OpenAI/Codex account is legally managed by them, either as a personal account or under organization authorization, and authorized these project-generated images to be saved, edited, and used for public publication by Mythic China. This record does not infer whether the account is personal or organization-managed and does not claim exclusivity, automatic copyrightability, absolute non-infringement, or clearance of unrelated third-party rights beyond the recorded production chain. Both selected candidates were text-only; no museum, manuscript, scan, research, or other third-party image was supplied to ImageGen.
+recordedAt: "2026-09-07T05:58:02Z"
+renditions:
+  - manifestId: asset-painted-skin-hero-primary-v1
+    usage: hero-desktop
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Painted Skin Entry Hero candidate, desktop landscape
+      Primary request: Create an entirely original contemporary editorial illustration for a refined cultural publication. Semi-painterly digital image with sculptural depth, tactile matte mineral-like surfaces, restrained atmospheric haze, precise negative space, crisp silhouettes, readable shadows, and soft directional light. Mysterious but legible; cinematic without game-poster spectacle; scholarly without becoming a diagram; tactile without decorative antiquing. No photoreal historical reconstruction. No text, letters, numerals, pseudo-Chinese writing, calligraphy, seals, talismans, symbols, logos, watermarks, borders, UI, or baked-in title. No yellowed parchment, distressed-book texture, franchise design, neon rim light, or copied historical composition.
+      View an original, historically nonspecific interior from a quiet exterior darkness through one narrow rectangular window opening on the right. The act of looking through the restricted opening is the primary subject. Inside, show a mostly hidden, visually indeterminate presence whose obscured hand partly holds a simple brush, directed toward a folded, entirely unmarked skin-like material plane resting across a low surface. Keep the material ambiguous, non-anatomical, unfinished, and non-graphic. The being is tertiary and mostly occluded.
+      Composition/framing: Landscape 16:9, independently designed for a 3200×1800 master. Exterior negative space dominates. Keep the leftmost 42% and top 16% calm, dark, and low-detail for white HTML title and navigation. Put the narrow rectangular reveal and ambiguous presence on the right, focal point near x 0.73, y 0.51. No border or embedded UI.
+      Color palette: Smoke-green night, charcoal occlusion, warm neutral surfaces, one muted interior amber glow.
+      Constraints: The brush must be visibly connected to the hidden presence, never floating. No explicit body detail. All room, window, furniture, brush, material, clothing fragment, lighting, and spatial design must be original and historically nonspecific.
+      Avoid: Fox ears, fox tail, animal shadow, fixed species, glamour portrait, femme fatale, eroticized body, nudity, exposed tissue, flaying, blood, heart, organs, surgery, forced swallowing, cure scene, Taoist, sword, talisman, ritual equipment, precise Qing interior, period costume, film still, jump scare, rectangular portal effects, ghosts, or game character.
+    receivedAt: "2026-09-07T03:23:49Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1672
+      heightPx: 941
+      sha256: 8ba6d1533169b634cfd09a122ec5e6d154d08b5726d29f49affe11296351035d
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/painted-skin/v1/painted-skin-hero-primary-v1-hero-desktop-3200w.png
+      usage: hero-desktop
+      widthPx: 3200
+      heightPx: 1800
+      sha256: 2f8e3d0f6fd42b4a30ab891cf90d0435c28a406f448c5c006c400094afe08b36
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved desktop candidate 01 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 3200x1800 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+  - manifestId: asset-painted-skin-hero-primary-v1
+    usage: hero-mobile
+    prompt: |-
+      Use case: stylized-concept
+      Asset type: Mythic China Painted Skin Entry Hero candidate, mobile portrait
+      Primary request: Create an entirely original contemporary editorial illustration for a refined cultural publication. Semi-painterly digital image with sculptural depth, tactile matte mineral-like surfaces, restrained atmospheric haze, precise negative space, crisp silhouettes, readable shadows, and soft directional light. Mysterious but legible; cinematic without game-poster spectacle; scholarly without becoming a diagram; tactile without decorative antiquing. No photoreal historical reconstruction. No text, letters, numerals, pseudo-Chinese writing, calligraphy, seals, talismans, symbols, logos, watermarks, borders, UI, or baked-in title. No yellowed parchment, distressed-book texture, franchise design, neon rim light, or copied historical composition.
+      From quiet exterior darkness, look through one narrow rectangular vertical window gap below the empty title zone into an original, historically nonspecific interior. The restricted act of looking is primary. Inside, a mostly hidden, visually indeterminate presence has one obscured hand partly holding a simple brush, directed toward a folded, entirely unmarked skin-like material plane on a low surface. Keep the material ambiguous, non-anatomical, unfinished, and non-graphic; keep the being tertiary and mostly occluded.
+      Composition/framing: Portrait 4:5, independently composed for a 1600×2000 master, never a crop of a landscape. Keep the top 22% and bottom 12% calm and free of essential presence, brush, or material detail. Window gap begins below the title zone; focal reveal near x 0.57, y 0.56.
+      Color palette: Smoke-green night, charcoal occlusion, warm neutral surfaces, one muted amber interior glow.
+      Constraints: Brush visibly connected to the hidden presence, never floating. No explicit body details. All forms original and historically nonspecific.
+      Avoid: Fox features, fixed species, glamour portrait, femme fatale, sexualized body, nudity, exposed tissue, flaying, blood, heart, organs, surgery, cure scene, Taoist, sword, talisman, ritual equipment, Qing reconstruction, period costume, film still, jump scare, ghost, game character.
+    receivedAt: "2026-09-07T03:29:37Z"
+    inputImages: []
+    rawOutput:
+      format: png
+      widthPx: 1122
+      heightPx: 1402
+      sha256: 0e67b705f5b558cddeaf2596722dfe63504cc5a65c08f8a49a53b3269c6a5797
+    master:
+      logicalUri: project-local://mythic-china/.local/visual-production/masters/painted-skin/v1/painted-skin-hero-primary-v1-hero-mobile-1600w.png
+      usage: hero-mobile
+      widthPx: 1600
+      heightPx: 2000
+      sha256: e1aba0378718f557f9a302efa47f5f87d15d6d5015d7870ec0d001552d939ebb
+    processing:
+      tool: Sharp
+      version: 0.35.4
+      operations:
+        - Verified Project-owner-approved mobile candidate 01 against its recorded SHA-256 before processing.
+        - Reconstructed the exact 1600x2000 Hero canvas with centered fit-cover Lanczos3 processing, a subpixel edge crop, and no non-uniform stretching; the master is not described as a native ImageGen canvas.
+        - Encoded the repository rendition as same-canvas WebP at quality 90 with Sharp 0.35.4.
+    verifiedAt: "2026-09-07T05:41:57Z"
+notes: The actual prompts and completion timestamps were recovered from the current Codex task's local event record solely to preserve production provenance; no chat transcript was copied into the repository. Raw selected candidates and exact-canvas masters remain in Git-ignored project-local storage, while the repository stores the approved same-canvas WebP sources.

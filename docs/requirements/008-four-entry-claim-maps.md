@@ -24,7 +24,7 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 | 方向决定 | 已确认 | 007 的 Liaozhai 第二 Collection 方向、3+3 分配、两条公开阅读顺序、Zhong Kui Featured 与《促织》保留均获确认；后续又确认任笃行 2016 主/张友鹤 2011 对校的工作路线，以及《促织》青柯亭单见证路线；第二 Collection 名仍是工作标题 |
 | 研究状态 | 可取得证据已分层复核，未决门禁保留 | Ten Kings 的馆藏对象、IIIF canvas、CBETA 行号及核心书目已闭合；Painted Skin 已核上海图书馆 1766 青柯亭本卷一数字页 72–75 / 左版心叶码 35–38，并区分任 2016 的部分可读电子材料与张 2011 的书目边界；《促织》只闭合上海图书馆青柯亭见证，跨见证门禁仍未闭合 |
 | 写作准备度 | 四篇均有证据受限英语草稿；修订前锁定稿及 010 当前改动单元与两条内容提示均已通过 Project owner 双语确认 | Painted Skin 当前只消费青柯亭 1766 与 Tso 2017 的 2 Source / 7 Claim / 1 `bilingual-approved` Terminology；自译只取一条短句并以 `verified` Claim 保存原文、版本、locator、译者/日期与审核记录，任/张比较及现代译本/影视直接比较移出当前 MVP |
-| 实施状态 | 证据最小物化、四篇纵切片、修订前锁定稿及 010 当前改动单元的双语确认、两个合集路径接线与 R1 重建完成 | 当前四个 `draft` Entry 均有正文；Painted Skin 新增 5 份原典 Claim、1 份本站自译 Claim 与 1 份 Terminology，并复用既有两份 Source。009 已把六篇接入两个三篇路径；010 聚焦确认与 R1 重建未新增资产、`relatedEntryIds` 或 Entry/Collection 状态变化。R1 已退役为 reference-only，目标读者反馈仍为 0 |
+| 实施状态 | 证据最小物化、四篇纵切片、双语确认、两个合集路径、R1 重建与五组 Hero 资产闭环完成 | 当前四个 `draft` Entry 均有正文；009 已把六篇接入两个三篇路径。012 已闭合四篇 Entry 与 Liaozhai Collection 的 approved brief、候选/权利、exact-canvas master、production record、approved/current manifest、repository source 和内容 Hero 绑定；`relatedEntryIds`、Liaozhai Featured 与 Entry/Collection 状态未改。R1 已退役为 reference-only，目标读者反馈仍为 0 |
 | 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本批不改变状态或 public artifact |
 
 本文中的 `TK-*`、`LZ-*`、`PS-*`、`FC-*` 只是研究表格内的局部标签，不是 Content Layer 稳定 ID，也不得复制进 `src/content` 后直接充当 Claim ID。表中的“可写”表示证据路线足以支持后续起草，不表示主张已完成双语、文化、版权或 Project owner 审校。
@@ -394,11 +394,12 @@ Project owner 在查看包含 20 组中英对照、Claim/Terminology 表和 12 �
 9. 已完成：Painted Skin 改用已核上海图书馆 1766 青柯亭本形成单见证首稿，消费 2 Source / 7 Claim / 1 Terminology；任/张比较、现代译本和影视直接比较移出当前 MVP。
 10. 已完成：Project owner 确认 Painted Skin 人工双语审核通过；本站短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
 11. 已完成：按 [`010-four-entry-reader-review.md`](010-four-entry-reader-review.md) 建立四篇目标读者文稿审核合同，并在仓库外生成当时通过静态技术检查的协调者 Markdown 与唯一参与者 HTML；该修订前 R1 快照现已因正文和模板输入改变而失效并标记为不得分发。
-12. 当前下一步：010 的四篇聚焦中英差异已确认，R1 已从当前 build 重生成、通过静态检查并退役为 reference-only；先完成视觉资产、`relatedEntryIds` 与状态审核。Public Beta 上线后，由 1 位不计入正式样本的目标读者在 live artifact 上执行 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按预冻结规则补位。任/张实页只在未来恢复现代校勘比较时再成为阻塞。
+12. 已完成：012 从当前 verified Claim 与权利边界建立五份 Hero-only brief；Project owner 批准候选配对与公开使用权利，Codex 完成 exact-canvas 和委托英文终审，五组 production record、approved/current manifest、repository source 和内容 Hero 绑定已闭合。
+13. 当前下一步：处理四篇 `relatedEntryIds`、Liaozhai Featured 与状态审核。Public Beta 上线后，由 1 位不计入正式样本的目标读者在 live artifact 上执行 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按预冻结规则补位。任/张实页只在未来恢复现代校勘比较时再成为阻塞。
 
 ## 9. 本批最终状态
 
-- 四篇候选的 claim map、正式书目、可取得的精确 locator、术语与不可写边界已完成分层研究；四个 draft owner 均已有证据受限草稿；修订前锁定稿、当前改动单元和两条内容提示均已通过 Project owner 双语确认。010 修订前 R1 已被当前重建版本取代且不得分发；当前 R1 静态检查通过，非计入试跑和正式真人反馈均为 0。该结果不表示四篇已通过目标读者、视觉或状态审核。
+- 四篇候选的 claim map、正式书目、可取得的精确 locator、术语与不可写边界已完成分层研究；四个 draft owner 均已有证据受限草稿；修订前锁定稿、当前改动单元和两条内容提示均已通过 Project owner 双语确认。012 已为四篇与 Liaozhai Collection 闭合五组 approved/current Hero 和内容绑定；010 修订前 R1 已被当前重建版本取代且不得分发，当前 R1 静态检查通过，非计入试跑和正式真人反馈均为 0。资产级最终视觉已通过，但该结果不表示四篇已通过目标读者、页面级发布候选 QA 或内容状态审核。
 - Ten Kings 的 S.3961 对象/IIIF canvas 与 CBETA 行号中，证据闭合的三条对象/文本 Claim、两份 Source 与 `十王` Terminology 已物化；图片复用权利与个别二手页内细节仍须在资产/写作阶段单独核验。
 - Liaozhai 导读已消费物化的 Luo 2009 Source、两条归因/计数 Claim 与 `志怪` Terminology 并形成首稿；任 2016 主/张 2011 对校路线虽已确认，实际册页未取得，故两书没有进入 Source，正文也不写成终本、唯一计数或完整传播史。
 - Painted Skin 当前按上海图书馆 1766 青柯亭单见证消费既有青柯亭与 Tso 两份 Source、5 条原典 Claim、1 条 `verified` 本站自译 Claim、1 条 Tso 归因 Claim 及 1 份 `bilingual-approved` `業魅` Terminology；青柯亭页 74 核作 `業魅`，Tso 引 `孽魅`，CText 关联的未具名见证作 `孽鬼`，跨见证差异的来源与演变没有解释。任/张实页、现代译本独立核页及电影一手时间码只在未来恢复比较时再处理。

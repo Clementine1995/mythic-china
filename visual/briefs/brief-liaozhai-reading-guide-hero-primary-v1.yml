@@ -1,0 +1,118 @@
+briefId: brief-liaozhai-reading-guide-hero-primary-v1
+version: 1
+status: approved
+ownerType: entry
+ownerId: liaozhai-reading-guide
+purpose: hero-primary
+approvedBy: Project owner (user-delegated AI review)
+approvedAt: "2026-09-07T03:02:50Z"
+notes: >-
+  On 2026-09-07, the Project owner explicitly delegated review and confirmation of this English brief to Codex. Codex reviewed its evidence mapping, edition boundaries, rights limits, responsive composition, and exclusions and approved the direction on that delegated basis. This approval covers only the brief; it approves neither an image nor a production method. The Qingketing scan must not be copied into the artwork or silently added to the project asset inventory.
+primaryReferenceFamily: The page density, column rhythm, and page-layout spacing of the 1766 Qingketing woodblock book, translated into an edition-aware reading landscape rather than a facsimile or antique-book interface
+period: The material reference is a 1766 witness; the Entry separately reports an approximate 1670–1700 compilation period and 1679 as an early main-body milestone, not a completion date for every tale
+region: Chinese literary history, anchored to a named witness held by Shanghai Library; no particular studio, library room, or story location is reconstructed
+medium: Contemporary digital editorial illustration using unmarked page planes and branching spatial paths; not a manuscript replica, aged-paper collage, or historical interior
+culturalContext:
+  - Make edition awareness the subject by showing more than one textual grouping without declaring a single definitive Liaozhai text.
+  - Treat 1679 as a stage in the reported compilation history rather than the completion date of every tale.
+  - Use the Qingketing object only for broad page rhythm and book-material context; do not reproduce its text, frames, folds, damage, or seals.
+  - Present Liaozhai as a varied literary collection rather than a synonym for horror, mythology, fox tales, or transparent folklore evidence.
+targetSlots:
+  - role: hero
+    slotId: primary
+    requiredUsages:
+      - hero-desktop
+      - hero-mobile
+    optionalUsages: []
+    canvas:
+      - usage: hero-desktop
+        widthPx: 3200
+        heightPx: 1800
+        compositionGoal: Two unequal groups of blank page planes overlap and diverge into separate reading paths, with a faint earlier layer visible below the larger route and no numbers or legible writing.
+        safeArea: Keep the leftmost 42 percent and top 16 percent low-detail for the HTML Entry identity and navigation; render no text into the image.
+        focalPointGoal:
+          x: 0.69
+          y: 0.5
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+            - 1920
+          allowUpscale: false
+      - usage: hero-mobile
+        widthPx: 1600
+        heightPx: 2000
+        compositionGoal: An independently composed vertical reading path begins with one partially visible early layer, then divides into two unequal stacks of blank pages whose edges remain distinct without becoming a literal book diagram.
+        safeArea: Keep the top 24 percent and bottom 12 percent free of essential page edges or path junctions for the HTML title and responsive controls; render no text into the image.
+        focalPointGoal:
+          x: 0.56
+          y: 0.57
+        buildPlan:
+          mode: responsive
+          formats:
+            - avif
+            - webp
+          candidateWidths:
+            - 640
+            - 960
+            - 1440
+          allowUpscale: false
+visualElements:
+  verified:
+    - elementId: staged-compilation-history
+      statement: The cited scholarship places compilation approximately between 1670 and 1700 and identifies 1679 as an early point by which the main body may have taken shape.
+      claimIds:
+        - claim-liaozhai-compilation-period-in-luo
+    - elementId: unequal-edition-groups
+      statement: The cited scholarship reports different tale totals and structures for two named editions.
+      claimIds:
+        - claim-liaozhai-counts-vary-by-edition
+  inferred:
+    - elementId: layered-compilation-path
+      statement: Use one partially visible lower layer and a later expanding route to suggest compilation over time without encoding exact dates in the image.
+      rationale: Layering translates the reported range and 1679 milestone into an editorial reading aid without claiming a complete chronology for every tale.
+    - elementId: branching-edition-paths
+      statement: Divide the Hero into two unequal but connected page groups with different spatial densities and endpoints.
+      rationale: The distinction communicates edition-specific variation without baking the two reported totals into the artwork as universal numbers.
+    - elementId: smoke-green-night-reading-palette
+      statement: Use smoke green, charcoal, warm neutral white, and a restrained pool of amber light.
+      rationale: This is the proposed Liaozhai editorial family and not a claim about historical ink, paper, or reading conditions.
+  invented:
+    - elementId: original-unmarked-page-planes
+      statement: Every page, edge, fold, binding cue, and blank surface is newly designed and contains no copied historical text or page geometry.
+    - elementId: original-reading-space
+      statement: The table-like planes, paths, overlaps, and surrounding space are original editorial architecture rather than a reconstructed studio or library.
+    - elementId: original-light-shadow-and-texture
+      statement: Night atmosphere, light pools, soft occlusion, shadow, and surface texture are invented visual devices.
+referenceAssets:
+  - referenceId: ref-shanghai-library-qingketing-liaozhai-1766
+    url: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    organization: Shanghai Library; Wikimedia Commons
+    creator: Pu Songling (text author); Qingketing block cutters unidentified
+    rightsStatus: public-domain
+    rightsUrl: https://commons.wikimedia.org/wiki/File:%E8%81%8A%E6%96%8B%E5%BF%97%E5%BC%82.%E5%8D%81%E5%85%AD%E5%8D%B7.%E6%B8%85.%E8%92%B2%E6%9D%BE%E9%BE%84.%E6%92%B0.%E6%B8%85%E4%B9%BE%E9%9A%86%E4%B8%89%E5%8D%81%E4%B8%80%E5%B9%B4%E9%9D%92%E6%9F%AF%E4%BA%AD%E5%88%8A%E6%9C%AC.pdf
+    licenseOrPermissionId: public-domain-mark-1.0
+    notes: Study only broad page density, column rhythm, page-layout spacing, and the context of a named 1766 witness. Do not reproduce, trace, crop, upload, or imitate its writing, frames, folds, damage, seals, exact page geometry, or complete composition.
+composition:
+  continuity: Desktop and mobile share the same two unequal textual groups, early lower layer, palette, and material family while using independently authored compositions.
+  hierarchy: The branching reading path is primary; unequal blank page groups are secondary; the earlier layer is tertiary; no supernatural figure or antique object becomes the focal subject.
+  colorDirection: Smoke green and charcoal establish depth, warm neutral white defines unmarked pages, and amber light is confined to one reading junction.
+  lightingDirection: Use one quiet off-axis pool of light and soft depth falloff; avoid candlelit nostalgia, sepia wash, horror underlighting, neon edges, and crushed shadows.
+  textPolicy: Entry title, dates, edition names, tale totals, caption, credit, disclosure, and all navigation remain HTML; artwork contains no letters, numerals, pseudo-Chinese marks, seals, logos, or watermarks.
+excludedMotifs:
+  - A single definitive Liaozhai edition, one universal tale count, or a claim that every tale was completed in 1679
+  - An implication that the project inspected the manuscript, Ren 2016, or Zhang 2011 text where the current evidence did not do so
+  - Readable Chinese, fake calligraphy, printed numerals, edition labels, seals, title slips, logos, or watermarks
+  - Full-frame yellowed paper, wormholes, distressed parchment, page-turning UI, or antique-book interface chrome
+  - Generic haunted-house imagery, skulls, ghost faces, fox-woman shorthand, or horror spectacle
+  - Treating zhiguai as a direct synonym for horror, mythology, or transparent folklore documentation
+  - Direct copies or close derivatives of the Qingketing scan, including text, page frames, folds, damage, and complete composition
+  - Film, television, game, or entertainment-franchise characters, costumes, camera compositions, logos, or trademarks
+openDecisions:
+  - A separately authorized production method, tool and account, input-rights review, candidate count, master location, and backup plan
+  - Final image selection, informative alt text, caption, credit, disclosure, responsive crops, and named cultural, rights, visual, accessibility, and language reviews

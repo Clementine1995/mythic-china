@@ -451,7 +451,7 @@ U5/M6/M7 target after separate authorization
 U3 已保持并加强 review 默认拒绝：
 
 - 所有 review 页面继续拒绝 `form`、`script`、供应商 action/link、inline event handler、远程子资源与客户端 JavaScript。
-- HTML5 DOM oracle 要求 13 个当前 review 页面各在 Footer 内恰有一个 inactive Newsletter；只允许六个 Entry 在 Sources 与 reading paths 后各有一个匹配 page ID 的 inactive Reader Request，其他七页不得出现。
+- HTML5 DOM oracle 要求 14 个当前 review 页面各在 Footer 内恰有一个 inactive Newsletter；只允许六个 Entry 在 Sources 与 reading paths 后各有一个匹配 page ID 的 inactive Reader Request，其他八页不得出现。
 - `/privacy/` 必须显示已确认联系和真实的“当前未启用”状态，并拒绝 `mailto:`、占位符或可能触发提交的结构。
 - U4 若获独立授权，才可为 Footer 中一个精确 Newsletter form 和一个精确 Tally HTTPS anchor 新增窄 allowlist；action/link、字段、method、账户和测试数据必须先写回本文。U5/M6/M7 的 Plausible fixture、public 接线与 production 请求也分别后置。
 - 禁止 inline event handler、任意 fetch、未知字段、远程 CSS/字体/图片、anchor ping 与 query 中的 PII。
