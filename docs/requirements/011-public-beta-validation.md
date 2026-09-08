@@ -22,7 +22,7 @@
 - 一句话结论：目标读者 R2 从 M6 上线前硬门禁改为 M7 Public Beta 上线后的验证与正式 MVP 收口门禁；缺少样本不得写成“通过”，但不再阻塞图片、状态、public artifact、受保护预览或经单独授权的 Public Beta 生产发布。
 - 是否可以进入本地后续开发：是。四篇 Entry 与 Liaozhai Collection 的五组 Hero 资产已完成 approved/current 闭环；VB6 已使 6 篇 Entry / 2 个 Collection 均 ready，随后 owner 已批准 6+2 published 与六篇目标日期 2026-09-10；013 已完成 origin/public assembly 的本地接线；Beta 页脚提示已获批准，本地实施见 013；016 已补条件式 hosting Privacy，后续为实际托管配置、独立 M5 交互及最终候选准备。
 - 是否可以立即发布 Public Beta：否。本地 public build 已完成；016 条件式 hosting Privacy 已落地；外部服务、实际托管配置、含 Beta 提示的 clean-source 最终 QA、预览和生产授权尚未完成。
-- 会改变后续实施结果的待确认项：目标读者招募/答卷渠道、平台内部身份和保护。Vercel 空项目及稳定 hostname 已由用户网页操作与截图确认，本地使用不再阻塞。
+- 会改变后续实施结果的待确认项：目标读者招募/答卷渠道、实际交付入口、构建配置及项目数据处理选择。2026-09-08 已现场核对团队/项目内部身份、Production 域名绑定及 `Require Log In / Standard Protection`；尚无部署，保护的实际访问验收仍待受保护预览。具体现场见 DEV_WORKFLOW 文末。
 
 ### 1.1 事实、推断与风险
 
@@ -126,7 +126,7 @@ R2a 先验证这份执行包与 live 页面；只有材料问题关闭并冻结�
 ## 6. 实施拆分
 
 1. **PB1 合同同步**：新增本文并同步 README、项目规则、产品、设计、架构、总合同与相关历史需求的当前路线。状态：已完成。
-2. **PB2 非读者发布门禁**：完成 M5-U4、M5-U5 离线合同/hook、四篇资产/关系/视觉/状态及 M6 public 条件接线与 public artifact。状态：实施中；012 的五组 Hero、VB6 关系/Featured 与 6+2 ready 已完成；owner 已批准首发 6+2 published 与六篇目标日期 2026-09-10；013 本地 public artifact 已完成；Beta 提示的批准与本地实施见 013；016 条件式 hosting Privacy 已落地；交互、实际托管核验与完整候选仍待后续批次。
+2. **PB2 非读者发布门禁**：完成 M5-U4、M5-U5 离线合同/hook、四篇资产/关系/视觉/状态及 M6 public 条件接线与 public artifact。状态：实施中；012 的五组 Hero、VB6 关系/Featured 与 6+2 ready 已完成；owner 已批准首发 6+2 published 与六篇目标日期 2026-09-10；013 本地 public artifact 已完成；Beta 提示的批准与本地实施见 013；016 条件式 hosting Privacy 已落地。托管身份/域名/保护设置已只读核对，交付入口、构建/output、数据处理决定、交互与完整候选仍未闭合。
 3. **PB3 受保护预览**：从 clean source 验证并验收受保护预览。状态：未开始。
 4. **PB4 Public Beta 生产发布**：逐次授权后把 validated source identity 发布到稳定、可索引的 production origin。状态：未开始。
 5. **PB5 上线后 R2**：先关闭第 5.1 节的研究执行与数据门禁，再在同一 live artifact 上完成 R2a、冻结研究版本、执行 R2b、处置与复测。状态：未开始。

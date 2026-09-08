@@ -4,6 +4,8 @@
 
 ## 当前状态
 
+- 托管只读复核（2026-09-08，本地 `502c0c8` 后）：Vercel 2FA 登录已完成，团队/项目内部身份与 Production 域名绑定已现场核对；生产和预览均无部署、Git 未连接、项目环境变量为空。Vercel Authentication 的 `Require Log In / Standard Protection` 已开启；实际构建/output 尚未配置，项目数据训练选项已勾选。现有网页拖放入口明确指向 Production，不能代替受保护预览。详细现场、待确认的交付方式及配置停点见 DEV_WORKFLOW 文末；本次只读账户，不关闭 M5、最终 QA 或发布门禁。
+
 - 013–016 检查点复核（2026-09-08）：完整核对既有 58 个变更路径及新增实现，同步治理摘要、总需求与领域文档后固定为 60 个路径。public 构建链、页面/图注/静态交互及文档门禁的独立只读审查未发现本地实现阻塞问题；完整 check 30 文件/529 测试、零 Astro 诊断与 public 13 页 → review 14 页构建/output verifier 通过。用户已明确授权本次本地提交，精确范围与执行入口见 DEV_WORKFLOW 文末，提交身份以 Git 历史为准。M5 真实联调、Plausible 费用/处理决定、托管账户/实际配置及最终 clean-source QA/receipt 仍未闭合；本次不推送、不部署，也不沿用提交前诊断作为发布凭证。
 
 - 阅读收尾（016，2026-09-08）：保留墨色视觉，首页导语改为具体故事邀请；11 处首页/目录图注原生展开，完整 AI 披露始终显示，8 处详情图注不折叠。Newsletter/Reader Request 已改为无控件静态状态，Privacy 补 Vercel 条件式说明。完整 check 30 文件/529 测试通过；最终空格修复后 public 13 页与 review 14 页构建均通过。内置浏览器完成 13 路由 × 390/768/1440 共 39 组合、核心截图和阅读链/图注键盘抽查；预览已关闭，未提交、未发布。详细范围与最终候选保留项见 [016](docs/requirements/016-reader-facing-polish.md)。

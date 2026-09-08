@@ -1404,3 +1404,52 @@ git diff --cached --stat
 本地检查点不关闭 006/011 的 U4/U5 或托管门禁。本次没有取得真实账户配置证据，也没有真实订阅、确认邮件、表单提交、分析事件、草稿发布、远端部署或数据删除。Buttondown/Tally 的真实 action/link、测试邮箱及按供应商区分的受控写入包仍须闭合；Plausible 的候选费用/处理决定尚待确认。详见 006 的当前接线进入清单。
 
 托管下一步只读核对项目/账户内部身份、稳定域名绑定、部署状态、实际 build/install/output/runtime 设置、预览保护和退出路径；再实例化不安装 Vercel CLI 的真实交付入口。不得因配置核查启动部署、连接触发自动构建的 Git 集成、关闭 2FA/保护或把 review runner 的透传参数当作 public 服务入口。受保护预览、地区/回滚实证与生产发布仍按 011 独立进入。
+
+## 检查点后托管现场复核（2026-09-08）
+
+本地检查点已创建为 `502c0c882f7925853f5e8e3f8ef83e2519042e79`，父节点为 `fabb4c9e829dc85c6c47161f49af5e9ad58594bd`；60 个路径与清单一致，Git 将样张两端识别为一次移动，因此摘要为 59 files。提交后工作树、暂存区和未跟踪文件为空；本地 `origin/main` 未变化，未推送。前节测试与构建均发生在该提交之前，仍只作诊断。
+
+用户报告输入 2FA 验证码后无响应；随后浏览器实际进入控制台并显示项目，登录已完成。以下来自同一次只读账户核查，不使用截图或页面副本入库，不保存个人邮箱、验证码或凭据。
+
+| 核查项 | 现场事实 | 尚未证明或仍需处理 |
+| --- | --- | --- |
+| 团队/项目身份 | Hobby 团队 `Mathic China`，slug `mathic-china`，ID `team_zxOM6nEHD6ZYTRcrAjbcwU3U`；项目 `project-scu6m`，ID `prj_U8IP9LhhpaeDC2dJlP0VVv3ciu70` | 每次部署前仍须复核目标身份与授权；名称拼写按现场保留 |
+| 域名与环境 | `mythic-china-beta.vercel.app` 绑定 Production；域名 `No Deployment`；概览显示无 Production/Preview Deployment；Preview 无自定义域名 | 未产生可验收的线上 URL、资源或回滚对象 |
+| Git | 未连接仓库；Deploy Hooks 不可用；Production 无 branch configuration | 不能以本地 push 触发部署；连接 Git 须先明确自动构建影响和授权 |
+| Build/Install/Output | Framework `Other`；三项 override 未启用，输入为空；Root Directory 为空 | 平台默认构建不能直接采用仓库默认 `build`，后者输出 review；须按选定交付方式实例化 public 配置 |
+| 运行时与变量 | Node `24.x`；Project 环境变量列表显示 `No Environment Variables Added`；系统变量访问开启 | 未验证实际 Node 小版本、Corepack/pnpm 11.22.0 平台兼容或 public origin 配置 |
+| 部署保护 | `Require Log In` 勾选，范围 `Standard Protection`；无自动化绕过密钥，OPTIONS allowlist 未启用 | 仅通过设置核查；未登录访问拦截、授权读者访问和保护覆盖仍须在真实 Preview 上验收 |
+| 数据与 Toolbar | 项目和团队的模型训练/数据分享选项均已勾选；项目 Toolbar 继承团队默认 On | 建议仅对本项目关闭训练选项，须先确认配置修改；Toolbar 的远端脚本/资源影响纳入最终输出与 Privacy 核查，不改团队其他项目 |
+| 退出与保留 | 项目页提供 Pause/Transfer/Delete；部署保留设置显示四类均为 30 天 | 只看见入口，不等于已验收暂停、迁移、导出、删除或回滚 |
+
+既有项目概览的文件/目录拖放文案明确为 `Deploy to Production`，不能当作 PB3 受保护预览。通用 [Vercel Drop](https://vercel.com/docs/drop) 文档另说明新建项目，但不足以断言既有项目页的行为；本次没有上传验证。当前 `Standard Protection` 不应被解释为 Production 域名也受保护，范围依据 [Deployment Protection](https://vercel.com/docs/deployment-protection)，实际访问仍未验收。
+
+交付决策停点：先确定向上述既有项目创建 Preview 的受控非 CLI 入口，再决定由平台构建完整源码还是交付本地已验收的不可变静态制品。前者必须显式使用既有 `build:public` 和 `.local/public-build/`、已确认的 origin 与固定包管理器；后者必须只包含 public 输出并绑定全部文件路径/大小/digest。两者都不能使用提交前 artifact，不能代替 clean revision 重建、最终 QA/receipt、M5 或发布授权。本节不提供尚未验证的上传命令，不安装 CLI，不连接 Git，不更改平台设置，不发送真实业务数据。
+
+本次文档补充沿用用户对当前任务的本地核对/提交授权，范围仅为 README、DEV_WORKFLOW 和 011；严格 UTF-8、相对链接、占位符及 diff 空白检查通过后暂存并提交，不重复业务测试或构建：
+
+```powershell
+$mythicHostingDocs = @('README.md', 'DEV_WORKFLOW.md', 'docs/requirements/011-public-beta-validation.md')
+if ((Resolve-Path -LiteralPath (git rev-parse --show-toplevel)).Path -ne 'F:\codex-project\mythic-china') { throw 'Unexpected Git root.' }
+if ((git branch --show-current) -ne 'main' -or (git rev-parse HEAD) -ne '502c0c882f7925853f5e8e3f8ef83e2519042e79') { throw 'Unexpected hosting-note parent.' }
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Expected empty staging.' }
+if (@(git ls-files --others --exclude-standard).Count -ne 0) { throw 'Unexpected untracked files.' }
+if (Compare-Object ($mythicHostingDocs | Sort-Object) (@(git diff --name-only) | Sort-Object)) { throw 'Hosting-note scope changed.' }
+git --literal-pathspecs add -- $mythicHostingDocs
+if ($LASTEXITCODE -ne 0) { throw 'Hosting-note staging failed.' }
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed.' }
+git diff --cached --stat
+```
+
+只读复核暂存内容与范围后：
+
+```powershell
+git diff --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Unstaged changes remain.' }
+git commit -m "docs(hosting): record verified account and deployment gates"
+if ($LASTEXITCODE -ne 0) { throw 'Hosting-note commit failed.' }
+git log -1 --format='%H %P %s'
+git status --short --branch
+```
