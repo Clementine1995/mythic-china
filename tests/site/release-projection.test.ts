@@ -163,6 +163,19 @@ describe("release content projection", () => {
     ]);
   });
 
+  it("does not treat a future target date as a scheduled publication filter", () => {
+    const entry = makeEntryRecord(
+      makeEntryData({
+        status: "published",
+        publishedAt: "9999-12-31",
+        updatedAt: null,
+      }),
+    );
+    expect(
+      createReleaseProjection({ entries: [entry], collections: [] }).entries,
+    ).toEqual([entry]);
+  });
+
   it("rejects a published Entry without a publication date", () => {
     const entry = makeEntryRecord(
       makeEntryData({

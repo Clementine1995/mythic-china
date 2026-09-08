@@ -68,6 +68,36 @@ function collectRepositoryInventory(directory = projectRoot): {
   return { files: files.sort(), links: links.sort() };
 }
 
+it("keeps the approved launch inventory published on the target date with explicit reading relationships", () => {
+  const entries = [
+    ["chinese-underworld-guide", "religion", "ten-kings"],
+    ["ten-kings", "religion", "zhong-kui"],
+    ["zhong-kui", "historical-legend", "chinese-underworld-guide"],
+    ["liaozhai-reading-guide", "literature", "painted-skin"],
+    ["painted-skin", "literature", "fighting-cricket"],
+    ["fighting-cricket", "literature", "liaozhai-reading-guide"],
+  ];
+  for (const [id, tradition, relatedId] of entries) {
+    const content = readProjectFile(`src/content/entries/${id}.md`);
+    expect(content).toMatch(/^status: published$/mu);
+    expect(content).toContain(`\ntraditionType: ${tradition}\n`);
+    expect(content).toContain(
+      `\nrelatedEntryIds:\n  - ${relatedId}\nheroAssetId:`,
+    );
+    expect(content).toMatch(/^publishedAt: "2026-09-10"$/mu);
+    expect(content).toMatch(/^updatedAt: null$/mu);
+  }
+  for (const [id, featuredId] of [
+    ["chinese-underworld", "zhong-kui"],
+    ["liaozhai", "painted-skin"],
+  ]) {
+    const content = readProjectFile(`src/content/collections/${id}.yml`);
+    expect(content).toMatch(/^status: published$/mu);
+    expect(content).not.toMatch(/^(?:publishedAt|updatedAt):/mu);
+    expect(content).toContain(`\nfeaturedEntryId: ${featuredId}\n`);
+  }
+});
+
 function hasForbiddenWeightSignature(relativePath: string): boolean {
   const descriptor = openSync(join(projectRoot, relativePath), "r");
   const header = Buffer.alloc(16);
@@ -197,15 +227,18 @@ describe("application and production boundaries", () => {
 
     expect(readdirSync(join(projectRoot, "src/services")).sort()).toEqual([
       "analytics.ts",
+      "article-reading-state.ts",
       "newsletter.ts",
       "reader-request.ts",
     ]);
     expect(readdirSync(join(projectRoot, "tests/services")).sort()).toEqual([
+      "article-reading-state.test.ts",
       "external-interactions.test.ts",
     ]);
 
     const serviceImportAllowlist = {
       "src/services/analytics.ts": ["astro/zod", "../site/public-site"],
+      "src/services/article-reading-state.ts": ["./analytics"],
       "src/services/newsletter.ts": ["astro/zod"],
       "src/services/reader-request.ts": [
         "astro/zod",
@@ -230,6 +263,25 @@ describe("application and production boundaries", () => {
         /\b(?:process\.env|import\.meta\.env|console\.(?:log|info|warn|error))\b/u,
       );
       expect(source, relativePath).not.toMatch(/https?:\/\//u);
+    }
+
+    const readingStatePath = "src/services/article-reading-state.ts";
+    const readingStateSource = readProjectFile(readingStatePath);
+    expect(readingStateSource).toContain(
+      'import type { AnalyticsEvent } from "./analytics";',
+    );
+    expect(readingStateSource).not.toMatch(
+      /\b(?:window|document|Date|performance|setTimeout|setInterval|globalThis)\b/u,
+    );
+    for (const file of collectRepositoryInventory().files.filter(
+      (file) =>
+        file.startsWith("src/") &&
+        file !== readingStatePath &&
+        /\.(?:ts|mjs|astro)$/u.test(file),
+    )) {
+      expect(readProjectFile(file), file).not.toContain(
+        "article-reading-state",
+      );
     }
 
     const visualRoot = join(projectRoot, "visual");

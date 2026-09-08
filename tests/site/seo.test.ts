@@ -50,6 +50,15 @@ describe("public SEO metadata", () => {
       },
       "AboutPage",
     ],
+    [
+      {
+        kind: "privacy",
+        path: "/privacy/",
+        title: "Privacy",
+        description: "How reader information is handled.",
+      },
+      "WebPage",
+    ],
   ])("builds consistent %s metadata", (descriptor, schemaType) => {
     const metadata = createPublicSeoMetadata(site, descriptor);
 
@@ -78,6 +87,47 @@ describe("public SEO metadata", () => {
       name: descriptor.title,
       description: descriptor.description,
     });
+  });
+
+  it("describes Privacy as an ordinary WebPage without article or collection claims", () => {
+    const metadata = createPublicSeoMetadata(site, {
+      kind: "privacy",
+      path: "/privacy/",
+      title: "Privacy",
+      description: "How reader information is handled.",
+    });
+    expect(metadata.structuredData).toEqual({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${fixtureOrigin}/privacy/#web-page`,
+      url: `${fixtureOrigin}/privacy/`,
+      name: "Privacy",
+      description: "How reader information is handled.",
+      inLanguage: "en",
+      publisher: {
+        "@id": `${fixtureOrigin}/about/#publisher`,
+        "@type": "Organization",
+        name: "Mythic China",
+        url: `${fixtureOrigin}/about/`,
+      },
+    });
+  });
+
+  it.each([
+    "/privacy",
+    "/Privacy/",
+    "/privacy/?preview=1",
+    "/about/",
+    "/review/type-specimen/",
+  ])("rejects a noncanonical Privacy route %s", (path) => {
+    expect(() =>
+      createPublicSeoMetadata(site, {
+        kind: "privacy",
+        path,
+        title: "Privacy",
+        description: "How reader information is handled.",
+      }),
+    ).toThrow(SeoMetadataError);
   });
 
   it("builds an Article with the visible editorial and publisher identities", () => {
@@ -171,6 +221,12 @@ describe("public SEO metadata", () => {
       description: "A complete public summary.",
       publishedAt: "2026-08-30",
       updatedAt: null,
+    },
+    {
+      kind: "about",
+      path: "/privacy/",
+      title: "Privacy",
+      description: "How reader information is handled.",
     },
     {
       kind: "about",

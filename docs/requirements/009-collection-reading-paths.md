@@ -2,6 +2,8 @@
 
 ## 0. 状态与权威边界
 
+第 1–7 节保存 009 当批合同与历史结果。后续 Hero、Featured、分类、Related、ready 审核及独立首发批准由 [012](012-five-hero-visual-briefs.md) 负责：六篇/两个合集现均 published，六篇目标公开日期统一为 2026-09-10；尚未部署，Liaozhai Featured 为 Painted Skin，两个三篇顺序不变，Related 输出仍 published-only，当前六篇各显示一个既定目标；索引为六篇/两个合集的非空列表，不再展示未发布候选架。009 的无 Hero/Featured 限制不覆盖后续独立授权。
+
 | 项目 | 当前状态 |
 | --- | --- |
 | 需求 | 已确认 |
@@ -23,7 +25,7 @@
 - Liaozhai `entryIds` 精确为 `liaozhai-reading-guide` → `painted-skin` → `fighting-cricket`。description 只说明阅读路径；状态为 `draft`，中文名、拼音、Featured 与 Hero 留空。
 - `chinese-underworld.entryIds` 精确为 `chinese-underworld-guide` → `ten-kings` → `zhong-kui`。既有 `editorial-review` 状态、Featured Zhong Kui、文字和资产保持。
 - 合集成员只由 `Collection.entryIds` 定义，Entry 反向入口由现有模板派生。成员关系不表示历史身份或证据互相适用。
-- 六篇 Entry 的稳定身份与状态保持；`relatedEntryIds` 继续为空。本接线批结束时 Painted Skin 虽进入策展路径，仍是没有正文、证据消费关系或图片的显式 empty draft；后续内容批已补正文与证据关系，仍不改变本段所记录的 009 授权范围。
+- 六篇 Entry 的稳定身份与状态保持；原有两篇 Related 关系保持，四篇新增 Related 当时为空。本接线批结束时 Painted Skin 虽进入策展路径，仍是没有正文、证据消费关系或图片的显式 empty draft；后续内容批已补正文与证据关系，仍不改变本段所记录的 009 授权范围。
 
 ## 3. 页面行为
 
@@ -61,4 +63,4 @@ Project owner 于 2026-09-05 明确确认该审核包通过人工双语审核；
 
 ## 7. 发布与版本状态
 
-本批未安装依赖、启动服务、调用真实接口、执行 Git 写操作或发布。所有修改仍位于 `119c01c` 之上的当前工作树；提交、推送、preview 与 production 均须另行逐次授权。
+本批未安装依赖、启动服务、调用真实接口、执行 Git 写操作或发布。009 及后续内容已进入 `f81b49f`，五组 Hero 进入 `1be085b`；当前 VB6 为后者上的未提交工作树。该历史批次不追认后续授权；preview 与 production 继续逐次授权。

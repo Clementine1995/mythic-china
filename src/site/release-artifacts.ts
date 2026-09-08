@@ -54,7 +54,13 @@ function escapeXml(value: string): string {
     .replaceAll("'", "&apos;");
 }
 
-const staticPageOrder = ["/", "/explore/", "/collections/", "/about/"] as const;
+const staticPageOrder = [
+  "/",
+  "/explore/",
+  "/collections/",
+  "/about/",
+  "/privacy/",
+] as const;
 
 function requireStaticPagePath(path: string): string {
   if (!(staticPageOrder as readonly string[]).includes(path)) {

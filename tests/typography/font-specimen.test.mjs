@@ -146,6 +146,77 @@ function validSpecimenHtml(policy) {
   </body></html>`;
 }
 
+describe("review navigation current location", () => {
+  function navigationHtml(currentHref, currentValue) {
+    const links = ["/", "/explore/", "/collections/", "/about/"]
+      .map(
+        (href) =>
+          `<a href="${href}"${href === currentHref ? ` aria-current="${currentValue}"` : ""}>${href}</a>`,
+      )
+      .join("");
+    return `<nav class="desktop-navigation" aria-label="Primary navigation">${links}</nav><nav aria-label="Mobile primary navigation">${links}</nav>`;
+  }
+
+  it.each([
+    ["index.html", "/", "page"],
+    ["explore/index.html", "/explore/", "page"],
+    ["collections/index.html", "/collections/", "page"],
+    ["about/index.html", "/about/", "page"],
+    ["explore/zhong-kui/index.html", "/explore/", "location"],
+    ["explore/chinese-underworld-guide/index.html", "/explore/", "location"],
+    ["explore/ten-kings/index.html", "/explore/", "location"],
+    ["explore/liaozhai-reading-guide/index.html", "/explore/", "location"],
+    ["explore/painted-skin/index.html", "/explore/", "location"],
+    ["explore/fighting-cricket/index.html", "/explore/", "location"],
+    ["collections/chinese-underworld/index.html", "/collections/", "location"],
+    ["collections/liaozhai/index.html", "/collections/", "location"],
+    ["privacy/index.html", null, null],
+    ["review/type-specimen/index.html", null, null],
+  ])("accepts the exact current token for %s", (relativePath, href, value) => {
+    expect(() =>
+      assertExactReviewNavigation(navigationHtml(href, value), relativePath),
+    ).not.toThrow();
+  });
+
+  it.each([
+    [
+      "parent called a page",
+      "explore/ten-kings/index.html",
+      "/explore/",
+      "page",
+    ],
+    ["page called a location", "explore/index.html", "/explore/", "location"],
+    [
+      "wrong section",
+      "collections/liaozhai/index.html",
+      "/explore/",
+      "location",
+    ],
+    ["missing state", "index.html", null, null],
+    ["unrelated Privacy state", "privacy/index.html", "/about/", "page"],
+    ["overbroad Home state", "explore/ten-kings/index.html", "/", "location"],
+  ])("rejects %s", (_label, relativePath, href, value) => {
+    expect(() =>
+      assertExactReviewNavigation(navigationHtml(href, value), relativePath),
+    ).toThrow("aria-current");
+  });
+
+  it("rejects a drift confined to mobile navigation", () => {
+    const html = navigationHtml("/explore/", "location");
+    const mobileStart = html.indexOf(
+      '<nav aria-label="Mobile primary navigation">',
+    );
+    const drifted =
+      html.slice(0, mobileStart) +
+      html
+        .slice(mobileStart)
+        .replace('aria-current="location"', 'aria-current="page"');
+    expect(() =>
+      assertExactReviewNavigation(drifted, "explore/ten-kings/index.html"),
+    ).toThrow("Mobile primary navigation has incorrect aria-current");
+  });
+});
+
 describe("M4-U5A font specimen policy", () => {
   it("accepts the exact review inventory, navigation, and specimen matrix", async () => {
     const policy = await readCjkCharacterPolicy(projectRoot);

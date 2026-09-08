@@ -6,10 +6,13 @@ import process from "node:process";
 import { describe, expect, it } from "vitest";
 
 import {
+  assertReviewCollectionFeaturedEntry,
   assertReviewCollectionReadingPath,
   assertReviewCssResourcePolicy,
   assertReviewEntryCollectionMembership,
   assertReviewEntryContentNote,
+  assertReviewEntryRelated,
+  assertReviewPublishedIndex,
   assertReviewHtmlResourcePolicy,
   assertReviewInteractionSurface,
   assertReviewOutputArtifactExtensions,
@@ -22,6 +25,158 @@ import {
 function reviewDocument(body, head = "") {
   return `<!doctype html><html lang="en"><head>${head}<meta name="robots" content="noindex, nofollow"></head><body>${body}</body></html>`;
 }
+
+describe("published content in review indexes", () => {
+  const list =
+    '<ol class="editorial-index"><li><a href="/explore/a/">A</a></li><li><a href="/explore/b/">B</a></li></ol>';
+  const section = `<section class="index-results">${list}</section>`;
+  const check = (body) =>
+    assertReviewPublishedIndex(reviewDocument(body), "explore/index.html", [
+      "/explore/a/",
+      "/explore/b/",
+    ]);
+
+  it("accepts the exact ordered published list without a candidate shelf", () => {
+    expect(() => check(section)).not.toThrow();
+  });
+
+  it.each([
+    ["missing index", ""],
+    ["duplicate index", section + section],
+    [
+      "wrong order",
+      section
+        .replace("/explore/a/", "/explore/temp/")
+        .replace("/explore/b/", "/explore/a/")
+        .replace("/explore/temp/", "/explore/b/"),
+    ],
+    [
+      "missing entry",
+      section.replace('<li><a href="/explore/b/">B</a></li>', ""),
+    ],
+    ["query suffix", section.replace("/explore/a/", "/explore/a/?preview=1")],
+    [
+      "malformed list item",
+      section.replace(
+        '<li><a href="/explore/a/">A</a></li>',
+        '<div><a href="/explore/a/">A</a></div>',
+      ),
+    ],
+    [
+      "link outside list",
+      section.replace(
+        "</section>",
+        '<a href="/explore/extra/">Extra</a></section>',
+      ),
+    ],
+    [
+      "candidate shelf",
+      section +
+        '<section data-review-preview="entries">Not published</section>',
+    ],
+    [
+      "empty state",
+      section +
+        '<div class="honest-empty-state">No published entries yet</div>',
+    ],
+  ])("rejects %s", (_label, body) => {
+    expect(() => check(body)).toThrow();
+  });
+});
+
+describe("published Related navigation", () => {
+  const nav =
+    '<nav aria-labelledby="related-heading"><h2 id="related-heading">Related entries</h2><ul class="related-entries"><li><a href="/explore/next/">Next</a></li></ul></nav>';
+  const check = (body) =>
+    assertReviewEntryRelated(
+      reviewDocument(body),
+      "explore/current/index.html",
+      "/explore/next/",
+    );
+
+  it("accepts the exact next published Entry alongside Collection membership", () => {
+    const membership =
+      '<nav aria-labelledby="collection-membership-heading"><h2 id="collection-membership-heading">Part of a collection</h2><ul class="related-entries"><li><a href="/collections/path/">Path</a></li></ul></nav>';
+    expect(() => check(membership + nav)).not.toThrow();
+  });
+
+  it.each([
+    ["missing navigation", ""],
+    ["duplicate navigation", nav + nav],
+    ["wrong target", nav.replace("/explore/next/", "/explore/wrong/")],
+    ["query suffix", nav.replace("/explore/next/", "/explore/next/?preview=1")],
+    [
+      "missing heading association",
+      nav.replace('aria-labelledby="related-heading"', ""),
+    ],
+    ["duplicate heading", nav + '<h2 id="related-heading">Other</h2>'],
+    [
+      "malformed list item",
+      nav.replace("<li>", "<div>").replace("</li>", "</div>"),
+    ],
+    [
+      "extra target",
+      nav.replace("</ul>", '<li><a href="/explore/extra/">Extra</a></li></ul>'),
+    ],
+    [
+      "link outside list",
+      nav.replace("</nav>", '<a href="/explore/extra/">Extra</a></nav>'),
+    ],
+  ])("rejects %s", (_label, body) => {
+    expect(() => check(body)).toThrow();
+  });
+});
+
+describe("review Collection Featured Entry", () => {
+  const featured = `<section class="collection-featured" aria-labelledby="featured-entry-heading">
+    <h2 id="featured-entry-heading">A tale</h2><a href="/explore/tale-slug/">Read the entry</a>
+  </section>`;
+
+  it("uses an explicit href independently of the reading-path order", () => {
+    expect(() =>
+      assertReviewCollectionFeaturedEntry(
+        reviewDocument(featured),
+        "collections/path/index.html",
+        "/explore/tale-slug/",
+        "A tale",
+      ),
+    ).not.toThrow();
+  });
+
+  it.each([
+    ["missing section", ""],
+    ["duplicate section", featured + featured],
+    [
+      "wrong link",
+      featured.replace("/explore/tale-slug/", "/explore/another/"),
+    ],
+    [
+      "query suffix",
+      featured.replace("/explore/tale-slug/", "/explore/tale-slug/?preview=1"),
+    ],
+    ["wrong title", featured.replace("A tale", "Another tale")],
+    [
+      "missing accessible heading",
+      featured.replace('aria-labelledby="featured-entry-heading"', ""),
+    ],
+    [
+      "extra link",
+      featured.replace(
+        "</section>",
+        '<a href="/explore/extra/">Extra</a></section>',
+      ),
+    ],
+  ])("rejects a Featured Entry with %s", (_label, body) => {
+    expect(() =>
+      assertReviewCollectionFeaturedEntry(
+        reviewDocument(body),
+        "collections/path/index.html",
+        "/explore/tale-slug/",
+        "A tale",
+      ),
+    ).toThrow();
+  });
+});
 
 function newsletterFooter() {
   return `<footer class="site-footer">

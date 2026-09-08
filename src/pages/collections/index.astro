@@ -11,7 +11,10 @@ readBuildIntent();
 const graph = await loadValidatedContentGraph();
 const projection = createReviewProjection(graph);
 const { publishedCollections } = projection;
-const { collection: reviewCollection } = getReviewIndexPreview(projection);
+const reviewCollection =
+  publishedCollections.length === 0
+    ? getReviewIndexPreview(projection).collection
+    : null;
 ---
 
 <SiteLayout
@@ -22,41 +25,47 @@ const { collection: reviewCollection } = getReviewIndexPreview(projection);
     <p class="section-context">Collections</p>
     <h1>Curated reading paths</h1>
     <p>
-      Follow curated reading paths. Current editorial candidates are shown
-      separately from the published index.
+      Follow curated reading paths. {
+        reviewCollection !== null &&
+          "Current editorial candidates are shown separately from the published index."
+      }
     </p>
   </header>
 
-  <section
-    class="review-preview page-shell section-space"
-    aria-labelledby="collection-review-preview-heading"
-    data-review-preview="collections"
-  >
-    <header class="review-preview__heading">
-      <h2 id="collection-review-preview-heading">Local review preview</h2>
-      <p>
-        <strong>Not published.</strong> This reading path remains under editorial
-        review and may change before release.
-      </p>
-    </header>
+  {
+    reviewCollection !== null && (
+      <section
+        class="review-preview page-shell section-space"
+        aria-labelledby="collection-review-preview-heading"
+        data-review-preview="collections"
+      >
+        <header class="review-preview__heading">
+          <h2 id="collection-review-preview-heading">Local review preview</h2>
+          <p>
+            <strong>Not published.</strong> This reading path is available for
+            local review and may change before release.
+          </p>
+        </header>
 
-    <ol class="review-preview-list">
-      <li>
-        <p class="review-preview-list__type">Curated collection</p>
-        <h3>
-          <a
-            href={`/collections/${reviewCollection.data.slug}/`}
-            data-review-candidate="collection"
-          >
-            {reviewCollection.data.title}
-          </a>
-        </h3>
-        <p class="review-preview-list__summary">
-          {reviewCollection.data.description}
-        </p>
-      </li>
-    </ol>
-  </section>
+        <ol class="review-preview-list">
+          <li>
+            <p class="review-preview-list__type">Curated collection</p>
+            <h3>
+              <a
+                href={`/collections/${reviewCollection.data.slug}/`}
+                data-review-candidate="collection"
+              >
+                {reviewCollection.data.title}
+              </a>
+            </h3>
+            <p class="review-preview-list__summary">
+              {reviewCollection.data.description}
+            </p>
+          </li>
+        </ol>
+      </section>
+    )
+  }
 
   <section class="index-results page-shell section-space" aria-live="polite">
     {

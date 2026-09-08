@@ -14,7 +14,7 @@
 | 发布状态 | 本需求不执行发布 | R2 未完成时保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态；M6、受保护预览与 M7 Public Beta 发布按 011 的非读者门禁和逐次授权独立推进 |
 
 - 当前权威结论更新时间：2026-09-07。
-- 当前源身份：本地 HEAD `f81b49fd1c288aed6c552c2e8d9926ec5a09e86c` 之上的文档修改工作树；本批没有形成可部署身份。
+- R1 保留为冻结的 reference-only 材料；五组 Hero 已提交为 `1be085b`，VB6 后四篇文稿语言未变，仅分类、关系与状态变化。R1 的旧输入 hash 不代表当前文件仍匹配，不重建或充当 live R2；后续在 Public Beta artifact 冻结新执行身份。当前修改未形成可部署身份。
 
 ## 1. 两层证据
 
@@ -176,7 +176,7 @@ Project owner 明确回复“`四篇聚焦双语复核通过。`”。该确认�
 
 当前 PB1/R1 文档同步不改变以下现状：
 
-- 四篇 Entry 继续为 `draft`；`traditionType`、`nameZh`、`pinyin`、`periodLabel`、`earliestKnown*`、`heroAssetId`、`relatedEntryIds`、日期与状态均不改。
+- 本需求文稿审核批当时保持四篇 draft；`traditionType`、`nameZh`、`pinyin`、`periodLabel`、`earliestKnown*`、`heroAssetId`、`relatedEntryIds`、日期与状态均不改。
 - Chinese Underworld Collection 继续为 `editorial-review`，Liaozhai Collection 继续为 `draft`；成员与顺序不改。
 - 六份 Terminology 继续为 `bilingual-approved`，Painted Skin 短译 Claim 继续为 `verified`；目标读者反馈不重新裁决事实或术语批准。
 - 本次 PB1 不创建 Asset Manifest、图片、Featured、public artifact 或外部表单，不执行 Git 写入、远端预览、部署或发布；M6/M7 可依 011 的非读者门禁和逐次授权独立推进这些工作。
@@ -193,4 +193,4 @@ Project owner 明确回复“`四篇聚焦双语复核通过。`”。该确认�
 
 ## 10. 下一停点
 
-四篇与 Liaozhai Collection 的五组视觉资产已由 012 闭环；当前项目下一停点是四篇 `relatedEntryIds`、Liaozhai Featured、内容状态审核，以及 M5-U4/U5 与 M6 public artifact/release-candidate 工作，它们按各自合同继续推进。Public Beta 上线后，再以第 3–5 节及冻结 R1 的题目、rubric 与文稿基线准备 live R2a；材料问题关闭后，建立 5–8 份核心全站可用记录和四篇各前 5–8 份可用深读，按冻结规则补位。当前没有合适人选，R2a/R2b 保持未开始、真人反馈为 0。AI 专业审读、Project owner 单人判断和行为分析均不能替代目标读者数据；收齐反馈前须保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态，不能宣称目标读者验证或正式 MVP 验证通过。
+四篇与 Liaozhai Collection 的五组视觉资产已由 012 闭环；012 VB6 已闭合四篇分类、Related 编辑环、Liaozhai Featured 与 6+2 ready；其后 owner 已批准全部 6+2 published，六篇目标日期为 2026-09-10；下一停点是 M5-U4/U5 与 M6 origin/public artifact/release-candidate 工作，它们按各自合同继续推进。Public Beta 上线后，再以第 3–5 节及冻结 R1 的题目、rubric 与文稿基线准备 live R2a；材料问题关闭后，建立 5–8 份核心全站可用记录和四篇各前 5–8 份可用深读，按冻结规则补位。当前没有合适人选，R2a/R2b 保持未开始、真人反馈为 0。AI 专业审读、Project owner 单人判断和行为分析均不能替代目标读者数据；收齐反馈前须保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态，不能宣称目标读者验证或正式 MVP 验证通过。

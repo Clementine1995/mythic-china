@@ -17,6 +17,132 @@ import {
 } from "../content/fixtures";
 
 describe("M4 review content projection", () => {
+  it("keeps six ready Entries and two ready Collections reviewable without publishing them", () => {
+    const paths = [
+      [
+        "chinese-underworld",
+        "zhong-kui",
+        ["chinese-underworld-guide", "ten-kings", "zhong-kui"],
+      ],
+      [
+        "liaozhai",
+        "painted-skin",
+        ["liaozhai-reading-guide", "painted-skin", "fighting-cricket"],
+      ],
+    ] as const;
+    const projection = createReviewProjection({
+      entries: paths.flatMap(([, , ids]) =>
+        ids.map((id) =>
+          makeEntryRecord(
+            makeEntryData({ entryId: id, slug: id, status: "ready" }),
+          ),
+        ),
+      ),
+      collections: paths.map(([id, featuredEntryId, entryIds]) =>
+        makeRecord(
+          id,
+          "collections",
+          makeCollectionData({
+            collectionId: id,
+            slug: id,
+            entryIds: [...entryIds],
+            featuredEntryId,
+            status: "ready",
+          }),
+        ),
+      ),
+    });
+
+    expect(projection.entries).toHaveLength(6);
+    expect(projection.collections).toHaveLength(2);
+    expect(projection.publishedEntries).toEqual([]);
+    expect(projection.publishedCollections).toEqual([]);
+    expect(getReviewHomeSlice(projection).entry.id).toBe("zhong-kui");
+    expect(
+      getReviewIndexPreview(projection).entries.map((entry) => entry.id),
+    ).toEqual(paths[0][2]);
+    expect(
+      getReviewCollectionEntries(paths[1][2], projection.entries).map(
+        (entry) => entry.id,
+      ),
+    ).toEqual(paths[1][2]);
+    expect(getReviewFeaturedEntry("painted-skin", projection.entries)?.id).toBe(
+      "painted-skin",
+    );
+  });
+
+  it("projects all six approved Entries and both Collections without changing curated paths", () => {
+    const paths = [
+      [
+        "chinese-underworld",
+        "The Chinese Underworld",
+        "zhong-kui",
+        ["chinese-underworld-guide", "ten-kings", "zhong-kui"],
+      ],
+      [
+        "liaozhai",
+        "Strange Tales from Liaozhai",
+        "painted-skin",
+        ["liaozhai-reading-guide", "painted-skin", "fighting-cricket"],
+      ],
+    ] as const;
+    const projection = createReviewProjection({
+      entries: paths.flatMap(([, , , ids]) =>
+        ids.map((id, index) =>
+          makeEntryRecord(
+            makeEntryData({
+              entryId: id,
+              slug: id,
+              status: "published",
+              publishedAt: "2026-09-10",
+              updatedAt: null,
+              relatedEntryIds: [ids[(index + 1) % ids.length]!],
+            }),
+          ),
+        ),
+      ),
+      collections: paths.map(([id, title, featuredEntryId, entryIds]) =>
+        makeRecord(
+          id,
+          "collections",
+          makeCollectionData({
+            collectionId: id,
+            slug: id,
+            title,
+            entryIds: [...entryIds],
+            featuredEntryId,
+            status: "published",
+          }),
+        ),
+      ),
+    });
+    expect(projection.publishedEntries.map((entry) => entry.id)).toEqual([
+      "chinese-underworld-guide",
+      "fighting-cricket",
+      "liaozhai-reading-guide",
+      "painted-skin",
+      "ten-kings",
+      "zhong-kui",
+    ]);
+    expect(
+      projection.publishedCollections.map((collection) => collection.id),
+    ).toEqual(["liaozhai", "chinese-underworld"]);
+    expect(getReviewHomeSlice(projection).entry.id).toBe("zhong-kui");
+    for (const [, , featuredId, ids] of paths) {
+      expect(
+        getReviewCollectionEntries(ids, projection.entries).map(
+          (entry) => entry.id,
+        ),
+      ).toEqual(ids);
+      expect(getReviewFeaturedEntry(featuredId, projection.entries)?.id).toBe(
+        featuredId,
+      );
+    }
+    expect(() => getReviewIndexPreview(projection)).toThrow(
+      "Review index previews must contain only not-published records.",
+    );
+  });
+
   it("includes every non-archived state in direct review routes", () => {
     const statuses = [
       "draft",

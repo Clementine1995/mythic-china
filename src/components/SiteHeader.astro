@@ -10,8 +10,12 @@ const navigation = [
   { href: "/collections/", label: "Collections" },
   { href: "/about/", label: "About" },
 ] as const;
-const isCurrent = (href: string): boolean =>
-  href === "/" ? currentPath === href : currentPath.startsWith(href);
+const currentLocation = (href: string): "page" | "location" | undefined =>
+  currentPath === href
+    ? "page"
+    : href !== "/" && currentPath.startsWith(href)
+      ? "location"
+      : undefined;
 ---
 
 <header class="site-header">
@@ -25,10 +29,7 @@ const isCurrent = (href: string): boolean =>
         {
           navigation.map((item) => (
             <li>
-              <a
-                href={item.href}
-                aria-current={isCurrent(item.href) ? "page" : undefined}
-              >
+              <a href={item.href} aria-current={currentLocation(item.href)}>
                 {item.label}
               </a>
             </li>
@@ -44,10 +45,7 @@ const isCurrent = (href: string): boolean =>
           {
             navigation.map((item) => (
               <li>
-                <a
-                  href={item.href}
-                  aria-current={isCurrent(item.href) ? "page" : undefined}
-                >
+                <a href={item.href} aria-current={currentLocation(item.href)}>
                   {item.label}
                 </a>
               </li>

@@ -19,7 +19,7 @@ export interface SeoCollectionItem {
 
 export type SeoPageDescriptor =
   | (BaseSeoPageDescriptor & {
-      kind: "home" | "explore" | "collections" | "about";
+      kind: "home" | "explore" | "collections" | "about" | "privacy";
     })
   | (BaseSeoPageDescriptor & {
       kind: "collection";
@@ -99,6 +99,8 @@ function descriptorPathMatches(descriptor: SeoPageDescriptor): boolean {
       return descriptor.path === "/collections/";
     case "about":
       return descriptor.path === "/about/";
+    case "privacy":
+      return descriptor.path === "/privacy/";
     case "entry":
       return isDynamicPagePath(descriptor.path, "/explore/");
     case "collection":
@@ -209,6 +211,15 @@ function createStructuredData(
       "@type": "AboutPage",
       "@id": `${canonical}#about-page`,
       about: [identityNode(site.publisher), identityNode(site.author)],
+      publisher: identityNode(site.publisher),
+    };
+  }
+
+  if (descriptor.kind === "privacy") {
+    return {
+      ...common,
+      "@type": "WebPage",
+      "@id": `${canonical}#web-page`,
       publisher: identityNode(site.publisher),
     };
   }

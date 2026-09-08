@@ -4,7 +4,7 @@ slug: fighting-cricket
 title: "The Fighting Cricket: Court Pressure and a Son's Strange Account"
 subtitle: null
 entryType: tale
-traditionType: null
+traditionType: literature
 nameZh: null
 pinyin: null
 aliases: []
@@ -25,12 +25,13 @@ claimIds:
   - claim-fighting-cricket-son-shen-hua
 terminologyRecordIds:
   - term-shen-hua-in-fighting-cricket
-relatedEntryIds: []
+relatedEntryIds:
+  - liaozhai-reading-guide
 heroAssetId: asset-fighting-cricket-hero-primary
-publishedAt: null
+publishedAt: "2026-09-10"
 updatedAt: null
 lastFactCheckedAt: "2026-09-04"
-status: draft
+status: published
 ---
 
 ## A demand reaches one family

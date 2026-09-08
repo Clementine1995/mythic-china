@@ -4,10 +4,10 @@ title: Strange Tales from Liaozhai
 titleZh: null
 pinyin: null
 description: Begin with a guide to reading Liaozhai, then explore Painted Skin and The Fighting Cricket. Follow the sources and distinguish each text from interpretations and adaptations.
-featuredEntryId: null
+featuredEntryId: painted-skin
 entryIds:
   - liaozhai-reading-guide
   - painted-skin
   - fighting-cricket
-status: draft
+status: published
 heroAssetId: asset-liaozhai-hero-primary

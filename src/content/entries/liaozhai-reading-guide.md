@@ -4,7 +4,7 @@ slug: liaozhai-reading-guide
 title: "Reading Liaozhai: Dates, Editions, and Genre"
 subtitle: null
 entryType: guide
-traditionType: null
+traditionType: literature
 nameZh: null
 pinyin: null
 aliases: []
@@ -26,12 +26,13 @@ claimIds:
   - claim-liaozhai-counts-vary-by-edition
 terminologyRecordIds:
   - term-zhiguai-in-liaozhai-reading-guide
-relatedEntryIds: []
+relatedEntryIds:
+  - painted-skin
 heroAssetId: asset-liaozhai-reading-guide-hero-primary
-publishedAt: null
+publishedAt: "2026-09-10"
 updatedAt: null
 lastFactCheckedAt: "2026-09-04"
-status: draft
+status: published
 ---
 
 ## Read the date as a range

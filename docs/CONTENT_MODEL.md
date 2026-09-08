@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。Chinese Underworld Collection Hero、Guide Hero，以及 012 的四篇 Entry 与 Liaozhai Collection 五组 Hero 后续均沿相同合同闭合独立资产谱系。当前 21 个 local master、21 份 repository source、9 份 production record 与 12 份 manifest 版本记录通过数据门禁，11 个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 从 17 份 current responsive source 生成并解码复核 120 个 AVIF/WebP 目标。四个新增 Entry 与 Liaozhai Collection 仍保持 `draft`；本次资产绑定不代表 `relatedEntryIds`、Liaozhai Featured、内容状态或发布已获批准。
+- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。Chinese Underworld Collection Hero、Guide Hero，以及 012 的四篇 Entry 与 Liaozhai Collection 五组 Hero 后续均沿相同合同闭合独立资产谱系。当前 21 个 local master、21 份 repository source、9 份 production record 与 12 份 manifest 版本记录通过数据门禁，11 个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 从 17 份 current responsive source 生成并解码复核 120 个 AVIF/WebP 目标。资产绑定本身不批准状态；后续 012 VB6 已审核六篇与两个合集到 ready，补齐四篇分类、两条 Related 编辑环与 Liaozhai Featured（Painted Skin），随后 Project owner 独立批准 6+2 published，六篇目标公开日期统一为 2026-09-10，尚未部署。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -14,7 +14,7 @@
 - 所有 Astro `glob()` loader 显式用 `generateId` 从规范化文件名生成内部 ID，并校验 loader ID 与 frontmatter/data 中对应的 `entryId`、`collectionId`、`sourceId`、`claimId` 或 `termId` 完全一致。`slug` 只用于公开 URL，不承担关系身份。
 - M2 固定 Entry canonical 为 `/explore/{slug}/`，Collection canonical 为 `/collections/{slug}/`；关系只保存稳定 ID。
 - M2 的两个真实 draft demo 身份固定为 `zhong-kui` 与 `chinese-underworld-guide`。它们用于验证 Schema、关系和模板，不得用占位文化事实、伪来源或假 approved 资产填满内容；`Chinese Underworld Guide (Working Draft)` 只是内部工作标题，不是已冻结的公开标题。
-- 当前内容 inventory 为 6 篇 Entry（2 篇 `editorial-review`、4 篇 `draft`）、2 个 Collection（1 `editorial-review` + 1 `draft`）、14 份 Source、25 份 Claim 与 6 份 Terminology；六份 Terminology 均已由 `Project owner (user-confirmed)` 分批批准为 `bilingual-approved`，published Entry / Collection 为 0/0。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`；它们分别已有 2/3/1、1/2/1、2/7/1 与 1/3/1 的 Source/Claim/Terminology 消费关系和证据受限正文。修订前锁定稿、010 后续改变的英语单元及两条 `contentNote` 均已通过 Project owner 双语确认，未改单元保留历史批准。Painted Skin 的七条 Claim 分为五条青柯亭原典、一条 `verified` 本站自译与一条 Tso 具名解释；只有青柯亭是该篇文本见证。四篇均处于 `draft`，不是可发布状态。
+- 当前内容 inventory 为 6 篇 published Entry、2 个 published Collection、14 份 Source、25 份 Claim 与 6 份 Terminology；六份 Terminology 均已由 `Project owner (user-confirmed)` 分批批准为 `bilingual-approved`，六篇 publishedAt 均为 2026-09-10，updatedAt 保持 null。四个新增 Entry 的稳定身份为 `ten-kings`、`liaozhai-reading-guide`、`painted-skin` 与 `fighting-cricket`；它们分别已有 2/3/1、1/2/1、2/7/1 与 1/3/1 的 Source/Claim/Terminology 消费关系和证据受限正文。修订前锁定稿、010 后续改变的英语单元及两条 `contentNote` 均已通过 Project owner 双语确认，未改单元保留历史批准。Painted Skin 的七条 Claim 分为五条青柯亭原典、一条 `verified` 本站自译与一条 Tso 具名解释；只有青柯亭是该篇文本见证。四篇已在 VB6 完成分类与关系审核并进入 ready；Underworld Guide 同批复用已有 CMA Source 补近引，Source/Claim/术语消费量为 4/4/1，全库 Source 对象数不变。
 
 ### 0.2 M3-U3 视觉记录与加载合同
 
@@ -47,7 +47,7 @@
 
 人物、异兽、地点、故事和指南共用一个内容集合，以 `entryType` 控制模板差异。
 
-下例只展示 Entry Schema 形状，不代表当前 `src/content/entries/zhong-kui.md` 记录；当前真实钟馗 Entry 已形成 `editorial-review` 内容候选，填写完整正文、Source/Claim/Terminology 与 fact-check 日期，并把 `heroAssetId` 绑定到 approved/current Hero。Project owner 已把当前编辑形态作为阶段候选接受，但内容状态仍不是 `ready/published`。
+下例只展示 Entry Schema 形状，不代表当前 `src/content/entries/zhong-kui.md` 记录；当前真实钟馗 Entry 已在 VB6 独立审核到 ready，填写完整正文、Source/Claim/Terminology 与 fact-check 日期，并把 `heroAssetId` 绑定到 approved/current Hero。Project owner 已把当前编辑形态作为阶段候选接受，历史接受不自动提升状态；VB6 ready 决定见 012，随后 owner 已批准 published，目标公开日期为 2026-09-10，仍不等于上线。
 
 ```yaml
 entryId: zhong-kui
@@ -140,7 +140,7 @@ heroAssetId: null
 - `draft | editorial-review | visual-review` Collection 可在内部预览中引用任意非 `archived` Entry；`ready` Collection 只能引用 `ready | published` Entry；`published` Collection 只能引用 `published` Entry。任何非 `archived` Collection 都不得引用 `archived` Entry；`archived` Collection 退出公开构建，只能保留指向 `published | archived` Entry 的既有发布谱系关系供历史追溯，不能借归档状态新挂 draft/未公开对象。
 - Collection 必须说明范围与限制，避免把不同时代/传统强行拼成统一体系。
 - Topic 是可复用筛选标签；Collection 是有导语、有顺序、有结论的产品页面。
-- 2026-09-05 经下一步授权，按 [009](requirements/009-collection-reading-paths.md) 建立两个三篇路径：阴间 `chinese-underworld-guide` → `ten-kings` → `zhong-kui`，聊斋 `liaozhai-reading-guide` → `painted-skin` → `fighting-cricket`。阴间保持 `editorial-review`、Featured 为钟馗；聊斋为 `draft`，Featured/Hero 为空。Entry 状态不变，`relatedEntryIds` 不由成员关系推导。
+- 2026-09-05 经下一步授权，按 [009](requirements/009-collection-reading-paths.md) 建立两个三篇路径：阴间 `chinese-underworld-guide` → `ten-kings` → `zhong-kui`，聊斋 `liaozhai-reading-guide` → `painted-skin` → `fighting-cricket`。009 当批未提升状态；012 后续闭合 Hero，VB6 又审核六篇/两个合集到 ready，并采用 Painted Skin Featured。Related 分别沿两个三篇顺序并回 Guide，编辑明确保存字段，不从成员关系推导；review 输出仍按 003 只选择 published 目标。首发 6+2 获 owner 独立批准后，六篇各显示一个既定 Related 目标，索引展示全部六篇/两个合集且隐藏未发布候选架；六篇目标日期为 2026-09-10。
 - Collection 的 realm token、纹理、构图和主题资产属于表现层/Asset Manifest，不写入本内容对象。
 
 ### 2.3 Source

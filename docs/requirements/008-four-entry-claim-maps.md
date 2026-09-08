@@ -2,6 +2,8 @@
 
 ## 0. 文档职责与状态
 
+后续状态：012 VB6 已在 `1be085b` 基线上审核六篇 Entry / 两个 Collection 到 ready，并闭合四篇分类、Related 编辑环与 Liaozhai Featured（Painted Skin）；其后 owner 已批准全部 6+2 为 published，六篇目标公开日期统一为 2026-09-10，尚未部署。本文研究、物化、首稿和双语批次的 draft/状态未改说明保留为当时边界，不覆盖 012 独立状态审核。四篇正文、证据范围与原事实核查日期保持。
+
 Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-second-collection-decision.md) 的推荐方向，先授权四篇候选的 claim map 与来源研究，随后又单独授权只做实际见证/版次、正式书目和页/叶/canvas locator 闭合。本文件合并记录这两个连续但互不扩权的研究批次，并在第 10–13 节另行记录 2026-09-04 后续独立授权的编辑路线确认、最小证据物化、检查点提交与 Ten Kings、Fighting Cricket、Liaozhai Reading Guide 三篇纵切片。2026-09-05 的 Painted Skin 写作前复核与现代版本检索记录于第 5.5–5.9 节；Project owner 随后授权补齐可合法核验的缺口，以具名且标为公版的 1766 青柯亭本形成单见证草稿，结果见第 5.10 节，并于 2026-09-06 完成该篇人工双语审核，见第 5.11 节。前三篇既有首稿的编辑复核与较早人工双语确认仍单独记录于第 14 节，不外推为 Painted Skin 的审核依据。
 
 本文负责：
@@ -24,8 +26,8 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 | 方向决定 | 已确认 | 007 的 Liaozhai 第二 Collection 方向、3+3 分配、两条公开阅读顺序、Zhong Kui Featured 与《促织》保留均获确认；后续又确认任笃行 2016 主/张友鹤 2011 对校的工作路线，以及《促织》青柯亭单见证路线；第二 Collection 名仍是工作标题 |
 | 研究状态 | 可取得证据已分层复核，未决门禁保留 | Ten Kings 的馆藏对象、IIIF canvas、CBETA 行号及核心书目已闭合；Painted Skin 已核上海图书馆 1766 青柯亭本卷一数字页 72–75 / 左版心叶码 35–38，并区分任 2016 的部分可读电子材料与张 2011 的书目边界；《促织》只闭合上海图书馆青柯亭见证，跨见证门禁仍未闭合 |
 | 写作准备度 | 四篇均有证据受限英语草稿；修订前锁定稿及 010 当前改动单元与两条内容提示均已通过 Project owner 双语确认 | Painted Skin 当前只消费青柯亭 1766 与 Tso 2017 的 2 Source / 7 Claim / 1 `bilingual-approved` Terminology；自译只取一条短句并以 `verified` Claim 保存原文、版本、locator、译者/日期与审核记录，任/张比较及现代译本/影视直接比较移出当前 MVP |
-| 实施状态 | 证据最小物化、四篇纵切片、双语确认、两个合集路径、R1 重建与五组 Hero 资产闭环完成 | 当前四个 `draft` Entry 均有正文；009 已把六篇接入两个三篇路径。012 已闭合四篇 Entry 与 Liaozhai Collection 的 approved brief、候选/权利、exact-canvas master、production record、approved/current manifest、repository source 和内容 Hero 绑定；`relatedEntryIds`、Liaozhai Featured 与 Entry/Collection 状态未改。R1 已退役为 reference-only，目标读者反馈仍为 0 |
-| 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本批不改变状态或 public artifact |
+| 实施状态 | 证据物化、四篇纵切片、双语确认、两个合集路径、五组 Hero 与 VB6 ready 审核完成 | 当前四个新增 Entry 均有正文，已在 VB6 ready 后取得独立 published 批准；009 已把六篇接入两个三篇路径。012 已闭合四篇 Entry 与 Liaozhai Collection 的 approved brief、候选/权利、exact-canvas master、production record、approved/current manifest、repository source 和内容 Hero 绑定；VB6 已闭合两条 Related 编辑环、Liaozhai Featured（Painted Skin）与 6+2 ready。R1 已退役为 reference-only，目标读者反馈仍为 0 |
+| 发布状态 | 未发布 | 后续独立批准后的 published Entry / Collection 为 6/2，六篇目标日期 2026-09-10；本文研究批不授权 public artifact 或部署 |
 
 本文中的 `TK-*`、`LZ-*`、`PS-*`、`FC-*` 只是研究表格内的局部标签，不是 Content Layer 稳定 ID，也不得复制进 `src/content` 后直接充当 Claim ID。表中的“可写”表示证据路线足以支持后续起草，不表示主张已完成双语、文化、版权或 Project owner 审校。
 
@@ -395,7 +397,7 @@ Project owner 在查看包含 20 组中英对照、Claim/Terminology 表和 12 �
 10. 已完成：Project owner 确认 Painted Skin 人工双语审核通过；本站短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
 11. 已完成：按 [`010-four-entry-reader-review.md`](010-four-entry-reader-review.md) 建立四篇目标读者文稿审核合同，并在仓库外生成当时通过静态技术检查的协调者 Markdown 与唯一参与者 HTML；该修订前 R1 快照现已因正文和模板输入改变而失效并标记为不得分发。
 12. 已完成：012 从当前 verified Claim 与权利边界建立五份 Hero-only brief；Project owner 批准候选配对与公开使用权利，Codex 完成 exact-canvas 和委托英文终审，五组 production record、approved/current manifest、repository source 和内容 Hero 绑定已闭合。
-13. 当前下一步：处理四篇 `relatedEntryIds`、Liaozhai Featured 与状态审核。Public Beta 上线后，由 1 位不计入正式样本的目标读者在 live artifact 上执行 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按预冻结规则补位。任/张实页只在未来恢复现代校勘比较时再成为阻塞。
+13. 当前下一步：owner 已在 VB6 的 6+2 ready 基础上批准全部 published，六篇目标公开日期为 2026-09-10；后续按独立门禁确认 origin 并实施 public assembly。Public Beta 上线后，由 1 位不计入正式样本的目标读者在 live artifact 上执行 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按预冻结规则补位。任/张实页只在未来恢复现代校勘比较时再成为阻塞。
 
 ## 9. 本批最终状态
 

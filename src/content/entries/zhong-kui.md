@@ -35,10 +35,10 @@ terminologyRecordIds:
 relatedEntryIds:
   - chinese-underworld-guide
 heroAssetId: asset-zhong-kui-hero-primary
-publishedAt: null
+publishedAt: "2026-09-10"
 updatedAt: null
 lastFactCheckedAt: "2026-08-30"
-status: editorial-review
+status: published
 ---
 
 ## A protector drawn as a threat

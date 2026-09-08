@@ -2,7 +2,7 @@
 
 ## 当前接线状态（2026-09-07）
 
-Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-collection-reading-paths.md) 已将本文件确认的两条 3 篇路径接入 Collection。新增 liaozhai draft，工作标题为 Strange Tales from Liaozhai；阴间保持 editorial-review 和 Zhong Kui Featured。当前共 6 Entry / 2 Collection，published 0/0；六篇均有对应合集反向入口。后续 [012](012-five-hero-visual-briefs.md) 已为四篇 Entry 与 Liaozhai Collection 闭合五组 approved/current Hero，并完成所属内容绑定；`relatedEntryIds`、Liaozhai Featured 与内容状态仍未改变。下文仍保留接线前的决策与分批实施记录；其中“唯一 Collection”“尚未加入”均描述对应批次当时状态，带 009/012 后续说明的段落反映后来的实施结果。当前实现以 009、012、README 和实际内容/视觉文件为准。
+[009](009-collection-reading-paths.md) 已接入两个三篇路径，后续 [012](012-five-hero-visual-briefs.md) 闭合五组 Hero 并完成 VB6：Project owner 已确认全部 6 篇 Entry / 2 个 Collection 为 published，六篇目标公开日期统一为 2026-09-10；尚未部署上线；Liaozhai Featured 为 Painted Skin，阴间 Featured 仍为 Zhong Kui。Related 编辑环沿各合集顺序并回 Guide，review Related 仍只显示 published 目标，六篇反向合集入口保持。下文研究、首稿与物化的 draft 说明保留为历史边界，不覆盖当前 012、README、内容与匹配测试。
 
 ## 0. 文档职责与状态
 
@@ -24,9 +24,9 @@ Project owner 在三篇首稿编辑修订后授权继续下一步；[009](009-co
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 决策状态 | Project owner 已确认 | 2026-09-03 确认 `Strange Tales from Liaozhai` 方向、3+3 分配、两条公开顺序、Zhong Kui Featured 与《促织》条件保留；新标题仍是工作标题 |
-| 实施状态 | 证据最小物化、四篇纵切片、两个合集路径与五组 Hero 资产闭环已完成 | 当前为 6 篇 Entry：原 2 篇保持 `editorial-review`，新增四篇保持 `draft`。009 已建立 Liaozhai draft Collection 并接入两个三篇路径；012 已闭合四篇与 Liaozhai Collection 的 brief、候选/权利、master、production record、approved/current manifest、repository source 和 `heroAssetId`。`relatedEntryIds`、Liaozhai Featured 与内容状态未改 |
+| 实施状态 | 证据最小物化、四篇纵切片、两个合集路径与五组 Hero 资产闭环已完成 | 当前为 6 篇 Entry：原 2 篇和新增四篇均在后续 VB6 审核到 ready。009 已建立 Liaozhai draft Collection 并接入两个三篇路径；012 已闭合四篇与 Liaozhai Collection 的 brief、候选/权利、master、production record、approved/current manifest、repository source 和 `heroAssetId`。VB6 已闭合分类、Related 编辑环、Liaozhai Featured（Painted Skin）与 6+2 ready，随后 owner 已批准首发 6+2 published，六篇日期为 2026-09-10 |
 | 研究状态 | 候选比较、四篇 claim map 及当前可用证据闭合完成 | [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 已分层记录实际见证、正式书目与精确 locator；Painted Skin 当前采用上海图书馆 1766 青柯亭单见证，任 2016 / 张 2011 与现代译本/影视直接比较延期；《促织》青柯亭单见证路线已确认，跨见证、作者归属与“首次增写”继续排除 |
-| 发布状态 | 未发布 | published Entry / Collection 仍为 0/0；本文不改变内容或发布状态 |
+| 发布状态 | 未发布 | 首发 published Entry / Collection 为 6/2；六篇目标日期 2026-09-10，独立批准记录见 012；尚未部署 |
 
 - 当前权威结论更新时间：2026-09-07。
 - 本文保存原始推荐依据与 owner approval，并在第 9–11 节及 008 第 13–14、5.10 节记录后续独立授权的证据物化、四篇纵切片与审核边界；方向确认本身仍不等于其他内容实现、写作完成或发布批准。
@@ -141,13 +141,13 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 6. 已完成：先把上述证据批形成本地检查点 `9914dd3`，再只为 Ten Kings 写入 2 Source / 3 Claim / 1 Terminology 消费关系和证据受限首稿；仍保持 `draft`。
 7. 已完成：只为 Fighting Cricket 写入 1 Source / 3 Claim / 1 Terminology 消费关系和青柯亭单见证证据受限首稿；Source 可见馆藏记录仅按独立例外改为 ASCII，精确中文馆藏号留在内部 notes，Entry 仍保持 `draft`。
 8. 已完成：只为 Liaozhai Reading Guide 写入 1 Source / 2 Claim / 1 Terminology 消费关系和证据受限首稿；任/张实际册页仍未取得，Entry 保持 `draft`。Project owner 于 2026-09-05 通过中文概要确认内容符合预期，并单独授权验证通过后本地提交。
-9. 009 后续已建立第二 Collection，并按已确认顺序接入两个三篇 `entryIds` 路径；012 后续已绑定 Liaozhai Hero。Liaozhai Featured 与六篇 `relatedEntryIds` 仍为空。
+9. 009 后续已建立第二 Collection，并按已确认顺序接入两个三篇 `entryIds` 路径；012 后续已绑定 Liaozhai Hero。VB6 后 Liaozhai Featured 为 Painted Skin，六篇 Related 沿各自合集顺序并返回 Guide。
 10. 已完成：前三篇纠偏稿通过人工双语审核；Painted Skin 又按上海图书馆 1766 青柯亭本形成 2 Source / 7 Claim / 1 Terminology 的单见证草稿。
 11. 已完成：Project owner 于 2026-09-06 确认 Painted Skin 人工双语审核通过；短译 Claim 提升为 `verified`，`業魅` Terminology 提升为 `bilingual-approved`，Entry 保持 `draft`。
 12. 已完成：012 为四篇 Entry 与 Liaozhai Collection 建立并批准五份 Hero-only brief；Project owner 随后批准五组候选与公开使用权利，Codex 完成 exact-canvas/委托英文终审，五组 master、production record、approved/current manifest、repository source 和内容绑定均已闭合。
-13. 当前下一步：另行处理四篇 `relatedEntryIds`、Liaozhai Featured 与内容状态。任/张及现代比较仅在未来恢复对应范围时处理。目标读者研究在 Public Beta 上线后按 R2a → R2b 的内部顺序执行。
+13. VB6 分类、Related、Featured 与 6+2 ready 已完成；owner 已批准 6+2 published 与六篇目标日期 2026-09-10；下一步按独立门禁确认 origin 与 public assembly。任/张及现代比较仅在未来恢复对应范围时处理。目标读者研究在 Public Beta 上线后按 R2a → R2b 的内部顺序执行。
 
-现有两篇 `editorial-review` Entry 不因本建议降级、升级或重写；四个新增 owner 保持 `draft`，且均已有证据受限首稿。本文决策批当时未创建第二 Collection；009 后续已完成本地路径接线，012 又在独立授权下完成五组 Hero 的生产、approved/current manifest、内容绑定与审校。四篇 `relatedEntryIds`、Liaozhai Featured 或内容状态变化仍须另立获授权的内容批次。
+本建议与早期研究批本身不提升状态；后续内容批、009 成员路径、012 Hero 与 VB6 ready 审核分别记录授权。VB6 曾审核六篇/两个合集到 ready；随后 owner 已批准全部 published，四篇正文含义、证据范围和原事实核查日期保持。
 
 ## 7. 风险与停止条件
 
@@ -155,7 +155,7 @@ Project owner 已确认第二个 MVP Collection 采用工作名 **`Strange Tales
 - **分类**：Liaozhai 是文学文本路径，不得把篇中叙事自动写成所有古代中国人的信仰或历史事实；Underworld 也不得写成单一地图/官署。
 - **性别与猎奇化**：当前 Painted Skin 草稿只保留 Tso 的具名学术解释，不直接比较旧译或影视；未来若恢复此类比较，仍须审查其如何塑造女性/鬼魅形象，不能只复述高传播版本。
 - **图像与权利**：网上可见、数字馆藏、公版文本和公共领域故事都不自动授权现代译文、馆藏摄影、书籍图版或影视/game 造型；本轮没有选择、生成或纳入项目图片资产，公开页图只用于核字且不构成复用授权。
-- **关系与状态**：方向确认本身不授权创建稳定 ID/slug、修改 `entryIds`、制造第二 Collection 页面或提升状态；后续独立授权已建立四个 draft 身份与证据子集，由 009 完成两个 Collection 的成员路径，并为 Painted Skin 建立证据消费关系。全部 `relatedEntryIds` 与任何状态变化仍未完成，悬空关系必须继续失败关闭。
+- **关系与状态**：方向确认本身不授权创建稳定 ID/slug、修改 `entryIds`、制造第二 Collection 页面或提升状态；后续独立授权已建立四个 draft 身份与证据子集，由 009 完成两个 Collection 的成员路径，并为 Painted Skin 建立证据消费关系。后续 VB6 已闭合 Related 编辑环与 ready；后续独立 published 决定已按 012 完成，悬空关系继续失败关闭。
 - **证据停点**：任一新篇无法取得可定位原典、独立研究和双语复核路径时，缩小主张、替换选题或停止，不用 AI 输出补事实空缺。
 
 ## 8. Project owner 确认与后续停点
@@ -170,7 +170,7 @@ Project owner 于 2026-09-03 首先确认：
 
 随后 Project owner 又单独授权只做四篇的实际见证/版次、正式书目与页/叶/canvas locator 证据闭合，仍不授权 Source/Claim/Terminology、正文、图片、内容对象或状态变化。此研究批由 [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 执行并停在分层证据账本；其中青柯亭单见证已直接核页，跨见证判断仍维持硬门禁。Project owner 之后又分别确认工作底本/单见证路线、授权最小 draft Entry owner，并最终授权证据已闭合的 Source/Claim/Terminology 物化；这些是后续独立授权，不回溯扩大前两次研究授权。
 
-当前停点是四篇证据受限纵切片、人工双语审核、009 的两个合集路径接线及 012 的五组 Hero 资产闭环已完成：四篇均已建立证据消费关系、正文和 approved/current Hero，两个 Collection 均有明确 `entryIds`，Liaozhai 也已绑定自己的 approved/current Hero。`relatedEntryIds`、Liaozhai Featured 与 Entry/Collection 状态仍未改变。证据批、Ten Kings 与 Fighting Cricket 已分别在后续用户授权下进入本地提交，Fighting Cricket 检查点 `7c0cb3f` 已由 Project owner 推送；Liaozhai Reading Guide 检查点 `119c01c` 也已由 Project owner 确认推送。当前修改位于 `96da8db` 基线之上，未执行 fetch、Git 写操作或发布。下一内容动作是关系、Featured 与状态审核；目标读者 R2 只在 Public Beta 上线后按 R2a → R2b 执行。
+四篇证据受限纵切片、双语审核、009 路径、012 Hero 与 VB6 逐项 ready 已完成。基线为 `1be085b`，VB6 是其上的未提交修改，未 fetch、执行 Git 写入或发布。首发 published 决定及六篇目标日期 2026-09-10 已确认；下一停点是独立的 origin/public assembly 门禁；R2 在 Public Beta 上线后按 R2a → R2b 执行。
 
 ## 9. 2026-09-04 后续证据物化记录
 

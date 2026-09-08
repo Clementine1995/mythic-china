@@ -7,10 +7,13 @@ import { fileURLToPath, URL } from "node:url";
 import { imageMetadata } from "astro/assets/utils";
 
 import {
+  assertReviewCollectionFeaturedEntry,
   assertReviewCollectionReadingPath,
   assertReviewCssResourcePolicy,
   assertReviewEntryCollectionMembership,
   assertReviewEntryContentNote,
+  assertReviewEntryRelated,
+  assertReviewPublishedIndex,
   assertReviewHtmlResourcePolicy,
   assertReviewInteractionSurface,
   assertReviewOutputArtifactExtensions,
@@ -40,7 +43,6 @@ import {
   assertReviewHtmlInventory,
   expectedReviewHtmlFiles,
   fontSpecimenOutputPath,
-  fontSpecimenRoute,
   readInternalReviewLinks,
 } from "./font-specimen-policy.mjs";
 
@@ -582,8 +584,7 @@ if (typeSpecimenHtml === undefined) {
 }
 assertFontSpecimenHtml(typeSpecimenHtml, cjkCharacterPolicy);
 
-// Focal-route checks keep release lists empty while exposing only the fixed
-// review slice through an explicitly labeled, non-published preview.
+// Published content is visible in local indexes without changing the review build intent.
 const zhongKuiHtml = htmlByPath.get("explore/zhong-kui/index.html");
 const collectionHtml = htmlByPath.get(
   "collections/chinese-underworld/index.html",
@@ -645,91 +646,19 @@ for (const title of ["鍾馗元夜出遊圖", "清早期竹雕鍾馗群鬼", "�
     );
   }
 }
-if (
-  !exploreIndexHtml.includes("No published entries yet") ||
-  exploreIndexHtml.includes('class="editorial-index"')
-) {
-  throw new Error("Explore must render the honest empty release state.");
-}
-if (
-  !collectionsIndexHtml.includes("No published collections yet") ||
-  collectionsIndexHtml.includes('class="editorial-index"')
-) {
-  throw new Error("Collections must render the honest empty release state.");
-}
-
-function collectReviewPreviewKinds(html) {
-  return (html.match(/<section\b[^>]*>/giu) ?? []).flatMap((tag) => {
-    const kind = readHtmlAttribute(tag, "data-review-preview");
-    return kind === null ? [] : [kind];
-  });
-}
-
-function collectReviewCandidateHrefs(html, candidateKind) {
-  return (html.match(/<a\b[^>]*>/giu) ?? [])
-    .filter(
-      (tag) =>
-        readHtmlAttribute(tag, "data-review-candidate") === candidateKind,
-    )
-    .map((tag) => readHtmlAttribute(tag, "href"));
-}
-
-const explorePreviewKinds = collectReviewPreviewKinds(exploreIndexHtml);
-const collectionsPreviewKinds = collectReviewPreviewKinds(collectionsIndexHtml);
-const exploreEntryCandidates = collectReviewCandidateHrefs(
-  exploreIndexHtml,
-  "entry",
-);
-const exploreCollectionCandidates = collectReviewCandidateHrefs(
-  exploreIndexHtml,
-  "collection",
-);
-const collectionEntryCandidates = collectReviewCandidateHrefs(
-  collectionsIndexHtml,
-  "entry",
-);
-const collectionCandidates = collectReviewCandidateHrefs(
-  collectionsIndexHtml,
-  "collection",
-);
-
-if (
-  JSON.stringify(explorePreviewKinds) !== JSON.stringify(["entries"]) ||
-  !exploreIndexHtml.includes("Local review preview") ||
-  !exploreIndexHtml.includes("Not published") ||
-  JSON.stringify(exploreEntryCandidates) !==
-    JSON.stringify([
-      "/explore/chinese-underworld-guide/",
-      "/explore/ten-kings/",
-      "/explore/zhong-kui/",
-    ]) ||
-  exploreCollectionCandidates.length !== 0
-) {
-  throw new Error(
-    "Explore must expose exactly the fixed, labeled review Entry preview.",
-  );
-}
-if (
-  JSON.stringify(collectionsPreviewKinds) !== JSON.stringify(["collections"]) ||
-  !collectionsIndexHtml.includes("Local review preview") ||
-  !collectionsIndexHtml.includes("Not published") ||
-  JSON.stringify(collectionCandidates) !==
-    JSON.stringify(["/collections/chinese-underworld/"]) ||
-  collectionEntryCandidates.length !== 0
-) {
-  throw new Error(
-    "Collections must expose exactly the fixed, labeled review Collection preview.",
-  );
-}
-for (const [route, html] of [
-  ["/", homeHtml],
-  ["/about/", aboutHtml],
-  ["/privacy/", privacyHtml],
-  ["/collections/chinese-underworld/", collectionHtml],
-  ["/explore/chinese-underworld-guide/", guideHtml],
-  ["/explore/zhong-kui/", zhongKuiHtml],
-  [fontSpecimenRoute, typeSpecimenHtml],
-]) {
+assertReviewPublishedIndex(exploreIndexHtml, "explore/index.html", [
+  "/explore/chinese-underworld-guide/",
+  "/explore/fighting-cricket/",
+  "/explore/liaozhai-reading-guide/",
+  "/explore/painted-skin/",
+  "/explore/ten-kings/",
+  "/explore/zhong-kui/",
+]);
+assertReviewPublishedIndex(collectionsIndexHtml, "collections/index.html", [
+  "/collections/liaozhai/",
+  "/collections/chinese-underworld/",
+]);
+for (const [route, html] of htmlByPath) {
   if (
     html.includes("data-review-preview") ||
     html.includes("data-review-candidate")
@@ -1012,11 +941,11 @@ if (
 if (
   !guideHtml.includes("Quick Answer") ||
   !guideHtml.includes("By <span>Mythic China Editorial</span>") ||
-  (guideHtml.match(/class="source-metadata"/gu) ?? []).length !== 3 ||
-  (guideHtml.match(/<dt>Accessed<\/dt>/gu) ?? []).length !== 3
+  (guideHtml.match(/class="source-metadata"/gu) ?? []).length !== 4 ||
+  (guideHtml.match(/<dt>Accessed<\/dt>/gu) ?? []).length !== 4
 ) {
   throw new Error(
-    "Underworld guide must render editorial copy, attribution, and three complete web Source records.",
+    "Underworld guide must render editorial copy, attribution, and four complete web Source records.",
   );
 }
 for (const collection of collectionReadingPathContracts) {
@@ -1033,7 +962,7 @@ for (const collection of collectionReadingPathContracts) {
     collectionId,
     collection.entries.map(({ href }) => href),
   );
-  for (const entry of collection.entries) {
+  for (const [index, entry] of collection.entries.entries()) {
     const entryHtml = htmlByPath.get(entry.outputPath);
     if (entryHtml === undefined)
       throw new Error(`Missing member Entry ${entry.entryId}.`);
@@ -1042,16 +971,25 @@ for (const collection of collectionReadingPathContracts) {
       entry.outputPath,
       collection.href,
     );
+    // Every approved ring target is now published; URLs remain explicit in the contract.
+    assertReviewEntryRelated(
+      entryHtml,
+      entry.outputPath,
+      collection.entries[(index + 1) % collection.entries.length].href,
+    );
   }
 }
-if (
-  liaozhaiHtml.includes('class="collection-featured"') ||
-  !liaozhaiHtml.includes('class="collection-hero__figure"')
-) {
+assertReviewCollectionFeaturedEntry(
+  liaozhaiHtml,
+  "collections/liaozhai/index.html",
+  "/explore/painted-skin/",
+  "Painted Skin: A Close Reading of a 1766 Text",
+);
+if (!liaozhaiHtml.includes('class="collection-hero__figure"')) {
   throw new Error(
-    "Draft Liaozhai must render its own Hero without borrowing a Featured Entry.",
+    "Liaozhai must keep its own Hero when rendering a Featured Entry.",
   );
 }
 process.stdout.write(
-  `Verified ${htmlFiles.length} noindex review pages including Privacy and the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, exact Entry content notes, inactive reader interactions, release empty states, navigation, Hero art direction, and zero client JavaScript.\n`,
+  `Verified ${htmlFiles.length} noindex review pages including Privacy and the direct-only type specimen, ${fontFiles.length} hash-locked fonts with CJK cmap coverage, exact Entry content notes, inactive reader interactions, six published Entries, two published Collections, exact Related links, navigation, Hero art direction, and zero client JavaScript.\n`,
 );

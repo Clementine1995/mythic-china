@@ -20,6 +20,7 @@ const fixedStaticPages = [
   { path: "/explore/" },
   { path: "/collections/" },
   { path: "/about/" },
+  { path: "/privacy/" },
 ] as const;
 
 function makePublishedEntry(input: {
@@ -93,6 +94,7 @@ describe("public release artifacts", () => {
         makePublishedCollection("collection-one", ["entry-new", "entry-old"]),
       ],
       staticPages: [
+        { path: "/privacy/" },
         { path: "/about/", updatedAt: "2026-08-30" },
         { path: "/collections/" },
         { path: "/" },
@@ -116,11 +118,16 @@ describe("public release artifacts", () => {
       `${fixtureOrigin}/explore/`,
       `${fixtureOrigin}/collections/`,
       `${fixtureOrigin}/about/`,
+      `${fixtureOrigin}/privacy/`,
       `${fixtureOrigin}/explore/entry-new/`,
       `${fixtureOrigin}/explore/entry-old/`,
       `${fixtureOrigin}/collections/collection-one/`,
     ]);
     expect(artifacts.rss).not.toContain("draft-entry");
+    expect(artifacts.rss).not.toContain("/privacy/");
+    expect(artifacts.sitemap).toContain(
+      `<url>\n    <loc>${fixtureOrigin}/privacy/</loc>\n  </url>`,
+    );
     expect(artifacts.sitemap).not.toContain("/review/type-specimen/");
     expect(artifacts.rss).not.toContain("/review/type-specimen/");
     const rssLinks = [...artifacts.rss.matchAll(/<link>([^<]+)<\/link>/gu)].map(
@@ -247,6 +254,7 @@ describe("public release artifacts", () => {
         { path: "/explore/" },
         { path: "/collections/" },
         { path: "/about/", updatedAt: "2026-02-30" },
+        { path: "/privacy/" },
       ],
       feedDescription: "Published entries.",
     },
@@ -276,6 +284,33 @@ describe("public release artifacts", () => {
       }),
     ).toThrow(ReleaseArtifactError);
   });
+
+  it.each([
+    {
+      staticPages: fixedStaticPages.filter((page) => page.path !== "/privacy/"),
+    },
+    { staticPages: [...fixedStaticPages, { path: "/privacy/" }] },
+    { staticPages: [...fixedStaticPages, { path: "/privacy" }] },
+  ])(
+    "rejects missing, duplicate or noncanonical Privacy in the Sitemap: %o",
+    ({ staticPages }) => {
+      expect(() =>
+        createReleaseArtifacts(site, {
+          entries: [
+            makePublishedEntry({
+              id: "entry-one",
+              publishedAt: "2026-08-30",
+            }),
+          ],
+          collections: [
+            makePublishedCollection("collection-one", ["entry-one"]),
+          ],
+          staticPages,
+          feedDescription: "Published entries.",
+        }),
+      ).toThrow(ReleaseArtifactError);
+    },
+  );
 
   it("rejects a Sitemap that omits any fixed static page", () => {
     expect(() =>

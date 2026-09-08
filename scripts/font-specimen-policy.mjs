@@ -207,6 +207,7 @@ export function assertReviewHtmlInventory(htmlFiles) {
 export function assertExactReviewNavigation(html, relativePath) {
   const document = parseHtml(html, { scriptingEnabled: false });
   const records = elementRecords(document);
+  const currentPath = reviewDocumentUrl(relativePath).pathname;
   const contracts = [
     {
       label: "Primary navigation",
@@ -233,14 +234,28 @@ export function assertExactReviewNavigation(html, relativePath) {
         `${relativePath} must contain one exact ${contract.label}.`,
       );
     }
-    const hrefs = descendants(matching[0], (node) => node.tagName === "a").map(
-      (node) => readAttribute(node, "href"),
-    );
+    const links = descendants(matching[0], (node) => node.tagName === "a");
+    const hrefs = links.map((node) => readAttribute(node, "href"));
     assertExactList(
       hrefs,
       navigationHrefs,
       `${relativePath} ${contract.label}`,
     );
+    for (const link of links) {
+      const href = readAttribute(link, "href");
+      // A section ancestor is the current location, not the current page.
+      const expectedCurrent =
+        currentPath === href
+          ? "page"
+          : href !== "/" && currentPath.startsWith(href)
+            ? "location"
+            : null;
+      if (readAttribute(link, "aria-current") !== expectedCurrent) {
+        throw new Error(
+          `${relativePath} ${contract.label} has incorrect aria-current for ${href}.`,
+        );
+      }
+    }
   }
 }
 

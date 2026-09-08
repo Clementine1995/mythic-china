@@ -4,7 +4,7 @@ slug: painted-skin
 title: "Painted Skin: A Close Reading of a 1766 Text"
 subtitle: null
 entryType: tale
-traditionType: null
+traditionType: literature
 nameZh: null
 pinyin: null
 aliases: []
@@ -32,12 +32,13 @@ claimIds:
   - claim-painted-skin-tso-gender-translation-reading
 terminologyRecordIds:
   - term-ye-mei-in-painted-skin
-relatedEntryIds: []
+relatedEntryIds:
+  - fighting-cricket
 heroAssetId: asset-painted-skin-hero-primary
-publishedAt: null
+publishedAt: "2026-09-10"
 updatedAt: null
 lastFactCheckedAt: "2026-09-06"
-status: draft
+status: published
 ---
 
 ## Advice and a warning before the disguise is seen

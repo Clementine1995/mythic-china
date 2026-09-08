@@ -184,6 +184,103 @@ export function indexReviewRelationshipContracts(contracts) {
   return { collectionIdsByOutputPath, entryIdsByOutputPath };
 }
 
+function listHasExactLinks(elements, list, expectedHrefs) {
+  if (list === undefined) return false;
+  const items = directElementChildren(list);
+  const anchors = descendantsOf(elements, list).filter(
+    (node) => node.tagName === "a",
+  );
+  return (
+    items.length === expectedHrefs.length &&
+    items.every(
+      (item) =>
+        item.tagName === "li" &&
+        descendantsOf(elements, item).filter((node) => node.tagName === "a")
+          .length === 1,
+    ) &&
+    JSON.stringify(
+      anchors.map((node) => readElementAttribute(node, "href")),
+    ) === JSON.stringify(expectedHrefs)
+  );
+}
+
+export function assertReviewPublishedIndex(html, relativePath, expectedHrefs) {
+  const { elements } = parseReviewHtml(html);
+  const sections = elements.filter(
+    (node) =>
+      node.tagName === "section" && classNames(node).has("index-results"),
+  );
+  const section = sections[0];
+  const lists = elements.filter((node) =>
+    classNames(node).has("editorial-index"),
+  );
+  const list = lists[0];
+  if (
+    sections.length !== 1 ||
+    section === undefined ||
+    lists.length !== 1 ||
+    list === undefined ||
+    list.tagName !== "ol" ||
+    !isDescendantOf(list, section) ||
+    !listHasExactLinks(elements, list, expectedHrefs) ||
+    descendantsOf(elements, section).filter((node) => node.tagName === "a")
+      .length !== expectedHrefs.length ||
+    elements.some(
+      (node) =>
+        classNames(node).has("honest-empty-state") ||
+        readElementAttribute(node, "data-review-preview") !== null ||
+        readElementAttribute(node, "data-review-candidate") !== null,
+    ) ||
+    html.includes("Not published") ||
+    html.includes("Local review preview")
+  ) {
+    throw new Error(
+      `${relativePath} must render one published index with exact hrefs ${JSON.stringify(expectedHrefs)} and no unpublished preview.`,
+    );
+  }
+}
+
+export function assertReviewEntryRelated(html, relativePath, expectedHref) {
+  const { elements } = parseReviewHtml(html);
+  const navs = elements.filter(
+    (node) =>
+      node.tagName === "nav" &&
+      readElementAttribute(node, "aria-labelledby") === "related-heading",
+  );
+  const nav = navs[0];
+  const headings = elements.filter(
+    (node) => readElementAttribute(node, "id") === "related-heading",
+  );
+  const heading = headings[0];
+  // Collection membership uses the same list class; scope this check to Related.
+  const lists =
+    nav === undefined
+      ? []
+      : descendantsOf(elements, nav).filter((node) =>
+          classNames(node).has("related-entries"),
+        );
+  const list = lists[0];
+  if (
+    navs.length !== 1 ||
+    nav === undefined ||
+    headings.length !== 1 ||
+    heading === undefined ||
+    heading.tagName !== "h2" ||
+    !isDescendantOf(heading, nav) ||
+    lists.length !== 1 ||
+    list === undefined ||
+    list.tagName !== "ul" ||
+    !isDescendantOf(list, nav) ||
+    !listHasExactLinks(elements, list, [expectedHref]) ||
+    descendantsOf(elements, nav).filter((node) => node.tagName === "a")
+      .length !== 1
+  ) {
+    throw new Error(
+      `${relativePath} must render one named Related navigation with exact href ${JSON.stringify(expectedHref)}.`,
+    );
+  }
+}
+
 export function assertReviewCollectionReadingPath(
   html,
   relativePath,
@@ -344,6 +441,42 @@ export function assertReviewEntryCollectionMembership(
   ) {
     throw new Error(
       `${relativePath} must contain one Collection membership with exact href ${JSON.stringify(expectedCollectionHref)}; received ${JSON.stringify(actualCollectionHrefs)}.`,
+    );
+  }
+}
+
+export function assertReviewCollectionFeaturedEntry(
+  html,
+  relativePath,
+  expectedHref,
+  expectedTitle,
+) {
+  const { elements } = parseReviewHtml(html);
+  const sections = elements.filter((node) =>
+    classNames(node).has("collection-featured"),
+  );
+  const section = sections[0];
+  const headings = elements.filter(
+    (node) => readElementAttribute(node, "id") === "featured-entry-heading",
+  );
+  const heading = headings[0];
+  const children =
+    section === undefined ? [] : descendantsOf(elements, section);
+  const anchors = children.filter((node) => node.tagName === "a");
+  if (
+    sections.length !== 1 ||
+    section?.tagName !== "section" ||
+    readElementAttribute(section, "aria-labelledby") !==
+      "featured-entry-heading" ||
+    headings.length !== 1 ||
+    heading?.tagName !== "h2" ||
+    !children.includes(heading) ||
+    normalizedText(heading) !== expectedTitle ||
+    anchors.length !== 1 ||
+    readElementAttribute(anchors[0], "href") !== expectedHref
+  ) {
+    throw new Error(
+      `${relativePath} must render one Featured Entry titled ${JSON.stringify(expectedTitle)} with exact href ${JSON.stringify(expectedHref)}.`,
     );
   }
 }

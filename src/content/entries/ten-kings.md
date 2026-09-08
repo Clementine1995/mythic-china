@@ -4,7 +4,7 @@ slug: ten-kings
 title: The Ten Kings in Two Sources
 subtitle: A Dunhuang scroll preserves an illustrated sequence; a separate text describes a ritual schedule, records, and judgment
 entryType: guide
-traditionType: null
+traditionType: religion
 nameZh: null
 pinyin: null
 aliases: []
@@ -26,12 +26,13 @@ claimIds:
   - claim-ten-kings-recording-apparatus
 terminologyRecordIds:
   - term-shi-wang-in-ten-kings
-relatedEntryIds: []
+relatedEntryIds:
+  - zhong-kui
 heroAssetId: asset-ten-kings-hero-primary
-publishedAt: null
+publishedAt: "2026-09-10"
 updatedAt: null
 lastFactCheckedAt: "2026-09-04"
-status: draft
+status: published
 ---
 
 ## An illustrated scroll from Dunhuang

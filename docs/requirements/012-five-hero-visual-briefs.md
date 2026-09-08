@@ -1,4 +1,4 @@
-# 012 四篇 Entry 与 Liaozhai Collection Hero Brief 及资产闭环：开发与验收说明
+# 012 Hero 资产闭环、阅读关系与内容就绪审核：开发与验收说明
 
 ## 0. 文档职责与状态
 
@@ -6,14 +6,15 @@
 
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
-| 需求状态 | VB1–VB5 已授权并完成 | Project owner 批准五组 desktop/mobile 配对，确认当前账户由其合法管理或已获组织授权，并授权把本批项目生成图保存、编辑和用于 Mythic China 公开发布 |
-| 实施状态 | 五组 Hero 资产闭环已完成 | 22 张候选与审校板保留在 Git-ignored local explore；10 个 exact-canvas master、5 份 production record、5 份 approved/current manifest、10 份 repository source、registry 与 5 个 versionless 内容绑定已建立 |
+| 需求状态 | VB1–VB6 及后续首发 published 决定已授权 | 候选/权利与 VB6 ready 审核批准保持；Project owner 随后确认全部六篇文章及两个合集进入 published，六篇目标公开日期统一为 2026-09-10；只授权本地内容、匹配接线、文档与验证 |
+| 实施状态 | 五组 Hero、VB6 ready 审核及首发 published 本地变更已完成 | 当前为 6 published Entry / 2 published Collection，六篇 publishedAt 为 2026-09-10；分类、两环、Featured、正文与资产保持；索引为真实 6/2 列表，六篇各展示一个 Related |
 | 审批状态 | Brief、候选、publication rights 与五审均已闭合 | 候选/权利由 `Project owner (user-confirmed)` 确认；exact-canvas 视觉与文化终审由 Project owner 选图加 Codex 成品复核完成；英文无障碍与语言文案由 Codex 按 Project owner 委托审核 |
-| 验证状态 | 数据合同定向门禁已通过；最终全量结果见第 7 节 | 10 个 master 与 10 份 repository source 的实际尺寸/hash、production lineage、owner/brief/Claim 关系、current 唯一性、内容绑定和精确 inventory 已通过 8 个测试文件/38 项测试 |
-| 发布状态 | 未提交、未推送、未发布 | 四篇 Entry 与 Liaozhai Collection 仍为 `draft`；`relatedEntryIds`、Liaozhai Featured、内容状态、服务、public artifact、预览与发布均未改变 |
+| 验证状态 | 首发 published 定向与完整本地门禁通过 | 定向 7 文件/210 测试、完整 25 文件/401 测试、14 页 noindex 输出通过；当前结果见第 6.4 节，VB6 与 VB1–VB5 历史证据分别见第 6.3、7 节 |
+| 发布状态 | 编辑批准为 published；网站未上线，修改未提交 | 五组 Hero 已进入 `1be085b`；VB6 与首发状态变更仍是未提交本地修改；没有 public artifact、服务、Git 写入、远端预览或部署 |
 
 - 当前权威结论更新时间：2026-09-07。
-- 实施基线：`96da8db52cc384e0dc77164288d3bce16383faf0`；开始时 HEAD、`main` 与本地 `origin/main` tracking ref 对齐且工作树干净。本批未 fetch，tracking ref 不单独证明服务器端状态。
+- VB1–VB5 历史实施基线：`96da8db52cc384e0dc77164288d3bce16383faf0`；开始时 HEAD、`main` 与本地 `origin/main` tracking ref 对齐且工作树干净。该批未 fetch，tracking ref 不单独证明服务器端状态。
+- VB6 基线：2026-09-07 只读复核确认五组 Hero 已提交为 `1be085bf5fc4ba56c2665d1c8193a83001aeec18`，HEAD、`main` 与本地 `origin/main` 一致，工作树干净；未 fetch 或查询服务器，不把 tracking ref 当作当前远端证明。所有操作直接在保存项目中执行。
 
 ## 1. 目标、不做与成功标准
 
@@ -122,7 +123,7 @@ Project owner 说明英文阅读不便，并明确要求 Codex 代为审核后�
 3. **VB3 生产授权**：确认候选方法、工具、数量、local explore 与退出边界。状态：已完成。实际采用的纯文字输入及同批项目生成图 edit target 由 production record 在生产后记录证明，不归因为 Project owner 事前确认输入链。
 4. **VB4 候选与五审**：按 approved brief 生产 22 张候选，Codex 预筛后由 Project owner 批准五组配对并确认 publication rights，再由 Codex 完成 exact-canvas 与委托英文终审。状态：已完成。
 5. **VB5 资产闭环**：建立 10 个 exact-canvas master、5 份 production record、5 份 approved/current manifest、10 份 repository source、响应式构建合同、registry、输出 oracle 与 5 个内容绑定。状态：已完成。
-6. **VB6 关系与状态审核**：另行处理四篇 `relatedEntryIds`、Liaozhai Featured 决策及 Entry/Collection 状态。状态：未开始。
+6. **VB6 关系与状态审核**：审核全部六篇关系、四篇分类、Liaozhai Featured 与八个内容包，先到 `ready`。状态：本地实施与验证已完成；合同与逐项结果见第 6.2 节，验证结果见第 6.3 节。
 
 任何一步的授权都不自动传递到下一步。brief 的人工批准只批准视觉生产合同，不批准某张图片、工具条款、发布权利、内容状态或公开使用。
 
@@ -138,7 +139,65 @@ Project owner 说明英文阅读不便，并明确要求 Codex 代为审核后�
 
 Project owner 已接受上述五组配对。exact-canvas 后复核未见文字、伪文字、Logo、水印、禁用角色、明显破损主体或响应式主轮廓混淆；Reading Guide 与 Liaozhai Collection 的 640px 灰度、无标题对比仍可分别凭“双分叉页组”和“偏轴暗口＋连续路径”辨认。逐资产公开文案、权利和五审结论保存在对应 manifest，实际提示词、接收时间、输入图 hash、raw/master tuple 与处理记录保存在对应 production record。
 
-## 7. 本批验证
+### 6.2 VB6 内容合同与逐项审核
+
+目标是闭合内容包门禁，不进入 `published`。不新增 Source/Claim/术语对象、不扩写正文、不产生视觉资产、不改 Schema、依赖或配置，不执行服务、真实接线、public artifact、Vercel、Git 写入或发布。
+
+编辑选择：阴间 `chinese-underworld-guide` → `ten-kings` → `zhong-kui` → Guide；聊斋 `liaozhai-reading-guide` → `painted-skin` → `fighting-cricket` → Guide。每篇只保存一个明确的 `relatedEntryIds`，不由 Collection 自动推导。两条环是阅读建议，不表示历史身份、文本源流或共享证据。既有合集三篇顺序与 Zhong Kui Featured 保持；Liaozhai 采用 Painted Skin Featured，让故事入口与导读优先的阅读顺序分开，内容提示仍在该篇开场之前。
+
+四篇分类依据当前证据范围：Ten Kings 的文本、仪式与审判语境归 `religion`；Liaozhai Guide 的文学编纂/版本问题及两个具名作品细读归 `literature`。它们不被归为普遍民俗或历史制度。已有 Zhong Kui `historical-legend` 与 Underworld Guide `religion` 保持。
+
+| 对象 | 证据与编辑审核 | 关系、资产与状态结论 |
+| --- | --- | --- |
+| Chinese Underworld Guide | 既有 004 编辑/术语批准；4 Source / 4 verified Claim / 1 bilingual-approved 术语；补入仓库已有 CMA 来源并给末段 museum records 加近引，英文含义不变 | Related Ten Kings；自有 approved/current Hero；ready |
+| Ten Kings | 2 Source / 3 verified Claim / 1 bilingual-approved 术语；008 纠偏与 010 聚焦双语确认；两见证保持分开 | religion；Related Zhong Kui；自有 approved/current Hero；ready |
+| Zhong Kui | 6 Source / 6 verified Claim / 1 bilingual-approved 术语；004 既有接受；历史传奇与可证历史仍分开 | Related Guide 保持；Hero v2 current、v1 非 current；ready |
+| Liaozhai Reading Guide | 1 Source / 2 verified Claim / 1 bilingual-approved 术语；008/010 既有双语确认；Luo 归因与版本限制保持 | literature；Related Painted Skin；自有 approved/current Hero；ready |
+| Painted Skin | 2 Source / 7 verified Claim / 1 bilingual-approved 术语；青柯亭单见证、自译和 Tso 具名解释分开；008/010 批准与内容提示保持 | literature；Related Fighting Cricket；自有 approved/current Hero；ready |
+| Fighting Cricket | 1 Source / 3 verified Claim / 1 bilingual-approved 术语；008/010 批准与内容提示保持；不增写死亡、复活或医学判断 | literature；Related Liaozhai Guide；自有 approved/current Hero；ready |
+| Chinese Underworld Collection | 004 既有接受；本批复核范围说明、顺序与 Featured 没有混淆宗教身份 | 三个成员均 ready；Featured Zhong Kui；自有 approved/current Hero；ready |
+| Liaozhai Collection | Codex 本批编辑复核现有英文标题/description：准确说明导读、两篇故事与文本/解释边界，无新增文化事实；不记为新的 owner 逐字批准 | 三个成员均 ready；Featured Painted Skin；自有 approved/current Hero；ready |
+
+主代理在既有批准记录与两路独立只读审查基础上逐项判断。六份术语均 `bilingual-approved`，25 份 Claim 均 `verified`，已用中文 Source 标题无 generic `zh`，完整书目覆盖所消费 Claim/术语。人工批准只引用原有记录；Codex 本批状态审核不冒充新增人工双语或视觉批准。所有 `lastFactCheckedAt` 保留原日期，`publishedAt` / `updatedAt` 保持 `null`。
+
+保留 003 的 published-only Related 输出合同：当前八个内容包仅为 ready，六篇 review 页不渲染 Related，阅读环作为编辑数据被匹配测试锁定。原有 Collection 正向路径与 Entry 反向入口继续可用；Featured 由原模板消费。Explore/Collections 的提示改成阶段中性的 local review / Not published，固定候选架范围和发布空态不变。
+
+实际修改：八个内容文件；Explore/Collections 两页仅改内部 review 提示；`review-output-policy.mjs` 与 `verify-m4-u2-output.mjs` 锁定 Painted Skin Featured 的唯一结构、标题与精确 href，保留自有 Hero 和六篇 Related 不展示，Guide 书目期望改为四条；architecture inventory、review projection 与 output policy 测试同步。权威文档更新基线、内容状态与停点，历史批次不追认新增授权。
+
+验收采用 `DEV_WORKFLOW.md` 的固定运行时定向测试、完整 check 与文档验证：实际 Schema/内容图/资产图必须通过，6 ready / 2 ready 且 published 0/0，14 页 noindex、112 Hero、10 WOFF2、零 XML/客户端 JavaScript。非默认视觉再生产不适用，因本批未改变视觉源或谱系。浏览器、键盘/缩放/故障/跨平台、外部服务、public artifact 与 release-candidate QA 均未执行。
+
+### 6.3 VB6 验证与收口
+
+- 固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0 下，定向 7 文件/188 项测试通过；完整 check 通过 Prettier、ESLint、25 文件/379 项测试、Astro 81 文件零诊断、14 页 noindex build/output verifier、112 Hero、10 个 hash-locked WOFF2、零 XML 与零客户端 JavaScript。
+- 33 份 Markdown 严格 UTF-8、108 个相对 Markdown 链接、模板占位符与 git diff --check 通过。两路独立只读审查辅助核对内容门禁、匹配测试和当前文档口径，历史批次证据保留。
+- Hero 追溯、权利、公开文案与五审保持；构建期 Schema/内容图/视觉图诊断未放宽。未重新生产视觉资产；浏览器及最终发布候选 QA、服务、外部交互、public artifact、Git 写操作、推送或发布未执行。当前改动只形成未提交的本地 ready 审核结果。
+
+### 6.4 Public Beta 首发内容批准
+
+Project owner 在 VB6 ready 审核后明确确认六篇文章与两个合集均作为 Public Beta 首发内容，并授权本地改为 `published`、同步文档和测试及完成本地验证；随后明确六篇目标公开日期统一为 `2026-09-10`。这是进入公开版本的编辑决定，不是已上线事实、定时上线任务、页面级最终验收或部署授权。
+
+| 对象 | 批准目标状态 | 目标公开日期 |
+| --- | --- | --- |
+| chinese-underworld-guide | published | 2026-09-10 |
+| ten-kings | published | 2026-09-10 |
+| zhong-kui | published | 2026-09-10 |
+| liaozhai-reading-guide | published | 2026-09-10 |
+| painted-skin | published | 2026-09-10 |
+| fighting-cricket | published | 2026-09-10 |
+| chinese-underworld Collection | published | 不适用：Collection 无日期字段 |
+| liaozhai Collection | published | 不适用：Collection 无日期字段 |
+
+六篇 `publishedAt` 使用带引号的 ISO 日期，`updatedAt` 保持 `null`，`lastFactCheckedAt` 保留原核查日期。正文、分类、Source/Claim/术语、两条 Related 环、成员顺序、Featured、Hero 与披露不变；八个对象一并提升以满足 published 关系矩阵。不新增 Schema、来源、资产、依赖、配置、外部交互或发布能力。
+
+必要接线：Explore/Collections 有 published 列表时不调用或展示固定的 Not published 候选架；列表为空时仍保留原候选架和 helper 的严格资格校验。相应提示只在候选架显示时出现。Related 仍按既有 published-only 合同消费，六篇各显示既定下一篇。默认 review 的 noindex/nofollow、固定 Home、14 页 inventory、112 Hero、10 WOFF2、零 XML/客户端 JavaScript 与 inactive 交互不变；`public` intent 继续拒绝执行。
+
+验收：真实八对象状态与六篇精确日期通过内容/资产图；未来日期不按系统时钟过滤；Explore 六篇同日按稳定 ID 排序，Collections 按标题排序；输出独立验证精确列表与 Related，未发布/空态 fixture 保留。固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0 下，定向 7 文件/210 测试与完整 check 通过：Prettier、ESLint、25 文件/401 测试、Astro 81 文件零诊断、14 页 noindex 输出、112 Hero、10 WOFF2、零 XML 与零客户端 JavaScript。所有结果均为 `1be085b` 上延续 VB6 的未提交本地修改，不继承先前构建证据。文档最终检查在本批收口时记录于 DEV_WORKFLOW。
+
+配套核对：正文/Source/Claim/术语及资产谱系、权利、alt/caption/credit/AI disclosure 均未改；现有 Schema、内容图、视觉图、public intent 与静态资源/交互阻断保持。索引与 Related 使用 HTML5 树检查精确链接、顺序、唯一结构及遗漏/重复/错目标；Related 校验限定在对应导航内，避免把复用列表 class 的 Collection 反向入口误判为重复。该非显然约束有职责注释，正向 fixture 同时覆盖两种导航。
+
+本批不启动服务、不做浏览器/最终发布 QA、不创建 origin 或 public artifact、不执行 Git 写入、推送、Vercel、预览或部署。目标日期变化后需重验受影响页面/SEO/制品；日期本身不会触发上线。第 6.2–6.3 节保留 VB6 当批 ready 结果，不代表本批批准后的状态。
+
+## 7. VB1–VB5 验证（历史基线）
 
 - 数据闭环定向测试已通过：8 个测试文件/38 项测试覆盖 Schema、production lineage、metadata/hash、owner/brief/Claim 图、current resolver、内容 Hero 外键、local master 与精确 repository inventory。
 - 非默认 `visual:build:check` 已通过：实际核验 21 个 local master，并从 17 份 current responsive rendition 生成、解码 120 个 AVIF/WebP 输出。
@@ -147,4 +206,4 @@ Project owner 已接受上述五组配对。exact-canvas 后复核未见文字�
 
 ## 8. 当前停点
 
-VB1–VB5 已完成：五份 brief、五组候选选择与权利、10 个 exact-canvas master、5 份 production record、5 份 approved/current manifest、10 份 repository source、内容绑定及静态输出合同均已闭合。当前停点转到 VB6：另行审核四篇 `relatedEntryIds`、Liaozhai Featured 与 Entry/Collection 状态；本批不执行 Git 写操作、服务、public artifact、预览或发布。
+VB1–VB5 已完成并进入 `1be085b`。VB6 ready 审核及随后首发 6+2 published 变更已完成本地实施与验证；六篇目标公开日期统一为 2026-09-10，当前修改未提交，网站尚未上线。下一停点是独立的 M5-U4/U5、稳定 HTTPS origin、public artifact assembly、最终 QA 与预览门禁，不由本批自动授权。R2 保持上线后执行、当前样本为 0；目标日期不创建自动发布任务。

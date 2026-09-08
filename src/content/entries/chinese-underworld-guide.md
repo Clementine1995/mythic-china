@@ -23,6 +23,7 @@ sourceIds:
   - source-afe-ten-magistrates-underworld
   - source-met-ten-kings-hell-44509
   - source-moe-yinjian
+  - source-cma-zhong-kui-lantern-night-1961-206
 claimIds:
   - claim-chinese-underworld-transitory-realm
   - claim-chinese-underworld-ten-magistrates-model
@@ -31,12 +32,12 @@ claimIds:
 terminologyRecordIds:
   - term-yinjian-in-chinese-underworld-guide
 relatedEntryIds:
-  - zhong-kui
+  - ten-kings
 heroAssetId: asset-chinese-underworld-guide-hero-primary
-publishedAt: null
+publishedAt: "2026-09-10"
 updatedAt: null
 lastFactCheckedAt: "2026-08-30"
-status: editorial-review
+status: published
 ---
 
 ## Begin with the word “underworld”
@@ -70,4 +71,4 @@ Each Entry in _The Chinese Underworld_ should answer four questions before it ma
 - Does a named court, deity, punishment, or route belong to one source or to a wider documented pattern?
 - Is an English term a neutral gloss, or does it introduce assumptions the Chinese source does not make?
 
-This is also why Zhong Kui appears in the collection as a featured protector, not as its ruler. Museum records identify him as a demon queller and connect his image with protective occasions, but the present evidence does not make him one of the Ten Kings or a universal underworld official. The collection places him near the threshold as an editorial reading path; it does not convert that placement into religious fact.
+This is also why Zhong Kui appears in the collection as a featured protector, not as its ruler. [Museum records](https://www.clevelandart.org/art/1961.206) identify him as a demon queller and connect his image with protective occasions, but the present evidence does not make him one of the Ten Kings or a universal underworld official. The collection places him near the threshold as an editorial reading path; it does not convert that placement into religious fact.
