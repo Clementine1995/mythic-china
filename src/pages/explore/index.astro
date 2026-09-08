@@ -1,18 +1,35 @@
 ---
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import IllustratedLink from "../../components/IllustratedLink.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { readBuildIntent } from "../../site/build-intent";
-import {
-  createReviewProjection,
-  getReviewIndexPreview,
-} from "../../site/review-projection";
+import { createPageProjection } from "../../site/page-projection";
+import { getReviewIndexPreview } from "../../site/review-projection";
+import { resolveApprovedPageAssetById } from "../../visual/resolve-approved-page-asset";
 
-readBuildIntent();
+const intent = readBuildIntent();
 const graph = await loadValidatedContentGraph();
-const projection = createReviewProjection(graph);
+const projection = createPageProjection(graph, intent);
 const { publishedEntries } = projection;
+const illustratedEntries = publishedEntries.map((entry) => {
+  if (entry.data.heroAssetId === null || entry.data.subtitle === null) {
+    throw new Error(`Explore Entry ${entry.id} requires a Hero and subtitle.`);
+  }
+  const asset = resolveApprovedPageAssetById(
+    graph.assets,
+    entry.data.heroAssetId,
+    {
+      ownerType: "entry",
+      ownerId: entry.id,
+      role: "hero",
+      slotId: "primary",
+      accessibilityMode: "informative",
+    },
+  );
+  return { entry, asset, intro: entry.data.subtitle };
+});
 const reviewEntries =
-  publishedEntries.length === 0
+  intent === "review" && publishedEntries.length === 0
     ? getReviewIndexPreview(projection).entries
     : [];
 ---
@@ -73,13 +90,16 @@ const reviewEntries =
     {
       publishedEntries.length > 0 ? (
         <ol class="editorial-index">
-          {publishedEntries.map((entry) => (
+          {illustratedEntries.map(({ entry, asset, intro }) => (
             <li>
-              <p>{entry.data.entryType}</p>
-              <h2>
-                <a href={`/explore/${entry.data.slug}/`}>{entry.data.title}</a>
-              </h2>
-              {entry.data.summary && <p>{entry.data.summary}</p>}
+              <IllustratedLink
+                {asset}
+                {intro}
+                href={`/explore/${entry.data.slug}/`}
+                title={entry.data.title}
+                context={entry.data.entryType}
+                sizes="(max-width: 767px) 32vw, 34vw"
+              />
             </li>
           ))}
         </ol>

@@ -2,11 +2,13 @@
 
 ## 0. 状态与结论
 
-- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，但尚未接入 public build；外部服务、托管项目与发布仍未实施。
+- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，013 已接入真实 origin 的本地 public build；空托管项目已由用户建立，外部服务与发布仍未实施。
 - M4 边界：经 2026-09-02 项目总检，M4 本地页面、探索投影、U4A 纯基础设施、U5A 样张、最终三档基础矩阵及当时 8 页人工视觉判断已完成。M4 不产生 deployable public artifact；原计划 U4B 的 public runner/output 接线与最终平台 QA 迁入 M6，生产与发布后验证保留给 M7。
 - 决策：**Astro 7 静态模式 + TypeScript strict + Git 内 Entry Markdown / 结构化 YAML + 构建期内容图校验 + 外部服务承接后续少量交互**。M2 不选择托管、不安装 adapter、MDX、React/Vue/Svelte、Tailwind 或商业依赖。
 - 核心判断：这是内容出版物，不是先造平台。首版的复杂度应集中在内容、出处、图片和设计，而不是账号、数据库和运行时服务。
-- Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并于 2026-09-02 明确当前不购买自定义域名；当前没有创建 Vercel 项目、稳定 production alias/hostname、自有域名、DNS 记录或任何生产托管配置。纯静态 `dist/` 与 SEO 核心保持供应商中立；M6 可在单独授权后确认稳定 production hostname，generated preview/commit URL 不得成为 canonical，托管选择仍不等于账户、配置、部署或发布授权。
+- Project owner 于 2026-08-30 选择 Vercel，并于 2026-09-02 明确当前不购买自定义域名；2026-09-08 已通过网页建立个人管理 Hobby 空项目 `project-scu6m`，截图确认稳定 Production 域名 `mythic-china-beta.vercel.app` / `No Deployment`。本地显式 origin 使用该 HTTPS hostname，拒绝其他域名或自动 Vercel URL。平台内部身份、预览保护与生产托管运行尚未验收，没有部署授权。
+
+2026-09-08 的 [013 本地 public assembly](requirements/013-public-artifact-assembly.md) 在既有纯 builder 上接入页面、静态 endpoint 和独立 verifier。`public` intent 仅消费 published projection，首页在 014 中明确选择 published 的阴间与聊斋，并保留阴间 / Zhong Kui Featured 关系；Layout 核对全站 metadata 与页面实际 title/description，Article 使用可见发布日期。Astro 按 intent 条件注入路由：review 样张只在 review 中存在，Sitemap/RSS/robots 只在 public 中存在。review 输出仍为 `dist/`，public 输出为 `.local/public-build/`。不新增 adapter、依赖、客户端执行代码或供应商 transport；本地未提交输出不能用于部署或生成 release receipt。
 - 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准这些 M1 原型的视觉皮肤，不能把其表现整份移入未来应用。M4-U2 先确认当时系统 fallback 字体下的页面方向；正式英/CJK 字体、最终样张与 8 页三档基础矩阵随后已完成，Project owner 于 2026-09-02 明确通过当时全部 8 个页面。真实键盘、200%、偏好/故障、支持平台与本地性能仍未验证，归 M6 release-candidate gate；M7 承接 Public Beta 生产、live/RUM 基线与上线后目标读者研究。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
 
 Astro 默认将页面预渲染为静态 HTML，并允许未来只把个别路由改为按需渲染，因此适合“静态核心、局部动态升级”的路线。来源：[Astro On-demand Rendering](https://docs.astro.build/en/guides/on-demand-rendering/)，访问于 2026-08-27。
@@ -54,14 +56,14 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 
 | 层 | MVP 推荐 | 选择原因 | 当前状态 |
 | --- | --- | --- | --- |
-| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M4 review 基线是原 7 个内容/功能页与一个 direct-only type specimen；M5-U3 又增加 Privacy；四个 draft Entry 随后形成 13 页历史快照，009 新增 Liaozhai Collection 页后当前共 14 个 `noindex, nofollow` 页面；public intent 尚未开放 |
+| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M4 review 基线是原 7 个内容/功能页与一个 direct-only type specimen；M5-U3 又增加 Privacy；四个 draft Entry 随后形成 13 页历史快照，009 新增 Liaozhai Collection 页后当前 review 共 14 个 `noindex, nofollow` 页面；013 public intent 生成 13 页与发现文件，仍未发布 |
 | 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | 当前为 6 published Entry、2 published Collection、14 Source、25 verified Claim 与 6 bilingual-approved Terminology；六篇目标公开日期为 2026-09-10，尚未部署 |
 | 内容约束 | Astro Content Layer + Zod 单记录 Schema + 独立内容图校验器 | Schema 校验字段；纯函数校验器负责跨集合关系、状态矩阵、ID 与 slug | M2 已实施并由 Vitest/build 覆盖 |
 | UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | M4 共享表现层、六类页面、样张与当前页面判断已完成；M6 最终 public artifact QA 未开始 |
-| 图片 | `src/assets/images` 保存尺寸锁定的 approved source renditions；Astro `Image/Picture` 消费 | M4 构建期生成 AVIF/WebP、多宽度与哈希输出，`dist/` 不反写 manifest | 当前完整工程门禁已在 9 个所属 review 页面生成并核验 8 个 Hero family 的 112 个唯一 AVIF/WebP；非默认入口另实际生成并解码 17 份 current responsive rendition 的 120 个目标 |
+| 图片 | `src/assets/images` 保存尺寸锁定的 approved source renditions；Astro `Image/Picture` 消费 | M4 构建期生成 AVIF/WebP、多宽度与哈希输出，`dist/` 不反写 manifest | 014 将逐图门禁扩展为 11 个含图页 / 19 个图位，仍要求 8 个 Hero family 的 112 个唯一 AVIF/WebP；非默认入口另实际生成并解码 17 份 current responsive rendition 的 120 个目标 |
 | 字体 | `src/assets/fonts` 保存版本化 WOFF2/许可证/FONTLOG/字符集/hash inventory；中央 CSS alias/token + URL registry 消费；`fontkitten` 在默认 Node 门禁读取 WOFF2 name/cmap，`parse5` 按 HTML5 树语义读取实际语言继承 | 自托管且保持上游替换不影响模板/内容；`?no-inline` 让英文 preload 永远指向真实文件，CJK 仅按窄 `unicode-range` 命中 | 4 份英文 WOFF2 与 SC/TC × 400/500/600 六份派生 WOFF2 已接线；CJK 静态字符/RFN/cmap 与当前页面效果已通过，慢/阻断、实际 fallback 与支持平台终验留 M6 |
 | 搜索 | Pagefind（达到约 30 篇后） | 扫描构建后的静态 HTML，无搜索服务器 | 后续触发 |
-| 托管 | 供应商中立的静态输出；未来静态托管选用 Vercel | 静态 Astro 无需 adapter，且托管不决定内容、URL 或应用结构 | 方向与当前不购买自定义域名的决定已确认；项目、稳定 production hostname、origin、配置与部署均未建立 |
+| 托管 | 供应商中立的静态输出；未来静态托管选用 Vercel | 静态 Astro 无需 adapter，且托管不决定内容、URL 或应用结构 | 方向与不购买自定义域名的决定保持；空项目、稳定 Production hostname 和本地 origin 已建立，尚无部署 |
 | 邮件 | Provider-neutral Newsletter DTO/Fake；Buttondown 是 U4 有条件接受的 transport 方向 | 静态表单可直接交给服务，不自建邮箱库；核心 DTO 不含供应商控制字段 | M5-U2 合同与 U3 inactive Footer review UI 已实施；Project owner 于 2026-09-04 确认 `mythic-china` 账户审核已通过，真实 action、provider mapping、账户级 DPA/设置与提交仍待 U4 单独授权和验证 |
 | 反馈 | Provider-neutral Submission/Record/Fake；Tally 是 U4 有条件接受的托管页方向 | 首版不引入账号和通用后端；浏览器字段与受信任记录分离 | M5-U2 合同与 U3 inactive Entry review UI 已实施；Tally Free 未发布草稿存在，持久 Respondent ID 与人工清理风险已接受，但 hosted link、发布、真实数据和供应商行为仍待 U4 单独授权 |
 | 分析 | 三事件 allowlist、URL/referrer 纯清洗与 Fake；Plausible 保持候选 | 先回答内容问题，拒绝应用 properties、PII 和跨站追踪 | M5-U2 纯合同已实施；Plausible 明确留到 U5，U3 未接脚本、事件或远端请求 |
@@ -204,7 +206,7 @@ Entry 使用 `{entryId}.md`；Collection、Source、Claim、Terminology 分别�
 
 Zod Schema 只负责单记录字段、枚举和局部条件；独立、无网络且可由 Vitest 直接调用的纯内容图校验器负责跨集合目标存在性、ID/slug 唯一性、Collection—Entry 状态矩阵、Featured Entry 约束、来源/Claim/术语关系、Claim `evidenceContext` 与 Source 类型/role 矩阵、Entry earliest Claim/Source 成对精确绑定和明确排序。Source 的 `titleZh` / `titleZhLang` 在 Schema 中成对，generic `zh` 表示 script 未核定；内容图拒绝 `ready | published | archived` Entry 引用这类未核定标题，不能从 `Source.language` 或字符外形推断 Hans/Hant。每份 Source 还必须显式填写 `usesDigitalImageEvidence`；值为 `true` 时 Schema 同时要求非空 `rightsStatus` 与 `rightsUrl`，不得从类型、URL 或页面是否含图自动猜测。该字段只标识 Claim / Terminology 的当前 locator 是否依赖数字页图、IIIF canvas 或对象图像，权利对不构成 Asset 复用许可。校验器先对 loader 记录副本按稳定身份排序，再生成确定性错误；不得依赖运行时 fallback 或 Content Layer 返回顺序猜测关系。Astro `getCollection()` 返回顺序不作为编辑顺序事实；所有列表按合同字段或稳定键显式排序。来源：[Astro sorting collection entries](https://docs.astro.build/en/guides/content-collections/#sorting-collection-entries)，访问于 2026-08-27。
 
-图片最终使用独立 Asset Manifest 并由 Entry/Collection 引用；内容字段保存 versionless 逻辑 `assetId`，构建期再解析显式 current manifest 版本。M3-U3 已让任何非空 `heroAssetId` 通过 owner/hero/primary、current、状态与历史门禁解析真实 manifest，不再接受只有格式合法的假资产字符串。当前 6 篇 Entry 与 2 个 Collection 均绑定自己的 approved/current Hero；VB6 ready 审核后，owner 独立批准六篇 Entry / 两个 Collection 均 published，六篇目标日期为 2026-09-10；Ten Kings、Fighting Cricket、Liaozhai 导读与 Painted Skin 的 Source/Claim/Terminology 消费关系分别为 2/3/1、1/3/1、1/2/1 与 2/7/1。所有对象消费同一 generic resolver；012 只扩展显式 image-module registry，并让 Entry 桌面 identity 根据 approved focal point 放在主焦点对侧，移动端继续使用静态文档流。资产绑定本身不提升状态，VB6 独立 ready 审核也不替代 M6 最终 public artifact 的语言、字体、故障、平台与发布门禁。字段合同见 `docs/CONTENT_MODEL.md`，详细实施合同见 `docs/requirements/002-visual-asset-pipeline.md`、`docs/requirements/004-first-vertical-slice-candidate.md` 与 `docs/requirements/012-five-hero-visual-briefs.md`。
+图片最终使用独立 Asset Manifest 并由 Entry/Collection 引用；内容字段保存 versionless 逻辑 `assetId`，构建期再解析显式 current manifest 版本。M3-U3 已让任何非空 `heroAssetId` 通过 owner/hero/primary、current、状态与历史门禁解析真实 manifest，不再接受只有格式合法的假资产字符串。当前 6 篇 Entry 与 2 个 Collection 均绑定自己的 approved/current Hero；VB6 ready 审核后，owner 独立批准六篇 Entry / 两个 Collection 均 published，六篇目标日期为 2026-09-10；Ten Kings、Fighting Cricket、Liaozhai 导读与 Painted Skin 的 Source/Claim/Terminology 消费关系分别为 2/3/1、1/3/1、1/2/1 与 2/7/1。所有对象消费同一 generic resolver；012 只扩展显式 image-module registry，当时让 Entry 桌面 identity 根据 approved focal point 放在主焦点对侧；014 将所有宽度的 identity 统一移至图片之前的正常文档流，图片 focal point 保持。资产绑定本身不提升状态，VB6 独立 ready 审核也不替代 M6 最终 public artifact 的语言、字体、故障、平台与发布门禁。字段合同见 `docs/CONTENT_MODEL.md`，详细实施合同见 `docs/requirements/002-visual-asset-pipeline.md`、`docs/requirements/004-first-vertical-slice-candidate.md` 与 `docs/requirements/012-five-hero-visual-briefs.md`。
 
 ### 5.2 新栏目如何增加
 
@@ -268,7 +270,7 @@ Vercel 与 Cloudflare 都提供全球 CDN，但节点数量或平台宣传不替
 
 ### 6.2 M4 public 纯基础设施与 M6 制品边界
 
-- `MYTHIC_CHINA_SITE_ORIGIN` 是未来 public 构建唯一允许的显式 origin 名称。M4-U4A 的纯校验只接受真实 HTTPS origin，拒绝缺失值、路径、query、fragment、credential、port、IP、localhost 与保留示例域；当前没有 runner 读取该变量，也没有真实值。
+- `MYTHIC_CHINA_SITE_ORIGIN` 是 public 构建唯一允许的显式 origin 名称。M4-U4A 的纯校验只接受真实 HTTPS origin，拒绝缺失值、路径、query、fragment、credential、port、IP、localhost 与保留示例域；013 runner 显式读取该变量，并进一步要求匹配用户确认的 `https://mythic-china-beta.vercel.app`；缺失、错误 hostname 或 Vercel 隐式变量不能替代。
 - Publisher 固定为 `Mythic China / Organization`，author 固定为 `Mythic China Editorial / Organization`；两者可见身份页均为 `/about/`，并分别使用 `#publisher` 与 `#editorial` 锚点。当前不输出 `og:image`，避免借用不匹配的钟馗资产。
 - `src/site/public-release.ts` 只在 published Entry 和 Collection 各至少一项时返回 public 投影；`src/site/seo.ts` 只构造内存中的 canonical、Open Graph 与 JSON-LD view model；`src/site/release-artifacts.ts` 只在 fixture 中构造 published-only Sitemap/RSS 字符串。三者均假定输入已经通过现有 Schema/内容图门禁，并另有完整 synthetic validated content graph fixture。
 - 2026-09-07 补齐既有 Privacy 页的纯函数合同：`privacy` 只接受 `/privacy/`，JSON-LD 为普通 `WebPage`；固定 Sitemap 静态清单为 `/`、`/explore/`、`/collections/`、`/about/`、`/privacy/`，各一次且按此排序，RSS 仍只含 published Entry。此能力不确认真实站点或 Privacy 的最终发布文案，也不接入 review 页面、public runner 或 XML endpoint。
@@ -277,7 +279,7 @@ Vercel 与 Cloudflare 都提供全球 CDN，但节点数量或平台宣传不替
 - M4-U4A 当时没有改变 `readBuildIntent()`、`SiteLayout`、六类页面、Astro endpoint 或默认输出；后续候选任务只为 `SiteLayout` 增加英文自托管字体 preload，CJK 明确不 preload，也不接入 public metadata/endpoint。M4-U5A 又新增仅显式 review intent 可构建、只允许直达的 `/review/type-specimen/`；它不进入 Header/Footer、Home、review candidate、release/public projection 或 SEO/artifact builder。`public` intent 继续失败；M4 收口时的 review `dist/` 为 8 个 noindex 页面、42 个 Hero 图片、10 个哈希 WOFF2、零 XML 与零客户端 JavaScript。原 7 页继续精确匹配真实 CJK content set，样张独立匹配生产 pinyin 语言、DESIGN 冻结混排行、65/36 required 与 `测`/`測` fallback-only set，不能反向放宽内容字符集；HTML/CSS oracle 另锁定 family/weight/style、head/robots/discovery 与 direct-only 等价 URL。2026-09-02 最终样张和页面实现已在 8 页 × 三档 24 个组合与四条 Hero 页 12 个组合通过基础浏览器矩阵，Project owner 随后明确通过全部 8 个页面；这关闭 M4 本地实现，不产生 public artifact。M5-U3、四篇 draft 与 009 的 Liaozhai Collection 后续把当前 review 清单扩展为 14 页；012 为四篇与 Liaozhai Collection 接入各自 Hero 后，当前输出合同为 14 个 `noindex, nofollow` 页面、112 个 Hero 图片、10 个哈希 WOFF2、零 XML 与零客户端 JavaScript，六个 Entry 页面各保留一个 inactive Reader Request 和唯一反向合集入口。此前 8 页浏览器矩阵是 M4 历史证据，不覆盖 Privacy、四个新增 Entry、Liaozhai Collection 或这些交互表面。
 - 真实键盘/200%/偏好、慢/阻断加载、图片失败、受控性能与支持平台 fallback 仍须在可控环境完成，不写成已通过。M5 外部交互边界冻结后，由 M6 完成 6 篇 Entry / 至少 2 个 Collection 与全部资产并作出人工 published 决定，确认真实 origin，接入 public runner、页面 metadata、XML routes 与独立 public verifier；再对该同一最终 public artifact 执行完整 release-candidate QA。
 - M6 public artifact assembly 实现稳定后，须由 Project owner 单独授权形成 clean committed source，并从该 revision 重新构建 artifact、运行 verifier 与完整 QA，最后生成绑定 clean source revision、lock/source digest、public intent、verifier/QA 结果和 `dirty: false` 的 verification receipt。dirty source 只允许 nondeployable 诊断记录；提交后必须重建、重验并重发 receipt，不能“洗白”旧证据。M6 远端预览再把该 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`；若复用不可变制品，receipt 还必须包含完整 artifact inventory/digest。pending 发布 QA、早期 M4 页面证据或 dirty-worktree `dist/` 均不得代替发布资格。一个 Entry + 一个 Collection 是纯技术 fail-closed 下限，不替代 M6 的 6 篇 Entry / 至少 2 个 Collection 预览候选或 M7 生产发布与发布后基线验收。最终 QA 后若发生实质内容、状态、模板、CSS、字体、Hero、manifest、origin、metadata、runner 或 XML 变化，按影响范围重跑对应证据。
-- Review/public output 必须允许普通外部 citation anchor，但所有页面子资源必须来自单斜杠根相对本地 URL 并精确闭合到实际 emitted inventory；远端或 protocol-relative `src`/`srcset`/`poster`/`data`/资源型 `href`、远端 CSS `url()`/`@import`、缺失本地目标、`base`、`iframe`、`object`、`embed`、form、script 与 meta refresh 均由 output policy/verifier 阻断，不能绕开 Asset Manifest、权利、hash、性能和隐私门禁。U3 interaction DOM oracle 另拒绝 provider link、未知标记、伪成功状态和不完整 Privacy 合同；未来 U4/U5 只能按已批准的精确 action、provider host 与 script allowlist 狭窄开放。语义壳 oracle 只遍历浏览器活跃 HTML5 树，安全资源扫描可以进入并拒绝 template 等非活跃 surface；两者不得用同一种原文本搜索替代。构建输出根和每个条目以 `lstat` fail-closed，symlink/junction 与未知类型不属于可发布 inventory。
+- Review/public output 必须允许普通外部 citation anchor，但所有页面子资源必须来自单斜杠根相对本地 URL 并精确闭合到实际 emitted inventory；远端或 protocol-relative `src`/`srcset`/`poster`/`data`/资源型 `href`、远端 CSS `url()`/`@import`、缺失本地目标、`base`、`iframe`、`object`、`embed`、form、可执行 script、未经验证的结构化数据脚本与 meta refresh 均由 output policy/verifier 阻断，不能绕开 Asset Manifest、权利、hash、性能和隐私门禁。U3 interaction DOM oracle 另拒绝 provider link、未知标记、伪成功状态和不完整 Privacy 合同；未来 U4/U5 只能按已批准的精确 action、provider host 与 script allowlist 狭窄开放。语义壳 oracle 只遍历浏览器活跃 HTML5 树，安全资源扫描可以进入并拒绝 template 等非活跃 surface；两者不得用同一种原文本搜索替代。构建输出根和每个条目以 `lstat` fail-closed，symlink/junction 与未知类型不属于可发布 inventory。
 
 ## 7. 动态能力边界
 
@@ -285,9 +287,11 @@ Astro 保持静态输出时不承接请求时状态。任何需要 secrets、写
 
 ### 7.1 Newsletter
 
-Newsletter 只在全站 Footer 的一个固定 slot 中渲染，不在每篇文章末尾重复。`src/services/newsletter.ts` 已建立只含 email 的严格 provider-neutral Submission、窄 adapter interface、脱敏结果和零网络 Fake；M5-U3 已渲染 disabled/inactive review preview，并确认只发送新文章与编辑精选、不超过每月两次、double opt-in、每封邮件可退订且 open/click tracking 在首次发送前及之后保持关闭。Buttondown `embed="1"`、action 与其他 transport 字段不属于核心 DTO；Project owner 于 2026-09-04 确认外部 `mythic-china` 账户审核已通过，但没有导入订阅者、发送邮件或连接站点的验证。固定 provider mapping、真实 action、账户级 DPA/设置与合成订阅提交仍待 U4 单独授权和验证。网站仓库不保存订阅者列表。文章末尾的 Reader Request 属于独立反馈入口，不得隐式订阅邮件。
+Newsletter 只在全站 Footer 的一个固定 slot 中渲染，不在每篇文章末尾重复。`src/services/newsletter.ts` 已建立只含 email 的严格 provider-neutral Submission、窄 adapter interface、脱敏结果和零网络 Fake；M5-U3 曾渲染 disabled/inactive review preview；016 已改为无控件的静态未开放说明，并确认只发送新文章与编辑精选、不超过每月两次、double opt-in、每封邮件可退订且 open/click tracking 在首次发送前及之后保持关闭。Buttondown `embed="1"`、action 与其他 transport 字段不属于核心 DTO；Project owner 于 2026-09-04 确认外部 `mythic-china` 账户审核已通过，但没有导入订阅者、发送邮件或连接站点的验证。固定 provider mapping、真实 action、账户级 DPA/设置与合成订阅提交仍待 U4 单独授权和验证。网站仓库不保存订阅者列表。文章末尾的 Reader Request 属于独立反馈入口，不得隐式订阅邮件。
 
 ### 7.2 Reader Request
+
+当前页面按 [016](requirements/016-reader-facing-polish.md) 只展示未开放、不采集状态和本地 Privacy 链接，无输入、按钮或 transport。全站 Footer Newsletter 与六篇 Entry Reader Request 的唯一性、位置、稳定 ID 和始终可见状态由 review/public 共用 DOM oracle 核验；后续 submission 合同如下，尚未接入页面。
 
 浏览器 submission：
 
@@ -385,7 +389,7 @@ M4 已完成获授权的本地基础浏览器矩阵；M6 最终 public artifact 
 
 ## 13. 待确认决策
 
-- Vercel 已选为未来静态托管目标；仍待确认账户/项目归属、稳定 production alias/hostname、预览保护、Git 发布授权、回滚和退出路径。经 Project owner 确认后，该 alias/hostname 的 HTTPS origin 才能写入 `MYTHIC_CHINA_SITE_ORIGIN`。当前未创建任何平台项目。
+- Vercel 已选为静态托管目标；owner 已提供个人管理 Hobby 空项目 `project-scu6m` 和稳定 Production 域名 `mythic-china-beta.vercel.app`，013 已使用该显式 HTTPS origin。本次仍须核对平台内部身份、实际项目/构建配置、预览保护、成本、回滚和退出路径；本地接线与旧截图不证明账户门禁通过，也不授权部署。
 - Project owner 已决定当前不购买自定义域名；未来品牌/权利核查、注册商、DNS 托管、canonical 主域、邮箱迁移与接入时点仍须单独决策。
 - Buttondown 与 Tally 已分别作为 U4 的有条件 transport 方向，Plausible 保留给 U5；Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布，三者均未接线或启用。U4 仍待对 Buttondown 账户级配置与真实 action、Tally hosted link 与发布，以及两者合成数据联调的独立授权和验证。
 - 本地 Git 已在 `F:\codex-project\mythic-china` 初始化；用户随后建立 `main`、M1/M2 提交与 `origin`。M3-U1 开始前，本地 HEAD、`main` 与本地 `origin/main` 对齐到 `f258227da1b5a73f22c87ec99722243742db0ba0`，工作树干净；本次未执行 fetch，因此不证明服务器端分支状态。这些事实不代表代理获得 add、commit、push 或发布授权；后续版本控制和首次预览/生产发布仍须逐次确认。

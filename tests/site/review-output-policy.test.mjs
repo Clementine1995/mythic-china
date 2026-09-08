@@ -181,11 +181,8 @@ describe("review Collection Featured Entry", () => {
 function newsletterFooter() {
   return `<footer class="site-footer">
     <section class="newsletter-form page-shell" data-review-interaction="newsletter" data-review-state="inactive">
-      <label for="footer-newsletter-email">Email address</label>
-      <input id="footer-newsletter-email" type="email" autocomplete="email" disabled>
-      <button type="button" disabled>Subscribe</button>
       <p>Receive new Mythic China stories and occasional editorial selections, no more than twice a month.</p>
-      <p>subscriptions are not open. When they open, confirm your subscription and unsubscribe from any email.</p>
+      <p>Newsletter subscriptions are not open yet.</p><p>We are not collecting email addresses here.</p>
       <a href="/privacy/">Privacy Notice</a>
     </section>
   </footer>`;
@@ -193,10 +190,8 @@ function newsletterFooter() {
 
 function readerRequest(pageId = "entry-one", extra = "") {
   return `<section class="entry-section reader-request" data-review-interaction="reader-request" data-review-state="inactive" data-page-id="${pageId}">
-    <p>What should we explore next? Topic or tale is required. Email is optional.</p>
-    <p>This does not subscribe me to the newsletter.</p>
+    <p>Reader Requests are not open yet. No suggestions or email addresses are collected here.</p>
     ${extra}
-    <button type="button" disabled>Reader Requests are not open</button>
     <a href="/privacy/">Privacy Notice</a>
   </section>`;
 }
@@ -772,6 +767,78 @@ describe("review output resource policy", () => {
       null,
     ],
     [
+      "disabled Newsletter control returns",
+      reviewDocument(
+        newsletterFooter().replace(
+          "</section>",
+          "<button disabled>Subscribe</button></section>",
+        ),
+      ),
+      null,
+    ],
+    [
+      "hidden Newsletter status",
+      reviewDocument(
+        newsletterFooter().replace(
+          "<p>Newsletter subscriptions",
+          "<p hidden>Newsletter subscriptions",
+        ),
+      ),
+      null,
+    ],
+    [
+      "hidden Privacy link",
+      reviewDocument(
+        newsletterFooter().replace(
+          '<a href="/privacy/">',
+          '<a hidden href="/privacy/">',
+        ),
+      ),
+      null,
+    ],
+    [
+      "missing Newsletter no-collection state",
+      reviewDocument(
+        newsletterFooter().replace(
+          "We are not collecting email addresses here.",
+          "",
+        ),
+      ),
+      null,
+    ],
+    [
+      "hidden Reader Request status",
+      reviewDocument(
+        '<article class="entry-page">' +
+          readerRequest().replace("<p>", "<p hidden>") +
+          "</article>" +
+          newsletterFooter(),
+      ),
+      "entry-one",
+    ],
+    [
+      "missing Reader Request no-collection state",
+      reviewDocument(
+        '<article class="entry-page">' +
+          readerRequest().replace(
+            "No suggestions or email addresses are collected here.",
+            "",
+          ) +
+          "</article>" +
+          newsletterFooter(),
+      ),
+      "entry-one",
+    ],
+    [
+      "collapsible inactive status",
+      reviewDocument(
+        "<details open><summary>Services</summary>" +
+          newsletterFooter() +
+          "</details>",
+      ),
+      null,
+    ],
+    [
       "unknown interaction marker",
       reviewDocument(
         `<main><section data-review-interaction="provider-signup"></section></main>${newsletterFooter()}`,
@@ -825,11 +892,33 @@ describe("review output resource policy", () => {
         <p>We are not currently accepting newsletter sign-ups and are not currently accepting Reader Requests.</p>
         <p>Buttondown uses buttondown.com; open and click tracking will remain off before the first send.</p>
         <p>Tally uses tally.so, stores form data in Google Cloud Belgium, and creates a persistent Respondent ID. Deleting provider records does not remove a Respondent ID. every 28 days, delete records that are at least 60 days old and empty Tally Trash in the same operation, producing an expected 60 to 88 days window. The sole operator is hyc, with no independent backup; a missed operation can extend that period.</p>
-        <p>Plausible is not enabled; its planned service domain is plausible.io.</p>
+        <section id="analytics-hosting">
+          <p>Plausible is not enabled; its planned service domain is plausible.io.</p>
+          <p>When you visit a version hosted on Vercel, Vercel may process your IP address, approximate location derived from it, and technical system information to deliver, maintain, and protect the hosting service.</p>
+          <p>Hosting and security processing can still occur without a submission. For Vercel’s own privacy practices, see <a href="https://vercel.com/legal/privacy-notice">Vercel’s Privacy Notice</a>.</p>
+        </section>
       </article>`;
     const validHtml = reviewDocument(
       `<main id="main-content">${privacyCopy}</main>${newsletterFooter()}`,
     );
+    for (const broken of [
+      validHtml.replace(
+        "visit a version hosted on Vercel",
+        "visit any website",
+      ),
+      validHtml.replace(
+        "https://vercel.com/legal/privacy-notice",
+        "https://vercel.com/",
+      ),
+      validHtml.replace(
+        '<section id="analytics-hosting">',
+        '<section hidden id="analytics-hosting">',
+      ),
+    ]) {
+      expect(() =>
+        assertReviewPrivacyNotice(broken, "privacy/index.html"),
+      ).toThrow();
+    }
     const mailtoHtml = reviewDocument(
       `<main id="main-content">${privacyCopy.replace("huyichen2019@gmail.com", '<a href="mailto:huyichen2019@gmail.com">huyichen2019@gmail.com</a>')}</main>${newsletterFooter()}`,
     );

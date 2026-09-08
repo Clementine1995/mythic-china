@@ -388,3 +388,26 @@ MVP 的竞争策略不是先把功能做全，而是先证明三件事能同时�
 3. 每个重要文化陈述和视觉主张都能追到明确来源或标记为推断/演绎。
 
 如果 M1 原型只能做到“漂亮”，没有来源层级，则没有达到产品定位；如果只能做到“资料完整”，没有视觉辨识度和连续阅读，也没有达到产品定位。
+
+## 2026-09-08 发布前独立复核
+
+本次重新读取原审计并访问官方首页或代表页，设计结论不以通用 Skill 的风格禁令为依据。当前网站本身的视觉判断依据此前本地浏览器图及其匹配模板/CSS；014 修改后另做实际页面复核，旧截图不证明新版效果。
+
+- [MythologyChinese](https://www.mythologychinese.com/)、[mythzh](https://mythzh.com/en/index.html) 与 [Yaopu](https://yaopulife.com/) 当前均有明确主题或故事入口。mythzh 同时区分来源层；来源分层是值得做好的一种编辑方法，不应宣称为本站独有能力。
+- [MythQuick](https://www.mythquick.com/) 的图像、名字与短介绍有助于选择，游戏化测试属于另一种产品定位；图文卡片本身并非审美缺点。[Mythopedia](https://mythopedia.com/) 的分类与 [Chang’e](https://mythopedia.com/topics/chang-e/) 的标题、作者日期、图像、目录和参考资料支持分层阅读，但其短标题不替代本站长标题的实际验收。
+- [The Public Domain Review](https://publicdomainreview.org/) 区分专题、最新文章、图像收藏及编辑选择；[World History Encyclopedia](https://www.worldhistory.org/mythology/) 将标题、作者、日期、图像说明与正文分层。本站借鉴编辑主次与阅读节奏，不移植页面皮肤。
+- [M+](https://www.mplus.org.hk/en/) 当前可读取展览、活动、杂志与藏品入口；[Rijksmuseum](https://www.rijksmuseum.nl/en/collection) 有 Discover、作品与访问者故事入口；[Google Arts & Culture Themes](https://artsandculture.google.com/project) 以主题及短说明组织探索。[Oculi Mundi](https://oculi-mundi.com/) 此次只能读取基础导航。此组仅支持结构判断，不作为当前字体、像素布局或动效已经逐屏验证的证据。
+
+局限：内置浏览器的 M+ 页面创建超时；[Yokai 的 Shikigami 页](https://yokai.com/shikigami/) 返回 403，Yaopu 的代表性 Wukong 文章也未成功读取。不把失败页面的旧印象写成最新观察，不声称完成这些站点的手机实机或完整视觉矩阵。
+
+设计决定：保留现代中性文化出版母体、原有字体与插画；首页明确两个专题，目录用图像和简短导读形成连续浏览节奏，文章完整标题移至图片之前。重点是画面、标题、留白和内容主次的关系；不机械禁用卡片、衬线或叠字，也不以流行趋势替代中国神话与志怪的具体语境。实施和验收见 [014](requirements/014-editorial-design-refinement.md)。
+
+## 2026-09-08 mythzh 背景与内容复核
+
+owner 指出 014 未解决整站气氛，当前判断据此更新。主代理实际查看了 [中文首页](https://mythzh.com/index.html) 的浏览器画面与可见 DOM 计算样式：墨黑背景、暖白文字、金色细节与融入暗部的大幅插画共同建立气氛；此前本站冷灰白背景让图片更像独立图版。015 借鉴色彩关系，保留本站布局和自有素材，不复制参考站源码、书法、图像或标识。
+
+只读内容比较实际读取 [英文首页](https://mythzh.com/en/index.html)、[中文钟馗](https://mythzh.com/underworld/figures/zhongkui.html) 和 [英文钟馗](https://mythzh.com/en/underworld/figures/zhongkui.html)。对方已有英文长文、篇内目录、年代/传统分层和继续阅读路径；钟馗样本涉及的题材比本站现稿更广，不能把其概括成只重视觉的浅百科。栏目广度、英文、来源分层、AI 插画都不能直接称为本站独有优势。
+
+本站钟馗有直接馆藏链接；十王给出写本号与 CBETA 行号；画皮给出青柯亭数字页定位。上述 mythzh 英文钟馗样本具名提及资料，但此次可读取正文未见对应外部链接和完整书目。因此只能说本站这几篇更方便回查，不能推导全站更权威。两条三篇路径提供较集中的选择，但对方也有导览；是否更适合初学者仍需真人比较。
+
+竞争方向建议：让具体故事问题吸引读者进入，结合有气氛的画面与可读叙事，再让精确出处支撑理解。本批只落实视觉和纠正定位表述，不扩大选题或改写正文。内部审核和构建门禁属于质量基础，不是读者会自动感受到的优势。局限：本次未成功读取部分地府系统页及聊斋同题正文，不能判断对方全站深度；没有读者偏好、留存或理解度比较数据。

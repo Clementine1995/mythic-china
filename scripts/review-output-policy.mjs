@@ -628,6 +628,25 @@ export function assertReviewEntryContentNote(html, relativePath, expectedText) {
   }
 }
 
+function assertStaticNoticeVisible(nodes, relativePath) {
+  for (const node of nodes) {
+    for (let current = node; current; current = current.parentNode) {
+      if (
+        ["hidden", "inert", "style"].some(
+          (name) => readElementAttribute(current, name) !== null,
+        ) ||
+        readElementAttribute(current, "aria-hidden") === "true" ||
+        current.tagName === "details"
+      ) {
+        throw new Error(
+          relativePath +
+            " must keep inactive service and privacy notices visible.",
+        );
+      }
+    }
+  }
+}
+
 export function assertReviewInteractionSurface(
   html,
   relativePath,
@@ -656,6 +675,16 @@ export function assertReviewInteractionSurface(
   ) {
     throw new Error(`${relativePath} links to an inactive provider.`);
   }
+  if (
+    elements.some((node) =>
+      ["form", "input", "button", "select", "textarea"].includes(node.tagName),
+    )
+  ) {
+    throw new Error(
+      relativePath +
+        " must not render controls while reader services are inactive.",
+    );
+  }
   const newsletterRoots = elements.filter(
     (node) =>
       readElementAttribute(node, "data-review-interaction") === "newsletter",
@@ -682,57 +711,24 @@ export function assertReviewInteractionSurface(
   }
 
   const newsletterElements = descendantsOf(elements, newsletter);
-  const emailInputs = newsletterElements.filter(
-    (node) => node.tagName === "input",
-  );
-  const email = emailInputs[0];
-  const newsletterButtons = newsletterElements.filter(
-    (node) => node.tagName === "button",
-  );
-  const newsletterButton = newsletterButtons[0];
+  assertStaticNoticeVisible([newsletter, ...newsletterElements], relativePath);
   const newsletterLinks = newsletterElements.filter((node) =>
     ["a", "area"].includes(node.tagName),
   );
-  const emailId = email && readElementAttribute(email, "id");
-  const emailLabels = newsletterElements.filter(
-    (node) =>
-      node.tagName === "label" &&
-      emailId !== null &&
-      readElementAttribute(node, "for") === emailId,
-  );
   const newsletterCopy = normalizedText(newsletter);
   if (
-    emailInputs.length !== 1 ||
-    email === undefined ||
-    emailId !== "footer-newsletter-email" ||
-    readElementAttribute(email, "type") !== "email" ||
-    readElementAttribute(email, "autocomplete") !== "email" ||
-    readElementAttribute(email, "disabled") === null ||
-    readElementAttribute(email, "name") !== null ||
-    readElementAttribute(email, "value") !== null ||
-    emailLabels.length !== 1 ||
-    normalizedText(emailLabels[0]) !== "Email address" ||
-    newsletterButtons.length !== 1 ||
-    newsletterButton === undefined ||
-    readElementAttribute(newsletterButton, "type") !== "button" ||
-    readElementAttribute(newsletterButton, "disabled") === null ||
-    readElementAttribute(newsletterButton, "name") !== null ||
-    readElementAttribute(newsletterButton, "formaction") !== null ||
-    newsletterElements.some((node) =>
-      ["form", "select", "textarea"].includes(node.tagName),
-    ) ||
     newsletterLinks.length !== 1 ||
     readElementAttribute(newsletterLinks[0], "href") !== "/privacy/" ||
     !newsletterCopy.includes("new Mythic China stories") ||
     !newsletterCopy.includes("occasional editorial selections") ||
     !newsletterCopy.includes("no more than twice a month") ||
-    !newsletterCopy.includes("confirm your subscription") ||
-    !newsletterCopy.includes("unsubscribe from any email") ||
     !newsletterCopy.includes("subscriptions are not open") ||
+    !newsletterCopy.includes("We are not collecting email addresses here.") ||
     newsletterCopy.toLowerCase().includes("successfully subscribed")
   ) {
     throw new Error(
-      `${relativePath} has a stale or potentially active Newsletter review contract.`,
+      relativePath +
+        " has a stale or potentially active Newsletter review contract.",
     );
   }
 
@@ -741,13 +737,8 @@ export function assertReviewInteractionSurface(
       readElementAttribute(node, "data-review-interaction") ===
       "reader-request",
   );
-  const controlsOutsideNewsletter = elements.filter(
-    (node) =>
-      ["button", "input", "select", "textarea"].includes(node.tagName) &&
-      !isDescendantOf(node, newsletter),
-  );
   if (expectedEntryId === null) {
-    if (readerRoots.length !== 0 || controlsOutsideNewsletter.length !== 0) {
+    if (readerRoots.length !== 0) {
       throw new Error(
         `${relativePath} must not render a Reader Request or extra control outside an Entry.`,
       );
@@ -780,35 +771,23 @@ export function assertReviewInteractionSurface(
   }
 
   const readerElements = descendantsOf(elements, reader);
-  const readerButtons = readerElements.filter(
-    (node) => node.tagName === "button",
-  );
-  const readerButton = readerButtons[0];
+  assertStaticNoticeVisible([reader, ...readerElements], relativePath);
   const readerLinks = readerElements.filter((node) =>
     ["a", "area"].includes(node.tagName),
   );
   const readerCopy = normalizedText(reader);
   if (
-    readerElements.some((node) =>
-      ["form", "input", "select", "textarea"].includes(node.tagName),
-    ) ||
-    readerButtons.length !== 1 ||
-    readerButton === undefined ||
-    readElementAttribute(readerButton, "type") !== "button" ||
-    readElementAttribute(readerButton, "disabled") === null ||
-    readElementAttribute(readerButton, "formaction") !== null ||
     readerLinks.length !== 1 ||
     readElementAttribute(readerLinks[0], "href") !== "/privacy/" ||
-    !readerCopy.includes("Topic or tale is required") ||
-    !readerCopy.includes("Email is optional") ||
-    !readerCopy.includes("This does not subscribe me to the newsletter.") ||
     !readerCopy.includes("Reader Requests are not open") ||
-    readerCopy.toLowerCase().includes("successfully submitted") ||
-    controlsOutsideNewsletter.length !== 1 ||
-    controlsOutsideNewsletter[0] !== readerButton
+    !readerCopy.includes(
+      "No suggestions or email addresses are collected here.",
+    ) ||
+    readerCopy.toLowerCase().includes("successfully submitted")
   ) {
     throw new Error(
-      `${relativePath} has a stale or potentially active Reader Request contract.`,
+      relativePath +
+        " has a stale or potentially active Reader Request contract.",
     );
   }
 
@@ -881,6 +860,10 @@ export function assertReviewPrivacyNotice(html, relativePath) {
     "a missed operation can extend that period",
     "Plausible is not enabled",
     "plausible.io",
+    "visit a version hosted on Vercel",
+    "IP address, approximate location derived from it, and technical system information",
+    "deliver, maintain, and protect the hosting service",
+    "Hosting and security processing can still occur",
   ];
   if (
     addresses.length !== 1 ||
@@ -897,6 +880,31 @@ export function assertReviewPrivacyNotice(html, relativePath) {
   ) {
     throw new Error(`${relativePath} has an incomplete Privacy notice.`);
   }
+  const hosting = rootElements.filter(
+    (node) =>
+      node.tagName === "section" &&
+      readElementAttribute(node, "id") === "analytics-hosting",
+  );
+  const policyLinks = rootElements.filter(
+    (node) =>
+      node.tagName === "a" &&
+      readElementAttribute(node, "href") ===
+        "https://vercel.com/legal/privacy-notice",
+  );
+  if (
+    hosting.length !== 1 ||
+    policyLinks.length !== 1 ||
+    !isDescendantOf(policyLinks[0], hosting[0])
+  ) {
+    throw new Error(
+      relativePath +
+        " must link its hosting notice to Vercel's Privacy Notice.",
+    );
+  }
+  assertStaticNoticeVisible(
+    [hosting[0], ...descendantsOf(elements, hosting[0])],
+    relativePath,
+  );
 }
 
 function decodeUrlEntities(value) {
@@ -1167,6 +1175,14 @@ export function assertReviewCssResourcePolicy(css, relativePath) {
 }
 
 export function assertReviewHtmlResourcePolicy(html, relativePath) {
+  return assertStaticHtmlResourcePolicy(html, relativePath, "review");
+}
+
+export function assertPublicHtmlResourcePolicy(html, relativePath) {
+  return assertStaticHtmlResourcePolicy(html, relativePath, "public");
+}
+
+function assertStaticHtmlResourcePolicy(html, relativePath, intent) {
   const { elements } = parseReviewHtml(html);
   const resources = [];
   const heads = elements.filter((node) => node.tagName === "head");
@@ -1181,7 +1197,8 @@ export function assertReviewHtmlResourcePolicy(html, relativePath) {
     head === undefined ||
     robots.length !== 1 ||
     robots[0]?.parentNode !== head ||
-    readElementAttribute(robots[0], "content") !== "noindex, nofollow"
+    readElementAttribute(robots[0], "content") !==
+      (intent === "public" ? "index, follow" : "noindex, nofollow")
   ) {
     throw new Error(
       `${relativePath} must keep one exact robots policy in head.`,
@@ -1201,7 +1218,20 @@ export function assertReviewHtmlResourcePolicy(html, relativePath) {
     const httpEquiv = (
       readElementAttribute(node, "http-equiv") ?? ""
     ).toLowerCase();
-    if (forbiddenElements.has(elementKey)) {
+    const isPublicJsonLd =
+      intent === "public" &&
+      elementKey === "script" &&
+      readElementAttribute(node, "type") === "application/ld+json";
+    if (isPublicJsonLd) {
+      if (node.parentNode !== head || node.attrs.length !== 1)
+        throw new Error(
+          `${relativePath} has unsafe JSON-LD attributes or placement.`,
+        );
+      const data = JSON.parse(textContent(node));
+      if (data === null || Array.isArray(data) || typeof data !== "object")
+        throw new Error(`${relativePath} requires a JSON-LD object.`);
+    }
+    if (forbiddenElements.has(elementKey) && !isPublicJsonLd) {
       throw new Error(
         `${relativePath} contains forbidden <${element}> output.`,
       );
@@ -1214,7 +1244,17 @@ export function assertReviewHtmlResourcePolicy(html, relativePath) {
         throw new Error(`${relativePath} contains forbidden meta policy.`);
       }
       if (
-        property.startsWith("og:") ||
+        (property.startsWith("og:") &&
+          !(
+            intent === "public" &&
+            [
+              "og:title",
+              "og:description",
+              "og:type",
+              "og:url",
+              "og:site_name",
+            ].includes(property)
+          )) ||
         name.startsWith("twitter:") ||
         (name !== "robots" && /(?:bot|spider|slurp)/u.test(name))
       ) {
@@ -1223,7 +1263,8 @@ export function assertReviewHtmlResourcePolicy(html, relativePath) {
     }
     if (
       elementKey === "link" &&
-      (rel.has("canonical") || rel.has("alternate"))
+      (rel.has("canonical") || rel.has("alternate")) &&
+      intent !== "public"
     ) {
       throw new Error(`${relativePath} contains release discovery metadata.`);
     }
@@ -1236,6 +1277,18 @@ export function assertReviewHtmlResourcePolicy(html, relativePath) {
       if (/^(?:javascript|vbscript):/iu.test(decodedValue)) {
         throw new Error(`${relativePath} contains an executable URL.`);
       }
+    }
+
+    // Public discovery links are checked as identities by the independent SEO oracle,
+    // not as fetched image/font resources. All other nodes retain the review policy.
+    if (
+      intent === "public" &&
+      elementKey === "link" &&
+      (rel.has("canonical") || rel.has("alternate"))
+    ) {
+      if (node.parentNode !== head || rel.size !== 1)
+        throw new Error(`${relativePath} has an invalid discovery link.`);
+      continue;
     }
 
     const attributes = resourceAttributes.get(elementKey) ?? [];

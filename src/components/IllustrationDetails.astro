@@ -1,0 +1,17 @@
+---
+import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
+
+interface Props {
+  asset: ResolvedAssetRecord;
+}
+
+const { asset } = Astro.props;
+---
+
+<figcaption class="visual-note">
+  <span>{asset.data.credit}. {asset.data.aiDisclosure}</span>
+  <details class="illustration-details">
+    <summary>Image notes</summary>
+    <span>{asset.data.caption}</span>
+  </details>
+</figcaption>

@@ -17,11 +17,11 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | M5-U3 页面与隐私子合同已确认；U4 账户准备与 Buttondown 审核结果已同步 | Project owner 于 2026-09-04 确认 Buttondown `mythic-china` 账户审核已通过；Tally Free 账户和未发布 Reader Request 草稿已准备。真实 action/link、账户级配置/条款、发布、写入与供应商行为仍留 U4/U5/M6 逐项确认 |
-| 实施状态 | M5-U2、M5-U3 与 U5A 离线单元完成；U4/U5 整体未完成 | 三个纯合同/Fake 之外新增纯内存阅读状态判定，页面不消费它。全站 inactive Newsletter、六个 Entry 的 inactive Reader Request、Privacy 与 output oracle 保持；当前六篇和两个合集均 published，页面仍为 review。账户事实没有进入配置，站点仍无真实供应商接线或网络 |
-| 验证状态 | U5A 与 Privacy 纯 builder 批次通过本地门禁；账户状态仍是 owner 提供的事实 | 定向 5 文件/98 测试、完整 26 文件/433 测试、Astro 83 文件零诊断与 14 页 output verifier；U3 的 320 项/9 页保留为历史证据。账户后台、浏览器、供应商真实行为与写入均不是通过证据 |
-| 发布状态 | 未发布 | 没有 public artifact、Vercel 项目、真实 origin、供应商生产配置或部署授权 |
+| 实施状态 | M5-U2、M5-U3 与 U5A 离线单元完成；U4/U5 整体未完成 | 三个纯合同/Fake 之外新增纯内存阅读状态判定，页面不消费它。全站 inactive Newsletter、六个 Entry 的 inactive Reader Request、Privacy 与 output oracle 保持；当前六篇和两个合集均 published，review/public 两种本地输出均保持 inactive。账户事实没有进入配置，站点仍无真实供应商接线或网络 |
+| 验证状态 | U2/U3/U5A 与 016 静态状态通过本地门禁；账户状态仍是 owner 提供的事实 | 016 记录完整 30 文件/529 测试、review/public 构建与 13 路由三档走查；早期 320/433 项记录保留各自范围。真实账户、供应商行为/写入及最终 public 候选 QA 未通过 |
+| 发布状态 | 未发布 | 013 已有本地 public artifact、显式 origin 与 owner 提供的 Vercel 空项目；供应商生产配置、实际托管验收和部署仍未完成 |
 
-- 当前权威结论更新时间：2026-09-07。
+- 当前权威结论更新时间：2026-09-08。
 - M5 实现基线：本地 HEAD 与 `main` 当时为 `3983bee91ada4a286613ec702a8009a4f528af3f`，进入 M5 前工作树干净；当时未 fetch 的本地 `origin/main` 为 `e2893d1`。M5-U2 实施期间，该 tracking ref 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`，三者在该批结束时对齐；本批未执行 fetch 或 Git 写入，tracking ref 不单独证明服务器端状态。后续版本身份以 README 与 `DEV_WORKFLOW.md` 的当前交接为准。
 
 ## 1. 结论与开发就绪判断
@@ -33,7 +33,7 @@
   1. Tally 跨同一 workspace 持久化的 localStorage `Respondent ID` 与低成本人工清理风险已由 Project owner 接受；Free 账户和字段匹配的草稿已准备，但仍未发布或提交。条件逻辑、生成标识、删除与 Empty Trash 行为仍须在 U4 验证，U2/U3 不接收、生成或保存该标识。
   2. Buttondown 方向、美国处理/DPA 边界、double opt-in、每月不超过两封及首次发送前关闭 open/click tracking 已获确认；Project owner 于 2026-09-04 确认账户 `mythic-china` 审核已通过。真实 action、账户级 DPA 状态、double opt-in/open-click tracking 后台值、soft/hard delete、届时价格和真实行为仍须在 U4 验证。
   3. Plausible Hosted 的购买、日级访客哈希、URL/referrer 真实 envelope、三年 dashboard 保留、custom event 计费与 production 启用仍须在 U5/M7 确认；U2 不实现供应商脚本或请求。
-  4. 公开隐私/数据权利联系邮箱、Newsletter/Reader Request 文案和阶段性 Vercel origin 边界已确认；U3 只生成了 noindex review 页面，仍未形成 public artifact。
+  4. 公开隐私/数据权利联系邮箱、Newsletter/Reader Request 文案和阶段性 Vercel origin 边界已确认；U3 原先只生成 noindex review 页面；013 已接入本地 public artifact，016 已同步静态状态与条件式 hosting Privacy。
 - 已确认的阶段决定：RUM/p75 延后 M7；M5-U2 只冻结 provider-neutral 字段、事件、清洗和失败语义，newsletter/request 转化仍只能使用供应商已接受记录的聚合结果。
 - 下一停点：由 Project owner 分别授权 M5-U4 的 Buttondown 账户级配置/真实 action 核查及合成订阅测试，以及 Tally 草稿发布、精确 hosted link、合成测试数据、写入数量、停止条件、回查和删除步骤；不得从“审核通过”自动推导登录、配置、发布草稿、安装 SDK、渲染可提交表单、启动服务、访问真实网络或写入任何数据。
 
@@ -52,11 +52,14 @@
 
 ### 1.2 事实、推断与风险
 
+2026-09-08 呈现更新见 [016](016-reader-facing-polish.md)：Newsletter/Reader Request 的 disabled 控件已移除，只显示未开放、不采集与 Privacy 链接。未来 double opt-in、独立同意和供应商运营合同保持；Privacy 增加条件式 Vercel 托管技术信息说明。013 已存在本地 public assembly 与 owner 提供的空项目/域名，本文较早的无 public/project 快照不定义最新部署准备状态。两种构建中的服务均未启用，尚未部署。
+
+
 已确认事实：
 
-- `SiteFooter.astro` 由共享 Layout 全站唯一渲染，并在 Footer 内挂载一个 disabled、inactive 的 Newsletter review 入口。
-- `EntryTemplate.astro` 在 Sources、Collection/Related reading paths 后为全部六个 review Entry 各挂载一个 disabled、inactive 的 Reader Request；其他页面没有该入口。当前六篇均 published，仍通过既有动态路由取得相同 review 表面，U5A 不改模板。
-- `/privacy/` 仍是 `noindex, nofollow` review 页面；当前精确 review inventory 为 14 页，包含六个 published Entry 和两个 published Collection。Privacy 显示 `hyc`、China、`huyichen2019@gmail.com`、60 天邮件运营保留规则，以及尚未启用的 Buttondown/Tally/Plausible 说明。
+- `SiteFooter.astro` 由共享 Layout 全站唯一渲染，并在 Footer 内挂载一个无控件、inactive 的 Newsletter 静态状态区（016）。
+- `EntryTemplate.astro` 在 Sources、Collection/Related reading paths 后为全部六个 review/public Entry 各挂载一个无控件、inactive 的 Reader Request（016）；其他页面没有该入口。当前六篇均 published，两种 intent 通过页面 projection 取得各自输出；U5A 不被模板消费。
+- `/privacy/` 在 review 中为 `noindex, nofollow`，public 本地构建输出其正式 metadata；当前精确 review inventory 为 14 页，包含六个 published Entry 和两个 published Collection。Privacy 显示 `hyc`、China、`huyichen2019@gmail.com`、60 天邮件运营保留规则，以及尚未启用的 Buttondown/Tally/Plausible 说明。
 - Astro 仍为纯静态输出，没有供应商 adapter、表单 endpoint、分析依赖或浏览器测试目录；`src/services/` 包含三个 provider-neutral DTO/validator/interface/Fake 模块与 U5A 纯内存阅读状态模块，页面没有消费这些服务。
 - review output policy 继续默认禁止 `form`、`script`、事件处理器、供应商 link/action 和非本地子资源，并新增 inactive UI、Privacy、位置、唯一性及文案的 HTML5 DOM oracle；构建 verifier 继续要求零客户端 JavaScript。
 - 本文、`CONTENT_MODEL.md`、`ARCHITECTURE.md` 与 `PROJECT_RULES.md` 已把浏览器 submission 与 provider/internal record 分开；M5-U2 的匹配 strict validator/Fake 已实现，真实 transport 尚未实现。
@@ -152,7 +155,7 @@ M4 已完成本地内容页面和负向安全门禁，但读者还不能订阅�
 SiteLayout
   -> SiteFooter
   -> identity + Footer navigation
-  -> 一个 disabled email preview + inactive Newsletter 文案 + Privacy link
+  -> 一个静态 inactive Newsletter 状态 + 不采集说明 + Privacy link
   -> 无 form / action / provider link / submission
 ```
 
@@ -417,7 +420,7 @@ M7 仍须冻结供应商标识、精确域名、实际 sample 与供应商计划
 
 ```text
 U3 Footer Newsletter
-  -> disabled email preview + inactive disclosure + local Privacy link
+  -> 静态 inactive 状态 + 不采集说明 + local Privacy link（016）
   -> stop: no form / action / network
 
 U3 Entry Reader Request
@@ -434,8 +437,8 @@ U5/M6/M7 target after separate authorization
 
 ### 6.2 组件职责
 
-- `NewsletterForm`：U3 只负责文案、disabled email preview、明确 inactive 状态和本地 privacy 入口；不渲染 `form`、action 或供应商链接，也不读取 Reader Request。U4 才能在单独授权后增加精确 transport。
-- `ReaderRequest`：U3 只负责问题、用途/字段/独立 consent 说明、稳定 page ID、disabled CTA 和本地 privacy 入口；不渲染真实字段或 Tally 链接，也不订阅 newsletter。U4 才能在单独授权后增加精确 hosted link。
+- `NewsletterForm`：当前按 016 只负责简短文案、明确 inactive/不采集状态和本地 privacy 入口；不渲染输入、按钮、`form`、action 或供应商链接，也不读取 Reader Request。U4 才能在单独授权后增加精确 transport。
+- `ReaderRequest`：当前按 016 只负责简短未开放/不采集说明、稳定 page ID 和本地 privacy 入口；未来用途/字段/独立 consent 合同留在 Privacy，不渲染输入、按钮或 Tally 链接，也不订阅 newsletter。U4 才能在单独授权后增加精确 hosted link。
 - `Analytics`：只负责显式事件 allowlist 与发送边界；不得扫描表单字段或自动采集 DOM 内容。
 - `Privacy` 页面：U3 review 页面公开控制者联系入口、Gmail 运营规则，以及三类尚未启用的供应商计划、目的、字段、地区、保留、删除/导出、退订/退出与投诉路径；不得把未来计划写成当前处理事实。
 
@@ -463,7 +466,7 @@ U3 已保持并加强 review 默认拒绝：
 - 日志只能记录错误类别、provider 名与不含 PII 的 request correlation；不得记录完整 email、建议、URL query 或供应商 token。
 - timeout/断连/unknown result 不自动重试真实写入；先只读回查 provider 状态。
 - newsletter 与 Reader Request 各自有独立同意和删除/退出路径。
-- 公开隐私联系入口已经确认并只存在于 noindex review；进入 M6 public artifact 前仍须按真实 hosting、origin 与 provider 状态复核并更新，不能把本地 review 页面视为已发布隐私说明。
+- 公开隐私联系入口已经确认并存在于 review/public 两种本地输出；016 已补条件式 hosting 说明。实际托管配置和 provider 状态仍须复核，不能把本地 public 页面视为已发布或账户验收通过。
 
 ## 7. 影响清单
 
@@ -515,7 +518,7 @@ U3 已保持并加强 review 默认拒绝：
 - 进入条件：公开联系邮箱、供应商方向与文案已确认；已满足。
 - 当前状态：已完成 noindex review 页面实现与完整本地门禁；该单元没有创建账户。后续已发生的账户/草稿准备见 12.4，action/link、发布、写入和供应商失败行为仍后置 U4。
 - 不交付：真实写入或 analytics。
-- 完成条件：语义顺序为 Sources → Related/Collection path → Reader Request → Footer；label、说明、可用 Privacy link 的可见 focus、移动布局和零 JS/零第三方依赖由源代码与构建输出 oracle 验证。原生 disabled 控件有意不进入焦点顺序；真实第三方失败行为属于 U4，不是 U3 完成证据。
+- 完成条件：语义顺序为 Sources → Related/Collection path → Reader Request → Footer；当前静态状态、说明、可用 Privacy link 的可见 focus、移动布局和零 JS/零第三方依赖由源代码与构建输出 oracle 验证。016 已移除 disabled 控件，不再要求 label/输入/按钮；真实第三方失败行为属于 U4，不是 U3 完成证据。
 
 ### M5-U4 供应商配置与测试联调
 
@@ -552,8 +555,8 @@ U3 已保持并加强 review 默认拒绝：
 | 单元 | Analytics reading state | qualified/depth 两种顺序、hidden pause/resume、重复观察、刷新、非故事区 | 两事件各 once-only；顺序不漏记；刷新才重置；隐藏时间与非故事区不计入 | U5A 21 项离线测试通过；实际 DOM 区域识别、hook 与生产环境隔离仍未实施 |
 | 单元 | Adapter failure | unavailable/rate-limit/timeout/unknown | 不假成功、不盲重试、不泄露 PII | 通过；三类 Fake 均覆盖五类结果，validation result 不回显输入，fetch trap 为零调用 |
 | 输出 | Footer/Entry 唯一性、顺序与 Privacy | review HTML5 DOM fixture/静态输出 | 只有 approved inactive 入口，其他 form/script/provider link 失败 | 通过；U3 当时为 9 页 Newsletter / 2 个 Entry Reader Request，当前扩展为 14 页 Newsletter / 6 个 Entry Reader Request；Privacy 继续拒绝 mailto/占位符 |
-| 构建 | 静态/noindex/public 负边界 | 固定运行时 | review 不接真实服务；内容核心不变 | 通过；当前为 14 页、112 Hero、10 WOFF2、零 XML、零客户端 JavaScript；public artifact 仍不存在，U3 的 9 页结果只保留为历史基线 |
-| 浏览器 | 390/768/1440、键盘、200%、无 JS、错误恢复 | 经授权 preview | 无阻塞布局/焦点/阅读问题 | 未执行 |
+| 构建 | 静态/noindex/public 负边界 | 固定运行时 | review 不接真实服务；内容核心不变 | 通过；review 为 14 页/零 XML，public 为 13 HTML/2 XML/robots.txt，均保持 112 Hero、10 WOFF2 和零可执行脚本；U3 的 9 页结果只保留为历史基线 |
+| 浏览器 | 390/768/1440、键盘、200%、无 JS、错误恢复 | 经授权 preview | 无阻塞布局/焦点/阅读问题 | 016 已完成静态交互的三档走查和图注键盘抽查；真实供应商跳转、200%、故障与最终 public 候选 QA 未完成 |
 | 真实联调 | Buttondown/Tally/Plausible | 独立授权和合成数据 | 与合同一致并完成回查/删除 | 未授权 |
 
 真实命令只引用 `DEV_WORKFLOW.md`；在入口未建立前不在本文写假命令。
@@ -568,12 +571,12 @@ U3 已保持并加强 review 默认拒绝：
 | M5-U5A 离线阅读判定 | 当前仓库；只消费模拟数据 | Project owner 于 2026-09-07 授权继续不涉及账号的开发 | 本地实现与验证完成；不接页面/DOM、供应商、配置或真实采集，不构成 U5 整体授权 |
 | M5-U4 账户准备 | Buttondown 与 Tally 外部账户；无站点连接或数据写入 | Project owner 已在任务前完成并提供现场事实；2026-09-04 又确认 Buttondown 审核通过 | Buttondown 审核已通过；Tally Free 草稿未发布；无已核 action/link、订阅者、邮件或 submission，未构成登录、配置或 U4 联调授权 |
 | 依赖/配置 | package、lock、adapter、env | 单独说明并授权 | 推荐静态方案当前不需要；未授权 |
-| 本地 dev/preview/browser | 进程、端口、浏览器状态 | 单独说明并授权 | 未授权 |
+| 本地 dev/preview/browser | 进程、端口、浏览器状态 | 单独说明并授权 | 014–016 已在各自授权内完成并关闭；本次检查点未授权新服务 |
 | Buttondown 写入 | 订阅请求、确认邮件 | 每次测试联调授权 | 未授权 |
 | Tally 写入 | Reader Request record | 每次测试联调授权 | 未授权 |
 | Plausible 事件 | 第三方 analytics | 环境与计划确认后授权 | 未授权 |
-| Git 写操作 | add/commit/push/amend | 单独授权 | 未授权、未执行 |
-| Vercel/部署 | 远端项目与环境 | 不属于 M5 本地单元 | 未授权 |
+| Git 写操作 | add/commit/push/amend | 单独授权 | 本次 013–016 本地检查点已获 add/commit 授权，结果见 DEV_WORKFLOW；不含 push/amend 或发布 |
+| Vercel/部署 | 远端项目与环境 | 核查与部署分别授权 | 本次只核查真实账户/托管门禁；未授权部署，登录/2FA 未完成不能作为账户证据 |
 
 ## 11. 发布与门禁
 
@@ -635,8 +638,23 @@ Project owner 补充确认 Buttondown `mythic-china` 账户审核已经通过。
 
 ## 13. 当前最终结论
 
-- 需求状态：M5-U3 子合同已确认；Buttondown 审核通过账户与 Tally Free 未发布草稿已形成 U4 准备事实。Buttondown/Tally 仍只是 U4 条件方向，Plausible 留 U5，真实 transport 和 public origin 按后续单元逐项确认。
+- 需求状态：M5-U3 子合同已确认；Buttondown 审核通过账户与 Tally Free 未发布草稿已形成 U4 准备事实。Buttondown/Tally 仍只是 U4 条件方向，Plausible 留 U5，真实 transport 与账户配置按后续单元逐项确认；013 的 public origin 已确认并本地接线。
 - 实施状态：M5-U2 纯合同/Fake、M5-U3 inert review 页面与 U5A 离线阅读状态完成；U4 的 Buttondown 审核条件已满足，但账户配置核查、真实 transport、Tally 草稿发布、供应商联调、Plausible hook 与 RUM 均未开始，M5 仍不能关闭。
-- 验证状态：U3 的 320 项/9 页及四篇增量后的 321 项/13 页保留为历史快照；当前定向 5 文件/98 测试与完整 26 文件/433 测试、Astro 83 文件零诊断、14 页 output verifier 通过，并确认六个 Entry 的 inactive Reader Request。Project owner 提供的审核/账户/草稿状态不是供应商行为验证；账户后台、真实提交、浏览器视觉/键盘/缩放与网络失败未验证且未授权。
+- 验证状态：U3 与 U5A 的历史数字保留各自范围；016 最新静态状态已通过完整 check、review/public output verifier、13 路由三档走查与图注键盘抽查，六个 Entry 均保持 inactive Reader Request。Project owner 提供的审核/账户/草稿状态不是供应商行为验证；真实账户/提交、供应商跳转及最终 public 候选缩放/故障等验收仍未完成。
 - 发布状态：未发布。
 - 下一停点：分别决定并授权 M5-U4 的 Buttondown 账户配置/真实 action 核查与合成订阅测试，以及 Tally 草稿发布、精确 hosted link、合成数据写入、停止、回查和删除步骤；审核通过不自动授权登录、配置、发布草稿或进入真实联调、U5、M6 与发布。
+
+## 14. 当前接线进入清单（2026-09-08）
+
+用户已要求独立推进 M5/托管门禁；本次完整检查点复核没有取得真实账户设置、供应商 action/link 或写入证据，U4/U5 继续保持未完成。以下是接线前必须取得的具体输入，不是已经实施的配置。
+
+| 单元 | 先核对的身份与输入 | 本地实现进入条件 | 真实验证停点 |
+| --- | --- | --- | --- |
+| Buttondown U4 | `mythic-china` 账户实际状态、原生 action、double opt-in、open/click tracking 关闭、计划/DPA 与删除能力；owner 控制的测试邮箱 | 真实 action/设置与第 5.1 节一致后，才写固定 `embed=1` mapping、Footer 唯一原生 POST 和精确输出 allowlist | 把具体邮箱、提交次数、确认邮件、重复/失败检查及仅限本次测试记录的回查/清理写入 DEV_WORKFLOW，再取得对应真实写入授权；不得用 Fake 结果代替 |
+| Tally U4 | owner 的 Free 草稿、字段/通知/同意逻辑、草稿发布决定和精确 hosted link | 第 5.2 节字段与供应商边界已核对后，才接入仅携带 published `pageId` 的站外链接 | 单独确认草稿发布、合成记录清单/数量、回查和删除范围；验证 trim/Unicode 长度、可选 email/consent、持久标识与失败行为，不能用已有草稿结构作为通过证据 |
+| Analytics U5 | 是否接受 Plausible Hosted 候选、费用上限及第 5.4 节处理/保留边界 | 业务决定关闭后才实现候选 adapter、DOM 阅读/Related hook 与离线隔离测试；review/local/preview 保持零真实请求 | 本轮不购买、不创建生产配置或发送事件；M6 public 条件接线及 M7 production analytics/唯一 RUM 分别验收 |
+| 托管 | Vercel 项目/账户内部身份、域名绑定、实际构建/运行时/输出设置和保护 | 以真实账户证据核对 013 的 public 入口和 Privacy；不把空项目截图当实际保护通过 | 不安装 CLI；真实交付入口、受保护预览、地区/退出/回滚与生产发布按 DEV_WORKFLOW/011 独立进入 |
+
+官方资料复核（2026-09-08）：[Buttondown 原生订阅表单](https://docs.buttondown.com/building-your-subscriber-base) 仍要求标准 HTML form action，不能用 fetch 绕过验证页面；[Plausible 定价](https://plausible.io/#pricing) 当前 10k 最低档显示 US$9/月，其 [数据说明](https://plausible.io/data-policy) 仍包含 IP/UA 日级标识，生产候选的费用及处理决定尚未由本轮用户确认；[Tally 删除说明](https://tally.so/help/how-to-delete-and-recover-form-data) 区分可恢复 Trash 与不可恢复清空。本次只核对文档，不证明对应账户已配置或发生真实写入。
+
+默认完成标准保持 011 第 2.2 节：inactive 状态与本地检查点不能关闭 U4/U5，未取得真实账户或业务决定时不使用示例 action/link、静默 fallback 或虚构 receipt 补齐。若以后改变首发交互范围，必须先明确修改目标合同，再实施和验证。

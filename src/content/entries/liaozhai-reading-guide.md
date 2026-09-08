@@ -2,7 +2,7 @@
 entryId: liaozhai-reading-guide
 slug: liaozhai-reading-guide
 title: "Reading Liaozhai: Dates, Editions, and Genre"
-subtitle: null
+subtitle: Start with the dates, editions, and literary terms behind the tales
 entryType: guide
 traditionType: literature
 nameZh: null

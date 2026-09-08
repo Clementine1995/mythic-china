@@ -4,7 +4,7 @@
 
 Mythic China 是只策展中国神话、志怪、民间传说、宗教传统与传奇人物的英语文化出版网站。`中国神话传说博物馆`（Chinese Myths & Legends Museum）是本项目的产品与设计隐喻，表示“有策展路径、来源和藏品式视觉说明的数字场馆”；它不是综合世界神话平台，也不宣称项目已经是具有实体馆藏或公共资质的博物馆。公开品牌仍使用 `Mythic China`，直至品牌名、域名与商标另行确认。
 
-视觉模型为：**现代中性文化平台母体 + 每个 Collection 独立美术指导 + 全站统一的可信 Entry 阅读器。** 它不是黑暗游戏 UI、普通博客模板，也不是把泛黄纸张、印本边线和重衬线铺满全站的古籍仿制品。
+视觉模型为：**现代文化平台母体 + 每个 Collection 独立美术指导 + 全站统一的可信 Entry 阅读器。** 2026-09-08，owner 要求整体背景向 mythzh 靠齐，当前共享表面改为墨色背景、暖白文字与克制金色；此前中性浅色方向由 [015](requirements/015-ink-palette.md) 更新，现代导视与统一阅读器继续保留。 它不是黑暗游戏 UI、普通博客模板，也不是把泛黄纸张、印本边线和重衬线铺满全站的古籍仿制品。
 
 设计参数：
 
@@ -57,7 +57,7 @@ Collection 美术指导 -> 主题世界：主图、色域、光线、纹理、�
 
 不得复制参考品牌的商标、专有字体、角色造型、图片、文案、动效签名或页面源码。
 
-### 当前确认：A 主、C 辅概念方向
+### 历史概念方向：A 主、C 辅（浅色表面已由 015 更新）
 
 2026-08-27，用户在三份仓库外 Home 方向稿中确认以下层级：
 
@@ -163,15 +163,16 @@ excluded_motifs
 
 ```css
 :root {
-  --canvas: #f4f5f3;
-  --surface: #ffffff;
-  --surface-muted: #e9ecea;
-  --ink: #101315;
-  --muted: #5c6267;
-  --rule: #d8dcda;
-  --brand-accent: #9f3f36;
-  --interactive: #173f55;
-  --focus: #1f6f9b;
+  color-scheme: dark;
+  --canvas: #121412;
+  --surface: #191c18;
+  --surface-muted: #232720;
+  --ink: #eee7d8;
+  --muted: #b3ae9f;
+  --rule: #3c4135;
+  --brand-accent: #c4a66a;
+  --interactive: #d5b77a;
+  --focus: #e8c98c;
 
   --realm-bg: #101716;
   --realm-surface: #182421;
@@ -184,13 +185,13 @@ excluded_motifs
 }
 ```
 
-- `--canvas` 与 `--surface` 是现代中性场馆表面，不命名或呈现为纸张；全站不使用纸纤维、泛黄、褐色污迹、印刷套色偏移或持续 grain。
+- `--canvas` 与 `--surface` 是统一的墨色场馆表面，`--surface-muted` 提供稍亮的第二层，不命名或呈现为纸张；全站不使用纸纤维、泛黄、褐色污迹、印刷套色偏移或持续 grain。
 - `--brand-accent` 只用于少数品牌时刻，不伪装成历史印章，也不承担错误、成功、警告或焦点语义。
 - 按钮、链接和焦点主要使用高对比的 `--interactive` / surface 组合；焦点及其他语义色不随 Collection 改变。
 - Realm-specific CSS 只能覆盖批准的 `--realm-*` token，不得散落 raw hex，也不得改变共享组件结构。
 - 首页同时展示多个 Collection 时，realm 色只出现在图片、短色带或小型标记内；全页表面保持中性。
 - 石青、石绿、朱砂、赭石等名称只表示受具体文物启发的数字方向，不宣称 CSS 色值等于历史颜料。实际使用前仍须逐组合检查对比度和色觉可辨性。
-- Entry 正文默认使用 `--surface` / `--ink`；Collection 可以由主题 Hero 在一个明确边界切换至统一阅读表面，但单页不得反复黑白翻转。
+- Entry 正文使用无纹理的共享墨色背景与 `--ink`；功能面板使用稍亮的 `--surface`。Collection Hero 接回统一阅读区域，正文不重复大图或装饰光效。暖白长文与金色链接均须检查实际对比。
 - 所有实际前景/背景组合必须通过 WCAG 对比检查；不能只凭 token 名判断。
 
 ### 5.2 Typography
@@ -316,11 +317,13 @@ M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows
 
 ### 6.2 Home
 
-1. **Contemporary Image-Led Hero**：文案占 4–5 栏，主题图像占 7–8 栏；标题、dek 和一个主 CTA 在首屏内。Home 的 canvas、导航和控件保持中性，即使首期主推中国阴间也不整页继承其暗色主题。
-2. **Explore Collections**：采用 1 大 2 小或其他受控非对称图片编排，不使用三张等宽模板卡。每张图可以呈现不同 Collection 气氛，但标题、间距和交互完全统一。
-3. **Featured Story**：M1 使用 `Zhong Kui, the Demon Queller` 作为当前关注入口；最多一个轻量 sticky chapter，没有足够内容时使用普通编辑分区。
-4. **Latest Entries**：编辑型列表与大图穿插，不把所有内容做成同尺寸卡片。
-5. **Global Footer Newsletter**：订阅只在全站 Footer 出现一次，以清楚的用途、频率和数据说明收束；首页正文不重复订阅模块。Reader Request 属于具体 Entry 的反馈入口，不放在首页 Footer 冒充订阅。
+当前实现以 [014](requirements/014-editorial-design-refinement.md) 为准：
+
+1. **主视觉**：共享墨色页面上并置品牌标题、短介绍、合集主入口与钟馗阅读链接，右侧使用钟馗原 Hero；手机自然折为单列。保留原有双语身份。
+2. **两个专题**：明确以阴间、聊斋的顺序并列展示各自插画、标题和简介；手机单列。图文层级统一，气氛来自各自画面；图注置于图片之外，首页/目录的展开规则见 016。
+3. **Footer Newsletter**：保留全站唯一订阅区域及当前 inactive 状态；不在首页重复钟馗 Featured Story、虚构 Latest Entries 或新增读者表单。
+
+原先的三图非对称编排、Featured 与 Latest 属于早期探索目标，本轮不沿用。首页不靠连续放大标题制造层级；主视觉、专题区和目录各用适合其阅读任务的尺度。
 
 Home 是所有 Collection 的中性宿主，不是第一期“中国阴间”的落地页，也不是多套主题的拼贴。页面表面、栅格、标题位置、卡片结构和 hover 行为固定；差异由图片构图、小型主题标记和受控色带承担。所有缩略图遵守同一对比、清晰度、caption、权利和色彩管理基线，但不强制套用同一种复古调色。
 
@@ -391,7 +394,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 ### 7.2 视觉语法
 
 - Hero 必须提供可读标题所需的真实安静空间，但不强制所有 Collection 使用一角式构图或固定 38%–45% 留白。人物位置、远近关系、色域和光线由该 Collection 的构图合同及具体资产 `focalPoint` 决定。
-- Entry 桌面 Hero 的 HTML identity 根据 approved desktop `focalPoint` 放在主要焦点的对侧；小于 `64rem` 的中小屏把 identity 作为独立内容置于图片上方，避免长标题压住图注。桌面叠图标题使用局部高不透明度暗底保护文字对比，不根据图片明暗猜测文字颜色；该暗底只存在于桌面断点，不改变原图与披露。标题断行上限为 `12ch`，仍受既有 identity 区域限制；手机图片容器须以同等优先级切换为 `4:5`。
+- Entry 的完整标题、中文身份与 subtitle 在所有宽度均进入 Hero 图片之前的正常文档流，使用中性 ink/surface；取消桌面叠字暗板与焦点对侧定位。当前标题最大行宽为 `24ch`，容器上限 `64rem`；具体折行须以全部六篇真实标题验收，不以统一行数裁短内容。图片继续使用 approved focal point、桌面 `16:9` 和手机独立 `4:5` 构图。该调整承接 [014](requirements/014-editorial-design-refinement.md)，不改变原资产及披露。
 - 长页按现代策展路径组织：名称、故事问题与 Quick Answer 开场，核心故事展开，原典依据、后世版本与本站解释依次深化，完整 Sources、Related Entries 与 Reader Request 收束；来源标记仍贴近对应主张。手卷“由读者控制前进”的原则可以指导节奏，但页面不模拟卷轴、题跋、卷轴把手或古书翻页。
 - 文章使用稳定 measure、清晰标题、有限分隔、图注和 source notes 建立证据层级；不以密集 hairline、版心框、题签、假缝线、虫蛀、烧边或泛黄制造历史感。
 - 真实材质、低调光、雾和空间层次只服务于具体 Collection / Entry；用镜头、人物尺度和负空间形成戏剧性，不用 UI 粒子、发光边框和“游戏技能特效”。
@@ -462,7 +465,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 
 ### Don't
 
-- 不做全站暗色、发光、磨砂玻璃和游戏 HUD。
+- 不做发光、磨砂玻璃和游戏 HUD；共享墨色色板以 015 的已批准方向为准。
 - 不使用全站米黄纸面、纸纤维、褐色做旧、密集分隔线和重衬线标题来制造“文化感”。
 - 不用三张等宽圆角卡贯穿所有区块。
 - 不把“书法字 + 红黑 + 云雾”当作完整中国风。
@@ -472,7 +475,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - 不复制黑神话角色设计或用 `in Black Myth style` 作为提示词。
 - 不直接采用 Apple/WIRED 专有字体和商标性细节。
 - 不为栏目新增字体、导航、CTA、ArticleBody、SourceNote、圆角、图标或动画库。
-- 不让“中国阴间”暗色主题成为 Home 或其他 Collection 的默认皮肤。
+- 不把“中国阴间”的专属母题或 `--realm-*` 主题参数设为 Home 或其他 Collection 的默认值；015 已批准的共享墨色色板不属于阴间专属主题。
 - 不为 Collection 创建独立功能壳层；允许它们拥有独立主图、色域、环境、构图和一个标志性动效。
 
 ## 12. 设计验收
@@ -498,7 +501,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - M5 实现后，Newsletter 是否只在全站 Footer 出现一次；Entry 正文收束后是否依次为 Sources、Related Entries 与 Reader Request。
 - Collection 主题环境是否贴合具体题材、保留中性安静的 Entry 阅读表面、拥有桌面/移动降级，并在隐藏背景后仍保持完整阅读与来源链。
 - `The Chinese Underworld` 是否表现整个主题世界而非一张钟馗角色海报；钟馗是否被准确标为边界上的驱鬼/护佑人物而非阴间统治者；现代游戏是否只出现在 Modern adaptations 语境。
-- M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿。首个真实 Home、Collection、Entry 及其功能页现已用同一内容完成 390px、768px、1440px 基础复核并获得 Project owner 当前页面确认；尚未执行的真实键盘/缩放/偏好、故障、性能和跨平台检查移交 M6 最终 public artifact。[`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节的正式目标读者比较按 011 移到 M7 Public Beta live artifact。Public Beta 候选还须包含经 Project owner 批准、全站稳定、可见且可访问的 Beta 提示；具体英文文案与位置在 M6/M7 实施前确认。M5/M6 若实质改变共享表现层、交互、内容、字体或资产，只重跑受影响证据；失败阻塞预览或发布，但不把 M4 历史实现重新标为未完成。Public Beta 期间发现的具体视觉或无障碍缺陷按原门禁修复，必要时回滚受影响页面。
+- M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿。首个真实 Home、Collection、Entry 及其功能页现已用同一内容完成 390px、768px、1440px 基础复核并获得 Project owner 当前页面确认；尚未执行的真实键盘/缩放/偏好、故障、性能和跨平台检查移交 M6 最终 public artifact。[`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节的正式目标读者比较按 011 移到 M7 Public Beta live artifact。Public Beta 候选还须包含经 Project owner 批准、全站稳定、可见且可访问的 Beta 提示；2026-09-08 owner 已批准全站页脚身份区域的静态段落，原文见 [011](requirements/011-public-beta-validation.md) 第 1.1 节；public 显示，review 不显示，复用既有字体、正文颜色与间距。最终候选仍须完成匹配视觉与无障碍验收。M5/M6 若实质改变共享表现层、交互、内容、字体或资产，只重跑受影响证据；失败阻塞预览或发布，但不把 M4 历史实现重新标为未完成。Public Beta 期间发现的具体视觉或无障碍缺陷按原门禁修复，必要时回滚受影响页面。
 - 外部 Skill 或竞品方案只能产生候选方向；不得把其类名、组件树、默认框架或视觉皮肤写成项目长期合同，也不能绕过上述复核门。
 
 以下仍是后续视觉批准标准，不是当前 M1 已达到的事实：
@@ -516,3 +519,15 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - 首个真实 Home 须按已确认的 A 主、C 辅概念方向完成页面级实现；Collection 与 Entry 继续按既有三层系统单独设计，并在同一纵切片中确认 A/C 语言是否需要延展。三页都须提交用户检查实际页面、响应式、字体、生产资产、无障碍和整体完成度，不把 Home 概念方向选择重新开放成无边界探索；若实际页面仍不符合目标，应只重构共享表现层，不改写内容、证据关系、稳定身份、URL 或语义阅读顺序。
 
 M1 冻结时为避免页面比例和裁切规则返工，先暂停首批 6 篇全部插画并要求真实纵切片先行。该纵切片的 M4 本地页面、Hero、字体静态链、三档基础矩阵与当前页面人工判断现已闭合；其余平台、故障和性能保留项不阻塞 M6 内容制作，但必须在组装后的最终 public artifact 与受保护预览上通过后才能发布。
+
+### 014 版面调整合同（颜色现以 015 为准）
+
+2026-09-08 的 [014](requirements/014-editorial-design-refinement.md) 当时保留字体、颜色母体、图片与正文阅读器；同日后续 [015](requirements/015-ink-palette.md) 更新共享颜色，不改以下版式，集中调整首页、目录及 Entry 首屏。首页主视觉搭配两个真实专题入口；Explore 与 Collections 使用带完整图注的图文目录，Explore 导读消费已有 subtitle，完整 summary 继续用于 Quick Answer 和 metadata。本站不因复用 Hero 而套用上表 Content card 的 5:4 目标；本轮保持已有 16:9 / 4:5 两种已审构图，避免另造未批准裁切。新增图片默认 lazy，不加入浏览器脚本。
+
+首页保留钟馗与中国阴间的原有双语身份；聊斋当前仅展示既有英文身份，不补造中文/拼音或改字体字符集。目录用较小的阅读尺度，首页专题使用较大的图像尺度；完整 caption、credit 和 AI disclosure 保持紧邻；当前可见性按下述 016 规则执行。新版审美和响应式结果须经本轮真实浏览器检查，不承袭旧截图的通过状态。
+
+### 016 阅读页面收尾
+
+首页、Explore 与 Collections 目录的 11 处图注使用原生 `details` / `summary`：完整 credit 与 AI disclosure 始终显示，`Image notes` 默认关闭、点击或键盘展开完整 caption；摘要入口至少 44px 高并沿用全站焦点样式。八处详情图注始终完整显示，不折叠，不改图片、alt、裁切或资产合同。
+
+未开放的 Footer Newsletter 与 Entry Reader Request 只保留简短静态状态、不采集说明和本地 Privacy 链接，移除 disabled 控件及重复的未来操作流程；隐私服务合同集中在 Privacy。保留唯一性、page ID 与 Sources/阅读路径之后的位置，未启用状态不能折叠或隐藏。具体实现与验收见 [016](requirements/016-reader-facing-polish.md)。

@@ -1,18 +1,35 @@
 ---
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
+import IllustratedLink from "../../components/IllustratedLink.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { readBuildIntent } from "../../site/build-intent";
-import {
-  createReviewProjection,
-  getReviewIndexPreview,
-} from "../../site/review-projection";
+import { createPageProjection } from "../../site/page-projection";
+import { getReviewIndexPreview } from "../../site/review-projection";
+import { resolveApprovedPageAssetById } from "../../visual/resolve-approved-page-asset";
 
-readBuildIntent();
+const intent = readBuildIntent();
 const graph = await loadValidatedContentGraph();
-const projection = createReviewProjection(graph);
+const projection = createPageProjection(graph, intent);
 const { publishedCollections } = projection;
+const illustratedCollections = publishedCollections.map((collection) => {
+  if (collection.data.heroAssetId === null) {
+    throw new Error(`Collection index ${collection.id} requires a Hero.`);
+  }
+  const asset = resolveApprovedPageAssetById(
+    graph.assets,
+    collection.data.heroAssetId,
+    {
+      ownerType: "collection",
+      ownerId: collection.id,
+      role: "hero",
+      slotId: "primary",
+      accessibilityMode: "informative",
+    },
+  );
+  return { collection, asset };
+});
 const reviewCollection =
-  publishedCollections.length === 0
+  intent === "review" && publishedCollections.length === 0
     ? getReviewIndexPreview(projection).collection
     : null;
 ---
@@ -71,14 +88,16 @@ const reviewCollection =
     {
       publishedCollections.length > 0 ? (
         <ol class="editorial-index">
-          {publishedCollections.map((collection) => (
+          {illustratedCollections.map(({ collection, asset }) => (
             <li>
-              <h2>
-                <a href={`/collections/${collection.data.slug}/`}>
-                  {collection.data.title}
-                </a>
-              </h2>
-              <p>{collection.data.description}</p>
+              <IllustratedLink
+                {asset}
+                href={`/collections/${collection.data.slug}/`}
+                title={collection.data.title}
+                intro={collection.data.description}
+                context="Curated collection"
+                sizes="(max-width: 767px) 32vw, 34vw"
+              />
             </li>
           ))}
         </ol>

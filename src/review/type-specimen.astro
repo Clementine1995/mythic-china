@@ -1,8 +1,8 @@
 ---
-import cjkCharacterSets from "../../assets/fonts/cjk-character-sets.json";
-import SiteLayout from "../../layouts/SiteLayout.astro";
-import { readBuildIntent } from "../../site/build-intent";
-import "../../styles/type-specimen.css";
+import cjkCharacterSets from "../assets/fonts/cjk-character-sets.json";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../site/build-intent";
+import "../styles/type-specimen.css";
 
 if (readBuildIntent() !== "review") {
   throw new Error("The type specimen is available only in review builds.");

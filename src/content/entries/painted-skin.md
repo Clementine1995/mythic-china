@@ -2,7 +2,7 @@
 entryId: painted-skin
 slug: painted-skin
 title: "Painted Skin: A Close Reading of a 1766 Text"
-subtitle: null
+subtitle: Look closely at disguise, trust, and the distance between a tale and its interpretations
 entryType: tale
 traditionType: literature
 nameZh: null

@@ -2,9 +2,9 @@
 
 ## 职责
 
-本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；012 又为四篇 Entry 与 Liaozhai Collection 闭合五组 Hero。当前共有 21 个精确画布 master、21 份 repository source rendition、9 份 production record、12 份 approved manifest 版本记录、11 个 approved/current 逻辑资产及 17 份 current responsive rendition；非默认视觉入口已实际生成、解码 120 个 AVIF/WebP 目标。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当时的 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。Project owner 后续把 M5-U1–U3、U4 账户准备快照与第二 Collection 决策包提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；2026-09-03 四篇研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为该提交，工作树干净。`public` intent、runner、页面/endpoint、deployable artifact、远端环境和发布都不存在；VB6 独立审核 6+2 到 ready 后，owner 又批准全部为 published，六篇目标公开日期为 2026-09-10。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 承接 Public Beta 生产、live smoke、回滚、线上地区复核、RUM/p75、上线后 R2a/R2b 与正式 MVP 收口。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
+本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；012 又为四篇 Entry 与 Liaozhai Collection 闭合五组 Hero。当前共有 21 个精确画布 master、21 份 repository source rendition、9 份 production record、12 份 approved manifest 版本记录、11 个 approved/current 逻辑资产及 17 份 current responsive rendition；非默认视觉入口已实际生成、解码 120 个 AVIF/WebP 目标。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当时的 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。Project owner 后续把 M5-U1–U3、U4 账户准备快照与第二 Collection 决策包提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；2026-09-03 四篇研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为该提交，工作树干净。013 已完成 `public` intent、runner、页面/endpoint 与本地诊断输出；deployable 身份、远端环境和发布仍未完成；VB6 独立审核 6+2 到 ready 后，owner 又批准全部为 published，六篇目标公开日期为 2026-09-10。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 承接 Public Beta 生产、live smoke、回滚、线上地区复核、RUM/p75、上线后 R2a/R2b 与正式 MVP 收口。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
-M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已进入 `3fa46d5`；当时 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。2026-09-04 的四篇证据最小物化建立 4 个 draft Entry、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁，并通过当时 13 页 review inventory 完整门禁；这些结果与 Buttondown 审核事实同步形成本地检查点 `9914dd3`。Ten Kings 与 Fighting Cricket 随后进入 `7c0cb3f`，Guide 于 2026-09-05 进入 `119c01c`，Project owner 已确认这些检查点 push；本批开始前的独立服务器只读核验与本地三个 ref 一致。009 及后续内容批完成两个三篇路径和四篇证据受限草稿，当前为 6 Entry / 2 Collection / 14 Source / 25 Claim / 6 Terminology 与 14 页 review 输出；修订前锁定稿及 010 当前四篇改动单元和两条 `contentNote` 均已通过 Project owner 双语确认，六份 Terminology 均为 `bilingual-approved`，Painted Skin 短译 Claim 为 `verified`。010 的 AI 专业审读、统一 `contentNote` 合同与 R1 重建已完成；R1 静态检查通过后已退役为 reference-only，真人反馈仍为 0。012 已新增并接线五组 Hero；VB6 后 Related 编辑环、Liaozhai Featured（Painted Skin）与 6+2 ready 已闭合；owner 又批准全部 published，六篇目标日期为 2026-09-10，本地索引为真实 6/2、六篇各展示一个 Related；真实 supplier transport、网络请求或 public artifact 仍不存在。
+M5-U2 的三个 provider-neutral service/Fake 与 M5-U3 的 inert Newsletter、Reader Request、Privacy review 页面和 HTML5 DOM output oracle 已进入 `3fa46d5`；当时 review inventory 为 9 页/42 Hero/10 WOFF2/零 XML/零客户端 JavaScript。2026-09-04 的四篇证据最小物化建立 4 个 draft Entry、5 Source、9 Claim、3 Terminology、Source 数字影像证据门禁，并通过当时 13 页 review inventory 完整门禁；这些结果与 Buttondown 审核事实同步形成本地检查点 `9914dd3`。Ten Kings 与 Fighting Cricket 随后进入 `7c0cb3f`，Guide 于 2026-09-05 进入 `119c01c`，Project owner 已确认这些检查点 push；本批开始前的独立服务器只读核验与本地三个 ref 一致。009 及后续内容批完成两个三篇路径和四篇证据受限草稿，当前为 6 Entry / 2 Collection / 14 Source / 25 Claim / 6 Terminology 与 14 页 review 输出；修订前锁定稿及 010 当前四篇改动单元和两条 `contentNote` 均已通过 Project owner 双语确认，六份 Terminology 均为 `bilingual-approved`，Painted Skin 短译 Claim 为 `verified`。010 的 AI 专业审读、统一 `contentNote` 合同与 R1 重建已完成；R1 静态检查通过后已退役为 reference-only，真人反馈仍为 0。012 已新增并接线五组 Hero；VB6 后 Related 编辑环、Liaozhai Featured（Painted Skin）与 6+2 ready 已闭合；owner 又批准全部 published，六篇目标日期为 2026-09-10，本地索引为真实 6/2、六篇各展示一个 Related；真实 supplier transport 与网络请求仍不存在；013 已接入本地 public artifact，最终发布资格仍待 M6 验收。
 
 2026-09-07 当前路线由 [`docs/requirements/011-public-beta-validation.md`](docs/requirements/011-public-beta-validation.md) 更新：M6 保留全部非读者 release-candidate 门禁与受保护预览；M7 先发布可索引 Public Beta 并完成 live smoke/回滚/RUM 基线，再执行 live R2a/R2b 与正式 MVP 收口。后续历史记录中“目标读者属于 M6”“目标读者移交首个真实纵切片”或“M7 只承接生产与 live/RUM”的旧时点描述不再控制当前执行顺序。
 
@@ -600,7 +600,7 @@ M4-U1 开始前的只读核查记录（2026-08-29）：
 
 ### M4-U2 review 构建意图
 
-M4 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图。当前唯一允许值仍为 `review`；缺失、`public` 或其他未知值都必须失败。M4-U3 已建立纯 published-only release 数据投影，M4-U4A 又建立纯 public/SEO builder，但它们都不是 build intent 或 deployable artifact；`public` 只有在 M6 public artifact assembly 获得真实 origin、published 内容、正式 loader 链、页面/output 接线与本地 public 技术门禁后才能另行加入，不能由 `NODE_ENV`、Vercel URL 或内容数量推断。该技术门禁不代表 M6 远端预览或 M7 生产发布资格。
+M4 使用环境变量 `MYTHIC_CHINA_BUILD_INTENT` 表达页面构建意图，其当时唯一允许值是 `review`。2026-09-08 的 013 本地 public assembly 已补齐真实 origin、published 内容、正式 loader 链、页面/output 接线和本地技术门禁，现新增显式 `public`。缺失与未知值继续失败，不能由 `NODE_ENV`、Vercel URL 或内容数量推断。review runner 仍拒绝 public；public 使用下文独立入口，技术构建不代表 M6 远端预览或 M7 生产发布资格。
 
 项目 scripts 通过 `scripts/run-review-astro.mjs` 只向其 Astro 子进程注入 `review`，子进程结束后变量随之退出，不修改调用者 shell、系统环境或项目配置。直接绕过该入口运行 Astro 时，页面构建意图缺失并按合同失败。该入口可以用于已授权的静态检查和构建；`dev` / `preview` script 虽保持可执行定义，但每次启动、停止或重启仍须单独授权。M4-U2 页面评审已获得并使用一次本地 preview/浏览器授权，该授权不自动延续到 M4-U3–M4-U5。
 
@@ -1182,6 +1182,47 @@ git diff --cached --stat
 通过标准：新提交父节点为上述基线、恰含已核对的 44 个路径，工作树和暂存区干净；本地 tracking ref 未同步，ahead 状态不表示已推送。提交哈希从执行结果及 Git 历史取得，不在待提交文本中预写自身哈希。此前各实施记录的“未提交”表示当时快照，不覆盖本次授权与执行后现场。
 
 
+### 2026-09-08 本地 public assembly
+
+用户已通过网页建立个人管理 Hobby 空项目 `project-scu6m`，截图确认 Production 域名 `mythic-china-beta.vercel.app` 且 `No Deployment`，随后授权继续本地部署准备。实现范围与失败关闭合同见 [013](docs/requirements/013-public-artifact-assembly.md)。不安装 Vercel CLI，不读取 token，不连接 Git，不启动服务、提交、推送或部署。当前原始基线 `fabb4c9e829dc85c6c47161f49af5e9ad58594bd` / main，执行前工作树干净。
+
+本地代码、测试与必要构建配置修改属于本次范围；review 保持 `dist/`，public 改写仅限项目内可再生 `.local/public-build/`。运行 public 前已只读确认其父目录和目标，不允许 symlink/junction。输出基于未提交源，只形成 nondeployable 诊断，不生成或冒充 clean-source verification receipt。
+
+执行前按本文件的固定 Node/Corepack 身份门禁设置本进程 PATH，并确认版本，**不重复安装**：
+
+```powershell
+$mythicProjectNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
+$mythicProjectCorepack = 'D:\Program Files\nvm\v24.16.0\corepack.cmd'
+$mythicProjectRuntimeDirectory = [IO.Path]::GetDirectoryName($mythicProjectNode)
+if ((Resolve-Path -LiteralPath '.').Path -ne 'F:\codex-project\mythic-china') { throw 'Unexpected workspace.' }
+if ((& $mythicProjectNode --version) -ne 'v24.16.0') { throw 'Unexpected Node.' }
+if ((& $mythicProjectCorepack --version) -ne '0.35.0') { throw 'Unexpected Corepack.' }
+$mythicOtherPathEntries = @($env:Path -split [IO.Path]::PathSeparator) | Where-Object { $_ -and $_.TrimEnd('\') -ine $mythicProjectRuntimeDirectory.TrimEnd('\') }
+$env:Path = (@($mythicProjectRuntimeDirectory) + $mythicOtherPathEntries) -join [IO.Path]::PathSeparator
+$env:ASTRO_TELEMETRY_DISABLED = '1'
+& $mythicProjectCorepack pnpm --version
+& $mythicProjectCorepack pnpm run format
+& $mythicProjectCorepack pnpm run test tests/site/build-intent.test.ts tests/site/public-assembly.test.ts tests/site/public-output-policy.test.mjs tests/site/public-runner.test.mjs
+& $mythicProjectCorepack pnpm run check
+```
+
+每个入口单独执行并检查退出码；失败后只在修正对应问题后重验。上述 format 前已确认范围，无用户范围外修改。配置 origin 只作用于本次子进程，构建后恢复：
+
+```powershell
+$mythicPreviousOrigin = $env:MYTHIC_CHINA_SITE_ORIGIN
+try {
+  $env:MYTHIC_CHINA_SITE_ORIGIN = 'https://mythic-china-beta.vercel.app'
+  & $mythicProjectCorepack pnpm run build:public
+  if ($LASTEXITCODE -ne 0) { throw 'Public diagnostic build failed.' }
+} finally {
+  $env:MYTHIC_CHINA_SITE_ORIGIN = $mythicPreviousOrigin
+}
+```
+
+需要只重验现有 public 输出时，在同一 origin 身份下执行 `& $mythicProjectNode scripts/verify-public-output.mjs`；该入口只读，不重建。public 后再执行 `pnpm run build` 验证 review 无模式残留。本批不运行 preview/browser；正式候选仍需既有完整 QA（含 Beta 提示显示验收）、hosting Privacy/真实供应商、clean source 与独立部署授权。
+
+本批结果：定向 4 文件/42 测试、完整 check 29 文件/498 测试与 Astro 96 文件零诊断通过。review → public → review 均实际构建通过；review 14 页且无 XML，public 13 HTML、2 XML、robots.txt、112 Hero 与 10 字体，独立输出检查通过。未启动服务、生成 receipt、提交、推送或部署，详细范围与未完成项见 013。
+
 ## 数据库、外部服务与真实写入口
 
 站点运行期当前均不适用。外部已有审核已通过的 Buttondown 账户和 Tally Free 未发布草稿，但项目没有数据库、表单 endpoint、邮件、分析、支付、广告配置或任何可执行外部写入口。未来接入任一能力时必须先建立需求文档，并在本文件增加：
@@ -1201,10 +1242,165 @@ Vercel 已被选为未来静态托管目标，Project owner 当前明确不购�
 
 ### 当前交接
 
-五组 Hero 已提交为 `1be085bf5fc4ba56c2665d1c8193a83001aeec18`，VB6 开始时 HEAD/main/本地 origin/main 对齐且工作树干净，未 fetch 或核验服务器。第二 Collection/`entryIds` 已按 009 接线；四篇修订前锁定稿及 010 当前改动单元和两条内容提示均已由 Project owner 确认通过人工双语审核，六份 Terminology 均为 `bilingual-approved`，Painted Skin 短译 Claim 为 `verified`。010 的 AI 专业文案修订、文章级内容提示、聚焦双语确认与 R1 重建已完成；R1 静态检查通过后已退役为 reference-only，真人反馈仍为 0。012 的四篇 Entry 与 Liaozhai Collection 五组 Hero 已完成 approved brief、候选选择与账户/公开使用确认、exact-canvas、production lineage、approved/current manifest、repository source、内容绑定和资产级五审；默认 review 输出合同现为 14 页、8 个 Hero family 在 9 个所属页面合计 112 个 Hero 图片、10 个字体、零 XML 与零客户端 JavaScript。VB6 已闭合四篇分类、两条 Related 编辑环、Liaozhai Featured（Painted Skin）与 6 ready Entry / 2 ready Collection；随后 owner 已批准全部 6+2 published，六篇 publishedAt 统一为 2026-09-10。当前下一停点是独立的 origin/public assembly。M5-U4/U5、M6 public artifact、clean-source QA 与受保护预览按各自合同继续。M7 在独立授权下发布可索引 Public Beta，随后执行 live R2a/R2b，并在问题处置与 Project owner 结论后关闭正式 MVP 验证。本批未执行 fetch、Git 写操作、push 或发布。
+2026-09-08 检查点开始前：本地 `main` / HEAD / 本地 `origin/main` 为 `fabb4c9e829dc85c6c47161f49af5e9ad58594bd`，013–016 共 58 个变更路径未提交、暂存区为空；用户已建立 Hobby 空项目及 `mythic-china-beta.vercel.app` Production 域名，public 本地接线与两条构建已经存在。前一“证据物化检查点时的交接”段保留历史状态，不能据其否定当前项目或 origin。用户随后授权完整核对、固定本地检查点及独立推进 M5/托管门禁，并明确要求本地提交；本次命令与结果见文末检查点章节。不包含 fetch、push、服务或部署，真实业务写入仍按数据范围单独确认。
+
+五组 Hero 已提交为 `1be085bf5fc4ba56c2665d1c8193a83001aeec18`，VB6 开始时 HEAD/main/本地 origin/main 对齐且工作树干净，未 fetch 或核验服务器。第二 Collection/`entryIds` 已按 009 接线；四篇修订前锁定稿及 010 当前改动单元和两条内容提示均已由 Project owner 确认通过人工双语审核，六份 Terminology 均为 `bilingual-approved`，Painted Skin 短译 Claim 为 `verified`。010 的 AI 专业文案修订、文章级内容提示、聚焦双语确认与 R1 重建已完成；R1 静态检查通过后已退役为 reference-only，真人反馈仍为 0。012 的四篇 Entry 与 Liaozhai Collection 五组 Hero 已完成 approved brief、候选选择与账户/公开使用确认、exact-canvas、production lineage、approved/current manifest、repository source、内容绑定和资产级五审；默认 review 输出合同现为 14 页、8 个 Hero family 在 11 个含图页 / 19 个图位合计 112 个唯一 Hero 图片、10 个字体、零 XML 与零客户端 JavaScript。VB6 已闭合四篇分类、两条 Related 编辑环、Liaozhai Featured（Painted Skin）与 6 ready Entry / 2 ready Collection；随后 owner 已批准全部 6+2 published，六篇 publishedAt 统一为 2026-09-10。013 已完成 origin/public assembly 的本地接线与验证；Beta 页脚提示已完成本地实施，最终显示验收仍随候选 QA；016 已补条件式 hosting Privacy；下一停点为实际托管配置复核、独立 M5 交互与完整候选准备，再进入 clean-source QA 和受保护预览。M7 在独立授权下发布可索引 Public Beta，随后执行 live R2a/R2b，并在问题处置与 Project owner 结论后关闭正式 MVP 验证。本批未执行 fetch、Git 写操作、push 或发布。
 
 当前默认禁止在 Vercel、其他最终环境或远端工作区直接修改业务代码；项目也没有可用的受控例外入口。部署、重启、排障或平台项目操作授权都不得推导出远端直接修改授权。若未来业务确需此路径，必须先在架构与本文件定义唯一入口、精确范围、身份门禁、验证、留痕和回流策略，并单独取得授权。
 
 ## 超时、中断和未知现场
 
 未来任何远端发布、表单联调或数据操作出现超时、断连或结果不明时：停止重复执行，记录最后确认步骤，仅做只读状态核查，再根据现场事实决定继续或人工恢复。
+
+## 014 版面与视觉复核
+
+2026-09-08，owner 授权独立设计复核后落实首页、目录、文章首屏，并另行授权临时本地 preview、浏览器检查及结束关闭。文件范围与停止条件见 [014](docs/requirements/014-editorial-design-refinement.md)。不安装依赖、不改运行配置、不做 Git 写操作或远端发布。
+
+沿用本文件固定 Node/Corepack/Path 门禁，在保存项目根依次执行：
+
+```powershell
+& $mythicProjectCorepack pnpm run format
+& $mythicProjectCorepack pnpm run check
+```
+
+public 构建使用上文 013 的显式 origin、try/finally 环境恢复入口；之后沿用 `pnpm run build` 回归 review。若局部失败，定向复核命令为：
+
+```powershell
+& $mythicProjectCorepack pnpm run test tests/site/hero-output-policy.test.mjs tests/site/public-assembly.test.ts tests/site/responsive-layout.test.ts
+```
+
+完整 check 后只读核查 4321 无其他监听，再用既有 `pnpm run preview -- --host 127.0.0.1` 启动，核对实际 PID 和 loopback 地址。浏览器只访问该临时服务；检查结束使用固定 Node 执行 `scripts/run-review-astro.mjs preview stop`，只读回查 PID/端口。截图、临时 JSON 与诊断均在仓库外，不提交。此授权不延续到下一任务，不访问真实表单或账户。
+
+014 结果：完整 check 30 文件/513 测试、Astro 98 文件零诊断通过；CSS 收尾后定向3文件/35测试、public13页和review14页两种构建通过，均保持112 Hero及10字体。内置浏览器完成27个页面/视口组合，首页三条入口实点通过；preview PID39148已停止且4321无监听，viewport已重置。详细证据范围、三篇subtitle与未完成的public视觉/最终QA见014。未提交、推送或部署。
+
+### 015 墨色背景验证（2026-09-08）
+
+本次为同一发布前设计任务的继续修改，owner 新指定 mythzh 为背景参考；临时浏览器检查沿用其已明确授予的 preview 启动、检查和关闭范围。固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0，保存项目与 HEAD fabb4c9e829dc85c6c47161f49af5e9ad58594bd 上的原有工作树不变。代码只改共享色板及 dark 声明。
+
+执行本文件固定入口的完整 check，通过格式、lint、既有测试、Astro 与 review 输出门禁；随后以既有显式 origin 执行 build:public，并回到默认 build，均零 Astro 诊断。public 为 13 HTML、2 XML、robots.txt、112 Hero、10 字体；review 为 14 noindex HTML，字体、逐图披露与零客户端脚本约束保留。
+
+临时 preview 使用既有 pnpm run preview -- --host 127.0.0.1 入口，实际监听 [::1]:4321，PID 32920。Codex 内置浏览器完成 8 页 × 390/1440 共 16 组合，正文/来源/菜单焦点另行抽查；结果及局限见 [015](docs/requirements/015-ink-palette.md)。结束时通过固定 Node 执行 scripts/run-review-astro.mjs preview stop，PID 不存在且端口无 LISTENING，viewport 重置、临时标签已关闭。未新增安装、真实写接口、Git 写操作或发布授权；本地诊断不构成最终 receipt。
+
+### 016 阅读页面收尾验证（2026-09-08）
+
+同一设计任务沿用已授权的临时 preview/检查/结束关闭，固定 runtime、保存项目与上述 format/check、public → review 构建、preview/stop 命令不变。新增定向验证组合（仅在有关改动或失败后使用）：
+
+```powershell
+& $mythicProjectCorepack pnpm run test tests/site/hero-output-policy.test.mjs tests/site/review-output-policy.test.mjs tests/site/external-interactions-ui.test.ts tests/site/responsive-layout.test.ts
+```
+
+范围为 11 处原生图注展开、8 处完整详情图注、零控件的 inactive 状态、首页导语与条件式托管 Privacy。完整 check 30 文件/529 测试与零 Astro 诊断通过；两处链接空格修复后重新 public → review 构建，13/14 页独立输出检查通过，112 Hero/10 字体不变。内置浏览器 13 路由 × 三档 39 组合无横向溢出/缺图/控件；一处即时 fonts=loading 在同宽复测 loaded。键盘与核心阅读链、截图范围见 [016](docs/requirements/016-reader-facing-polish.md)。preview PID 30856 已通过固定 stop 入口结束，进程不存在且 4321 无 LISTENING；临时标签关闭、viewport 重置。无安装、账户、Git 或发布写操作。
+
+
+## 013–016 本地检查点与 M5/托管进入核查（2026-09-08）
+
+用户在当前任务明确要求核对完整变更与文档、固定本地检查点、独立推进 M5/托管门禁，并在最后本地提交。本节记录本次范围，不追认旧任务为发布授权。父基线为 `fabb4c9e829dc85c6c47161f49af5e9ad58594bd` / main；进入时 58 个变更路径、暂存区为空。核对后只增加 PROJECT_RULES 的阶段摘要和 001 总需求当前状态同步，完整检查点为下列 60 个路径；包含 21 个未跟踪文件与样张移动两端，不使用仅跟踪文件暂存。
+
+三项独立只读审查覆盖 public 构建链、页面/图注/静态交互、文档与 M5/托管门禁，未发现本地实现阻塞缺陷。主代理同步当前文档中的墨色、public assembly、图位、条件式 hosting Privacy 与验证时点，保留历史事实和全部发布/数据门禁。本次没有新增业务代码修复、来源、资产、字体、依赖或运行配置。
+
+固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0，沿用本文既有入口完成完整 `check`，通过 Prettier、ESLint、30 文件/529 测试、Astro 零 error/warning/hint 与 review verifier；随后按 013 显式 origin 入口执行 public → review 构建，13 HTML/2 XML/robots.txt 与 14 noindex HTML 均通过独立输出检查，112 Hero/10 字体和零可执行脚本保持。Markdown 严格 UTF-8、相对链接、占位符与 diff whitespace 按本文既有入口检查。构建仍是提交前本地诊断，不生成 clean-source receipt，不代替最终 public 浏览器、缩放、故障、平台或性能 QA。
+
+### 本地暂存与提交入口
+
+以下两段分别执行，第一段完成后只读复核完整暂存 diff 与新增实现；出现范围漂移、意外 hook、失败或未知状态即停止。提交前已核对默认 hooks 目录没有非 sample hook、没有自定义 hooksPath；不禁用或绕过 hook。命令只作用于保存项目，不含 branch/worktree、fetch、push、amend 或部署。
+
+```powershell
+$mythicCheckpointFiles = @(
+  'astro.config.mjs',
+  'DEV_WORKFLOW.md',
+  'docs/ARCHITECTURE.md',
+  'docs/COMPETITIVE_AUDIT.md',
+  'docs/DESIGN.md',
+  'docs/PRODUCT.md',
+  'docs/REFERENCES.md',
+  'docs/requirements/001-mvp-foundation.md',
+  'docs/requirements/003-pages-exploration-seo.md',
+  'docs/requirements/006-external-interactions.md',
+  'docs/requirements/011-public-beta-validation.md',
+  'docs/requirements/013-public-artifact-assembly.md',
+  'docs/requirements/014-editorial-design-refinement.md',
+  'docs/requirements/015-ink-palette.md',
+  'docs/requirements/016-reader-facing-polish.md',
+  'package.json',
+  'PROJECT_RULES.md',
+  'README.md',
+  'scripts/hero-output-policy.mjs',
+  'scripts/public-output-policy.mjs',
+  'scripts/review-output-policy.mjs',
+  'scripts/run-public-astro.mjs',
+  'scripts/verify-m4-u2-output.mjs',
+  'scripts/verify-public-output.mjs',
+  'src/components/IllustratedLink.astro',
+  'src/components/IllustrationDetails.astro',
+  'src/components/NewsletterForm.astro',
+  'src/components/ReaderRequest.astro',
+  'src/components/SiteFooter.astro',
+  'src/content/entries/fighting-cricket.md',
+  'src/content/entries/liaozhai-reading-guide.md',
+  'src/content/entries/painted-skin.md',
+  'src/layouts/SiteLayout.astro',
+  'src/pages/collections/[slug].astro',
+  'src/pages/collections/index.astro',
+  'src/pages/explore/[slug].astro',
+  'src/pages/explore/index.astro',
+  'src/pages/index.astro',
+  'src/pages/privacy.astro',
+  'src/pages/review/type-specimen.astro',
+  'src/review/type-specimen.astro',
+  'src/site/build-intent.ts',
+  'src/site/endpoints/robots.txt.ts',
+  'src/site/endpoints/rss.xml.ts',
+  'src/site/endpoints/sitemap.xml.ts',
+  'src/site/load-public-assembly.ts',
+  'src/site/page-projection.ts',
+  'src/site/public-assembly.ts',
+  'src/site/public-site.ts',
+  'src/styles/global.css',
+  'src/templates/EntryTemplate.astro',
+  'src/templates/HomeTemplate.astro',
+  'tests/site/build-intent.test.ts',
+  'tests/site/external-interactions-ui.test.ts',
+  'tests/site/hero-output-policy.test.mjs',
+  'tests/site/public-assembly.test.ts',
+  'tests/site/public-output-policy.test.mjs',
+  'tests/site/public-runner.test.mjs',
+  'tests/site/responsive-layout.test.ts',
+  'tests/site/review-output-policy.test.mjs'
+)
+if ((Resolve-Path -LiteralPath (git rev-parse --show-toplevel)).Path -ne 'F:\codex-project\mythic-china') { throw 'Unexpected Git root.' }
+if ((git branch --show-current) -ne 'main') { throw 'Unexpected branch.' }
+if ((git rev-parse HEAD) -ne 'fabb4c9e829dc85c6c47161f49af5e9ad58594bd') { throw 'Unexpected checkpoint parent.' }
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Expected an empty staging area.' }
+$mythicPendingPaths = @(git diff --name-only --no-renames) + @(git ls-files --others --exclude-standard)
+if (Compare-Object ($mythicCheckpointFiles | Sort-Object) ($mythicPendingPaths | Sort-Object)) { throw 'Checkpoint scope changed.' }
+git --literal-pathspecs add -- $mythicCheckpointFiles
+if ($LASTEXITCODE -ne 0) { throw 'Checkpoint staging failed.' }
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed.' }
+$mythicStagedPaths = @(git diff --cached --name-only --no-renames)
+if (Compare-Object ($mythicCheckpointFiles | Sort-Object) ($mythicStagedPaths | Sort-Object)) { throw 'Staged inventory changed.' }
+git diff --cached --name-status
+git diff --cached --stat
+```
+
+暂存复核通过后：
+
+```powershell
+git diff --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Unstaged changes remain.' }
+if (@(git ls-files --others --exclude-standard).Count -ne 0) { throw 'Untracked files remain.' }
+git commit -m "feat(site): assemble public pages and polish reading"
+if ($LASTEXITCODE -ne 0) { throw 'Local checkpoint commit failed.' }
+git log -1 --format='%H %P %s'
+git status --short --branch
+git diff --cached --stat
+```
+
+通过标准：新提交父节点为上述基线，按 `git show --format= --name-only --no-renames HEAD` 核对恰含上述 60 个路径，工作树、暂存区和未跟踪文件为空；本地 tracking ref 不同步，不据 ahead 状态声称已推送。精确提交身份从执行结果和 Git 历史取得，不在待提交文本中预写自身哈希。
+
+### M5 与托管停点
+
+本地检查点不关闭 006/011 的 U4/U5 或托管门禁。本次没有取得真实账户配置证据，也没有真实订阅、确认邮件、表单提交、分析事件、草稿发布、远端部署或数据删除。Buttondown/Tally 的真实 action/link、测试邮箱及按供应商区分的受控写入包仍须闭合；Plausible 的候选费用/处理决定尚待确认。详见 006 的当前接线进入清单。
+
+托管下一步只读核对项目/账户内部身份、稳定域名绑定、部署状态、实际 build/install/output/runtime 设置、预览保护和退出路径；再实例化不安装 Vercel CLI 的真实交付入口。不得因配置核查启动部署、连接触发自动构建的 Git 集成、关闭 2FA/保护或把 review runner 的透传参数当作 public 服务入口。受保护预览、地区/回滚实证与生产发布仍按 011 独立进入。

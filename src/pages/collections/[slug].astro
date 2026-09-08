@@ -4,8 +4,8 @@ import type { CollectionEntry } from "astro:content";
 
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
 import { readBuildIntent } from "../../site/build-intent";
+import { createPageProjection } from "../../site/page-projection";
 import {
-  createReviewProjection,
   getReviewCollectionEntries,
   getReviewFeaturedEntry,
 } from "../../site/review-projection";
@@ -21,9 +21,9 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  readBuildIntent();
+  const intent = readBuildIntent();
   const graph = await loadValidatedContentGraph();
-  const projection = createReviewProjection(graph);
+  const projection = createPageProjection(graph, intent);
 
   return projection.collections.map((collection) => {
     const heroAsset = collection.data.heroAssetId

@@ -7,6 +7,12 @@
 - 设计参考用于抽取原则，不复制商标、专有字体、角色造型、图片、文案或源码。
 - 技术供应商和版本在实施前重新核对；本文件不是锁文件，也不是法律意见。
 
+## 本地 public assembly 技术来源（2026-09-08）
+
+- [Astro static file endpoints](https://docs.astro.build/en/guides/endpoints/) — 构建期生成 Sitemap、RSS 和 robots 静态文件。
+- [Astro injectRoute](https://docs.astro.build/en/reference/integrations-reference/#injectroute-option) — 按显式 intent 注入 review 样张或 public endpoint；交叉核对已安装 Astro 7.2.8。
+- [Astro outDir](https://docs.astro.build/en/reference/configuration-reference/#outdir) — 分离 review 与 public 的可再生输出目录。
+
 ## 1. 视觉与品牌参考
 
 ### Game Science / Black Myth
@@ -295,3 +301,13 @@ Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并�
 ```
 
 读者文章在相关主张旁提供轻量出处，并在正文收束后、Related Entries 与 Reader Request 之前列出完整 Sources；不能只把所有链接集中到本文件。
+
+## 2026-09-08 设计复核访问记录
+
+原竞品与文化平台 URL 的最新抽样、用途及加载局限见 [COMPETITIVE_AUDIT](COMPETITIVE_AUDIT.md#2026-09-08-发布前独立复核)。用途为比较入口、编辑层级与阅读结构；不引用文化事实，不复制图片、字体或页面源码。此次审美决定依据本站主题和具体页面，不把 `design-taste-frontend` 或任何其他 Skill 当作必选视觉规范。
+
+2026-09-08 后续定向复核：[mythzh 中文首页](https://mythzh.com/index.html) 用于实际背景/文字/图像关系比较；[英文首页](https://mythzh.com/en/index.html)、[中文钟馗](https://mythzh.com/underworld/figures/zhongkui.html) 与 [英文钟馗](https://mythzh.com/en/underworld/figures/zhongkui.html) 用于内容和可回查性抽样。均为公开主站资料，仅作设计与产品研究，未复制素材、字体、代码或文化正文。结论与局限见 [竞品审计](COMPETITIVE_AUDIT.md#2026-09-08-mythzh-背景与内容复核)。
+
+## 2026-09-08 托管隐私说明
+
+[Vercel Privacy Notice](https://vercel.com/legal/privacy-notice)，官方隐私声明（页面标注更新 2026-06-01，访问 2026-09-08）。用于 Privacy 的条件式托管说明：访问 Vercel 托管的客户网站时，Vercel 可能处理 IP、由其推导的大致位置和系统信息，以交付、维护及保护服务。链接用于 Vercel 自身隐私实践，不替代其代表客户作为 processor 时的本站说明；不据此推断本站实际账户日志期限、地区、分析开关或已部署。实施合同见 [016](requirements/016-reader-facing-polish.md)。

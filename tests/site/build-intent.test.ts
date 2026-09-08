@@ -7,7 +7,11 @@ describe("page build intent", () => {
     expect(readBuildIntent("review")).toBe("review");
   });
 
-  it.each([undefined, "", "public", "production", "draft"])(
+  it("accepts an explicit public intent", () => {
+    expect(readBuildIntent("public")).toBe("public");
+  });
+
+  it.each([undefined, "", " public ", "production", "draft"])(
     "fails closed for unsupported intent %s",
     (value) => {
       expect(() => readBuildIntent(value)).toThrow(BuildIntentError);

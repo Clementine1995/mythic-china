@@ -1,0 +1,36 @@
+---
+import ManifestHeroPicture from "./ManifestHeroPicture.astro";
+import IllustrationDetails from "./IllustrationDetails.astro";
+import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
+
+interface Props {
+  asset: ResolvedAssetRecord;
+  href: string;
+  title: string;
+  intro: string;
+  context: string;
+  sizes: string;
+  heading?: "h2" | "h3";
+}
+
+const {
+  asset,
+  href,
+  title,
+  intro,
+  context,
+  sizes,
+  heading: Heading = "h2",
+} = Astro.props;
+---
+
+<figure class="illustrated-link" data-hero-asset={asset.data.assetId}>
+  <ManifestHeroPicture {asset} {sizes} />
+  <div class="illustrated-link__copy">
+    <p class="section-context">{context}</p>
+    <Heading><a {href}>{title}</a></Heading>
+    <slot />
+    <p class="illustrated-link__intro">{intro}</p>
+  </div>
+  <IllustrationDetails {asset} />
+</figure>

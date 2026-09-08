@@ -4,7 +4,7 @@ import type { CollectionEntry } from "astro:content";
 
 import { loadValidatedContentGraph } from "../../content/load-validated-content-graph";
 import { readBuildIntent } from "../../site/build-intent";
-import { createReviewProjection } from "../../site/review-projection";
+import { createPageProjection } from "../../site/page-projection";
 import EntryTemplate from "../../templates/EntryTemplate.astro";
 import { resolveApprovedPageAssetById } from "../../visual/resolve-approved-page-asset";
 import type { ResolvedAssetRecord } from "../../visual/resolve-visual-assets";
@@ -18,9 +18,9 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  readBuildIntent();
+  const intent = readBuildIntent();
   const graph = await loadValidatedContentGraph();
-  const projection = createReviewProjection(graph);
+  const projection = createPageProjection(graph, intent);
   // Related Entries stay published-only even when the current route is a draft review.
   const publishedEntriesById = new Map(
     projection.publishedEntries.map((entry) => [entry.id, entry]),

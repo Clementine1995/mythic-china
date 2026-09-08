@@ -1,6 +1,21 @@
 import { isIP } from "node:net";
 
 export const siteOriginEnvironmentVariable = "MYTHIC_CHINA_SITE_ORIGIN";
+export const approvedSiteOrigin = "https://mythic-china-beta.vercel.app";
+
+export function createConfiguredPublicSite(
+  value: string | undefined,
+): PublicSite {
+  const site = createPublicSite(value);
+  // Syntax alone cannot distinguish a stable alias from a generated deployment URL.
+  if (site.origin !== approvedSiteOrigin) {
+    throw new PublicSiteConfigurationError(
+      "invalid-site-origin",
+      `${siteOriginEnvironmentVariable} does not match the owner-confirmed production origin.`,
+    );
+  }
+  return site;
+}
 
 export const publicSiteIdentity = {
   name: "Mythic China",

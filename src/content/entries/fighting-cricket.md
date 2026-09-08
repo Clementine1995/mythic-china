@@ -2,7 +2,7 @@
 entryId: fighting-cricket
 slug: fighting-cricket
 title: "The Fighting Cricket: Court Pressure and a Son's Strange Account"
-subtitle: null
+subtitle: Read the tale's chain of demands alongside the son's later account of taking a cricket's form
 entryType: tale
 traditionType: literature
 nameZh: null

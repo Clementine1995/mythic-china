@@ -4,6 +4,7 @@ import { render, type CollectionEntry } from "astro:content";
 import ManifestHeroPicture from "../components/ManifestHeroPicture.astro";
 import ReaderRequest from "../components/ReaderRequest.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { readBuildIntent } from "../site/build-intent";
 import type { ResolvedAssetRecord } from "../visual/resolve-visual-assets";
 
 interface Props {
@@ -15,6 +16,12 @@ interface Props {
 }
 
 const { entry, collections, relatedEntries, sources, heroAsset } = Astro.props;
+const isPublic = readBuildIntent() === "public";
+const formatPublicationDate = (date: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+    timeZone: "UTC",
+  }).format(new Date(`${date}T00:00:00Z`));
 const { Content } = await render(entry);
 // Empty editorial fields stay absent; draft metadata is not substituted as reader copy.
 const hasBody = Boolean(entry.body?.trim());
@@ -27,16 +34,6 @@ const factCheckedLabel = entry.data.lastFactCheckedAt
       timeZone: "UTC",
     }).format(new Date(`${entry.data.lastFactCheckedAt}T00:00:00Z`))
   : null;
-const desktopHeroFocalX =
-  heroAsset?.data.repositoryRenditions.find(
-    (rendition) => rendition.usage === "hero-desktop",
-  )?.focalPoint.x ?? null;
-const heroIdentitySide =
-  desktopHeroFocalX === null
-    ? null
-    : desktopHeroFocalX >= 0.5
-      ? "entry-page--identity-start"
-      : "entry-page--identity-end";
 ---
 
 <SiteLayout
@@ -48,7 +45,6 @@ const heroIdentitySide =
     class:list={[
       "entry-page",
       heroAsset ? "entry-page--visual" : "entry-page--simple",
-      heroIdentitySide,
     ]}
   >
     {
@@ -68,7 +64,10 @@ const heroIdentitySide =
             )}
           </div>
 
-          <figure class="entry-hero__figure">
+          <figure
+            class="entry-hero__figure"
+            data-hero-asset={heroAsset.data.assetId}
+          >
             <ManifestHeroPicture
               asset={heroAsset}
               sizes="(max-width: 767px) 100vw, 90vw"
@@ -103,6 +102,26 @@ const heroIdentitySide =
       <p>
         By <span>Mythic China Editorial</span>
       </p>
+      {
+        isPublic && entry.data.publishedAt && (
+          <p>
+            Published{" "}
+            <time data-publication-date datetime={entry.data.publishedAt}>
+              {formatPublicationDate(entry.data.publishedAt)}
+            </time>
+          </p>
+        )
+      }
+      {
+        isPublic && entry.data.updatedAt && (
+          <p>
+            Updated{" "}
+            <time data-modified-date datetime={entry.data.updatedAt}>
+              {formatPublicationDate(entry.data.updatedAt)}
+            </time>
+          </p>
+        )
+      }
       {
         entry.data.lastFactCheckedAt && factCheckedLabel && (
           <p>

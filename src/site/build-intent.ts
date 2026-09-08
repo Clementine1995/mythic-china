@@ -2,7 +2,7 @@ import process from "node:process";
 
 export const buildIntentEnvironmentVariable = "MYTHIC_CHINA_BUILD_INTENT";
 export const reviewBuildIntent = "review" as const;
-export type BuildIntent = typeof reviewBuildIntent;
+export type BuildIntent = typeof reviewBuildIntent | "public";
 
 export class BuildIntentError extends Error {
   constructor(message: string) {
@@ -15,13 +15,13 @@ export function readBuildIntent(
   value = process.env[buildIntentEnvironmentVariable],
 ): BuildIntent {
   // There is no implicit development mode; every page build declares its intent.
-  if (value === reviewBuildIntent) return value;
+  if (value === reviewBuildIntent || value === "public") return value;
   if (value === undefined || value.trim() === "") {
     throw new BuildIntentError(
-      `${buildIntentEnvironmentVariable} is required. M4-U2 only supports review.`,
+      `${buildIntentEnvironmentVariable} is required: review or public.`,
     );
   }
   throw new BuildIntentError(
-    `${buildIntentEnvironmentVariable}=${value} is not enabled. M4-U2 only supports review.`,
+    `${buildIntentEnvironmentVariable}=${value} is not enabled: use review or public.`,
   );
 }

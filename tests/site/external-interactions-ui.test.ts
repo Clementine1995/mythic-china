@@ -28,16 +28,17 @@ describe("M5-U3 inert review interactions", () => {
     expect(footer.match(/<NewsletterForm\s*\/>/gu)).toHaveLength(1);
     expect(newsletter).toContain('data-review-interaction="newsletter"');
     expect(newsletter).toContain('data-review-state="inactive"');
-    expect(newsletter).toContain('type="email"');
-    expect(newsletter).toContain('autocomplete="email"');
-    expect(newsletter).toContain('<button type="button" disabled>');
     expect(newsletter).toContain('href="/privacy/"');
     expect(newsletterSource).toContain("new Mythic China stories");
     expect(newsletterSource).toContain("occasional editorial selections");
     expect(newsletterSource).toContain("no more than twice a month");
-    expect(newsletterSource).toContain("confirm your subscription");
-    expect(newsletterSource).toContain("unsubscribe from any email");
-    expect(newsletter).not.toMatch(/<form\b|\baction=|https?:\/\//iu);
+    expect(newsletterSource).toContain("subscriptions are not open");
+    expect(newsletterSource).toContain(
+      "We are not collecting email addresses here.",
+    );
+    expect(newsletter).not.toMatch(
+      /<(?:form|input|button|select|textarea)\b|\baction=|https?:\/\//iu,
+    );
   });
 
   it("keeps one inactive Reader Request after every Entry reading path", async () => {
@@ -60,16 +61,12 @@ describe("M5-U3 inert review interactions", () => {
     expect(readerRequest).toContain('data-review-interaction="reader-request"');
     expect(readerRequest).toContain('data-review-state="inactive"');
     expect(readerRequest).toContain("data-page-id={pageId}");
-    expect(readerRequest).toContain("What Chinese myth or strange tale");
-    expect(readerRequest).toContain("Topic or tale is required");
-    expect(readerRequest).toContain("Email is optional");
     expect(readerRequestSource).toContain(
-      "This does not subscribe me to the newsletter.",
+      "No suggestions or email addresses are collected here.",
     );
-    expect(readerRequest).toContain('<button type="button" disabled>');
     expect(readerRequest).toContain('href="/privacy/"');
     expect(readerRequest).not.toMatch(
-      /<form\b|<input\b|<textarea\b|\baction=|https?:\/\//iu,
+      /<(?:form|input|button|select|textarea)\b|\baction=|https?:\/\//iu,
     );
   });
 

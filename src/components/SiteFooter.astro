@@ -1,5 +1,11 @@
 ---
 import NewsletterForm from "./NewsletterForm.astro";
+
+interface Props {
+  showPublicBeta: boolean;
+}
+
+const { showPublicBeta } = Astro.props;
 ---
 
 <footer class="site-footer">
@@ -7,6 +13,14 @@ import NewsletterForm from "./NewsletterForm.astro";
   <div class="site-footer__inner">
     <div class="site-footer__identity">
       <p class="site-footer__brand">Mythic China</p>
+      {
+        showPublicBeta && (
+          <p data-public-beta>
+            Public Beta — This site is open to readers. Reader testing is not
+            yet complete.
+          </p>
+        )
+      }
       <p>
         An English-language cultural publication focused on Chinese myths,
         legends, traditions, and their sources.

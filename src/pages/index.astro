@@ -1,19 +1,49 @@
 ---
 import { loadValidatedContentGraph } from "../content/load-validated-content-graph";
 import { readBuildIntent } from "../site/build-intent";
-import {
-  createReviewProjection,
-  getReviewHomeSlice,
-} from "../site/review-projection";
+import { createPageProjection } from "../site/page-projection";
+import { getPublicHomeSlice } from "../site/public-assembly";
+import { getReviewHomeSlice } from "../site/review-projection";
 import HomeTemplate from "../templates/HomeTemplate.astro";
 import { resolveApprovedPageAssetById } from "../visual/resolve-approved-page-asset";
 
-readBuildIntent();
+const intent = readBuildIntent();
 const graph = await loadValidatedContentGraph();
-const projection = createReviewProjection(graph);
-const { collection, entry } = getReviewHomeSlice(projection);
+const projection = createPageProjection(graph, intent);
+const publicHome = intent === "public" ? getPublicHomeSlice(projection) : null;
+const { entry } = publicHome ?? getReviewHomeSlice(projection);
+const homeCollections =
+  publicHome !== null
+    ? publicHome.collections
+    : ["chinese-underworld", "liaozhai"].map((id) => {
+        const collection = projection.publishedCollections.find(
+          (item) => item.id === id,
+        );
+        if (!collection)
+          throw new Error(
+            "Review Home requires published Collection " + id + ".",
+          );
+        return collection;
+      });
+const illustratedCollections = homeCollections.map((collection) => {
+  if (collection.data.heroAssetId === null) {
+    throw new Error(`Home Collection ${collection.id} requires a Hero asset.`);
+  }
+  const asset = resolveApprovedPageAssetById(
+    graph.assets,
+    collection.data.heroAssetId,
+    {
+      ownerType: "collection",
+      ownerId: collection.id,
+      role: "hero",
+      slotId: "primary",
+      accessibilityMode: "informative",
+    },
+  );
+  return { collection, asset };
+});
 if (entry.data.heroAssetId === null) {
-  throw new Error(`Review Home Entry ${entry.id} requires a Hero asset.`);
+  throw new Error(`Home Entry ${entry.id} requires a Hero asset.`);
 }
 // Home reaches the selected Entry Hero only through its versionless logical ID.
 const heroAsset = resolveApprovedPageAssetById(
@@ -29,4 +59,4 @@ const heroAsset = resolveApprovedPageAssetById(
 );
 ---
 
-<HomeTemplate {collection} {entry} {heroAsset} />
+<HomeTemplate {entry} {heroAsset} collections={illustratedCollections} />

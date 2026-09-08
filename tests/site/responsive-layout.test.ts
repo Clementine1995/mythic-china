@@ -37,15 +37,23 @@ describe("responsive review layout", () => {
     );
   });
 
-  it("gives overlaid Entry identity a contrast surface only above medium widths", async () => {
+  it("keeps long Entry titles in normal flow at every width", async () => {
     const globalCss = await readFile(
       resolve(projectRoot, "src", "styles", "global.css"),
       "utf8",
     );
     expect(globalCss).toMatch(
-      /@media \(min-width: 64rem\)\s*\{\s*\.entry-hero__identity::before\s*\{[^}]*background: color-mix\(in srgb, var\(--realm-bg\) 88%, transparent\);/su,
+      /\n\.entry-hero\s*\{[^}]*display: flex;[^}]*flex-direction: column;/su,
     );
-    expect(globalCss.match(/\.entry-hero__identity::before/gu)).toHaveLength(1);
+    expect(globalCss).toMatch(
+      /\n\.entry-hero__identity\s*\{[^}]*position: static;[^}]*color: var\(--ink\);/su,
+    );
+    expect(globalCss).not.toMatch(
+      /entry-hero__identity::before|entry-page--identity-(?:start|end)/u,
+    );
+    expect(globalCss).not.toMatch(
+      /\.entry-hero h1\s*\{[^}]*max-width: 12ch;/su,
+    );
   });
 
   it("overrides the desktop Entry picture selector at mobile widths", async () => {
@@ -59,25 +67,6 @@ describe("responsive review layout", () => {
     expect(mobileCss).toMatch(
       /\.entry-hero__figure \.manifest-hero-picture,[^{]*\{[^}]*aspect-ratio: 4 \/ 5;/su,
     );
-  });
-
-  it("keeps medium-width Entry titles in flow and before their figures", async () => {
-    const globalCss = await readFile(
-      resolve(projectRoot, "src", "styles", "global.css"),
-      "utf8",
-    );
-    const mediumCss = globalCss.slice(
-      globalCss.indexOf("@media (max-width: 63.99rem)"),
-      globalCss.indexOf("@media (max-width: 47.99rem)"),
-    );
-    expect(globalCss).toMatch(/\n\.entry-hero h1\s*\{[^}]*max-width: 12ch;/su);
-    expect(mediumCss).toMatch(
-      /\.entry-hero\s*\{[^}]*display: flex;[^}]*flex-direction: column;/su,
-    );
-    expect(mediumCss).toMatch(
-      /\.entry-hero__identity\s*\{[^}]*position: static;[^}]*order: 1;[^}]*width: auto;[^}]*color: var\(--ink\);/su,
-    );
-    expect(mediumCss).toMatch(/\.entry-hero__figure\s*\{[^}]*order: 2;/su);
   });
 
   it("caps narrative prose at the established reading measure", async () => {
@@ -224,34 +213,6 @@ describe("responsive review layout", () => {
     );
 
     expect(mobileReviewListRule?.[1]).toContain(
-      "grid-template-columns: minmax(0, 1fr);",
-    );
-  });
-
-  it("keeps inert interaction controls legible and shrinkable", async () => {
-    const globalCss = await readFile(
-      resolve(projectRoot, "src", "styles", "global.css"),
-      "utf8",
-    );
-
-    expect(globalCss).toMatch(
-      /\.interaction-field input,\s*\.interaction-preview button\s*\{[^}]*min-height: 2\.75rem;/su,
-    );
-    expect(globalCss).toMatch(
-      /\.interaction-preview :disabled\s*\{[^}]*opacity: 1;/su,
-    );
-
-    const mobileStart = globalCss.indexOf("@media (max-width: 47.99rem)");
-    const mobileEnd = globalCss.indexOf(
-      "/* Motion accessibility. */",
-      mobileStart,
-    );
-    const mobileCss = globalCss.slice(mobileStart, mobileEnd);
-    const newsletterControls = mobileCss.match(
-      /\.newsletter-form__controls\s*\{([^}]*)\}/u,
-    );
-
-    expect(newsletterControls?.[1]).toContain(
       "grid-template-columns: minmax(0, 1fr);",
     );
   });

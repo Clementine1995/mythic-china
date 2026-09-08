@@ -1,7 +1,5 @@
 ---
 const headingId = "footer-newsletter-heading";
-const emailId = "footer-newsletter-email";
-const statusId = "footer-newsletter-status";
 ---
 
 <section
@@ -14,32 +12,17 @@ const statusId = "footer-newsletter-status";
     <p class="section-context">Newsletter</p>
     <h2 id={headingId}>New stories, carefully sourced.</h2>
     <p>
-      Receive new Mythic China stories and occasional editorial selections, no
-      more than twice a month.
+      A newsletter for new Mythic China stories and occasional editorial
+      selections, no more than twice a month.
     </p>
   </div>
 
-  <div class="newsletter-form__review interaction-preview">
-    <div class="newsletter-form__controls">
-      <div class="interaction-field">
-        <label for={emailId}>Email address</label>
-        <input
-          id={emailId}
-          type="email"
-          autocomplete="email"
-          aria-describedby={statusId}
-          disabled
-        />
-      </div>
-      <button type="button" disabled>Subscribe</button>
-    </div>
-    <p id={statusId} class="interaction-review-status">
-      Review preview — subscriptions are not open. This page will not send or
-      store an email address.
+  <div class="newsletter-form__review">
+    <p class="interaction-review-status">
+      Newsletter subscriptions are not open yet.
     </p>
     <p class="interaction-privacy-copy">
-      When subscriptions open, Buttondown will email you to confirm your
-      subscription. You can unsubscribe from any email. Read our
+      We are not collecting email addresses here.{" "}
       <a href="/privacy/">Privacy Notice</a>.
     </p>
   </div>
