@@ -2,6 +2,10 @@
 
 ## 0. 文档职责与状态
 
+2026-09-09 首发范围收敛：owner 在停止继续表单测试后要求尽早准备上线。本次按阅读版 Public Beta 准备，保留 6 篇 Entry、2 个 Collection 及现有静态页；Newsletter、Reader Request、Analytics 和 RUM 均不启用。M5 未完成项保留为对应功能未来启用的门禁，不再作为本次阅读版首发的前置条件；已有测试记录不擅自删除。本节与下列更新后的进入条件取代旧阶段记录中“先完成全部 M5 才能准备发布”的顺序，不代表 M5、最终 QA 或发布已经通过。
+
+2026-09-09 增量：GoatCounter 设置已由 owner 截图与保存确认，M6 默认关闭的 public bootstrap、脚本身份与原始产物离线执行验证完成；真实统计未启用，不关闭 U5、完整候选 QA 或发布。详见 [006](006-external-interactions.md) 与 [013](013-public-artifact-assembly.md)。
+
 本文定义 Mythic China 首次可索引 Public Beta 的进入条件、上线后目标读者验证、问题分级处置与 Beta 收口。它解决“没有现成独立读者时，若把真人审核固定在上线前，项目将无法获得真实读者”的冷启动循环。
 
 本文不降低事实、双语、文化、权利、视觉、无障碍、内容状态、public artifact、预览或生产授权门禁；不创建新的内容状态，不授权部署、数据收集或外部写入，也不把分析行为数据当作阅读理解结论。
@@ -21,7 +25,7 @@
 
 - 一句话结论：目标读者 R2 从 M6 上线前硬门禁改为 M7 Public Beta 上线后的验证与正式 MVP 收口门禁；缺少样本不得写成“通过”，但不再阻塞图片、状态、public artifact、受保护预览或经单独授权的 Public Beta 生产发布。
 - 是否可以进入本地后续开发：是。四篇 Entry 与 Liaozhai Collection 的五组 Hero 资产已完成 approved/current 闭环；VB6 已使 6 篇 Entry / 2 个 Collection 均 ready，随后 owner 已批准 6+2 published 与六篇目标日期 2026-09-10；013 已完成 origin/public assembly 的本地接线；Beta 页脚提示已获批准，本地实施见 013；016 已补条件式 hosting Privacy，后续为实际托管配置、独立 M5 交互及最终候选准备。
-- 是否可以立即发布 Public Beta：否。本地 public build 已完成；016 条件式 hosting Privacy 已落地；外部服务、实际托管配置、含 Beta 提示的 clean-source 最终 QA、预览和生产授权尚未完成。
+- 是否可以立即发布 Public Beta：否。本地 public build 与 inactive Privacy 已完成；实际交付配置、含 Beta 提示的 clean-source 最终 QA、受保护预览和生产授权尚未完成。未启用的外部服务不阻塞阅读版候选。
 - 会改变后续实施结果的待确认项：目标读者招募/答卷渠道、实际交付入口、构建配置及项目数据处理选择。2026-09-08 已现场核对团队/项目内部身份、Production 域名绑定及 `Require Log In / Standard Protection`；尚无部署，保护的实际访问验收仍待受保护预览。具体现场见 DEV_WORKFLOW 文末。
 
 ### 1.1 事实、推断与风险
@@ -47,13 +51,13 @@ Public Beta 生产发布前必须全部满足：
 
 1. 6 篇 Entry、至少 2 个 Collection 完成事实、Source/Claim、双语术语、英文编辑、关系、内容提示、视觉资产、权利、披露和内容无障碍文案门禁。
 2. Project owner 在完整本地 inventory 上逐项作出 `published` 决定并批准目标公开日期；Public Beta 不允许索引 draft、`editorial-review`、`visual-review` 或 `ready` 内容。
-3. M5-U4 按 [`006-external-interactions.md`](006-external-interactions.md) 完成 Buttondown 与 Tally 的账户级配置、真实 action/link 和受控合成数据联调；Reader Request 不扩展为目标读者研究表单。
-4. M5-U5 只按 006 完成 provider-neutral analytics 合同、候选 adapter、条件 hook 和离线测试；M6 在真实 origin 下完成 public 条件接线与制品验证，M7 才选择并启用 production analytics 与唯一 RUM producer。
+3. 阅读版的 Newsletter 与 Reader Request 保持 inactive，无可提交控件、外部表单入口或传输；Privacy 与实际产物一致。Buttondown/Tally 的未完成配置、联调与清理按 [`006-external-interactions.md`](006-external-interactions.md) 保留，恢复对应功能前单独完成，不计为已通过。
+4. Analytics 配置保持关闭，现有唯一 bootstrap 通过摘要与离线执行校验；实际候选在 local/preview/production 均不发送供应商请求，不增加 RUM producer。以后启用统计或 RUM 时，仍须完成 006 的处理、Privacy、传输与退出验证并取得独立授权。
 5. M6 完成真实 HTTPS origin、public intent/runner、页面 metadata、Sitemap/RSS/JSON-LD、独立 output verifier 与真实非空 public artifact。
 6. 从另行授权的 clean committed revision 重建同一 artifact，完成自动门禁、390/768/1440、真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、支持平台 fallback、链接、本地性能和 Project owner 最终视觉审核，并生成 clean-source verification receipt。该轮不以 R2 样本为放行条件。
 7. 受保护预览绑定同一 validated source identity，并通过账户归属、保护、目标地区表现、成本、退出和回滚验收。
 8. 同一发布候选包含 Project owner 批准的可见、可访问 Public Beta 提示；它不宣称已通过目标读者验证，具体文案和位置已有匹配视觉、键盘和输出检查。
-9. `DEV_WORKFLOW.md` 已实例化生产发布、live smoke、回滚、production analytics/RUM 和停止条件，且 Project owner 单独授权本次生产发布。
+9. `DEV_WORKFLOW.md` 已实例化生产发布、live smoke、回滚和停止条件，且 Project owner 单独授权本次生产发布。阅读版 live smoke 必须复核交互与统计仍关闭；production analytics/RUM 的启用流程后置。
 
 ### 2.3 Beta 退出条件
 
@@ -85,11 +89,11 @@ Public Beta 保持进行中，直到：
 
 ```text
 当前 R1 静态准备完成、R2 = 0
-  -> M5-U4/U5 与 M6 内容、资产、关系、状态、public artifact
+  -> 阅读版关闭交互/统计检查与 M6 内容、资产、关系、状态、public artifact
   -> clean-source release QA 与受保护预览
   -> Project owner 独立授权生产发布
   -> 可索引 Public Beta（现有 published 状态）
-  -> live smoke / 回滚入口 / 目标地区 / production analytics 与唯一 RUM producer 核验
+  -> live smoke / 回滚入口 / 目标地区 / 交互与统计仍关闭
   -> 另行确认并授权研究执行包与版本身份
   -> live artifact 上执行 R2a
   -> 修正研究材料或关键发现
@@ -126,7 +130,7 @@ R2a 先验证这份执行包与 live 页面；只有材料问题关闭并冻结�
 ## 6. 实施拆分
 
 1. **PB1 合同同步**：新增本文并同步 README、项目规则、产品、设计、架构、总合同与相关历史需求的当前路线。状态：已完成。
-2. **PB2 非读者发布门禁**：完成 M5-U4、M5-U5 离线合同/hook、四篇资产/关系/视觉/状态及 M6 public 条件接线与 public artifact。状态：实施中；012 的五组 Hero、VB6 关系/Featured 与 6+2 ready 已完成；owner 已批准首发 6+2 published 与六篇目标日期 2026-09-10；013 本地 public artifact 已完成；Beta 提示的批准与本地实施见 013；016 条件式 hosting Privacy 已落地。托管身份/域名/保护设置已只读核对，交付入口、构建/output、数据处理决定、交互与完整候选仍未闭合。
+2. **PB2 阅读版发布门禁**：验收交互与统计关闭、现有内容/资产及 M6 public artifact。状态：本地实现与自动验证已完成，完整候选尚未验收；既有内容批准、Beta 提示和 inactive Privacy 保留。下一步为固定 clean source、最终页面 QA 与真实预览交付；M5 不在本次继续测试。
 3. **PB3 受保护预览**：从 clean source 验证并验收受保护预览。状态：未开始。
 4. **PB4 Public Beta 生产发布**：逐次授权后把 validated source identity 发布到稳定、可索引的 production origin。状态：未开始。
 5. **PB5 上线后 R2**：先关闭第 5.1 节的研究执行与数据门禁，再在同一 live artifact 上完成 R2a、冻结研究版本、执行 R2b、处置与复测。状态：未开始。

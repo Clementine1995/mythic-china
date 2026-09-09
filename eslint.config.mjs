@@ -5,7 +5,13 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig([
   {
-    ignores: [".astro/**", "coverage/**", "dist/**", "prototypes/**"],
+    ignores: [
+      ".astro/**",
+      ".local/public-build/**",
+      "coverage/**",
+      "dist/**",
+      "prototypes/**",
+    ],
   },
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],

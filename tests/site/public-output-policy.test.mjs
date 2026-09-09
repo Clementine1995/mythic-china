@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { analyticsScriptHref } from "../../scripts/analytics-output-policy.mjs";
 import { createPublicSite } from "../../src/site/public-site.ts";
 import {
   createPublicSeoMetadata,
@@ -21,7 +22,18 @@ import {
 } from "../../scripts/public-output-policy.mjs";
 import { assertReviewHtmlResourcePolicy } from "../../scripts/review-output-policy.mjs";
 
-const origin = "https://mythic-china-fixture.vercel.app";
+const origin = "https://mythic-china-beta.vercel.app";
+const analyticsConfiguration = {
+  buildIntent: "public",
+  isEnabled: false,
+  origin,
+  endpoint: "https://mythic-china.goatcounter.com/count",
+  publicPaths: [...publicPagePaths],
+  entryPaths: publicPagePaths.filter(
+    (path) => path.startsWith("/explore/") && path !== "/explore/",
+  ),
+};
+const analyticsHtml = `<meta name="mythic-china-analytics" content='${JSON.stringify(analyticsConfiguration)}'><script type="module" src="${analyticsScriptHref}"></script>`;
 const site = createPublicSite(origin);
 function homeHtml() {
   const metadata = createPublicSeoMetadata(site, {
@@ -30,7 +42,7 @@ function homeHtml() {
     title: "Mythic China",
     description: "Stories and sources.",
   });
-  return `<!doctype html><html lang="en"><head><title>Mythic China</title><meta name="description" content="Stories and sources."><meta name="robots" content="index, follow"><link rel="canonical" href="${origin}/"><link rel="alternate" type="application/rss+xml" title="Mythic China" href="/rss.xml"><meta property="og:title" content="Mythic China"><meta property="og:description" content="Stories and sources."><meta property="og:type" content="website"><meta property="og:url" content="${origin}/"><meta property="og:site_name" content="Mythic China"><script type="application/ld+json">${serializeJsonLd(metadata.structuredData)}</script></head><body><h1>Chinese myths, carefully told.</h1></body></html>`;
+  return `<!doctype html><html lang="en"><head><title>Mythic China</title><meta name="description" content="Stories and sources."><meta name="robots" content="index, follow"><link rel="canonical" href="${origin}/"><link rel="alternate" type="application/rss+xml" title="Mythic China" href="/rss.xml"><meta property="og:title" content="Mythic China"><meta property="og:description" content="Stories and sources."><meta property="og:type" content="website"><meta property="og:url" content="${origin}/"><meta property="og:site_name" content="Mythic China"><script type="application/ld+json">${serializeJsonLd(metadata.structuredData)}</script>${analyticsHtml}</head><body><h1>Chinese myths, carefully told.</h1></body></html>`;
 }
 describe("public output safety", () => {
   it("accepts validated discovery metadata but keeps the review policy strict", () => {
@@ -58,6 +70,15 @@ describe("public output safety", () => {
       ).toThrow();
   });
   it.each([
+    ["missing analytics", (html) => html.replace(analyticsHtml, "")],
+    [
+      "duplicate analytics",
+      (html) => html.replace(analyticsHtml, analyticsHtml + analyticsHtml),
+    ],
+    [
+      "enabled analytics",
+      (html) => html.replace('"isEnabled":false', '"isEnabled":true'),
+    ],
     [
       "uppercase extra canonical",
       (html) =>
@@ -201,6 +222,7 @@ describe("public output safety", () => {
       "sitemap.xml",
       "robots.txt",
       "_astro/site.css",
+      analyticsScriptHref.slice(1),
     ];
     expect(() => assertPublicInventory(files)).not.toThrow();
     for (const extra of [

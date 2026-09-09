@@ -8,7 +8,7 @@
 - 核心判断：这是内容出版物，不是先造平台。首版的复杂度应集中在内容、出处、图片和设计，而不是账号、数据库和运行时服务。
 - Project owner 于 2026-08-30 选择 Vercel，并于 2026-09-02 明确当前不购买自定义域名；2026-09-08 已通过网页建立个人管理 Hobby 空项目 `project-scu6m`，截图确认稳定 Production 域名 `mythic-china-beta.vercel.app` / `No Deployment`。本地显式 origin 使用该 HTTPS hostname，拒绝其他域名或自动 Vercel URL。平台内部身份、预览保护与生产托管运行尚未验收，没有部署授权。
 
-2026-09-08 的 [013 本地 public assembly](requirements/013-public-artifact-assembly.md) 在既有纯 builder 上接入页面、静态 endpoint 和独立 verifier。`public` intent 仅消费 published projection，首页在 014 中明确选择 published 的阴间与聊斋，并保留阴间 / Zhong Kui Featured 关系；Layout 核对全站 metadata 与页面实际 title/description，Article 使用可见发布日期。Astro 按 intent 条件注入路由：review 样张只在 review 中存在，Sitemap/RSS/robots 只在 public 中存在。review 输出仍为 `dist/`，public 输出为 `.local/public-build/`。不新增 adapter、依赖、客户端执行代码或供应商 transport；本地未提交输出不能用于部署或生成 release receipt。
+2026-09-08 的 [013 本地 public assembly](requirements/013-public-artifact-assembly.md) 在既有纯 builder 上接入页面、静态 endpoint 和独立 verifier。`public` intent 仅消费 published projection，首页在 014 中明确选择 published 的阴间与聊斋，并保留阴间 / Zhong Kui Featured 关系；Layout 核对全站 metadata 与页面实际 title/description，Article 使用可见发布日期。Astro 按 intent 条件注入路由：review 样张只在 review 中存在，Sitemap/RSS/robots 只在 public 中存在。review 输出仍为 `dist/`，public 输出为 `.local/public-build/`。013 原批未新增客户端执行代码；2026-09-09 的 M6 增量只在 public 注入默认关闭的本站 analytics bootstrap 与严格配置，review 仍零脚本，无依赖或真实供应商请求。本地未提交输出不能用于部署或生成 release receipt。
 - 当前工作区已有不可发布的 M1 Home、Collection、Entry、Review Board 与字体验收原型；它们已冻结为工程参考基线，不属于应用源码。只允许参考语义阅读链、链接、响应式/无障碍骨架和表现层替换边界；用户未批准这些 M1 原型的视觉皮肤，不能把其表现整份移入未来应用。M4-U2 先确认当时系统 fallback 字体下的页面方向；正式英/CJK 字体、最终样张与 8 页三档基础矩阵随后已完成，Project owner 于 2026-09-02 明确通过当时全部 8 个页面。真实键盘、200%、偏好/故障、支持平台与本地性能仍未验证，归 M6 release-candidate gate；M7 承接 Public Beta 生产、live/RUM 基线与上线后目标读者研究。原型本身不作为目标栈初始化证据，实际初始化状态以现有 M2 源码、配置和锁文件为准。
 
 Astro 默认将页面预渲染为静态 HTML，并允许未来只把个别路由改为按需渲染，因此适合“静态核心、局部动态升级”的路线。来源：[Astro On-demand Rendering](https://docs.astro.build/en/guides/on-demand-rendering/)，访问于 2026-08-27。
@@ -64,9 +64,9 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 | 字体 | `src/assets/fonts` 保存版本化 WOFF2/许可证/FONTLOG/字符集/hash inventory；中央 CSS alias/token + URL registry 消费；`fontkitten` 在默认 Node 门禁读取 WOFF2 name/cmap，`parse5` 按 HTML5 树语义读取实际语言继承 | 自托管且保持上游替换不影响模板/内容；`?no-inline` 让英文 preload 永远指向真实文件，CJK 仅按窄 `unicode-range` 命中 | 4 份英文 WOFF2 与 SC/TC × 400/500/600 六份派生 WOFF2 已接线；CJK 静态字符/RFN/cmap 与当前页面效果已通过，慢/阻断、实际 fallback 与支持平台终验留 M6 |
 | 搜索 | Pagefind（达到约 30 篇后） | 扫描构建后的静态 HTML，无搜索服务器 | 后续触发 |
 | 托管 | 供应商中立的静态输出；未来静态托管选用 Vercel | 静态 Astro 无需 adapter，且托管不决定内容、URL 或应用结构 | 方向与不购买自定义域名的决定保持；空项目、稳定 Production hostname 和本地 origin 已建立，尚无部署 |
-| 邮件 | Provider-neutral Newsletter DTO/Fake；Buttondown 是 U4 有条件接受的 transport 方向 | 静态表单可直接交给服务，不自建邮箱库；核心 DTO 不含供应商控制字段 | M5-U2 合同与 U3 inactive Footer review UI 已实施；Project owner 于 2026-09-04 确认 `mythic-china` 账户审核已通过，真实 action、provider mapping、账户级 DPA/设置与提交仍待 U4 单独授权和验证 |
-| 反馈 | Provider-neutral Submission/Record/Fake；Tally 是 U4 有条件接受的托管页方向 | 首版不引入账号和通用后端；浏览器字段与受信任记录分离 | M5-U2 合同与 U3 inactive Entry review UI 已实施；Tally Free 未发布草稿存在，持久 Respondent ID 与人工清理风险已接受，但 hosted link、发布、真实数据和供应商行为仍待 U4 单独授权 |
-| 分析 | 三事件 allowlist、URL/referrer 纯清洗与 Fake；Plausible 保持候选 | 先回答内容问题，拒绝应用 properties、PII 和跨站追踪 | M5-U2 纯合同已实施；Plausible 明确留到 U5，U3 未接脚本、事件或远端请求 |
+| 邮件 | Provider-neutral Newsletter DTO/Fake；固定 Buttondown 原生表单分支默认关闭 | 仅 email 的静态 POST，不自建邮箱库，不添加脚本或 fetch | 006 的 `mythicworld` 配置与 Layout/Footer 接线已实施，实际构建保持 inactive；Node 内存渲染验证启用分支。托管页单邮箱状态转换有 owner 证据，owner 已确认真实退订；测试记录清理、本站真实提交与启用门禁仍未完成 |
+| 反馈 | Provider-neutral Submission/Record/Fake；Tally 是 U4 有条件接受的托管页方向 | 首版不引入账号和通用后端；浏览器字段与受信任记录分离 | M5-U2 合同与 U3 inactive Entry review UI 已实施；Tally 已取得 owner 的预览显示确认和发布链接，持久 Respondent ID 与人工清理风险已接受；首项空白建议落库后，owner 已批准原始收集与编辑前严格筛选；离线入口和实际验证见 006 第 12.11 节，邮箱同意及其余供应商行为仍待 U4 |
+| 分析 | 三事件、URL/referrer 纯清洗、Fake 与 U5A 阅读判定已实现；U5B 目标改为 GoatCounter 官方免费托管 | 按次数统计，最小请求，拒绝应用 properties、PII 和跨站追踪 | U5B pageview、注入式 adapter、条件 DOM hook 与 Privacy 未启用文案已本地验证；M6 public 默认关闭 bootstrap 与产物离线验证完成；账户设置有 owner 截图/保存确认，真实采集未启用 |
 
 CJK 生产链是显式离线边界：`cjk-character-sets.json -> 固定 Source Han Sans 2.005R commit/input SHA -> 隔离 fontTools/Brotli 实例化与子集 -> RFN-safe internal names + OFL/FONTLOG -> 6 WOFF2 -> fonts.css exact unicode-range -> fontkitten source/dist cmap -> parse5 rendered HTML lang/content gate`。生成器与固定 requirements 落在 `scripts/`；隔离 Python 环境、已安装依赖及两份各约 36 MB 的上游 SC/TC TTF 只存在于 Git-ignored `.local/font-production/`，不是 clone、CI 或默认 `pnpm check` 的运行依赖。生成器拒绝不匹配的 Python/fontTools/Brotli 版本，已落库 WOFF2 的 SHA-256 把受控生成结果与默认 Node 门禁绑定。字符新增必须先更新受审输入并重建，不允许自动扫描文档/原型或使用完整 CJK range。HTML 语言门禁遍历 HTML5 解析后的真实树，不用正则或 XML 式手写栈猜测浏览器的隐式闭合、表格 foster parenting 与实体解码。
 
@@ -182,7 +182,7 @@ mythic-china/
 └─ scripts/                # 只有稳定校验入口出现后才创建
 ```
 
-上图是完整 MVP 的跨里程碑目标，不是一次性脚手架清单。`src/services/` 与 `tests/services/` 已在 M5-U2 获批后建立，inventory 精确为 newsletter、Reader Request、analytics 三个纯模块与一份集中单测；其中没有供应商 SDK、真实 transport、配置、存储或网络调用。M5-U3 又建立 Newsletter / Reader Request 的 inactive review UI 与 Privacy 页面，但没有表单 action、外链或客户端事件。带“后续才创建”含义的 `components/commercial/`、`tests/browser/` 等节点在对应需求批准前仍不得建立；M3-U4 已为 `visual/production-records` 建立真实记录、Schema/loader 与双向关系门禁。当前 12 份 manifest 和 21 份 repository source rendition 均保留；11 个逻辑资产各有一份 approved/current，Zhong Kui Hero v1 的 manifest 与两份 source 作为 approved/non-current 历史存在。workflow/model registry 本期不用。
+上图是完整 MVP 的跨里程碑目标，不是一次性脚手架清单。`src/services/` 与 `tests/services/` 已在 M5-U2 获批后建立，最初包含 newsletter、Reader Request、analytics 三个纯模块与集中单测；U5A/U5B 后 services 共六个模块，新增阅读状态、轻量 analytics record 与 GoatCounter 注入式 adapter，并新增 client/site-analytics.ts。M6 再由唯一 analytics-bootstrap.ts 在 public 消费严格关闭配置，并在通过客户端门禁后才注入 fetch；没有供应商 SDK 或存储，真实统计未启用。M5-U3 又建立 Newsletter / Reader Request 的 inactive review UI 与 Privacy 页面，但没有表单 action、外链或客户端事件。带“后续才创建”含义的 `components/commercial/`、`tests/browser/` 等节点在对应需求批准前仍不得建立；M3-U4 已为 `visual/production-records` 建立真实记录、Schema/loader 与双向关系门禁。当前 12 份 manifest 和 21 份 repository source rendition 均保留；11 个逻辑资产各有一份 approved/current，Zhong Kui Hero v1 的 manifest 与两份 source 作为 approved/non-current 历史存在。workflow/model registry 本期不用。
 
 私有参考图、探索废图、高分辨率母版、模型和 LoRA 权重必须位于 Git inventory 之外。本期获授权的物理根是项目内 `/.local/visual-production/`，由锚定的 `/.local/` ignore 隔离；以后可迁到对象存储。仓库仅保留公开 Web source rendition、manifest 和有追溯价值的小型生产记录；默认 build 不读取 `.local`。
 
@@ -287,7 +287,9 @@ Astro 保持静态输出时不承接请求时状态。任何需要 secrets、写
 
 ### 7.1 Newsletter
 
-Newsletter 只在全站 Footer 的一个固定 slot 中渲染，不在每篇文章末尾重复。`src/services/newsletter.ts` 已建立只含 email 的严格 provider-neutral Submission、窄 adapter interface、脱敏结果和零网络 Fake；M5-U3 曾渲染 disabled/inactive review preview；016 已改为无控件的静态未开放说明，并确认只发送新文章与编辑精选、不超过每月两次、double opt-in、每封邮件可退订且 open/click tracking 在首次发送前及之后保持关闭。Buttondown `embed="1"`、action 与其他 transport 字段不属于核心 DTO；Project owner 于 2026-09-04 确认外部 `mythic-china` 账户审核已通过，但没有导入订阅者、发送邮件或连接站点的验证。固定 provider mapping、真实 action、账户级 DPA/设置与合成订阅提交仍待 U4 单独授权和验证。网站仓库不保存订阅者列表。文章末尾的 Reader Request 属于独立反馈入口，不得隐式订阅邮件。
+Newsletter 只在全站 Footer 的一个固定 slot 中渲染，不在每篇文章末尾重复。`src/services/newsletter.ts` 保持只含 email 的严格 provider-neutral Submission、窄 adapter interface、脱敏结果和零网络 Fake。`src/site/newsletter-configuration.ts` 统一固定 action 与默认 false 开关，经 Layout/Footer 把 intent、批准 origin 和开关传给 NewsletterForm；review 始终保持 016 的无控件静态说明，public 默认也不输出 form/action。未来原生 POST 分支只有 email，不增加 embed、metadata、tag、客户端脚本或 fetch；实际 output 门禁继续拒绝可提交表单，启用前须另行更新精确 allowlist 和 Privacy 并通过账户/真实验证。频率保持新文章与编辑精选、不超过每月两封，double opt-in、每封可退订与关闭 open/click tracking 的合同不变。当前真实 newsletter slug 是 `mythicworld`，owner 的托管页单邮箱 Unactivated → Regular 证据及随后真实退订完成确认见 006 第 12.8 节，不替代本站表单、网络、记录清理与处理/退出验证。网站仓库不保存订阅者列表；Reader Request 仍独立，不得隐式订阅。
+
+组件离线测试使用现有 `astro/config` 的 `getViteConfig` 与 `astro/container` 渲染真实 NewsletterForm/SiteFooter；`vitest.config.ts` 设置 `configFile: false`，不加载站点发布 hook。启用 HTML 仅在 Node 内存中检查，不写文件、不提供浏览器或 HTTP 入口；fetch 陷阱与默认产物的零表单检查共同保留真实写入边界。该方式依据 [Astro 测试文档](https://docs.astro.build/en/guides/testing/)，访问于 2026-09-09。
 
 ### 7.2 Reader Request
 
@@ -303,10 +305,11 @@ pageId + requestedTopic [+ email + emailConsent]
 - `email` 与 `emailConsent` 为可选字段且必须成对出现。
 - `requestId`、`createdAt`、`status` 与 `normalizedTopicId` 只属于 provider/server/internal record；权威时间由受信任边界生成，不接受浏览器隐藏字段。
 - `src/services/reader-request.ts` 已把 Submission 与初始 Record 建为独立 strict Schema：topic trim 后为 3–240 Unicode code point，email 最大 254 字符且与 consent 成对；published Entry ID allowlist 由调用方注入，Fake 不保存输入或访问网络。
-- 初始 Record 只允许 `status: new` 与 `normalizedTopicId: null`；Tally `submissionId` / `respondentId` 不进入 canonical Record。Project owner 已接受持久 Respondent ID 与低成本人工清理风险。外部 Tally Free 账户和字段匹配的未发布草稿已准备，但没有 hosted link、submission 或真实供应商记录；草稿结构不证明发布后的条件逻辑或标识行为。
+- 初始 Record 只允许 `status: new` 与 `normalizedTopicId: null`；Tally `submissionId` / `respondentId` 不进入 canonical Record。Project owner 已接受持久 Respondent ID 与低成本人工清理风险。外部 Tally Free 表单已有 owner 的配置/预览显示确认和发布链接；完整公开表单核验、实际校验和标识行为仍待完成，最新证据范围见 006 第 12.10 节。
 - Tally 方向要求 hyc 每 28 天删除所有已满 60 天的提交，并在同次操作中 Empty Trash；按时执行时形成约 60–88 天的操作窗口，且 hyc 是唯一负责人、没有独立备份，漏执行会延长保留时间。真实账户行为与漏执行风险的最终 U4 验收不能由此处的文档约定替代。
 - 页面不直接暴露密钥；外部 endpoint 或 server function 位于单一边界。
-- M5 后续传输与供应商边界见 [`006-external-interactions.md`](requirements/006-external-interactions.md)；U2 字段合同与 U3 inactive review UI 已完成，Tally 仅是 U4 有条件接受的 transport 方向。当前只有外部账户与未发布草稿准备，仓库没有 provider 配置、hosted link 或接通数据。
+- 2026-09-09 owner 确认 Tally 先收集原始建议、编辑前严格筛选。离线入口 `scripts/review-reader-request.mjs` 由 hyc 手动运行，以 stdin 接收明确映射的输入字段，复用现有 Submission validator，并从当前 Entry 内容读取 published allowlist；通过后仍须核对来源身份、时间、同意证据与编辑价值。原始 Completed 不等于有效 Record，拒绝项不进入选题池。脚本只输出脱敏结果，不写数据、不联网、不调用供应商；非空邮箱仍须在 Tally 提交前明确同意。它不是本站后端、自动导入或发布功能。
+- M5 后续传输与供应商边界见 [`006-external-interactions.md`](requirements/006-external-interactions.md)；U2 字段合同与 U3 inactive review UI 已完成，Tally 仍是 U4 有条件接受的 transport 方向。真实发布链接只记录在运行与需求文档中，站点没有 provider 配置、链接接线或接通数据。
 
 ### 7.3 Analytics
 
@@ -317,9 +320,15 @@ pageId + requestedTopic [+ email + emailConsent]
 - `related_story_click`
 - `outbound_recommendation_click` 仍是未来概念，当前不在 Schema allowlist。
 
-事件对象严格不接受 properties、完整建议、邮箱、page/content title、用户或会话标识；newsletter/request 转化只使用供应商已接受记录的聚合结果，不把按钮点击或跳转冒充成功。U2 纯 normalizer 只接受当前 public site 的 HTTPS URL、去除 query/hash 并清空 referrer；Fake 不发送网络。Plausible 明确留在 U5；U3 Privacy 页面标示 analytics 尚未启用，且没有接入脚本、事件或远端请求。Plausible adapter、真实 envelope、日级标识、保留和启用仍未实现。
+事件对象严格不接受 properties、完整建议、邮箱、page/content title、用户或会话标识；newsletter/request 转化只使用供应商已接受记录的聚合结果，不把按钮点击或跳转冒充成功。U2 纯 normalizer 只接受当前 public site 的 HTTPS URL、去除 query/hash 并清空 referrer；Fake 不发送网络。2026-09-08 owner 接受 GoatCounter 官方免费托管替代 Plausible，完整目标见 [006 第 5.4 节](requirements/006-external-interactions.md)。当前 Privacy 已改为 GoatCounter 未启用计划。U5B 新增 analytics-record.ts 的轻量严格清洗、goatcounter-analytics.ts 的注入式请求 mapping 与 client/site-analytics.ts 的条件 DOM hook，均已通过离线检查；M6 已通过唯一本地 bootstrap 和严格静态配置接入 public 页面，发送默认关闭。账户值有截图/保存确认，真实请求和报表尚未验收。
 
-M5-U5A 的 `src/services/article-reading-state.ts` 已独立实现纯内存状态转换：调用方显式提供单调时间、可见性、主故事和视口边界；按前一可见状态累计时间，visible 时记录故事相交与 75% 深度，达到 15 秒后按既有语义返回两个各一次的无 properties 事件。初始化重置全部状态，未知故事区域不推断，非法时间/区域失败；不读取 DOM、时钟、配置或存储，不调用 adapter/网络。架构测试禁止页面消费该模块，当前 review 仍零客户端脚本。真实 DOM 区域识别、定时观察、production/public 隔离和发送属于尚未实施的 U5 hook/M6/M7，不由纯函数测试冒充通过。
+U5B 的目标边界为：复用三个事件及 U5A，另建 pageview 合同；普通 pageview 覆盖既定 public 路由，业务事件只绑定 published 来源文章。GoatCounter 关闭 Sessions 后按次数聚合，adapter 把事件名与规范文章 pathname 编为供应商事件 path，Related 不添加目标 ID。仅通过文档化的公开 `/count` 发送 `p/e` 和必要的非持久 `rnd`，不用会附加 query/屏幕信息的官方默认脚本，不新增依赖或后台。Referer/Cookie 必须在传输层抑制并验证；IP/UA 等网络技术信息仍由服务方处理。2026-09-09 owner 的设置截图与保存确认表明账户配置为 90 天保留、八项额外采集关闭；服务端实际清理未验收。
+
+public 输出现只精确放行本站 analytics bootstrap：scripts/analytics-script.json 固定 exact href 与 SHA-256，逐页校验配置/唯一标签，再执行原始 JS 的无网络 VM fixture；review 仍零客户端脚本与配置。配置默认关闭，并在运行时同时校验实际 production origin 和批准路径，不能只看 public build intent/canonical；local、preview 和自动化即使消费同一 public artifact 也不能发送真实请求。所有本地测试注入 Fake；发出请求或收到 opaque 响应不作为服务方 `recorded` 证据。真实账户、请求头/缓存、导航故障、报表及退出分别验收，生产启用仍属 M7，RUM 不由 GoatCounter 替代。
+
+当前 DOM hook 没有导入时副作用，也没有默认 transport；调用方必须显式启用并提供窗口、文档及 adapter。现有 bootstrap 通过 SiteLayout 从 `createConfiguredPublicSite` 与 published assembly 注入批准边界，不能从运行时 location 推导允许的 origin；同时保证每个 document 只绑定一次。adapter 的语法/成员校验不证明配置来源已经批准。状态与计时仅在本次绑定内，`pagehide/pageshow` 排除 BFCache 停留时间而不重复 pageview，cleanup 移除全部监听与定时器。
+
+M5-U5A 的 `src/services/article-reading-state.ts` 已独立实现纯内存状态转换：调用方显式提供单调时间、可见性、主故事和视口边界；按前一可见状态累计时间，visible 时记录故事相交与 75% 深度，达到 15 秒后按既有语义返回两个各一次的无 properties 事件。初始化重置全部状态，未知故事区域不推断，非法时间/区域失败；不读取 DOM、时钟、配置或存储，不调用 adapter/网络。架构测试禁止页面消费该模块，当前 review 仍零客户端脚本。U5B 的独立 DOM hook 已消费该模块，并在模拟 DOM/时钟中验证区域选择、定时观察、环境隔离、BFCache 暂停恢复和清理；页面仍禁止直接消费状态机。M6 bootstrap 的实际字节现另有离线执行验证；浏览器和 M7 真实发送不能由这些离线测试冒充通过。
 
 M5 合同 [`006-external-interactions.md`](requirements/006-external-interactions.md) 已确认把 Web Vitals/RUM 明确延后到 M7，由一个独立 RUM producer 承担；这只是阶段责任与 provider-neutral 最小合同，不是已启用能力。M7 若把真实流量 p75 作为完成门禁，仍须选择并验收供应商、采集指标、字段、同意依据、保留期限、退出/删除路径与第三方域名，不能到生产发布后才补数据源，也不得同时启用两个 RUM beacon。
 
@@ -391,6 +400,6 @@ M4 已完成获授权的本地基础浏览器矩阵；M6 最终 public artifact 
 
 - Vercel 已选为静态托管目标；owner 已提供个人管理 Hobby 空项目 `project-scu6m` 和稳定 Production 域名 `mythic-china-beta.vercel.app`，013 已使用该显式 HTTPS origin。本次仍须核对平台内部身份、实际项目/构建配置、预览保护、成本、回滚和退出路径；本地接线与旧截图不证明账户门禁通过，也不授权部署。
 - Project owner 已决定当前不购买自定义域名；未来品牌/权利核查、注册商、DNS 托管、canonical 主域、邮箱迁移与接入时点仍须单独决策。
-- Buttondown 与 Tally 已分别作为 U4 的有条件 transport 方向，Plausible 保留给 U5；Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布，三者均未接线或启用。U4 仍待对 Buttondown 账户级配置与真实 action、Tally hosted link 与发布，以及两者合成数据联调的独立授权和验证。
+- Buttondown 的默认关闭本地配置/组件已接线，Tally 已有 owner 提供的发布链接；首项真实测试接受空白建议；owner 已批准先收集、编辑前严格筛选，按离线审核与修订用例继续，尚未接入本站。GoatCounter 默认关闭接线和独立四次统计回查/清理已完成；Buttondown 托管页单邮箱状态转换有 owner 证据，真实退订已由 owner 确认，记录清理未验。三项服务均未在本站启用真实写入；U4、U5 与 M7 生产启用分别验收，不因本地准备或免费方案合并授权。
 - 本地 Git 已在 `F:\codex-project\mythic-china` 初始化；用户随后建立 `main`、M1/M2 提交与 `origin`。M3-U1 开始前，本地 HEAD、`main` 与本地 `origin/main` 对齐到 `f258227da1b5a73f22c87ec99722243742db0ba0`，工作树干净；本次未执行 fetch，因此不证明服务器端分支状态。这些事实不代表代理获得 add、commit、push 或发布授权；后续版本控制和首次预览/生产发布仍须逐次确认。
 - 本期 master 位置已确认为项目根 `/.local/visual-production/masters/`；当前没有独立备份，丢失时按 production record 重新生成。私有参考资料本期不上传 ImageGen，也不写入仓库；长期对象存储与备份策略仍待后续确认。

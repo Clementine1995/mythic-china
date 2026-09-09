@@ -2,6 +2,8 @@
 
 ## 职责、状态与开发就绪
 
+2026-09-09 首发范围以 [011](011-public-beta-validation.md) 的阅读版更新为准：既有 inactive 表单和关闭的统计就是本次候选的预期状态，真实供应商接线留到未来启用。当天从当前工作树重建 public，通过 Astro 117 文件零诊断、13 页及全部资源/链接/metadata/关闭脚本校验；此结果仍是本地诊断，不替代 clean-source 最终 QA。
+
 本文负责 M6 的显式 origin、published-only 页面、metadata、静态发现文件和独立输出校验；承接 003 的 public 纯 builder，不关闭 011 的生产门禁。
 
 - 需求：已确认；用户在建立空项目和域名后授权继续本地部署准备。
@@ -24,7 +26,7 @@
 3. public 路由只消费 published projection，缺少必要首页或 Collection 成员、metadata 重复/缺失、无有效 Entry/Collection 均失败；无草稿 fallback。
 4. Sitemap 含五个固定页与 6/2 published 内容；RSS 只含六篇 Entry，排序及日期沿用现有纯合同；robots.txt 允许抓取并引用同源 Sitemap。全部只在 public intent 下注入静态 endpoint。
 5. 字体样张移到 `src/review/type-specimen.astro`，仅在 review intent 注入原 URL `/review/type-specimen/`；public 不包含样张 HTML、链接或专用 CSS，不做构建后删文件。
-6. 独立 output verifier 核对精确 HTML/XML/TXT inventory、canonical/OG/JSON-LD、可见署名/日期、XML 与 HTML 身份一致、链接/fragment、资源存在性、固定字体哈希、CJK、零可执行脚本和零供应商请求。复用既有静态安全检查时 review 的限制不放宽；public 仅允许受验证的 metadata 与非执行 JSON-LD。
+6. 独立 output verifier 核对精确 HTML/XML/TXT inventory、canonical/OG/JSON-LD、可见署名/日期、XML 与 HTML 身份一致、链接/fragment、资源存在性、固定字体哈希和 CJK。2026-09-09 的 M6 analytics 接线只新增一个由 exact href + SHA-256 锁定的本站 bootstrap 与严格静态配置，默认关闭、零供应商请求；禁止其他执行脚本、额外 chunks 或动态 import。review 仍为零脚本；public 保留已验证 metadata 与非执行 JSON-LD。实际产物必须通过独立、无网络的执行 fixture，启用与真实联调后置。
 7. Newsletter/Reader Request 按后续 016 保持 inactive 静态说明，无输入/按钮/form/action/transport。Privacy 同步实际准备状态并补充条件式 Vercel 托管说明；本地核验不证明账户配置、供应商联调或生产接线已完成。Beta 提示按 011 的批准文案与位置实施，不以本批输出替代完整发布候选。
 
 ## 修改位置与实施单元
@@ -72,3 +74,13 @@
 本地实施与验证已完成：固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0 下，格式化、ESLint、public 与 review 构建通过，Astro 两次均为 96 文件零诊断；public 13 页各有一条批准提示，review 14 页均无提示，原有资源和内容输出门禁均通过。未重跑此前 assembly 的 498 项单元测试。34 份 Markdown 的 UTF-8/相对链接/占位符与差异检查通过。
 
 本次只增加 UI 阶段提示，不含文化陈述或新资产，文化来源、资产追溯和披露无变更；既有构建诊断继续通过。组件职责由必填 prop 和现有 intent 表达，无需额外解释性注释。独立只读审查未发现代码问题；发现的过时交接文案已同步。正文、图片、字体、CSS 与依赖均未变化。改动未提交、暂存区为空；没有服务、浏览器、真实写入、推送或部署，输出继续是 nondeployable 本地诊断，最终显示验收未完成。
+
+## 默认关闭的 analytics 接线（2026-09-09）
+
+owner 确认 GoatCounter 设置保存成功并授权下一步，本地 public 现包含唯一本站 bootstrap 与一份严格静态配置；配置从已验证 site/published assembly 生成并固定关闭。客户端独立钉住生产 origin 和精确账户，WeakSet 只管理 document 生命周期；review 不输出脚本或配置，正文、来源、导航及图片保持静态。
+
+`scripts/analytics-script.json` 锁定 `/_astro/page.Di-gmpYO.js` 的原始字节摘要；public verifier 逐页检查唯一模块/配置和精确库存，确认无额外 JS/import/chunk，再在无网络 VM 中运行未经修改的真实脚本。覆盖 13 路由 pageview、三事件、默认关闭/非生产/错误配置、自动化、正常与中键 Related 激活、失败不重试以及微任务延迟写入拒绝。两次真实构建的文件名与摘要一致。完整 check 36 文件/619 测试、Astro 112 文件零诊断通过；public 13 页/一个关闭脚本与 review 14 页/零脚本均通过，112 Hero/10 字体不变。
+
+Privacy 已同步账户的 90 天与额外维度关闭，以及实际清理/处理未验收边界。内容/资产、依赖与锁文件未变，必要职责注释及既有构建诊断保持。实际浏览器、请求头/缓存/导航、报表回查/清理、最终 QA 和生产启用仍未验收；未启动服务、发送请求、提交或部署，本次无发布 receipt。源差异与命令以 DEV_WORKFLOW 对应小节为准。
+
+实现依据：[Astro injectScript](https://docs.astro.build/en/reference/integrations-reference/#injectscript-option) 与 [客户端脚本处理](https://docs.astro.build/en/guides/client-side-scripts/)，访问于 2026-09-09，并核对锁定 Astro 7.2.8 的 `astro:scripts/page.js` 客户端入口；该独立入口不依赖组件条件渲染来消除 review 脚本。

@@ -322,6 +322,31 @@ h3 {
   grid-column: 7 / -1;
 }
 
+.newsletter-form__fields {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.newsletter-form__fields input {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.newsletter-form__fields button {
+  justify-self: start;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 .interaction-review-status {
   padding: var(--space-2) var(--space-4);
   border-inline-start: 2px solid var(--brand-accent);

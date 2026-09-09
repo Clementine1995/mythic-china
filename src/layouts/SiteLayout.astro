@@ -3,7 +3,12 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { readBuildIntent } from "../site/build-intent";
 import { loadPublicAssembly } from "../site/load-public-assembly";
+import {
+  analyticsConfigurationName,
+  createPublicAnalyticsConfiguration,
+} from "../site/analytics-configuration";
 import { serializeJsonLd } from "../site/seo";
+import { isNewsletterEnabled } from "../site/newsletter-configuration";
 import { fontAssetUrls } from "../typography/font-assets";
 import "../styles/fonts.css";
 import "../styles/global.css";
@@ -18,6 +23,9 @@ interface Props {
 const { title, description, pageClass, preloadStoryFont = false } = Astro.props;
 const intent = readBuildIntent();
 const assembly = intent === "public" ? await loadPublicAssembly() : null;
+const analyticsConfiguration = assembly
+  ? createPublicAnalyticsConfiguration(assembly.site, assembly.descriptors)
+  : null;
 const pagePath = Astro.url.pathname.endsWith("/")
   ? Astro.url.pathname
   : `${Astro.url.pathname}/`;
@@ -44,6 +52,14 @@ if (
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="color-scheme" content="dark" />
+    {
+      analyticsConfiguration && (
+        <meta
+          name={analyticsConfigurationName}
+          content={JSON.stringify(analyticsConfiguration)}
+        />
+      )
+    }
     <link
       rel="preload"
       href={fontAssetUrls.displayRoman}
@@ -98,6 +114,13 @@ if (
     <main id="main-content" tabindex="-1">
       <slot />
     </main>
-    <SiteFooter showPublicBeta={intent === "public"} />
+    <SiteFooter
+      showPublicBeta={intent === "public"}
+      newsletter={{
+        buildIntent: intent,
+        siteOrigin: assembly?.site.origin,
+        isEnabled: isNewsletterEnabled,
+      }}
+    />
   </body>
 </html>

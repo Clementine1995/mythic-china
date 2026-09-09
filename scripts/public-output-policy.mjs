@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import { parse } from "parse5";
 import { assertPublicHtmlResourcePolicy } from "./review-output-policy.mjs";
+import {
+  analyticsScriptHref,
+  analyticsMetaName,
+  assertAnalyticsConfiguration,
+} from "./analytics-output-policy.mjs";
 
 // This launch inventory is independent of the page builder and its emitted metadata.
 export const publicPagePaths = Object.freeze([
@@ -35,6 +40,11 @@ export function publicOutputPath(path) {
 }
 export function assertPublicInventory(paths) {
   assert.deepEqual(
+    paths.filter((path) => path.endsWith(".js")),
+    [analyticsScriptHref.slice(1)],
+    "Expected only the reviewed analytics bundle.",
+  );
+  assert.deepEqual(
     paths.filter((path) => path.endsWith(".html")).sort(),
     publicPagePaths.map(publicOutputPath).sort(),
     "Public HTML inventory differs from the approved launch.",
@@ -46,10 +56,12 @@ export function assertPublicInventory(paths) {
     ["robots.txt", "rss.xml", "sitemap.xml"],
   );
   assert(
-    paths.every((path) =>
-      /^(?:_astro\/[^/]+\.(?:css|avif|webp|woff2)|(?:[a-z0-9-]+\/)*index\.html|robots\.txt|rss\.xml|sitemap\.xml)$/u.test(
-        path,
-      ),
+    paths.every(
+      (path) =>
+        path === analyticsScriptHref.slice(1) ||
+        /^(?:_astro\/[^/]+\.(?:css|avif|webp|woff2)|(?:[a-z0-9-]+\/)*index\.html|robots\.txt|rss\.xml|sitemap\.xml)$/u.test(
+          path,
+        ),
     ),
     "Unexpected public artifact.",
   );
@@ -189,7 +201,43 @@ export function assertPublicDocument(html, path, origin) {
     "og:site_name": "Mythic China",
   }))
     assert.equal(meta("property", name), value, name);
-  const jsonNode = inHead(one(tag("script"), "JSON-LD"));
+  const analyticsNode = inHead(
+    one(
+      tag("script").filter((node) => htmlAttribute(node, "type") === "module"),
+      "analytics bootstrap",
+    ),
+  );
+  assert.deepEqual(
+    Object.fromEntries(
+      analyticsNode.attrs.map(({ name, value }) => [name, value]),
+    ),
+    { type: "module", src: analyticsScriptHref },
+  );
+  assert.equal(htmlText(analyticsNode), "");
+  const configurationNode = inHead(
+    one(
+      tag("meta").filter(
+        (node) => htmlAttribute(node, "name") === analyticsMetaName,
+      ),
+      "analytics configuration",
+    ),
+  );
+  assert.deepEqual(configurationNode.attrs.map(({ name }) => name).sort(), [
+    "content",
+    "name",
+  ]);
+  const analyticsConfiguration = JSON.parse(
+    htmlAttribute(configurationNode, "content"),
+  );
+  assertAnalyticsConfiguration(analyticsConfiguration, origin, publicPagePaths);
+  const jsonNode = inHead(
+    one(
+      tag("script").filter(
+        (node) => htmlAttribute(node, "type") === "application/ld+json",
+      ),
+      "JSON-LD",
+    ),
+  );
   const data = JSON.parse(htmlText(jsonNode));
   const publisher = {
     "@id": `${origin}/about/#publisher`,

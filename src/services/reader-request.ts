@@ -1,6 +1,6 @@
 import { z } from "astro/zod";
 
-import { contentIdSchema } from "../content/content-schemas";
+import { contentIdSchema } from "../content/content-schemas.ts";
 
 const readerEmailSchema = z
   .email()

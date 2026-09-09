@@ -2,7 +2,7 @@ import { URL } from "node:url";
 
 import { z } from "astro/zod";
 
-import { contentIdPattern } from "./content-id";
+import { contentIdPattern } from "./content-id.ts";
 
 export const contentStatuses = [
   "draft",

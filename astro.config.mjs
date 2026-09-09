@@ -20,7 +20,7 @@ export default defineConfig({
     {
       name: "mythic-china-build-routes",
       hooks: {
-        "astro:config:setup": ({ injectRoute }) => {
+        "astro:config:setup": ({ injectRoute, injectScript }) => {
           if (intent === "review") {
             injectRoute({
               pattern: "/review/type-specimen",
@@ -28,6 +28,10 @@ export default defineConfig({
               prerender: true,
             });
           } else {
+            injectScript(
+              "page",
+              'import "/src/client/analytics-bootstrap.ts";',
+            );
             for (const filename of ["sitemap.xml", "rss.xml", "robots.txt"]) {
               injectRoute({
                 pattern: `/${filename}`,

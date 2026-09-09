@@ -258,7 +258,18 @@ Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并�
 - [Gmail 删除与清空 Trash](https://support.google.com/mail/answer/7401?hl=en_as) 与 [Google 数据保留与删除过程](https://policies.google.com/technologies/retention?hl=en-US) — Google 官方资料。用途：区分活动邮箱/Trash 的人工删除动作与 Google 系统级删除过程；项目采用“请求关闭 60 天后删除活动邮箱与 Trash，法律要求除外”的运营期限，不把它表述成 Google 备份级硬删除 SLA。
 - [Building your subscriber base](https://docs.buttondown.com/building-your-subscriber-base)、[Double opt-in](https://docs.buttondown.com/double-opt-in)、[Data Processing Agreement](https://buttondown.com/legal/data-processing-agreement)、[Subscriber cleanup](https://docs.buttondown.com/subscriber-cleanup)、[Open tracking](https://docs.buttondown.com/open-tracking) 与 [Click tracking](https://docs.buttondown.com/click-tracking) — Buttondown 官方文档。用途：核对静态订阅表单、double opt-in、美国处理/DPA、soft/hard delete 与 tracking 边界；访问于 2026-09-02。Project owner 已有条件接受 Buttondown、DPA 与美国数据处理方向；double opt-in 必须开启，open/click tracking 从首次发送前并在之后保持关闭。另据 Project owner 于 2026-09-03 提供的账户现场事实，`mythic-china` 已创建但当时仍在人工审核，没有导入订阅者、发送邮件或连接站点；Project owner 又于 2026-09-04 确认该账户审核已通过。两项账户状态都是用户提供的现场事实而非官网证据；最新事实只关闭等待审核门槛，不提供真实 action、provider mapping、账户级设置或实际处理验证。
 - [Tally GDPR and DPA](https://tally.so/help/gdpr)、[Respondent ID](https://tally.so/help/prevent-duplicate-submissions)、[Submissions data retention](https://tally.so/help/submissions-data-retention)、[Delete and recover form data](https://tally.so/help/how-to-delete-and-recover-form-data) 与 [Plans and pricing](https://tally.so/help/plans-and-pricing) — Tally 官方文档。用途：核对比利时/Google Cloud Belgium 数据位置、跨同 workspace 的 localStorage Respondent ID、自动/人工 retention、Trash/Empty Trash 与计划边界；访问于 2026-09-02。Project owner 已有条件接受持久 Respondent ID 与低成本人工清理方案：hyc 每 28 天删除所有已满 60 天的提交并同次 Empty Trash，按时执行时形成约 60–88 天操作窗口；hyc 是唯一负责人且没有独立备份，接受漏执行会延长保留时间的风险。另据 Project owner 于 2026-09-03 提供的账户现场事实，Tally 使用 Free 计划且 Reader Request 草稿仍未发布；字段结构已准备，但 hosted link、submission、通知/集成、导出/删除和 Respondent ID 真实行为均未验证。该现场事实与官网供应商能力证据分开。
-- [Plausible compliance](https://plausible.io/docs/compliance)、[Data policy](https://plausible.io/data-policy) 与 [Script options](https://plausible.io/docs/script-extensions) — Plausible 官方文档。用途：记录无 Cookie 宣称、URL/referrer/日级访客哈希、数据地区和脚本选项边界；访问于 2026-09-02。Plausible 明确留在 U5，U3 未接任何脚本、事件、远端请求或账户。
+- [Plausible compliance](https://plausible.io/docs/compliance)、[Data policy](https://plausible.io/data-policy) 与 [Script options](https://plausible.io/docs/script-extensions) — Plausible 官方文档。用途：保留原候选的无 Cookie 宣称、URL/referrer/日级访客哈希、数据地区和脚本选项研究历史；访问于 2026-09-02，U3 当时未接任何脚本、事件、远端请求或账户。2026-09-08 已被 GoatCounter 免费目标替代，不再定义当前供应商或购买门禁。
+
+### GoatCounter 免费托管目标（2026-09-08）
+
+以下均为 GoatCounter 官方页面或维护者源码，访问日期为 2026-09-08；用于 [006 第 5.4 节](requirements/006-external-interactions.md) 的设计与待核合同，不证明本站账户已注册、设置已生效或真实统计已接通。
+
+- [主页](https://www.goatcounter.com/) 与 [服务条款](https://www.goatcounter.com/help/terms)：开源、捐赠支持的当前免费托管与合理用量范围；首次注册须由人手工完成。免费条件会变化，不承诺固定额度或永久免费，也不要求购买 Plausible。
+- [Sessions](https://www.goatcounter.com/help/sessions) 与 [事件](https://www.goatcounter.com/help/events)：默认去重与关闭 Sessions 后按次计数；事件以 path 表示且不以 `/` 开头。项目据此选择关闭 Sessions，并在 adapter 将三个既有事件名与规范来源文章路径组合；不新增用户标识或 properties。
+- [公开像素接口](https://www.goatcounter.com/help/pixel)、[JavaScript API](https://www.goatcounter.com/help/js) 与 [默认 count.js 源码](https://github.com/arp242/goatcounter/blob/main/public/count.js)：公开 `/count`、参数合同及自有 JS 集成入口；默认脚本还发送 query/屏幕字段，不能用清洗 path 代替全部出站字段验证。项目目标只使用最小 `p/e` 和必要的非持久 `rnd`，传输头与服务端处理另行验收。
+- [隐私与删除](https://www.goatcounter.com/help/privacy) 与 [保留配置源码](https://github.com/arp242/goatcounter/blob/main/settings.go)：区分聚合、可选 pageview 明细、内存会话映射、处理设施与账户删除后的备份边界。90 天是项目选定的聚合保留目标，源码存在配置不等于免费账户能力、配置值或清理已经实证。
+- [维护者关于路径删除的答复](https://github.com/arp242/goatcounter/issues/806)：用于设计受控测试记录清理核查；不作为当前账户权限或删除执行证据，不授权清理其他数据。
+- [Count handler 源码](https://raw.githubusercontent.com/arp242/goatcounter/main/handlers/count.go)、[路径处理源码](https://raw.githubusercontent.com/arp242/goatcounter/main/hit.go) 与 [Fetch 标准](https://fetch.spec.whatwg.org/#main-fetch)：U5B 离线传输选择依据。官方 handler 提供 CORS 响应；no-cors 与拒绝重定向不能组合，因此选择 CORS/omit/no-referrer/no-store/redirect:error，无自动 fallback。普通 pageview 与事件路径在后台的尾斜杠处理不同；GIF 响应不证明记录已入聚合。访问于 2026-09-08，本站真实请求、响应头和报表仍待独立验证。
 
 ## 6. 可选视觉辅助（ComfyUI）
 
@@ -311,3 +322,7 @@ Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并�
 ## 2026-09-08 托管隐私说明
 
 [Vercel Privacy Notice](https://vercel.com/legal/privacy-notice)，官方隐私声明（页面标注更新 2026-06-01，访问 2026-09-08）。用于 Privacy 的条件式托管说明：访问 Vercel 托管的客户网站时，Vercel 可能处理 IP、由其推导的大致位置和系统信息，以交付、维护及保护服务。链接用于 Vercel 自身隐私实践，不替代其代表客户作为 processor 时的本站说明；不据此推断本站实际账户日志期限、地区、分析开关或已部署。实施合同见 [016](requirements/016-reader-facing-polish.md)。
+
+## 2026-09-09 本站 analytics 脚本入口
+
+[Astro Integration API — injectScript](https://docs.astro.build/en/reference/integrations-reference/#injectscript-option) 与 [Scripts and event handling](https://docs.astro.build/en/guides/client-side-scripts/)，Astro 官方文档，访问于 2026-09-09。用于选择 public-only 的 page 脚本注入与理解 bundling/去重；并核对本地锁定 Astro 7.2.8 的虚拟 page 入口和客户端脚本处理，防止把组件条件渲染误认为脚本隔离。实际 bundle、精确锁及无网络执行验证见 013，不据文档推断本站已启用采集。

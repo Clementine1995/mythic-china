@@ -893,7 +893,7 @@ describe("review output resource policy", () => {
         <p>Buttondown uses buttondown.com; open and click tracking will remain off before the first send.</p>
         <p>Tally uses tally.so, stores form data in Google Cloud Belgium, and creates a persistent Respondent ID. Deleting provider records does not remove a Respondent ID. every 28 days, delete records that are at least 60 days old and empty Tally Trash in the same operation, producing an expected 60 to 88 days window. The sole operator is hyc, with no independent backup; a missed operation can extend that period.</p>
         <section id="analytics-hosting">
-          <p>Plausible is not enabled; its planned service domain is plausible.io.</p>
+          <p>GoatCounter is not enabled; its planned service domain is mythic-china.goatcounter.com. This version sends no analytics requests. These are counts, not identified readers. The account is configured for 90 days of aggregate retention; processing terms remain unverified.</p>
           <p>When you visit a version hosted on Vercel, Vercel may process your IP address, approximate location derived from it, and technical system information to deliver, maintain, and protect the hosting service.</p>
           <p>Hosting and security processing can still occur without a submission. For Vercel’s own privacy practices, see <a href="https://vercel.com/legal/privacy-notice">Vercel’s Privacy Notice</a>.</p>
         </section>

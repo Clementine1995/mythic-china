@@ -1,6 +1,62 @@
 # DEV_WORKFLOW.md
 
+## 阅读版 Beta 本地准备（2026-09-09）
+
+本次 public 重建通过 Astro 117 文件零诊断与独立 output verifier：13 HTML、2 XML、robots.txt、112 Hero、10 字体和一个默认关闭的脚本。独立只读检查的 658 个站内链接/资源/片段均存在，实际页面没有 form 或输入控件；Privacy 与关闭状态一致。共 140 文件、3,275,431 字节。此前同一业务源码的完整 check 为 38 文件/655 测试通过；本次之后只改范围和交接文档，未重复全量测试。favicon 缺失作为非阻塞体验项后补。
+
+先沿既有固定 Node/Corepack 与显式 origin 的 `build:public` 入口构建并通过校验，再用下列命令保存**本地诊断包**。包仅含 public 输出，不包含 review `dist/`、源码、测试或配置；文件摘要清单放在 ZIP 外。命令创建新的忽略目录，不覆盖旧包、不联系平台。当前 dirty source 的包不能上传；获得本地提交授权后须从 clean revision 重建并完成最终 QA，再生成新的候选身份。
+
+```powershell
+$betaOutput = (Resolve-Path -LiteralPath '.local/public-build').Path
+$betaPrep = Join-Path (Resolve-Path -LiteralPath '.local').Path ('reading-beta-prep-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+$null = New-Item -ItemType Directory -Path $betaPrep -ErrorAction Stop
+$betaZip = Join-Path $betaPrep 'mythic-china-public-diagnostic.zip'
+$betaFiles = @(Get-ChildItem -LiteralPath $betaOutput -File -Recurse | ForEach-Object {
+  [ordered]@{
+    path = [IO.Path]::GetRelativePath($betaOutput, $_.FullName).Replace('\', '/')
+    bytes = $_.Length
+    sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+  }
+} | Sort-Object { $_.path })
+[IO.Compression.ZipFile]::CreateFromDirectory($betaOutput, $betaZip)
+$betaArchive = [IO.Compression.ZipFile]::OpenRead($betaZip)
+try {
+  if ($betaArchive.Entries.Count -ne $betaFiles.Count) { throw 'ZIP inventory mismatch' }
+  foreach ($betaFile in $betaFiles) {
+    $betaEntry = $betaArchive.GetEntry($betaFile.path)
+    if (!$betaEntry -or $betaEntry.Length -ne $betaFile.bytes) { throw 'ZIP file mismatch' }
+    $betaStream = $betaEntry.Open()
+    try { $betaHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($betaStream)).ToLowerInvariant() }
+    finally { $betaStream.Dispose() }
+    if ($betaHash -ne $betaFile.sha256) { throw 'ZIP digest mismatch' }
+  }
+} finally { $betaArchive.Dispose() }
+$betaManifest = [ordered]@{
+  status = 'nondeployable-local-diagnostic'
+  generatedAt = [DateTime]::UtcNow.ToString('o')
+  sourceHead = (git rev-parse HEAD)
+  sourceDirty = [bool](git status --porcelain)
+  origin = 'https://mythic-china-beta.vercel.app'
+  archive = [IO.Path]::GetFileName($betaZip)
+  archiveSha256 = (Get-FileHash -LiteralPath $betaZip -Algorithm SHA256).Hash.ToLowerInvariant()
+  files = $betaFiles
+}
+[IO.File]::WriteAllText((Join-Path $betaPrep 'manifest.json'), ($betaManifest | ConvertTo-Json -Depth 6), [Text.UTF8Encoding]::new($false))
+$betaPrep
+```
+
+下一步：单独授权本地提交现有已验证改动，按新 revision 重建 public，并短时启动仅本机可访问的静态预览完成最终页面 QA，结束后关闭该服务。接着准备既有 Vercel 项目的受保护 Preview；通过后再请求生产发布。本轮不安装 CLI、不接 Git、不上传。非 CLI 的 [Vercel Create Deployment API](https://vercel.com/docs/rest-api/deployments/create-a-new-deployment) 支持精确 project/team 与文件交付，但需要另行配置认证，且首次项目设置会被保存；官方文档的默认 Preview 行为尚未在本项目验证，不能直接把网页 Production 拖放当成这个入口。原生 API 的真实调用、保护及回滚必须在上传前完成具体准备。
+
+本机已只读确认 `C:\Program Files\Python313\python.exe` 为 Python 3.13.13。取得本地服务授权后，重新检查 4321 无监听，再在前台终端运行下列仅用于静态 QA 的入口；不借默认 review runner 预览 public。保存终端会话/PID，结束时在该终端 Ctrl+C，回查对应 PID 及端口已退出；如端口已被占用则不结束未知进程。此处列命令不代表已启动服务。
+
+```powershell
+netstat -ano | Select-String ':4321\s+.*LISTENING'
+& 'C:\Program Files\Python313\python.exe' -m http.server 4321 --bind 127.0.0.1 --directory 'F:\codex-project\mythic-china\.local\public-build'
+```
+
 ## 职责
+
+当前执行主线（2026-09-09）：按 [011](docs/requirements/011-public-beta-validation.md) 优先准备阅读版 Beta，Newsletter、Reader Request、Analytics/RUM 保持关闭。Tally 测试已由 owner 暂停在 3/10 次激活、2 条 Completed；下文后续用例是历史计划，不再自动执行。未完成项归对应功能未来启用，测试记录不擅自删除。本次仅做本地 public 重建、静态校验和诊断包整理；提交、启动预览服务、远端预览及生产发布仍按具体动作授权。
 
 本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；012 又为四篇 Entry 与 Liaozhai Collection 闭合五组 Hero。当前共有 21 个精确画布 master、21 份 repository source rendition、9 份 production record、12 份 approved manifest 版本记录、11 个 approved/current 逻辑资产及 17 份 current responsive rendition；非默认视觉入口已实际生成、解码 120 个 AVIF/WebP 目标。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当时的 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。Project owner 后续把 M5-U1–U3、U4 账户准备快照与第二 Collection 决策包提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；2026-09-03 四篇研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为该提交，工作树干净。013 已完成 `public` intent、runner、页面/endpoint 与本地诊断输出；deployable 身份、远端环境和发布仍未完成；VB6 独立审核 6+2 到 ready 后，owner 又批准全部为 published，六篇目标公开日期为 2026-09-10。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 承接 Public Beta 生产、live smoke、回滚、线上地区复核、RUM/p75、上线后 R2a/R2b 与正式 MVP 收口。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 
@@ -1225,7 +1281,7 @@ try {
 
 ## 数据库、外部服务与真实写入口
 
-站点运行期当前均不适用。外部已有审核已通过的 Buttondown 账户和 Tally Free 未发布草稿，但项目没有数据库、表单 endpoint、邮件、分析、支付、广告配置或任何可执行外部写入口。未来接入任一能力时必须先建立需求文档，并在本文件增加：
+站点运行期的真实写入当前均未启用。外部已有审核已通过的 Buttondown 账户及 owner 提供发布链接的 Tally Free 表单；本站 Newsletter/Analytics 配置默认关闭，Reader Request 尚未接线，没有数据库或站内表单 endpoint。Tally 的最新证据及受控步骤见本文末尾与 006 第 12.10 节；账户准备或托管表单存在不等于本站真实接入。未来启用任一能力时必须先在对应需求和本文落实：
 
 - 环境和实际身份校验。
 - Mock/隔离测试入口。
@@ -1452,4 +1508,311 @@ git commit -m "docs(hosting): record verified account and deployment gates"
 if ($LASTEXITCODE -ne 0) { throw 'Hosting-note commit failed.' }
 git log -1 --format='%H %P %s'
 git status --short --branch
+```
+
+## GoatCounter 免费分析合同与实施顺序（2026-09-08）
+
+本批开始时 HEAD 为 `190cbdde39811912c1761799962500fff33c9202`，工作树和暂存区干净，本地 `main` 与未 fetch 的 `origin/main` 对齐；这不是远端查询结果。owner 已接受零月费方案并要求继续，账户由 owner 手工注册。Plausible 的购买/处理决定保留为前节历史，已不属于当前进入门禁；新合同以 [006 第 5.4 节与 U5B](docs/requirements/006-external-interactions.md) 为准。
+
+本批文件范围为 README、本文、ARCHITECTURE、REFERENCES、006、011，加上 PRODUCT/001 中直接相关的当前供应商摘要。只同步文档，不改变代码、公开 Privacy、运行配置、依赖、服务或版本控制；文档检查使用本文既有“文档验证”命令，检查状态、UTF-8、相对链接、占位符和 diff 空白。代码和构建未变，无需重复业务测试或构建，也不新增最终候选验证证据。
+
+后续按以下顺序推进，实施前先列出精确文件及适用验证入口：
+
+1. **离线接线**：复用 `article-reading-state.ts`，补 pageview、GoatCounter mapping/注入 transport、默认关闭配置入口、本站 bootstrap 与 DOM hook；同步 Privacy 目标文案、架构 inventory 和精确 public 输出例外。仅 Fake 请求，不安装依赖或启动服务；运行匹配单元/架构/输出测试及既有完整本地门禁。离线产物验证还须覆盖 local/preview 零出站，不能只验证源代码 helper。
+2. **账户只读核查**：owner 提供公开统计站点 URL 后，按 006 第 14 节核对归属、精确 endpoint、免费适用性、Sessions/明细/维度、90 天保留、看板访问、地区与条款、导出/删除。只需公开地址，不接收凭据；未核定的生产值不写进配置。登录与后台修改不得从账户注册自动推导。
+3. **受控真实验证**：先实例化独立测试环境与批准 origin、合成路径、pageview/三个事件的精确数量上限、停止条件、同窗口报表回查和仅本次记录的清理；没有这份执行包和真实写入授权就不请求 `/count`。测试环境不能是解除隔离的 public preview。未取得真实输入前不提供可运行的示例 endpoint 或伪造验证命令。
+4. **M6/M7**：配置、公开 Privacy 与同一制品完成验证后，继续 clean-source QA、受保护预览及单独 production 启用；真实请求头/缓存/导航与报表需实证。GoatCounter 不产出本项目 RUM/p75，不关闭 Buttondown/Tally、托管或发布门禁。
+
+若免费账户无法满足 006 的字段、次数和保留合同，或供应商要求付费，统计保持关闭并重新决定，不自动购买或切换。关闭发送、导出和删除是不同动作，退出必须记录实际完成范围；本节没有执行账户变更、真实写入、提交、推送或部署。
+
+文档批验证：37 份 Markdown 的严格 UTF-8、相对链接、占位符扫描及 diff 空白检查通过；独立只读复审未发现本批阻塞项。差异限定上述八份文档；没有运行代码测试、构建、服务或真实供应商请求。U5 离线接线、账户与生产验证继续保持未完成。
+
+### U5B 离线适配与 DOM 监听
+
+owner 随后提供 `https://mythic-china.goatcounter.com/`。该地址是 owner 提供的账户准备信息；公开抓取未读到页面，不证明后台设置、保留或统计成功。本单元不访问 `/count` 或账户写接口，不修改真实运行配置，不启用生产统计。
+
+本单元新增 `src/services/analytics-record.ts`（浏览器可用的严格事件/pageview 清洗）、`goatcounter-analytics.ts`（精确请求 mapping 与必需的注入 transport）及 `src/client/site-analytics.ts`（默认关闭的条件 DOM 监听）；`analytics.ts` 保留原 Schema/Fake 入口并复用轻量合同。监听读取既有 Story/Related 结构，无导入时副作用，页面暂不消费它；M6 才实现唯一本站 bootstrap、运行配置及制品验证。本次只同步 Privacy 未启用计划、隐私文案 oracle、供应商链接拒绝名单和匹配架构/单元测试，不放行实际输出脚本。
+
+沿用本文固定 Node/Corepack/Path 身份门禁和 `format`、`check`、显式 origin 的 `build:public` → `build` 入口。定向测试入口为：
+
+```powershell
+& $mythicProjectCorepack pnpm run test tests/services/analytics-record.test.ts tests/services/goatcounter-analytics.test.ts tests/services/external-interactions.test.ts tests/services/article-reading-state.test.ts tests/client/site-analytics.test.ts tests/architecture/project-boundaries.test.ts tests/site/external-interactions-ui.test.ts tests/site/review-output-policy.test.mjs
+```
+
+所有 transport 均由测试 Fake 注入；不运行站点浏览器验收或本地服务，不发送真实 analytics 请求。检查范围含字段与来源文章清单、失败不假成功/不重试、hidden/BFCache 暂停与恢复、两种阅读顺序、Related 正常激活、cleanup，以及默认关闭/review/非生产 origin/未发布路径/自动化零调用。旧 37 文件文档批结果不覆盖本单元代码。
+
+离线单元验证结果：定向 8 文件/256 测试、完整 check 的 33 文件/581 测试和 Astro 105 文件零诊断通过；随后显式 origin 的 public → review 构建及两套 verifier 通过，仍为 13 public HTML / 14 review HTML、112 Hero、10 字体和零客户端 JavaScript。独立只读审查未发现模块逻辑阻塞。内容/资产追溯、文化来源、图片与字体未变，非默认资产再生产不适用；请求结果不代表聚合已记录、可见时间/Story 分母与 BFCache 生命周期处保留必要职责说明。
+
+读取 owner 提供的 GoatCounter 地址时，公开抓取未成功，本机浏览器导航亦超时；没有取得账户后台设置或请求/报表证据，不把它写成账户不存在或已验收。未启动本地服务、安装依赖、修改真实配置、发送统计事件、提交、推送或部署。真实 DOM/浏览器传输验收、M6 bootstrap/产物 fixture 与最终发布 QA 仍后置；本轮输出仅为未提交源码上的本地诊断。
+
+### M6 analytics 页面接线（2026-09-09）
+
+owner 提供 GoatCounter 设置截图并确认保存成功：90 天保留，八项采集维度全部关闭；已授权继续本地接线。账户行为未实证，设置证据详见 006。范围为 `src/site/analytics-configuration.ts`、`src/client/analytics-bootstrap.ts`、`src/client/site-analytics.ts` 的职责说明、`astro.config.mjs`、`src/layouts/SiteLayout.astro`、Privacy、脚本锁与输出/离线执行验证、匹配测试及 README/ARCHITECTURE/PRODUCT/001/006/011/013/REFERENCES。只修改构建代码中的关闭配置，不修改真实环境变量、账户或生产开关，不启动服务、发送真实请求、提交或部署。
+
+沿用固定运行时、format/check 与显式 origin 的 public → review 构建。首次接线产物或 bootstrap 源变化时，原输出锁应拒绝未审 JS；只读检查实际 bundle 的唯一入口、全部源码依赖与无额外 import/chunk，再把精确路径和原始字节 SHA-256 登记到 `scripts/analytics-script.json`。该锁只表示受审脚本身份，不是发布 receipt；禁止由每次构建自动刷新。实际产物执行验证由 public verifier 强制调用，全部 fetch 注入 Fake，无浏览器/服务和真实网络。
+
+匹配测试入口（按已存在的固定 Corepack 变量）：
+
+```powershell
+& $mythicProjectCorepack pnpm run test tests/client/analytics-bootstrap.test.ts tests/site/analytics-configuration.test.ts tests/site/analytics-output-policy.test.mjs tests/site/public-output-policy.test.mjs tests/site/public-assembly.test.ts tests/architecture/project-boundaries.test.ts tests/site/external-interactions-ui.test.ts tests/site/review-output-policy.test.mjs
+```
+
+完成标准：13 页 public 各引用同一份锁定 JS/配置；14 页 review 无脚本/配置；缺失、未知属性、错误来源/账户/路径、任意启用值、重复脚本、字节变化与额外 JS 均被拒绝或零调用；完整 check、两种构建及文档检查通过。实际请求头、网络可达性、报表回查和删除行为保留到受控联调；未提交源的检查不生成 clean-source receipt。
+
+本单元完成记录：固定 Node/Corepack/pnpm 下，初次定向 8 文件/229 项测试通过；复审后收紧模拟 DOM 的 selector/属性匹配，并补微任务延迟写入负例，定向 2 文件/23 项通过；最终完整 check 为 36 文件/619 项测试、Astro 112 文件零诊断及 14 页 review/零 JS。public 构建为 13 HTML、2 XML、robots.txt、112 Hero、10 字体和一个关闭的 JS；原始产物的无网络执行通过。两次生成的 `/_astro/page.Di-gmpYO.js` 均为 6783 bytes，SHA-256 为 `1c53c7630c7ad1f4a5ce94730eaec261e3296319873b1faeefbc546ec4ecf71d`，精确锁已登记；最终保持 public → review 构建顺序。
+
+构建初次因虚拟入口相对路径无法解析而失败，已改为 Vite 根路径导入；随后原零 JS oracle 按预期拦截新脚本，受审锁与精确例外接入后通过。ESLint 新发现可再生 public JS 被当源码扫描，`eslint.config.mjs` 只增加 `.local/public-build/**` 排除，产物仍受摘要和执行检查；没有削弱源文件检查或其他输出门禁。新增脚本工具使用明确 Node imports。内容、文化来源、Hero、字体、资产追溯/披露与 URL 未变；已有构建诊断通过，必要职责注释解释身份钉住、document 生命周期、失败关闭与受审产物执行。不适用新的内容/资产生产或视觉重构。未启动服务/浏览器、安装依赖、修改账户、发送真实统计、暂存、提交、推送或部署；没有 clean-source receipt。
+
+### GoatCounter 四次受控真实验证（2026-09-09）
+
+owner 对上一单元提出的受控真实联调回复“开始吧”，本次已获真实测试授权。目标是核对最小浏览器传输、四种 path mapping、报表接收及测试数据清理，不是生产启用或 M5 整体完成。仅更新本文和 006 的执行状态，在系统临时目录准备独立诊断工具；不改变站点代码、配置、allowlist、Privacy、服务、依赖、Git 或部署。既有未提交工作保留，HEAD 为 `190cbdde39811912c1761799962500fff33c9202`。
+
+**身份与环境**：仅使用 owner 的 `https://mythic-china.goatcounter.com/`，目的端固定为 `https://mythic-china.goatcounter.com/count`。先在仅含该站点的已登录独立浏览器窗口确认账户、绑定域名、90 天/八项关闭/看板权限、当前报表时区以及 Settings → Manage Pageviews 入口。确认下表四个 path 均不存在后才能发送；如果已存在、设置不符、登录不可用或不能精确清理，停止发送，不换路径绕过。账户删除仅核查入口，不执行。
+
+诊断页面路径为 `C:\Users\335086\AppData\Local\Temp\mythic-goatcounter-check-20260909.html`，只能从本机 `file:` 打开；无监听端口、外部脚本、字体、图片、存储、自动请求或重试。它独立于站点构建，只通过一次手动点击发送以下序列；`file:` 的不透明 Origin 通常为 `null`，须实际观察并保留其证据范围，不伪装为 Production。网站 local/review/preview 零请求与 production 默认关闭继续保持。工具文案明确成功 HTTP 响应不等于后台记数。
+
+| 顺序 | `p` 解码值 | `e` | 全次请求上限 |
+| --- | --- | --- | --- |
+| 1 | `/explore/goatcounter-check-20260909/` | `false` | 1 |
+| 2 | `article_session_qualified:/explore/goatcounter-check-20260909/` | `true` | 1 |
+| 3 | `article_depth_75:/explore/goatcounter-check-20260909/` | `true` | 1 |
+| 4 | `related_story_click:/explore/goatcounter-check-20260909/` | `true` | 1 |
+
+**传输与停止**：严格 GET，只有 `p/e` query；复用当前 adapter 的 `mode: cors`、`credentials: omit`、空 referrer、`referrerPolicy: no-referrer`、`cache: no-store`、`keepalive: true`、`redirect: error`，无 body/自定义 header。浏览器仍会向该服务提供连接 IP、默认 User-Agent 和 Origin 等技术信息；测试不传读者数据。一次点击先禁用入口，依序发送；第一个 HTTP 失败、非 2xx、重定向或 15 秒内未取得可判定的传输结果即停止后续发送，不刷新重发，不更换 no-cors/像素方式。HTTP 2xx 可以继续本次序列，但后台聚合仍是未确认；不能用 adapter 对 2xx 返回的 `unknown-result` 作为传输失败条件。CORS/断连/超时也可能已被服务端接收，仍须回查和精确清理。显式停止按钮只阻止后续请求，已发出的不能撤回。页面按钮只在当前打开期间锁定；全次四次的预算由操作记录约束，不能因刷新、另开标签或重开文件重置。
+
+**浏览器入口**：使用已连接的浏览器工具；若内置浏览器不可用，则使用 Computer Use 技能在独立 Edge 窗口打开上述本地文件。先开 Network 面板清空本次记录，再单次点击。记录实际 GET 数、脱敏后的 path/e、status/CORS、Cookie/Referer 是否缺失及 Origin；不导出可能包含登录凭据的整份 HAR。工具自身的 fetch 选项只证明请求意图，不代替 Network 证据。
+
+**回查与退出**：记录账户时区及测试前后窗口，只读等待统计更新，核对四项各新增一次。HTTP 2xx/GIF 不作接收证明；没有出现时只刷新后台，不重发。普通 pageview 在后台可能去掉尾斜杠，事件内部路径则保留，须按实际四条 path 及 ID 精确对应。Settings → Manage Pageviews 只选择本次已确认的四个 path ID，不用全选或宽泛前缀；到最终不可恢复删除按钮时按工具规则取得当次确认，再删除并等待后台处理、刷新核对消失。未得到确认时保留精确待清理清单并停止，不能冒称闭环。
+
+明细关闭时 CSV export 不可用，本次不为导出开启明细，也不创建 API token。聚合报表足以完成最小回查；如使用现有 JSON export，则只在仓库外保存并检查本次 path 与 aggregate，不导出无关数据。90 天实际历史清理、备份、完整退出、生产阅读触发与重复加载次数均不由本次四条 smoke 证明。官方依据：[更新频率](https://www.goatcounter.com/help/faq)、[CSV 限制](https://www.goatcounter.com/help/export)、[聚合 JSON](https://www.goatcounter.com/help/export-json)、[路径清理入口](https://github.com/arp242/goatcounter/issues/806)、[删除处理实现](https://raw.githubusercontent.com/arp242/goatcounter/main/handlers/settings.go)。
+
+**进入状态**：内置浏览器清单无标签，打开专用 GoatCounter 标签超时；现有 Edge 窗口混有其他私人业务标签，自动审批拒绝读取其完整页面状态。已请 owner 新建仅含 GoatCounter 的独立窗口，不要求凭据或重复测试授权。在取得该窗口并完成先决核查前，真实请求计数为零。业务代码未变，不重复完整测试/构建；本文/006 使用既有文档验证和 diff 检查，临时工具须先以 Fake fetch 验证预算、停止和零自动请求。
+
+随后 owner 已打开独立 GoatCounter 窗口；首次操作被 Esc 中断，恢复后工具因无法可靠确定浏览器 URL 而结束 Computer Use，未发送请求。owner 改为提供统计首页截图：日期范围为 2026-09-02 至 2026-09-09，页面显示 `No data received`、`0 out of 0 visits shown`、`0 visits`，示例代码中的端点为本次精确 `/count` 地址。该截图支持当前零数据基线，不是对示例供应商脚本的接入授权；报表时区和 Manage pageviews 精确清理入口仍待截图核对。先前 90 天/八项关闭及保存确认仍有效，不要求重复配置。
+
+本次临时 HTML 与 `C:\Users\335086\AppData\Local\Temp\mythic-goatcounter-check-20260909-verify.mjs` 均仅为仓库外诊断材料。主代理创建前检查精确路径不存在；HTML 无外部资源，只允许目标 endpoint 连接，默认禁用发送，操作人须先核对零基线和清理入口。验证脚本读取该 HTML 的实际脚本字节并用 `node:vm` 注入 Fake DOM/fetch，覆盖加载零调用、前置条件、四次预算、重复点击、失败/超时停止及手动停止；同时对照当前 adapter 的请求选项。该检查无真实网络或浏览器：
+
+```powershell
+& 'D:\Program Files\nvm\v24.16.0\node.exe' 'C:\Users\335086\AppData\Local\Temp\mythic-goatcounter-check-20260909-verify.mjs'
+```
+
+临时工具验证通过后仍不自动打开或发送；先由 owner 提供 Manage pageviews 页面，再逐步操作 Network 面板和本地工具，完成真实请求及后台回查。当前不存在真实发送结果。
+
+准备验证结果：固定 Node 下临时 HTML 的 10 项无网络执行场景通过，包含四个精确 `p/e` 与当前 adapter 请求选项逐项一致、前置条件、重复点击、非本地来源、HTTP 失败/网络失败/超时和手动停止。37 份 Markdown 严格 UTF-8、143 个相对链接、模板占位符与 diff 空白检查通过。仅本文/006 和仓库外两个临时文件在本轮修改，站点业务代码及既有未提交变更未动；暂存区为空。尚未在真实浏览器打开临时工具，没有真实请求、数据删除、提交、推送或部署。
+
+### 四次收数回查结果（2026-09-09）
+
+owner 先提供 Settings → Manage pageviews 截图，页面具有 Path 搜索以及按匹配路径移除/合并的管理入口，通配语法在 UI 可见；这证明入口可用，不证明执行删除。随后按指导自行使用临时 HTML，返回的结果截图显示已勾选零基线/清理入口确认框且按钮锁定；测试开始为 UTC `2026-09-09T01:34:18.232Z`（Asia/Shanghai 09:34:18.232），前节四个完整 `p/e` 各调用一次、均为 HTTP 200，本页累计四次。主代理未操作浏览器、重发或触发额外真实请求；本轮四次预算已耗尽，不能通过刷新或重开工具补测。
+
+同次 owner 提供的 GoatCounter 首页截图，日期范围仍为 2026-09-02 至 2026-09-09，`No data received` 已消失，显示 `4 out of 4 visits shown` 与 `4 visits`：
+
+| 工具请求与后台对应项 | 观察结果 | 证据范围 |
+| --- | --- | --- |
+| pageview，`e=false` | 工具 HTTP 200；后台 `/explore/goatcounter-check-20260909` 为 1 | 后台可见完整路径，普通页面尾斜杠被去掉 |
+| `article_session_qualified`，`e=true` | 工具 HTTP 200；对应前缀行计数 1 且有 event 标记 | 工具显示完整合成路径；后台行的末尾被 UI 截断 |
+| `article_depth_75`，`e=true` | 工具 HTTP 200；对应前缀行计数 1 且有 event 标记 | 同上，完整后台路径/ID 留给清理前核对 |
+| `related_story_click`，`e=true` | 工具 HTTP 200；对应前缀行计数 1 且有 event 标记 | 同上，完整后台路径/ID 留给清理前核对 |
+
+结论：已证明本次独立合成工具的浏览器可达性和四类请求对应的后台收数；不是仅凭 HTTP 200 判成功。总数包含一个 pageview 和三个事件，不代表四位访客，也未实证 Sessions 关闭后的重复加载计数、生产 origin、15 秒/75%/Related 阅读触发或发布制品。页面中 Referrer 等维度仍显示采集关闭，但这不能替代实际请求头核查；请求头的 Cookie/Referer 缺失、Origin、缓存/导航及账户时区均不能从这两张截图推断已通过。
+
+当时剩余动作（执行结果由下一节替代）：保留现有 Network 记录，读取四个 `/count` 的请求 URL/query 和 Request Headers，不刷新或重新发送；若记录已丢失则把请求头检查列为未完成，不消耗新的写入预算。随后在 Manage pageviews 以 `%goatcounter-check-20260909%` 搜索，仅用结果定位，逐条核对四个完整 path 和实际 ID；不把通配搜索当删除范围、不删除其他路径。精确对象复核后才由 owner 确认并清理，刷新回查四条消失。没有删除证据时保留本次四条待清理，不关闭 U5。现有清理入口截图没有显示执行结果，因此未登记删除成功。
+
+本轮只同步 README、本文及 006 的当前事实，不修改业务代码、临时工具、账户配置、生产开关、依赖、服务或 Git；沿用文档验证，不重复业务测试/build。此前准备与离线阶段的“零真实请求”保留其历史范围，以本节作为本次执行后状态。
+
+### 四条测试统计清理收口（2026-09-09）
+
+owner 表示已关闭 Network。本次四次请求预算已经用完，实际 Cookie/Referer/Origin、query、缓存等 Network 证据记为未验证，不通过重发补取，也不把工具代码或页面日志当请求头证据。
+
+owner 随后在 Manage pageviews 搜索 `%goatcounter-check-20260909%`，截图完整显示下列四个结果，每项 `# of hits` 均为 1，未匹配其他记录：
+
+- `/explore/goatcounter-check-20260909`
+- `article_session_qualified:/explore/goatcounter-check-20260909/`
+- `article_depth_75:/explore/goatcounter-check-20260909/`
+- `related_story_click:/explore/goatcounter-check-20260909/`
+
+四个完整路径已逐项对照前节合成清单，关闭此前后台事件后缀被截断的缺口。该 UI 没有显示内部 path ID；原执行计划中的 ID 核对改以完整路径、四项精确结果集及各 1 hit 确认，不声称取得 ID，不读取隐藏账户接口。搜索通配符只用于定位；本次删除对象经人工核对恰为这四项，无其他用户记录。
+
+主代理说明 Delete pageviews 会不可恢复地删除这四项后，owner 自行执行并返回 Dashboard 截图：日期范围仍为 2026-09-02 至 2026-09-09，Filter paths 为空，Pages 显示 `0 out of 0 visits shown` / `Nothing to display`，Totals 为 `0 visits`。结合删除前四个精确路径和四次收数，确认本次测试聚合已从同范围无筛选报表消失，不仅是删除按钮受理提示。未取得内部 ID、后台清理任务日志或备份证据，不扩大为账户删除、90 天自动清理或底层存储/备份擦除验证。
+
+本次结果为“独立合成发送 → 后台各收一次 → 精确路径清理 → 报表归零”完成。请求头仍是明确缺项，生产 origin、真实阅读触发、重复加载次数、导航/缓存、账户时区和完整处理/退出验证不由本次证明；站点 `isEnabled: false` 未变，M5/U5 整体和发布门禁保持。本次四次授权预算耗尽，临时 HTML/验证脚本留在系统临时目录作诊断材料，不再打开或执行发送入口；没有新增请求、服务、依赖、配置、Git 提交/推送或部署。
+
+收尾仅修改 README、本文、006；图片和一次性日志不入库，未改内容/资产/业务代码，资产追溯与构建诊断无变化，故不重复业务测试或构建。验证沿用本文既有严格 UTF-8、相对链接、模板占位符与 diff 空白入口。
+
+## Buttondown 账户与有限订阅验证（2026-09-09）
+
+当前账户、设置与证据范围以 [006 第 12.8 节](docs/requirements/006-external-interactions.md#128-buttondown-账户与有限订阅验证2026-09-09) 为准。后台显示 Mythic China，newsletter slug 为 `mythicworld`；owner 提供的完整原生 form 只有 email，目标传输合同据此替代旧的固定 embed 字段计划。此前 U2 的历史执行记录不倒写，业务代码仍只有 provider-neutral DTO/Fake 与 inactive Footer。
+
+- **已发生的手工操作**：owner 按指引用本人控制的一个测试邮箱从 `https://buttondown.com/mythicworld` 托管页操作订阅，先给出一行 Unactivated，再按确认邮件指引操作后给出同一行 Regular 截图。主代理未代填邮箱、调用真实接口、发送邮件或读取确认链接。本节按实际结果补记，不将事后截图称为已提前冻结的完整执行包。
+- **证据限度**：当前观察到一条测试身份的状态转换；请求/邮件的具体数量、Network、邮件正文/头及嵌入 action/payload 未取证。Billing 仅展示升级提示和无发票。本站无可提交表单，本次也没有 localhost、preview、Vercel 或已部署页面的订阅测试。
+- **后续最小范围**：先由 owner 查看已有邮件是否提供退订或管理订阅入口；[官方 Portal](https://docs.buttondown.com/portal) 也提供读者身份管理。对同一测试身份最多执行一次读者退订，回后台核对 Unsubscribed；该步骤尚未发生。若入口另需登录邮件、出现其他 newsletter/身份、收费、未知结果或错误，先停止并说明，不自行追加订阅、重发、API/import 或群发。
+- **清理停点**：退订不等于删除。待实际菜单显示后，只核对本次测试身份的精确删除对象与提示，再按 owner 的清理决定操作；不批量删除。官方 [cleanup](https://docs.buttondown.com/subscriber-cleanup) 默认 soft delete，不能承诺底层或备份清空；目前未取得退订或清理证据。
+- **验证与状态**：本批仅同步 README、006 与本文，不改变内容/资产/业务代码或构建诊断，不运行业务测试、构建、服务、依赖安装、Git 写操作或部署。37 份 Markdown 严格 UTF-8、145 个相对链接、零模板占位符与 diff 空白检查通过；暂存区为空。U4/M5 和本站接线继续开放，四次 GoatCounter 预算保持耗尽。
+
+## Newsletter 默认关闭准备（2026-09-09）
+
+owner 要求加快进度，本批直接推进 006 第 12.9 节的默认关闭本地准备。范围为 Newsletter 配置、Layout/Footer/NewsletterForm、局部表单样式、Vitest 的 Astro 内存渲染配置、匹配测试和状态文档；现行 public/review 输出门禁不放宽，Privacy 仍准确说明本站不接收订阅。没有新依赖、服务、真实请求、邮箱、Git 或发布操作。
+
+沿本文固定 Node/Corepack 身份门禁运行；不重复安装。新增 `vitest.config.ts` 使用现有 `astro/config` 与 `astro/container` 的官方测试入口，`configFile: false` 避免加载站点运行配置或发布 hook，运行在 Node 内存，不开放监听端口。真实 action 只在隔离内存 HTML 中验证，fetch 陷阱使意外请求失败，测试不输出邮箱或确认链接。
+
+```powershell
+& $mythicProjectNode node_modules/prettier/bin/prettier.cjs --write src/site/newsletter-configuration.ts src/components/NewsletterForm.astro src/components/SiteFooter.astro src/layouts/SiteLayout.astro src/styles/global.css vitest.config.ts tests/site/newsletter-form.test.ts tests/site/external-interactions-ui.test.ts
+& $mythicProjectCorepack pnpm run test tests/site/newsletter-form.test.ts tests/site/external-interactions-ui.test.ts tests/architecture/project-boundaries.test.ts
+& $mythicProjectCorepack pnpm run check
+& $mythicProjectCorepack pnpm run build:public
+& $mythicProjectCorepack pnpm run build
+```
+
+public 构建必须沿本文 013 的显式批准 origin 入口执行，不能直接在无 origin 的 shell 运行上列 public 命令。定向格式化只列本批修改的源码与测试，文档检查沿既有入口。完成标准是两种真实产物仍无可提交 Newsletter、仅隔离内存可验证未来原生表单；未通过的账户、Portal/邮件退订、清理和发布门禁继续保留。
+
+- 实施与验证：默认 false 配置、Layout/Footer 透传、仅 email 的原生表单分支及局部样式已完成。定向 3 文件/24 测试通过；完整 check 通过 Prettier、ESLint、37 文件/635 测试、Astro 115 文件零诊断与 14 页 review verifier。随后显式 origin 的 public → review 构建及各自输出 verifier 通过，仍为 13/14 页、112 Hero 与 10 字体；public 保留唯一摘要锁定的关闭分析脚本，review 零脚本，两种产物均没有可提交表单。
+- 检查修正：真实 DOM oracle 要求完整 robots 声明，内存文档 wrapper 已补齐；Astro Container 的 Props 类型用展开后的属性对象匹配，未用断言绕过。当前 Corepack 布局未解析到 pnpm exec prettier，故定向格式化使用已安装的精确 Node 入口，不安装工具或重写其他文件。
+- 配套与限制：内容、Source/Claim/Terminology、资产及披露未变；构建诊断保持零错误，代码在 review 隔离和测试配置不加载发布 hook 处解释职责，并由真实组件/门禁测试核验。没有启用表单的浏览器、键盘、网络、CAPTCHA、重复订阅或邮件实证，没有退订/清理、服务启动、依赖变更、Git 写操作或发布；本地通过只关闭本批准备，不关闭 U4/M5 或最终发布验收。
+
+### 后续退订确认（2026-09-09）
+
+owner 已明确确认本次测试身份的真实退订完成，该事实替代前两节的退订待办；不要求重做或补截图，不推断当前后台标签、退订入口、邮件数量或网络细节。测试记录删除仍未确认，后续仅处理该记录的精确清理，不新增订阅或邮件。
+
+本次只同步 README、006、ARCHITECTURE 与本文的当前状态，代码、内容、资产和运行配置不变；验证沿既有文档 UTF-8、相对链接、占位符、差异空白及格式检查入口，不重复业务测试或构建。没有账户操作、服务、Git 写入或发布。
+
+## Tally 草稿核对与受控验证准备（2026-09-09）
+
+本批在保存项目 `F:\codex-project\mythic-china` 的既有 main 工作树继续，接手基线为 `190cbdd`，24 个已跟踪改动和 17 个未跟踪文件均保留，暂存区为空。owner 已提供 Draft 编辑页，要求沿用此前完成的字段名、3–240 长度和 Required/Hidden 配置，随后确认 Self 与 Respondent email notifications 均关闭；具体证据范围见 [006 第 12.10 节](docs/requirements/006-external-interactions.md#1210-tally-草稿配置确认2026-09-09)。不再重复索要已确认配置。
+
+本批先同步 006 和本文并准备下列步骤；owner 随后提供发布链接，当前状态已窄同步 README 与 ARCHITECTURE。A 的预览显示由 owner 确认，B 的发布链接已提供且浏览器标签标题匹配，但完整公开页面核验未完成；C 的本轮最多 10 次提交尝试已获 owner 明确授权，当前已用 1/10，第 1 项未通过并暂停后续 9 项；删除另行确认。三阶段分别回报结果，不把前一阶段的通过当作后一阶段授权，也不接入尚未完成行为验证的站点链接。
+
+### A. 编辑器预览显示核对
+
+从已有草稿右上角 `Preview` 进入编辑器预览，保持 Draft；只观察以下三种状态，不点击 `Send suggestion`、不按 Enter 提交，不使用真实邮箱。演示邮箱使用不可投递的合成值 `reader@example.invalid`，只放入表单输入框，不放入 URL。
+
+1. Email 空白时，完整 consent 标题和复选框均应隐藏。
+2. 填入合成邮箱后，consent 应出现且保留必填标记；不勾选、不提交。
+3. 清空邮箱后，完整 consent 应重新隐藏。结果一次用文字回报即可；只有异常时需要画面定位。
+
+当前结果：首次预览图中 Email 空白，consent 文案和复选框仍可见。主代理给出完整题块默认 Hide、保留 required 和既有 `email Is not empty → Show emailConsent` 的修正及三状态复查指引后，owner 回复“可以了”。按该回复上下文确认 A 的“隐藏 → 出现 → 隐藏”显示检查通过，不重复索要截图；没有代理浏览器复验，不推断 owner 的具体菜单动作，也不证明实际提交校验或数据保存。
+
+以上仅核对条件显示，不证明未同意时阻止提交、隐藏 required 字段不会阻塞、长度校验或旧 consent 值清除。官方说明可用 Preview 检查显示/Email 校验，但本次未找到“Preview 提交不保存且不发邮件”的明确保证，不能把预览按钮当零写入沙箱；如现场出现验证邮件、验证码、收费或意外跳转即停下，不继续操作。
+
+### B. 发布草稿并取得真实链接
+
+仅发布当前 `Mythic China — Reader Request` 草稿一次，影响是建立可由持链接者访问的 Tally 托管表单，不等于网站部署。发布后从该表单 Share 页取得精确 HTTPS URL，核对表单身份；此阶段不提交，不公开推广链接，不改变 Newsletter、Analytics 或站点代码。URL 只允许追加已 published 的稳定 `pageId=zhong-kui`，不带邮箱、建议或同意值。发布结果不明时只读核查，不重复点击。
+
+当前结果：owner 按上述步骤提供 [Tally 托管表单](https://tally.so/r/2E6gdj)，据此记录由 owner 完成发布。代理公开网页读取失败，浏览器打开超时后的标签清单显示精确 URL 和 `Mythic China — Reader Request` 标题；完整页面读取仍超时，尚未独立核验公开字段与 pageId 传递。未填写数据或提交，不重新发布。后续测试入口为 [携带已发布 pageId 的表单](https://tally.so/r/2E6gdj?pageId=zhong-kui)，该 query 只表示预填意图，不证明供应商已正确接收或保存。
+
+### C. 真实提交与精确清理（初轮历史；后续由文末编辑前审核流程替代）
+
+测试前 owner 已确认该表单 Submissions 为 0、Trash 为空，并沿用上次 Buttondown 那个本人控制的测试邮箱；地址不用发给代理，也不保存到仓库。owner 已明确回复“授权”，批准本轮最多 10 次提交尝试；当前已用 1/10，第 1 项未通过并暂停后续 9 项，删除另行确认。代理恢复浏览器连接仍超时，未填写或激活提交，按既定方案由 owner 在现有浏览器逐项操作，代理判断结果并累计次数；首次提交前在上述精确测试入口确认实际标题和字段仍匹配已核对表单。真实邮箱只在第 5、9、10 项由 owner 填入，其余不填邮箱。Self/Respondent 通知保持关闭，无新集成、邮件验证或营销订阅。用户可随时中止，停止后只核对已经发生的结果与精确清理对象。
+
+下表是初轮行为方案，最多 **10 次提交按钮激活，每项一次**；键盘提交同样计数，不自动重试，不以“预计拒绝”排除预算。按顺序完成，每次等待明确结果并回查记录；任一结果与预期不符、出现重复记录、未知结果、限流、验证码、邮件或其他状态变化，立即停止后续项。预期共有 5 次接受；该预期不是对实际落库数量的保证。
+
+| 项 | 合成建议与邮箱状态 | 合同期望 |
+| --- | --- | --- |
+| 1 | 三个普通空格，无邮箱 | 拒绝空白建议 |
+| 2 | ` ab `，无邮箱 | trim 后 2 code point，拒绝 |
+| 3 | `😀😀`，无邮箱 | 2 code point，拒绝，区分 UTF-16 单元计数 |
+| 4 | 241 个 ASCII `a`，无邮箱 | 超过上限，拒绝 |
+| 5 | `MC Tally consent check`，测试邮箱，未勾选同意 | 拒绝 |
+| 6 | ` abc `，无邮箱 | 接受；检查供应商保存原值与内部 trim 规则的差别 |
+| 7 | 239 个 ASCII `a` 后接一个 `😀`，无邮箱 | 240 code point，接受 |
+| 8 | `e`、组合重音 U+0301、`a` 三个 code point，无邮箱 | 接受，区分字素簇计数 |
+| 9 | `MC Tally reply check`，测试邮箱，明确勾选同意 | 接受，仅用于建议跟进 |
+| 10 | `MC Tally cleared email check`；先填邮箱并勾选，再清空邮箱 | 接受；核对没有残留邮箱或孤立 consent |
+
+**当前实测结果：第 1 项未通过，已用 1/10，后续 9 项暂停。** owner 在三个普通空格、无邮箱的操作指引后提供后台截图，显示 All 1 / Completed 1 / Partial 0；唯一行时间原样为 `Sep 9, 03:09 PM`，`pageId=zhong-kui`，requestedTopic 视觉空白，email/emailConsent 为 `-`。这支持首项输入已进入供应商记录，而非按合同拒绝；不从表格空白推断原始字符串或 null，不从 `-` 推断 null/false，不转换未核实的时区。Submission ID、记录详情和原始 payload 等尚未核对。保留唯一记录，先只读识别与核查可行修复；不继续下一项、不重试、不提高最小长度来冒充 trim 修复，也不以事后删除替代接收合同。剩余预算不自动解除异常停止条件；本轮没有重新提交、修改后台配置或删除。
+
+每条实际记录用 submission ID、提交时间和精确内容对应到当次操作，核对 `pageId`、建议、邮箱/同意的保存值、供应商生成标识和成功页。不得只凭感谢页判定记录正确；原始 payload、浏览器存储和邮件行为未取证时明确保留缺项，不把本轮通过写成服务端防绕过、完整故障/无障碍或 U4 整体验收。
+
+完成或中止后先只读列出本次实际产生的精确记录，再按 owner 对这些对象的授权移入 Trash；回查活动列表。永久删除须先核对 Trash 的实际作用域与完整对象，再在当次确认后执行并回查。若 Empty Trash 会影响其他表单或非本次数据，不清空；不以清理测试数据为由删除范围外内容。不得把供应商记录删除写成浏览器 Respondent ID 或备份已清除。
+
+### 本批状态与验证
+
+owner 配置确认保留，A 的三状态显示检查已由 owner 确认通过；B 的发布链接已取得，代理只观察到浏览器标签 URL/标题匹配，完整页面核验未完成；C 的测试前零记录/空 Trash/测试邮箱归属已由 owner 确认，并已明确授权本轮最多 10 次提交尝试，当前已用 1/10，第 1 项未通过并暂停后续 9 项，删除另行确认。当前仅同步 006、本文、README、ARCHITECTURE 和 CONTENT_MODEL 的 Tally 状态；业务代码、内容/资产及披露、构建期诊断和关键代码职责说明均不适用，不重复业务测试或构建。文档检查沿本文既有 UTF-8、相对链接、模板占位符和差异空白入口；准备批的独立审查不代替实际供应商行为证据。代理未启动服务、操作账户、发布草稿、填写/提交表单、发送邮件、删除记录、执行 Git 写操作或部署。
+
+官方依据（访问于 2026-09-09）：[预览与跳转边界](https://tally.so/help/redirect-on-completion)、[Email 校验](https://tally.so/help/email)、[隐藏字段与真实 Share 链接](https://tally.so/help/hidden-fields)、[删除与 Trash](https://tally.so/help/how-to-delete-and-recover-form-data)。公开说明不替代上述现场回查。
+
+## Reader Request 编辑前离线审核（2026-09-09）
+
+owner 已确认“先收集、编辑前严格筛选”，对应 [006 第 12.11 节](docs/requirements/006-external-interactions.md#1211-原始建议与编辑前严格筛选2026-09-09)。此前 C 的第 1 项保留为旧提交前拒绝要求下的失败；详情截图仍只有视觉空白和 `-`，没有 Submission ID，不再要求重复截图。首项后已有 1 条原始 Completed；当前真实提交累计 3/10，原第 5 项被拦住且当时 Completed 仍为 1；随后原第 6 项匿名 abc 建议写入，当前 Completed 为 2。下列流程替代旧 C 的后续执行顺序和文本拒绝预期；既有数据范围、同一 owner 邮箱、通知关闭、异常停点及删除逐次确认继续适用。
+
+### 人工处理边界
+
+1. hyc 在 Tally 核对本次来源记录和输入原值，明确 pageId、建议、邮箱与同意；界面不明或只有 `-` 时先核对，不猜测底层字段。Tally 原始导出不直接作为本工具输入，也不自动变成内部 Record。
+2. 只映射 `pageId`、`requestedTopic` 和可选的 `email` / `emailConsent`。二者确认都没有时可以同时省略；明确空邮箱与不同意映射为 null/false；非空邮箱必须有本次建议的明确 true。同意不明不得补成 true。禁止把 Respondent ID、后台时间或 Submission ID 加入 Submission 输入；这些由来源核对独立处理。
+3. 执行下面的本地入口。脚本从当前 Entry 的 frontmatter/Schema 读取 status 为 published 的 ID，且 ID 必须匹配文件名；这不是对线上部署状态的证明。配置与内容无效时停止，不采用历史名单或将输入 pageId 自动加入名单。
+4. `eligible-for-editorial-review` 仅表示输入字段合格，可进一步人工判断选题；`rejected` 不进入有效建议或排期。创建内部 Record 前还须核实来源 ID/时间及同意证据，不把本工具当身份认证、自动导入或自动发布。保留和清理遵循已有运营规则；本次唯一测试记录仍需精确对象授权后清理。
+
+有效建议仍须 trim 后为 3–240 Unicode code point；空白、两个 emoji、组合字符和长度越界均由既有 validator 检查，不靠肉眼数数。Tally 原生 Required/3–240 设置保留；它的原始字符计数和接受/拒绝不再代表内部严格校验。非空邮箱的明确同意仍须在 Tally 提交前阻断，不能用编辑前筛选替代。
+
+### 本地运行入口
+
+使用保存项目的固定 Node，输入只经 stdin 进入进程；不要把真实 JSON 放进命令参数、脚本、仓库、测试、日志或粘贴到任务消息中。下面示例只描述输入形状，实际值由 hyc 在本机输入：
+
+```json
+{"pageId":"zhong-kui","requestedTopic":"A synthetic suggestion"}
+```
+
+```powershell
+$readerReviewRoot = (Resolve-Path -LiteralPath '.').Path
+$readerReviewNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
+if ($readerReviewRoot -ne 'F:\codex-project\mythic-china') { throw 'Unexpected workspace.' }
+if ((& $readerReviewNode --version) -ne 'v24.16.0') { throw 'Unexpected Node runtime.' }
+$readerReviewInput = Read-Host '粘贴一条明确映射后的 JSON'
+$readerReviewInput | & $readerReviewNode scripts/review-reader-request.mjs
+$readerReviewExit = $LASTEXITCODE
+$readerReviewInput = $null
+```
+
+输入可能在本机终端显示，应在个人受控终端操作，不录制或分享含真实数据的终端画面。脚本自身不写文件、不联网，不输出原文、邮箱或供应商 ID，只输出状态、trim 后字符数和无效字段名。退出码 0 为字段通过，1 为拒绝，2 为输入/运行/内容错误；任何错误结果不得进入编辑流程。当前工具只实现人工调用，尚未自动接通真实 Tally 数据。
+
+### 修订后的真实测试
+
+文本边界改用本地合成测试验证。旧 C 的第 2、3、4、7、8 项不再向 Tally 提交；不重做第 1 项。保留原第 5、6、9、10 项各一次，仍使用同一个测试 URL 和邮箱，新增最多 4 次，预计全轮累计 5 次激活，始终不超过已经授权的 10 次。未用预算不用于自动重试或新用例。
+
+| 顺序 | 原用例 | 操作 | 预期 |
+| --- | --- | --- | --- |
+| 已通过（累计第 2 次） | 5 | `MC Tally consent check`，本人测试邮箱，不勾选同意 | 表单因未同意而阻止；Completed 仍为 1。其他字段报错不能替代同意验收 |
+| 已接收（累计第 3 次） | 6 | ` abc `，无邮箱 | 接受原始建议；后台回查后在本地审核通过，trim 后为 3 code point |
+| 已暂停，未执行 | 9 | `MC Tally reply check`，本人测试邮箱，明确同意 | 原预期：接受；实际记录的邮箱与本次同意对应，不触发 newsletter |
+| 已暂停，未执行 | 10 | `MC Tally cleared email check`，先填邮箱并同意，再清空邮箱 | 原预期：接受；检查没有残留邮箱或孤立同意 |
+
+第 2 次 owner 回报：填写邮箱、不勾选同意并点击 Send suggestion 后提交不了，随后刷新后台确认 Completed 仍为 1。按操作上下文与回查记录该项通过，累计仍为 2/10；未独立取得具体提示或原始请求，不作为服务端防绕过证据。随后执行原第 6 项，结果见下；不重做邮箱未同意项。
+
+第 3 次后台回查：owner 截图显示 All 2 / Completed 2 / Partial 0；新增行显示 `Sep 9, 03:57 PM`、`pageId=zhong-kui`、建议 `abc`，email 视觉空白、emailConsent 为 `-`。确认匿名建议新增一条，累计 3/10；保存的首尾空格、底层空值和感谢页尚未单独验证。同一合成输入的离线严格校验已通过，不能替代原始 payload。下一项为原第 9 项：`MC Tally reply check`、本人测试邮箱、明确勾选同意后只提交一次；预期感谢页与 Completed 增至 3，回查该记录邮箱及同意，真实地址不发给代理。
+
+正常情况下预计新增 3 条原始记录，加已有无效空白共 4 条；这只是预期。每项只点一次并等待明确结果，回查实际条数。非预期阻断、未经同意的邮箱被保存、重复/未知结果、验证码、限流或邮件均立即停止。清理仍先列出当时精确对象并另行确认，不清空范围外数据。本地测试通过才进入上述下一项，不从本地结果推导 Tally 已通过。
+
+### 本批修改与验证入口
+
+新增离线脚本与 `tests/editorial/reader-request-review.test.mjs`；现有 validator 与 content Schema 各补一个 `.ts` 导入扩展名，使固定 Node 直接运行，并同步架构导入清单。规则、Schema 值域、站点 UI、运行配置、依赖及服务均不变。相关文档范围为 README、本文、006、CONTENT_MODEL 与 ARCHITECTURE；文化内容、资产追溯与公开披露不受本次离线入口影响，无新数据接收方，故无需修改公开 Privacy。脚本明确说明不回显错误消息的原因，构建期诊断沿既有 check 验证。
+
+在本文既有固定 Node/Corepack/PATH 身份门禁通过后执行：
+
+```powershell
+& $mythicProjectCorepack pnpm exec prettier --write scripts/review-reader-request.mjs tests/editorial/reader-request-review.test.mjs
+& $mythicProjectCorepack pnpm run test tests/editorial/reader-request-review.test.mjs tests/services/external-interactions.test.ts tests/architecture/project-boundaries.test.ts
+& $mythicProjectCorepack pnpm run check
+```
+
+文档沿既有严格 UTF-8、相对链接、占位符和 diff 空白入口检查。仅使用合成数据验证，本批不提交真实表单、不删除记录、不执行 Git 写入或部署；本地结果不构成 M5 整体验收或发布凭证。定向 3 文件/47 项通过；完整 check 首次因缺少显式 Node 导入被 ESLint 阻止，补齐后完整通过 Prettier、ESLint、38 文件/655 项测试、Astro 117 文件零诊断，以及 14 页 review build/output verifier。脚本子进程实测三个空格拒绝、trim 后为 0；本地内容清单与输出脱敏也通过。未重跑 public 构建或浏览器，真实数据审核、Tally 后续用例和清理仍未完成。
+
+本次宿主同时向 Node 传入 `PATH` 与 `Path`，导致 `pnpm exec` 无法解析已安装的 Prettier。若当前会话只读核查仍有该现象，可使用以下等价 Corepack 入口，仅为验证子进程保留单一 PATH；不改系统环境、项目配置或依赖：
+
+```powershell
+$readerVerifyScript = @'
+const { spawnSync } = require('node:child_process');
+const { dirname, join } = require('node:path');
+const runtime = dirname(process.execPath);
+const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => key.toLowerCase() !== 'path'));
+env.PATH = runtime + ';' + (process.env.Path || process.env.PATH);
+env.ASTRO_TELEMETRY_DISABLED = '1';
+const commands = [
+  ['pnpm', 'exec', 'prettier', '--write', 'scripts/review-reader-request.mjs', 'tests/editorial/reader-request-review.test.mjs'],
+  ['pnpm', 'run', 'test', 'tests/editorial/reader-request-review.test.mjs', 'tests/services/external-interactions.test.ts', 'tests/architecture/project-boundaries.test.ts'],
+  ['pnpm', 'run', 'check'],
+];
+for (const args of commands) {
+  const result = spawnSync(process.execPath, [join(runtime, 'node_modules/corepack/dist/corepack.js'), ...args], { env, stdio: 'inherit' });
+  if (result.status !== 0) process.exit(result.status ?? 1);
+}
+'@
+& 'D:\Program Files\nvm\v24.16.0\node.exe' -e $readerVerifyScript
 ```

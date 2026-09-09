@@ -1,12 +1,22 @@
 ---
+import {
+  resolveNewsletterAction,
+  type NewsletterRenderingContext,
+} from "../site/newsletter-configuration";
+
+type Props = NewsletterRenderingContext;
+
+const action = resolveNewsletterAction(Astro.props);
 const headingId = "footer-newsletter-heading";
+const emailId = "footer-newsletter-email";
+const privacyId = "footer-newsletter-privacy";
 ---
 
 <section
   class="newsletter-form page-shell"
   aria-labelledby={headingId}
   data-review-interaction="newsletter"
-  data-review-state="inactive"
+  data-review-state={action ? "active" : "inactive"}
 >
   <div class="newsletter-form__copy">
     <p class="section-context">Newsletter</p>
@@ -18,12 +28,46 @@ const headingId = "footer-newsletter-heading";
   </div>
 
   <div class="newsletter-form__review">
-    <p class="interaction-review-status">
-      Newsletter subscriptions are not open yet.
-    </p>
-    <p class="interaction-privacy-copy">
-      We are not collecting email addresses here.{" "}
-      <a href="/privacy/">Privacy Notice</a>.
-    </p>
+    {
+      action ? (
+        <>
+          <form
+            class="newsletter-form__fields"
+            action={action}
+            method="post"
+            accept-charset="UTF-8"
+            aria-describedby={privacyId}
+          >
+            <label for={emailId}>Email address</label>
+            <input
+              id={emailId}
+              type="email"
+              name="email"
+              autocomplete="email"
+              maxlength="254"
+              required
+            />
+            <button class="button-link" type="submit">
+              Subscribe
+            </button>
+          </form>
+          <p id={privacyId} class="interaction-privacy-copy">
+            Buttondown processes your email address. Check your inbox to confirm
+            your subscription. You can unsubscribe at any time. See our{" "}
+            <a href="/privacy/">Privacy Notice</a>.
+          </p>
+        </>
+      ) : (
+        <>
+          <p class="interaction-review-status">
+            Newsletter subscriptions are not open yet.
+          </p>
+          <p class="interaction-privacy-copy">
+            We are not collecting email addresses here.{" "}
+            <a href="/privacy/">Privacy Notice</a>.
+          </p>
+        </>
+      )
+    }
   </div>
 </section>

@@ -226,23 +226,38 @@ describe("application and production boundaries", () => {
     }
 
     expect(readdirSync(join(projectRoot, "src/services")).sort()).toEqual([
+      "analytics-record.ts",
       "analytics.ts",
       "article-reading-state.ts",
+      "goatcounter-analytics.ts",
       "newsletter.ts",
       "reader-request.ts",
     ]);
     expect(readdirSync(join(projectRoot, "tests/services")).sort()).toEqual([
+      "analytics-record.test.ts",
       "article-reading-state.test.ts",
       "external-interactions.test.ts",
+      "goatcounter-analytics.test.ts",
     ]);
 
     const serviceImportAllowlist = {
-      "src/services/analytics.ts": ["astro/zod", "../site/public-site"],
+      "src/services/analytics-record.ts": ["../site/public-site"],
+      "src/services/analytics.ts": [
+        "astro/zod",
+        "../site/public-site",
+        "./analytics-record",
+        "./analytics-record",
+        "./analytics-record",
+      ],
       "src/services/article-reading-state.ts": ["./analytics"],
+      "src/services/goatcounter-analytics.ts": [
+        "./analytics-record",
+        "./analytics",
+      ],
       "src/services/newsletter.ts": ["astro/zod"],
       "src/services/reader-request.ts": [
         "astro/zod",
-        "../content/content-schemas",
+        "../content/content-schemas.ts",
       ],
     } as const;
 
@@ -277,11 +292,49 @@ describe("application and production boundaries", () => {
       (file) =>
         file.startsWith("src/") &&
         file !== readingStatePath &&
+        file !== "src/client/site-analytics.ts" &&
         /\.(?:ts|mjs|astro)$/u.test(file),
     )) {
       expect(readProjectFile(file), file).not.toContain(
         "article-reading-state",
       );
+    }
+
+    expect(readdirSync(join(projectRoot, "src/client")).sort()).toEqual([
+      "analytics-bootstrap.ts",
+      "site-analytics.ts",
+    ]);
+    const client = readProjectFile("src/client/site-analytics.ts");
+    const bootstrap = readProjectFile("src/client/analytics-bootstrap.ts");
+    expect(
+      [...bootstrap.matchAll(/from ["']([^"']+)["']/gu)].map(
+        (match) => match[1],
+      ),
+    ).toEqual([
+      "../services/goatcounter-analytics",
+      "../site/analytics-configuration",
+      "./site-analytics",
+    ]);
+    expect(bootstrap).toContain("new WeakSet<Document>()");
+    expect(bootstrap).toContain("view.fetch(url, options)");
+    expect(bootstrap).not.toMatch(
+      /\b(?:localStorage|sessionStorage|indexedDB|process\.env|import\.meta\.env|console)\b/u,
+    );
+    for (const file of collectRepositoryInventory().files.filter(
+      (file) =>
+        file.startsWith("src/") &&
+        /\.(?:ts|astro)$/u.test(file) &&
+        file !== "src/client/analytics-bootstrap.ts",
+    ))
+      expect(readProjectFile(file), file).not.toMatch(/\bfetch\s*\(/u);
+    expect(client).not.toMatch(
+      /\b(?:fetch|WebSocket|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|indexedDB|process\.env|import\.meta\.env)\b/u,
+    );
+    expect(client).toContain("isEnabled = false");
+    for (const file of collectRepositoryInventory().files.filter(
+      (file) => file.startsWith("src/") && file.endsWith(".astro"),
+    )) {
+      expect(readProjectFile(file), file).not.toContain("site-analytics");
     }
 
     const visualRoot = join(projectRoot, "visual");

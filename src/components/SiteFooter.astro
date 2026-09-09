@@ -1,15 +1,17 @@
 ---
 import NewsletterForm from "./NewsletterForm.astro";
+import type { NewsletterRenderingContext } from "../site/newsletter-configuration";
 
 interface Props {
   showPublicBeta: boolean;
+  newsletter: NewsletterRenderingContext;
 }
 
-const { showPublicBeta } = Astro.props;
+const { showPublicBeta, newsletter } = Astro.props;
 ---
 
 <footer class="site-footer">
-  <NewsletterForm />
+  <NewsletterForm {...newsletter} />
   <div class="site-footer__inner">
     <div class="site-footer__identity">
       <p class="site-footer__brand">Mythic China</p>

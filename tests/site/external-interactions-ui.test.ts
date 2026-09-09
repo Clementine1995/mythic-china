@@ -15,7 +15,7 @@ function normalizeSource(source: string): string {
 }
 
 describe("M5-U3 inert review interactions", () => {
-  it("keeps one inactive Newsletter surface in the global Footer", async () => {
+  it("routes the Newsletter through the single Footer boundary", async () => {
     const [footer, newsletter] = await Promise.all([
       readProjectFile("src", "components", "SiteFooter.astro"),
       readProjectFile("src", "components", "NewsletterForm.astro"),
@@ -25,9 +25,13 @@ describe("M5-U3 inert review interactions", () => {
     expect(footer).toContain(
       'import NewsletterForm from "./NewsletterForm.astro";',
     );
-    expect(footer.match(/<NewsletterForm\s*\/>/gu)).toHaveLength(1);
+    expect(
+      footer.match(/<NewsletterForm\s+\{\.\.\.newsletter\}\s*\/>/gu),
+    ).toHaveLength(1);
     expect(newsletter).toContain('data-review-interaction="newsletter"');
-    expect(newsletter).toContain('data-review-state="inactive"');
+    expect(newsletter).toContain(
+      'data-review-state={action ? "active" : "inactive"}',
+    );
     expect(newsletter).toContain('href="/privacy/"');
     expect(newsletterSource).toContain("new Mythic China stories");
     expect(newsletterSource).toContain("occasional editorial selections");
@@ -36,9 +40,7 @@ describe("M5-U3 inert review interactions", () => {
     expect(newsletterSource).toContain(
       "We are not collecting email addresses here.",
     );
-    expect(newsletter).not.toMatch(
-      /<(?:form|input|button|select|textarea)\b|\baction=|https?:\/\//iu,
-    );
+    expect(newsletter).not.toMatch(/<script\b|https?:\/\//iu);
   });
 
   it("keeps one inactive Reader Request after every Entry reading path", async () => {
@@ -107,8 +109,13 @@ describe("M5-U3 inert review interactions", () => {
     expect(privacySource).toContain(
       "a missed operation can extend that period",
     );
-    expect(privacySource).toContain("Plausible is not enabled");
-    expect(privacySource).toContain("plausible.io");
+    expect(privacySource).toContain("GoatCounter is not enabled");
+    expect(privacySource).toContain("mythic-china.goatcounter.com");
+    expect(privacySource).toContain("counts, not identified readers");
+    expect(privacySource).toContain(
+      "account is configured for 90 days of aggregate retention",
+    );
+    expect(privacySource).toContain("terms remain unverified");
     expect(privacy).not.toMatch(/<form\b|<script\b|mailto:|\baction=/iu);
     expect(privacy).not.toMatch(/\[(?:TODO|TBD|填写|待确认)\]/iu);
   });

@@ -1,4 +1,8 @@
 import { URL } from "node:url";
+import {
+  analyticsScriptHref,
+  analyticsMetaName,
+} from "./analytics-output-policy.mjs";
 
 import { parse as parseHtml } from "parse5";
 import { extname } from "node:path";
@@ -54,6 +58,7 @@ const resourceAttributes = new Map([
 const inactiveProviderHosts = Object.freeze([
   "buttondown.com",
   "buttondown.email",
+  "goatcounter.com",
   "plausible.io",
   "tally.so",
 ]);
@@ -858,8 +863,12 @@ export function assertReviewPrivacyNotice(html, relativePath) {
     "sole operator is hyc",
     "no independent backup",
     "a missed operation can extend that period",
-    "Plausible is not enabled",
-    "plausible.io",
+    "GoatCounter is not enabled",
+    "mythic-china.goatcounter.com",
+    "sends no analytics requests",
+    "counts, not identified readers",
+    "account is configured for 90 days of aggregate retention",
+    "terms remain unverified",
     "visit a version hosted on Vercel",
     "IP address, approximate location derived from it, and technical system information",
     "deliver, maintain, and protect the hosting service",
@@ -1231,12 +1240,32 @@ function assertStaticHtmlResourcePolicy(html, relativePath, intent) {
       if (data === null || Array.isArray(data) || typeof data !== "object")
         throw new Error(`${relativePath} requires a JSON-LD object.`);
     }
-    if (forbiddenElements.has(elementKey) && !isPublicJsonLd) {
+    const isPublicAnalytics =
+      intent === "public" &&
+      elementKey === "script" &&
+      readElementAttribute(node, "type") === "module" &&
+      readElementAttribute(node, "src") === analyticsScriptHref;
+    if (
+      isPublicAnalytics &&
+      (node.parentNode !== head ||
+        node.attrs.length !== 2 ||
+        textContent(node) !== "")
+    )
+      throw new Error(
+        `${relativePath} has unsafe analytics script attributes or placement.`,
+      );
+    if (
+      forbiddenElements.has(elementKey) &&
+      !isPublicJsonLd &&
+      !isPublicAnalytics
+    ) {
       throw new Error(
         `${relativePath} contains forbidden <${element}> output.`,
       );
     }
     if (elementKey === "meta") {
+      if (intent === "review" && name === analyticsMetaName)
+        throw new Error(`${relativePath} contains analytics configuration.`);
       if (
         httpEquiv.trim() === "refresh" ||
         httpEquiv.trim().startsWith("content-security-policy")
