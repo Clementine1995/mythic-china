@@ -658,6 +658,14 @@ export function assertReviewInteractionSurface(
   expectedEntryId = null,
 ) {
   const { elements } = parseReviewHtml(html);
+  const analyticsNotice =
+    relativePath === "privacy/index.html"
+      ? elements.find(
+          (node) =>
+            node.tagName === "section" &&
+            readElementAttribute(node, "id") === "analytics-hosting",
+        )
+      : null;
   const interactionRoots = elements.filter(
     (node) => readElementAttribute(node, "data-review-interaction") !== null,
   );
@@ -675,7 +683,14 @@ export function assertReviewInteractionSurface(
     elements.some(
       (node) =>
         ["a", "area"].includes(node.tagName) &&
-        usesInactiveProviderHost(readElementAttribute(node, "href") ?? ""),
+        usesInactiveProviderHost(readElementAttribute(node, "href") ?? "") &&
+        !(
+          node.tagName === "a" &&
+          analyticsNotice &&
+          isDescendantOf(node, analyticsNotice) &&
+          readElementAttribute(node, "href") ===
+            "https://www.goatcounter.com/help/privacy"
+        ),
     )
   ) {
     throw new Error(`${relativePath} links to an inactive provider.`);
@@ -817,7 +832,11 @@ export function assertReviewInteractionSurface(
   }
 }
 
-export function assertReviewPrivacyNotice(html, relativePath) {
+export function assertReviewPrivacyNotice(
+  html,
+  relativePath,
+  hasAnalytics = false,
+) {
   const { elements } = parseReviewHtml(html);
   const roots = elements.filter(
     (node) => readElementAttribute(node, "data-review-notice") === "privacy",
@@ -863,21 +882,33 @@ export function assertReviewPrivacyNotice(html, relativePath) {
     "sole operator is hyc",
     "no independent backup",
     "a missed operation can extend that period",
-    "GoatCounter is not enabled",
     "mythic-china.goatcounter.com",
-    "sends no analytics requests",
     "counts, not identified readers",
     "account is configured for 90 days of aggregate retention",
-    "terms remain unverified",
+    "periodic cleanup",
+    "dashboard is private",
+    "Global Privacy Control or Do Not Track",
+    "?analytics=off",
+    "#analytics=off",
     "visit a version hosted on Vercel",
     "IP address, approximate location derived from it, and technical system information",
     "deliver, maintain, and protect the hosting service",
     "Hosting and security processing can still occur",
   ];
+  requiredCopy.push(
+    ...(hasAnalytics
+      ? ["GoatCounter is enabled on our public site", "legitimate interest"]
+      : ["GoatCounter is not enabled", "sends no analytics requests"]),
+  );
   if (
     addresses.length !== 1 ||
     !normalizedText(addresses[0]).includes("huyichen2019@gmail.com") ||
     requiredCopy.some((copy) => !noticeCopy.includes(copy)) ||
+    (hasAnalytics
+      ? /GoatCounter is not enabled|sends no analytics requests/u.test(
+          noticeCopy,
+        )
+      : noticeCopy.includes("GoatCounter is enabled on our public site")) ||
     /\[(?:TODO|TBD|填写|待确认)\]/iu.test(noticeCopy) ||
     rootElements.some(
       (node) =>
@@ -900,9 +931,17 @@ export function assertReviewPrivacyNotice(html, relativePath) {
       readElementAttribute(node, "href") ===
         "https://vercel.com/legal/privacy-notice",
   );
+  const analyticsPolicyLinks = rootElements.filter(
+    (node) =>
+      node.tagName === "a" &&
+      readElementAttribute(node, "href") ===
+        "https://www.goatcounter.com/help/privacy",
+  );
   if (
     hosting.length !== 1 ||
     policyLinks.length !== 1 ||
+    analyticsPolicyLinks.length !== 1 ||
+    !isDescendantOf(analyticsPolicyLinks[0], hosting[0]) ||
     !isDescendantOf(policyLinks[0], hosting[0])
   ) {
     throw new Error(
@@ -1264,6 +1303,10 @@ function assertStaticHtmlResourcePolicy(html, relativePath, intent) {
       );
     }
     if (elementKey === "meta") {
+      if (name === "mythic-china-rum")
+        throw new Error(
+          `${relativePath} contains RUM configuration before activation review.`,
+        );
       if (intent === "review" && name === analyticsMetaName)
         throw new Error(`${relativePath} contains analytics configuration.`);
       if (

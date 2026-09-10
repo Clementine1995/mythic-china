@@ -2,6 +2,10 @@
 
 ## 0. 文档职责与状态
 
+2026-09-10 本地检查点授权：owner 随后明确“提交一次吧”，将第 12.12 节的已验证候选与此前本地技术验收/RUM 一并保存。精确范围和 Git 入口见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#分析与技术验收本地检查点2026-09-10)，提交身份以 Git 历史为准；下文未提交表述为实施快照。本轮不执行真实请求、Edge/CDP、服务、推送或部署，006 的其余门禁不变。
+
+2026-09-10 GoatCounter 启用收尾：owner 在确认“已有接入，只需验证后开启并发布”的范围后要求处理。本批沿用四次合成收数及精确清理证据，既有账户的 production 采集候选、退出和对应 Privacy 已完成本地验证；Newsletter、Reader Request 与 RUM 继续关闭。尚未提交或发布，当前线上仍为关闭版。范围、结果与真实 Network 停点见第 12.12 节。
+
 2026-09-09 当前停点：owner 要求停止继续表单测试并优先准备上线，按 [011](011-public-beta-validation.md) 进入阅读版 Beta。Tally 停在累计 3/10 次激活、后台 Completed 2 条；第 4 次及后续用例未执行，两条记录未清理。下文的剩余测试顺序仅保留为历史计划，不再自动继续。Newsletter、Reader Request、Analytics/RUM 均保持关闭；本合同的未完成联调和清理不记为通过，留到相应功能恢复前按范围处理。
 
 本文负责：
@@ -432,6 +436,32 @@ M7 仍须冻结供应商标识、精确域名、实际 sample 与供应商计划
 - [Cloudflare Core Web Vitals](https://developers.cloudflare.com/web-analytics/data-metrics/core-web-vitals/)
 - [Cloudflare Data Localization](https://developers.cloudflare.com/data-localization/)
 
+### 5.5.1 发布后 RUM 实施方案（2026-09-10）
+
+本节最初为候选设计；owner 随后要求实施 RUM，并明确“还没有账户，先完成本地实现”。本地范围及结果由 [017](017-real-user-monitoring.md) 维护，当前仍不启用采集。复核结果仍不能证明 Vercel Speed Insights 或 Cloudflare Web Analytics 的默认 beacon 满足第 5.5 节全部字段、地区和保留要求；不直接开启它们。Google PSI 的实验室分数和 Globalping 的地区 HTTP 结果也不是本站的真实用户 p75。
+
+已确认的本地方案为 **Google web-vitals → 自有 Cloudflare Workers Free 接收端 → 仅服务 RUM 的 D1 最小存储**。静态阅读页面保持，架构仅新增 RUM 专用接收/存储边界；017 固定四字段及测量语义。已锁定 web-vitals 6.2.1 并实施默认关闭代码，不代表创建 Cloudflare 账户、真实数据库、接受 DPA 或启用生产采集。
+
+| 项目 | 候选设计与启用前完成标准 |
+| --- | --- |
+| 客户端 | 只使用 `onLCP/onINP/onCLS`，显式映射指标名和数值；不使用 attribution 包，不上传整个 metric 对象。默认不上传 pathname、设备等可选维度，不采集 referrer、DOM、资源 URL、email 或用户/会话 ID |
+| 测量去重 | 017 已确认仅在当前指标实例内有效的随机 `measurementId` 及递增更新序号；不跨导航关联，不写 Cookie、localStorage 或其他浏览器存储。多次后台回调更新同一指标实例，乱序旧值不能覆盖新值；BFCache 新实例重新生成随机 ID，不传库原始 ID |
+| 环境和流量 | 只允许正式 origin 与 public artifact，默认关闭；local/review/preview 不加载或发送。合成测试使用离线 Fake，启用前冻结自动化和维护检查的禁发机制。Origin/CORS 只限制来源，不证明请求来自真人；没有可验收的自动化隔离办法时不启动基线窗口 |
+| 接收与有效性 | 严格字段白名单、允许的指标名、有限非负数值及请求体大小；只保存指标、测量标识、更新序号和必要的 UTC 接收时间。应用不保存 IP、请求头或原始正文。缺失浏览器指标、不发生交互时缺失 INP 均记缺样，不能补零；有效样本数按去重后的指标实例计，不能称为独立读者数；指标值仍为 LCP/INP 毫秒数或 CLS 分值 |
+| 窗口与统计 | 017 固定 UTC 连续 14 个完整自然日，以指标实例首次接收日期归窗；数据库时间封死截止写入并冻结快照，迟到更新不得倒改结论。每指标实际去重有效数 `n ≥ 50` 才报告排序第 `ceil(0.75 × n)` 个值作为 p75；保留 011 的缺样处理，不根据结果降低门槛。具体起止日期仍在真实启用前冻结 |
+| 成本和失效 | 使用 Free 计划，不自动升级。配额拒绝、清理失败、异常丢失或采集暂停必须使相应窗口失效或明确不完整，不能默认为零或继续标成完整基线；上线前验证拒绝路径和成本停止条件 |
+| 保留、日志、退出 | 建议活动记录保留 30 天并定时删除，长期只保留无测量标识的聚合结果。显式关闭 Workers 持久日志和 invocation logs，不记录请求正文/头，不启用 Tail/Logpush。退出时关闭唯一 producer、验证零请求、删除 D1 数据并核对恢复窗口、供应商其他备份与账户终止处理 |
+
+官方能力核查（访问于 2026-09-10）：
+
+- [web-vitals](https://github.com/GoogleChrome/web-vitals) 支持发送至自有 endpoint；生命周期内重复回调与 ID 的语义要求接收端正确更新同一测量。库的支持范围与真实浏览器缺样仍须实证。
+- [Workers 定价](https://developers.cloudflare.com/workers/platform/pricing/) 的 Free 额度为 100,000 请求/日、每次 10ms CPU；[D1 定价](https://developers.cloudflare.com/d1/platform/pricing/) 的 Free 额度为 500 万读行/日、10 万写行/日、总计 5GB，超限会拒绝相关操作。计划价格需在实际开通前复核，不把免费额度当服务可用性承诺。
+- [D1 SQL](https://developers.cloudflare.com/d1/sql-api/sql-statements/) 支持按实际保存值排序计数；[Analytics Engine](https://developers.cloudflare.com/analytics/analytics-engine/sampling/) 使用自适应采样，加权计数与加权百分位不能无条件当作未经采样的原始总体，所以不选作本方案精确样本数的唯一账本。
+- [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/) 在 Free 下另有 7 天恢复窗口；30 天活动数据清理不代表即时物理删除。[Workers 配置](https://developers.cloudflare.com/workers/wrangler/configuration/) 与[日志文档](https://developers.cloudflare.com/workers/observability/logs/workers-logs/)支持关闭持久日志，但不证明平台不处理网络 IP 或安全日志。
+- [Cloudflare DPA](https://www.cloudflare.com/cloudflare-customer-dpa/) 包含 Self-Serve Subscription Agreement；实际账户的适用 DPA、subprocessor、lawful basis、必要 consent 和公开 Privacy 尚未确认。[D1 数据位置](https://developers.cloudflare.com/d1/configuration/data-location/)的 jurisdiction 不证明全部 Worker 处理限定在同一区域，也不能代替美东/美西/欧洲可达性检查。
+
+本地实施与字段、重复/乱序、缺样、跨日窗口、p75、存储失败和清理测试见 017。当前已安装 web-vitals，未创建 Worker/D1、未接受新条款，RUM 仍关闭。真实 endpoint、Free 计划、Privacy、处理条款及传输/退出证据齐备后，冻结日期与脚本身份，再进入单独生产启用。足够样本的本地计算结果仍要求运行复核，不自动证明无机器人、配额丢失或 Beta 已达标。
+
 ## 6. 目标技术与设计
 
 ### 6.1 当前 U3 与后续目标调用链
@@ -764,3 +794,17 @@ GoatCounter 账户核对清单：
 2026-09-09 四次真实收数补充（替代上述进入阶段的零发送现状）：owner 提供 Manage pageviews 搜索/管理入口截图，随后操作临时工具并提供结果：UTC `2026-09-09T01:34:18.232Z` 开始，既定 pageview 与三个事件各发送一次、均显示 HTTP 200，总四次。另一张后台截图在相同日期范围显示 `4 out of 4 visits shown`，普通页面 `/explore/goatcounter-check-20260909` 一次，三种预定事件前缀各一次且带 event 标记；这是四条合成次数，不是四位访客或真实阅读触发。事件完整后缀在截图中被截断，须在 Manage pageviews 逐条核对完整路径/ID 后清理；实际 Network Cookie/Referer/Origin 等请求头尚无截图。入口存在及操作人确认框不等于已执行删除，报表时区也未单独核对；真实请求预算已耗尽，不通过重发补证据。详细证据范围和下一步只读回看/清理见 DEV_WORKFLOW，网站配置和发布状态不变。
 
 2026-09-09 清理收口补充（本次最终状态）：owner 表示已关闭 Network，故实际请求头保持未验证。Manage pageviews 随后返回恰好四条匹配结果、各 1 hit，全部完整路径与合成清单一致；普通页面没有尾斜杠，三个事件保留尾斜杠。UI 未显示内部 ID，因此以已展开的完整四路径和当前精确结果集核对删除对象，不虚构 ID 或通过隐藏接口补取。owner 手动删除后提供 Dashboard 截图：相同 2026-09-02 至 2026-09-09 范围、Filter paths 为空、`0 out of 0 visits shown`、`0 visits` 和 `Nothing to display`。本次四条测试统计的发送、收数和清理后报表归零已确认；不声称证明备份删除、90 天自动清理、账户退出、请求头或生产环境。预算用完，临时工具不再运行，生产统计保持关闭；M5/U5 整体、U4、最终 QA 和发布门禁不随本次收口关闭。
+
+### 12.12 GoatCounter 启用收尾（2026-09-10）
+
+- 目标：完成既有 GoatCounter 的生产启用准备和实际 Privacy；不重新接入，不恢复 Newsletter、Reader Request、RUM，不添加依赖、账号、表单、持久标识或新事件。此前 Hero sizes 和默认关闭的 RUM 工作保留。owner 已要求验证后启用发布；本批先完成可审查的本地候选，Git/真实浏览器/发布分别固定身份与实际执行范围。
+- 实现：`src/site/analytics-configuration.ts` 的单一常量供 public meta 与 Privacy 共用；public 候选为 true，review 无 meta/JS。`site-analytics.ts` 在绑定及每次发送前尊重 DNT=1/GPC=true、query 或片段任一 `analytics=off`；hashchange 立即退出。运行中发现退出后清除监听器/计时器，当前 Document 包括 BFCache 均不恢复。无 Cookie/localStorage；移除标记后的新页面重新判断，单页地址选项不自动传播到其他页面。既有 15 秒/75%/Related、p/e、omit/no-referrer/no-store/keepalive 与零重试合同不变。
+- 账户事实：主代理只读登录看板，2026-09-03 至 2026-09-10 无筛选报表为 0。Settings 当前 site 与正式域名一致，90 天、八项额外采集全关、看板仅登录用户可见；没有改动或保存设置。旧四次合成收数与精确删除后的归零证据继续有效；预算仍耗尽。
+- 处理选择：按已批准的最小聚合用途，Privacy 将运营和改进出版物的正当利益写明，不建立画像、跨页标识或 Cookie；提供浏览器偏好及单页退出。不因供应商说“可能无需同意”宣称全面法律豁免。免费合理用量、实际地区及官方说明于本日复核；没有凭空新增 DPA 开关或声称签订独立 DPA。若后续要求更严格的同意机制或处理范围变化，先关闭采集再决定。
+- 保留/退出核查：账户阈值为 90 天；官方源码通过周期任务清理旧统计，不能写成第 90 天即时硬删除，也不能写成本账户定时任务已经实测。JSON 可导出聚合，CSV 需要开启明细，因此不为验证启用明细或创建 API token。删除账户入口已在当前 Settings 导航看到，只读核查不执行退出。八项关闭不能证明供应商所有连接/反滥用技术记录均不存在，Privacy 保留相应处理说明。
+- 修改清单：上述配置/监听器、Privacy、`scripts/analytics-output-policy.mjs`、`verify-analytics-bootstrap.mjs`、`review-output-policy.mjs`、`verify-public-output.mjs`、精确 `analytics-script.json` 及相应 site/client 测试；README、ARCHITECTURE 和 DEV_WORKFLOW 同步当前状态。内容、来源、Schema、图像/字体与披露不在本轮改动范围。
+- 验收：完整 check、public→review 输出、实际唯一 bundle 的原始字节审查与 Fake VM 执行；验证初始/运行中退出、BFCache、刷新、重复参数、所有 public 路径和原事件合同。真实请求头/缓存/导航及最终发布尚待完成，不能由模拟 transport 替代。当前是未提交候选，不是发布 receipt，线上仍关闭。
+
+本日官方来源：[Terms](https://www.goatcounter.com/help/terms)、[Privacy/地区与退出](https://www.goatcounter.com/help/privacy)、[同意说明](https://www.goatcounter.com/help/gdpr)、[JSON 导出](https://www.goatcounter.com/help/export-json)、[CSV 条件](https://www.goatcounter.com/help/export)、[周期清理源码](https://github.com/arp242/goatcounter/blob/main/cron/tasks.go)、[处理边界源码](https://github.com/arp242/goatcounter/blob/main/memstore.go)。源码 main 核查只解释机制，不冒充托管实例版本或执行证明。
+
+12.12 本地验收结果：完整 41 文件/698 项测试、Astro 128 文件零诊断，以及 public 原始 bundle Fake VM → review 零 JS 构建通过；新增 8 项退出回归。140 文件 / 3,278,559 bytes 中 126 个与原包字节相同，差异限于 13 HTML 的统计配置/脚本引用、Privacy 和此前 Hero sizes，以及唯一新统计 JS。脚本摘要与详细证据见 DEV_WORKFLOW。账户时区已在 Preferences 核对为 Asia/Shanghai、邮件报表 Never，未改设置。内容和资产披露未变，构建诊断与退出生命周期职责说明已核对；真实 count 发送零次，未提交、推送或部署。真实 Network/缓存/导航与 clean-source 检查点未闭合，故 006 整体不关闭。

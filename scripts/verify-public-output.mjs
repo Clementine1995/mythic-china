@@ -177,7 +177,11 @@ await assertAnalyticsBootstrapExecution(
   analyticsBytes.toString("utf8"),
   analyticsConfiguration,
 );
-assertReviewPrivacyNotice(htmlFor("/privacy/"), "privacy/index.html");
+assertReviewPrivacyNotice(
+  htmlFor("/privacy/"),
+  "privacy/index.html",
+  analyticsConfiguration.isEnabled,
+);
 assertReviewPublishedIndex(
   htmlFor("/explore/"),
   "explore/index.html",
@@ -380,5 +384,5 @@ const [sitemap, rss, robots] = await Promise.all(
 );
 assertPublicDiscoveryFiles({ sitemap, rss, robots }, pages, site.origin);
 process.stdout.write(
-  `Public output verified: ${pages.length} HTML, 2 XML, robots.txt, ${images.length} Hero images, ${seenFonts.size} fonts; one hash-locked inactive analytics script, offline execution passed. Local diagnostic only; no release receipt or deployment.\n`,
+  `Public output verified: ${pages.length} HTML, 2 XML, robots.txt, ${images.length} Hero images, ${seenFonts.size} fonts; one hash-locked enabled analytics script, offline execution passed. Local diagnostic only; no release receipt or deployment.\n`,
 );

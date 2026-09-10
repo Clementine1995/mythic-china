@@ -158,6 +158,7 @@ describe("application and production boundaries", () => {
     expect(manifest.dependencies).toEqual({
       astro: "7.2.8",
       sharp: "0.35.4",
+      "web-vitals": "6.2.1",
     });
     expect(Object.keys(manifest.devDependencies).sort()).toEqual([
       "@astrojs/check",
@@ -324,7 +325,8 @@ describe("application and production boundaries", () => {
       (file) =>
         file.startsWith("src/") &&
         /\.(?:ts|astro)$/u.test(file) &&
-        file !== "src/client/analytics-bootstrap.ts",
+        file !== "src/client/analytics-bootstrap.ts" &&
+        file !== "src/rum/bootstrap.ts",
     ))
       expect(readProjectFile(file), file).not.toMatch(/\bfetch\s*\(/u);
     expect(client).not.toMatch(

@@ -4,6 +4,16 @@
 
 ## 当前状态
 
+- 本地检查点（2026-09-10）：owner 已明确要求将当前 39 个改动文件提交一次，收录技术验收记录、Hero sizes、默认关闭的 RUM 和 GoatCounter 启用候选；本次仅同步版本状态，不修改业务实现。执行及核对入口见 [DEV_WORKFLOW](DEV_WORKFLOW.md#分析与技术验收本地检查点2026-09-10)，实际提交身份以 Git 历史为准。下方“未提交”保留为实施时快照；此检查点不推送或发布，尚未通过的真实 Network/缓存/导航和发布验证继续保留。
+
+- GoatCounter 启用候选（2026-09-10）：既有账户的 90 天、八项额外采集全关、私有看板及 Asia/Shanghai 时区已直接只读复核；旧四次收数与清理证据沿用。本地 public 配置已准备为启用，Privacy 随构建状态显示，并补 DNT/GPC、单页退出和退出后不恢复计数。完整 41 文件/698 项测试、Astro 128 文件零诊断、public 原始脚本离线验证与 review 零 JS 通过。候选仍为 140 文件 / 3,278,559 字节，126 文件与原发布包逐字节一致；差异仅统计配置/脚本、Privacy 及此前 Hero sizes。RUM、Newsletter、Reader Request 仍关闭。尚未提交、推送或发布；线上仍为原关闭版，真实 Network/缓存/导航证据及 clean-source 发布检查点待完成，详见 [006 第 12.12 节](docs/requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10) 和 [DEV_WORKFLOW](DEV_WORKFLOW.md#goatcounter-启用收尾2026-09-10)。
+
+- RUM 本地实现（2026-09-10）：owner 确认暂无 Cloudflare 账户，先完成本地代码。已锁定 web-vitals 6.2.1，新增仅测 LCP/INP/CLS 的独立客户端、Worker/D1 接收/去重、固定 14 日 p75、维护清理与隔离测试；不收集路径、邮箱或持久用户标识。配置为 null，两种构建均不注入 RUM；Privacy 明确仍未启用。完整 41 文件/690 项测试、Astro 128 文件零诊断及 public → review 构建通过；实际输出无 RUM，原统计脚本摘要不变。真实账户/传输/部署和 14 日基线尚未开始，详见 [017](docs/requirements/017-real-user-monitoring.md) 与 [DEV_WORKFLOW](DEV_WORKFLOW.md#rum-本地实施2026-09-10)。未提交、推送或发布。
+
+- 钟馗移动 LCP 跟进（2026-09-10）：公开旧版三轮手机 LCP 为 2.710/2.255/2.552s；桌面补测出现单次 TBT 495ms 与另一次 CLS 0.04，异常和环境差异完整保留，未证明具体绘制原因。本地已修正六篇文章共享 Hero 的手机 sizes，使其考虑两侧边距；完整 38 文件/655 测试、Astro 零诊断、public → review 构建通过。原 140 文件比对仅六篇文章的 30 个 sizes 属性改变，其他 134 文件字节一致。浏览器选图及修改后性能尚未验证；该轨迹诊断已由 owner 暂缓，详见 [DEV_WORKFLOW](DEV_WORKFLOW.md#钟馗移动-lcp-诊断与尺寸修正2026-09-10)。本批源码和文档未提交、未推送、未发布，线上仍为原 dc0ad2d，RUM 保持关闭。
+
+- 发布后技术验收（2026-09-10）：首页与钟馗在美东、美西、欧洲的 12 次 HTTP 测量全部 200，总耗时 18–358ms；Google PSI 四份北美初始加载报告已取得，手机性能分为 99/95、桌面均为 100，LCP 分别为 1.802/2.710s 与 0.321/0.482s，CLS/TBT 均为 0。PSI 资源表补充了同源请求与传输字节证据，但不等于完整 Network/HAR；指定三地区浏览器首/复访和 macOS/iOS/Android 真机仍未验收。RUM 方案随后获准先本地实施（见顶部 017），采集仍关闭；CrUX 无可用数据。本批提供技术验收与钟馗移动 LCP 的后续依据，不要求 owner 先招募读者。结果与限制见 [DEV_WORKFLOW](DEV_WORKFLOW.md#发布后技术验收2026-09-10)，方案见 [006 第 5.5.1 节](docs/requirements/006-external-interactions.md#551-发布后-rum-实施方案2026-09-10)。本轮仅改文档、未提交或推送，线上制品保持原 dc0ad2d。
+
 - 阅读版 Public Beta 已正式公开（2026-09-10）：[正式站点](https://mythic-china-beta.vercel.app) 已可匿名访问。原 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK` 原样推广，无重建或新部署；01:35–01:36 UTC 的完整 live smoke 确认全部 140 文件 / 3,275,431 字节为 200、MIME 正确且 SHA256 与原上传包一致。正式首页与钟馗正文的浏览器检查通过，订阅、读者建议和统计继续关闭；01:38 UTC 复查正式域名 200，两个部署网址仍 302 至 Vercel 登录。实机与三地区性能按 011 第 2.2.1 节 2026-09-10 最新决定在结束 Beta 前补齐，目标读者验证也尚未完成。当前仅同步发布与验收文档，未提交或推送；具体结果见 [DEV_WORKFLOW](DEV_WORKFLOW.md#阅读版-public-beta-正式公开入口2026-09-10)。
 
 - 受保护暂存部署已就绪（2026-09-10）：owner 在本机执行确认入口，同一 dc0ad2d / 140 文件已部署为 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK`，`production / READY`。[暂存站点](https://project-scu6m-bp33wljub-mathic-china.vercel.app) 和实际生成的衍生别名均受 All Deployments 登录保护；正式域名仍为 404。00:02 UTC 执行回执与 00:05 UTC 主代理独立匿名复查一致；owner 已确认首页和插画正常。主代理随后完成登录后 13 页 DOM 检查：19 处图片加载成功，226 处站内链接/锚点目标有效，交互入口及统计配置保持关闭；7 份线上字体/样式/图片与原制品 SHA256 一致。完整远端字节与请求、地区及跨平台实机仍未验收，Public Beta 尚未公开。本地 QA 不重跑，业务源码未改，未提交或推送；详细身份与证据见 [DEV_WORKFLOW](DEV_WORKFLOW.md#受保护暂存部署入口2026-09-09)。
@@ -51,6 +61,8 @@
 - 目标读者文稿审核：[`010-four-entry-reader-review.md`](docs/requirements/010-four-entry-reader-review.md) 的修订前 R1 已失效；聚焦双语确认后重建的协调者 Markdown 与冻结 R1 HTML 已通过 20/20 输入哈希、4 篇可见文本、2 条内容提示、结构、离线性、唯一 ID/ARIA/片段引用和严格 UTF-8 检查。该 R1 现为 reference-only，只保存问题、rubric 与四篇文稿基线，不得作为 live R2 阅读面或答卷载体。目前 R2a/R2b 与真人反馈均为 0，不能写成目标读者审核通过。Project owner 于 2026-09-07 确认采用 [`011-public-beta-validation.md`](docs/requirements/011-public-beta-validation.md)：R2 改在可索引 Public Beta 上线后执行，作为正式 MVP 收口门禁，不再阻塞图片、关系、状态、public artifact、受保护预览或经单独授权的 Beta 生产发布。
 
 ## 当前接力顺序
+
+当前执行位置为 M7 上线后技术验收：按 017 先完成 RUM 本地实现。owner 已暂缓独立 Edge/CDP 轨迹诊断，且暂无跨平台真机；完整请求证据、指定三地区浏览器矩阵与实机仍未关闭。缺少独立目标读者时保留 R2 未开始，不阻塞技术工作。下列 M4–M7 为阶段依赖背景，最新运行状态以本页顶部和 DEV_WORKFLOW 为准。
 
 1. **M4 本地产品实现已完成**：Collection/Guide Hero、双语术语、四条馆藏标题 locale、CJK 静态门禁、Windows/local 正式页基础矩阵、功能页修正、M4-U5A noindex 字体样张/自动负门禁、最终样张三档基础矩阵与 Project owner 对 8 个页面的视觉判断已形成。现有 review 输出继续不可部署，后续内容包已在 VB6 独立审核到 ready。
 2. **M5 外部交互边界**：[`006-external-interactions.md`](docs/requirements/006-external-interactions.md) 的 U2 纯合同/Fake、U3 inactive UI/Privacy 与 U5A 阅读判定已完成。U5B 的零网络 adapter/DOM hook 已通过本地检查，owner 已通过截图与保存确认账户设置；M6 默认关闭的页面 bootstrap 和产物离线验证完成，仓库外四次合成发送、收数与清理后归零已确认，请求头和生产验证待闭合。Buttondown 当前 newsletter slug 为 `mythicworld`，默认关闭的本站表单准备已完成；后台原生 action/部分设置及托管页单邮箱 `Unactivated → Regular` 状态变化已有 owner 证据。owner 已确认真实退订；测试记录清理、完整处理边界与本站真实提交/启用仍待 U4。Tally 已有 owner 的预览显示确认和发布链接，浏览器标签 URL/标题匹配；完整页面读取未完成，测试前 owner 已确认 Submissions 为 0、Trash 为空并沿用本人测试邮箱；本轮已用 3/10，匿名 abc 建议已写入，当前 Completed 为 2；owner 确认不勾选邮箱同意时提交被拦住，刷新后 Completed 仍为 1，此项按 owner 操作与后台回查通过。第 1 项空白建议产生 1 条 Completed，保留为旧提交前校验要求下的失败。owner 已批准先收集、编辑前严格筛选；本地审核入口已完成，38 文件/655 项测试、Astro 117 文件零诊断与 14 页 review 构建通过；修订后的真实测试见 006 第 12.11 节，邮箱同意要求保持，删除另行确认。当前网站无可提交表单或实际统计，独立测试不改变内容和发布门禁。
@@ -113,6 +125,7 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 - `src/`：Content Layer、视觉资产加载/校验/current resolver、纯 release/review 投影、含 Privacy 但已接线的 public SEO/artifact builder、共享生产壳、真实页面模板/静态路由、M5-U2 provider-neutral service/Fake、U5A 离线阅读状态判定、U5B 轻量清洗合同/GoatCounter adapter/DOM hook 与 M6 默认关闭的 public bootstrap/配置，以及 M5-U3 Newsletter/Reader Request/Privacy inert review UI。
 - `tests/`：内容、视觉资产、页面投影、public SEO/artifact、resolver、运行时、架构边界、M5-U2 外部交互纯合同、U5A 阅读判定、U5B 请求 mapping/DOM 生命周期与 M5-U3 页面/output policy Vitest。
 - `scripts/`：固定 Node 子进程身份、review build intent、静态输出和视觉资产构建的稳定 runner/verifier；review verifier 现包含 M5-U3 HTML5 DOM oracle，命令和影响只看 `DEV_WORKFLOW.md`。
+- `src/rum/`、`workers/rum/`、`tests/rum/`：017 的默认关闭客户端、独立 RUM 接收/存储/汇总与纯内存验证；不进入正文数据链，不含真实 Cloudflare 账户或发布配置。
 - `prototypes/`：不可发布的静态视觉评审原型；不代表应用实现或已核准内容，工作母版与探索废图不应进入正式代码仓库。
 - `package.json`、`pnpm-lock.yaml` 与 `pnpm-workspace.yaml`：精确依赖、唯一锁、pnpm 11 发布成熟期例外与显式第三方 build-script 拒绝策略；不得另建 lock。
 

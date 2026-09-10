@@ -115,7 +115,11 @@ describe("M5-U3 inert review interactions", () => {
     expect(privacySource).toContain(
       "account is configured for 90 days of aggregate retention",
     );
-    expect(privacySource).toContain("terms remain unverified");
+    expect(privacySource).toContain(
+      "GoatCounter is enabled on our public site",
+    );
+    expect(privacySource).toContain("periodic cleanup");
+    expect(privacySource).toContain("Global Privacy Control or Do Not Track");
     expect(privacy).not.toMatch(/<form\b|<script\b|mailto:|\baction=/iu);
     expect(privacy).not.toMatch(/\[(?:TODO|TBD|填写|待确认)\]/iu);
   });

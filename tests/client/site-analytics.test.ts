@@ -43,7 +43,11 @@ function fixture(url = origin + articlePath + "?email=private#secret") {
   });
   const view = Object.assign(new EventSurface(), {
     location: new URL(url),
-    navigator: { webdriver: false },
+    navigator: {
+      webdriver: false,
+      doNotTrack: "0",
+      globalPrivacyControl: false,
+    },
     innerHeight: 600,
     performance: { now: () => atMs },
     setInterval: (callback: () => void) => {
@@ -116,6 +120,58 @@ function fixture(url = origin + articlePath + "?email=private#secret") {
 }
 
 describe("conditional analytics DOM binding", () => {
+  it.each([
+    { query: "?analytics=off" },
+    { query: "#analytics=off" },
+    { query: "?analytics=on&analytics=off" },
+    { doNotTrack: "1" },
+    { globalPrivacyControl: true },
+  ])("does no work when a reader opts out before binding: %j", (choice) => {
+    const f = fixture(origin + articlePath + (choice.query ?? ""));
+    if (choice.doNotTrack) f.view.navigator.doNotTrack = choice.doNotTrack;
+    if (choice.globalPrivacyControl)
+      f.view.navigator.globalPrivacyControl = true;
+    f.start({ isEnabled: true });
+    f.advance(30_000);
+    f.activate();
+    expect(f.transport).not.toHaveBeenCalled();
+    expect(
+      f.timers.size + f.document.listenerCount + f.view.listenerCount,
+    ).toBe(0);
+  });
+
+  it.each(["hash", "dnt", "gpc"])(
+    "keeps a runtime %s opt-out until a new document",
+    (choice) => {
+      const f = fixture();
+      f.start({ isEnabled: true });
+      if (choice === "hash") {
+        f.view.location.hash = "analytics=off";
+        f.view.fire("hashchange");
+      } else {
+        f.view.navigator.doNotTrack = choice === "dnt" ? "1" : "0";
+        f.view.navigator.globalPrivacyControl = choice === "gpc";
+        f.activate();
+      }
+      f.view.location.hash = "sources";
+      f.view.navigator.doNotTrack = "0";
+      f.view.navigator.globalPrivacyControl = false;
+      f.view.fire("hashchange");
+      f.view.fire("pageshow");
+      f.view.fire("scroll");
+      f.document.fire("visibilitychange");
+      f.advance(30_000);
+      f.activate();
+      expect(f.events()).toEqual([articlePath]);
+      expect(
+        f.timers.size + f.document.listenerCount + f.view.listenerCount,
+      ).toBe(0);
+      const fresh = fixture(origin + articlePath + "?analytics=on");
+      fresh.start({ isEnabled: true });
+      expect(fresh.events()).toEqual([articlePath]);
+    },
+  );
+
   it("is closed by default and has no listeners or timers when disabled", () => {
     const f = fixture();
     f.start();

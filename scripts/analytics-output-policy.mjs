@@ -34,8 +34,8 @@ export function assertAnalyticsConfiguration(value, origin, publicPaths) {
   assert.equal(value.buildIntent, "public");
   assert.equal(
     value.isEnabled,
-    false,
-    "Analytics activation requires a separate verified change.",
+    true,
+    "The activation candidate must contain the reviewed enabled configuration.",
   );
   assert.deepEqual([...value.publicPaths].sort(), [...publicPaths].sort());
   assert.deepEqual(

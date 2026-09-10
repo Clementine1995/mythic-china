@@ -13,6 +13,8 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
     config = configuration,
     url = configuration.origin + "/about/?private=discard#discard",
     webdriver = false,
+    doNotTrack,
+    globalPrivacyControl,
     copies = 1,
     fail = false,
     misplaced = false,
@@ -48,7 +50,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
     };
     const window = {
       location: new URL(url),
-      navigator: { webdriver },
+      navigator: { webdriver, doNotTrack, globalPrivacyControl },
       innerHeight: 600,
       performance: { now: () => atMs },
       setInterval: (callback) => {
@@ -77,6 +79,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
       calls,
       listeners,
       timers,
+      window,
       advance: () => {
         atMs = 15000;
         for (const callback of [...timers.values()]) callback();
@@ -101,9 +104,15 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
         }),
     };
   }
-  const enabled = { ...configuration, isEnabled: true };
+  assert.equal(configuration.isEnabled, true);
+  const enabled = configuration;
   const inactive = [
-    {},
+    { config: { ...configuration, isEnabled: false } },
+    { doNotTrack: "1" },
+    { globalPrivacyControl: true },
+    { url: configuration.origin + "/about/?analytics=off" },
+    { url: configuration.origin + "/about/#analytics=off" },
+    { url: configuration.origin + "/about/?analytics=on&analytics=off" },
     { config: enabled, copies: 0 },
     { config: enabled, copies: 2 },
     { config: "{" },
@@ -186,6 +195,15 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
   );
   assert.equal(entry.timers.size, 0);
   checkRequests(entry.calls);
+  const optedOut = fixture({ url: configuration.origin + entryPath });
+  optedOut.window.location.hash = "analytics=off";
+  optedOut.listeners.get("window:hashchange")();
+  optedOut.window.location.hash = "sources";
+  optedOut.advance();
+  optedOut.activate();
+  await setImmediate();
+  assert.equal(optedOut.calls.length, 1, "Opt-out must suppress later events.");
+  assert.equal(optedOut.listeners.size + optedOut.timers.size, 0);
   const failed = fixture({ config: enabled, fail: true });
   await setImmediate();
   assert.equal(failed.calls.length, 1, "Transport failure must not retry.");

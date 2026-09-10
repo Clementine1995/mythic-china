@@ -25,7 +25,7 @@ import { assertReviewHtmlResourcePolicy } from "../../scripts/review-output-poli
 const origin = "https://mythic-china-beta.vercel.app";
 const analyticsConfiguration = {
   buildIntent: "public",
-  isEnabled: false,
+  isEnabled: true,
   origin,
   endpoint: "https://mythic-china.goatcounter.com/count",
   publicPaths: [...publicPagePaths],
@@ -76,8 +76,8 @@ describe("public output safety", () => {
       (html) => html.replace(analyticsHtml, analyticsHtml + analyticsHtml),
     ],
     [
-      "enabled analytics",
-      (html) => html.replace('"isEnabled":false', '"isEnabled":true'),
+      "unexpected disabled analytics",
+      (html) => html.replace('"isEnabled":true', '"isEnabled":false'),
     ],
     [
       "uppercase extra canonical",

@@ -1,5 +1,240 @@
 # DEV_WORKFLOW.md
 
+## 分析与技术验收本地检查点（2026-09-10）
+
+owner 已明确要求“提交一次吧”，本次授权形成一个本地检查点：保存此前 Hero sizes、技术验收文档、默认关闭的 RUM 实现，以及 GoatCounter 启用候选和退出/Privacy。本次不推送、部署、启动服务或改用 Edge/CDP，不发送真实统计。既有生产发布意图不扩大本轮执行范围。
+
+父基线为 `29b3d953588d5f9dcb7b37d426a99a8760f22310` / main；进入时暂存区为空，精确范围为以下 39 个路径。业务代码不再修改；完整 41 文件/698 测试、Astro 128 文件零诊断、public 原始 bundle/Fake VM 与 review 零 JS，以及锁更新后 30 项回归沿用上轮已完成结果。本次核对文件范围、严格 UTF-8、文档链接和暂存 diff，不重复执行未变化的业务测试。当前日志/构建仍是提交前诊断；后续发布须按新的 clean revision 重新形成候选验证，不能自动升级旧证据为发布 receipt。
+
+```powershell
+$mythicCheckpointFiles = @(
+  'DEV_WORKFLOW.md',
+  'README.md',
+  'astro.config.mjs',
+  'docs/ARCHITECTURE.md',
+  'docs/requirements/006-external-interactions.md',
+  'docs/requirements/011-public-beta-validation.md',
+  'docs/requirements/017-real-user-monitoring.md',
+  'package.json',
+  'pnpm-lock.yaml',
+  'scripts/analytics-output-policy.mjs',
+  'scripts/analytics-script.json',
+  'scripts/review-output-policy.mjs',
+  'scripts/verify-analytics-bootstrap.mjs',
+  'scripts/verify-public-output.mjs',
+  'src/client/site-analytics.ts',
+  'src/layouts/SiteLayout.astro',
+  'src/pages/privacy.astro',
+  'src/site/analytics-configuration.ts',
+  'src/templates/EntryTemplate.astro',
+  'src/rum/bootstrap.ts',
+  'src/rum/collector.ts',
+  'src/rum/configuration.ts',
+  'src/rum/contract.ts',
+  'src/rum/web-vitals.ts',
+  'tests/architecture/project-boundaries.test.ts',
+  'tests/client/analytics-bootstrap.test.ts',
+  'tests/client/site-analytics.test.ts',
+  'tests/site/analytics-configuration.test.ts',
+  'tests/site/analytics-output-policy.test.mjs',
+  'tests/site/external-interactions-ui.test.ts',
+  'tests/site/public-output-policy.test.mjs',
+  'tests/site/review-output-policy.test.mjs',
+  'tests/rum/collector.test.ts',
+  'tests/rum/output-boundaries.test.ts',
+  'tests/rum/sqlite-fixture.ts',
+  'tests/rum/worker.test.ts',
+  'workers/rum/schema.sql',
+  'workers/rum/store.ts',
+  'workers/rum/worker.ts'
+)
+if ((Resolve-Path -LiteralPath (git rev-parse --show-toplevel)).Path -ne 'F:\codex-project\mythic-china') { throw 'Unexpected Git root.' }
+if ((git branch --show-current) -ne 'main') { throw 'Unexpected branch.' }
+if ((git rev-parse HEAD) -ne '29b3d953588d5f9dcb7b37d426a99a8760f22310') { throw 'Unexpected checkpoint parent.' }
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Expected an empty staging area.' }
+$mythicPendingPaths = @(git diff --name-only --no-renames) + @(git ls-files --others --exclude-standard)
+if (Compare-Object ($mythicCheckpointFiles | Sort-Object) ($mythicPendingPaths | Sort-Object)) { throw 'Checkpoint scope changed.' }
+git --literal-pathspecs add -- $mythicCheckpointFiles
+if ($LASTEXITCODE -ne 0) { throw 'Checkpoint staging failed.' }
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed.' }
+$mythicStagedPaths = @(git diff --cached --name-only --no-renames)
+if (Compare-Object ($mythicCheckpointFiles | Sort-Object) ($mythicStagedPaths | Sort-Object)) { throw 'Staged inventory changed.' }
+git diff --cached --stat
+```
+
+暂存复核通过后执行一次提交：
+
+```powershell
+git diff --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Unstaged changes remain.' }
+if (@(git ls-files --others --exclude-standard).Count -ne 0) { throw 'Untracked files remain.' }
+git commit -m "feat(analytics): prepare GoatCounter activation and local RUM"
+if ($LASTEXITCODE -ne 0) { throw 'Local checkpoint commit failed.' }
+git log -1 --format='%H %P %s'
+git status --short --branch
+git diff --cached --stat
+```
+
+收口核对新提交父节点和完整 39 路径、工作树/暂存区/未跟踪文件均为空；实际哈希以 Git 历史和执行结果为准，不在提交文本预写自身哈希。下文及各需求中的“未提交”属于此前实施快照，以本次授权和执行后现场为准。当前只关闭本地保存停点；真实 Network/缓存/导航、独立 Edge/CDP 授权及最终发布验证仍未完成，线上统计保持原关闭版。
+
+## GoatCounter 启用收尾（2026-09-10）
+
+owner 已要求处理既有统计的验证、启用和发布。范围见 [006 第 12.12 节](docs/requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。本地先完成 production 开关、退出判断、双构建 Privacy、精确 bundle 锁和匹配检查；不得把本地开启写成线上已经收数。保留此前 Hero sizes 和关闭的 RUM 实现，不恢复表单测试、不创建新服务、不安装依赖、不复用已耗尽的四次合成发送入口。
+
+先执行本文固定 Node/Corepack/pnpm 身份与进程 PATH 门禁，再沿既有定向 Prettier 入口格式化本节直接涉及的文件。检查命令如下；public 使用本文既有显式 origin 的 try/finally 入口，最后恢复 review 输出。
+
+```powershell
+& $mythicProjectCorepack pnpm run test tests/client/site-analytics.test.ts tests/client/analytics-bootstrap.test.ts tests/site/analytics-configuration.test.ts tests/site/analytics-output-policy.test.mjs tests/site/external-interactions-ui.test.ts tests/site/review-output-policy.test.mjs
+& $mythicProjectCorepack pnpm run check
+& $mythicProjectCorepack pnpm run build:public
+& $mythicProjectCorepack pnpm run build
+```
+
+bundle 变化时沿 M6 既有流程：第一次 public 构建应拒绝旧脚本锁；检查实际唯一 JS、全部依赖和原始字节后，手动更新 `scripts/analytics-script.json` 的路径与 SHA256，再重跑输出验证。VM 中执行原始制品只能使用 Fake fetch，不能视为真实浏览器请求头证据。
+
+本次只读账户核查：当前登录 `mythic-china` 看板，2026-09-03 至 2026-09-10 无路径过滤的报表为 0；Settings 的 site 为正式域名、retention 为 90、八项 Data collection 均未勾选、Dashboard 仅登录用户可见。Preferences 的时区已核对为 Asia/Shanghai，邮件报表 Never。未保存或改动设置。真实 Origin 下的请求头/缓存/导航仍需受支持的 Network 入口；现有内置浏览器不提供该入口。Git 检查点、真实浏览器执行及发布前先固定实际文件、身份与验证范围，不能复用旧包、旧 token 或旧发布脚本的身份。
+
+## RUM 本地实施（2026-09-10）
+
+owner 已要求实施 RUM，随后明确“还没有账户，先完成本地实现”。[017](docs/requirements/017-real-user-monitoring.md) 负责最小字段、窗口和退出合同。本批仅在既有项目增加锁定的 `web-vitals@6.2.1`、默认关闭的构建接线、独立 Worker/D1 源码与零网络测试；不安装 Wrangler、不创建账户/数据库、不启动服务、不发送真实测量，不执行 Git 或部署。
+
+先执行本文固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0 身份门禁和进程 PATH 设置。依赖仅从当前配置的 npm registry 读取并锁定该精确版本，不执行包脚本或改变成熟期、代理、证书、全局安装与其他依赖版本：
+
+```powershell
+& $mythicProjectCorepack pnpm view web-vitals@6.2.1 version dist.integrity dependencies --json
+& $mythicProjectCorepack pnpm add --save-exact --ignore-scripts web-vitals@6.2.1
+& $mythicProjectCorepack pnpm run test tests/rum tests/architecture/project-boundaries.test.ts
+& $mythicProjectCorepack pnpm run check
+# 沿本文既有 origin try/finally 入口进行 public → review 构建。
+& $mythicProjectCorepack pnpm run build:public
+& $mythicProjectCorepack pnpm run build
+```
+
+定向格式化只作用于 017 列出的本次文件，使用既有 pnpm exec prettier --write 入口。测试中的 SQLite 为 Node 自带的 `:memory:` 数据库，结束即关闭，不连接 Cloudflare、不创建持久文件。测试库/传输均注入 Fake，Worker 仅在内存接收合成 Request。相对链接验证先排除 fenced 与 inline code，避免将旧说明中的 PowerShell 类型转换识别为链接；不改原代码例子。
+
+当前 `rumDeployment = null` 明确表示未配置，不生成假 endpoint/数据库 ID、Wrangler 发布文件或启用日期。接通时先核对真实账户，再准备精确 binding、Free 成本限制、日志禁用、每小时 Cron、开窗与退出命令；将入口写入本文后取得对应运行/发布授权。当前 public verifier 仍拒绝任何未审 RUM 脚本，生产启用还需精确 bundle 清单和原始制品执行验证，不能仅改开关。
+
+本批验证：新增 35 项 RUM 测试，最终完整 check 为 41 文件/690 项，Astro 128 文件零诊断；独立审查发现的观察器部分注册失败后禁发缺口已修正，并补 quota 429 回归。public → review 构建与输出验证通过，仍为 public 140 文件/原唯一 inactive analytics JS、review 14 页零 JS。只读与原冻结上传包逐文件比对：六篇 Entry 的原 sizes 修正及 Privacy 为差异，其余 133 文件字节相同；本批无 RUM JS、meta 或远程请求。内容、来源、资产/字体及披露不变，Privacy 新增未启用计划；细节与未验证项见 017。此处全部是未提交源码的本地诊断，无发布 receipt。
+
+依赖 registry 核查首次受本机网络限制失败，获自动审批后仅访问官方 registry，核对 6.2.1 integrity 并安装；锁文件只多一个无传递依赖的 web-vitals。定向 prettier 遇已知 PATH/Path 重复键后，使用本文既有单一 PATH 的 Node/Corepack 子进程入口成功格式化本批文件，未改系统或项目环境。无新服务、真实数据、Git 写入或远端部署。
+
+## 钟馗移动 LCP 诊断与尺寸修正（2026-09-10）
+
+owner 同意继续定向诊断和最小优化。本批先对公开旧版钟馗补做两次 PSI，与 11:11 原记录合为三轮，全部保留；只提交同一公开 URL，不提供认证信息。PSI 的手机配置沿既有 412×823 / DPR 1.75 / slow 4G；自动附带的桌面结果也保留。不能把相同模拟参数当作相同主机性能，也不能将这些旧版结果标为本地修改后的收益。
+
+本地改动仅为 `src/templates/EntryTemplate.astro` 的手机 sizes：使用与现有 CSS 相同的 `47.99rem` 布局条件与 `calc(100vw - 2rem)`；保留桌面 90vw、picture 构图条件、候选文件、字体、CSS、内容和客户端脚本。合同见 [011 第 2.2.4 节](docs/requirements/011-public-beta-validation.md#224-钟馗移动-lcp-诊断与最小修正)。原四份文档的未提交改动保留；本批不安装依赖、启动服务、启用采集或执行 Git/部署。
+
+执行顺序：复测旧版并保留异常 → 修正尺寸声明 → 完整 check、显式 origin 的 public 构建与逐文件差异核对 → 回到 review build。以下沿本文固定 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0 与进程 PATH 身份门禁；public origin 只在子进程环境临时设置并恢复，不改配置文件。`.local/public-build/` 已只读确认为本项目内的实际目录；构建只刷新诊断输出，不覆盖原冻结上传包和发布回执。
+
+```powershell
+& $mythicProjectCorepack pnpm run check
+# 使用本文既有 MYTHIC_CHINA_SITE_ORIGIN 的 try/finally 入口。
+& $mythicProjectCorepack pnpm run build:public
+& $mythicProjectNode .local/post-launch-technical/audit-entry-sizes.mjs
+& $mythicProjectCorepack pnpm run build
+```
+
+差异核对只读新 public 输出和原冻结请求包：全部文件名单一致；只允许六篇 Entry 的四个 source 和一个 img 的 sizes 改变，其余 HTML 文本、图片/字体/CSS/JS/XML/robots 的字节保持。脚本与新 PSI 转录保存在忽略目录 `.local/post-launch-technical/`。它证明输出范围，不是浏览器 currentSrc、精确图宽或性能收益的验收；本批没有可用 trace/HAR 入口。
+
+方法依据（访问于 2026-09-10）：[WHATWG source size](https://html.spec.whatwg.org/multipage/images.html#source-size)、[W3C Media Queries 单位](https://www.w3.org/TR/mediaqueries-4/#units)、[Google LCP 分段诊断](https://web.dev/articles/optimize-lcp)。sizes/MQ 中 rem 使用初始字号；当前根元素没有作者 font-size，不能将其推广成会跟随未来 html 字号覆盖。小于站点最小宽度、占位滚动条和既有构图断点的精确浏览器行为仍需实测。
+
+三轮公开旧版结果如下，时间均为 2026-09-10 北京时间，LCP/TBT 单位为 ms：
+
+| PSI 报告 | 手机分数 / LCP / TBT / CLS | 桌面分数 / LCP / TBT / CLS | 报告列示的基准指数（手机 / 桌面） |
+| --- | --- | --- | --- |
+| [11:11 原记录](https://pagespeed.web.dev/analysis/https-mythic-china-beta-vercel-app-explore-zhong-kui/6tuhupfmsx?form_factor=mobile) | 95 / 2710 / 0 / 0 | 100 / 482 / 0 / 0 | 134 / 756 |
+| [11:38 补测](https://pagespeed.web.dev/analysis/https-mythic-china-beta-vercel-app-explore-zhong-kui/pnqqw684fn?form_factor=mobile) | 97 / 2255 / 0 / 0 | 72 / 910 / 495 / 0 | 950 / 62 |
+| [11:41 补测](https://pagespeed.web.dev/analysis/https-mythic-china-beta-vercel-app-explore-zhong-kui/pgnu4lkmh5?form_factor=mobile) | 96 / 2552 / 0 / 0 | 100 / 402 / 0 / 0.04 | 402 / 504 |
+
+完整页面转录摘要在 `.local/post-launch-technical/psi-lcp-repeats.json`，未覆盖上一批四份报告。手机 LCP 为 2.255–2.710s，三次中位数 2.552s；这不是 RUM p75。基准指数为报告原字段，不是 CPU 使用率。11:38 桌面 TBT 495ms、未归因强制重排 505ms 与两条较长文档任务均保留，不能用其他两次高分排除该异常，也不能直接归因本站 module 或字体。环境差异与页面开销的影响尚未分离。
+
+手机原始元素渲染延迟依次为 1,130 / 1,920 / 960ms，仍是优先需要 trace 解释的区间；报告没有给出足以证明具体解码、字体或布局因果的轨迹。第三轮相同显示配置下的图片审核需求又从 665×831 变为 380×475，故不能将单次估算的节省字节视为确定收益。本批停止继续刷 PSI 分数，保留范围内的一行修正；后续使用可提供 trace 的固定浏览器环境做单变量验证。
+
+本批验证完成：格式、lint、38 文件/655 项测试、Astro 117 文件零诊断与 review 输出门禁通过；随后显式 origin 的 public → review 构建分别通过 13/14 页输出门禁。首次完整检查被本批及上一批忽略目录脚本缺少显式 Node 全局导入阻断，已仅补这些自有脚本的 Node 导入，再运行完整 check 通过，没有改 ESLint 范围或放宽规则。
+
+`entry-sizes-output.json` 确认相对原包的 140 文件名单相同，134 个文件逐字节一致；六篇 Entry 每篇只变四个 source 和一个 img 的 sizes、各增加 80 bytes，回替新声明后与原 HTML 完全一致。内容、来源、alt/图注/AI 披露、原图与 112 个输出、10 份字体、CSS、JS 均保持；非默认视觉生产不适用。构建诊断与现有相关测试通过；单行声明无需额外职责注释。源码未提交，public 输出只是本地诊断，没有形成新的发布 receipt。
+
+下一项具体运行方案（尚未执行/授权）：已只读确认本机 `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` 为 152.0.4191.66。拟用新建的独立临时浏览器资料目录，通过本机 CDP 调试连接录制性能轨迹；短时启动只监听 127.0.0.1 的静态预览，分别读取原冻结包与本次已核验输出，两版各三次固定手机条件，保存请求/图片选择/绘制和主线程事件。只读这些公开制品，不使用现有登录资料、不安装依赖、不接远端调试端口或上传日志，结束时关闭本次启动的浏览器和预览进程。浏览器控制工具要求使用其他控制方式须由用户明确指定；AGENTS.md 也要求服务启动有明确授权。因此当前停在此方案，取得针对独立 Edge/CDP 与本地预览的明确许可后，再实例化并执行诊断脚本。它不会自动授权提交、部署或 RUM。
+
+## 发布后技术验收（2026-09-10）
+
+本轮 owner 明确要求补浏览器 Network、美国东/西部与欧洲性能、跨平台实机及 RUM 方案。只检验已公开的 `dc0ad2d` / `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK`，不重建或重发原 140 文件，不启用统计/表单/RUM、不注册付费服务、不修改网络安全设置、不提交或推送。当前文档检查点为 `29b3d953588d5f9dcb7b37d426a99a8760f22310`；它不替换实际制品源身份。
+
+测试页面为首页和 `/explore/zhong-kui/`。忽略目录 `.local/post-launch-technical/prepare.mjs` 先核对不可变原请求 SHA256，再用 HTML5 parser 逐篇枚举 picture 的真实 emitted 候选；按每个 picture 最大文件之和作保守排序，钟馗为 102,162 字节，下一篇为阴间指南 67,998 字节。该排序不是浏览器实际传输量。选择依据保存为 `page-selection.json`。
+
+地区 HTTP 使用 Globalping 免费匿名 API，位置明确为 US/VA、US/CA、DE/Frankfurt；2026-09-10 节点清单分别有 82、219、197 个匹配候选。每页两轮、每轮三节点，本批最多 12 个节点测量；第二轮引用第一轮 ID 尽量复用节点。仅发送公开 hostname/path，不携带 Cookie、Token 或认证信息；结果可凭 ID 分享，原始回执仅存忽略目录。响应未知即保留 ID/请求并停止，不自动重发 POST。HTTP 测量不执行 JavaScript，不是完整 Network、LCP、CLS、INP 或移动/桌面验收；第一轮也不能自动标成冷缓存。
+
+唯一执行入口：
+
+```powershell
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/post-launch-technical/prepare.mjs
+# 默认只读准备校验，零网络调用；需要已有公开节点清单。
+powershell.exe -NoProfile -File .local/post-launch-technical/measure-regions.ps1
+# 本次已授权的 12 节点上限，结果写入新的时间命名目录；重复执行是新一轮测量。
+powershell.exe -NoProfile -File .local/post-launch-technical/measure-regions.ps1 -Measure
+# 只从本次已完成回执生成摘要，零网络；固定本次结果目录。
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/post-launch-technical/summarize-regions.mjs
+# 零网络：核对 PSI 页面摘录的资源总量与原上传包文件名单。
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/post-launch-technical/audit-psi.mjs
+```
+
+Node 沿既定项目运行时，未安装依赖；Globalping 的 HTTPS 通过 Windows PowerShell 系统默认网络入口执行，没有变更代理或证书验证。curl 直接访问 Globalping/Google API 连接失败，系统默认入口随后成功取得 Globalping 节点清单；失败不记为站点性能问题。浏览器通过受支持 CUA 界面访问公开页面与 WebPageTest；其当前 tab 能力只有 pageAssets/webmcp 与 console logs，没有完整 Network/HAR 入口。不得用底层调试协议绕过工具限制。跨平台只记录实际提供的设备；Windows PnP 查询未发现连接的 WPD/Android/iPhone/iPad/ADB 目标，不把模拟视口或本机 Windows 结果算成其他实机。
+
+官方方法依据（访问于 2026-09-10）：[Globalping OpenAPI](https://github.com/jsdelivr/globalping/blob/master/public/v1/spec.yaml)、[HTTP schema 与计时](https://github.com/jsdelivr/globalping/blob/master/public/v1/components/schemas.yaml)、[免费额度](https://globalping.io/credits)、[WebPageTest 匿名入口](https://www.logicmonitor.com/webpagetest)、[PSI 方法](https://developers.google.com/speed/docs/insights/v5/about)。Globalping `firstByte` 不含 DNS/TCP/TLS；报告分别保留原值与这些分项之和的推导首字节延迟，不能混作浏览器 navigation TTFB。完整三地区实验室矩阵仍按 ARCHITECTURE；RUM 方案由 006 第 5.5 节负责，不由 HTTP 探针替代。
+
+### 三地区 HTTP 实测结果
+
+测量时间为 2026-09-10 02:51:47–02:51:58 UTC（北京时间 10:51）。全部 12 个节点结果为 `finished / HTTP 200`；TLS 1.3 与主机证书核查通过。表内数字为第一轮 → 第二轮，单位毫秒：
+
+| 页面 | 实际节点 | firstByte 等待 | DNS + TCP + TLS + firstByte | HTTP 总耗时 | CDN 缓存 |
+| --- | --- | --- | --- | --- | --- |
+| 首页 | Reston, Virginia / AS16276 | 117 → 41 | 150 → 54 | 152 → 55 | MISS → HIT |
+| 首页 | Los Angeles, California / AS36352 | 24 → 24 | 67 → 58 | 68 → 60 | HIT → HIT |
+| 首页 | Frankfurt, Germany / AS31898 | 345 → 153 | 357 → 162 | 358 → 164 | MISS → HIT |
+| 钟馗 | Reston, Virginia / AS16276 | 88 → 142 | 115 → 152 | 116 → 153 | MISS → HIT |
+| 钟馗 | Los Angeles, California / AS36352 | 20 → 18 | 60 → 57 | 65 → 61 | HIT → HIT |
+| 钟馗 | Frankfurt, Germany / AS31898 | 157 → 8 | 208 → 17 | 209 → 18 | MISS → HIT |
+
+原始请求、创建响应、完整 API 结果与 index 保存于 `.local/post-launch-technical/globalping-20260910-025146-5171056/`，独立摘要为 `.local/post-launch-technical/regional-summary.json`。四个测量 ID 依次为首页首/复轮 `2HkPeOo0G9ryp3EZy000216iJ` / `2z5cK2i3cZCC8n0Ph000216iJ`、钟馗首/复轮 `2D7xmFGGHKpGZxUxL000216iJ` / `2gDZQYhvBPYbVJUqj000216iJ`。
+
+结论限于这 12 次 HTTP 请求：总耗时 18–358ms，第二轮 6/6 CDN HIT。每页两轮的节点元数据一致；不声称两页都使用同一台物理探针。西部首轮已经 HIT，东部钟馗第二轮耗时更长，不能写成“冷/暖浏览器缓存已测”或“缓存命中一定更快”。API 正文全部截断为前 10,000 字符，不能独立证明完整文件摘要或部署 ID；制品身份沿用原发布完整性证据，没有重新标记为新源码版本。
+
+### 浏览器实验室结果与请求证据
+
+WebPageTest 官方匿名入口在提交一次公开首页后显示免费测试次数已用尽，未提供报告；没有重复提交、注册或升级。随后通过 Google PSI 官方网页分别提交首页和钟馗各一次，每次同时生成手机/桌面报告；只提交公开 URL，未向测量工具提供目标站认证信息。报告为北美洲的初始页面加载，未指定美东/美西，也没有欧洲或复访数据。
+
+| 页面 / 档位 | PSI 性能分 | FCP | LCP | CLS | TBT | 总传输量 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 首页 / 手机 | 99 | 1.352s | 1.802s | 0 | 0ms | 261,936 bytes |
+| 首页 / 桌面 | 100 | 0.254s | 0.321s | 0 | 0ms | 203,617 bytes |
+| 钟馗 / 手机 | 95 | 1.660s | 2.710s | 0 | 0ms | 376,969 bytes |
+| 钟馗 / 桌面 | 100 | 0.322s | 0.482s | 0 | 0ms | 368,903 bytes |
+
+原报告：[首页（11:05 北京时间）](https://pagespeed.web.dev/analysis/https-mythic-china-beta-vercel-app/y5l7tejy9r?form_factor=mobile)、[钟馗（11:11 北京时间）](https://pagespeed.web.dev/analysis/https-mythic-china-beta-vercel-app-explore-zhong-kui/6tuhupfmsx?form_factor=mobile)。两份均为 Lighthouse 13.4.1 / HeadlessChromium 151.0.7922.71；手机模拟 412×823、DPR 1.75、150ms TCP RTT、1,638.4kb/s、CPU 1.2× slowdown，桌面模拟 1350×940、DPR 1、40ms RTT、10,240kb/s、CPU 1×。主机基准性能有波动，单次样本不能归因或作为 p75。其 Android/Mac UA 是模拟配置，不是对应真机。
+
+PSI 的网络载荷表已提供初始加载的资源与字节证据：四份表显示的第三方资源数均为 0，所列文档、CSS、字体、AVIF 与原 module 均为正式同源。钟馗表展示 10 项资源：六份 WOFF2、一个 Hero、一份 CSS、文档和一个 3,316 bytes 的 module；手机 Hero 实际传输 42,034 bytes（资源本体 41,460），桌面 Hero 33,968 bytes。这些是报告展示的资源条目，不是完整 HAR，不证明导航、展开、滚动、后台/退出期间绝无额外请求，也没有逐请求 Cookie/Referer/响应头证据。当前 CUA 不提供该捕获能力，仍保留完整 Network 待验收项。
+
+本轮发现：钟馗手机 LCP 为 2.710s，报告建议缩小所选 960×1200 Hero，目标显示需求为 665×831、预计可省约 21KiB；LCP 原始诊断另显示资源加载延迟 200ms、下载 180ms、元素渲染延迟 1,130ms。它们与模拟后的 LCP 不是同一计时口径，不能相加求差。应先复核图片候选、字体/CSS 的渲染链和重复测量，再决定最小优化；本轮没有据此改业务代码。两页 CrUX 均显示无数据；TBT 不能充当 INP，Lighthouse 的自动无障碍高分也不关闭人工验收。
+
+PSI 可见指标及资源表摘录保存于 `.local/post-launch-technical/psi-summary.json`，明确标注为页面转录而非原始 API/HAR；`audit-psi.mjs` 检查四表求和、38 条显示资源与不可变上传包的文件映射，以及 Hero 本体字节，不把该校验当远端响应哈希检查。
+
+源码只读核查支持下一轮诊断边界：[Hero 组件](src/components/ManifestHeroPicture.astro)已使用静态 picture、eager/high，没有等待 JavaScript 展示的入口；[文章模板](src/templates/EntryTemplate.astro)手机 `sizes=100vw` 与 [CSS](src/styles/global.css) 的 `100vw - 2rem` 内容宽度有误差，但 [响应式合同](src/visual/visual-asset-schemas.ts)固定 640/960/1440/1920，报告所需 665px 仍超过 640，单改 sizes 不保证降档。字体已采用 swap，CJK 已有子集。下一最小诊断是在可取得 trace 的固定手机环境重复约三次，先定位图片下载结束至绘制的间隔；768px 中档或字体预加载对照仅为待验证候选，前者需同步资产合同，不能直接改一个清单绕过门禁。
+
+### 剩余验收的执行范围
+
+| 项目 | 固定检查范围与应保留证据 | 当前停止条件 |
+| --- | --- | --- |
+| 完整浏览器 Network | 在无目标站登录态的窗口中，从首个导航开始保留请求；首页 → 钟馗 → Sources/合集/相关阅读，检查图注展开、滚动至 75%、可见等待至少 20 秒及后台/返回。核对全部请求 URL、类型、发起方、状态、缓存、传输量及必要请求头；Newsletter/Reader Request/GoatCounter/RUM 不应发送。原始敏感头不进入仓库 | 需要受支持的 Network/HAR 入口；当前 PSI 表只作为初始加载的补充证据 |
+| 三地区完整实验室矩阵 | US East / US West / Europe × 首页/钟馗 × 手机/桌面，共 12 组，每组首访/同浏览器复访；记录工具版本、实际地点、视口/DPR/CPU/网络、TTFB/LCP/CLS、图片与 JS 传输量、浏览器缓存和 CDN 状态。不得把 CDN MISS/HIT 当浏览器冷/暖缓存 | WebPageTest 当前匿名入口无可用报告额度；PSI 未给出指定地区与复访。获得可用入口后补测，不预填通过 |
+| macOS / iOS / Android 真机 | 每平台登记真实型号、系统/浏览器版本和日期；检查首页、钟馗与中文/拼音/引文字体，横竖屏、200% 文字放大、菜单触控、图注、Hero、Sources 与横向溢出；按既有字体故障方式检查 fallback 并记实际字体或无法识别，绑定公开制品 | 本机为 Windows 10.0.26100，当前未发现连接的目标移动设备；用户暂无其他设备。未实测，不用视口或 UA 模拟替代 |
+| RUM | 按 [006 第 5.5.1 节](docs/requirements/006-external-interactions.md#551-发布后-rum-候选方案2026-09-10尚未批准接入)确认候选接收端、测量字段、数据处理和退出，再进入离线验证与单独生产启用 | 方案已形成，接收端/数据库、字段、处理条件和启用尚未批准；采集保持关闭，14 日基线尚未开始 |
+
+本批不需要目标读者招募；R2 按 011 保留为未开始。没有业务代码改动，内容/资产追溯、构建期诊断及职责注释变更不适用；本轮只做技术测量、方案和文档验证，不重建或重新发布。
+
+本批验证结果：37 份 Markdown 严格 UTF-8、90 个相对链接、四份修改文档的模板占位符与 `git diff --check` 通过；PSI 四表字节求和、38 条资源到原上传包的映射及 Hero 本体 41,460 bytes 校验通过。独立只读审查复核了地区回执与证据边界、RUM 候选的授权/字段/窗口/退出，没有未关闭的文档问题。工作树仅有 README、DEV_WORKFLOW、006、011 四份未暂存文档修改，临时脚本与回执留在忽略目录；main 相对未同步的本地 origin/main 为 ahead 1，本轮未提交或推送。未运行业务测试/build，也不把文档验证当发布验收。
+
 ## 阅读版 Public Beta 正式公开入口（2026-09-10）
 
 状态：本次阅读版 Public Beta 已按 owner 授权正式公开，[正式站点](https://mythic-china-beta.vercel.app) 可匿名访问。owner 已明确确认将 macOS/iOS/Android 实机显示与字体 fallback、美国东/西部及欧洲性能实测改到 Public Beta 上线后、结束 Beta 前补齐；当前仍为未验证，其他门禁保持。公开后原 140 文件完整核验通过，没有触发恢复保护。下列步骤是本次已执行入口，不是再次推广或再次公开的授权。
@@ -1975,3 +2210,8 @@ for (const args of commands) {
 '@
 & 'D:\Program Files\nvm\v24.16.0\node.exe' -e $readerVerifyScript
 ```
+
+本批本地结果：完整 check 41 文件/698 项测试，Astro 128 文件零 error/warning/hint；review 14 页零 JS 通过。首次 public 因新 bundle 被旧锁拒绝，检查唯一无 import/export 的 7,172-byte `/_astro/page.Br3bZ4bz.js` 后手动登记 SHA256 `eabde04719862a9f6c0665f614f3cd416ad1984a24d4a652757899512d4fcadf`，public verifier 与原始脚本 Fake VM 通过，再回到 review 构建通过。隐私链接仅允许 Privacy 页 analytics-hosting 内的精确官方政策地址，没有开放统计/表单入口。原 140 文件包 SHA256 先核对，再逐文件比较：126 文件完全相同，13 HTML 及唯一 JS 变化；非 Privacy HTML 去除开关/脚本引用与此前 Hero sizes 后均与原文相同。候选共 3,278,559 bytes。内容/来源、图片/字体、alt/图注/AI 披露未变，退出生命周期职责已写在代码边界并有回归。Preferences 时区为 Asia/Shanghai；本轮真实 count 发送为零，未做任何账户写入、Git 提交/推送或部署。
+
+下一步具体停点：当前原始制品可供审查，但不能由 dirty source 创建发布。拟先取得一次本地检查点提交授权，保存已有 Hero/RUM 本地交付与本轮启用准备，再按同一 source 重新验证。真实请求层验收需要用户明确允许独立临时 Edge/CDP（不读取已有浏览器资料），现有内置浏览器只提供 DOM/页面控制，没有 Network/HAR。运行方案须先限定仅本站公开内容与 GoatCounter endpoint、实际环境、次数、停止与后续回查；不因本文计划启动浏览器/服务、伪造正式源身份、重放旧四次工具或删除真实文章路径统计。生产启用发布意图已获确认，不重复询问该意图；尚缺的本地提交与浏览器技术方式授权分别处理。
+本轮最后复核：38 份 Markdown 严格 UTF-8、186 个相对链接及 diff 空白检查通过；脚本锁更新后的匹配输出测试 30 项通过，独立只读审查无阻塞发现。正式首页匿名 GET 为 200，仍引用原 `page.Di-gmpYO.js` 且 analytics meta 为 false；仅读取 HTML，没有运行页面或发送 count。暂存区为空，Git/发布状态保持未执行。

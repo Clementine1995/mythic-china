@@ -2,6 +2,8 @@
 
 ## 0. 状态与结论
 
+- 2026-09-10 Analytics 当前增量：本地 public 候选的 `isAnalyticsEnabled` 为 true，与 Privacy 共用单一配置；review 仍零 JS/meta。唯一 hash-locked bootstrap 保持精确 origin/账户/published 路径约束；DNT/GPC 和单页 `analytics=off` 在绑定及发送前检查，运行中退出清理当前 Document 的全部监听与计时器，BFCache 不恢复。传输仍仅 p/e、omit credentials、no-referrer、no-store、keepalive，无 Cookie/持久标识/重试。原始 bundle Fake 执行与 public/review 实际输出已验证；尚未部署或取得正式 Origin 的真实请求头证据，线上仍关闭。账户/隐私和发布停点见 [006 第 12.12 节](requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。RUM 配置继续为 null。
+
 - 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，013 已接入真实 origin 的本地 public build；空托管项目已由用户建立，外部服务与发布仍未实施。
 - M4 边界：经 2026-09-02 项目总检，M4 本地页面、探索投影、U4A 纯基础设施、U5A 样张、最终三档基础矩阵及当时 8 页人工视觉判断已完成。M4 不产生 deployable public artifact；原计划 U4B 的 public runner/output 接线与最终平台 QA 迁入 M6，生产与发布后验证保留给 M7。
 - 决策：**Astro 7 静态模式 + TypeScript strict + Git 内 Entry Markdown / 结构化 YAML + 构建期内容图校验 + 外部服务承接后续少量交互**。M2 不选择托管、不安装 adapter、MDX、React/Vue/Svelte、Tailwind 或商业依赖。
@@ -330,7 +332,9 @@ public 输出现只精确放行本站 analytics bootstrap：scripts/analytics-sc
 
 M5-U5A 的 `src/services/article-reading-state.ts` 已独立实现纯内存状态转换：调用方显式提供单调时间、可见性、主故事和视口边界；按前一可见状态累计时间，visible 时记录故事相交与 75% 深度，达到 15 秒后按既有语义返回两个各一次的无 properties 事件。初始化重置全部状态，未知故事区域不推断，非法时间/区域失败；不读取 DOM、时钟、配置或存储，不调用 adapter/网络。架构测试禁止页面消费该模块，当前 review 仍零客户端脚本。U5B 的独立 DOM hook 已消费该模块，并在模拟 DOM/时钟中验证区域选择、定时观察、环境隔离、BFCache 暂停恢复和清理；页面仍禁止直接消费状态机。M6 bootstrap 的实际字节现另有离线执行验证；浏览器和 M7 真实发送不能由这些离线测试冒充通过。
 
-M5 合同 [`006-external-interactions.md`](requirements/006-external-interactions.md) 已确认把 Web Vitals/RUM 明确延后到 M7，由一个独立 RUM producer 承担；这只是阶段责任与 provider-neutral 最小合同，不是已启用能力。M7 若把真实流量 p75 作为完成门禁，仍须选择并验收供应商、采集指标、字段、同意依据、保留期限、退出/删除路径与第三方域名，不能到生产发布后才补数据源，也不得同时启用两个 RUM beacon。
+RUM 的本地实施由 [017](requirements/017-real-user-monitoring.md) 负责，2026-09-10 owner 已确认先本地实现，暂无 Cloudflare 账户。`src/rum/` 独立于 GoatCounter：唯一标准 `web-vitals@6.2.1` producer 只映射 LCP/INP/CLS、随机单指标实例 ID 和递增序号；实际正式 origin、published 路径、日期、维护/自动化/隐私偏好检查通过后才加载自托管库和发送。没有 Cookie、持久浏览器标识、URL/设备维度或 attribution。`rumDeployment = null` 时两种构建均不产生 RUM meta/入口/chunk；review 仍零客户端 JS，public 保留原唯一 inactive analytics 脚本。正式启用仍需精确输出白名单及原始 bundle 执行证据，当前 verifier 拒绝任何 RUM 配置/脚本。
+
+`workers/rum/` 是仅服务 RUM 的独立 Workers/D1 源码边界，不进入 Astro 静态构建、不存储内容或读者账号。公开接口只有严格 JSON 的 POST `/vitals`；数据库时间限制固定 UTC 14 日窗口，较高序号才更新同实例。可信运维开窗、每小时维护、一次性封存与脱敏汇总为独立入口，没有公开管理 API。维护事务先标记缺口/暂停/过期、封存，再清理首次接收满 30 天的记录；准时每小时运行时删除延迟最多约一小时，供应商恢复/备份期限另行处理。关闭接收不关闭清理。足样本 p75 仍需平台/维护错误审查，Origin/CORS 不作为真人鉴别。默认测试仅用 Node 内存 SQLite 与 Fake，不部署 Cron、不绑定真实 D1；暂无可运行的远端服务或采集数据。实际 Free 计划、处理依据、日志禁用、删除路径和生产配置仍须核验，不得同时启用两个 RUM beacon。
 
 ### 7.4 Future Commerce
 
@@ -389,7 +393,7 @@ M4 已完成获授权的本地基础浏览器矩阵；M6 最终 public artifact 
 
 ## 12. MVP 明确不做
 
-- 全站 SSR、独立 API 服务、通用数据库或微服务。
+- 全站 SSR、内容/账号业务的独立 API 服务、通用数据库或微服务。017 仅允许 RUM 专用接收与最小测量存储，不扩大为通用后端。
 - React/Vue 全站运行时、全局状态库和客户端路由。
 - WordPress 插件体系或提前接入 Headless CMS。
 - Elasticsearch、Algolia、Neo4j 和实时关系图。

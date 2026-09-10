@@ -893,7 +893,7 @@ describe("review output resource policy", () => {
         <p>Buttondown uses buttondown.com; open and click tracking will remain off before the first send.</p>
         <p>Tally uses tally.so, stores form data in Google Cloud Belgium, and creates a persistent Respondent ID. Deleting provider records does not remove a Respondent ID. every 28 days, delete records that are at least 60 days old and empty Tally Trash in the same operation, producing an expected 60 to 88 days window. The sole operator is hyc, with no independent backup; a missed operation can extend that period.</p>
         <section id="analytics-hosting">
-          <p>GoatCounter is not enabled; its planned service domain is mythic-china.goatcounter.com. This version sends no analytics requests. These are counts, not identified readers. The account is configured for 90 days of aggregate retention; processing terms remain unverified.</p>
+          <p>GoatCounter is not enabled; its service domain is mythic-china.goatcounter.com. This version sends no analytics requests. These are counts, not identified readers. The account is configured for 90 days of aggregate retention with periodic cleanup. The dashboard is private. Global Privacy Control or Do Not Track, ?analytics=off and #analytics=off provide opt-out. <a href="https://www.goatcounter.com/help/privacy">GoatCounter privacy policy</a></p>
           <p>When you visit a version hosted on Vercel, Vercel may process your IP address, approximate location derived from it, and technical system information to deliver, maintain, and protect the hosting service.</p>
           <p>Hosting and security processing can still occur without a submission. For Vercel’s own privacy practices, see <a href="https://vercel.com/legal/privacy-notice">Vercel’s Privacy Notice</a>.</p>
         </section>
@@ -901,6 +901,30 @@ describe("review output resource policy", () => {
     const validHtml = reviewDocument(
       `<main id="main-content">${privacyCopy}</main>${newsletterFooter()}`,
     );
+    expect(() =>
+      assertReviewInteractionSurface(validHtml, "privacy/index.html"),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewInteractionSurface(validHtml, "index.html"),
+    ).toThrow();
+    expect(() =>
+      assertReviewInteractionSurface(
+        validHtml.replace(
+          "https://www.goatcounter.com/help/privacy",
+          "https://mythic-china.goatcounter.com/count",
+        ),
+        "privacy/index.html",
+      ),
+    ).toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(
+        validHtml.replace(
+          "https://www.goatcounter.com/help/privacy",
+          "https://www.goatcounter.com/",
+        ),
+        "privacy/index.html",
+      ),
+    ).toThrow();
     for (const broken of [
       validHtml.replace(
         "visit a version hosted on Vercel",
@@ -922,6 +946,21 @@ describe("review output resource policy", () => {
     const mailtoHtml = reviewDocument(
       `<main id="main-content">${privacyCopy.replace("huyichen2019@gmail.com", '<a href="mailto:huyichen2019@gmail.com">huyichen2019@gmail.com</a>')}</main>${newsletterFooter()}`,
     );
+    const enabledHtml = validHtml
+      .replace(
+        "GoatCounter is not enabled",
+        "GoatCounter is enabled on our public site based on legitimate interest",
+      )
+      .replace("This version sends no analytics requests.", "");
+    expect(() =>
+      assertReviewPrivacyNotice(enabledHtml, "privacy/index.html", true),
+    ).not.toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(enabledHtml, "privacy/index.html"),
+    ).toThrow();
+    expect(() =>
+      assertReviewPrivacyNotice(validHtml, "privacy/index.html", true),
+    ).toThrow();
     const outsideMainHtml = reviewDocument(
       `${privacyCopy}<main id="main-content"></main>${newsletterFooter()}`,
     );

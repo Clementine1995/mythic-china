@@ -10,6 +10,10 @@ import {
 import { serializeJsonLd } from "../site/seo";
 import { isNewsletterEnabled } from "../site/newsletter-configuration";
 import { fontAssetUrls } from "../typography/font-assets";
+import {
+  createRumConfiguration,
+  rumConfigurationName,
+} from "../rum/configuration";
 import "../styles/fonts.css";
 import "../styles/global.css";
 
@@ -26,6 +30,10 @@ const assembly = intent === "public" ? await loadPublicAssembly() : null;
 const analyticsConfiguration = assembly
   ? createPublicAnalyticsConfiguration(assembly.site, assembly.descriptors)
   : null;
+const rumConfiguration = createRumConfiguration(
+  intent,
+  assembly?.descriptors.map((page) => page.path) ?? [],
+);
 const pagePath = Astro.url.pathname.endsWith("/")
   ? Astro.url.pathname
   : `${Astro.url.pathname}/`;
@@ -52,6 +60,14 @@ if (
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="color-scheme" content="dark" />
+    {
+      rumConfiguration && (
+        <meta
+          name={rumConfigurationName}
+          content={JSON.stringify(rumConfiguration)}
+        />
+      )
+    }
     {
       analyticsConfiguration && (
         <meta

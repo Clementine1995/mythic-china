@@ -5,6 +5,7 @@ import type { GoatCounterConfiguration } from "../services/goatcounter-analytics
 export const analyticsSiteOrigin = "https://mythic-china-beta.vercel.app";
 export const analyticsEndpoint = "https://mythic-china.goatcounter.com/count";
 export const analyticsConfigurationName = "mythic-china-analytics";
+export const isAnalyticsEnabled = true;
 
 export interface PublicAnalyticsConfiguration extends GoatCounterConfiguration {
   buildIntent: "public";
@@ -19,7 +20,7 @@ export function createPublicAnalyticsConfiguration(
     throw new Error("Analytics requires the approved public site.");
   return {
     buildIntent: "public",
-    isEnabled: false,
+    isEnabled: isAnalyticsEnabled,
     origin: site.origin,
     endpoint: analyticsEndpoint,
     publicPaths: pages.map((page) => page.path),

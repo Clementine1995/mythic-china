@@ -16,7 +16,7 @@ const html = (content, intent = "public") =>
 const origin = "https://mythic-china-beta.vercel.app";
 const config = {
   buildIntent: "public",
-  isEnabled: false,
+  isEnabled: true,
   origin,
   endpoint: "https://mythic-china.goatcounter.com/count",
   publicPaths: ["/", "/explore/painted-skin/"],
@@ -70,12 +70,12 @@ describe("analytics artifact boundary", () => {
       /reviewed bytes/,
     );
   });
-  it("requires disabled configuration with exact origin, account and complete paths", () => {
+  it("requires enabled configuration with exact origin, account and complete paths", () => {
     expect(() =>
       assertAnalyticsConfiguration(config, origin, config.publicPaths),
     ).not.toThrow();
     for (const mutated of [
-      { ...config, isEnabled: true },
+      { ...config, isEnabled: false },
       { ...config, isEnabled: "false" },
       { ...config, extra: true },
       { ...config, origin: "https://preview.vercel.app" },

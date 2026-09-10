@@ -21,10 +21,26 @@ export function bindSiteAnalytics({
   isEnabled = false,
 }: SiteAnalyticsOptions): () => void {
   const { origin, pathname } = view.location;
+  function hasOptedOut(): boolean {
+    const navigator = view.navigator as Navigator & {
+      globalPrivacyControl?: boolean;
+    };
+    return (
+      navigator.doNotTrack === "1" ||
+      navigator.globalPrivacyControl === true ||
+      new URLSearchParams(view.location.search)
+        .getAll("analytics")
+        .includes("off") ||
+      new URLSearchParams(view.location.hash.slice(1))
+        .getAll("analytics")
+        .includes("off")
+    );
+  }
   if (
     isEnabled !== true ||
     buildIntent !== "public" ||
     view.navigator.webdriver ||
+    hasOptedOut() ||
     origin !== adapter.origin ||
     !adapter.hasPublicPath(pathname)
   )
@@ -45,6 +61,12 @@ export function bindSiteAnalytics({
 
   function send(action: () => Promise<unknown>): void {
     try {
+      // A privacy choice stops this document, including later BFCache restores.
+      if (isStopped) return;
+      if (hasOptedOut()) {
+        stop();
+        return;
+      }
       void action().catch(() => {});
     } catch {
       // Analytics cannot interrupt reading or navigation, including a transport failure.
@@ -75,7 +97,13 @@ export function bindSiteAnalytics({
   }
 
   function startTimer(): void {
-    if (isEntry && story && timer === undefined && !state.hasEmittedDepth75) {
+    if (
+      !isStopped &&
+      isEntry &&
+      story &&
+      timer === undefined &&
+      !state.hasEmittedDepth75
+    ) {
       // Periodic measurement also catches font/image layout changes without scrolling.
       timer = view.setInterval(onObservation, 500);
     }
@@ -83,6 +111,10 @@ export function bindSiteAnalytics({
 
   function onObservation(): void {
     if (!isSuspended) observe();
+  }
+
+  function onPrivacyChange(): void {
+    if (hasOptedOut()) stop();
   }
 
   function onPageHide(): void {
@@ -136,11 +168,12 @@ export function bindSiteAnalytics({
   view.addEventListener("resize", onObservation);
   view.addEventListener("pagehide", onPageHide);
   view.addEventListener("pageshow", onPageShow);
+  view.addEventListener("hashchange", onPrivacyChange);
   document.addEventListener("visibilitychange", onObservation);
   document.addEventListener("click", onActivation);
   document.addEventListener("auxclick", onActivation);
 
-  return () => {
+  function stop(): void {
     if (isStopped) return;
     isStopped = true;
     clearTimer();
@@ -148,8 +181,10 @@ export function bindSiteAnalytics({
     view.removeEventListener("resize", onObservation);
     view.removeEventListener("pagehide", onPageHide);
     view.removeEventListener("pageshow", onPageShow);
+    view.removeEventListener("hashchange", onPrivacyChange);
     document.removeEventListener("visibilitychange", onObservation);
     document.removeEventListener("click", onActivation);
     document.removeEventListener("auxclick", onActivation);
-  };
+  }
+  return stop;
 }

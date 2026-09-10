@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import process from "node:process";
 import { readBuildIntent } from "./src/site/build-intent.ts";
+import { createRumConfiguration } from "./src/rum/configuration.ts";
 import {
   createConfiguredPublicSite,
   siteOriginEnvironmentVariable,
@@ -32,6 +33,9 @@ export default defineConfig({
               "page",
               'import "/src/client/analytics-bootstrap.ts";',
             );
+            if (createRumConfiguration(intent, ["/"])) {
+              injectScript("page", 'import "/src/rum/bootstrap.ts";');
+            }
             for (const filename of ["sitemap.xml", "rss.xml", "robots.txt"]) {
               injectRoute({
                 pattern: `/${filename}`,

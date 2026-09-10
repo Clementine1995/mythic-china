@@ -21,10 +21,13 @@ const configuration = () =>
   );
 
 describe("public analytics configuration", () => {
-  it("pins the client identity to the approved site and copies published assembly paths while disabled", () => {
+  it("enables only the approved site and copies published assembly paths", () => {
     expect(analyticsSiteOrigin).toBe(approvedSiteOrigin);
     const value = configuration();
-    expect(value.isEnabled).toBe(false);
+    expect(value.isEnabled).toBe(true);
+    expect(
+      parseAnalyticsConfiguration({ ...value, isEnabled: false })?.isEnabled,
+    ).toBe(false);
     expect(value.publicPaths).toEqual(pages.map((page) => page.path));
     expect(value.entryPaths).toEqual(["/explore/painted-skin/"]);
     expect(parseAnalyticsConfiguration(value)).toEqual(value);

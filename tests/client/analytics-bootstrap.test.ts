@@ -65,7 +65,7 @@ describe("analytics bootstrap", () => {
     f.start();
     f.start();
     expect(f.view.fetch).toHaveBeenCalledTimes(1);
-    expect(f.view.addEventListener).toHaveBeenCalledTimes(4);
+    expect(f.view.addEventListener).toHaveBeenCalledTimes(5);
     expect(f.document.addEventListener).toHaveBeenCalledTimes(3);
     const fresh = fixture();
     fresh.start();

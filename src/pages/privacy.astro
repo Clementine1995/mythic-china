@@ -1,8 +1,9 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { readBuildIntent } from "../site/build-intent";
+import { isAnalyticsEnabled } from "../site/analytics-configuration";
 
-readBuildIntent();
+const hasAnalytics = readBuildIntent() === "public" && isAnalyticsEnabled;
 ---
 
 <SiteLayout
@@ -18,7 +19,7 @@ readBuildIntent();
         still planned and inactive.
       </p>
       <p class="privacy-updated">
-        Last updated <time datetime="2026-09-09">September 9, 2026</time>
+        Last updated <time datetime="2026-09-10">September 10, 2026</time>
       </p>
     </header>
 
@@ -124,27 +125,62 @@ readBuildIntent();
 
       <section id="analytics-hosting" aria-labelledby="analytics-heading">
         <h2 id="analytics-heading">Analytics and hosting</h2>
+        {
+          hasAnalytics ? (
+            <p>
+              GoatCounter is enabled on our public site. We use aggregate counts
+              to understand which stories are read and improve the publication.
+              Our basis is our legitimate interest in operating and improving
+              this site. The service domain is mythic-china.goatcounter.com.
+            </p>
+          ) : (
+            <p>
+              GoatCounter is not enabled in this version, which sends no
+              analytics requests. The public-site configuration uses
+              mythic-china.goatcounter.com under the arrangements below.
+            </p>
+          )
+        }
         <p>
-          GoatCounter is not enabled. This version sends no analytics requests.
-          The planned service domain is mythic-china.goatcounter.com. Data
-          handling and reporting must be verified before activation.
+          When enabled, analytics counts page loads, qualified readings, reading
+          depth, and related-story link activations. These are counts, not
+          identified readers. A reload counts again; returning to a page kept in
+          the browser's back-forward cache does not start a new count. We send
+          only the public page path and whether the count is an event; event
+          paths include the event name and source article path. We exclude URL
+          queries, fragments, referrers, email addresses, and form contents. We
+          use no analytics cookies or persistent visitor identifiers.
         </p>
         <p>
-          If enabled, analytics will count page views, qualified readings,
-          reading depth, and related-story link activations. These are counts,
-          not identified readers. We plan to exclude URL queries, fragments,
-          referrers, email addresses, and form contents, and to use no cookies
-          or persistent visitor identifiers. Network requests still expose
-          technical information, including an IP address, browser information,
-          and the site's origin, to the provider.
+          The provider still receives technical connection information,
+          including an IP address, browser information, and the site's origin,
+          and may process technical records to operate and protect its service.
+          GoatCounter's operator is based in Ireland; its privacy policy lists
+          hosting in Finland and Germany. See{" "}
+          <a href="https://www.goatcounter.com/help/privacy"
+            >GoatCounter's privacy policy</a
+          >.
         </p>
         <p>
           The account is configured for 90 days of aggregate retention, with
           individual pageview details, sessions, referrers, browser and system
           statistics, screen size, location, and language collection disabled.
-          Actual data removal, export and deletion options, and processing terms
-          remain unverified. This notice will describe the verified arrangements
-          before analytics is activated.
+          Retention is applied through periodic cleanup, rather than guaranteed
+          immediate deletion at exactly 90 days. The dashboard is private. The
+          operator can export aggregates or remove site data; the provider says
+          account-deletion backups may remain for up to 30 days. Aggregate
+          counts do not let us identify or retrieve an individual reader's
+          visits.
+        </p>
+        <p>
+          To opt out, enable Global Privacy Control or Do Not Track in a browser
+          that supports it. You can also load a page with <code
+            >?analytics=off</code
+          >
+          or add <code>#analytics=off</code> to its address. This stops further analytics
+          for that page, including after a back-forward restore; earlier counts are
+          not removed. The address choice is not stored or carried to other pages.
+          Browser privacy preferences apply across pages.
         </p>
         <p>
           Vercel is the selected hosting provider for Mythic China. When you
@@ -157,9 +193,39 @@ readBuildIntent();
           >.
         </p>
         <p>
-          This version does not enable visitor analytics or accept newsletter
-          sign-ups or Reader Requests. Hosting and security processing can still
-          occur when you visit a hosted page without submitting information.
+          This version does not accept newsletter sign-ups or Reader Requests.
+          Hosting and security processing can still occur when you visit a
+          hosted page without submitting information.
+        </p>
+      </section>
+
+      <section
+        id="performance-monitoring"
+        aria-labelledby="performance-monitoring-heading"
+      >
+        <h2 id="performance-monitoring-heading">
+          Planned performance monitoring
+        </h2>
+        <p>
+          Real user monitoring is not enabled. This version sends no performance
+          measurements. We are preparing to measure loading speed, interaction
+          delay, and layout shifts using a self-hosted copy of Google's
+          web-vitals library and a dedicated Cloudflare receiver.
+        </p>
+        <p>
+          The planned payload contains only a metric name, its value, a random
+          identifier for that metric instance, and an update sequence. It does
+          not contain page addresses, referrers, email addresses, or identifiers
+          shared across visits. No cookies or browser storage are used.
+          Cloudflare would still receive technical network information when
+          handling a request.
+        </p>
+        <p>
+          We plan to delete active measurements after 30 days and retain only
+          aggregate results. Provider recovery and backup processes may take
+          longer. The account, processing terms, request behavior, deletion
+          process, and any required consent must be verified before activation.
+          This notice will be updated with those verified arrangements.
         </p>
       </section>
 
