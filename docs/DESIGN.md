@@ -271,7 +271,7 @@ Zhōng Kuí 钟馗 · Hēibái Wúcháng 黑白无常
 《山海经》《搜神记》《聊斋志异》
 ```
 
-M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows 环境的 system fallback 检查有记录。正式自托管 WOFF2 与 CJK 字符/子集/cmap 静态门禁现已建立；正常/禁用/慢速字体加载、支持平台实机 fallback、实际字形可读性与浏览器真实 200% 缩放仍属于 M6 最终 public artifact 和受保护预览前的生产字体门禁。未执行项必须保留为未验证，不能由静态 cmap、M1 fallback 结果或 M4 本地页面通过替代，也不再阻塞 M6 内容制作本身。
+M1 冻结要求样张结构、上述字符覆盖、字号层级和当前 Windows 环境的 system fallback 检查有记录。正式自托管 WOFF2 与 CJK 字符/子集/cmap 静态门禁现已建立；正常/禁用/慢速字体加载、实际字形可读性与浏览器真实 200% 缩放仍属于 M6 最终 public artifact 和受保护预览前的生产字体门禁。按 Project owner 于 2026-09-10 确认的 [011](requirements/011-public-beta-validation.md)，macOS/iOS/Android 实机显示与字体 fallback 在 Public Beta 上线后、结束 Beta 前验收；预览进入记录须明确尚未验证的平台。未执行项必须保留为未验证，不能由静态 cmap、M1 fallback、视口/UA 模拟或 M4 本地页面通过替代，也不再阻塞 M6 内容制作本身。
 
 ### 5.3 Spacing, Grid and Shape
 

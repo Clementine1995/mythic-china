@@ -4,6 +4,14 @@
 
 ## 当前状态
 
+- 阅读版 Public Beta 已正式公开（2026-09-10）：[正式站点](https://mythic-china-beta.vercel.app) 已可匿名访问。原 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK` 原样推广，无重建或新部署；01:35–01:36 UTC 的完整 live smoke 确认全部 140 文件 / 3,275,431 字节为 200、MIME 正确且 SHA256 与原上传包一致。正式首页与钟馗正文的浏览器检查通过，订阅、读者建议和统计继续关闭；01:38 UTC 复查正式域名 200，两个部署网址仍 302 至 Vercel 登录。实机与三地区性能按 011 第 2.2.1 节 2026-09-10 最新决定在结束 Beta 前补齐，目标读者验证也尚未完成。当前仅同步发布与验收文档，未提交或推送；具体结果见 [DEV_WORKFLOW](DEV_WORKFLOW.md#阅读版-public-beta-正式公开入口2026-09-10)。
+
+- 受保护暂存部署已就绪（2026-09-10）：owner 在本机执行确认入口，同一 dc0ad2d / 140 文件已部署为 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK`，`production / READY`。[暂存站点](https://project-scu6m-bp33wljub-mathic-china.vercel.app) 和实际生成的衍生别名均受 All Deployments 登录保护；正式域名仍为 404。00:02 UTC 执行回执与 00:05 UTC 主代理独立匿名复查一致；owner 已确认首页和插画正常。主代理随后完成登录后 13 页 DOM 检查：19 处图片加载成功，226 处站内链接/锚点目标有效，交互入口及统计配置保持关闭；7 份线上字体/样式/图片与原制品 SHA256 一致。完整远端字节与请求、地区及跨平台实机仍未验收，Public Beta 尚未公开。本地 QA 不重跑，业务源码未改，未提交或推送；详细身份与证据见 [DEV_WORKFLOW](DEV_WORKFLOW.md#受保护暂存部署入口2026-09-09)。
+
+- 部署异常已撤销（2026-09-09）：原 dc0ad2d 的首次创建被平台归为 Production，曾使正式域名公开返回本站内容，受保护 Preview 未交付。owner 明确授权后，于 14:09 UTC 完成精确删除：部署 API 404、当时部署列表为空；主代理 14:10 UTC 独立匿名复查正式域名返回 404 / DEPLOYMENT_NOT_FOUND，无本站 title 或 main。该次事故清理后停止创建，再核实首次部署行为；后续独立暂存部署见上一条。已公开期间的外部访问/副本未核查。业务制品未改，未提交或推送；证据见 [DEV_WORKFLOW](DEV_WORKFLOW.md#受保护-preview-上传准备2026-09-09)。
+
+- 发布验收时点调整（2026-09-09）：owner 确认跨平台实机显示与 fallback 在受保护预览阶段完成，正式公开上线前仍必须验收；其他本地检查、源身份和部署授权保持。`dc0ad2d` 候选已完成异常/慢加载补验、26 组真实 200% 缩放、39 组最终三档检查及用户委托的 Codex 视觉接受；用户暂无其他设备，实机继续记为未验证。下一步准备受保护预览；本次仅同步文档，未提交、未部署，详见 [011 第 2.2.1 节](docs/requirements/011-public-beta-validation.md#221-跨平台实机验收时点)。
+
 - 当前主线（2026-09-09）：优先准备阅读版 Public Beta，首发为现有 6 篇文章、2 个合集和 5 个静态页。订阅、读者建议、Analytics/RUM 继续关闭，暂停 Tally 后续测试；M5 的未完成项留到对应功能启用前，详见 [011](docs/requirements/011-public-beta-validation.md)。本次 public 重建与独立校验通过：13 HTML、2 XML、robots.txt、112 张 Hero、10 个字体及一个关闭的脚本，共 140 文件 / 3,275,431 字节。下一步只处理 clean source、最终页面验收、受保护预览和独立生产授权；当前仍未发布。
 
 - Newsletter 默认关闭准备已完成（2026-09-09）：按 owner 提供的 `mythicworld` 原生 action 实现仅 email 的 POST 分支，并完成 Layout/Footer 接线与真实组件的 Node 内存渲染验证。完整检查通过 37 文件/635 项测试、Astro 115 文件零诊断，以及 public 13 页、review 14 页的构建和输出门禁；两种实际产物仍无可提交表单。Buttondown 托管页单邮箱 `Unactivated → Regular` 已有 owner 证据，owner 随后确认真实退订已完成；测试记录清理、本站真实提交与邮件行为仍未验证。账户事实和启用门禁见 [006 第 12.8–12.9 节](docs/requirements/006-external-interactions.md#128-buttondown-账户与有限订阅验证2026-09-09)。
@@ -47,7 +55,7 @@
 1. **M4 本地产品实现已完成**：Collection/Guide Hero、双语术语、四条馆藏标题 locale、CJK 静态门禁、Windows/local 正式页基础矩阵、功能页修正、M4-U5A noindex 字体样张/自动负门禁、最终样张三档基础矩阵与 Project owner 对 8 个页面的视觉判断已形成。现有 review 输出继续不可部署，后续内容包已在 VB6 独立审核到 ready。
 2. **M5 外部交互边界**：[`006-external-interactions.md`](docs/requirements/006-external-interactions.md) 的 U2 纯合同/Fake、U3 inactive UI/Privacy 与 U5A 阅读判定已完成。U5B 的零网络 adapter/DOM hook 已通过本地检查，owner 已通过截图与保存确认账户设置；M6 默认关闭的页面 bootstrap 和产物离线验证完成，仓库外四次合成发送、收数与清理后归零已确认，请求头和生产验证待闭合。Buttondown 当前 newsletter slug 为 `mythicworld`，默认关闭的本站表单准备已完成；后台原生 action/部分设置及托管页单邮箱 `Unactivated → Regular` 状态变化已有 owner 证据。owner 已确认真实退订；测试记录清理、完整处理边界与本站真实提交/启用仍待 U4。Tally 已有 owner 的预览显示确认和发布链接，浏览器标签 URL/标题匹配；完整页面读取未完成，测试前 owner 已确认 Submissions 为 0、Trash 为空并沿用本人测试邮箱；本轮已用 3/10，匿名 abc 建议已写入，当前 Completed 为 2；owner 确认不勾选邮箱同意时提交被拦住，刷新后 Completed 仍为 1，此项按 owner 操作与后台回查通过。第 1 项空白建议产生 1 条 Completed，保留为旧提交前校验要求下的失败。owner 已批准先收集、编辑前严格筛选；本地审核入口已完成，38 文件/655 项测试、Astro 117 文件零诊断与 14 页 review 构建通过；修订后的真实测试见 006 第 12.11 节，邮箱同意要求保持，删除另行确认。当前网站无可提交表单或实际统计，独立测试不改变内容和发布门禁。
 3. **M6 内容与 public artifact assembly**：VB6 已闭合 6+2 ready、四篇分类、Related 编辑环和 Liaozhai Featured。阴间指南复用已有 CMA Source 补末段近引，全库仍为 14 Source / 25 Claim / 6 Terminology。owner 已批准全部 published，六篇目标日期 2026-09-10。稳定 HTTPS origin 与 public assembly 已在 013 接线；本批输出仍为 nondeployable 本地诊断，Beta 页脚提示已获文案与位置批准，本地实施见 013；016 已补条件式 hosting Privacy；下一阶段核对真实托管配置、独立 M5 交互并准备最终发布候选。R2 在 Public Beta 上线后执行。
-4. **M6 发布候选 QA 与受保护预览**：public assembly 实现稳定后，先由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建最终 public artifact，执行真实键盘、200% zoom、JavaScript-disabled、reduced motion、慢/阻断字体、图片失败、支持平台 fallback、最终视觉与本地 LCP/CLS 基线，并生成 verification receipt。dirty source 上的检查只能形成 nondeployable 诊断记录，提交后不得直接沿用或“洗白”。全部通过后才可单独授权受保护远端预览，并验收账户、保护、地区表现、回滚与退出方案。任何实质内容、状态、模板、资产、样式或配置变化使受影响证据失效。
+4. **M6 发布候选 QA 与受保护预览**：public assembly 实现稳定后，先由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建最终 public artifact，执行真实键盘、200% zoom、JavaScript-disabled、reduced motion、慢/阻断字体、图片失败、本机 fallback、最终视觉与本地 LCP/CLS 基线，并生成 verification receipt。dirty source 上的检查只能形成 nondeployable 诊断记录，提交后不得直接沿用或“洗白”。上述本地项目通过且记录尚未验证的平台后，才可单独授权受保护远端预览，并验收账户、保护、回滚与退出方案；跨平台实机显示与 fallback 及目标地区性能按 011 第 2.2.1 节于 Public Beta 上线后、结束 Beta 前补齐，未验证项继续明确记录。任何实质内容、状态、模板、资产、样式或配置变化使受影响证据失效。
 5. **M7 Public Beta、上线后验证与正式收口**：预览验收后逐次授权把同一身份发布为稳定、可索引且带可访问 Beta 提示的 Public Beta，并建立 live smoke、回滚、目标地区复核与真实流量 RUM/p75 基线。上线后另行冻结并授权研究执行包，先由 1 位独立读者完成 R2a；R2b 建立 5–8 份核心全站可用记录，四篇焦点 Entry 各取前 5–8 份可用深读，按预冻结规则可加入替补，因此总招募人数可能超过 8。达到 010/011 阈值、关闭关键发现、处置重复重大问题并由 Project owner 确认后，才结束 Beta 并认定正式 MVP 验证完成。每一步都不自动授权下一步。
 
 简中本地化试点是独立后续轨道：实施前须另行授权，不进入上述英语 MVP 的阻塞链，也不要求中英文同步发布；具体启动时点留待实施批次确认。目标合同见 [`005-localized-content-pilot.md`](docs/requirements/005-localized-content-pilot.md)。
@@ -77,7 +85,7 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 
 ## 当前运行口径
 
-当前已有本地应用开发与自动验证环境，但没有运行中的本地服务。历史 M4-U5A preview PID `9628` 与 2026-09-02 最终 U5 人工证据 preview PID `31960` 均已停止；Project owner 判断后回查 4321 无监听，验收标签也已清理。M5-U2/U3 只运行本地自动化和静态 build：Fake 测试证明零网络，U3 output verifier 证明零 form/script/provider link，不构成供应商联调或常驻环境。Vercel 已被选为未来静态托管目标，但项目仍没有数据库或运行中的远端部署；用户已建立空 Vercel 项目与稳定 Production 域名，本地 origin 已接线。
+当前已有本地应用开发与自动验证环境，但没有本任务启动的本地服务。历史 M4-U5A preview PID `9628` 与 2026-09-02 最终 U5 人工证据 preview PID `31960` 均已停止；Project owner 判断后回查 4321 无监听，验收标签也已清理。M5-U2/U3 的 Fake 和静态验证不构成供应商联调。2026-09-10，现有 Vercel 项目已有原 dc0ad2d 制品的受保护暂存部署；正式域名仍返回 404，项目无数据库。本地 origin 已接线，Newsletter、Reader Request、Analytics/RUM 在原制品中保持关闭，登录后的托管输出仍待核验。
 
 | 环境或运行角色 | 固定工作区 | 代码/制品身份 | 配置入口 | 数据与外部资源 | 允许用途 |
 | --- | --- | --- | --- | --- | --- |
@@ -141,7 +149,7 @@ M2/M3-U5 已建立本地静态应用、视觉资产合同和非默认生产复�
 
 ## 发布口径
 
-当前已有 Vercel 空项目与稳定 Production 域名，但没有部署或获授权的发布任务。M4 只完成 noindex 本地产品实现、published-only 投影和 public/SEO 纯 builder，不产生 deployable public artifact。M6 的 6 篇 Entry / 2 个 Collection 已获人工 `published` 决定，013 已确认 public origin 并实现本地 public artifact assembly；其一个 Entry + 一个 Collection 仍只是技术 fail-closed 下限，不替代实际预览候选。实现稳定后须由 Project owner 单独授权形成 clean committed source，并从该 revision 重新构建真实非空 public artifact、运行独立 output verifier 与最终发布候选 QA。dirty source 上的结果只能记录为 nondeployable 诊断，后续提交不能直接继承该 artifact、QA 或 receipt。用户已通过网页完成空项目及域名准备，但平台内部身份、保护等仍待复核，且这些准备不等于预览或部署授权；远端预览保留给 M6 完整候选。M7 在独立授权下把同一验证身份发布为可索引 Public Beta；R2a/R2b 在 live artifact 上执行，完成后才关闭正式 MVP 验证。M6 最终 verification receipt 必须绑定 clean source revision、lock/source digest、public intent、verifier/QA 结果与 `dirty: false`；远端预览再把同一个 clean committed source、验证结果和 deployment target 绑定为 `validated_source_identity`。若未来复用不可变制品，receipt 还必须包含完整 artifact inventory/digest；部署、目标读者数据收集、表单真实写入、分析埋点、支付和线上数据操作分别授权、分别验收。
+原 clean revision `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` 的已验收制品已于 2026-09-10 原样推广到正式域名并公开为阅读版 Public Beta。6 篇 Entry / 2 个 Collection 的人工 published 决定、原 public 构建、独立 verifier 和本地 QA 保持；本轮没有重建、上传新部署或修改业务源码。原暂存 receipt 保留，新增公开记录绑定同一部署 ID、Standard Protection、正式域名匿名 200、全部 140 文件远端 SHA256/MIME 与首页/核心正文浏览器检查。两个部署网址仍要求登录。交互和统计关闭配置、原 bootstrap 摘要/离线验证与本轮线上字节一致性有证据；完整浏览器 Network 未直接取证，不把 DOM 或 GET 冒充请求抓包。实机与三地区性能按 011 最新决定在结束 Beta 前补齐，R2a/R2b 仍未开始；当前保持 `Public Beta / pending human validation`，不宣称正式 MVP 验证完成。今后若从新 revision 构建，仍须绑定 clean source、lock/source digest、public intent、verifier/QA 与 `dirty: false`；不可变制品复用保持完整 inventory/digest。后续部署、数据收集、表单、分析和线上数据操作分别授权、分别验收。
 
 ## AI 协作口径
 

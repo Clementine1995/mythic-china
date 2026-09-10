@@ -13,11 +13,11 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | 已确认 | Project owner 于 2026-09-07 确认采用“先完成非读者发布门禁，再以可索引 Public Beta 获取真实读者并关闭 R2”的路线 |
-| 实施状态 | 合同已建立；PB2 已进入实施 | 012 已闭合四篇 Entry 与 Liaozhai Collection 的五组 Hero brief、候选/权利、master、production record、approved/current manifest、repository source 和内容绑定；VB6 已闭合分类、Related、Featured 与 6+2 ready；owner 随后批准全部 6+2 published，六篇目标公开日期统一为 2026-09-10；013 的 `public` intent、稳定 origin 与本地诊断制品已完成；完整发布候选及远端运行环境仍未完成 |
-| 验证状态 | PB1 文档验证与 PB2 Hero 数据闭环定向验证通过；上线后目标读者验证未开始 | 五组 Hero 的 Schema、production lineage、metadata/hash、owner/Claim 图、current resolver、内容外键、local master 与精确 inventory 已通过 8 个测试文件/38 项测试；最终视觉构建与全量结果见 012 第 7 节。R1 静态检查已通过，R2a/R2b 真人反馈仍为 0 |
-| 发布状态 | 未发布 | 当前 published Entry / Collection 为 6/2，六篇目标日期为 2026-09-10，已有 Vercel 空项目及 production hostname，尚无受保护远端预览或生产部署 |
+| 实施状态 | PB2/PB3 已形成证据；PB4 阅读版正式公开 | 原 dc0ad2d 的 6 Entry / 2 Collection / 140 文件原样推广；内容、资产和关系批准保持，交互与统计继续关闭 |
+| 验证状态 | 本地 QA、受保护 13 页 DOM、正式 140 文件与首页/核心正文 live smoke 通过 | 全部正式响应 200、MIME/字节/SHA256 一致，具体方法见 DEV_WORKFLOW；完整 Network 未直接取证，实机与三地区性能按 2.2.1 在结束 Beta 前补齐，R2a/R2b 仍为 0 |
+| 发布状态 | 阅读版 Public Beta 已公开 | 同一 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK` 已推广；正式域名匿名 200，Standard Protection 下两个部署网址仍要求登录。状态为 Public Beta / pending human validation，未完成正式 MVP 验证 |
 
-- 当前权威结论更新时间：2026-09-08。
+- 当前权威结论更新时间：2026-09-10。
 - 2026-09-08 增量：owner 已通过网页建立个人管理 Hobby 空项目 `project-scu6m`，Production 域名 `mythic-china-beta.vercel.app` / `No Deployment`。本地 public assembly 已在 [013](013-public-artifact-assembly.md) 接线；此前 origin/runner/endpoint 尚不存在的描述保留为 PB1/VB6 阶段背景，不再作为当前阻塞项。本批未提交输出仍是 nondeployable 诊断，不关闭下列生产进入门禁。
 - 决策基线：`f81b49fd1c288aed6c552c2e8d9926ec5a09e86c`；PB1 已提交为 `96da8db52cc384e0dc77164288d3bce16383faf0`。五组 Hero 已提交为 `1be085b`，VB6 从该 clean 基线完成本地 ready 审核；当前修改未提交，也不形成可部署身份。
 
@@ -25,8 +25,8 @@
 
 - 一句话结论：目标读者 R2 从 M6 上线前硬门禁改为 M7 Public Beta 上线后的验证与正式 MVP 收口门禁；缺少样本不得写成“通过”，但不再阻塞图片、状态、public artifact、受保护预览或经单独授权的 Public Beta 生产发布。
 - 是否可以进入本地后续开发：是。四篇 Entry 与 Liaozhai Collection 的五组 Hero 资产已完成 approved/current 闭环；VB6 已使 6 篇 Entry / 2 个 Collection 均 ready，随后 owner 已批准 6+2 published 与六篇目标日期 2026-09-10；013 已完成 origin/public assembly 的本地接线；Beta 页脚提示已获批准，本地实施见 013；016 已补条件式 hosting Privacy，后续为实际托管配置、独立 M5 交互及最终候选准备。
-- 是否可以立即发布 Public Beta：否。本地 public build 与 inactive Privacy 已完成；实际交付配置、含 Beta 提示的 clean-source 最终 QA、受保护预览和生产授权尚未完成。未启用的外部服务不阻塞阅读版候选。
-- 会改变后续实施结果的待确认项：目标读者招募/答卷渠道、实际交付入口、构建配置及项目数据处理选择。2026-09-08 已现场核对团队/项目内部身份、Production 域名绑定及 `Require Log In / Standard Protection`；尚无部署，保护的实际访问验收仍待受保护预览。具体现场见 DEV_WORKFLOW 文末。
+- 本次公开流程：owner 已于 2026-09-10 授权并确认第 2.2.1 节的时点调整；同一部署已推广到正式域名并公开，140 文件匿名完整性检查、首页与核心正文浏览器检查通过，没有触发恢复保护。执行身份、时间与证据限度见 DEV_WORKFLOW 顶部；这不是新一次发布授权。
+- 当前下一步：保持阅读版 Public Beta，按 2.2.1 在结束 Beta 前补齐实机与三地区性能；独立研究执行前确认目标读者招募/答卷渠道及 5.1 执行包。完整 Network 未直接取证的限制保留；不重复部署或本地 QA，不自动启用外部服务。
 
 ### 1.1 事实、推断与风险
 
@@ -54,15 +54,34 @@ Public Beta 生产发布前必须全部满足：
 3. 阅读版的 Newsletter 与 Reader Request 保持 inactive，无可提交控件、外部表单入口或传输；Privacy 与实际产物一致。Buttondown/Tally 的未完成配置、联调与清理按 [`006-external-interactions.md`](006-external-interactions.md) 保留，恢复对应功能前单独完成，不计为已通过。
 4. Analytics 配置保持关闭，现有唯一 bootstrap 通过摘要与离线执行校验；实际候选在 local/preview/production 均不发送供应商请求，不增加 RUM producer。以后启用统计或 RUM 时，仍须完成 006 的处理、Privacy、传输与退出验证并取得独立授权。
 5. M6 完成真实 HTTPS origin、public intent/runner、页面 metadata、Sitemap/RSS/JSON-LD、独立 output verifier 与真实非空 public artifact。
-6. 从另行授权的 clean committed revision 重建同一 artifact，完成自动门禁、390/768/1440、真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、支持平台 fallback、链接、本地性能和 Project owner 最终视觉审核，并生成 clean-source verification receipt。该轮不以 R2 样本为放行条件。
-7. 受保护预览绑定同一 validated source identity，并通过账户归属、保护、目标地区表现、成本、退出和回滚验收。
+6. 从另行授权的 clean committed revision 重建同一 artifact，在进入受保护预览前完成自动门禁、390/768/1440、真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、本机 fallback、链接、本地性能和 Project owner 最终视觉审核，并生成绑定源身份及检查范围的 verification receipt。该轮不以 R2 样本为放行条件。
+7. 受保护预览绑定同一 validated source identity，并通过账户归属、保护、成本、退出和回滚验收。macOS/iOS/Android 实机显示与字体 fallback，以及美国东部、西部和欧洲性能实测，按第 2.2.1 节在 Public Beta 上线后、结束 Beta 前补齐；预览及公开记录列明具体未验证平台和地区，不能标成通过。公开后立即核验同一原 140 文件，发现阻塞阅读问题即恢复登录保护；其他门禁不因此后移。
 8. 同一发布候选包含 Project owner 批准的可见、可访问 Public Beta 提示；它不宣称已通过目标读者验证，具体文案和位置已有匹配视觉、键盘和输出检查。
 9. `DEV_WORKFLOW.md` 已实例化生产发布、live smoke、回滚和停止条件，且 Project owner 单独授权本次生产发布。阅读版 live smoke 必须复核交互与统计仍关闭；production analytics/RUM 的启用流程后置。
+
+### 2.2.1 跨平台实机验收时点
+
+当前决定（2026-09-10）：Project owner 明确同意将 macOS/iOS/Android 真机显示与字体 fallback，以及美国东部、西部和欧洲性能实测，调整为 Public Beta 上线后、结束 Beta 前补齐。当前依据已接受的 Windows、本地与受保护线上验收执行本次公开；公开后立即对比原 140 文件，发现阻塞阅读的问题即恢复登录保护。此决定只改变这两组验收时点，不改变测试平台、页面、指标或通过标准，也不把缺失证据记为通过。地区性能仍按 ARCHITECTURE 覆盖首页及最重文章、移动/桌面、冷/暖缓存和既定全部指标；实机记录仍绑定设备/系统/浏览器、页面、结果与同一制品身份。Windows、视口/UA 或浏览器引擎模拟均不能替代实机。
+
+历史决定（2026-09-09，当前时点由上一段替代）：Project owner 当时将实机检查由受保护预览前移至受保护预览阶段，并要求正式公开前完成。该历史授权与原验收记录保留，不覆盖本次最新决定。
+
+已验证的 `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` 候选完成 108 组正常/无脚本/减弱动效/资源故障与慢加载补验、26 组真实 200% 缩放、39 组最终三档版面及本地性能测量；用户委托的 Codex 最终视觉审核接受。当前用户暂无其他设备，跨平台实机仍未验证。这些证据绑定原 clean revision 及其 140 文件制品，不随文档修改自动改绑为新 revision，也不构成生产授权。
+
+2026-09-10 的确认包含按上述方案尽快公开本次阅读版 Beta、公开后立即完整性检查与阻塞问题时恢复登录保护；不授权 Git 提交/推送、业务代码变更、功能启用、付费升级或采集读者数据。公开访问与保护设置按 DEV_WORKFLOW 的具体入口执行，其余运行配置及通过标准保持。
+
+### 2.2.2 受保护预览准备
+
+2026-09-10，owner 在本机执行确认入口，原 dc0ad2d / 140 文件已交付到受保护 **staged production**，部署 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK` 为 READY。上传前已加强为 All Deployments 登录保护，请求关闭该次正式域名自动推广；实际仍生成一个受保护衍生别名。00:02 UTC 执行回执与 00:05 UTC 主代理独立匿名复查确认：正式域名 404，部署及衍生别名跳转 Vercel 登录。它作为当前受保护验收环境，不冒称 Vercel Preview，也不构成公开生产放行。随后 Windows 内置浏览器的登录后 13 页 DOM、19 处图片加载、226 处站内目标及 7 份字体/样式/图片字节抽验通过；交互入口及统计配置仍关闭。完整远端字节、请求/平台注入、线上索引文件、目标地区与跨平台实机仍保留。具体身份、授权、方法与证据限度、单次创建与精确异常撤销记录以 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#受保护暂存部署入口2026-09-09) 为准；本轮没有重跑本地 QA 或 Git 写入。下列段落为上一轮事故及创建前的历史记录，不覆盖本次 READY 状态。
+
+异常已撤销（2026-09-09）：唯一一次创建返回 `target: production`，曾使正式域名公开返回本站正文，受保护 Preview 未通过。owner 明确授权后完成精确删除；14:09 UTC receipt 显示对象 API 404、部署列表为空，14:10 UTC 主代理独立匿名复查正式域名为 404 / DEPLOYMENT_NOT_FOUND，无本站内容。当前无可用部署，不再尝试创建；首次部署环境选择方案需核实后再提新的预览动作。曾公开期间的外部访问/副本未验证。执行与保留证据由 DEV_WORKFLOW 维护，下段为创建前准备记录。
+
+2026-09-09，用户要求准备受保护预览。原 dc0ad2d clean-source 制品的目录与 ZIP 均已逐项复核，140 文件 / 3,275,431 字节与原 inventory 完全一致；非 Git REST 请求包及本地摘要已生成并完成 Base64 回解检查。拟使用既有 Vercel 项目，以 Other、空 build/install command、根输出目录直接交付该制品，具体身份、请求摘要、实时保护检查、授权和撤销入口仅由 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#受保护-preview-上传准备2026-09-09) 维护。上述首次交付设置尚未应用；2026-09-09 已通过本机 Token 只读核对项目/团队、已绑定域名及 Standard Protection，部署为 0。owner 已保存本项目 Pre-Production Toolbar Off 并确认关闭项目模型训练开关；Toolbar 提示需新部署生效，实际输出及保护访问尚未验证。代理本次仅准备，没有 Git 写入、账户配置写入或远端部署；本次 Preview 已获明确授权，但新输入凭据的项目 GET 返回 403、团队 scope 未授权；创建 POST 尚未执行，凭据恢复后继续同一次授权。实机缺口按 2.2.1 保留。
 
 ### 2.3 Beta 退出条件
 
 Public Beta 保持进行中，直到：
 
+- 按第 2.2.1 节补齐 macOS/iOS/Android 实机显示与字体 fallback，以及美国东部、西部和欧洲的完整性能实测；设备/系统/浏览器、地区、页面、冷/暖缓存、指标、结果及匹配制品身份齐全，阻塞阅读问题已解决。缺少这些证据时不能结束 Beta。
 - production identity 与 validated source identity 一致；live robots/canonical/核心路由/资源 smoke、回滚入口和目标地区复核已有记录，且没有未关闭的关键技术发现。
 - M7 已按 006 选择并启用唯一 RUM producer，真实 production request/dashboard 已核验。默认观察窗为连续 14 个完整自然日，LCP、INP、CLS 各至少 50 个供应商判定有效且排除 review/preview/自动化流量的测量值后才报告 p75；供应商有效性口径、时区、过滤与窗口起止须在启用前冻结。14 日后任一指标不足 50 个有效值时记为 `RUM INCONCLUSIVE — INSUFFICIENT TRAFFIC`，不得宣称该指标或整体性能通过；Project owner 可在核对 M6 实验室基线仍有效并明确接受该限制后关闭正式 MVP 验证。窗口或样本门槛不得在看到结果后下调。
 - R2a 由 1 位符合画像但不计入正式样本的独立读者在当前 live artifact 上完成，材料、首读停点、记录方式和实际时长问题已经关闭。
@@ -130,9 +149,9 @@ R2a 先验证这份执行包与 live 页面；只有材料问题关闭并冻结�
 ## 6. 实施拆分
 
 1. **PB1 合同同步**：新增本文并同步 README、项目规则、产品、设计、架构、总合同与相关历史需求的当前路线。状态：已完成。
-2. **PB2 阅读版发布门禁**：验收交互与统计关闭、现有内容/资产及 M6 public artifact。状态：本地实现与自动验证已完成，完整候选尚未验收；既有内容批准、Beta 提示和 inactive Privacy 保留。下一步为固定 clean source、最终页面 QA 与真实预览交付；M5 不在本次继续测试。
-3. **PB3 受保护预览**：从 clean source 验证并验收受保护预览。状态：未开始。
-4. **PB4 Public Beta 生产发布**：逐次授权后把 validated source identity 发布到稳定、可索引的 production origin。状态：未开始。
+2. **PB2 阅读版发布门禁**：原 dc0ad2d 本地候选已接受，内容/资产、关闭交互与统计、Beta 提示及 inactive Privacy 保留；源身份和本地 QA 见 2.2.1，不重复测试 M5。
+3. **PB3 受保护预览**：原已验收制品的 staged production 已 READY，匿名保护、owner 首页确认、登录后 13 页 DOM/图片/站内目标与 7 份资源字节抽验通过；完整远端响应在本次公开后立即核验，实机与三地区性能按 2.2.1 留到结束 Beta 前补齐。
+4. **PB4 Public Beta 生产发布**：2026-09-10 已按 owner 授权推广同一部署、开放正式域名，并通过 140 文件及首页/核心正文 live smoke；Standard Protection 保留，两个部署网址仍要求登录。详细结果见 DEV_WORKFLOW；当前为 Public Beta，尚未结束验证。
 5. **PB5 上线后 R2**：先关闭第 5.1 节的研究执行与数据门禁，再在同一 live artifact 上完成 R2a、冻结研究版本、执行 R2b、处置与复测。状态：未开始。
 6. **PB6 正式 MVP 收口**：Project owner 关闭目标读者验证、复核 live/RUM 基线并决定结束 Beta。状态：未开始。
 
@@ -146,5 +165,5 @@ R2a 先验证这份执行包与 live 页面；只有材料问题关闭并冻结�
 
 - Public Beta 路线已获确认；目标读者审核仍未执行，证据状态继续为 `PENDING HUMAN READERS`。
 - 缺少 R2 样本不再阻塞图片、`relatedEntryIds`、视觉/状态审核、M6 public artifact、受保护预览或经独立授权的 Public Beta 生产发布。
-- Public Beta 不是降低质量标准的预览替代物；除目标读者效果验证外，既有内容、资产、技术、隐私、版本身份、预览和生产门禁全部保留。
+- Public Beta 不是降低质量标准的预览替代物；既有内容、资产、技术、隐私、版本身份、预览和生产门禁保留，实机与三地区性能执行时点以第 2.2.1 节最新确认、目标读者效果验证以本文上线后合同为准。
 - PB1 文档合同同步已完成；PB2 已完成五组 Hero 的 brief、候选/权利、production lineage、approved/current manifest、repository source 与内容绑定。VB6 已闭合关系、Featured 与 6+2 ready，随后 owner 已批准 6+2 published 与六篇目标日期 2026-09-10；013 本地 origin/public assembly 已完成；下一停点为完整发布候选准备。外部服务、Git、Vercel 操作和发布仍须按对应范围单独授权。

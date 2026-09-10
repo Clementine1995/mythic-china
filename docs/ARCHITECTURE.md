@@ -244,12 +244,12 @@ M4 本地产品实现完成
   -> 真实 origin + M6 public artifact assembly 实现
   -> Project owner 单独授权 clean commit
   -> 从 clean revision 重新构建 public artifact / Sitemap / RSS / JSON-LD
-  -> output verifier + 自动、键盘/缩放/偏好、故障、字体/跨平台、视觉与本地性能 QA
-  -> local clean-source verification receipt
+  -> output verifier + 自动、键盘/缩放/偏好、故障、本机字体、视觉与本地性能 QA
+  -> local clean-source verification receipt（列明跨平台实机未验证项）
   -> M6 受保护远端预览 + validated_source_identity
   -> M7 同一已验证源身份发布可索引 Public Beta + live smoke / 回滚 / RUM 基线
   -> live artifact R2a 非计入试跑 -> R2b 5–8 份核心全站记录 + 四篇各前 5–8 份可用深读（按冻结规则补位）
-  -> 处置关键发现并复测 -> Project owner 关闭正式 MVP 验证
+  -> 处置关键发现并复测 -> 按 011 补齐三平台实机及美东/美西/欧洲性能验收 -> Project owner 关闭正式 MVP 验证
 ```
 
 ### 6.1 托管、域名与海外交付阶段
@@ -257,16 +257,16 @@ M4 本地产品实现完成
 | 阶段 | 决策 |
 | --- | --- |
 | 文档与本地开发 | 不创建托管或域名事实；先完成内容、视觉和静态构建验收 |
-| 首次在线预览 | M4 noindex 本地实现已经完成。M5 边界冻结后，由 M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 published 决定，确认 origin 并完成 public artifact assembly 实现。实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一真实非空 artifact，完成 output verifier、可访问性、故障、字体/跨平台、视觉与本地性能 QA，生成 clean-source receipt。dirty source 只能产生 nondeployable 诊断记录，提交后不得复用。没有自有域名时，可在 M6 单独授权建立 Project owner 控制的 Vercel 项目身份以确认稳定 production alias/hostname，但不得借此部署 review 输出。完整本地 public 候选通过后再另立远端预览授权，并验收账户归属、保护策略、目标地区实测、回滚、成本与退出路径 |
-| Public Beta 公开前 | 明确配置唯一 `MYTHIC_CHINA_SITE_ORIGIN`。没有自有域名时，可以在 Project owner 确认后使用稳定的 Vercel production alias/hostname 作为阶段性 origin；每次部署变化的 generated/branch URL 永远不能作为 canonical。未来切换自有域名必须另立迁移与 canonical 决策。R2 缺少样本不阻塞这一阶段，但所有其他发布门禁及逐次生产授权必须关闭 |
-| Public Beta 上线后 | 保持可见、可访问的 Beta 提示及内部 `Public Beta / pending human validation` 状态；先按 011 冻结并授权研究执行包和版本，再在 live artifact 上按 010 执行四篇深读与全站任务。关键发现按所属硬门禁立即修复，必要时回滚或取消发布受影响页面；重复重大问题、live/RUM 基线、研究阈值与 Project owner 结论关闭后，才认定正式 MVP 验证完成 |
+| 首次在线预览 | M4 noindex 本地实现已经完成。M5 边界冻结后，由 M6 完成 6 篇内容、至少 2 个合集页、全部资产与人工 published 决定，确认 origin 并完成 public artifact assembly 实现。实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一真实非空 artifact，完成 output verifier、可访问性、故障、本机字体、视觉与本地性能 QA，生成列明未验证平台的 clean-source receipt。跨平台实机显示与 fallback 按 [011 第 2.2.1 节](requirements/011-public-beta-validation.md#221-跨平台实机验收时点) 按 011 最新决定在 Public Beta 上线后、结束 Beta 前完成，仍须记录实机未验证项。dirty source 只能产生 nondeployable 诊断记录，提交后不得复用。没有自有域名时，可在 M6 单独授权建立 Project owner 控制的 Vercel 项目身份以确认稳定 production alias/hostname，但不得借此部署 review 输出。完整本地 public 候选通过后再另立远端预览授权，并验收账户归属、保护策略、回滚、成本与退出路径；目标地区实测按 011 最新时点完成 |
+| Public Beta 公开前 | 明确配置唯一 `MYTHIC_CHINA_SITE_ORIGIN`。没有自有域名时，可以在 Project owner 确认后使用稳定的 Vercel production alias/hostname 作为阶段性 origin；每次部署变化的 generated/branch URL 永远不能作为 canonical。未来切换自有域名必须另立迁移与 canonical 决策。R2 缺少样本不阻塞这一阶段，但其他发布门禁按 011 明确时点执行，逐次生产授权必须具备 |
+| Public Beta 上线后 | 保持可见、可访问的 Beta 提示及内部 `Public Beta / pending human validation` 状态；先按 011 冻结并授权研究执行包和版本，再在 live artifact 上按 010 执行四篇深读与全站任务。关键发现按所属硬门禁立即修复，必要时回滚或取消发布受影响页面；重复重大问题、live/RUM 基线、研究阈值与 Project owner 结论关闭，且按 011 补齐三平台实机及三地区性能验收后，才认定正式 MVP 验证完成 |
 | 出现少量动态能力 | 由后续需求先比较外部服务、Astro 官方 adapter 的隔离按需路由与独立动态表面；只有托管、安全和数据边界确认并单独授权后才接入，不因预想中的 D1、R2、KV 或 Workers 先选平台 |
 
 Vercel 已被选择为未来静态托管目标。Astro 静态项目可以在 Vercel 零配置部署，只有使用服务端渲染或平台运行时能力时才需要 adapter；本项目当前不新增 adapter。Vercel 为每次 deployment 生成可变 URL，并另提供 production domain 变量；由于该变量在 Preview 环境也存在，build intent 与 canonical 都不得从 Vercel 环境自动猜测，必须由后续 public runner 显式读取并校验项目自有的 `MYTHIC_CHINA_SITE_ORIGIN`。来源：[Astro on Vercel](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls) 与 [Vercel System Environment Variables](https://vercel.com/docs/environment-variables/system-environment-variables)，访问于 2026-08-30。
 
 域名注册、DNS 与托管仍是三个可替换边界。自有域名可以由第三方注册商持有，再用 DNS 接入 Vercel；更换托管或从阶段性 production alias/hostname 切换自有域名时，应通过显式迁移决策调整 origin，不让内容 ID、Markdown 或 slug 跟随平台变化。来源：[Vercel Adding a Domain](https://vercel.com/docs/domains/working-with-domains/add-a-domain)，访问于 2026-08-30。
 
-Vercel 与 Cloudflare 都提供全球 CDN，但节点数量或平台宣传不替代实测。M6 受保护预览建立后、M7 生产前，用首页和图片最重的文章页从预期读者区域（至少美国东/西部与欧洲）分别测试移动/桌面、冷/暖缓存，并记录 TTFB、LCP、CLS、传输图片体积和客户端 JavaScript；M7 上线后再用真实用户数据复核第 75 百分位。来源：[Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare Global Cache](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Google Lab and Field Data](https://web.dev/articles/lab-and-field-data-differences)，访问于 2026-08-26。
+Vercel 与 Cloudflare 都提供全球 CDN，但节点数量或平台宣传不替代实测。按 Project owner 于 2026-09-10 明确确认的 011 第 2.2.1 节，在 Public Beta 上线后、结束 Beta 前，用首页和图片最重的文章页从预期读者区域（至少美国东/西部与欧洲）分别测试移动/桌面、冷/暖缓存，并记录 TTFB、LCP、CLS、传输图片体积和客户端 JavaScript；M7 上线后再用真实用户数据复核第 75 百分位。来源：[Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare Global Cache](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Google Lab and Field Data](https://web.dev/articles/lab-and-field-data-differences)，访问于 2026-08-26。
 
 ### 6.2 M4 public 纯基础设施与 M6 制品边界
 
@@ -278,7 +278,7 @@ Vercel 与 Cloudflare 都提供全球 CDN，但节点数量或平台宣传不替
 - 当前 M4-U4A 纯基础设施与 M6 public artifact assembly 合同只覆盖英语根路径；已确认但未实施的简中试点不改变英语 published inventory、public build 或发布资格。未来本地化实施必须扩展正式 loader、内容图、SEO builder、Layout/Header、Sitemap 与 output verifier 后再开放 locale 页面，不能只复制路由或拼接 `hreflang`。
 - M4-U4A 当时没有改变 `readBuildIntent()`、`SiteLayout`、六类页面、Astro endpoint 或默认输出；后续候选任务只为 `SiteLayout` 增加英文自托管字体 preload，CJK 明确不 preload，也不接入 public metadata/endpoint。M4-U5A 又新增仅显式 review intent 可构建、只允许直达的 `/review/type-specimen/`；它不进入 Header/Footer、Home、review candidate、release/public projection 或 SEO/artifact builder。`public` intent 继续失败；M4 收口时的 review `dist/` 为 8 个 noindex 页面、42 个 Hero 图片、10 个哈希 WOFF2、零 XML 与零客户端 JavaScript。原 7 页继续精确匹配真实 CJK content set，样张独立匹配生产 pinyin 语言、DESIGN 冻结混排行、65/36 required 与 `测`/`測` fallback-only set，不能反向放宽内容字符集；HTML/CSS oracle 另锁定 family/weight/style、head/robots/discovery 与 direct-only 等价 URL。2026-09-02 最终样张和页面实现已在 8 页 × 三档 24 个组合与四条 Hero 页 12 个组合通过基础浏览器矩阵，Project owner 随后明确通过全部 8 个页面；这关闭 M4 本地实现，不产生 public artifact。M5-U3、四篇 draft 与 009 的 Liaozhai Collection 后续把当前 review 清单扩展为 14 页；012 为四篇与 Liaozhai Collection 接入各自 Hero 后，当前输出合同为 14 个 `noindex, nofollow` 页面、112 个 Hero 图片、10 个哈希 WOFF2、零 XML 与零客户端 JavaScript，六个 Entry 页面各保留一个 inactive Reader Request 和唯一反向合集入口。此前 8 页浏览器矩阵是 M4 历史证据，不覆盖 Privacy、四个新增 Entry、Liaozhai Collection 或这些交互表面。
 - 真实键盘/200%/偏好、慢/阻断加载、图片失败、受控性能与支持平台 fallback 仍须在可控环境完成，不写成已通过。M5 外部交互边界冻结后，由 M6 完成 6 篇 Entry / 至少 2 个 Collection 与全部资产并作出人工 published 决定，确认真实 origin，接入 public runner、页面 metadata、XML routes 与独立 public verifier；再对该同一最终 public artifact 执行完整 release-candidate QA。
-- M6 public artifact assembly 实现稳定后，须由 Project owner 单独授权形成 clean committed source，并从该 revision 重新构建 artifact、运行 verifier 与完整 QA，最后生成绑定 clean source revision、lock/source digest、public intent、verifier/QA 结果和 `dirty: false` 的 verification receipt。dirty source 只允许 nondeployable 诊断记录；提交后必须重建、重验并重发 receipt，不能“洗白”旧证据。M6 远端预览再把该 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`；若复用不可变制品，receipt 还必须包含完整 artifact inventory/digest。pending 发布 QA、早期 M4 页面证据或 dirty-worktree `dist/` 均不得代替发布资格。一个 Entry + 一个 Collection 是纯技术 fail-closed 下限，不替代 M6 的 6 篇 Entry / 至少 2 个 Collection 预览候选或 M7 生产发布与发布后基线验收。最终 QA 后若发生实质内容、状态、模板、CSS、字体、Hero、manifest、origin、metadata、runner 或 XML 变化，按影响范围重跑对应证据。
+- M6 public artifact assembly 实现稳定后，须由 Project owner 单独授权形成 clean committed source，并从该 revision 重新构建 artifact、运行 verifier 与预览前本地 QA，生成绑定 clean source revision、lock/source digest、public intent、verifier/QA 结果和 `dirty: false` 的预览 verification receipt，明列跨平台实机未验证项；实机显示与 fallback 按 011 第 2.2.1 节在 Public Beta 上线后、结束 Beta 前完成，未验证项继续记录。dirty source 只允许 nondeployable 诊断记录；提交后必须重建、重验并重发 receipt，不能“洗白”旧证据。M6 远端预览再把该 clean committed source、验证结果与具体 deployment target 绑定为 `validated_source_identity`；若复用不可变制品，receipt 还必须包含完整 artifact inventory/digest。pending 发布 QA、早期 M4 页面证据或 dirty-worktree `dist/` 均不得代替发布资格。一个 Entry + 一个 Collection 是纯技术 fail-closed 下限，不替代 M6 的 6 篇 Entry / 至少 2 个 Collection 预览候选或 M7 生产发布与发布后基线验收。最终 QA 后若发生实质内容、状态、模板、CSS、字体、Hero、manifest、origin、metadata、runner 或 XML 变化，按影响范围重跑对应证据。
 - Review/public output 必须允许普通外部 citation anchor，但所有页面子资源必须来自单斜杠根相对本地 URL 并精确闭合到实际 emitted inventory；远端或 protocol-relative `src`/`srcset`/`poster`/`data`/资源型 `href`、远端 CSS `url()`/`@import`、缺失本地目标、`base`、`iframe`、`object`、`embed`、form、可执行 script、未经验证的结构化数据脚本与 meta refresh 均由 output policy/verifier 阻断，不能绕开 Asset Manifest、权利、hash、性能和隐私门禁。U3 interaction DOM oracle 另拒绝 provider link、未知标记、伪成功状态和不完整 Privacy 合同；未来 U4/U5 只能按已批准的精确 action、provider host 与 script allowlist 狭窄开放。语义壳 oracle 只遍历浏览器活跃 HTML5 树，安全资源扫描可以进入并拒绝 template 等非活跃 surface；两者不得用同一种原文本搜索替代。构建输出根和每个条目以 `lstat` fail-closed，symlink/junction 与未知类型不属于可发布 inventory。
 
 ## 7. 动态能力边界

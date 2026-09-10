@@ -1,5 +1,82 @@
 # DEV_WORKFLOW.md
 
+## 阅读版 Public Beta 正式公开入口（2026-09-10）
+
+状态：本次阅读版 Public Beta 已按 owner 授权正式公开，[正式站点](https://mythic-china-beta.vercel.app) 可匿名访问。owner 已明确确认将 macOS/iOS/Android 实机显示与字体 fallback、美国东/西部及欧洲性能实测改到 Public Beta 上线后、结束 Beta 前补齐；当前仍为未验证，其他门禁保持。公开后原 140 文件完整核验通过，没有触发恢复保护。下列步骤是本次已执行入口，不是再次推广或再次公开的授权。
+
+执行结果：通过现有 owner 登录的 Vercel UI，在精确部署详情使用 Deployment Actions → Promote；确认框仅列 `mythic-china-beta.vercel.app`。推广后同一部署保留 Ready / Production、Staged 标签消失且正式域名关联；01:29:34 UTC 匿名 GET 仍为 302 至 `vercel.com/sso-api`。随后保留 Require Log In，将 All Deployments 改为 Standard Protection 并 Save；读回 Standard Protection 且 Save disabled。没有 Redeploy、上传、付费升级、Git 或业务数据写入。
+
+01:35:55–01:36:43 UTC（上海 09:35:55–09:36:43）的 `public-smoke-20260910-013643-3438248.json` 为 passed：140/140 HTTP 200、3,275,431 字节、全部 MIME 与原包 SHA256 匹配、无 noindex/none 响应头。此结果覆盖 13 HTML、Sitemap/RSS/robots、112 AVIF/WebP、10 WOFF2、CSS 与唯一 module。已接受原文件的 robots Allow /、13 条 Sitemap、6 条 RSS 与正式 canonical 因远端字节一致获得同一响应证据；未声称搜索引擎已收录。01:38:35–37 UTC 独立匿名复查正式域名 200 且本站 title 存在，hash URL 与 `project-scu6m-mathic-china.vercel.app` 均 302 至 Vercel 登录。
+
+正式域名的 Windows 内置浏览器首页与钟馗正文检查通过：H1/canonical、图片解码、来源/合集/相关阅读正常，无表单控件；Newsletter/Reader Request 为 inactive，analytics meta 为 false，仅有原 module 与非执行 JSON-LD。首页截图显示正常，两页 error 日志查询均为空。关闭配置、此前原 bootstrap 离线验证及全部线上文件一致性支持继续关闭的判定；本轮没有直接完整 Network 抓包，不把该判定写成逐请求实测。实机、三地区性能、R2 与完整请求观察的证据限度继续保留；正式 MVP 尚未收口。脱敏汇总另存 `.local/reading-beta-staged-dc0ad2d/public-release-result.json`，原暂存回执及事故记录不覆盖。
+
+发布身份固定为项目 `prj_U8IP9LhhpaeDC2dJlP0VVv3ciu70` / 团队 `team_zxOM6nEHD6ZYTRcrAjbcwU3U`，原 `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` / 140 文件 / 3,275,431 字节，已验收部署 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK`。沿用下节的本地 QA、上传 inventory、13 页 DOM 与资源抽验；不重建、不上传新部署、不连接 Git、不改内容/交互/统计。执行前 Vercel 登录页确认 Mathic China / Hobby；该部署为 Ready、Production / Staged、Assigning Custom Domains Skipped；Domains 仅列正式域名且 No Deployment。执行前保护为 Require Log In + All Deployments，无 automation bypass secret。项目构建设置为 Other，Build/Install/Output 的 Override 均关闭；这是项目默认值的 UI 读回，不等同于原部署请求中的空命令与根输出覆盖。该部署的 Web Analytics / Speed Insights 均显示 Not Enabled。实际发布后状态以上述执行结果为准。
+
+执行顺序与停止条件：
+
+1. 在 [部署详情](https://vercel.com/mathic-china/project-scu6m/D3E9hWGC4h19MSg1KcuVaiTWunwK) 核对精确 ID、Ready、Staged 与现有域名，保持 All Deployments。用 Deployment Actions → Promote 及确认框的 Promote 推广同一部署；不能点 Redeploy。正式域名唯一清单已核对，若出现新增生产域名、身份变化或创建新构建，则停止。官方 [promote 合同](https://vercel.com/docs/rest-api/projects/point-production-traffic-to-a-given-deployment) 明确此操作不重建，[CLI 说明](https://vercel.com/docs/cli/alias#preferred-production-commands) 推荐 staged production 使用 promote。
+2. 推广成功后，在同一部署详情及 Domains 核对正式域名关联，匿名 GET 确认仍受登录保护；推广不等于公开。操作超时或结果未知时只读核查当前状态，不重复提交。
+3. 适用门禁完成或取得明确的验收时点调整后，进入 [Deployment Protection](https://vercel.com/mathic-china/project-scu6m/settings/deployment-protection)，保留 Require Log In，将 All Deployments 改为 Standard Protection 并 Save。此步骤公开生产域名，部署独有长 URL 仍应受保护；不选择关闭所有认证、不添加绕过 secret 或额外例外。Standard 对应 `all_except_custom_domains`，不使用旧 `prod_deployment_urls_and_all_previews`。范围依据：[官方保护说明](https://vercel.com/docs/deployment-protection) 与 [官方短 vercel.app 生产域名示例](https://vercel.com/academy/optimize-your-vercel-account/deployment-protection)，访问日期 2026-09-10。实际衍生别名的匿名结果需记录，不预先声称只公开一个 hostname。
+4. 立即运行下列匿名 live smoke：全部 140 个正式响应必须为 200、MIME 匹配、SHA256 与不可变原上传包一致且没有 noindex/none 响应头；首页和核心文章再做正式域名浏览器读取，核对渲染、交互/统计关闭、实际资源与错误。完整响应一致性同时覆盖 13 HTML、2 XML、robots、112 图片、10 字体、CSS 与唯一脚本；不把无脚本执行的 GET 当作 Network 零发送或跨地区性能证据。复核正式与 generated/derived URL 的实际匿名范围。
+5. 若文件、索引、来源、闭合交互、页面渲染或受保护长 URL 出现阻塞问题，立即在同一项目把 Standard 恢复 All Deployments 并 Save，再匿名核对正式/长 URL/衍生别名均要求登录。保留已验收部署和域名映射，不删除对象；这会撤回公开访问，但不恢复此前正式域名的 404，也不能撤回外部已取得的副本。无旧正式版本可回滚，保护恢复是本次退出入口。
+
+上述 UI 入口失效时，官方同等接口为 `POST /v10/projects/{projectId}/promote/{deploymentId}`（JSON `{}`）、`GET /v9/projects/{projectId}`（`lastAliasRequest.jobStatus` 与 `toDeploymentId`）、`GET /v4/aliases/mythic-china-beta.vercel.app`，保护更改/恢复为 `PATCH /v9/projects/{projectId}` 的 `ssoProtection.deploymentType`；均限定原 teamId。当前优先复用已登录浏览器，不索要新 Token，不调用未授权业务接口。[Alias 读回](https://vercel.com/docs/rest-api/aliases/get-an-alias)、[项目更新](https://vercel.com/docs/rest-api/projects/update-an-existing-project)。
+
+本轮忽略目录的 `verify-public-release.ps1` 只读取原请求包并向固定正式 hostname 发匿名 GET，不使用 Cookie/Token、不跟随重定向、不执行脚本、不写远端。默认入口只验证原请求摘要与 140 文件/字节身份；加 `-VerifyLive` 才进行实际请求并生成唯一时间命名的脱敏 `public-smoke-*.json`，首个异常即停止并标记需要恢复保护，脚本本身不会操作 Vercel。
+
+```powershell
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/verify-public-release.ps1
+# 仅在本次正式域名已公开后执行：
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/verify-public-release.ps1 -VerifyLive
+```
+
+## 受保护暂存部署入口（2026-09-09）
+
+已执行并完成匿名保护检查（2026-09-10 00:02 UTC / 上海 08:02）：owner 在本机执行下列确认入口，原 `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` / 140 文件部署为 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK`，`production / READY`，地址为 [受保护暂存站点](https://project-scu6m-bp33wljub-mathic-china.vercel.app)。本次不重建、不重复本地 QA；旧事故及原 attempt 保留。本节命令是本次已用入口，不是再次创建指令。
+
+执行回执 `.local/reading-beta-staged-dc0ad2d/result.json` 记录 All Deployments 为 `all`，此前为 `all_except_custom_domains`；实际生成一个衍生别名 `project-scu6m-mathic-china.vercel.app`，`alias` / `automaticAliases` 均有该值。正式域名 `mythic-china-beta.vercel.app` 为 404；部署首页、钟馗正文路由、一个真实图片路径及衍生别名均返回 302 Vercel Authentication，没有本站正文。主代理于 00:05:27 UTC 独立无 Cookie/Token GET 三个 hostname，再次确认正式域名 404，部署和衍生别名 302 至 `vercel.com/sso-api`，无本站 title。当前是受保护暂存交付，不是公开 Public Beta。
+
+新 attempt key 为 `381ce65515c7491ca468e6a55ca1bf33`，新请求 SHA256 为 `43f67300f1dacf716bc1c826f35376fe1f390f94e6025ab628db211ed3200484`；原请求与 artifact inventory 摘要保持。脚本在操作前读到的四项静态设置均为 null，请求包含原四项直接静态交付设置；回执未保存它们的最终逐项读回，不能称为已额外核验。owner 随后通过已登录 Vercel 的浏览器打开该暂存站点，明确确认“能正常看到首页和插画”；该证据只关闭首页登录可达与插画显示，不扩大为完整页面验收。
+
+2026-09-10 登录后线上检查：owner 切回当前任务并确认右侧首页可见后，主代理恢复 Windows Codex 内置浏览器连接，在上述同一部署逐页导航并读取实际 DOM。13 页标题、单一 H1、正式 origin 的 canonical、Beta 提示均符合候选；19 处图片均 `complete` 且自然宽度大于 0、alt 非空；226 处站内链接/锚点均对应本轮已读取的页面或 ID。六篇 Entry 均有 Quick Answer、Sources、合集与相关阅读；画皮和促织显示 Content note。13 页 Newsletter、六篇 Reader Request 均 inactive，表单/输入/文本框/按钮数量为 0；每页 analytics meta 的 `isEnabled` 为 false。每页只观察到原 `/_astro/page.Di-gmpYO.js` module 与一段非执行 JSON-LD，没有额外脚本节点；工具的最多 50 条 error 日志查询为空。
+
+通过浏览器 `pageAssets` 导出首页当次已观察的 7 份资源，逐个与 `.local/public-build` 同路径原文件比较 SHA256，全部一致：Geist Sans、Source Serif 4、简体中文 Sans 三种 WOFF2，`SiteLayout.DQef1wZt.css`，以及钟馗、冥界、聊斋三张浏览器选中的 AVIF。导出 7/7 成功、无失败；本轮脱敏范围与逐项摘要另存忽略目录 `.local/reading-beta-staged-dc0ad2d/online-browser-check-20260910.json`，不覆盖原部署 receipt。
+
+证据限度：本轮是登录后 DOM/图片解码及 7 文件字节抽验，不是完整 140 文件的远端摘要验证；未取得完整 Network，不能据关闭配置、脚本节点或 error 查询断言零供应商传输或所有平台注入都不存在。线上 Sitemap/RSS/robots 响应、未被选择的图片变体、其余字体/脚本原始字节、四项平台设置最终读回、目标地区表现和 macOS/iOS/Android 实机仍未核验；本机已登录暂存环境不代替这些检查或正式域名 live smoke。本轮仅导航/读取与本地记录，无表单提交、统计启用、平台配置修改、新部署、保护放开或 Git 写入。
+
+新的交付方式是 **受保护 staged production**，不是 Vercel 的 Preview target，也不是公开生产发布。官方 [CLI 文档](https://vercel.com/docs/cli/deploy#skip-domain) 明确首次部署必为 Production，`--prod --skip-domain` 可暂不推广域名；[CLI 请求构造](https://github.com/vercel/vercel/blob/main/packages/cli/src/util/index.ts) 与 [客户端](https://github.com/vercel/vercel/blob/main/packages/client/src/deploy.ts) 对应顶层 `target: "production"`、`autoAssignCustomDomains: false`。由于 [首次部署衍生别名报告](https://community.vercel.com/t/first-deployment-classified-as-production-despite-explicit-preview-target-hobby/46713) 尚有未解释的公开行为，不能仅依赖 skip-domain 与 Standard Protection。
+
+具体安全顺序：在固定项目核对身份、域名、无 Git、静态设置和部署清单后，只把本项目 `ssoProtection.deploymentType` 设为 `all`，GET 读回通过才上传。当前 [All Deployments 官方合同](https://vercel.com/docs/deployment-protection#all-deployments) 明确 Vercel Authentication 对所有计划免费，覆盖生产域名和衍生 URL；[项目更新 API](https://vercel.com/docs/rest-api/projects/update-an-existing-project) 支持该字段。若账户拒绝该配置或要求付费，停止于上传前，不购买、升级或换方案。以上外部资料访问日期为 2026-09-09。
+
+新增忽略目录 `.local/reading-beta-staged-dc0ad2d/` 只保存一次性执行脚本与脱敏 receipt。`deploy-staged.ps1` 校验原请求 SHA256、全部 140 个内联文件与原 inventory（3,275,431 字节），原请求和历史 attempt 均不覆盖。源、内容、图片披露、表单及分析开关保持；该任务没有业务代码修改，构建期诊断、业务测试和内容/资产重新审校不适用。
+
+用户审阅具体操作后已在本机执行带 `-ProtectAllAndDeploy` 的命令，并报告 READY，确认范围为本项目 All Deployments 保护、原四项静态交付设置、一次暂存部署与异常时仅删除该次新建对象（包括其 Production 标签）。本次未触发撤销。保护加强后保留，不自动恢复到可能公开的模式；公开发布及保护放开继续单独授权。
+
+```powershell
+powershell.exe -NoProfile -File "F:\codex-project\mythic-china\.local\reading-beta-staged-dc0ad2d\deploy-staged.ps1" -ProtectAllAndDeploy
+```
+
+脚本使用已核验的 bundled PowerShell 7；Token 由用户在自己的终端以遮挡输入提供，同一进程完成操作，仅发给 `api.vercel.com`。不通过聊天、凭据文件、命名管道、剪贴板读取或超时内存中转；退出清除引用。当前只读匿名复查不需要再次输入 Token。只使用既有授权范围，403 不触发扩大权限。
+
+脚本先创建不可覆盖的 attempt 标记，再唯一 POST。网络结果未知只按唯一 metadata 查询，重跑也只核对旧 attempt，不创建第二次。READY 后回查 All Deployments 仍生效，枚举返回的 `url`、`alias`、`automaticAliases` 和正式域名，匿名检查首页、钟馗正文路由及一个真实图片路径；管理 Token 不发送到这些网址。任何公开正文、保护失败或非预期状态都只 GET 核对本次 ID/project/source/attempt 后 DELETE 同一对象，并回查对象 404 与正式域名不可匿名读。保护配置保留；不改其他项目、不 promotion、不创建绕过凭据、不连接 Git。结果保存在 `result.json`；`ready-protected-staged` 只代表 READY 与匿名保护检查通过，登录后的实际托管内容、字节/Toolbar、地区与跨平台实机验收仍须另记，不能宣称 Public Beta 已公开。
+
+本地只读验证入口：
+
+```powershell
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/deploy-staged.ps1 -ValidateOnly
+```
+
+`-ValidateOnly` 不读取 Token、不调用网络、不创建 attempt 或 receipt。准备阶段已通过原包摘要、140 文件回解和字节数校验；独立静读纠正了认证页正文误判与撤销判断，匿名探针使用不带 Cookie/Token、禁止重定向的 HttpClient。一次性 `check-offline.ps1` 对真实脚本的输入、API 与匿名请求进行内存替换，隔离目录保存合成 receipt，已验证四个场景：正常响应只创建一次；保护失败不上传；POST 结果未知不重试；匿名公开响应只删除匹配本次身份的对象。这些零真实网络检查只证明本地控制流，不证明实际 Vercel 行为。失败场景脚本按预期退出 1，由外层核对输出的 `passed: true` 和写调用次数判断。
+
+```powershell
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/check-offline.ps1 -Scenario success
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/check-offline.ps1 -Scenario protection-rejected
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/check-offline.ps1 -Scenario unknown-post
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/reading-beta-staged-dc0ad2d/check-offline.ps1 -Scenario public-response
+```
+
+文档严格 UTF-8、排除代码块后的相对链接和 diff 空白检查通过；旧通用链接正则把代码中的 `[bool](git status --porcelain)` 误认作链接，未改动该无关原代码。当前无 Git add/commit/push，既有 9 份未提交文档修改保留。
+
 ## 阅读版 Beta 本地准备（2026-09-09）
 
 本次 public 重建通过 Astro 117 文件零诊断与独立 output verifier：13 HTML、2 XML、robots.txt、112 Hero、10 字体和一个默认关闭的脚本。独立只读检查的 658 个站内链接/资源/片段均存在，实际页面没有 form 或输入控件；Privacy 与关闭状态一致。共 140 文件、3,275,431 字节。此前同一业务源码的完整 check 为 38 文件/655 测试通过；本次之后只改范围和交接文档，未重复全量测试。favicon 缺失作为非阻塞体验项后补。
@@ -54,7 +131,89 @@ netstat -ano | Select-String ':4321\s+.*LISTENING'
 & 'C:\Program Files\Python313\python.exe' -m http.server 4321 --bind 127.0.0.1 --directory 'F:\codex-project\mythic-china\.local\public-build'
 ```
 
+## 受保护 Preview 上传准备（2026-09-09）
+
+最终收口（2026-09-09 14:10 UTC）：owner 在已明确授权后运行本地精确删除入口，`rollback-result.json` 记录 14:09:29 UTC 删除成功、对象 API 404、部署列表为空、正式域名 404、无本站 title，`verificationPassed: true`。主代理于 14:10:08 UTC 独立匿名 GET 正式域名，返回 404 / DEPLOYMENT_NOT_FOUND，无本站 title/main。异常部署 `dpl_HhYVfCrWk9jNwmC45Eh4GcwmP72N` 已撤销；当前无可用部署，受保护 Preview 未交付。曾经公开可读，无法据删除推定没有外部访问或缓存副本；项目静态设置未恢复也未在删除后回查，不擅自改动。主代理停止部署，不发送第二次 POST。后续须先验证首次部署环境选择方案，再形成具体的新预览动作。原 140 文件、请求及事故证据保持，业务源码未变；没有 Git 提交或推送。下文异常停点与准备内容保留为过程事实，当前状态以本段为准。
+
+当前异常停点（2026-09-09）：13:14 UTC，有效项目 Token 通过预检（既有部署列表空、固定 project/team/domain 与 Standard Protection 匹配），固定请求执行唯一一次 POST。创建及随后 GET 均返回 `dpl_HhYVfCrWk9jNwmC45Eh4GcwmP72N`、`target: production`；URL 为 `project-scu6m-myml8l6ev-mathic-china.vercel.app`，alias 为 `project-scu6m-mathic-china.vercel.app`，原 source/inventory 元数据匹配。随后匿名请求 `https://mythic-china-beta.vercel.app/` 返回 200，存在本站 title 与 main；另外两个 URL 的本机探测连接失败，不能解释为无公开访问。主代理对首次部署默认环境的判断不充分，受保护 Preview 验收失败。
+
+已停止创建；`creation-attempt.json` 保留以禁止重发。原授权包含异常时仅撤销本次新部署，但自动审批两次拒绝为撤销该 Production 标签对象交接凭据，要求明确生产对象删除授权。已向 owner 请求仅删除上述精确 ID，当前未撤销；收到后先 GET 核对 ID/project/source，再 DELETE 同一对象，并回查部署列表与正式域名匿名不可读。原静态请求、pre-create/create-response/deployment-state 与本地 manifest 保留；不向聊天/文件写凭据，不把异常状态写成已发布成功。以下准备段落为本次创建前合同，当前状态以上述异常停点为准。
+
+本节是当前发布交接入口，替代前文诊断包和历史“先补全部平台再预览”的下一步说明。用户本次要求准备受保护预览；已完成本地封装与校验，尚未上传、提交、推送或修改账户配置。目标仍是既有 Vercel 项目，采用原已验收静态制品的非 Git REST 交付方案；本次凭据与实时项目/团队、域名及主保护设置已只读核实；owner 已完成本项目数据分享/Toolbar 设置选择和保存；首次静态交付设置及本次 Preview 创建授权仍须在实际写入前落实。
+
+- 制品源：`dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd`，`.local/public-build/`；140 文件 / 3,275,431 字节，全部路径、大小和 SHA256 与原 QA inventory、ZIP 一致。当前仅治理文档未提交，不改变原制品身份。
+- 准备文件：`.local/reading-beta-preview-dc0ad2d/request.json` 与 `manifest.json`，均被既有 `.local/` 忽略规则覆盖。请求仅内联原 140 个文件及来源元数据，无源码、配置文件、凭据、表单记录或 review 输出；Base64 回解逐文件验证通过。
+- 请求体：4,383,259 字节，SHA256 `786b824733d92a67c81f53dc61dc4d6dbbc4ef5c021d31ac7989f4f799eea0ef`。原 inventory SHA256 `0fa0a30a41f104662d4f1bd3966898e8478c4a14c4adaf55321b0e073c6bc4fd`；原 ZIP SHA256 `ff128abf88dfd20a2b82ae01b13dd23889483a2034f8a56d1675169650d48ffb`。
+- 预期团队 `team_zxOM6nEHD6ZYTRcrAjbcwU3U`（`mathic-china`）、项目 `prj_U8IP9LhhpaeDC2dJlP0VVv3ciu70`（`project-scu6m`）来自 2026-09-08 现场，不能代替本次实时复核。Production 域名保持 `mythic-china-beta.vercel.app`。
+- 请求省略 `target`，遵守官方 Create Deployment API 的默认 Preview 语义；同时没有 `gitSource`、`gitMetadata`、`alias`、`deploymentId` 或自定义环境。禁止临时添加 production、promotion 或 alias 动作。
+- 首次部署会保存 `projectSettings`：`framework: null`（Other）、`buildCommand: ""`、`installCommand: ""`、`outputDirectory: "."`，直接交付预编译静态目录。它是待批准的本项目交付设置，不是已经生效的配置；没有平台 Astro 构建、依赖安装或 Git 关联。
+
+### 上传前现场与授权
+
+截图核对（2026-09-09）：owner 提供了含地址栏的本项目 Deployment Protection 页面，URL 为 https://vercel.com/mathic-china/project-scu6m/settings/deployment-protection；可见 Require Log In 开启、Standard Protection 已选中、Save 灰显，Trusted Sources 可见本项目自身记录。这证明截图时点的主保护设置，不证明页面下方未展示的例外/绕过设置或已部署访问行为；内部 ID 和完整配置继续通过授权后的 API 核对。凭据准备采用仅限 project-scu6m 的短期项目 Token，由用户创建和保管，任务后撤销；不要求完整账户或全团队权限。参考 [Access tokens](https://vercel.com/docs/accounts/access-tokens)（访问 2026-09-09）。本轮未创建凭据或部署。
+
+先只读核对当前项目 ID/团队、Production 域名、部署列表和 Standard Protection；检查无绕过链接、例外域或自动化绕过配置。核对 Toolbar、模型训练/数据分享设置，明确其实际处理范围后再决定本项目设置，不能沿用旧勾选状态当作批准。保留 Vercel Authentication；不调整团队其他项目。有效 API 凭据只经用户控制的本机安全输入提供，不粘贴聊天、不写仓库、不打印、不从浏览器存储提取。Token 已由 owner 生成并经本机输入完成只读认证；没有生成第二个凭据，不记录凭据值。
+
+本机凭据输入入口（2026-09-09）：owner 已回复短期项目 Token“已生成”，下一步由用户在自有 Windows 窗口手动输入。临时脚本 `.local/reading-beta-preview-dc0ad2d/read-token.ps1` 只显示遮挡输入框，用户点击 Continue 后把值经任务专用随机名本机命名管道交给当前 Node 会话；不写 Token 文件、环境配置、终端历史或工具输出，不读取剪贴板或浏览器存储。先在 Node 会话建立一次性命名管道，再以系统 PowerShell 的 `-NoProfile -STA -File` 和本次管道名启动该精确脚本；`Start-Process -WindowStyle Hidden` 隐藏控制台，仅显示用户需要操作的输入窗口。输入后关闭窗口；Token 仅在内存持有供当前项目的已授权 API 核查，任务结束或 30 分钟后清除，上传继续另行授权。GET 项目、域名和部署清单只输出必要的脱敏配置，不输出认证头或原始账户响应。
+
+自动弹窗未在用户桌面显示，已只关闭本次两个临时输入进程；命名管道仍由当前 Node 会话持有。手动入口为用户在自己的 PowerShell 运行系统 `powershell.exe -NoProfile -STA -File`、上述脚本精确路径和当前会话生成的 `-PipeName`。管道名称不是凭据，不写入长期命令；会话失效时重新创建通道。用户在窗口中输入后，主代理再执行 GET 核查。当前段落下方环境变量示例保留为同一 REST 调用合同参考，实际本轮采用内存 Token，不设置 `VERCEL_TOKEN`。
+
+当前只读核查执行入口（2026-09-09）：本机输入已成功，普通 Node 环境外连返回 EACCES；实际成功入口为经权限审批的 bundled PowerShell 7.6.5（`C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe`）直接执行 `.local/reading-beta-preview-dc0ad2d/verify-vercel.ps1 -PipeName`，不嵌套 Windows PowerShell 5。当前会话先建立随机名、一次性本机管道，Token 只经该管道送入查询进程内存，查询后清除引用；不在参数、文件或输出中保存。脚本固定 GET 本项目、项目域名和部署列表，拒绝重定向，先核对 project/team/name，只打印白名单脱敏摘要；缺失字段记 unavailable，错误只打印阶段和 HTTP 状态。此入口没有 POST/PATCH/DELETE，不执行下方参考上传命令。
+
+实时只读结果（2026-09-09 10:56 UTC）：项目/团队/name 均匹配；Production 域名已验证，项目无 Git 连接、部署列表为 0。API 的 `all_except_custom_domains` 对应当前 Standard Protection，依据 [Vercel 官方 Provider 双向映射](https://github.com/vercel/terraform-provider-vercel/blob/main/vercel/resource_project.go#L1284)；保留原值，不修改保护配置。脱敏摘要位于忽略目录的 `preflight.json`。响应缺失的绕过/例外、环境变量与 Toolbar 字段不能推定为空或关闭；项目 AI 数据分享也未返回。后续 owner 已完成下段所记项目设置，实际匿名拦截及有权访问留待本次预览。该次 API 核查没有上传、配置写入或 Git 写入。
+
+项目设置确认（2026-09-09）：owner 截图显示本项目 General 的 Vercel Toolbar 使用 Pre-Production Deployments / Production Deployments 标签；owner 已将前者设为 Off 并保存，后续截图提示保存成功且需新部署生效。General 的 Data Preferences 卡片实际开关为 “Improve models with this project’s data”；owner 已按指导关闭并点击 Save，回复“操作完了”。此项关闭状态依据 owner 确认，非 API 回查；未操作团队设置。Toolbar 的实际无注入结果仍在首次 Preview 验证。Token 的 30 分钟本机内存缓存已清除；原凭据无需重新生成，获本次部署授权后通过既有本机输入入口重新输入，值不写入文件或聊天。
+
+以下只读入口要求已取得本次凭据使用授权，`VERCEL_TOKEN` 已安全注入当前进程；不在文档中放入凭据值：
+
+```powershell
+$previewTeam = "team_zxOM6nEHD6ZYTRcrAjbcwU3U"
+$previewProject = "prj_U8IP9LhhpaeDC2dJlP0VVv3ciu70"
+if (!$env:VERCEL_TOKEN) { throw "Vercel credential is not configured." }
+$previewHeaders = @{ Authorization = "Bearer " + $env:VERCEL_TOKEN }
+$previewProjectState = Invoke-RestMethod -Method Get -Uri "https://api.vercel.com/v9/projects/${previewProject}?teamId=$previewTeam" -Headers $previewHeaders
+if ($previewProjectState.id -ne $previewProject -or $previewProjectState.accountId -ne $previewTeam -or $previewProjectState.name -ne "project-scu6m") { throw "Unexpected Vercel project identity." }
+if ($previewProjectState.ssoProtection.deploymentType -notin @("all_except_custom_domains", "prod_deployment_urls_and_all_previews", "all", "preview")) { throw "Preview authentication is not verified." }
+$previewBefore = Invoke-RestMethod -Method Get -Uri "https://api.vercel.com/v7/deployments?projectId=$previewProject&teamId=$previewTeam&limit=20" -Headers $previewHeaders
+```
+
+在上述身份/保护、项目数据处理决定、请求体及授权范围全部明确后，单独确认：仅创建一次本项目 Preview，允许上述首次静态交付设置，验证实际保护；如结果异常，只撤销本次新建 deployment，不动项目或其他部署。未获该次授权时止于准备。
+
+本次执行授权（2026-09-09）：owner 明确回复“授权本次预览部署”，范围为原 140 文件与四项静态项目设置的一次受保护 Preview、只读验收，以及异常时仅取消/删除本次新 deployment；不含 Production、Git 写入或保护绕过配置。实际入口为 bundled PowerShell 7.6.5 直接执行忽略目录的 `create-preview.ps1 -PipeName`，先从随机本机管道取凭据并重验身份/保护/域名/空部署列表，再以已锁定请求摘要执行一次 POST；独占创建本地 attempt 标记防止重复。响应不明只读回查，输出与 receipt 只保存白名单字段，不含 Token。下列 REST 合同保持。
+
+授权后的执行停点（2026-09-09）：重新输入凭据已由本机安全接收，但创建脚本在第一个项目 GET 返回 403，`createAttempted: false`，没有写入 attempt 标记或调用 POST。随后有/无固定 teamId 的只读核查均拒绝；API code 为 `forbidden`，脱敏 message 明确当前 Token 无权访问 `mathic-china` scope，未证明具体是否过期。需要 owner 提供可访问该团队下本项目的有效 Token，不扩大到完整账户；当前无效内存凭据已清除。本次单次 Preview 授权保持，凭据恢复后重过项目身份/保护核查再继续。
+
+### 已授权后的单次创建与只读回查
+
+```powershell
+$previewBodyPath = "F:\codex-project\mythic-china\.local\reading-beta-preview-dc0ad2d\request.json"
+if ((Get-FileHash -LiteralPath $previewBodyPath -Algorithm SHA256).Hash.ToLowerInvariant() -ne "786b824733d92a67c81f53dc61dc4d6dbbc4ef5c021d31ac7989f4f799eea0ef") { throw "Prepared payload changed." }
+$createdPreview = Invoke-RestMethod -Method Post -Uri "https://api.vercel.com/v13/deployments?teamId=$previewTeam" -Headers $previewHeaders -ContentType "application/json" -InFile $previewBodyPath
+if (!$createdPreview.id) { throw "Creation outcome requires read-only reconciliation; do not retry POST." }
+$previewResult = Invoke-RestMethod -Method Get -Uri ("https://api.vercel.com/v13/deployments/" + $createdPreview.id + "?teamId=" + $previewTeam) -Headers $previewHeaders
+```
+
+创建响应不明、超时或断连时只查询 deployment 列表及本次 source/inventory 元数据，禁止重复 POST。用返回的 deployment ID/URL 回查 READY、目标 Preview、项目/来源元数据和无 Production alias；响应缺字段则以控制台详情核验，不能当作通过。保存脱敏后的目标、状态和证据，不保存认证头或完整账户响应。
+
+验收包括：未登录请求被拦截且不返回文章正文/资产；有权账户可访问；首页、目录、全部文章/合集、Privacy、XML 和静态资源正常；实际响应内容与原 140 文件摘要匹配；没有平台注入导致的非预期脚本/请求；正式域名未指向这次 Preview。macOS/iOS/Android 实机显示与 fallback 仍 pending，在该预览阶段、公开生产前完成。生产发布继续单独授权。
+
+### 撤销与退出
+
+异常对象的明确删除授权（2026-09-09）：owner 已回复“授权删除这个异常部署”，精确范围为 `dpl_HhYVfCrWk9jNwmC45Eh4GcwmP72N`。因此前 30 分钟内存凭据已清除，原凭据交接未执行。为避免输入通道再次超时，用户在自己的 PowerShell 执行下列本地入口；脚本自动选用已核验可加载 Windows Forms 的 bundled PowerShell 7，在同一进程遮挡输入 Token 后立即删除，不再经 Node 中转或跨对话缓存。窗口明确显示精确 ID，按钮为 Delete deployment。脚本先核对 pre-create 空列表、create-response ID 及实时 GET 的 project/source，再只 DELETE 该对象，回查 GET、部署列表及正式域名匿名响应，并在 `rollback-result.json` 写脱敏结果。脚本不含创建、alias、项目删除或设置变更；退出清除 Token 引用。此处只是入口准备，不代表已经撤销。
+
+```powershell
+powershell.exe -NoProfile -STA -File "F:\codex-project\mythic-china\.local\reading-beta-preview-dc0ad2d\delete-anomalous-deployment.ps1"
+```
+
+首次 Preview 没有旧生产版本可回滚。写入授权必须明确包含异常时仅撤销本次创建的部署；若没有包含，则先请求该精确对象的授权。先 GET 确认 ID 属于目标项目且不在 `$previewBefore` 列表中：仍在构建时用 `PATCH https://api.vercel.com/v12/deployments/{本次返回ID}/cancel?teamId=team_zxOM6nEHD6ZYTRcrAjbcwU3U`；已生成需撤销时用 `DELETE https://api.vercel.com/v13/deployments/{本次返回ID}?teamId=team_zxOM6nEHD6ZYTRcrAjbcwU3U`。路径中的 ID 必须取真实响应，不执行示意占位路径。随后 GET/匿名访问确认停止或不可访问，保留删除前后的脱敏 ID/状态证据。此范围不暂停或删除项目、不解绑 Production 域名；若保存过项目设置，按已记录的原值和授权范围恢复。任务专用 Token 到期或由用户撤销，不保留长期访问。
+
+官方依据（访问 2026-09-09）：[Create Deployment](https://vercel.com/docs/rest-api/deployments/create-a-new-deployment)、[静态项目跳过构建](https://vercel.com/docs/builds/configure-a-build)、[Vercel Authentication](https://vercel.com/docs/deployment-protection/methods-to-protect-deployments/vercel-authentication)、[Get Deployment](https://vercel.com/docs/rest-api/deployments/get-a-deployment-by-id-or-url)、[取消](https://vercel.com/docs/rest-api/deployments/cancel-a-deployment)与[删除](https://vercel.com/docs/rest-api/deployments/delete-a-deployment)。官方合同已核验；真实 API 上传和保护访问未执行，不把准备包当成线上验收结果。
+
 ## 职责
+
+历史发布验收时点（2026-09-09；实机与地区时点已由本文顶部及 011 的 2026-09-10 决定替代）：Project owner 已确认按 [011 第 2.2.1 节](docs/requirements/011-public-beta-validation.md#221-跨平台实机验收时点) 将跨平台实机显示与 fallback 放到受保护预览阶段完成；它仍是正式公开生产发布前的必要条件。预览前的本地 QA、clean-source 及制品摘要证据保持，receipt 明列 macOS/iOS/Android 未验证项，不能宣称生产放行；预览中补齐匹配制品的设备/系统/浏览器、页面和结果。后文历史顺序中“所有平台 QA 必须在预览前完成”仅由本次明确调整的时点取代，其他门禁不变。
+
+本次范围仅为文档同步，没有 Git 写入、运行配置变更、服务启动或远端部署。现有 QA 属于 `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` 及其不可变制品；文档变更不自动重新绑定源身份。若后续从新 revision 构建，按原规则重建并完成适用校验；若采用已验收的不可变制品，必须核对原 source/lock 与完整 artifact inventory/digest，并将本次时点决定作为附加记录，不改写旧 receipt 的事实。
 
 当前执行主线（2026-09-09）：按 [011](docs/requirements/011-public-beta-validation.md) 优先准备阅读版 Beta，Newsletter、Reader Request、Analytics/RUM 保持关闭。Tally 测试已由 owner 暂停在 3/10 次激活、2 条 Completed；下文后续用例是历史计划，不再自动执行。未完成项归对应功能未来启用，测试记录不擅自删除。本次仅做本地 public 重建、静态校验和诊断包整理；提交、启动预览服务、远端预览及生产发布仍按具体动作授权。
 

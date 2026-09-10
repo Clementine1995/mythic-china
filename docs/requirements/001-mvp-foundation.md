@@ -237,11 +237,13 @@ M4 本地产品实现完成
   -> 真实 origin + M6 public artifact assembly 与 output verifier 实现
   -> Project owner 单独授权 clean commit
   -> 从 clean revision 重新构建同一最终 artifact 并重跑 output verifier
-  -> 键盘/缩放/偏好、故障、字体/跨平台、视觉与本地性能 QA
-  -> clean-source verification receipt -> 受保护远端预览
+  -> 键盘/缩放/偏好、故障、本机字体、视觉与本地性能 QA
+  -> clean-source verification receipt（列明跨平台实机未验证项）-> 受保护远端预览
+
+
   -> M7 同一已验证源身份发布可索引 Public Beta + live smoke / 回滚 / RUM 基线
   -> live artifact R2a 非计入试跑 -> R2b 5–8 份核心全站记录 + 四篇各前 5–8 份可用深读（按冻结规则补位）
-  -> 处置关键发现并复测 -> Project owner 关闭正式 MVP 验证
+  -> 处置关键发现并复测 -> 按 011 补齐三平台实机及美东/美西/欧洲性能验收 -> Project owner 关闭正式 MVP 验证
 ```
 
 ### 4.3 目标读者阅读与交互链
@@ -416,16 +418,16 @@ Search / static social card / Home
 ### M6 首发内容与预览验收
 
 - 目标：完成 6 篇 Entry、至少 2 个 Collection 和全部视觉内容包，在完整本地 inventory 上组装并验证可部署 public 候选，再按独立授权进入远端预览。
-- 交付：内容包 `ready`、Project owner 的逐项 `published` 决定、真实 HTTPS origin、原计划 M4-U4B 的 public intent/runner、页面 metadata、Sitemap/RSS/JSON-LD endpoints、独立 output verifier、最终 public artifact、release-candidate QA、clean-source verification receipt，以及后续受保护的预览环境候选版本。
-- 完成条件：claim/source、术语/译文、英文、文化、图片与内容无障碍文案门禁通过；published-only 真实非空索引和 public assembly 实现完成。assembly 稳定后，Project owner 单独授权形成 clean committed source；必须从该 revision 重新构建同一最终 artifact，重跑 public output verifier，并通过 390/768/1440、真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、支持平台 fallback、链接、最终视觉与本地性能验收。最终 receipt 记录 clean source revision、lock/source digest、public intent、verifier/QA 结果与 `dirty: false`；dirty source 只允许 nondeployable 诊断记录，提交后不得复用旧 artifact、QA 或 receipt。远端预览再把该 clean committed source、receipt/verifier 与 deployment target 绑定为 `validated_source_identity`。目标读者 R2 不属于 M6 进入条件。
-- 状态：部分完成。六篇文章、两个合集、Hero、关系和 owner 首发 published/2026-09-10 日期决定已闭合；013 的真实 origin 与本地 public assembly、016 的条件式 hosting Privacy 已完成；最终 QA、clean-source receipt、实际托管验收与受保护预览尚未完成。
+- 交付：内容包 `ready`、Project owner 的逐项 `published` 决定、真实 HTTPS origin、原计划 M4-U4B 的 public intent/runner、页面 metadata、Sitemap/RSS/JSON-LD endpoints、独立 output verifier、最终 public artifact、release-candidate QA、clean-source verification receipt，以及后续受保护的预览环境候选版本。按 owner 于 2026-09-10 确认的 [011 第 2.2.1 节](011-public-beta-validation.md#221-跨平台实机验收时点)，macOS/iOS/Android 实机显示与字体 fallback 及美国东/西部、欧洲性能实测在 Public Beta 上线后、结束 Beta 前补齐；其他本地 QA 仍是预览前置，预览和发布记录明列这些未验证项。
+- 完成条件：claim/source、术语/译文、英文、文化、图片与内容无障碍文案门禁通过；published-only 真实非空索引和 public assembly 实现完成。assembly 稳定后，Project owner 单独授权形成 clean committed source；必须从该 revision 重新构建同一最终 artifact，重跑 public output verifier，并通过 390/768/1440、真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、本机 fallback、链接、最终视觉与本地性能验收。跨平台实机显示与 fallback 按 011 第 2.2.1 节在 Public Beta 上线后、结束 Beta 前完成，预览 receipt 明列未验证平台。预览 receipt 记录 clean source revision、lock/source digest、public intent、verifier/QA 结果与 `dirty: false`；dirty source 只允许 nondeployable 诊断记录，提交后不得复用旧 artifact、QA 或 receipt。远端预览再把该 clean committed source、receipt/verifier 与 deployment target 绑定为 `validated_source_identity`。目标读者 R2 不属于 M6 进入条件。
+- 状态：本地候选与受保护暂存已完成适用验收。六篇文章、两个合集、Hero、关系和 owner 首发 published/2026-09-10 日期决定已闭合；013 的真实 origin 与本地 public assembly、016 的条件式 hosting Privacy 已完成；原 dc0ad2d 的本地最终 QA、clean-source receipt、受保护暂存及已完成的托管检查通过。实机与三地区性能按 011 后置，完整 Network 未直接取证，范围见 DEV_WORKFLOW。
 
 ### M7 Public Beta、生产基线与正式 MVP 收口
 
 - 目标：在用户独立授权后把已验收身份发布为可索引 Public Beta，建立只读发布后检查，并在 live artifact 上完成目标读者验证。
 - 不交付：商业化与下一阶段功能。
-- 完成条件：目标身份一致，域名和核心页面可用，无新增关键技术发现；live robots/canonical/资源/核心阅读 smoke、回滚入口、目标地区复核与发布后真实流量 RUM/p75 基线有记录；按 010/011 完成 R2a、R2b、关键发现处置、重复重大问题处置与复测，并由 Project owner 关闭正式 MVP 验证。缺少样本期间保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态。
-- 状态：未开始。
+- 完成条件：目标身份一致，域名和核心页面可用，无新增关键技术发现；live robots/canonical/资源/核心阅读 smoke、回滚入口、目标地区复核与发布后真实流量 RUM/p75 基线有记录；按 010/011 完成 R2a、R2b、关键发现处置、重复重大问题处置与复测，并按 011 补齐三平台实机及三地区性能验收后，由 Project owner 关闭正式 MVP 验证。缺少样本期间保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态。
+- 状态：阅读版 Public Beta 已于 2026-09-10 正式公开；同一部署 140 文件与核心页面 live smoke 通过，实际证据见 DEV_WORKFLOW。R2、三平台实机、三地区性能与正式 MVP 收口仍未完成。
 
 ## 9. 测试与验收矩阵
 
@@ -495,9 +497,9 @@ M6 远端预览前必须：
 
 - 在 `../../DEV_WORKFLOW.md` 写入真实的项目关联、源身份、受保护预览、撤销与回滚命令；不得上传 review `dist/`。
 - M6 public artifact assembly 先从正式 loader/validator/resolver 和完整 published inventory 生成 public 页面、metadata、Sitemap/RSS/JSON-LD，并由独立 output verifier 验证。
-- assembly 实现稳定后，先由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一最终 public artifact，完成真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、支持平台 fallback、最终视觉与本地性能 QA，并生成 verification receipt；最终 receipt 必须记录 clean source revision、lock/source digest、public intent、verifier/QA 结果与 `dirty: false`。dirty source 只可产生 nondeployable 诊断记录，提交后不得复用旧 artifact、QA 或 receipt。
+- assembly 实现稳定后，先由 Project owner 单独授权形成 clean committed source，再从该 revision 重新构建同一最终 public artifact，完成真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、本机 fallback、最终视觉与本地性能 QA，并生成列明未验证平台的预览 verification receipt；跨平台实机显示与 fallback 按 011 第 2.2.1 节在 Public Beta 上线后、结束 Beta 前完成。预览 receipt 必须记录 clean source revision、lock/source digest、public intent、verifier/QA 结果与 `dirty: false`。dirty source 只可产生 nondeployable 诊断记录，提交后不得复用旧 artifact、QA 或 receipt。
 - M6 只把 clean committed source、receipt/verifier、完整候选身份与具体预览 deployment target 绑定为 `validated_source_identity`；若复用不可变制品，还须记录完整 artifact inventory/digest。
-- 验收预览保护、访问范围、目标地区表现、成本和退出路径。
+- 验收预览保护、访问范围、成本和退出路径，目标地区表现按 011 最新时点在结束 Beta 前补齐。
 - 获得远端预览独立授权。
 
 M7 Public Beta 生产发布前必须：
@@ -514,7 +516,7 @@ Public Beta 上线后必须：
 - 缺少样本或研究阈值尚未达到时保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态，不把研究写成已完成。
 - 具体发现若暴露事实、来源、文化安全、无障碍或视觉硬门禁缺陷，立即修复，必要时回滚或取消发布受影响页面，并对影响范围复测。
 - 按 006 与 011 核验唯一 RUM producer 和真实 production 数据路径；至少观察连续 14 个完整自然日，各指标达到 50 个有效测量值才报告 LCP/INP/CLS p75。样本不足时记录 `RUM INCONCLUSIVE — INSUFFICIENT TRAFFIC`，不冒充性能通过，也不在看到结果后下调窗口或门槛。
-- Project owner 核对 live/RUM 技术基线、聚合结果、修改与复测证据后，明确关闭目标读者验证与正式 MVP 验证。
+- Project owner 核对 live/RUM 技术基线、聚合结果、修改与复测证据，且按 011 补齐三平台实机及三地区性能验收后，明确关闭目标读者验证与正式 MVP 验证。
 
 ## 12. 当前完成记录
 
