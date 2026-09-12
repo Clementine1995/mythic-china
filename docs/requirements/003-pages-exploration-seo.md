@@ -1,5 +1,9 @@
 # 003 页面、探索与 SEO：开发与验收说明
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 0. 文档职责与状态
 
 本文负责：
@@ -31,7 +35,7 @@
 | 需求状态 | 已确认并完成 M4 本地产品范围；public/release 责任已移交 M6/M7 | Project owner 已分别授权并完成 M4-U2、M4-U3、M4-U4A、首个纵切片本地候选、机器门禁、Collection/Guide Hero、CJK 静态链、Windows/local 部分预检、review 索引候选架/功能页排版修正、U5A 字体样张及最终三档人工证据批次；原计划 U4B 与最终 release QA 不再定义 M4 完成 |
 | 实施状态 | M4-U1、M4-U2、M4-U3、M4-U4A 与 M4 本地页面验收已完成 | 两篇编辑候选、Collection 与 Guide 各自的 approved/current Hero、4 份英文 WOFF2、6 份 SC/TC 静态 WOFF2、窄 review-only candidate view model 及 direct-only type specimen 已形成；013 已完成 public runner、页面/endpoint 和本地诊断制品；最终 deployable 身份仍归 M6 QA/receipt |
 | 验证状态 | M4 适用的自动门禁、Windows/local 基础矩阵及当时页面人工判断通过 | M4 收口时完整 `pnpm run check` 通过 23 个测试文件/279 项测试、Astro 73 文件零诊断、8 页/42 个 Hero 图片/10 个 hash-locked WOFF2 review 输出；2026-09-02 又通过最终 8 页 × 390/768/1440 共 24 个实际浏览器组合与四条 Hero 页 12 个 art-direction 组合，Project owner 随后明确通过全部 8 个页面。真实键盘、200%、慢/阻断字体、故障/偏好、LCP/CLS、实际 fallback face 和支持平台仍未完成，保留为 M6 release-candidate gate；M7 承接 Public Beta 生产、live/RUM 基线及上线后目标读者研究 |
-| 发布状态 | 未发布 | 用户已建立 Vercel 空项目与稳定 Production 域名，本地 origin 已接线；尚无预览/生产部署或发布授权 |
+| 本批发布状态 | 当时未发布 | 后续 public assembly、受保护暂存与 Public Beta 发布见 011/DEV_WORKFLOW；本文不改绑后续身份 |
 
 - 当前权威结论更新时间：2026-09-07。
 - M4-U3 实现与原收口文档已由 Project owner 提交为 `e94eacaad989652c7f71ae50276652cc3f54997a`（`updatee`）；M4-U2 历史基线为 `5f327b63f7a227e54773718d140e7295ef6ed3c9`（`M4-u2 completed`），U2 主体历史基线为 `8c6d12cabce11741bb83941904993f4d8831c818`，M3 历史基线为 `c606f5aab92d908ff2935c5b7212ad5066636a50`。
@@ -429,7 +433,7 @@ M4-U4A 最终 `pnpm run check` 完整通过：18 个测试文件/157 项测试�
 
 ## 11. 发布与门禁
 
-M4-U4A 没有发布目标。纯 release/public/SEO/artifact builder 是数据/view-model/string，不是 `public` build intent 或 deployable artifact。Vercel 已被选为未来托管目标，但当前没有真实 origin、Vercel 项目、预览环境或生产环境；本地 build、noindex review 候选和页面视觉确认都不构成部署或发布授权。
+M4-U4A 当批没有发布目标。纯 release/public/SEO/artifact builder 是数据/view-model/string，当时不是 `public` build intent 或 deployable artifact；后续 013 与 011 已完成 origin、public assembly、暂存和发布。本地 build、noindex review 候选和页面视觉确认本身仍不构成发布授权。
 
 未来可发布输出必须使用同一已验收源身份，满足 published-only 投影、真实 canonical、SEO artifacts、页面/字体/无障碍/性能门禁，并由 Project owner 逐次授权。具体命令只能在真实环境建立后写入 DEV_WORKFLOW。
 

@@ -2,7 +2,7 @@
 
 ## 0. 状态
 
-- 状态：MVP 目标合同草案；M2 内容文件/关系 Schema 与 M3-U3 visual brief/Asset Manifest Schema、关系/文件校验和 current resolver 已在本地实现并通过工程门禁；M3-U4/U5 已产生并批准一套视觉资产与真实生产记录。终验发现 Hero v1 手部缺陷后，Project owner 于 2026-08-29 验收 Hero v2；Hero v1 保留为 approved/non-current 审计历史。Chinese Underworld Collection Hero、Guide Hero，以及 012 的四篇 Entry 与 Liaozhai Collection 五组 Hero 后续均沿相同合同闭合独立资产谱系。当前 21 个 local master、21 份 repository source、9 份 production record 与 12 份 manifest 版本记录通过数据门禁，11 个逻辑资产各有唯一 approved/current。项目直接依赖 `sharp@0.35.4` 从 17 份 current responsive source 生成并解码复核 120 个 AVIF/WebP 目标。资产绑定本身不批准状态；后续 012 VB6 已审核六篇与两个合集到 ready，补齐四篇分类、两条 Related 编辑环与 Liaozhai Featured（Painted Skin），随后 Project owner 独立批准 6+2 published，六篇目标公开日期统一为 2026-09-10，尚未部署。
+- 状态：正式阅读版 MVP 的内容合同已确认，6 篇 Entry、2 个 Collection 与八组 Hero 已随 Public Beta 公开；当前发布身份及未验证范围见 README、011。M2 内容/关系 Schema 与 M3 visual brief/Asset Manifest、关系/文件校验和 current resolver 已实现并通过各自门禁。当前 21 个 local master、21 份 repository source、9 份 production record 与 12 份 manifest 版本记录通过数据门禁，11 个逻辑资产各有唯一 approved/current；Hero v1 保留为 approved/non-current 审计历史。资产绑定本身不批准内容状态，历史批准和测试结果继续按原日期及身份保存。
 - 适用范围：文章、人物、异兽、地点、体系指南、主题合集、来源、工具无关的视觉资产和读者选题建议。
 - 原则：公开页面可以简洁，内部记录必须足以回答“这句话、这个译法和这张图依据什么”；来源、claim 和关键术语先于视觉制作。这是编辑生产门禁，不是读者页面顺序。
 
@@ -338,6 +338,8 @@ M3-U3 对此前自然语言字段冻结以下最小机器形状，后续生产�
 
 ### 2.7 Reader Request
 
+本节保留后续功能的数据合同。当前页面只有 inactive 状态说明，不收集或传输 Reader Request；真实启用已移出正式阅读版 MVP，未来仍须按 006 完成隐私、供应商和退出验收。
+
 首版不在网站仓库保存真实请求。浏览器 submission 与 provider/internal record 必须分开；浏览器只可提交：
 
 ```yaml
@@ -403,7 +405,7 @@ normalizedTopicId: null
 9. 常见误解或现代改编。
 10. Sources。
 11. Related Entries / 下一条探索路径。
-12. Reader Request。
+12. Reader Request inactive 状态说明；未来启用后仍位于此处。
 
 `contentNote`、`opening` 与 `summary` 来自 frontmatter；Markdown body 从第 4 项核心故事开始，避免解析渲染后 HTML、按首段切割或为此引入 MDX。全站 Footer newsletter 属于页面外壳，不属于 Entry 正文模板，也不得插入上述阅读链。
 
@@ -525,7 +527,7 @@ src/assets/images/         # 已批准且尺寸锁定的 Astro 图片源 renditi
 - 成品 publication rights；不能用 reference asset 的研究许可代替。
 - cultural、rights、visual、accessibility 与适用 language 审核均记录审核人、日期和结论。
 - 与 `accessibilityMode` 匹配的 alt / 空 alt、适用的 caption、credit、AI disclosure 和焦点坐标。
-- 桌面、移动、OG 和社媒裁切预览。
+- 按获批用途审核适用的桌面、移动、OG 或社媒裁切预览。
 
 ## 7. 未来商业扩展边界（非 M2 Schema）
 
@@ -559,4 +561,4 @@ draft
 
 `ready` 是内容包状态，不消费真实键盘、缩放、媒体偏好、JavaScript 开关、字体/图片故障、LCP/CLS 或操作系统 fallback 等站点运行时证据。上述能力必须在 M6 把最终内容、M5 交互与 public 输出组装为同一候选后验证；M4 纵切片证据可作为共享实现基线，但新增对象、实质内容、模板、CSS、字体或资产变化不得借用不适用的旧证据。
 
-状态变更不允许靠修改一个字段绕过验证。M5 外部交互边界冻结后，由 M6 完成 6 篇 Entry、至少 2 个 Collection 与全部资产；Project owner 才在完整 inventory 上逐项作出 `published` 决定并批准目标公开日期。随后确认真实 HTTPS origin，执行 M6 public artifact assembly，生成真实非空 Home/Explore/Collections、受影响动态页、metadata、Sitemap 与 RSS。assembly 实现稳定后须由 Project owner 单独授权形成 clean committed source，再从该 revision 重建同一 public artifact 并执行最终自动门禁、键盘/缩放/偏好、故障、字体/跨平台、性能与人工视觉 QA；通过后才生成可用于受保护预览的 clean-source verification receipt。dirty source 上的结果只能是 nondeployable 诊断，提交后不得直接沿用。M2 已建立本地工程门禁与命令，实际服务、远端预览和发布仍须在对应里程碑开始前继续补齐 `DEV_WORKFLOW.md` 并取得独立授权。
+状态变更不允许靠修改一个字段绕过验证。正式阅读版范围要求 6 篇 Entry、2 个 Collection、八组 approved/current Hero 及其实际用途导出；正文插图和完整故事卡包后移。内容、来源、权利、无障碍、性能、跨平台、RUM 与 R2 门禁不因范围收敛而降低。现有内容已完成逐项 `published` 决定、public assembly 与公开发布；后续变更须从 clean committed revision 重建并执行受影响门禁，dirty source 只能产生 nondeployable 诊断。运行、验证与发布命令继续以 `DEV_WORKFLOW.md` 为准并分别授权。

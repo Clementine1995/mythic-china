@@ -2,7 +2,7 @@
 
 ## 0. 状态与结论
 
-- 2026-09-10 Analytics 当前增量：本地 public 候选的 `isAnalyticsEnabled` 为 true，与 Privacy 共用单一配置；review 仍零 JS/meta。唯一 hash-locked bootstrap 保持精确 origin/账户/published 路径约束；DNT/GPC 和单页 `analytics=off` 在绑定及发送前检查，运行中退出清理当前 Document 的全部监听与计时器，BFCache 不恢复。传输仍仅 p/e、omit credentials、no-referrer、no-store、keepalive，无 Cookie/持久标识/重试。原始 bundle Fake 执行与 public/review 输出已验证，21cdbb6 已发布；正式 Origin 的 7 次真实请求头及后台计数确认。原生 DNT、单页退出和实际 BFCache 返回通过；阅读/退出使用焦点模拟，原生前后台完整流程及原生 GPC 未验证。账户/隐私和发布停点见 [006 第 12.12 节](requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。RUM 配置继续为 null。
+- 2026-09-10 Analytics 发布状态：已发布的 `21cdbb6` 制品中 `isAnalyticsEnabled` 为 true，与 Privacy 共用单一配置；review 仍零 JS/meta。唯一 hash-locked bootstrap 保持精确 origin/账户/published 路径约束；DNT/GPC 和单页 `analytics=off` 在绑定及发送前检查，运行中退出清理当前 Document 的全部监听与计时器，BFCache 不恢复。传输仍仅 p/e、omit credentials、no-referrer、no-store、keepalive，无 Cookie/持久标识/重试。原始 bundle Fake 执行与 public/review 输出已验证；正式 Origin 的 7 次真实请求头及后台计数确认。原生 DNT、单页退出和实际 BFCache 返回通过；阅读/退出使用焦点模拟，原生前后台完整流程及原生 GPC 未验证。账户/隐私和发布停点见 [006 第 12.12 节](requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。RUM 配置继续为 null。
 
 - 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，013 已接入真实 origin 的本地 public build；Vercel Public Beta 已公开，GoatCounter 已启用；表单与 RUM 仍关闭。
 - M4 边界：经 2026-09-02 项目总检，M4 本地页面、探索投影、U4A 纯基础设施、U5A 样张、最终三档基础矩阵及当时 8 页人工视觉判断已完成。M4 不产生 deployable public artifact；原计划 U4B 的 public runner/output 接线与最终平台 QA 迁入 M6，生产与发布后验证保留给 M7。
@@ -58,7 +58,7 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 
 | 层 | MVP 推荐 | 选择原因 | 当前状态 |
 | --- | --- | --- | --- |
-| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M4 review 基线是原 7 个内容/功能页与一个 direct-only type specimen；M5-U3 又增加 Privacy；四个 draft Entry 随后形成 13 页历史快照，009 新增 Liaozhai Collection 页后当前 review 共 14 个 `noindex, nofollow` 页面；013 public intent 生成 13 页与发现文件，仍未发布 |
+| 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | review 共 14 个 `noindex, nofollow` 页面；public intent 生成 13 页与发现文件，已随 `21cdbb6` 发布。M4 的 8 页、后续 13 页 draft 等保留为历史快照 |
 | 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | 当前为 6 published Entry、2 published Collection、14 Source、25 verified Claim 与 6 bilingual-approved Terminology；六篇公开日期为 2026-09-10，已随 Public Beta 上线 |
 | 内容约束 | Astro Content Layer + Zod 单记录 Schema + 独立内容图校验器 | Schema 校验字段；纯函数校验器负责跨集合关系、状态矩阵、ID 与 slug | M2 已实施并由 Vitest/build 覆盖 |
 | UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | M4 共享表现层、六类页面、样张与当前页面判断已完成；M6 最终 public artifact QA 未开始 |
@@ -332,7 +332,7 @@ public 输出现只精确放行本站 analytics bootstrap：scripts/analytics-sc
 
 M5-U5A 的 `src/services/article-reading-state.ts` 已独立实现纯内存状态转换：调用方显式提供单调时间、可见性、主故事和视口边界；按前一可见状态累计时间，visible 时记录故事相交与 75% 深度，达到 15 秒后按既有语义返回两个各一次的无 properties 事件。初始化重置全部状态，未知故事区域不推断，非法时间/区域失败；不读取 DOM、时钟、配置或存储，不调用 adapter/网络。架构测试禁止页面消费该模块，当前 review 仍零客户端脚本。U5B 的独立 DOM hook 已消费该模块，并在模拟 DOM/时钟中验证区域选择、定时观察、环境隔离、BFCache 暂停恢复和清理；页面仍禁止直接消费状态机。M6 bootstrap 的实际字节现另有离线执行验证；浏览器和 M7 真实发送不能由这些离线测试冒充通过。
 
-RUM 的本地实施由 [017](requirements/017-real-user-monitoring.md) 负责，2026-09-10 owner 已确认先本地实现，暂无 Cloudflare 账户。`src/rum/` 独立于 GoatCounter：唯一标准 `web-vitals@6.2.1` producer 只映射 LCP/INP/CLS、随机单指标实例 ID 和递增序号；实际正式 origin、published 路径、日期、维护/自动化/隐私偏好检查通过后才加载自托管库和发送。没有 Cookie、持久浏览器标识、URL/设备维度或 attribution。`rumDeployment = null` 时两种构建均不产生 RUM meta/入口/chunk；review 仍零客户端 JS，public 保留原唯一 inactive analytics 脚本。正式启用仍需精确输出白名单及原始 bundle 执行证据，当前 verifier 拒绝任何 RUM 配置/脚本。
+RUM 的本地实施由 [017](requirements/017-real-user-monitoring.md) 负责，2026-09-10 owner 已确认先本地实现，暂无 Cloudflare 账户。`src/rum/` 独立于 GoatCounter：唯一标准 `web-vitals@6.2.1` producer 只映射 LCP/INP/CLS、随机单指标实例 ID 和递增序号；实际正式 origin、published 路径、日期、维护/自动化/隐私偏好检查通过后才加载自托管库和发送。没有 Cookie、持久浏览器标识、URL/设备维度或 attribution。`rumDeployment = null` 时两种构建均不产生 RUM meta/入口/chunk；review 仍零客户端 JS，public 仅保留已启用的 GoatCounter bootstrap，不产生额外 RUM 输出。正式启用 RUM 仍需精确输出白名单及原始 bundle 执行证据，当前 verifier 拒绝任何 RUM 配置/脚本。
 
 `workers/rum/` 是仅服务 RUM 的独立 Workers/D1 源码边界，不进入 Astro 静态构建、不存储内容或读者账号。公开接口只有严格 JSON 的 POST `/vitals`；数据库时间限制固定 UTC 14 日窗口，较高序号才更新同实例。可信运维开窗、每小时维护、一次性封存与脱敏汇总为独立入口，没有公开管理 API。维护事务先标记缺口/暂停/过期、封存，再清理首次接收满 30 天的记录；准时每小时运行时删除延迟最多约一小时，供应商恢复/备份期限另行处理。关闭接收不关闭清理。足样本 p75 仍需平台/维护错误审查，Origin/CORS 不作为真人鉴别。默认测试仅用 Node 内存 SQLite 与 Fake，不部署 Cron、不绑定真实 D1；暂无可运行的远端服务或采集数据。实际 Free 计划、处理依据、日志禁用、删除路径和生产配置仍须核验，不得同时启用两个 RUM beacon。
 
@@ -389,7 +389,7 @@ MVP 至少建立：
 
 M2 首批自动门禁固定为：Prettier check、ESLint correctness、Vitest 内容/架构测试、`astro check` 与 `astro build`。`build` script 已先运行 `astro check` 再运行 `astro build`，聚合 `check` 按格式、lint、测试、类型/内容检查、build 顺序执行；不得把单独 build 成功写成类型检查通过。历史 M2 审计基线是 2026-08-28 的 4 个测试文件/41 项测试、Astro 0 error / 0 warning / 0 hint 与 3 页静态输出；Hero v2 返修后于 2026-08-29 的历史结果为 10 个测试文件/72 项测试、Astro 检查 36 个文件且零诊断、静态输出 3 页，非默认 `visual:build:check` 另复核七个 local master 和三份 current responsive rendition 的 22 个响应式图片目标。当前聚合结果以 `DEV_WORKFLOW.md` 最新完成记录为准。来源：[Astro type checking](https://docs.astro.build/en/guides/typescript/#type-checking)，访问于 2026-08-27。
 
-M4 已完成获授权的本地基础浏览器矩阵；M6 最终 public artifact 的键盘、缩放、偏好、故障、平台与性能检查仍需要单独的服务/浏览器授权。当前不引入 Playwright、`tests/browser` 或浏览器二进制；任何自动浏览器依赖仍须独立的架构、依赖和验证授权。M2 真实安装、定向验证、聚合门禁和 dev/preview 服务命令均记录在 `DEV_WORKFLOW.md`。
+M4 基础浏览器矩阵与后续发布候选检查分别按各自身份保存；已有结果和未验证范围见 README、011 与 DEV_WORKFLOW，不把历史矩阵扩成当前全平台通过。后续新增检查或受业务变化影响的键盘、缩放、偏好、故障、平台及性能验收仍需相应服务/浏览器授权。当前未引入 Playwright、`tests/browser` 或浏览器二进制；新增自动浏览器依赖仍须独立的架构、依赖和验证授权。真实安装、定向验证、聚合门禁和 dev/preview 服务命令均记录在 `DEV_WORKFLOW.md`。
 
 ## 12. MVP 明确不做
 

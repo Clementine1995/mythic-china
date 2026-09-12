@@ -1,5 +1,9 @@
 # 010 四篇草稿目标读者文稿审核：准备与验收说明
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 0. 文档职责与状态
 
 本文定义 `ten-kings`、`fighting-cricket`、`liaozhai-reading-guide` 与 `painted-skin` 四篇英语草稿的目标读者文稿审核。它负责审核标题、开场、Quick Answer、正文、术语呈现、来源可发现性与合集阅读意图是否便于非专业英语读者理解。
@@ -193,4 +197,4 @@ Project owner 明确回复“`四篇聚焦双语复核通过。`”。该确认�
 
 ## 10. 下一停点
 
-四篇与 Liaozhai Collection 的五组视觉资产已由 012 闭环；012 VB6 已闭合四篇分类、Related 编辑环、Liaozhai Featured 与 6+2 ready；其后 owner 已批准全部 6+2 published，六篇目标日期为 2026-09-10；下一停点是 M5-U4/U5 与 M6 origin/public artifact/release-candidate 工作，它们按各自合同继续推进。Public Beta 上线后，再以第 3–5 节及冻结 R1 的题目、rubric 与文稿基线准备 live R2a；材料问题关闭后，建立 5–8 份核心全站可用记录和四篇各前 5–8 份可用深读，按冻结规则补位。当前没有合适人选，R2a/R2b 保持未开始、真人反馈为 0。AI 专业审读、Project owner 单人判断和行为分析均不能替代目标读者数据；收齐反馈前须保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态，不能宣称目标读者验证或正式 MVP 验证通过。
+四篇与 Liaozhai Collection 的五组视觉资产已由 012 闭环；6+2 published 已随 Public Beta 公开。当前下一停点是冻结 live R2 执行包并完成 R2a/R2b、问题处置与复测；M5-U4 已移至后续功能轨道，既有发布与技术缺项按 011。当前没有合适人选，真人反馈为 0。AI 专业审读、Project owner 单人判断和行为分析均不能替代目标读者数据；收齐反馈前须保持可见 Beta 提示和内部 `Public Beta / pending human validation` 状态。

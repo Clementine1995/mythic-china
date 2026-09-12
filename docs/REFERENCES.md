@@ -251,7 +251,7 @@ Guide Hero 只从同一来源链抽取“空白记录表面、行政法庭空间
 - [Next.js Static Exports](https://nextjs.org/docs/app/guides/static-exports)、[MDX](https://nextjs.org/docs/app/guides/mdx/) 与 [Backend for Frontend](https://nextjs.org/docs/app/guides/backend-for-frontend) — Next.js 官方文档。用途：Next.js 静态能力、限制和未来后端边界比较。
 - [Vercel CDN](https://vercel.com/docs/cdn)、[Cloudflare caching](https://developers.cloudflare.com/use-cases/performance/caching/) 与 [Lab and field data differences](https://web.dev/articles/lab-and-field-data-differences) — 用途：全球交付候选与海外实测原则；供应商宣传不替代真实页面测试。
 
-Project owner 于 2026-08-30 选择 Vercel 作为未来静态托管目标，并于 2026-09-02 明确当前不购买自定义域名；Astro 输出与 SEO 核心仍保持供应商中立，不新增 adapter。当前没有 Vercel 项目、稳定 production alias/hostname、自有域名、账号操作授权或部署事实；M6 可在单独授权后确认稳定 production hostname 并将其 HTTPS origin 写入 `MYTHIC_CHINA_SITE_ORIGIN`，每次 deployment 的 generated preview/commit URL 不得成为 canonical。未来自定义域名与邮箱迁移另行决策。Cloudflare 保留为历史比较资料，不是当前实施目标。Next.js 仅在动态产品需求被验证后再重评。
+Project owner 于 2026-08-30 选择 Vercel，并于 2026-09-02 明确当前不购买自定义域名；Astro 输出与 SEO 核心保持供应商中立，不新增 adapter。2026-09-10 已在稳定 Production 域名 `mythic-china-beta.vercel.app` 公开阅读版 Public Beta，当前发布身份和平台证据见 README/DEV_WORKFLOW；后续操作前仍须复核易变状态并逐次授权。generated preview/commit URL 不得成为 canonical。未来自定义域名与邮箱迁移另行决策。Cloudflare 仅是 RUM 候选，当前无账户或实际部署。Next.js 仅在动态产品需求被验证后再重评。
 
 ### M5 外部交互与隐私
 

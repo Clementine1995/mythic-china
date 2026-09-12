@@ -479,6 +479,16 @@ powershell.exe -NoProfile -STA -File "F:\codex-project\mythic-china\.local\readi
 
 ## 职责
 
+### 当前运行与版本摘要（2026-09-12）
+
+正式 MVP 已采用阅读版范围：6 篇英语文章、2 个合集、各自 Hero、来源、导航、SEO、最小分析及现有静态页；表单真实启用、逐篇正文图和完整故事卡后移。当前为 Public Beta / pending human validation，退出条件仍按 011。
+
+当前生产制品绑定 clean source `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`，最新线上与账户实证日期为 2026-09-10。2026-09-12 将此前六份发布记录文档提交为 `b6144610ada7c713a5213c3e747fc190dd42dd2c`，未推送；后续范围文档修改留在工作树，不重建或改绑线上制品。
+
+剩余正式收口项为三平台真机、指定三地区浏览器性能、真实 RUM 接通与观察窗、R2a/R2b、问题处置和 owner 确认。GoatCounter 已启用；Buttondown/Tally 与 RUM 均未启用，其中表单已后移，RUM 门槛保持。任何新的服务、数据、Git、远端或发布动作仍分别授权。
+
+**原候选 QA 证据定位（2026-09-12 只读复核）**：011 已记录原 `dc0ad2d` 候选的 108 组场景、26 组真实 200% 缩放、39 组三档及委托视觉接受。现存 `.local/reading-beta-qa-dc0ad2d/local-qa.json` 是 2026-09-09 08:51 UTC 的 partial 记录；本次在已登记的 `reading-beta-*` 目录与本文入口中未定位到后续追加原始回执。保留后续接受结论，同时登记追加原始证据入口待补齐；不把早期 partial 当作后续失败，不改写旧 receipt，也不据此无差别重跑。上述证据不自动改绑到 `21cdbb6`；当前版本的 698 项检查、39 组布局及 140 文件公开完整性证据分别按已有回执记录。
+
 历史发布验收时点（2026-09-09；实机与地区时点已由本文顶部及 011 的 2026-09-10 决定替代）：Project owner 已确认按 [011 第 2.2.1 节](docs/requirements/011-public-beta-validation.md#221-跨平台实机验收时点) 将跨平台实机显示与 fallback 放到受保护预览阶段完成；它仍是正式公开生产发布前的必要条件。预览前的本地 QA、clean-source 及制品摘要证据保持，receipt 明列 macOS/iOS/Android 未验证项，不能宣称生产放行；预览中补齐匹配制品的设备/系统/浏览器、页面和结果。后文历史顺序中“所有平台 QA 必须在预览前完成”仅由本次明确调整的时点取代，其他门禁不变。
 
 本次范围仅为文档同步，没有 Git 写入、运行配置变更、服务启动或远端部署。现有 QA 属于 `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` 及其不可变制品；文档变更不自动重新绑定源身份。若后续从新 revision 构建，按原规则重建并完成适用校验；若采用已验收的不可变制品，必须核对原 source/lock 与完整 artifact inventory/digest，并将本次时点决定作为附加记录，不改写旧 receipt 的事实。
@@ -1723,7 +1733,7 @@ try {
 
 Vercel 已被选为未来静态托管目标，Project owner 当前明确不购买自定义域名；项目仍没有稳定 production alias/hostname、真实 origin、预览/生产环境或可执行部署命令。M4 的 noindex 本地产品实现与当时 8 页人工判断已完成；M5-U2 provider-neutral 合同/Fake 及 M5-U3 的 9 页 inert review UI/Privacy 历史基线也已完成。四个 draft Entry 随后形成 13 页历史快照并物化 5 Source、9 Claim 与 3 Terminology；009 新增 Liaozhai draft Collection 后，当前为 6 Entry / 2 Collection / 14 页 review 输出，两个三篇路径已接线，published inventory 已获独立批准为 6/2，六篇目标日期为 2026-09-10，`public` intent、runner、路由/endpoint、deployable output 和远端环境均不存在。Project owner 于 2026-09-04 确认 Buttondown 账户审核已通过，Tally Free 草稿仍未发布；M5-U4 仍未完成，其下一停点须按 `docs/requirements/006-external-interactions.md` 分别授权 Buttondown 账户级配置与真实 action 核查、合成订阅联调，以及 Tally 发布、精确 hosted link、合成数据写入、回查和删除。VB6 已闭合关系、Featured 与 6 ready Entry / 2 ready Collection；owner 已完成逐项人工 `published` 与六篇目标日期 2026-09-10 决定；M6 后续仍须在单独授权下建立 Vercel 项目身份、确认稳定 production hostname 作为阶段性 origin。随后才实施 public artifact assembly，并从另行授权的 clean committed source 重建同一最终 artifact，执行 output verifier 与完整 release-candidate QA，生成 clean-source verification receipt。dirty source 只允许 nondeployable 诊断记录；M6 远端预览和 M7 生产/live smoke/RUM 仍逐次授权。任何首次项目创建、关联、预览部署和生产发布都必须先把真实命令、身份与回滚写入本文件；不得上传包含 non-published 路由的 review `dist/`。
 
-### 当前交接
+### 2026-09-08 检查点交接（历史）
 
 2026-09-08 检查点开始前：本地 `main` / HEAD / 本地 `origin/main` 为 `fabb4c9e829dc85c6c47161f49af5e9ad58594bd`，013–016 共 58 个变更路径未提交、暂存区为空；用户已建立 Hobby 空项目及 `mythic-china-beta.vercel.app` Production 域名，public 本地接线与两条构建已经存在。前一“证据物化检查点时的交接”段保留历史状态，不能据其否定当前项目或 origin。用户随后授权完整核对、固定本地检查点及独立推进 M5/托管门禁，并明确要求本地提交；本次命令与结果见文末检查点章节。不包含 fetch、push、服务或部署，真实业务写入仍按数据范围单独确认。
 

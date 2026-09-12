@@ -1,5 +1,9 @@
 # 012 Hero 资产闭环、阅读关系与内容就绪审核：开发与验收说明
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 0. 文档职责与状态
 
 本文冻结 `ten-kings`、`liaozhai-reading-guide`、`painted-skin`、`fighting-cricket` 四篇 Entry 与 `liaozhai` Collection 的五份 Hero-only visual brief，并记录从候选生产、Project owner 选图与公开使用授权到 exact-canvas master、production record、approved/current manifest、repository source 和内容绑定的完整闭环。Project owner 因英文阅读不便委托 Codex 审核英文文案；记录区分 Project owner 的候选/权利确认与 Codex 的成品视觉、文化、无障碍和语言终审。
@@ -206,4 +210,4 @@ Project owner 在 VB6 ready 审核后明确确认六篇文章与两个合集均�
 
 ## 8. 当前停点
 
-VB1–VB5 已完成并进入 `1be085b`。VB6 ready 审核及随后首发 6+2 published 变更已完成本地实施与验证；六篇目标公开日期统一为 2026-09-10，当前修改未提交，网站尚未上线。下一停点是独立的 M5-U4/U5、稳定 HTTPS origin、public artifact assembly、最终 QA 与预览门禁，不由本批自动授权。R2 保持上线后执行、当前样本为 0；目标日期不创建自动发布任务。
+VB1–VB5 已完成并进入 `1be085b`。VB6 ready 审核及随后 6+2 published 已完成；五组 Hero 与其余三组 Hero 一起覆盖正式阅读版范围，后续已提交并随 Public Beta 公开，身份与限制见 README/011。Lead、正文图与完整社媒包后移，不由 Hero-only 闭环推导为已交付。R2 当前样本为 0；目标日期不创建自动发布任务。

@@ -2,7 +2,7 @@
 
 ## 0. 职责与状态
 
-版本检查点（2026-09-10）：owner 已明确授权将本地 RUM 与技术验收/GoatCounter 准备提交一次，具体执行和身份核对见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#分析与技术验收本地检查点2026-09-10)。此后 Git 提交不改变本文实施时的诊断范围或发布状态；RUM 仍为 null 配置，没有真实账户、数据库或采集。
+当前版本与运行边界：本地 RUM 源码已纳入 `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5`；该 revision 的站点制品已发布，但 `rumDeployment` 仍为 null，public/review 均不输出 RUM 客户端。最近已留存的账户事实为 2026-09-10 owner 确认尚无 Cloudflare 账户；RUM 没有真实 endpoint、数据库、部署或采集窗口。后续文档提交不改变这些运行事实，也不把下文实施时的诊断结果改绑为新的发布证据。站点发布身份与执行范围见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)。
 
 本文负责 006 第 5.5 节 RUM 的本地实现及后续接通条件，不负责其他三地区浏览器、真机、读者研究或发布验收。
 
@@ -10,8 +10,8 @@
 | --- | --- | --- |
 | 需求 | 已确认本地实施 | 2026-09-10 owner 要求实施 RUM，随后明确尚无 Cloudflare 账户，先完成本地实现 |
 | 实施 | 本地代码完成 | web-vitals 客户端、独立 Worker/D1 与隔离测试；真实配置后置 |
-| 验证 | 本地自动化通过 | 41 文件/690 测试、Astro 128 文件零诊断、public → review 构建与输出门禁 |
-| 发布 | 未发布 | 无账户、真实 endpoint、数据库或生产采集 |
+| 验证 | 本地自动化通过，真实 RUM 未验收 | 本地实施批 41 文件/690 测试；后续 `21cdbb6` clean-source 全量检查为 41 文件/698 测试、Astro 128 文件零诊断及 public/review 输出门禁 |
+| 线上 RUM | 未部署、未启用 | 默认关闭源码已提交；站点已发布不代表 RUM 服务已部署，没有真实 endpoint、数据库或生产采集 |
 
 基线为 `29b3d953588d5f9dcb7b37d426a99a8760f22310` 加既有技术验收文档与 Entry Hero sizes 未提交修改；这些改动保留。线上身份仍以发布回执为准，本地实施不改写旧证据。
 
@@ -19,7 +19,7 @@
 
 本地开发就绪：是。实现 Google web-vitals 的 LCP、INP、CLS 采集、严格接收、乱序去重、固定窗口 p75、保留清理和失败关闭。新增精确锁定的 `web-vitals@6.2.1` 是本次实现的唯一运行依赖；库不加载远程脚本、不自行上传数据。Cloudflare 是未来接收处理方，网络层仍可能处理 IP 与请求头，应用代码不保存这些信息。
 
-不增加页面/设备分析、用户画像、Cookie、浏览器存储、通用后端、仪表盘、账号或通知。Worker 与 D1 仅用于性能测量，正文继续静态。当前授权只用于本地源代码、依赖锁定、默认关闭配置和离线验证；不创建 Cloudflare 资源、接受条款、真实写库、启动服务、提交、推送或部署。
+不增加页面/设备分析、用户画像、Cookie、浏览器存储、通用后端、仪表盘、账号或通知。Worker 与 D1 仅用于性能测量，正文继续静态。2026-09-10 本地实施授权只覆盖源代码、依赖锁定、默认关闭配置和离线验证；后续 Git 检查点另行授权。本文不提供创建 Cloudflare 资源、接受条款、真实写库、启动服务、推送或部署的持续授权。
 
 退出策略为关闭客户端构建接线和接收开关，验证零请求，再按精确授权删除活动测量及核对供应商恢复/备份处理。没有账户时不编造 endpoint、数据库 ID 或发布配置。
 
@@ -45,13 +45,13 @@
 
 定向验证默认 off/review/preview/未知路径/维护/自动化/偏好禁发；严格字段/大体积/失败；重复和乱序、BFCache ID 重置；14 天和截止竞争；49/50 样本、p75、缺样、快照不可变、清理和维护中断。完整 check 与 public → review 构建须通过，off public 库存保持唯一既有 analytics 脚本且其摘要不变。命令只见 DEV_WORKFLOW。
 
-本地实现完成不等于启用或取得 RUM 数据。后续需实际账户 Free 计划、DPA/处理地区/必要 consent、最小网络传输、维护禁发/退出清理、Worker 运行兼容与 quota 拒绝证据；再冻结真实日期、endpoint、public bundle 白名单及启用 Privacy，经具体发布授权接通。当前没有可部署身份或真实采样窗口。
+本地实现完成不等于启用或取得 RUM 数据。后续需实际账户 Free 计划、DPA/处理地区/必要 consent、最小网络传输、维护禁发/退出清理、Worker 运行兼容与 quota 拒绝证据；再冻结真实日期、endpoint、public bundle 白名单及启用 Privacy，经具体发布授权接通。当前没有已验收的 RUM 启用制品或真实采样窗口；站点已有的发布身份不代替 RUM 接通验收。
 
 ## 5. 外部依据
 
 2026-09-10 核对：[Google web-vitals v6.2.1](https://github.com/GoogleChrome/web-vitals/releases/tag/v6.2.1)、[库接口及生命周期](https://github.com/GoogleChrome/web-vitals)、[D1 prepare/batch 事务](https://developers.cloudflare.com/d1/worker-api/d1-database/)、[Cron](https://developers.cloudflare.com/workers/configuration/cron-triggers/)。价格、隐私和退出依据继续见 006 第 5.5.1 节；它们不证明实际账户已配置。
 
-## 6. 实施记录
+## 6. 本地实施记录（2026-09-10 历史快照）
 
 2026-09-10 本地实现完成。新增 35 项 RUM 测试覆盖字段裁剪、默认关闭/preview/自动化/维护/隐私偏好、单次初始化、重复/乱序/BFCache、传输/观察器异常、49/50/51/100 样本、缺失指标、SQL 截止竞争、封存、30 天删除和维护回滚。独立只读审查发现观察器部分注册失败后仍可能发送，已将失败锁扩至初始化全程，并补回归；另补 429 后停止发送测试。最终完整 check 41 文件/690 项通过，Astro 128 文件零 error/warning/hint。
 

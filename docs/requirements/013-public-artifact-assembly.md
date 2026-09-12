@@ -1,5 +1,9 @@
 # 013 本地 public artifact assembly
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 职责、状态与开发就绪
 
 2026-09-09 首发范围以 [011](011-public-beta-validation.md) 的阅读版更新为准：既有 inactive 表单和关闭的统计就是本次候选的预期状态，真实供应商接线留到未来启用。当天从当前工作树重建 public，通过 Astro 117 文件零诊断、13 页及全部资源/链接/metadata/关闭脚本校验；此结果仍是本地诊断，不替代 clean-source 最终 QA。

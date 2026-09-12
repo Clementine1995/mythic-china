@@ -1,5 +1,9 @@
 # 008 四篇首发候选 Claim Map 与来源研究
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 0. 文档职责与状态
 
 后续状态：012 VB6 已在 `1be085b` 基线上审核六篇 Entry / 两个 Collection 到 ready，并闭合四篇分类、Related 编辑环与 Liaozhai Featured（Painted Skin）；其后 owner 已批准全部 6+2 为 published，六篇目标公开日期统一为 2026-09-10，尚未部署。本文研究、物化、首稿和双语批次的 draft/状态未改说明保留为当时边界，不覆盖 012 独立状态审核。四篇正文、证据范围与原事实核查日期保持。
@@ -27,7 +31,7 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](007-se
 | 研究状态 | 可取得证据已分层复核，未决门禁保留 | Ten Kings 的馆藏对象、IIIF canvas、CBETA 行号及核心书目已闭合；Painted Skin 已核上海图书馆 1766 青柯亭本卷一数字页 72–75 / 左版心叶码 35–38，并区分任 2016 的部分可读电子材料与张 2011 的书目边界；《促织》只闭合上海图书馆青柯亭见证，跨见证门禁仍未闭合 |
 | 写作准备度 | 四篇均有证据受限英语草稿；修订前锁定稿及 010 当前改动单元与两条内容提示均已通过 Project owner 双语确认 | Painted Skin 当前只消费青柯亭 1766 与 Tso 2017 的 2 Source / 7 Claim / 1 `bilingual-approved` Terminology；自译只取一条短句并以 `verified` Claim 保存原文、版本、locator、译者/日期与审核记录，任/张比较及现代译本/影视直接比较移出当前 MVP |
 | 实施状态 | 证据物化、四篇纵切片、双语确认、两个合集路径、五组 Hero 与 VB6 ready 审核完成 | 当前四个新增 Entry 均有正文，已在 VB6 ready 后取得独立 published 批准；009 已把六篇接入两个三篇路径。012 已闭合四篇 Entry 与 Liaozhai Collection 的 approved brief、候选/权利、exact-canvas master、production record、approved/current manifest、repository source 和内容 Hero 绑定；VB6 已闭合两条 Related 编辑环、Liaozhai Featured（Painted Skin）与 6+2 ready。R1 已退役为 reference-only，目标读者反馈仍为 0 |
-| 发布状态 | 未发布 | 后续独立批准后的 published Entry / Collection 为 6/2，六篇目标日期 2026-09-10；本文研究批不授权 public artifact 或部署 |
+| 本批发布状态 | 当时未发布 | 后续独立批准后的 6/2 已随 Public Beta 公开；本文研究批本身不授权 public artifact 或部署 |
 
 本文中的 `TK-*`、`LZ-*`、`PS-*`、`FC-*` 只是研究表格内的局部标签，不是 Content Layer 稳定 ID，也不得复制进 `src/content` 后直接充当 Claim ID。表中的“可写”表示证据路线足以支持后续起草，不表示主张已完成双语、文化、版权或 Project owner 审校。
 

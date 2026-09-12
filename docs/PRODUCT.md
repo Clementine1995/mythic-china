@@ -2,10 +2,11 @@
 
 ## 0. 文档状态
 
-- 状态：草拟；设计体系、首发主题、M2 技术/内容方向、M3 资产管线，以及第二 MVP Collection 的 Liaozhai 方向与 3+3 分配已确认；M2 本地实施、M3-U1–U5、M4 本地产品实现及 M5-U2/U3 已完成。M4 包含 U1–U3、U4A public/SEO 纯基础设施、首个纵切片、两组 Hero、正式字体静态链、U5A noindex 字体样张、最终三档基础矩阵及当时 8 页人工视觉判断；M5-U3 把 noindex review inventory 增至 9 页并增加 inert Newsletter、Reader Request 与 Privacy，不构成 public artifact。2026-09-04 起四篇候选完成研究、证据受限 draft、人工双语审核与两个三篇 Collection 路径；当前 R1 已重建并通过静态检查。012 随后为四篇 Entry 与 Liaozhai Collection 闭合五组 approved/current Hero，包括 brief、候选/权利、exact-canvas、production lineage、repository source、内容绑定及资产级五审。VB6 已审核六篇/两个合集到 ready，随后 owner 独立批准全部 published、六篇目标日期统一为 2026-09-10；四篇分类、两条 Related 编辑环与 Liaozhai Featured（Painted Skin）已落实；013 已接入本地 public artifact，014–016 已完成版式、墨色及阅读收尾。真实键盘/200%/媒体偏好、故障/性能与跨平台收口仍由 M6 最终 public artifact 和受保护预览承担。
-- 日期：2026-09-08。
+- 状态：正式阅读版 MVP 范围已由 Project owner 于 2026-09-12 确认；6 篇英语文章、2 个合集及各自主图已公开为 Public Beta，正式验证尚未关闭。当前实现与稳定运行摘要以 [README](../README.md) 为准；最新线上与账户实证日期为 2026-09-10，本轮只同步文档。
+- 日期：2026-09-12。
 - 当前事实：用户具备 ComfyUI 等静态生图能力，暂不具备视频制作能力；本项目实际资产生产采用 OpenAI ImageGen，没有使用 ComfyUI。旧批按各自 manifest 保存 Project owner 当时确认的账户与权利事实；012 当前批则准确记录账户由 Project owner 合法管理、可以是个人账户或已获组织授权，并获准把项目生成图保存、编辑和公开使用，不推断具体账户类型。当前版本化 inventory 为 21 个 production master、21 份 repository source rendition、9 份 production record 与 12 份 manifest；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current 审计历史。review inventory 为 14 页，8 个 Hero family 在 11 个含图页 / 19 个图位使用 112 个图片输出；016 的交互区域仅显示未开放静态状态。013 已接入 public 页面/output，生成 13 HTML、2 XML 与 robots.txt，已随 Public Beta 发布。4 份英文 WOFF2 与 6 份 Source Han Sans SC/TC 静态子集已接线并通过静态门禁。2026-09-02 的 8 页 × 3 档基础浏览器矩阵和 Project owner 判断仍是历史证据，不自动覆盖后续页面；真实键盘/200%、媒体偏好、JavaScript-disabled、慢/阻断字体、图片失败、LCP/CLS、实际 fallback face 与跨平台 fallback 仍归 M6 发布候选 QA。六篇/两个合集已有 published 编辑批准，本地 public artifact 已实现；Windows、本地与受保护线上验收后已公开为 Public Beta；最新发布身份及 GoatCounter 受控验收见 README/006，跨平台真机和完整地区性能仍未完成。
-- 已确认产品方向：newsletter 只在全站 footer 提供，不在每篇末尾重复，只发送新文章与偶尔的编辑精选且每月不超过两次；文章末尾保留独立 Reader Request，选填邮件只用于该建议的后续联系，不得自动订阅 newsletter；ComfyUI 是可选视觉辅助，人物、传说、译名和画面依据必须先完成来源核查。
+- 已确认阅读版范围：6 篇英语 Entry、2 个 Collection、各自 approved/current Hero、可追溯来源、阅读导航、基础 SEO、最小产品分析及现有静态页。Newsletter / Reader Request 的真实启用、每篇正文插图及完整故事卡包后移为独立运营需求，不作为 001/011 收口前置，也不记为已完成；RUM、跨平台、地区性能、R2 与逐次发布授权门槛保持。
+- 后续表单启用方向：newsletter 只在全站 footer 提供，只发送新文章与偶尔的编辑精选且每月不超过两次；文章末尾 Reader Request 的选填邮箱只用于明确同意的建议后续联系，不得自动订阅。现有 inactive 区域与合同保留，恢复启用按 006 独立授权。
 - 已确认设计方向：全站采用“中国神话传说博物馆”体验体系——现代文化平台母体、每个 Collection 独立美术主题、全站统一的可信 Entry 阅读器。2026-09-08 owner 要求背景向 mythzh 靠齐，墨色、暖白与金色的当前视觉合同见 015 和 DESIGN。“博物馆”是策展与阅读隐喻，不扩展为世界神话平台，也不宣称实体馆藏或公共机构身份。国风不等于水墨、古籍或旧报纸皮肤；整页背景不足不阻断内容、导航、Schema 与阅读功能基础。
 - 已确认首发主题：第一个正式 Collection 为 `The Chinese Underworld / 中国阴间`；`Zhong Kui, the Demon Queller` 是 M1 Featured Entry 与首批重点发布入口，但不代表整个中国阴间，也不被描述为阴间统治者。
 - 已确认第二 Collection 方向：工作名为 `Strange Tales from Liaozhai`，`Strange Tales After Dark` 只保留为可选营销副标题；六篇采用 007 的 3+3 分配与两条公开阅读顺序，Zhong Kui 继续作为 Chinese Underworld Featured。Project owner 已确认 Liaozhai 的任 2016 主/张 2011 对校研究路线和《促织》青柯亭单见证路线；四个新增 Entry 均有证据受限正文和 approved/current Hero，并在 VB6 审核到 ready。Painted Skin 先采用已核上海图书馆 1766 青柯亭本，任/张比较与现代译本/影视的直接比较延期。第二 Collection 与两个三篇成员路径已按 009 建立，Liaozhai Collection 也已绑定自有 Hero；其 Featured 已选择 Painted Skin，状态在 VB6 审核到 ready。
@@ -16,7 +17,7 @@
 
 ## 1. Executive Summary
 
-Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者提供一个视觉驱动、出处清楚的中国神话探索网站。网站用可读的英文故事、原创插画和明确的传统/文本分层，解决英语读者遇到中国神、鬼、异兽、地点或传奇人物时“能看见，却难以理解来源和版本”的问题。MVP 以静态网站、6 篇首发内容和主题合集验证生产节奏、连续阅读、订阅与读者选题反馈，不建设账号、社区和复杂后端。
+Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者提供一个视觉驱动、出处清楚的中国神话探索网站。网站用可读的英文故事、原创插画和明确的传统/文本分层，解决英语读者遇到中国神、鬼、异兽、地点或传奇人物时“能看见，却难以理解来源和版本”的问题。正式阅读版 MVP 以静态网站、6 篇首发内容和 2 个主题合集验证故事理解、来源可发现性、连续阅读与内容生产方式；订阅、读者选题反馈和扩展视觉包后续独立推进，不建设账号、社区和复杂后端。
 
 英文定位：
 
@@ -76,7 +77,7 @@ Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者�
 - 长文、来源、关系和版本说明需要稳定页面承载。
 - 网站能把一次创作沉淀为长期内容资产，并为图片分发提供统一落点。
 - 原创绘制、授权素材或 ComfyUI 辅助都可以形成静态视觉；ComfyUI 不是内容来源或 MVP 依赖，没有视频能力不会阻塞 MVP。
-- 网站本身不会自动带来读者，因此“母站内容包 + 外部静态图卡分发 + 邮件沉淀”视为同一个产品循环。
+- 网站本身不会自动带来读者。母站阅读内容先交付，外部静态图卡分发与邮件沉淀作为后续运营扩展分别授权，不构成阅读版 MVP 收口条件。
 
 ### 4.2 竞品定位
 
@@ -125,9 +126,9 @@ Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者�
 
 主题合集负责形成阅读路径。当前建立了两个 Collection 对象，其余仍为候选：
 
-- **The Chinese Underworld / 中国阴间**（`editorial-review`，已建立对象且方向确认）
+- **The Chinese Underworld / 中国阴间**（`published`，三篇成员及自有 Hero 已公开）
 - Defying Heaven（候选）
-- **Strange Tales from Liaozhai**（`draft`，已建立对象；仍是工作名，`Strange Tales After Dark` 只作可选营销副标题）
+- **Strange Tales from Liaozhai**（`published`，三篇成员及自有 Hero 已公开；`Strange Tales After Dark` 只保留为可选营销副标题）
 
 ### 5.2 站内发现与单篇阅读链路
 
@@ -147,23 +148,24 @@ Mythic China 将为对神话、奇幻、恐怖和民俗感兴趣的英语读者�
         -> 本站解释
         -> 完整 Sources
         -> Related Entries
-        -> Reader Request
+        -> Reader Request inactive 状态说明（后续启用）
 
-任意页面 -> 全站 footer newsletter
+任意页面 -> 全站 footer newsletter inactive 状态说明（后续启用）
 ```
 
 轻量出处必须随相关主张出现；`Sources` 是正文收束后的完整书目，不是故事前置门槛。上述读者链与内部生产链不同：编辑仍须先完成 claim、来源和术语核查，再写作和制作视觉。
 
 ### 5.3 每篇内容包（发布物清单，不代表制作顺序）
 
-- 1 篇英文文章。
-- 1 张横向主视觉。
-- 可选 1 组桌面/移动主题背景；它是非阻断的页面气氛资产，不得替代正文插图或承担唯一事实信息。
-- 2–3 张正文插图。
-- 3–5 张静态故事卡或视觉切片。
-- 可选 1 张用途匹配的 Open Graph 分享图；当前已确认采用 text-only Open Graph，不为每篇强制生产图片。只有页面具备权利、文化与用途审核通过的 approved/current 资产时，后续单元才可另行启用。
+本节是 2026-09-12 确认的正式阅读版 MVP 发布物合同，适用于现有六篇文章；两个合集各保留自己的 approved/current Hero 与阅读路径。
+
+- 1 篇经审核的英文文章。
+- 1 个经审核的 Hero family，包含适用的桌面/移动独立构图。
 - 1 个下一步阅读入口。
 - 可追溯的主张—来源记录、关键术语决策、图片披露和内部资产记录。
+- 当前采用 text-only Open Graph，不为每篇强制生产分享图片。
+
+每篇 2–3 张正文插图、3–5 张静态故事卡或视觉切片移至后续扩展包，不作为阅读版 MVP 门禁。六篇当前正文插图为 0，完整故事卡包为 0/6；钟馗已有 Lead、OG、Social 样例不等于六篇完整图包已交付。未来若采用正文图、用途匹配的 OG 或社媒图，仍须独立确认范围并执行相应权利、文化、用途和资产审核。可选主题背景继续是非阻断气氛资产。
 
 ### 5.4 首发建议
 
@@ -173,7 +175,7 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](requir
 
 已确认的公开阅读顺序分别为“Guide → Ten Kings → Zhong Kui”和“Liaozhai 导读 → Painted Skin → The Fighting Cricket”，它们不必等同生产优先级；Zhong Kui 继续作为 Featured Entry，不必位于公开阅读顺序首项。Project owner 已选择《促织》只按上海图书馆青柯亭单见证叙事；该见证已直接核到卷七、Commons 数字页 427–432、可见叶码四至九，其中数字页 431 有 `後歲餘…身化促織`，并据此只物化三条见证限定 Claim。辽宁手稿、现代校记与早期抄本仍未取得，因此跨见证叙事、作者归属与谁“首次增写”魂化结尾继续阻塞。
 
-四个新题目已在 VB6 审核到 ready，随后取得 owner 的 published 批准；四篇证据受限草稿的修订前锁定版本、当前改动单元与两条内容提示均已通过 Project owner 双语确认。010 的修订前材料已失效，当前 R1 静态检查通过后退役为 reference-only；尚无真人反馈。五组资产级审核、四篇分类、Related、Liaozhai Featured 与 ready 已闭合，published 决定已确认，仍待新页面级发布候选 QA；Public Beta 上线后执行 1 位不计入样本的 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按 011 的预冻结规则可加入替补。Painted Skin 当前按上海图书馆 1766 青柯亭本消费 5 条原典 Claim、1 条 `verified` 本站自译 Claim，并消费 Tso 的 1 条具名解释 Claim；青柯亭页 74 的 `業魅` 经审译为 `wicked apparition`，Tso 的 `孽魅` 与 CText 关联未具名见证的 `孽鬼` 不用于改写该见证。任笃行 2016 与张友鹤 2011 没有成为该篇 Source，现代校勘本、Giles Source/直接比较、现代译本和影视直接比较均移出当前 MVP。Fighting Cricket 只消费青柯亭单见证的三条见证限定 Claim，不补写未物化情节。中国阴间必须呈现为多时期、多地域、多文本与多传统叠加，而不是唯一地图或组织架构。The Met 的馆藏记录支持把钟馗称为 `Demon Queller`；本站将他作为驱鬼形象策展进中国阴间 Collection，但不默认写成十王之一、全中国共同认可的阴司官员或阴间统治者。边界入口见 [The Met 的钟馗馆藏记录](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia 教学资料](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)。现代游戏只能进入明确的现代改编/接受史层。原候选 `Fengdu`、`Meng Po` 与 `Black and White Impermanence` 现建议延后；后两者等晚期或地方复合传统若找不到足够证据，就缩小主张、明确争议或替换选题，不能用“ancient”“自古统一”等叙事填空。
+四个新题目已在 VB6 审核到 ready，随后取得 owner 的 published 批准；四篇证据受限草稿的修订前锁定版本、当前改动单元与两条内容提示均已通过 Project owner 双语确认。010 的修订前材料已失效，当前 R1 静态检查通过后退役为 reference-only；尚无真人反馈。五组资产级审核、四篇分类、Related、Liaozhai Featured 与 ready 已闭合，published 决定及适用候选、公开发布检查已完成；剩余真机、完整地区性能、RUM 与 R2 按 011 收口。Public Beta 上线后执行 1 位不计入样本的 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按 011 的预冻结规则可加入替补。Painted Skin 当前按上海图书馆 1766 青柯亭本消费 5 条原典 Claim、1 条 `verified` 本站自译 Claim，并消费 Tso 的 1 条具名解释 Claim；青柯亭页 74 的 `業魅` 经审译为 `wicked apparition`，Tso 的 `孽魅` 与 CText 关联未具名见证的 `孽鬼` 不用于改写该见证。任笃行 2016 与张友鹤 2011 没有成为该篇 Source，现代校勘本、Giles Source/直接比较、现代译本和影视直接比较均移出当前 MVP。Fighting Cricket 只消费青柯亭单见证的三条见证限定 Claim，不补写未物化情节。中国阴间必须呈现为多时期、多地域、多文本与多传统叠加，而不是唯一地图或组织架构。The Met 的馆藏记录支持把钟馗称为 `Demon Queller`；本站将他作为驱鬼形象策展进中国阴间 Collection，但不默认写成十王之一、全中国共同认可的阴司官员或阴间统治者。边界入口见 [The Met 的钟馗馆藏记录](https://www.metmuseum.org/art/collection/search/75262) 与用于区分十王审判体系的 [Columbia 教学资料](https://afe.easia.columbia.edu/cosmos/prb/underworld.htm)。现代游戏只能进入明确的现代改编/接受史层。原候选 `Fengdu`、`Meng Po` 与 `Black and White Impermanence` 现建议延后；后两者等晚期或地方复合传统若找不到足够证据，就缩小主张、明确争议或替换选题，不能用“ancient”“自古统一”等叙事填空。
 
 第二个 Collection 方向、3+3 分配、公开顺序、Chinese Underworld Featured、Liaozhai 工作底本研究路线与《促织》单见证路线均已确认；四个新增 Entry 均已完成证据消费关系和正文，修订前锁定版本及 010 当前改动单元均已通过 Project owner 双语确认，009 也已建立第二 Collection 对象和两个三篇 `entryIds` 路径。R1 已重建、通过静态检查并退役为 reference-only；012 已闭合四篇与 Liaozhai Collection 的五组 Hero。完整 6+2 inventory 已获 published 批准，六篇目标日期统一为 2026-09-10；013 已完成 origin/public assembly，阅读版 Public Beta 随后公开；真机和完整地区性能按 011 在结束 Beta 前补齐。R2a/R2b 只保持其内部先试跑、后正式样本的顺序，并在 Public Beta 上线后执行。`Defying Heaven` 仍是后续候选；`Shan Hai Jing: An Illustrated Field Guide` 继续留在 Phase 2，而非仅凭视觉潜力提前挤入三篇 MVP 路径。
 
@@ -185,13 +187,13 @@ Project owner 于 2026-09-03 确认 [`007-second-collection-decision.md`](requir
 
 ### 6.2 初始验证阈值
 
-以下是首轮假设，不是现有基线；在达到 12 篇或积累至少 1,000 个合格阅读会话后复盘：
+以下是后续运营复盘假设，不是现有基线或 Beta 退出门槛；在达到 12 篇或积累至少 1,000 个合格阅读会话后复盘。正式 MVP 验收以 010/011 为准，当前 Related 事件次数不能换算为去重阅读会话占比，具体统计限制见 006：
 
-- 生产可持续性：连续 8 周平均每周发布至少 1 个完整内容包。
+- 生产可持续性：连续 8 周平均每周发布至少 1 个符合第 5.3 节阅读版规格的内容包。
 - 连续探索率：至少 20% 的文章阅读会话点击相关内容或下一篇。
 - 深度阅读：至少 30% 的合格文章会话到达正文 75% 位置。
-- 邮件意愿：至少 2% 的合格会话完成订阅提交。
-- 选题参与：至少 1% 的文章会话提交选题，或每月获得足以形成候选池的有效建议。
+- 邮件意愿：未来订阅功能独立启用后，观察至少 2% 的合格会话完成订阅提交；关闭期间不计作零转化或未达标。
+- 选题参与：未来 Reader Request 独立启用后，观察至少 1% 的文章会话提交选题，或每月获得足以形成候选池的有效建议；关闭期间不作完成判断。
 
 ### 6.3 Guardrails
 
@@ -235,9 +237,11 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 
 ### 7.3 反馈与订阅
 
+本节是后续独立启用时的功能验收合同，不属于正式阅读版 MVP 收口范围；当前仅保留无可提交控件的 inactive 状态说明。
+
 **作为读者，我希望推荐下一篇传说。**
 
-验收：每篇末尾提供 `What Chinese myth or strange tale should we explore next?`；首版用外部表单或隔离接口，不要求账号；邮箱可选并有明确同意。
+验收：每篇末尾提供 `What Chinese myth or strange tale should we explore next?`；后续首个启用版本用外部表单或隔离接口，不要求账号；邮箱可选并有明确同意。
 
 **作为读者，我希望收到新故事。**
 
@@ -254,6 +258,8 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 验收：先核准适用的 claim、术语和 versioned visual brief，再开始视觉制作；每个逻辑资产版本可包含一个或多个已核准 master rendition，并由一份工具无关的 versioned manifest 追溯 brief 元素、参考资产、人工修改、仓库 source renditions、accessibility mode 和成品权利。纯装饰且全部 invented 的背景不得支撑事实。只有实际使用 ComfyUI 或其他生成工具时才记录其模型与工作流 metadata。
 
 ## 8. Out of Scope for MVP
+
+- Newsletter / Reader Request 的真实启用、每篇正文插图及完整故事卡包；既有关闭实现、功能合同、样例资产与匹配测试保留，未完成项不记为完成。
 
 - 视频、播客、自动播放音视频和持续循环的动态背景；有来源边界且不影响阅读的静态主题背景不在此限制内。
 - 账号、评论、收藏、公开投稿、积分和社区。
@@ -272,7 +278,7 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 
 ### Phase 1：首版验证（0–12 篇）
 
-实现文章、合集、footer newsletter、文章末尾选题建议和基础隐私友好分析。暂不变现，避免商业模块干扰内容需求验证。
+交付 6 篇文章、2 个合集、各自 Hero、来源、阅读导航、基础 SEO 与最小隐私友好分析，完成 010/011 的阅读版正式验证。表单启用和扩展视觉包后续按独立需求推进；暂不变现。
 
 ### Phase 2：优势栏目（约 20–35 篇）
 
@@ -305,6 +311,8 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 
 ## 10. Reader Request Feedback Loop
 
+以下是后续启用后的目标流程，当前不执行，也不作为阅读版 MVP 的完成条件。
+
 ```text
 文章末尾提交选题
   -> 合并同义请求
@@ -319,7 +327,7 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 
 编辑排期建议：70% 强化已验证主题，20% 测试相邻题材，10% 保留给编辑主动发掘的冷门故事，避免完全由票数把内容锁在少数知名人物上。
 
-首版实际保存或传递的数据最小集见 `docs/CONTENT_MODEL.md`。MVP 不预建公开选题社区、用户画像或个性化推荐。
+未来启用时允许保存或传递的数据最小集见 `docs/CONTENT_MODEL.md`。MVP 不预建公开选题社区、用户画像或个性化推荐。
 
 ## 11. Dependencies and Risks
 
@@ -328,8 +336,8 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 - 能提供版本与具体定位的原典/馆藏、专业研究和现代资料来源。
 - 能核对中文/古汉语的研究校对，以及英文编辑或母语读者的质量反馈。
 - 若使用生成式视觉工具，可商用且许可清楚的模型、LoRA、字体和参考资产。
-- M2 技术与内容合同、固定运行时、依赖安装和本地应用初始化已经完成并由用户提交为本地基线 `f258227`；M3-U1–U5 已完成。M3-U4 的五个最终画布、四份 approved/current manifest 与首份 production record 是历史完成事实；终验发现 Hero v1 手部缺陷后，Project owner 又验收 Hero v2，v1 作为 non-current 历史保留。随后 Chinese Underworld Collection Hero 与 Guide Hero 以各自的 approved brief 闭合 desktop/mobile 构图、权利与五审、exact-canvas master、production record、repository source、approved/current manifest 与 versionless asset ID 绑定。012 再为四篇 Entry 与 Liaozhai Collection 闭合五组 Hero；当前共有 21 个 local master、21 份 repository source、9 份 production record 与 12 份 manifest 版本记录，11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 作为 approved/non-current 历史保留。`sharp@0.35.4` 仍是唯一新增运行依赖，17 份 current responsive rendition 的 120 个 AVIF/WebP 目标已实际生成/解码验证；CJK 默认门禁另把 `fontkitten@1.0.3` 与 `parse5@8.0.1` 固定为直接开发依赖，不进入浏览器运行时。M4 本地产品实现已经完成；U5A direct-only noindex 字体样张在当时保持 42 图、10 字体、零 XML/JS 与 public 负边界，最终 8 页 × 三档基础浏览器矩阵及 Project owner 对当时全部 8 个页面的视觉判断也已通过。当前 review 输出合同扩展为 14 页、112 个 Hero 图片、10 个字体、零 XML/JS，014–016 已补本地页面走查，随后已完成获准的 Windows/线上发布检查，真机及完整地区性能仍按 011 保留。六份 Terminology 与四条馆藏标题 locale 已由 `Project owner (user-confirmed)` bilingual reviewer 分批批准；CJK 字符输入、SC/TC × 400/500/600 六份静态子集、OFL/RFN/FONTLOG、精确 `unicode-range`、hash/name/weight/cmap 与 HTML5 `lang` 门禁已经闭合。M5-U2 provider-neutral 合同/Fake 与 M5-U3 inert Newsletter、Reader Request、Privacy 已完成；Project owner 于 2026-09-04 确认 Buttondown `mythic-china` 账户审核已通过，Tally Free 草稿仍未发布，U4 仍未完成。表单工作已由 owner 暂停，现有账户验证进度与未完成项见 [`006-external-interactions.md`](requirements/006-external-interactions.md)，不自动继续联调。2026-09-04 的内容证据批已建立四个 draft Entry owner、5 Source、9 Claim、3 Terminology 及数字影像证据门禁；Ten Kings、Fighting Cricket、Liaozhai 导读与 Painted Skin 后续分别完成 2 Source / 3 Claim / 1 Terminology、1 Source / 3 Claim / 1 Terminology、1 Source / 2 Claim / 1 Terminology 和 2 Source / 7 Claim / 1 Terminology 的消费关系与证据受限首稿，四篇修订前锁定版本、010 当前改动单元和两条内容提示均已通过 Project owner 双语确认；当前 R1 已重建并通过静态检查，六份 Terminology 与短译 Claim 的状态不变。009 已建立两个 Collection 对象及其三篇成员路径；VB6 已闭合关系、Featured 与 6+2 ready；owner 已完成逐项 `published` 与六篇目标日期 2026-09-10 决定；013 已完成真实 HTTPS origin 与本地 public artifact assembly；随后针对同一最终 public artifact 完成键盘/200%/偏好、故障、本机字体、视觉及本地性能 QA，生成列明未验证平台的 clean-source receipt，再经独立授权进入受保护 Vercel 预览。按 [011 第 2.2.1 节](requirements/011-public-beta-validation.md#221-跨平台实机验收时点)，macOS/iOS/Android 实机显示与字体 fallback 及美国东/西部、欧洲性能实测按 2026-09-10 最新决定在 Public Beta 上线后、结束 Beta 前补齐，当前仍为未验证。M7 在独立授权下发布可索引 Public Beta，承接 live smoke、回滚和真实流量基线；R2a/R2b 随后在 live artifact 上执行并用于正式 MVP 验证收口。Project owner 当前明确不购买自定义域名；owner 管理的 Vercel 项目已公开，平台身份、配置及本轮推广已核验；后续发布仍须逐次授权，generated preview/commit URL 也不得成为 canonical。public-release 的一个 Entry + 一个 Collection 只是技术门禁，不替代 M6/M7 产品验收；Buttondown/Tally 均未接入或启用；U5B 已于 2026-09-08 确认 GoatCounter 官方免费托管目标，U5B 的注入式 adapter/离线 DOM hook 与 Privacy 计划已本地验证；账户设置已在 2026-09-10 复核，GoatCounter 已启用；7 次受控验收不构成真实读者或转化基线，原生前后台缺项见 006。
-- 上述 M6 最终 QA 与 receipt 必须从同一 clean committed revision 重新构建并执行；dirty source 上的检查只能形成 nondeployable 诊断记录，提交后不得复用。M5 推荐合同当前把 Web Vitals/RUM 显式列为 M7 的独立单一生产者，并在 [`006-external-interactions.md`](requirements/006-external-interactions.md) 记录候选、字段、同意、保留与退出边界；provider-neutral 上限已确认，RUM 供应商选择与真实账户验收仍待 M7，不能把 GoatCounter 产品分析或实验室性能数据冒充生产 p75。
+- M2–M4 本地实现与其阶段性验证已完成，历史证据见 001–004 和 DEV_WORKFLOW。当前为 6 published Entry / 2 published Collection / 14 Source / 25 Claim / 6 bilingual-approved Terminology，8 组已审核 Hero；14 页 review 与 13 页 public 构建均已接线，013–016 已随 Public Beta 发布。主图、来源、双语、状态和发布的批准分别生效，彼此不替代。现有资产 inventory 与运行证据以 README、012、DEV_WORKFLOW 为准，不以早期 8 页/M4 的检查覆盖后续页面。
+- 后续变更须按影响范围从同一 clean committed revision 构建并验证；dirty source 的诊断不能升级为发布 receipt。最新源 21cdbb6 的 698 项测试、39 组布局与完整 140 文件公开校验，原 dc0ad2d 的其他候选 QA/PSI/地区 HTTP 证据，分别按原身份保留。三平台真机、完整地区浏览器矩阵与 R2 未完成。GoatCounter 已启用但受控验收不是自然读者基线；017 RUM 本地实现已完成，因无 Cloudflare 账户保持关闭，真实采集、维护及 14 日窗口仍需执行。006 的表单测试暂停，真实启用后移。
 
 上述推荐路线中的“M7 生产发布”同时包含发布后只读基线与检查，不以成功触发部署作为里程碑收口。
 
@@ -350,7 +358,7 @@ Public Beta 是使用现有 `published` 状态、稳定 HTTPS origin、canonical
 
 - `Mythic China` 的公开品牌名和商标可用性是否通过正式核查；Project owner 当前明确不购买自定义域名，未来迁移另行决策。
 - Vercel Hobby 项目 `project-scu6m` 已公开运行 Public Beta；源身份、Standard Protection、原样推广、完整 CDN 字节和回滚目标见 DEV_WORKFLOW。后续发布逐次授权，易变配置执行前复核。
-- 第二个首发 Collection 的方向、工作名、3+3 分配、公开顺序、Zhong Kui Featured、Liaozhai 任 2016 主/张 2011 对校路线与《促织》青柯亭单见证路线已经 Project owner 确认；四篇 claim map、本轮证据闭合、初始 4 draft Entry / 5 Source / 9 Claim / 3 Terminology 最小物化、四篇证据受限草稿、修订前锁定稿及 010 当前改动单元的人工双语审核，以及两个 Collection 对象和成员路径也已完成。010 的旧材料已失效；当前 R1 静态检查通过后退役为 reference-only，真人反馈仍为 0。012 已闭合四篇 Entry 与 Liaozhai Collection 的五组 Hero 资产和内容绑定；VB6 已闭合 Liaozhai Featured、两条 Related 编辑环与 6+2 ready，后续 owner 已批准全部 published 与六篇目标日期 2026-09-10，仍待新页面级发布候选 QA。Public Beta 上线后执行非计入样本 R2a，再建立 5–8 份核心全站可用记录与四篇各前 5–8 份可用深读，按预冻结规则可加入替补。任/张实页、现代译本和影视直接比较移出当前 MVP，未来若恢复相应范围再另行闭合。辽宁手稿、现代校记与早期抄本仍未取得，故《促织》跨见证、作者归属和首次增写判断继续阻塞；已有两个本地合集对象不降低“至少 2 个完整可发布合集”的预览门槛，研究与物化边界见 [`008-four-entry-claim-maps.md`](requirements/008-four-entry-claim-maps.md)。
-- 后续正式 Entry 内容、内容状态与 M6 页面级发布候选 QA 的英文编辑、研究校对和视觉签字由谁承担；当前五组新 Hero 的资产级文化、视觉、无障碍与语言审核已经关闭。
-- [`006-external-interactions.md`](requirements/006-external-interactions.md) 已把 Buttondown/Tally 条件接受为 U4 的 Newsletter/Reader Request transport 方向，并记录公开联系、美国处理/DPA 边界、持久 Respondent ID 与人工清理风险。Project owner 于 2026-09-04 确认 Buttondown `mythic-china` 账户审核已通过；Tally Free 账户和未发布草稿结构已由 Project owner 确认。该账户状态是用户提供的现场事实；真实 action/link、账户级条款与设置、发布、导出/删除和供应商行为仍待 U4 实证，U5 已改用 GoatCounter 官方免费托管目标，分析预算零月费；次数口径与 90 天聚合保留见 006，90 天与额外维度关闭已有 owner 截图/保存确认，GoatCounter 的实际请求与后台计数已确认，90 天自动清理及账户退出执行尚未实测。M7 RUM 已有 017 本地实现，但无 Cloudflare 账户，继续关闭；Buttondown/Tally 也未在本站启用。
+- 两个首发 Collection、3+3 分配、阅读顺序、Zhong Kui / Painted Skin Featured、来源受限正文、人工双语审校、8 组 Hero 与 6+2 published 决定均已落实并随 Public Beta 公开。R1 是 reference-only，R2 真人反馈为 0；样本、问题处置与正式收口按 010/011。任/张实际册页、现代译本与影视直接比较已移出当前范围；《促织》跨见证、作者归属和首次增写仍无足够证据，不得扩写为已核事实。
+- 后续新增或实质修改内容，仍须明确相应英文编辑、研究校对与视觉签字；既有资产和候选的独立审核结果不自动覆盖新改动。真人可读性与理解度仍待 010/011 的独立读者验证。
+- 外部功能与账户的最新已知进度、测试数据及退出责任以 [006](requirements/006-external-interactions.md) 为准：GoatCounter 已启用，原生前后台/GPC、自动清理与实际退出仍有证据缺口；Buttondown/Tally 未在本站启用，测试暂停，未来启用须重新核对易变账户事实。RUM 源码已存在，真实 Worker/D1 尚未部署，不能把关闭实现或产品统计当作真实 p75。
 - 本地化实施仍待确认的细节包括内容存储形状、localized slug、逐 locale 状态字段、简中试点之外的页面范围、`x-default`/feed 规则、切换器位置与偏好持久化，以及完整简中页面所需的字符集扩展、子集规模、逐 locale 审校与跨平台字体策略；当前英语 review 投影内少量 CJK 的工具、字符集和 cmap 门禁已经闭合。已确认的路径与语义边界见 [`005-localized-content-pilot.md`](requirements/005-localized-content-pilot.md)。

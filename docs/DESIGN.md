@@ -342,7 +342,7 @@ Home 是所有 Collection 的中性宿主，不是第一期“中国阴间”的
 ```text
 Eyebrow / 中文名 / 拼音
 H1 + dek
-3:2 lead image + caption + disclosure
+16:9 desktop Hero / 4:5 mobile Hero + caption + disclosure
 署名 / 核查日期（轻量 metadata）
 可选 Content note
 Opening
@@ -359,12 +359,12 @@ Reader request
 
 - 主体占 8 栏，正文约 680–760px；右侧 3 栏可放目录和 source notes。
 - `contentNote` 非空时在署名之后、Opening 之前始终可见，以统一的具名文本区块呈现；不折叠、不使用警报动效，也不随 Collection 更换语义或交互。
-- 每 600–900 词安排一个视觉节拍，但不为了插图打断论证。
+- 每 600–900 词形成一个视觉或版式节拍，可由标题、留白、来源层次与现有 Hero 完成；正式阅读版 MVP 不要求新增正文插图。
 - `What the text says / Later traditions / Our interpretation` 使用排版和细线区分，不使用满页彩色 callout。
 - 来源、caption 和 AI disclosure 在图外作为 HTML 文本，不烧录进图片；轻量 source note 贴近对应主张，完整 Sources 在正文收束后集中列出。
 - 文章正文统一使用中性 surface/ink、固定字体与固定 measure；Collection 差异只留在 lead image、标签、1px 主题线和可选顶部环境层。
 - M1 Entry 为 `Zhong Kui, the Demon Queller`，必须把传统材料、后世版本、本站解释和现代改编分开；Black Myth 只能出现在明确的现代改编语境中。
-- 文章正文收束后依次为完整 Sources、Related Entries 与 Reader Request；不在每篇文章末尾重复 newsletter，订阅入口统一由全站 Footer 承担。
+- 文章正文收束后依次为完整 Sources、Related Entries 与 Reader Request inactive 状态说明；Newsletter 同样只保留全站 Footer inactive 区域。真实启用后移，未来位置合同保持。
 
 ### 6.5 Explore
 
@@ -380,7 +380,8 @@ Reader request
 | --- | --- | --- |
 | Hero desktop | 3200×1800，16:9 | 按目标页面 brief 为文案与焦点保留安全区 |
 | Hero mobile | 1600×2000，4:5 | 独立构图，不机械裁剪桌面图 |
-| Article lead / scene | 2400×1600，3:2 | 文章默认主图 |
+| Article Hero | 桌面 16:9、手机独立 4:5 | 正式阅读版文章主图 |
+| Lead / inline / social | 按后续获批用途确定 | 可选扩展视觉，不是阅读版 MVP 必交项 |
 | Cinematic scene | 2560×1440，16:9 | 专题或章节横幅 |
 | Character portrait | 2048×2560，4:5 | 人物页与静态分发 |
 | Inline detail | 2000×1500，4:3 | 器物、建筑、局部叙事 |
@@ -395,7 +396,7 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 
 - Hero 必须提供可读标题所需的真实安静空间，但不强制所有 Collection 使用一角式构图或固定 38%–45% 留白。人物位置、远近关系、色域和光线由该 Collection 的构图合同及具体资产 `focalPoint` 决定。
 - Entry 的完整标题、中文身份与 subtitle 在所有宽度均进入 Hero 图片之前的正常文档流，使用中性 ink/surface；取消桌面叠字暗板与焦点对侧定位。当前标题最大行宽为 `24ch`，容器上限 `64rem`；具体折行须以全部六篇真实标题验收，不以统一行数裁短内容。图片继续使用 approved focal point、桌面 `16:9` 和手机独立 `4:5` 构图。该调整承接 [014](requirements/014-editorial-design-refinement.md)，不改变原资产及披露。
-- 长页按现代策展路径组织：名称、故事问题与 Quick Answer 开场，核心故事展开，原典依据、后世版本与本站解释依次深化，完整 Sources、Related Entries 与 Reader Request 收束；来源标记仍贴近对应主张。手卷“由读者控制前进”的原则可以指导节奏，但页面不模拟卷轴、题跋、卷轴把手或古书翻页。
+- 长页按现代策展路径组织：名称、故事问题与 Quick Answer 开场，核心故事展开，原典依据、后世版本与本站解释依次深化，完整 Sources、Related Entries 与 Reader Request inactive 状态说明收束；来源标记仍贴近对应主张。手卷“由读者控制前进”的原则可以指导节奏，但页面不模拟卷轴、题跋、卷轴把手或古书翻页。
 - 文章使用稳定 measure、清晰标题、有限分隔、图注和 source notes 建立证据层级；不以密集 hairline、版心框、题签、假缝线、虫蛀、烧边或泛黄制造历史感。
 - 真实材质、低调光、雾和空间层次只服务于具体 Collection / Entry；用镜头、人物尺度和负空间形成戏剧性，不用 UI 粒子、发光边框和“游戏技能特效”。
 - 历史服饰、器物、建筑与符号依据来源；不确定元素记录为 `inferred` 或 `invented`。
@@ -491,14 +492,14 @@ Web 导出优先 AVIF + WebP，目标宽度 640 / 960 / 1440 / 1920；具体压�
 - 页面是否呈现现代、清洁的中国神话传说文化平台，而不是旧报纸、泛黄古籍、历史博客或 Apple/WIRED/Black Myth 的表面皮肤。
 - 页面品牌、`<title>`、SEO 文案与 structured data 是否仍声明为 `Mythic China` 的 `WebSite` / `Article` 等实际类型；在运营实体与资质未确认前，不使用 `Museum` 类型、不声称实体馆藏或机构身份。
 - 每张主视觉是否记录 period、region、medium、context、source、rights、证据状态与 excluded motifs；是否只设一个 primary reference family。
-- 六个 Collection Hero 视觉探针排成 3×2 时，是否像同一品牌的不同展厅，而不是六个网站；除中国阴间外不得据此建立稳定 ID 或路线承诺。
-- 六个 Collection 是否拥有不同美术语言，而不是同一纸面模板只换颜色；Home 是否仍保持中性，没有被中国阴间主题占领。
+- M1 的六个 Collection Hero 视觉探针排成 3×2 时，是否像同一品牌的不同展厅，而不是六个网站；该探针不构成正式 MVP 要交付六个合集，当前范围为两个。
+- 已实现的 Collection 是否拥有不同美术语言，而不是同一纸面模板只换颜色；Home 是否仍保持中性，没有被中国阴间主题占领。
 - 去掉所有图片后，导航、栅格、字体、按钮和节奏是否仍能识别为 Mythic China。
 - 转为灰度后，栏目能否通过构图与纹理区分，而不只依赖颜色。
 - 首页是否仍是一个完整出版物页面，而非六种主题皮肤拼贴。
 - Realm-specific CSS 是否只覆盖 `--realm-*`；是否出现栏目专属字体、功能组件或 raw hex。
 - 字体验收页是否覆盖中文、英文、拼音、困难字形、慢加载、fallback 与 200% 缩放。
-- M5 实现后，Newsletter 是否只在全站 Footer 出现一次；Entry 正文收束后是否依次为 Sources、Related Entries 与 Reader Request。
+- 当前 inactive Newsletter 是否只在全站 Footer 出现一次；Entry 正文收束后是否依次为 Sources、Related Entries 与 Reader Request inactive 状态。未来启用另按 006 验收。
 - Collection 主题环境是否贴合具体题材、保留中性安静的 Entry 阅读表面、拥有桌面/移动降级，并在隐藏背景后仍保持完整阅读与来源链。
 - `The Chinese Underworld` 是否表现整个主题世界而非一张钟馗角色海报；钟馗是否被准确标为边界上的驱鬼/护佑人物而非阴间统治者；现代游戏是否只出现在 Modern adaptations 语境。
 - M1 冻结仅确认工程参考基线和后续替换边界，不代表视觉批准或生产视觉终稿。首个真实 Home、Collection、Entry 及其功能页现已用同一内容完成 390px、768px、1440px 基础复核并获得 Project owner 当前页面确认；尚未执行的真实键盘/缩放/偏好、故障、性能和跨平台检查移交 M6 最终 public artifact。[`COMPETITIVE_AUDIT.md`](COMPETITIVE_AUDIT.md) 第 6.3 节的正式目标读者比较按 011 移到 M7 Public Beta live artifact。Public Beta 候选还须包含经 Project owner 批准、全站稳定、可见且可访问的 Beta 提示；2026-09-08 owner 已批准全站页脚身份区域的静态段落，原文见 [011](requirements/011-public-beta-validation.md) 第 1.1 节；public 显示，review 不显示，复用既有字体、正文颜色与间距。最终候选仍须完成匹配视觉与无障碍验收。M5/M6 若实质改变共享表现层、交互、内容、字体或资产，只重跑受影响证据；失败阻塞预览或发布，但不把 M4 历史实现重新标为未完成。Public Beta 期间发现的具体视觉或无障碍缺陷按原门禁修复，必要时回滚受影响页面。

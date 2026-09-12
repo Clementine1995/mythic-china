@@ -2,6 +2,8 @@
 
 ## 0. 文档职责与状态
 
+2026-09-12 正式范围决定：Newsletter / Reader Request 的真实启用已移出阅读版 MVP，作为后续独立运营需求；本文件继续保存 U4 功能合同、既有测试数据、隐私和退出责任，U4 保持未完成。GoatCounter 的已启用状态、RUM 的既定退出门槛及其他技术证据不因范围调整关闭。
+
 2026-09-10 当前发布结论：clean source `21cdbb6` 的 GoatCounter 已在正式站点启用，后台确认 7 条受控计数；实际请求头、原生 DNT、单页退出与实际 BFCache 返回已有证据。阅读事件和退出使用焦点模拟，原生前后台完整流程及原生 GPC 不记为通过。Newsletter、Reader Request 与 RUM 仍关闭，U4/U5 整体不因此关闭。发布身份与证据限度见第 12.12 节末尾及 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)。下列带日期的准备和检查点段落是历史快照，不覆盖当前发布状态。
 
 2026-09-10 本地检查点授权：owner 随后明确“提交一次吧”，将第 12.12 节的已验证候选与此前本地技术验收/RUM 一并保存。精确范围和 Git 入口见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#分析与技术验收本地检查点2026-09-10)，提交身份以 Git 历史为准；下文未提交表述为实施快照。本轮不执行真实请求、Edge/CDP、服务、推送或部署，006 的其余门禁不变。
@@ -29,12 +31,12 @@
 | 验证状态 | clean-source 698 测试、140 文件完整性、7 次后台收数、实际请求头、原生 DNT、单页退出与实际 BFCache 返回通过 | 阅读/退出采用焦点模拟，原生前后台完整流程及原生 GPC 未验证；6 次 HTTP 200、Related 响应未观测但后台收数确认。Buttondown/Tally 未完成项保持 |
 | 发布状态 | Public Beta 已公开，GoatCounter 已启用 | `21cdbb6` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy` 于 2026-09-10 原样推广，完整 CDN 字节匹配；RUM 与表单仍关闭 |
 
-- 当前权威结论更新时间：2026-09-10。
+- 当前权威结论更新时间：2026-09-12；最新账户与线上实证日期为 2026-09-10。
 - M5 实现基线：本地 HEAD 与 `main` 当时为 `3983bee91ada4a286613ec702a8009a4f528af3f`，进入 M5 前工作树干净；当时未 fetch 的本地 `origin/main` 为 `e2893d1`。M5-U2 实施期间，该 tracking ref 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`，三者在该批结束时对齐；本批未执行 fetch 或 Git 写入，tracking ref 不单独证明服务器端状态。后续版本身份以 README 与 `DEV_WORKFLOW.md` 的当前交接为准。
 
 ## 1. 结论与开发就绪判断
 
-- 一句话结论：GoatCounter 已正式启用，7 条受控计数与实际请求头已有证据；原生 DNT、单页退出及实际 BFCache 返回通过，阅读和退出使用焦点模拟，原生前后台完整流程仍未验证。Buttondown 当前 `mythicworld` 的 action/部分设置及托管页单邮箱 `Unactivated → Regular` 状态变化已有 owner 证据，Newsletter 默认关闭的本地准备已完成，owner 又确认真实退订已完成；记录清理、本站真实提交和启用仍待验证。Tally 的 owner 预览显示确认及发布链接已取得，完整公开表单核验和真实联调仍待完成，M5 尚不能关闭。
+- 一句话结论：GoatCounter 已正式启用，7 条受控计数与实际请求头已有证据；原生 DNT、单页退出及实际 BFCache 返回通过，阅读和退出使用焦点模拟，原生前后台完整流程仍未验证。Buttondown/Tally 未在本站启用，U4 测试与联调暂停并后移；既有记录清理、隐私与退出责任继续保留，不再阻塞正式阅读版 MVP。
 - 业务代码进度：U2/U3/U5A 与 U5B 已完成本地实现和验证；M6 已用严格配置与唯一 bootstrap 接入 public 页面，review 零脚本。GoatCounter 发布、实际请求头及后台回查见 12.12；U4、原生前后台、完整地区/真机和 M7 RUM 仍后置。
 - M5-U2 阻塞项：无且已关闭。Reader Request 的 trim 后 3–240 Unicode code point、可选 email 最大 254 字符与 consent 配对，以及三个无应用自定义 properties 的 analytics 事件，均已冻结为本单元 provider-neutral 合同并由匹配测试验证。
 - 后续门禁（不阻塞 M5-U2）：
@@ -43,7 +45,7 @@
   3. GoatCounter 官方托管的当前免费适用性、真实 `/count` 地址、关闭 Sessions/明细/多余维度、90 天聚合保留目标与删除/退出能力须按第 5.4 节核查。离线实现不依赖真实账户；本次真实写入与 production 启用已完成，限制见 12.12；不以购买 Plausible 为进入条件。
   4. 公开隐私/数据权利联系邮箱、Newsletter/Reader Request 文案和阶段性 Vercel origin 边界已确认；U3 原先只生成 noindex review 页面；013 已接入本地 public artifact，016 已同步静态状态与条件式 hosting Privacy。
 - 已确认的阶段决定：RUM/p75 延后 M7；M5-U2 只冻结 provider-neutral 字段、事件、清洗和失败语义，newsletter/request 转化仍只能使用供应商已接受记录的聚合结果。
-- 下一步：旧四条合成统计已清理，本次独立 7 条生产验收及请求头/后台回查已完成，预算均用完，不重发；原生前后台完整流程与原生 GPC 保留未验证。Buttondown 的真实退订已由 owner 确认，其测试记录精确清理仍待回查。Tally 的测试前零记录/空 Trash/测试邮箱归属已确认，本轮限次合成提交已用 3/10，首项空白建议落库而未通过合同，原 C 顺序已停止；owner 已确认先收集、编辑前严格筛选，第 12.11 节本地审核入口已通过验证，owner 已确认不勾选同意时提交被拦住且刷新后 Completed 仍为 1，匿名 abc 建议随后写入，当前 Completed 为 2，下一项为填写邮箱并明确同意；默认关闭的本地准备不再等待账户操作。
+- 下一步：统计预算已用完，不重发；原生前后台完整流程与原生 GPC 保留未验证。Buttondown/Tally 保持关闭与暂停，未来获得功能启用授权时从第 12.8–12.11 节既有现场恢复，并先核对易变账户、测试记录和清理状态；不按历史测试顺序自动继续。
 
 ### 1.1 M5-U3 Project owner 决定（2026-09-02 历史记录）
 
@@ -96,12 +98,12 @@
 
 ### 2.1 当前问题
 
-M4 已完成本地内容页面和负向安全门禁，但读者还不能订阅、建议下一篇选题或产生可解释的产品信号。现有合同同时要求外部交互和默认阻断所有表单/脚本；如果不先冻结精确例外，最容易出现假成功、隐私字段漂移或全局放宽输出策略。
+当前已通过 GoatCounter 获得最小产品分析信号；Newsletter 与 Reader Request 保持关闭。未来启用表单仍需冻结精确例外，避免假成功、隐私字段漂移或全局放宽输出策略。
 
 ### 2.2 目标行为
 
-- 任意公开页面的 Footer 只出现一个 newsletter 入口。
-- 每个公开 Entry 在 Sources、Related Entries 之后出现一个 Reader Request 入口。
+- 当前任意公开页面的 Footer 只出现一个 inactive newsletter 状态区；未来启用时仍保持唯一。
+- 当前每个公开 Entry 在 Sources、Related Entries 之后出现一个 inactive Reader Request 状态区；未来启用时沿用该位置。
 - newsletter 与 Reader Request 使用彼此独立的同意语义，不互相订阅。
 - 自动化只访问 Fake/Mock，不访问真实供应商或网络。
 - 公开隐私说明列明用途、字段、供应商、第三方域名、数据位置、保留、导出/删除、退订/退出和联系方法。
@@ -190,11 +192,16 @@ review static build
   -> 零客户端 JavaScript
   -> provider-neutral event/envelope contract 与 Fake 未被页面消费
   -> 无 analytics provider / script / network / RUM
+
+public production (21cdbb6)
+  -> 唯一 hash-locked GoatCounter bootstrap
+  -> 仅正式 origin 与批准的 published 路径
+  -> RUM 仍为 null，不产生额外脚本
 ```
 
 ## 5. 推荐业务与数据合同
 
-本节的 provider-neutral DTO、字段值域、三个事件、清洗与失败语义已为 M5-U2 确认；Buttondown 与 Tally 仍为 U4 的有条件 transport 方向。2026-09-08 Project owner 接受 GoatCounter 官方免费托管替代 Plausible，并自行准备注册账户；第 5.4 节是目标合同；后续 U5B 与 M6 本地接线已完成，2026-09-09 owner 的截图和保存确认提供账户设置证据。三项服务均未处理真实站点数据，analytics 默认关闭。
+本节的 provider-neutral DTO、字段值域、三个事件、清洗与失败语义已为 M5-U2 确认；Buttondown 与 Tally 仍为 U4 的后续 transport 方向。GoatCounter 已在正式站点启用并处理受控验收数据，范围见第 12.12 节；Newsletter/Reader Request 与 RUM 保持关闭。
 除非另有说明，供应商能力、隐私、保留与价格事实均于 2026-09-02 从下列官方页面核对；登录核查账户配置、购买、发布草稿或联调前必须重新只读复核，不能把本文快照或用户提供的审核状态当作永久条款。
 
 ### 5.0 公开隐私联系：Gmail
@@ -574,6 +581,7 @@ U3 已保持并加强 review 默认拒绝：
 
 ### M5-U4 供应商配置与测试联调
 
+- 正式阅读版 MVP 决定：本单元后移为未来独立启用轨道，保持未完成和暂停；以下合同、次数、数据和删除责任不作废。
 - 目标：对已审核通过的 Buttondown 账户，并在 Tally 草稿另获发布授权后，验证 action/link、字段、double opt-in、条件 consent、CAPTCHA、重复、429、错误、保留、导出与删除。
 - 当前状态：Buttondown 后台 action/部分设置及托管页单邮箱 `Unactivated → Regular` 已由 owner 提供证据；默认关闭的本站准备已完成，owner 已确认真实退订；记录清理、实际 payload 与本站真实启用仍未验证。Tally 已取得 owner 提供的发布链接，首项测试后的原始收集/编辑前筛选决定及离线入口见 12.11；完整公开表单核验与其余真实联调待完成，U4 保持未完成。
 - 授权：每个供应商单独记录账户、计划、环境、合成数据、写入数量、停止、回查与删除；测试邮箱必须由 Project owner 明确控制。
@@ -757,17 +765,12 @@ owner 已明确批准先收集原始建议、编辑前严格筛选。第 12.10 �
 
 ## 13. 当前最终结论
 
-本节原结论记录 2026-09-08 至 09 的阶段快照；当前发布与验收结论以第 0 节及第 12.12 节末尾为准。下列“未发布”和请求头缺项不再代表当前 GoatCounter 状态，表单及其他未完成项仍保留。
+- GoatCounter 已随 `21cdbb6` 正式启用，受控传输与后台收数有证据；原生前后台完整流程、原生 GPC、自动清理与实际退出仍按第 12.12 节保留。
+- Newsletter / Reader Request 当前无可提交控件或传输，真实启用已移至后续独立需求；U4 保持未完成，既有 Buttondown/Tally 测试记录及清理责任不删除、不自动续测。
+- RUM 与表单关闭不影响静态阅读。RUM 仍是正式 MVP 的既定技术门槛，真实接通与观察窗按 017/011；U4 未完成不再阻塞阅读版 001/011 收口。
+- 本轮仅同步范围与现状，不改变账户、数据或生产配置。
 
-U5B 离线模块验证（2026-09-08）：定向 8 文件/256 测试与完整 check 的 33 文件/581 测试通过，Astro 105 文件零诊断；public → review 构建及输出 verifier 通过，仍为 13 个 public HTML / 14 个 review HTML、112 Hero、10 字体与零客户端 JavaScript。新代码只由离线测试调用；Privacy 计划已更新，内容、来源、资产披露和路由未变。真实账号设置、DOM 浏览器行为、请求头与报表、生产配置、M6 bootstrap/制品 fixture、最终 QA 和发布均未验收，不生成 clean-source receipt。
-
-- 需求状态：M5-U3 与 GoatCounter 免费托管/次数统计/最小请求合同已确认，90 天保留与额外采集关闭有账户截图及 owner 保存确认；处理和退出能力仍待验收。013 public origin 与本地条件接线已完成。
-- 实施状态：M5-U2/U3/U5A、U5B、M6 默认关闭的 bootstrap/制品接线与 Newsletter 默认关闭准备已完成，仓库外四次合成发送/收数/清理回查已确认；实际请求头、U4 联调、RUM 和完整 M6 QA 未完成，M5 不能关闭。
-- 验证状态：U3 与 U5A 的历史数字保留各自范围；016 最新静态状态已通过完整 check、review/public output verifier、13 路由三档走查与图注键盘抽查，六个 Entry 均保持 inactive Reader Request。Buttondown 托管页单邮箱状态转换和 owner 的真实退订完成确认见 12.8；记录清理、本站提交/跳转及最终 public 候选缩放/故障等验收仍未完成。
-- 发布状态：未发布。
-- 下一步：本次合成统计发送/收数/清理回查结束，请求头缺项已登记，不重发。Buttondown 已有 12.8 的有限订阅证据及 12.9 的默认关闭本地实现，真实退订已由 owner 确认，继续核对本次记录清理；本站真实启用、Tally 真实联调、完整传输验证、最终 M6 验收及发布保留各自进入条件。
-
-## 14. 当前接线进入清单（2026-09-08）
+## 14. 接线进入清单（2026-09-08 历史记录）
 
 用户已要求独立推进 M5/托管门禁，并接受 GoatCounter 免费方案。2026-09-09 已取得地址、设置截图和 owner 保存确认；本地默认关闭接线及独立四次合成发送/收数/清理回查已验证，请求头和完整处理边界仍未验收，U4/U5 不能整体关闭。下表区分已满足的配置输入和后续验证。
 
@@ -787,7 +790,7 @@ GoatCounter 账户核对清单：
 3. 核对免费账户能否设置聚合保留 90 天、设置/清理语义、数据位置/条款、导出、按路径清理与账户删除入口；不满足合同就保持发送关闭。
 4. 在 DEV_WORKFLOW 中定义受控测试环境、规范合成路径、三个事件与 pageview 的次数上限、同窗口报表回查、停止与清理范围；取得真实写入授权后才发送。不得在 public preview 上临时解除隔离，也不得混用测试统计与产品基线。
 
-默认完成标准保持 011 第 2.2 节：inactive 状态与本地检查点不能关闭 U4/U5，未取得真实账户或业务决定时不使用示例 action/link、静默 fallback 或虚构 receipt 补齐。若以后改变首发交互范围，必须先明确修改目标合同，再实施和验证。
+inactive 状态与本地检查点不能关闭未来 U4/U5 的功能验收；U4 未完成不阻塞 2026-09-12 确认的阅读版 001/011 收口。未来启用时不得使用示例 action/link、静默 fallback 或虚构 receipt 补齐，必须先确认目标合同、易变账户事实和具体授权。
 
 2026-09-09 接线补充结果：默认关闭的 M6 bootstrap/精确配置/产物例外已完成；36 文件/619 测试与 Astro 112 文件零诊断通过，public 13 页携带唯一摘要锁定的关闭模块，review 14 页零脚本，实际 JS 无网络执行 fixture 通过。账户设置有截图及 owner 保存确认；本批未发送真实数据，也未验证服务端清理、浏览器请求头和报表。实施细节、原始字节身份与未验证项见 013 和 DEV_WORKFLOW，U4/U5、M6 最终 QA 与 M7 发布继续保持独立。
 

@@ -1,5 +1,9 @@
 # 007 第二个 MVP Collection：只读研究决策包
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 当前接线状态（2026-09-07）
 
 [009](009-collection-reading-paths.md) 已接入两个三篇路径，后续 [012](012-five-hero-visual-briefs.md) 闭合五组 Hero 并完成 VB6：Project owner 已确认全部 6 篇 Entry / 2 个 Collection 为 published，六篇目标公开日期统一为 2026-09-10；尚未部署上线；Liaozhai Featured 为 Painted Skin，阴间 Featured 仍为 Zhong Kui。Related 编辑环沿各合集顺序并回 Guide，review Related 仍只显示 published 目标，六篇反向合集入口保持。下文研究、首稿与物化的 draft 说明保留为历史边界，不覆盖当前 012、README、内容与匹配测试。
@@ -26,7 +30,7 @@
 | 决策状态 | Project owner 已确认 | 2026-09-03 确认 `Strange Tales from Liaozhai` 方向、3+3 分配、两条公开顺序、Zhong Kui Featured 与《促织》条件保留；新标题仍是工作标题 |
 | 实施状态 | 证据最小物化、四篇纵切片、两个合集路径与五组 Hero 资产闭环已完成 | 当前为 6 篇 Entry：原 2 篇和新增四篇均在后续 VB6 审核到 ready。009 已建立 Liaozhai draft Collection 并接入两个三篇路径；012 已闭合四篇与 Liaozhai Collection 的 brief、候选/权利、master、production record、approved/current manifest、repository source 和 `heroAssetId`。VB6 已闭合分类、Related 编辑环、Liaozhai Featured（Painted Skin）与 6+2 ready，随后 owner 已批准首发 6+2 published，六篇日期为 2026-09-10 |
 | 研究状态 | 候选比较、四篇 claim map 及当前可用证据闭合完成 | [`008-four-entry-claim-maps.md`](008-four-entry-claim-maps.md) 已分层记录实际见证、正式书目与精确 locator；Painted Skin 当前采用上海图书馆 1766 青柯亭单见证，任 2016 / 张 2011 与现代译本/影视直接比较延期；《促织》青柯亭单见证路线已确认，跨见证、作者归属与“首次增写”继续排除 |
-| 发布状态 | 未发布 | 首发 published Entry / Collection 为 6/2；六篇目标日期 2026-09-10，独立批准记录见 012；尚未部署 |
+| 本批发布状态 | 当时未发布 | 后续 6/2 published、Public Beta 发布与当前限制见 012/011；本文研究批不提供发布授权 |
 
 - 当前权威结论更新时间：2026-09-07。
 - 本文保存原始推荐依据与 owner approval，并在第 9–11 节及 008 第 13–14、5.10 节记录后续独立授权的证据物化、四篇纵切片与审核边界；方向确认本身仍不等于其他内容实现、写作完成或发布批准。

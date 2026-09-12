@@ -1,8 +1,12 @@
 # 009 两个合集的本地阅读路径
 
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
+> 2026-09-12 当前状态：Project owner 已确认正式 MVP 采用阅读版，范围为 6 篇英语文章、2 个合集、各自 Hero 与既定验收；Newsletter / Reader Request 真实启用、逐篇正文图及完整故事卡包后移。阅读版 Public Beta 已公开，生产身份与未验证项以 README、011 和 DEV_WORKFLOW 为准。本文带日期的阶段状态与验证结果继续作为历史证据，不据此否定当前发布，也不把后移项或未完成验收写成已完成。
+
 ## 0. 状态与权威边界
 
-第 1–7 节保存 009 当批合同与历史结果。后续 Hero、Featured、分类、Related、ready 审核及独立首发批准由 [012](012-five-hero-visual-briefs.md) 负责：六篇/两个合集现均 published，六篇目标公开日期统一为 2026-09-10；尚未部署，Liaozhai Featured 为 Painted Skin，两个三篇顺序不变，Related 输出仍 published-only，当前六篇各显示一个既定目标；索引为六篇/两个合集的非空列表，不再展示未发布候选架。009 的无 Hero/Featured 限制不覆盖后续独立授权。
+第 1–7 节保存 009 当批合同与历史结果。后续 Hero、Featured、分类、Related、ready 审核及独立首发批准由 [012](012-five-hero-visual-briefs.md) 负责：六篇/两个合集现均 published 并随 Public Beta 公开，六篇目标公开日期统一为 2026-09-10；Liaozhai Featured 为 Painted Skin，两个三篇顺序不变，Related 输出仍 published-only，当前六篇各显示一个既定目标；索引为六篇/两个合集的非空列表。009 的无 Hero/Featured 限制不覆盖后续独立授权。
 
 | 项目 | 当前状态 |
 | --- | --- |
