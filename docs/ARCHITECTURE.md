@@ -2,9 +2,9 @@
 
 ## 0. 状态与结论
 
-- 2026-09-10 Analytics 当前增量：本地 public 候选的 `isAnalyticsEnabled` 为 true，与 Privacy 共用单一配置；review 仍零 JS/meta。唯一 hash-locked bootstrap 保持精确 origin/账户/published 路径约束；DNT/GPC 和单页 `analytics=off` 在绑定及发送前检查，运行中退出清理当前 Document 的全部监听与计时器，BFCache 不恢复。传输仍仅 p/e、omit credentials、no-referrer、no-store、keepalive，无 Cookie/持久标识/重试。原始 bundle Fake 执行与 public/review 实际输出已验证；尚未部署或取得正式 Origin 的真实请求头证据，线上仍关闭。账户/隐私和发布停点见 [006 第 12.12 节](requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。RUM 配置继续为 null。
+- 2026-09-10 Analytics 当前增量：本地 public 候选的 `isAnalyticsEnabled` 为 true，与 Privacy 共用单一配置；review 仍零 JS/meta。唯一 hash-locked bootstrap 保持精确 origin/账户/published 路径约束；DNT/GPC 和单页 `analytics=off` 在绑定及发送前检查，运行中退出清理当前 Document 的全部监听与计时器，BFCache 不恢复。传输仍仅 p/e、omit credentials、no-referrer、no-store、keepalive，无 Cookie/持久标识/重试。原始 bundle Fake 执行与 public/review 输出已验证，21cdbb6 已发布；正式 Origin 的 7 次真实请求头及后台计数确认。原生 DNT、单页退出和实际 BFCache 返回通过；阅读/退出使用焦点模拟，原生前后台完整流程及原生 GPC 未验证。账户/隐私和发布停点见 [006 第 12.12 节](requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。RUM 配置继续为 null。
 
-- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，013 已接入真实 origin 的本地 public build；空托管项目已由用户建立，外部服务与发布仍未实施。
+- 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，013 已接入真实 origin 的本地 public build；Vercel Public Beta 已公开，GoatCounter 已启用；表单与 RUM 仍关闭。
 - M4 边界：经 2026-09-02 项目总检，M4 本地页面、探索投影、U4A 纯基础设施、U5A 样张、最终三档基础矩阵及当时 8 页人工视觉判断已完成。M4 不产生 deployable public artifact；原计划 U4B 的 public runner/output 接线与最终平台 QA 迁入 M6，生产与发布后验证保留给 M7。
 - 决策：**Astro 7 静态模式 + TypeScript strict + Git 内 Entry Markdown / 结构化 YAML + 构建期内容图校验 + 外部服务承接后续少量交互**。M2 不选择托管、不安装 adapter、MDX、React/Vue/Svelte、Tailwind 或商业依赖。
 - 核心判断：这是内容出版物，不是先造平台。首版的复杂度应集中在内容、出处、图片和设计，而不是账号、数据库和运行时服务。
@@ -59,7 +59,7 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 | 层 | MVP 推荐 | 选择原因 | 当前状态 |
 | --- | --- | --- | --- |
 | 页面与构建 | Astro 7 静态模式 + TypeScript strict | 内容型、默认静态、可在有事实触发时局部升级 | M4 review 基线是原 7 个内容/功能页与一个 direct-only type specimen；M5-U3 又增加 Privacy；四个 draft Entry 随后形成 13 页历史快照，009 新增 Liaozhai Collection 页后当前 review 共 14 个 `noindex, nofollow` 页面；013 public intent 生成 13 页与发现文件，仍未发布 |
-| 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | 当前为 6 published Entry、2 published Collection、14 Source、25 verified Claim 与 6 bilingual-approved Terminology；六篇目标公开日期为 2026-09-10，尚未部署 |
+| 内容 | Entry 使用 Markdown；Collection、Source、Claim、Terminology 使用 YAML；一对象一文件 | Git 可追踪、正文与结构化记录职责明确、避免先建 CMS | 当前为 6 published Entry、2 published Collection、14 Source、25 verified Claim 与 6 bilingual-approved Terminology；六篇公开日期为 2026-09-10，已随 Public Beta 上线 |
 | 内容约束 | Astro Content Layer + Zod 单记录 Schema + 独立内容图校验器 | Schema 校验字段；纯函数校验器负责跨集合关系、状态矩阵、ID 与 slug | M2 已实施并由 Vitest/build 覆盖 |
 | UI | 语义模板 + Astro Components + 分层原生 CSS token | 内容合同不依赖当前视觉实现，同时避免整站客户端框架与额外 bundle | M4 共享表现层、六类页面、样张与当前页面判断已完成；M6 最终 public artifact QA 未开始 |
 | 图片 | `src/assets/images` 保存尺寸锁定的 approved source renditions；Astro `Image/Picture` 消费 | M4 构建期生成 AVIF/WebP、多宽度与哈希输出，`dist/` 不反写 manifest | 014 将逐图门禁扩展为 11 个含图页 / 19 个图位，仍要求 8 个 Hero family 的 112 个唯一 AVIF/WebP；非默认入口另实际生成并解码 17 份 current responsive rendition 的 120 个目标 |
@@ -68,7 +68,7 @@ Astro Content Collections 可以通过 Content Layer loader 为 Markdown 与结�
 | 托管 | 供应商中立的静态输出；未来静态托管选用 Vercel | 静态 Astro 无需 adapter，且托管不决定内容、URL 或应用结构 | 方向与不购买自定义域名的决定保持；空项目、稳定 Production hostname 和本地 origin 已建立，尚无部署 |
 | 邮件 | Provider-neutral Newsletter DTO/Fake；固定 Buttondown 原生表单分支默认关闭 | 仅 email 的静态 POST，不自建邮箱库，不添加脚本或 fetch | 006 的 `mythicworld` 配置与 Layout/Footer 接线已实施，实际构建保持 inactive；Node 内存渲染验证启用分支。托管页单邮箱状态转换有 owner 证据，owner 已确认真实退订；测试记录清理、本站真实提交与启用门禁仍未完成 |
 | 反馈 | Provider-neutral Submission/Record/Fake；Tally 是 U4 有条件接受的托管页方向 | 首版不引入账号和通用后端；浏览器字段与受信任记录分离 | M5-U2 合同与 U3 inactive Entry review UI 已实施；Tally 已取得 owner 的预览显示确认和发布链接，持久 Respondent ID 与人工清理风险已接受；首项空白建议落库后，owner 已批准原始收集与编辑前严格筛选；离线入口和实际验证见 006 第 12.11 节，邮箱同意及其余供应商行为仍待 U4 |
-| 分析 | 三事件、URL/referrer 纯清洗、Fake 与 U5A 阅读判定已实现；U5B 目标改为 GoatCounter 官方免费托管 | 按次数统计，最小请求，拒绝应用 properties、PII 和跨站追踪 | U5B pageview、注入式 adapter、条件 DOM hook 与 Privacy 未启用文案已本地验证；M6 public 默认关闭 bootstrap 与产物离线验证完成；账户设置有 owner 截图/保存确认，真实采集未启用 |
+| 分析 | 三事件、URL/referrer 纯清洗、Fake 与 U5A 阅读判定已实现；U5B 目标改为 GoatCounter 官方免费托管 | 按次数统计，最小请求，拒绝应用 properties、PII 和跨站追踪 | U5B pageview、adapter、DOM hook 与实际 Privacy 已验证；M6 public bootstrap 在正式 origin 启用，review 零脚本；生产请求与后台计数已确认，受控验证限制见 006 |
 
 CJK 生产链是显式离线边界：`cjk-character-sets.json -> 固定 Source Han Sans 2.005R commit/input SHA -> 隔离 fontTools/Brotli 实例化与子集 -> RFN-safe internal names + OFL/FONTLOG -> 6 WOFF2 -> fonts.css exact unicode-range -> fontkitten source/dist cmap -> parse5 rendered HTML lang/content gate`。生成器与固定 requirements 落在 `scripts/`；隔离 Python 环境、已安装依赖及两份各约 36 MB 的上游 SC/TC TTF 只存在于 Git-ignored `.local/font-production/`，不是 clone、CI 或默认 `pnpm check` 的运行依赖。生成器拒绝不匹配的 Python/fontTools/Brotli 版本，已落库 WOFF2 的 SHA-256 把受控生成结果与默认 Node 门禁绑定。字符新增必须先更新受审输入并重建，不允许自动扫描文档/原型或使用完整 CJK range。HTML 语言门禁遍历 HTML5 解析后的真实树，不用正则或 XML 式手写栈猜测浏览器的隐式闭合、表格 foster parenting 与实体解码。
 
@@ -184,7 +184,7 @@ mythic-china/
 └─ scripts/                # 只有稳定校验入口出现后才创建
 ```
 
-上图是完整 MVP 的跨里程碑目标，不是一次性脚手架清单。`src/services/` 与 `tests/services/` 已在 M5-U2 获批后建立，最初包含 newsletter、Reader Request、analytics 三个纯模块与集中单测；U5A/U5B 后 services 共六个模块，新增阅读状态、轻量 analytics record 与 GoatCounter 注入式 adapter，并新增 client/site-analytics.ts。M6 再由唯一 analytics-bootstrap.ts 在 public 消费严格关闭配置，并在通过客户端门禁后才注入 fetch；没有供应商 SDK 或存储，真实统计未启用。M5-U3 又建立 Newsletter / Reader Request 的 inactive review UI 与 Privacy 页面，但没有表单 action、外链或客户端事件。带“后续才创建”含义的 `components/commercial/`、`tests/browser/` 等节点在对应需求批准前仍不得建立；M3-U4 已为 `visual/production-records` 建立真实记录、Schema/loader 与双向关系门禁。当前 12 份 manifest 和 21 份 repository source rendition 均保留；11 个逻辑资产各有一份 approved/current，Zhong Kui Hero v1 的 manifest 与两份 source 作为 approved/non-current 历史存在。workflow/model registry 本期不用。
+上图是完整 MVP 的跨里程碑目标，不是一次性脚手架清单。`src/services/` 与 `tests/services/` 已在 M5-U2 获批后建立，最初包含 newsletter、Reader Request、analytics 三个纯模块与集中单测；U5A/U5B 后 services 共六个模块，新增阅读状态、轻量 analytics record 与 GoatCounter 注入式 adapter，并新增 client/site-analytics.ts。M6 再由唯一 analytics-bootstrap.ts 在 public 消费严格静态配置，并在通过客户端门禁后才注入 fetch；没有供应商 SDK 或浏览器持久存储，GoatCounter 仅在正式 origin 采集。M5-U3 又建立 Newsletter / Reader Request 的 inactive review UI 与 Privacy 页面，但没有表单 action、外链或客户端事件。带“后续才创建”含义的 `components/commercial/`、`tests/browser/` 等节点在对应需求批准前仍不得建立；M3-U4 已为 `visual/production-records` 建立真实记录、Schema/loader 与双向关系门禁。当前 12 份 manifest 和 21 份 repository source rendition 均保留；11 个逻辑资产各有一份 approved/current，Zhong Kui Hero v1 的 manifest 与两份 source 作为 approved/non-current 历史存在。workflow/model registry 本期不用。
 
 私有参考图、探索废图、高分辨率母版、模型和 LoRA 权重必须位于 Git inventory 之外。本期获授权的物理根是项目内 `/.local/visual-production/`，由锚定的 `/.local/` ignore 隔离；以后可迁到对象存储。仓库仅保留公开 Web source rendition、manifest 和有追溯价值的小型生产记录；默认 build 不读取 `.local`。
 
@@ -264,7 +264,7 @@ M4 本地产品实现完成
 | Public Beta 上线后 | 保持可见、可访问的 Beta 提示及内部 `Public Beta / pending human validation` 状态；先按 011 冻结并授权研究执行包和版本，再在 live artifact 上按 010 执行四篇深读与全站任务。关键发现按所属硬门禁立即修复，必要时回滚或取消发布受影响页面；重复重大问题、live/RUM 基线、研究阈值与 Project owner 结论关闭，且按 011 补齐三平台实机及三地区性能验收后，才认定正式 MVP 验证完成 |
 | 出现少量动态能力 | 由后续需求先比较外部服务、Astro 官方 adapter 的隔离按需路由与独立动态表面；只有托管、安全和数据边界确认并单独授权后才接入，不因预想中的 D1、R2、KV 或 Workers 先选平台 |
 
-Vercel 已被选择为未来静态托管目标。Astro 静态项目可以在 Vercel 零配置部署，只有使用服务端渲染或平台运行时能力时才需要 adapter；本项目当前不新增 adapter。Vercel 为每次 deployment 生成可变 URL，并另提供 production domain 变量；由于该变量在 Preview 环境也存在，build intent 与 canonical 都不得从 Vercel 环境自动猜测，必须由后续 public runner 显式读取并校验项目自有的 `MYTHIC_CHINA_SITE_ORIGIN`。来源：[Astro on Vercel](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls) 与 [Vercel System Environment Variables](https://vercel.com/docs/environment-variables/system-environment-variables)，访问于 2026-08-30。
+Vercel 已承载当前公开静态站点。Astro 静态项目可以在 Vercel 零配置部署，只有使用服务端渲染或平台运行时能力时才需要 adapter；本项目当前不新增 adapter。Vercel 为每次 deployment 生成可变 URL，并另提供 production domain 变量；由于该变量在 Preview 环境也存在，build intent 与 canonical 都不得从 Vercel 环境自动猜测，必须由后续 public runner 显式读取并校验项目自有的 `MYTHIC_CHINA_SITE_ORIGIN`。来源：[Astro on Vercel](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel Generated URLs](https://vercel.com/docs/deployments/generated-urls) 与 [Vercel System Environment Variables](https://vercel.com/docs/environment-variables/system-environment-variables)，访问于 2026-08-30。
 
 域名注册、DNS 与托管仍是三个可替换边界。自有域名可以由第三方注册商持有，再用 DNS 接入 Vercel；更换托管或从阶段性 production alias/hostname 切换自有域名时，应通过显式迁移决策调整 origin，不让内容 ID、Markdown 或 slug 跟随平台变化。来源：[Vercel Adding a Domain](https://vercel.com/docs/domains/working-with-domains/add-a-domain)，访问于 2026-08-30。
 
@@ -322,11 +322,11 @@ pageId + requestedTopic [+ email + emailConsent]
 - `related_story_click`
 - `outbound_recommendation_click` 仍是未来概念，当前不在 Schema allowlist。
 
-事件对象严格不接受 properties、完整建议、邮箱、page/content title、用户或会话标识；newsletter/request 转化只使用供应商已接受记录的聚合结果，不把按钮点击或跳转冒充成功。U2 纯 normalizer 只接受当前 public site 的 HTTPS URL、去除 query/hash 并清空 referrer；Fake 不发送网络。2026-09-08 owner 接受 GoatCounter 官方免费托管替代 Plausible，完整目标见 [006 第 5.4 节](requirements/006-external-interactions.md)。当前 Privacy 已改为 GoatCounter 未启用计划。U5B 新增 analytics-record.ts 的轻量严格清洗、goatcounter-analytics.ts 的注入式请求 mapping 与 client/site-analytics.ts 的条件 DOM hook，均已通过离线检查；M6 已通过唯一本地 bootstrap 和严格静态配置接入 public 页面，发送默认关闭。账户值有截图/保存确认，真实请求和报表尚未验收。
+事件对象严格不接受 properties、完整建议、邮箱、page/content title、用户或会话标识；newsletter/request 转化只使用供应商已接受记录的聚合结果，不把按钮点击或跳转冒充成功。U2 纯 normalizer 只接受当前 public site 的 HTTPS URL、去除 query/hash 并清空 referrer；Fake 不发送网络。2026-09-08 owner 接受 GoatCounter 官方免费托管替代 Plausible，完整目标见 [006 第 5.4 节](requirements/006-external-interactions.md)。当前 Privacy 按共享配置说明已启用的 GoatCounter 处理与退出方式。U5B 新增 analytics-record.ts 的轻量严格清洗、goatcounter-analytics.ts 的注入式请求 mapping 与 client/site-analytics.ts 的条件 DOM hook，均已通过离线检查；M6 已通过唯一本地 bootstrap 和严格静态配置接入 public 页面，正式 origin 已启用发送。账户值已只读复核，7 次生产验收请求与后台计数已对应，受控焦点及未验证范围见 006。
 
 U5B 的目标边界为：复用三个事件及 U5A，另建 pageview 合同；普通 pageview 覆盖既定 public 路由，业务事件只绑定 published 来源文章。GoatCounter 关闭 Sessions 后按次数聚合，adapter 把事件名与规范文章 pathname 编为供应商事件 path，Related 不添加目标 ID。仅通过文档化的公开 `/count` 发送 `p/e` 和必要的非持久 `rnd`，不用会附加 query/屏幕信息的官方默认脚本，不新增依赖或后台。Referer/Cookie 必须在传输层抑制并验证；IP/UA 等网络技术信息仍由服务方处理。2026-09-09 owner 的设置截图与保存确认表明账户配置为 90 天保留、八项额外采集关闭；服务端实际清理未验收。
 
-public 输出现只精确放行本站 analytics bootstrap：scripts/analytics-script.json 固定 exact href 与 SHA-256，逐页校验配置/唯一标签，再执行原始 JS 的无网络 VM fixture；review 仍零客户端脚本与配置。配置默认关闭，并在运行时同时校验实际 production origin 和批准路径，不能只看 public build intent/canonical；local、preview 和自动化即使消费同一 public artifact 也不能发送真实请求。所有本地测试注入 Fake；发出请求或收到 opaque 响应不作为服务方 `recorded` 证据。真实账户、请求头/缓存、导航故障、报表及退出分别验收，生产启用仍属 M7，RUM 不由 GoatCounter 替代。
+public 输出现只精确放行本站 analytics bootstrap：scripts/analytics-script.json 固定 exact href 与 SHA-256，逐页校验配置/唯一标签，再执行原始 JS 的无网络 VM fixture；review 仍零客户端脚本与配置。配置已启用，并在运行时同时校验实际 production origin 和批准路径，不能只看 public build intent/canonical；local、preview 和自动化即使消费同一 public artifact 也不能发送真实请求。自动化单元测试注入 Fake；另行授权的隔离 Edge/CDP 生产验收采用原始脚本与真实地址，并严格限制发送预算，具体范围见 DEV_WORKFLOW。发出请求或收到 opaque 响应不作为服务方 `recorded` 证据。真实账户、请求头/缓存、导航、报表及退出证据按 006 分别记录；生产采集已启用，原生前后台及 GPC 缺项保留，RUM 不由 GoatCounter 替代。
 
 当前 DOM hook 没有导入时副作用，也没有默认 transport；调用方必须显式启用并提供窗口、文档及 adapter。现有 bootstrap 通过 SiteLayout 从 `createConfiguredPublicSite` 与 published assembly 注入批准边界，不能从运行时 location 推导允许的 origin；同时保证每个 document 只绑定一次。adapter 的语法/成员校验不证明配置来源已经批准。状态与计时仅在本次绑定内，`pagehide/pageshow` 排除 BFCache 停留时间而不重复 pageview，cleanup 移除全部监听与定时器。
 
@@ -402,8 +402,8 @@ M4 已完成获授权的本地基础浏览器矩阵；M6 最终 public artifact 
 
 ## 13. 待确认决策
 
-- Vercel 已选为静态托管目标；owner 已提供个人管理 Hobby 空项目 `project-scu6m` 和稳定 Production 域名 `mythic-china-beta.vercel.app`，013 已使用该显式 HTTPS origin。本次仍须核对平台内部身份、实际项目/构建配置、预览保护、成本、回滚和退出路径；本地接线与旧截图不证明账户门禁通过，也不授权部署。
+- Vercel 已选为静态托管目标；owner 管理的 Hobby 项目 `project-scu6m` 已在稳定 Production 域名 `mythic-china-beta.vercel.app` 运行；身份、保护、原样推广及完整 CDN 验证见 DEV_WORKFLOW。本轮保留旧部署作为回滚目标；后续发布仍须逐次授权并复核易变状态。
 - Project owner 已决定当前不购买自定义域名；未来品牌/权利核查、注册商、DNS 托管、canonical 主域、邮箱迁移与接入时点仍须单独决策。
-- Buttondown 的默认关闭本地配置/组件已接线，Tally 已有 owner 提供的发布链接；首项真实测试接受空白建议；owner 已批准先收集、编辑前严格筛选，按离线审核与修订用例继续，尚未接入本站。GoatCounter 默认关闭接线和独立四次统计回查/清理已完成；Buttondown 托管页单邮箱状态转换有 owner 证据，真实退订已由 owner 确认，记录清理未验。三项服务均未在本站启用真实写入；U4、U5 与 M7 生产启用分别验收，不因本地准备或免费方案合并授权。
+- Buttondown 的默认关闭本地配置/组件已接线，Tally 已有 owner 提供的发布链接；首项真实测试接受空白建议；owner 已批准先收集、编辑前严格筛选，按离线审核与修订用例继续，尚未接入本站。GoatCounter 已正式启用，旧四次独立统计已清理，本次七次生产验收已回查；Buttondown 托管页单邮箱状态转换有 owner 证据，真实退订已由 owner 确认，记录清理未验。Buttondown/Tally 仍未在本站启用，GoatCounter 的原生前后台完整流程仍未验收；U4、U5 与 M7 分别验收，不因本地准备或免费方案合并授权。
 - 本地 Git 已在 `F:\codex-project\mythic-china` 初始化；用户随后建立 `main`、M1/M2 提交与 `origin`。M3-U1 开始前，本地 HEAD、`main` 与本地 `origin/main` 对齐到 `f258227da1b5a73f22c87ec99722243742db0ba0`，工作树干净；本次未执行 fetch，因此不证明服务器端分支状态。这些事实不代表代理获得 add、commit、push 或发布授权；后续版本控制和首次预览/生产发布仍须逐次确认。
 - 本期 master 位置已确认为项目根 `/.local/visual-production/masters/`；当前没有独立备份，丢失时按 production record 重新生成。私有参考资料本期不上传 ImageGen，也不写入仓库；长期对象存储与备份策略仍待后续确认。

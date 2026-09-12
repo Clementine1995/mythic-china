@@ -1,5 +1,38 @@
 # DEV_WORKFLOW.md
 
+## GoatCounter 生产验收与激活入口（2026-09-10）
+
+owner 已要求完成剩余 GoatCounter 验收与上线，并明确允许独立 Edge/CDP 临时浏览器及短时本地预览。仅使用新建 profile，不读取现有浏览器资料；结束关闭本次进程。此次不增加事件、服务或依赖，RUM、Newsletter、Reader Request 保持关闭，不执行 Git 写操作。
+
+已在 clean `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` 上重新通过完整 698 测试、Astro 128 文件零诊断、review 零 JS 及 public 构建。冻结目录 `.local/goatcounter-release-21cdbb6/` 包含 140 文件 / 3,278,559 bytes；inventory SHA256 为 `1ca496b658912338d9a85080531820c2e660b531172699c3320c702bc78aab75`，request SHA256 为 `e04a7c64ebd54e52155e6183f449139c0125fd1a6e441d5337fd64835f0ad4fb`。本节之后的文档修改不进入已冻结制品；实际业务源码和原始字节不得变化。
+
+本地入口使用固定 Node：
+
+```powershell
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/goatcounter-release-21cdbb6/deployment-session.mjs --validate-only
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/goatcounter-release-21cdbb6/deployment-session.mjs --stdin-token
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/goatcounter-release-21cdbb6/browser-qa.mjs local
+```
+
+上述为本次已执行入口，不是重跑授权；创建、推广及 7 次真实统计预算均已使用。部署会话实际从关闭回显的 stdin 接收 project-scu6m 项目范围 Token，仅留进程内存。`preflight` 只读固定 project/team/domain/old deployment；`stage` 唯一 POST 使用 `target: production` 与 `autoAssignCustomDomains: false`，保持 Standard Protection 和旧公开域名。创建前持久化 attempt，未知结果只用 `reconcile` 查回，不重发 POST。`status/files` 只读检查；文件管理 API 证明上传源码，不能冒充实际 CDN 字节。通过本地及受保护页面验收后 `promote` 推广同一个 READY 部署；公开后立即核对完整 140 文件和限次浏览器传输。有阻塞故障时 `rollback` 恢复原 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK`；若无法恢复，则 `protect` 加强为 All Deployments。回滚会关闭自动生产域名分配，必须记录；不删除任何部署。`close` 已执行，凭据会话结束。
+
+真实发送预算为本轮独立的最多 7 次：首页首次与普通刷新 2 次 pageview，钟馗 pageview、qualified、depth75、Related 各 1 次，Related 目标 Chinese Underworld Guide pageview 1 次。只接受既有正式 origin 下的 GET 与 p/e，提前监听 Network/ExtraInfo/缓存/响应，拦住第八次及任何异常字段；无重试。原计划覆盖原生可见/隐藏计时、Story 75%、点击、同文档退出与实际 BFCache；原生完整流程未完成，最终阅读和退出测试明确采用 CDP focused/active 模拟，不能计为原生前后台验收。localhost、受保护预览和退出场景零发送；不伪造 webdriver、Origin 或生产地址。原生 GPC 不可用，保留未验证，不把注入值当浏览器偏好证据。
+
+真实 QA 已进入现有规范路径的聚合；不得删除这些可能混有读者的路径。排除整个 UTC 2026-09-10 测试日，产品基线最早从 2026-09-11 00:00 UTC（北京时间 08:00）开始；7 条计数不是 7 位读者，也不是 RUM 基线。后台只读回查，不因报表延迟重发。截图、Network、临时脚本、profile 与平台回执均留忽略目录。
+
+本次执行结果：
+
+- 发布：08:23:47 UTC 唯一创建 `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`，08:46:22 UTC 同一 READY 部署原样推广，无重建。项目 `prj_U8IP9LhhpaeDC2dJlP0VVv3ciu70`、团队 `team_zxOM6nEHD6ZYTRcrAjbcwU3U` 与正式域名现场核对一致；Standard Protection 保持。原部署保留，本轮未回滚、删除或新增第二次部署。
+- 制品：39/39 本地页面/视口组合通过且零统计发送；受保护站点抽查 Home、Privacy、Zhong Kui。推广后 08:47:08–08:47:57 UTC 完整 live smoke 确认 140/140 文件 200、正确 MIME、字节长度及 SHA256。唯一 JS 为 `/_astro/page.Br3bZ4bz.js`，7,172 字节，SHA256 `eabde04719862a9f6c0665f614f3cd416ad1984a24d4a652757899512d4fcadf`。该完整 CDN 证据独立于源文件 API。
+- 收数：7/7 真实发送，后台无路径筛选的 2026-09-03 至 2026-09-10 范围显示 7 out of 7：首页 2、Zhong Kui 1、Guide 1，qualified/depth75/Related 各 1。后三种事件及 Guide 页面浏览在焦点模拟下完成；恢复诊断时的重复页面浏览在传输前阻断，不增加预算。
+- Network：7 次均观测到实际 ExtraInfo 请求头，无 Cookie、Referer、Authorization，Origin 为正式站点，仅 GET p/e；普通刷新使用重新打开的同一专用 profile，未关闭浏览器缓存或硬刷新，观察到 no-cache/Pragma。6 次观测 HTTP 200；Related 点击后导航使其响应未被观测，以后台对应事件 1 条确认收数。初次响应 body 完成观察超时与中断记录保留，不把“请求已发出”或未观察到 loadingFinished 当作收数/失败结论。
+- 退出：原生 Edge DNT 偏好实际返回 navigator.doNotTrack=1、普通文档请求 DNT:1，统计零尝试/零发送。独立退出检查仅在传输前阻断初始页面浏览；hash 退出后移除标记仍无新增尝试，query/hash 退出导航后实际 pageshow.persisted=true，BFCache 返回仍不恢复，真实发送为 0。该退出检查同样使用焦点模拟。原生 GPC、原生前后台完整流程、三平台真机、完整地区性能和 RUM 仍未验证；单独 visibility 诊断只复现可见时间不足，不能证明此前超时的唯一原因。
+- 收尾：全部本次 Edge 进程、短时预览及凭据会话已结束；不需要工作电脑持续开机。业务源码未变，内容/来源/资产披露沿用已验证制品；本轮只同步稳定文档，未提交或推送。
+
+本次实际补验入口为 `browser-qa-controlled.mjs live --resume-reading`、`browser-qa.mjs dnt` 和 `exit-qa.mjs`（均由上述固定 Node 运行）；完整 HTTP 校验使用同目录 `verify-public.ps1 -VerifyLive`。这些记录仅用于追溯，真实发送预算已经耗尽，不得重跑正向统计。主要回执均在 `.local/goatcounter-release-21cdbb6/`：`deployment-result.json`、`staged-qa.json`、`local-qa.json`、`public-smoke-20260910-084757-8589012.json`、`live-qa.json`、`live-resume-qa.json`、`live-controlled-qa.json`、`dashboard-final-counts.json`、`dnt-qa.json`、`exit-qa.json`；中断回执不改写为 passed，以后续逐项证据解释最终覆盖范围。原生焦点与模拟的区别见 [CDP Focus Emulation](https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setFocusEmulationEnabled)。
+
+官方执行依据（2026-09-10）：[Vercel staged promotion](https://vercel.com/docs/deployments/promoting-a-deployment)、[项目范围 Token](https://vercel.com/docs/accounts/access-tokens)、[deployment files](https://vercel.com/docs/rest-api/deployments/list-deployment-files)、[Edge CDP](https://learn.microsoft.com/en-us/microsoft-edge/devtools/protocol/)、[Network](https://chromedevtools.github.io/devtools-protocol/tot/Network/)、[Fetch](https://chromedevtools.github.io/devtools-protocol/tot/Fetch/)。
+
 ## 分析与技术验收本地检查点（2026-09-10）
 
 owner 已明确要求“提交一次吧”，本次授权形成一个本地检查点：保存此前 Hero sizes、技术验收文档、默认关闭的 RUM 实现，以及 GoatCounter 启用候选和退出/Privacy。本次不推送、部署、启动服务或改用 Edge/CDP，不发送真实统计。既有生产发布意图不扩大本轮执行范围。

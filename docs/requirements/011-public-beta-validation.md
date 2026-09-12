@@ -2,6 +2,8 @@
 
 ## 0. 文档职责与状态
 
+2026-09-10 当前更新：GoatCounter 经独立授权完成启用，当前生产源为 21cdbb6，详见 [006 第 12.12 节](006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。下面两段是阅读版首次发布前的历史范围；统计后续启用不恢复表单或 RUM，也不关闭真机、完整地区性能或 R2。
+
 2026-09-09 首发范围收敛：owner 在停止继续表单测试后要求尽早准备上线。本次按阅读版 Public Beta 准备，保留 6 篇 Entry、2 个 Collection 及现有静态页；Newsletter、Reader Request、Analytics 和 RUM 均不启用。M5 未完成项保留为对应功能未来启用的门禁，不再作为本次阅读版首发的前置条件；已有测试记录不擅自删除。本节与下列更新后的进入条件取代旧阶段记录中“先完成全部 M5 才能准备发布”的顺序，不代表 M5、最终 QA 或发布已经通过。
 
 2026-09-09 增量：GoatCounter 设置已由 owner 截图与保存确认，M6 默认关闭的 public bootstrap、脚本身份与原始产物离线执行验证完成；真实统计未启用，不关闭 U5、完整候选 QA 或发布。详见 [006](006-external-interactions.md) 与 [013](013-public-artifact-assembly.md)。
@@ -13,9 +15,9 @@
 | 维度 | 当前状态 | 证据或阻塞项 |
 | --- | --- | --- |
 | 需求状态 | 已确认 | Project owner 于 2026-09-07 确认采用“先完成非读者发布门禁，再以可索引 Public Beta 获取真实读者并关闭 R2”的路线 |
-| 实施状态 | PB2/PB3 已形成证据；PB4 阅读版正式公开 | 原 dc0ad2d 的 6 Entry / 2 Collection / 140 文件原样推广；内容、资产和关系批准保持，交互与统计继续关闭 |
-| 验证状态 | 既有发布 smoke 通过；发布后技术验收部分完成 | 140 文件完整性证据保持；新增三地区 12 次 HTTP 200、北美 PSI 四份手机/桌面报告与初始请求资源表。完整 Network、指定三地区首/复访和三平台实机未完成，RUM 方案未启用；详见 2.2.3，R2a/R2b 仍为 0 |
-| 发布状态 | 阅读版 Public Beta 已公开 | 同一 `dpl_D3E9hWGC4h19MSg1KcuVaiTWunwK` 已推广；正式域名匿名 200，Standard Protection 下两个部署网址仍要求登录。状态为 Public Beta / pending human validation，未完成正式 MVP 验证 |
+| 实施状态 | PB2/PB3 已形成证据；PB4 阅读版正式公开 | 当前 21cdbb6 的 6 Entry / 2 Collection / 140 文件原样推广；内容/资产批准保持，GoatCounter 已启用，表单和 RUM 关闭 |
+| 验证状态 | 既有发布 smoke 通过；发布后技术验收部分完成 | 新制品 140 文件完整性及 GoatCounter 7 次请求/后台回查、原生 DNT、受控退出/BFCache 通过；阅读/退出采用焦点模拟，原生前后台完整流程未完成。旧版三地区 HTTP/PSI 见 2.2.3；完整地区浏览器/真机/RUM 与 R2 保留 |
+| 发布状态 | 阅读版 Public Beta 已公开 | 当前 `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy` 已原样推广；正式域名匿名 200，Standard Protection 保持，部署网址要求登录。状态为 Public Beta / pending human validation，未完成正式 MVP 验证 |
 
 - 当前权威结论更新时间：2026-09-10。
 - 2026-09-08 增量：owner 已通过网页建立个人管理 Hobby 空项目 `project-scu6m`，Production 域名 `mythic-china-beta.vercel.app` / `No Deployment`。本地 public assembly 已在 [013](013-public-artifact-assembly.md) 接线；此前 origin/runner/endpoint 尚不存在的描述保留为 PB1/VB6 阶段背景，不再作为当前阻塞项。本批未提交输出仍是 nondeployable 诊断，不关闭下列生产进入门禁。
@@ -26,7 +28,7 @@
 - 一句话结论：目标读者 R2 从 M6 上线前硬门禁改为 M7 Public Beta 上线后的验证与正式 MVP 收口门禁；缺少样本不得写成“通过”，但不再阻塞图片、状态、public artifact、受保护预览或经单独授权的 Public Beta 生产发布。
 - 是否可以进入本地后续开发：是。四篇 Entry 与 Liaozhai Collection 的五组 Hero 资产已完成 approved/current 闭环；VB6 已使 6 篇 Entry / 2 个 Collection 均 ready，随后 owner 已批准 6+2 published 与六篇目标日期 2026-09-10；013 已完成 origin/public assembly 的本地接线；Beta 页脚提示已获批准，本地实施见 013；016 已补条件式 hosting Privacy，后续为实际托管配置、独立 M5 交互及最终候选准备。
 - 本次公开流程：owner 已于 2026-09-10 授权并确认第 2.2.1 节的时点调整；同一部署已推广到正式域名并公开，140 文件匿名完整性检查、首页与核心正文浏览器检查通过，没有触发恢复保护。执行身份、时间与证据限度见 DEV_WORKFLOW 顶部；这不是新一次发布授权。
-- 当前下一步：owner 于 2026-09-10 暂缓独立 Edge/CDP 轨迹诊断，并确认尚无跨平台真机；当前沿 [017](017-real-user-monitoring.md) 先完成 RUM 本地实现，因无 Cloudflare 账户不接真实采集。完整 Network、指定三地区浏览器首/复访仍未关闭。owner 暂无独立目标读者，R2 保留未开始，不要求先招募才继续技术工作；不重复部署，不自动启用外部服务。
+- 当前下一步：owner 于 2026-09-10 暂缓独立 Edge/CDP 轨迹诊断，并确认尚无跨平台真机；[017](017-real-user-monitoring.md) RUM 本地实现已完成，因无 Cloudflare 账户不接真实采集。随后独立授权完成 GoatCounter 生产验收；完整 Network、原生前后台及指定三地区浏览器首/复访仍未关闭。owner 暂无独立目标读者，R2 保留未开始，不要求先招募才继续技术工作；不重复部署，不自动启用外部服务。
 
 ### 1.1 事实、推断与风险
 
@@ -52,12 +54,12 @@ Public Beta 生产发布前必须全部满足：
 1. 6 篇 Entry、至少 2 个 Collection 完成事实、Source/Claim、双语术语、英文编辑、关系、内容提示、视觉资产、权利、披露和内容无障碍文案门禁。
 2. Project owner 在完整本地 inventory 上逐项作出 `published` 决定并批准目标公开日期；Public Beta 不允许索引 draft、`editorial-review`、`visual-review` 或 `ready` 内容。
 3. 阅读版的 Newsletter 与 Reader Request 保持 inactive，无可提交控件、外部表单入口或传输；Privacy 与实际产物一致。Buttondown/Tally 的未完成配置、联调与清理按 [`006-external-interactions.md`](006-external-interactions.md) 保留，恢复对应功能前单独完成，不计为已通过。
-4. Analytics 配置保持关闭，现有唯一 bootstrap 通过摘要与离线执行校验；实际候选在 local/preview/production 均不发送供应商请求，不增加 RUM producer。以后启用统计或 RUM 时，仍须完成 006 的处理、Privacy、传输与退出验证并取得独立授权。
+4. 首次阅读版 Analytics 配置保持关闭，唯一 bootstrap 通过摘要与离线校验；local/preview/production 均不发送请求，不增加 RUM producer。后续启用须按 006 明确处理、Privacy、传输/退出证据和独立授权；2026-09-10 已完成 GoatCounter 启用，受控验证及原生前后台/GPC 缺项见 006，RUM 仍关闭。
 5. M6 完成真实 HTTPS origin、public intent/runner、页面 metadata、Sitemap/RSS/JSON-LD、独立 output verifier 与真实非空 public artifact。
 6. 从另行授权的 clean committed revision 重建同一 artifact，在进入受保护预览前完成自动门禁、390/768/1440、真实键盘、200%、JavaScript-disabled、reduced motion、字体/图片故障、本机 fallback、链接、本地性能和 Project owner 最终视觉审核，并生成绑定源身份及检查范围的 verification receipt。该轮不以 R2 样本为放行条件。
 7. 受保护预览绑定同一 validated source identity，并通过账户归属、保护、成本、退出和回滚验收。macOS/iOS/Android 实机显示与字体 fallback，以及美国东部、西部和欧洲性能实测，按第 2.2.1 节在 Public Beta 上线后、结束 Beta 前补齐；预览及公开记录列明具体未验证平台和地区，不能标成通过。公开后立即核验同一原 140 文件，发现阻塞阅读问题即恢复登录保护；其他门禁不因此后移。
 8. 同一发布候选包含 Project owner 批准的可见、可访问 Public Beta 提示；它不宣称已通过目标读者验证，具体文案和位置已有匹配视觉、键盘和输出检查。
-9. `DEV_WORKFLOW.md` 已实例化生产发布、live smoke、回滚和停止条件，且 Project owner 单独授权本次生产发布。阅读版 live smoke 必须复核交互与统计仍关闭；production analytics/RUM 的启用流程后置。
+9. `DEV_WORKFLOW.md` 已实例化生产发布、live smoke、回滚和停止条件，且 Project owner 单独授权本次生产发布。首次阅读版 live smoke 复核交互与统计关闭；后续 GoatCounter 启用的 live smoke 按 006 核对实际开启配置、Privacy、传输和后台，表单/RUM 保持关闭。
 
 ### 2.2.1 跨平台实机验收时点
 
@@ -98,7 +100,7 @@ WebPageTest 当前匿名入口提示免费次数用尽，未产生报告；没�
 
 完成标准：完整现有检查和 public/review 输出门禁通过；逐文件对比原包，只有六篇文章的 30 个 sizes 属性发生预期变化，其他输出字节一致；README 与 DEV_WORKFLOW 同步实际结果。无需为单行声明新增镜像断言型单元测试，采用真实构建输出核对变更范围。浏览器精确宽度/currentSrc、绘制 trace 和修改后 LCP 未经实测不能标记通过，后续提交与发布仍须单独授权。
 
-状态：尺寸声明修正已完成，本地验证通过；38 文件/655 项现有测试、Astro 117 文件零诊断、public/review 构建与输出门禁通过。原 140 文件逐项比对只改变六篇文章的 30 个 sizes 属性，其余 134 文件字节一致。新增两轮旧版 PSI 均已记录，手机三轮 LCP 为 2.710/2.255/2.552s，桌面单次 TBT 495ms 与另一次 CLS 0.04 也保留，绘制根因仍未确定。浏览器轨迹与修改后性能尚未验收，不能关闭性能诊断。本地诊断不构成新可部署身份，线上仍为原 dc0ad2d；本批未提交、未发布、未接入 RUM，也不关闭完整地区矩阵、Network 或真机缺口。下一停点和执行记录见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#钟馗移动-lcp-诊断与尺寸修正2026-09-10)。
+状态：尺寸声明修正已完成，本地验证通过；38 文件/655 项现有测试、Astro 117 文件零诊断、public/review 构建与输出门禁通过。原 140 文件逐项比对只改变六篇文章的 30 个 sizes 属性，其余 134 文件字节一致。新增两轮旧版 PSI 均已记录，手机三轮 LCP 为 2.710/2.255/2.552s，桌面单次 TBT 495ms 与另一次 CLS 0.04 也保留，绘制根因仍未确定。浏览器轨迹与修改后性能尚未验收，不能关闭性能诊断。本地诊断不构成新可部署身份，本地修正阶段线上仍为原 dc0ad2d。后续 sizes 已随 21cdbb6 的 GoatCounter 发布上线，39 组本地页面/视口检查通过；修改后性能与绘制根因仍未验收，不关闭完整地区矩阵、Network 或真机缺口，RUM 仍关闭。下一停点和执行记录见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#钟馗移动-lcp-诊断与尺寸修正2026-09-10)。
 
 ### 2.3 Beta 退出条件
 
@@ -131,11 +133,11 @@ Public Beta 保持进行中，直到：
 
 ```text
 当前 R1 静态准备完成、R2 = 0
-  -> 阅读版关闭交互/统计检查与 M6 内容、资产、关系、状态、public artifact
+  -> 首次阅读版关闭交互/统计检查与 M6 内容、资产、关系、状态、public artifact
   -> clean-source release QA 与受保护预览
   -> Project owner 独立授权生产发布
   -> 可索引 Public Beta（现有 published 状态）
-  -> live smoke / 回滚入口 / 目标地区 / 交互与统计仍关闭
+  -> live smoke / 回滚入口 / 目标地区 / 对应批准配置（GoatCounter 后续按 006 启用）
   -> 另行确认并授权研究执行包与版本身份
   -> live artifact 上执行 R2a
   -> 修正研究材料或关键发现
