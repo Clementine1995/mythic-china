@@ -1,5 +1,82 @@
 # DEV_WORKFLOW.md
 
+## RUM 关闭状态接收端：手工部署准备（2026-09-14）
+
+**当前停点：旧候选暂停发布。** 后续内置浏览器核查已确认代码粘贴进 `worker.js`，Quick Edit 显示 `TextDecoderConstructorOptions` 缺少 `ignoreBOM` 的 TS2345 错误（原制品第 112 行）。界面 Active/Latest 短版本为 `70d438ce`，Deploy 禁用，预览仍为 Hello World；这些信号不足以确认 RUM 已发布。该错误是编辑器类型合同问题，不把它写成运行时解码事故。下文旧候选的 hash 和验证保留为追溯，不再指示 owner 发布该旧文件。
+
+本地只为 `workers/rum/worker.ts` 的 `TextDecoder` 增加标准默认值 `ignoreBOM: false`，保留 `fatal: true`，并在 `tests/rum/worker.test.ts` 补带 UTF-8 BOM 的 JSON 回归。参数默认语义依据 [WHATWG Encoding](https://encoding.spec.whatwg.org/#interface-textdecoder)；Cloudflare 支持对应属性，见 [Encoding](https://developers.cloudflare.com/workers/runtime-apis/encoding/)。owner 已明确授权本次本地提交与重新打包，不在云端临时改源代码；必须在匹配验证与本地提交后从新的 clean revision 重新生成候选，不能把修改后的字节继续绑定旧 revision/hash。
+
+修正验证使用下文既有固定 Node/Corepack/pnpm 身份及 `pnpm run test tests/rum`、`pnpm run typecheck` 入口；RUM 3 文件/36 测试通过，Astro 128 文件零 error/warning/hint，源/测试定向 ESLint 通过。格式检查使用现有 Prettier 模块 API；本机本轮 `pnpm exec prettier` 未找到 CLI，未据此安装或调整依赖。未启动服务或访问真实数据库；没有重跑站点构建，也没有验证 Cloudflare 编辑器修正后的实际诊断。内容/资产/公开披露无变化，解码边界仍是严格 UTF-8 与原有 BOM 处理，非显然的显式参数原因记录于本节；旧候选不覆盖。
+
+本次已获授权的本地提交范围为下列五个文件，提交信息 `fix(rum): make decoder options compatible with Cloudflare`。包含此前同一接线任务的三份运行文档，不包含 `.local/` 制品、不推送或发布。先核对 HEAD、空暂存区和精确变更范围，再执行：
+
+```powershell
+$mythicRumCheckpointFiles = @('DEV_WORKFLOW.md', 'README.md', 'docs/requirements/017-real-user-monitoring.md', 'workers/rum/worker.ts', 'tests/rum/worker.test.ts')
+if ((git rev-parse HEAD) -ne '08db1e0eb11cd6650ca82873047bc2e046efac6b') { throw 'Unexpected checkpoint parent.' }
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Expected an empty staging area.' }
+$mythicRumPendingPaths = @(git diff --name-only --no-renames) + @(git ls-files --others --exclude-standard)
+if (Compare-Object ($mythicRumCheckpointFiles | Sort-Object) ($mythicRumPendingPaths | Sort-Object)) { throw 'Checkpoint scope changed.' }
+git diff --check
+if ($LASTEXITCODE -ne 0) { throw 'Whitespace check failed.' }
+git --literal-pathspecs add -- $mythicRumCheckpointFiles
+if ($LASTEXITCODE -ne 0) { throw 'Staging failed.' }
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed.' }
+git commit -m 'fix(rum): make decoder options compatible with Cloudflare'
+if ($LASTEXITCODE -ne 0) { throw 'Local checkpoint commit failed.' }
+git log -1 --format='%H %P %s'
+git status --short
+```
+
+提交结果以 Git 历史与执行后现场为准，不在提交文本预写自身哈希。提交后按新 revision 建立独立候选目录，保留旧包，重新核对三个源码输入、无外部 import、默认入口与关闭状态；Cloudflare 编辑器无该错误仍须由后续粘贴取得实际证据。以下仅将已审查的本地生成器复制到新目录并更新其精确 revision 门禁，输出采用排他创建，不能覆盖旧文件：
+
+```powershell
+$mythicRumPreparedRevision = (git rev-parse HEAD).Trim()
+if ((git log -1 --format='%s') -ne 'fix(rum): make decoder options compatible with Cloudflare') { throw 'Unexpected source commit.' }
+if ((git status --porcelain).Length -ne 0) { throw 'Expected a clean source revision.' }
+$mythicRumPreparedDirectory = Join-Path '.local' ('rum-worker-' + $mythicRumPreparedRevision.Substring(0, 7))
+if (Test-Path -LiteralPath $mythicRumPreparedDirectory) { throw 'Candidate directory already exists.' }
+$mythicRumGenerator = [System.IO.File]::ReadAllText((Join-Path (Get-Location) '.local/rum-worker-08db1e0/prepare.mjs'))
+if (-not $mythicRumGenerator.Contains('08db1e0eb11cd6650ca82873047bc2e046efac6b')) { throw 'Generator revision gate missing.' }
+New-Item -ItemType Directory -Path $mythicRumPreparedDirectory -ErrorAction Stop | Out-Null
+$mythicRumGenerator = $mythicRumGenerator.Replace('08db1e0eb11cd6650ca82873047bc2e046efac6b', $mythicRumPreparedRevision)
+[System.IO.File]::WriteAllText((Join-Path (Get-Location) (Join-Path $mythicRumPreparedDirectory 'prepare.mjs')), $mythicRumGenerator, [System.Text.UTF8Encoding]::new($false))
+& 'D:\Program Files\nvm\v24.16.0\node.exe' (Join-Path $mythicRumPreparedDirectory 'prepare.mjs')
+if ($LASTEXITCODE -ne 0) { throw 'Candidate generation or artifact checks failed.' }
+Get-FileHash -LiteralPath (Join-Path $mythicRumPreparedDirectory 'worker.txt') -Algorithm SHA256
+git status --short
+```
+
+新目录的 `manifest.json` 记录实际 source revision、源文件/锁文件摘要、制品字节与 SHA256、离线检查及未部署状态；它和执行回执共同标识新候选，不沿用下文旧包摘要。源码与测试未再变化时沿用上述 36 项测试与类型检查，最终原始 ESM 字节仍由生成器重新执行离线检查。
+
+owner 在 Cloudflare 内置浏览器中自行完成注册与邮箱验证，并按步骤准备资源。主代理已从控制台读到 Worker `mythic-china-rum`、`mythic-china-rum.huyichen2019.workers.dev` 和兼容日期 `2026-09-14`；账户 ID 为 `c090c719a4b548b0ef02ba8aa334631b`。owner 提供 D1 ID `300f8ad2-992a-4a14-944b-6b4a897d7b1e`，并报告已执行 `workers/rum/schema.sql`、设置文本变量 `RUM_ENABLED=false`、关闭 Logs 及持久/invocation logs，Traces 保持关闭。这些设置和 D1 表结构尚未由代理重新读取；DB 绑定仍须在部署前逐项核对。此前控制台显示没有 Cron，本轮未安排或触发 Cron。
+
+当前交付仅为默认关闭的接收端候选与手动操作说明；主代理仅按本次授权本地提交与打包，不推送、发布、写真实数据库或修改 Cloudflare 设置。网站的 `rumDeployment` 继续为 null，没有开启采集窗口。关闭状态接收端部署不等于网站采集启用；正式启用仍需完成 017 的账户/处理条件、窗口、调度、Privacy、客户端制品和生产验证。
+
+候选在 clean `08db1e0eb11cd6650ca82873047bc2e046efac6b` 上生成，输入仅 `src/rum/contract.ts`、`workers/rum/store.ts`、`workers/rum/worker.ts` 与一个只重导出默认入口的打包入口。使用现有 `esbuild@0.28.2`，没有安装依赖或运行包安装脚本。单文件 ESM 保存为便于整份复制的 `.local/rum-worker-08db1e0/worker.txt`，6,933 bytes，SHA256 `f45b3417e66e55ccc884aa4db5c92892503e73d6d2a257678d88eb8b45b54755`；纯文本扩展名也避免把编译制品当作待格式化源码。同目录 `manifest.json` 保存源码/锁文件摘要与目标身份，`prepare.mjs` 保存生成及原始制品离线检查。后续本节、README 和 017 的文档修改不改变已冻结的业务源与制品身份。
+
+本地入口使用下文固定 Node/Corepack/pnpm 身份门禁。生成器仅供在同一 clean revision、目标输出不存在时复现，拒绝覆盖已有制品；文档工作树有改动时不能直接重跑：
+
+```powershell
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/rum-worker-08db1e0/prepare.mjs
+& $mythicProjectCorepack pnpm run test tests/rum
+Get-FileHash -LiteralPath '.local/rum-worker-08db1e0/worker.txt' -Algorithm SHA256
+```
+
+实际结果：RUM 3 文件/35 测试通过；打包无警告、无外部 import，只有默认导出的 `fetch`/`scheduled`。直接执行最终 ESM 原始字节的离线检查确认：关闭、缺开关或缺绑定时合法来源的 `/vitals` 返回 503 且不访问数据库；根路径返回 404，无 Origin 的 `/vitals` 返回 403；无窗口时仍拒绝接收；离线检查没有发出网络请求。这些结果不代替 Cloudflare runtime、真实 D1 绑定与发布后验证。
+
+owner 手动部署精确制品的步骤（须先替换为修正后的 clean-source 候选及新摘要）：
+
+1. 进入上述账户的 Workers & Pages → `mythic-china-rum`。确认仍使用 Workers Free；Bindings 中 `DB` 必须指向上述 D1 ID，不能把数据库 UUID 填成变量名。Settings 的文本变量 `RUM_ENABLED` 为 `false`，Logs、Include Invocation logs、Persist logs to the Workers dashboard、Traces 均关闭；没有 Tail/Logpush/导出目标或 Cron。账户计划与设置不符时先处理，不升级套餐或开启采集。
+2. 点击 Edit code，打开默认 Hello World 的入口文件，将其内容整体替换为上述 `worker.txt` 的全部文本。它是 JavaScript 源文本，粘贴后保留控制台原入口文件名。这里上传的是本地已验收制品，不在控制台临时改业务逻辑；若现有入口已经不是默认示例，先核查版本，不直接覆盖。
+3. 由 owner 点击 Deploy；出现成功部署及版本标识后记录该版本，再重新核对变量、绑定与日志。根网址返回空 404、直接导航 `/vitals` 返回空 403 都是源码的预期行为，不应把它们当作网站首页或健康页。
+4. 本步骤不设置 Cron、不调用定时事件、不插入窗口、不把开关改成 true，也不重建/发布 Vercel 网站。`scheduled` 即使在接收关闭时也会执行维护 SQL；因此调度属于后续独立步骤。
+
+成功后的下一步为按真实环境核验部署与绑定，然后配置每小时维护和未来 UTC 零点开始的 14 日窗口、审核客户端启用制品。回退时维持 `false`、保持网站客户端 null，通过 Cloudflare Deployments 选择本次部署前的明确版本；不删除 Worker、D1 或测量表。以上为操作说明，不是主代理已执行发布的回执。
+
+初次打包未修改业务代码、内容、来源、资产或公开披露，相关重新审校不适用；未运行站点全量构建或浏览器验收。后续实际编辑器诊断、本地解码修正与检查点授权以本节顶部为准，未推送或由代理部署。官方依据：[esbuild Build API](https://esbuild.github.io/api/#build)、[Cloudflare ES Modules](https://developers.cloudflare.com/workers/reference/migrate-to-module-workers/)、[D1 控制台与 Worker 编辑器](https://developers.cloudflare.com/d1/get-started/)。
+
 ## GoatCounter 生产验收与激活入口（2026-09-10）
 
 owner 已要求完成剩余 GoatCounter 验收与上线，并明确允许独立 Edge/CDP 临时浏览器及短时本地预览。仅使用新建 profile，不读取现有浏览器资料；结束关闭本次进程。此次不增加事件、服务或依赖，RUM、Newsletter、Reader Request 保持关闭，不执行 Git 写操作。

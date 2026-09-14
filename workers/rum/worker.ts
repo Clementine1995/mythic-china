@@ -58,7 +58,9 @@ async function readBody(request: Request): Promise<unknown> {
     bytes.set(chunk, offset);
     offset += chunk.length;
   }
-  return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+  return JSON.parse(
+    new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(bytes),
+  );
 }
 
 export async function receiveRum(

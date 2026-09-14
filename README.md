@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-文档核对日期：2026-09-12；最新发布与账户实证日期：2026-09-10。本轮只更新文档，不将历史回执写成今日线上复验。2026-09-11 的匿名 HTTP 复核因连接限制/超时未取得响应，不据此判断线上故障。
+文档核对日期：2026-09-14；最新站点发布与 GoatCounter 实证日期：2026-09-10。Cloudflare 资源准备与 RUM 关闭状态候选见下文；不将历史站点回执写成今日线上复验。2026-09-11 的匿名 HTTP 复核因连接限制/超时未取得响应，不据此判断线上故障。
 
 **当前阶段：英语阅读版 Public Beta / pending human validation。正式 MVP 范围已确认，验收尚未收口。**
 
@@ -18,7 +18,7 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 | 发布 | [正式站点](https://mythic-china-beta.vercel.app) 的最新回执绑定 clean source `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`；2026-09-10 完整 140 文件 / 3,278,559 字节 HTTP、MIME、长度与 SHA256 通过，部署网址受登录保护 | 今天未复核远端；可索引不等于搜索引擎已收录。文档提交不改变生产制品身份 |
 | GoatCounter | 正式启用；4 次页面浏览、3 次事件共 7 条受控计数，7 次实际请求头、6 次 HTTP 200；Related 响应未观测，后台确认收数；原生 DNT、受控退出和实际 BFCache 返回有证据 | 阅读和退出采用 CDP 焦点模拟；原生前后台完整流程、原生 GPC 及账户自动清理/实际导出注销未实测；预算已耗尽，不补发、不删除规范路径 |
 | 表单 | Newsletter 默认关闭分支和 Reader Request 离线审核已实现；页面均为无控件 inactive 状态 | 真实启用后移，测试保持暂停；既有供应商记录的处理、保留和退出责任仍按 006，不因后移消失 |
-| 性能与 RUM | 21cdbb6 的 41 文件/698 测试、Astro 128 文件零诊断、双构建及 39 组布局检查有日志；旧 dc0ad2d 的地区 HTTP/PSI 是历史基线；017 RUM 本地代码完成，配置为 null | 完整三地区浏览器矩阵、macOS/iOS/Android 真机、修改后性能、真实 RUM 接通与 14 日窗口未完成；深度绘制诊断暂缓 |
+| 性能与 RUM | 21cdbb6 的 41 文件/698 测试、Astro 128 文件零诊断、双构建及 39 组布局检查有日志；旧 dc0ad2d 的地区 HTTP/PSI 是历史基线；017 本地实现完成，2026-09-14 owner 已准备 Cloudflare 资源，后续解码兼容修正通过 36 项 RUM 测试与 128 文件零诊断；站点配置仍为 null | Quick Edit 实证发现旧候选缺少显式解码参数，旧候选暂停发布；已授权修正的本地提交与重新打包，新候选按 DEV_WORKFLOW 冻结，仍需编辑器复验；D1/开关/日志按 owner 回报待复核；完整地区浏览器、三平台真机、修改后性能、真实 RUM 接通与 14 日窗口未完成 |
 | 中文与扩展 | 005 已确认三个既有对象的简中试点目标；当前英语根路径、中文专名和 CJK 字体已存在 | 中文路由、locale Schema、语言切换与 localized SEO 未实施；中文、搜索、扩栏、商业化均不阻塞英语阅读版 MVP |
 
 证据入口：[生产验收与激活](DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)、[发布后技术验收](DEV_WORKFLOW.md#发布后技术验收2026-09-10)、[内容与 Hero 审核](docs/requirements/012-five-hero-visual-briefs.md)、[Beta 退出条件](docs/requirements/011-public-beta-validation.md#23-beta-退出条件)。各阶段原始结果保留在 DEV_WORKFLOW 与对应需求的带日期记录中，不把旧“未发布”“未提交”当作当前状态。
@@ -59,9 +59,9 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 ## 当前运行口径
 
-唯一保存项目为 `F:\codex-project\mythic-china`。2026-09-12 先将既有六份发布记录文档提交为 `b6144610ada7c713a5213c3e747fc190dd42dd2c`；其父节点与最新已发布业务源均为 `21cdbb6`。该本地文档提交未推送，本轮范围整理另留工作树；后续版本状态执行前重新核对，本地 tracking ref 不证明远端状态。
+唯一保存项目为 `F:\codex-project\mythic-china`。2026-09-14 解码修正检查点的父节点为 `08db1e0eb11cd6650ca82873047bc2e046efac6b`，已包含阅读版范围整理；较早文档检查点为 `b6144610ada7c713a5213c3e747fc190dd42dd2c`，最新已发布业务源仍为 `21cdbb6`。owner 已明确授权五文件本地提交与新 clean-source 候选打包，实际提交以 Git 历史和执行回执为准；新候选由对应忽略目录的 manifest 标识，不复用旧包摘要。主代理不推送或部署，本地 tracking ref 不证明远端状态。
 
-最新运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用，详情见 DEV_WORKFLOW。该轮临时 Edge、预览和凭据会话均已关闭；本轮不启动服务。网站不依赖工作电脑常开，项目没有线上内容/账号数据库；RUM Worker/D1 只有本地源码，尚未创建真实资源。
+最新站点运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用，详情见 DEV_WORKFLOW。该轮临时 Edge、预览和凭据会话均已关闭；本轮不启动服务。网站不依赖工作电脑常开，项目没有线上内容/账号数据库。2026-09-14 已从 Cloudflare 控制台读到 `mythic-china-rum` Worker 及 workers.dev 地址；owner 提供 D1 ID，并报告建表、接收关闭与日志关闭完成。正式 RUM 接收端仍待手动部署，站点客户端、调度和 14 日窗口未启用；精确资源身份、制品及待复核项见 [接收端准备入口](DEV_WORKFLOW.md#rum-关闭状态接收端手工部署准备2026-09-14)。
 
 `dev` / `preview` 会改变运行状态，不是只读健康检查；服务、供应商数据操作、推送与部署仍需各自授权。
 

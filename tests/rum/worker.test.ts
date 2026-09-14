@@ -143,6 +143,15 @@ describe("RUM receiver", () => {
     expect(rows()).toHaveLength(0);
   });
 
+  it("accepts UTF-8 JSON with a leading byte-order mark", async () => {
+    const input = new Request(request(), {
+      body: new TextEncoder().encode(`\uFEFF${JSON.stringify(measurement)}`),
+    });
+    expect((await receive(input)).status).toBe(204);
+    expect(rows()).toHaveLength(1);
+    expect(rows()[0]).toMatchObject({ name: "LCP", value: 2000 });
+  });
+
   it("uses restrictive CORS and no cache without accepting a preflight as data", async () => {
     const preflight = new Request(
       "https://rum-fixture.example.workers.dev/vitals",
