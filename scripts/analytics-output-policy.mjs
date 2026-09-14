@@ -13,10 +13,7 @@ export function assertAnalyticsScriptBytes(bytes) {
     analyticsScript.sha256,
     "Analytics script differs from the reviewed bytes.",
   );
-  assert(
-    !/\b(?:import|export)\b/u.test(bytes.toString("utf8")),
-    "Analytics must be one self-contained bundle.",
-  );
+  // The complete module graph is independently checked by rum-output-policy.
 }
 
 export function assertAnalyticsConfiguration(value, origin, publicPaths) {

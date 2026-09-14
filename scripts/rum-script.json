@@ -1,0 +1,13 @@
+{
+  "entryImports": [
+    { "kind": "dynamic", "specifier": "./web-vitals.CMUBx256.js" }
+  ],
+  "chunks": [
+    {
+      "href": "/_astro/web-vitals.CMUBx256.js",
+      "bytes": 7962,
+      "sha256": "4191d66a5ad74e21fe39a849df0bf0fd738d5115644ecb5cec3f7d688051fc12",
+      "imports": []
+    }
+  ]
+}

@@ -2,18 +2,22 @@
 
 ## 0. 职责与状态
 
-当前版本与运行边界：本地 RUM 源码已纳入 `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5`；该 revision 的站点制品已发布，但 `rumDeployment` 仍为 null，public/review 均不输出 RUM 客户端。2026-09-14 owner 已完成 Cloudflare 注册及资源准备，主代理从控制台读到 Worker 与 workers.dev 地址；D1 ID、建表及关闭开关/日志按 owner 回报记录，绑定与最终设置尚待复核。关闭状态接收端候选从 clean `08db1e0eb11cd6650ca82873047bc2e046efac6b` 生成，正式代码尚未报告部署，也没有安排调度或开启采集窗口。精确资源与手工部署入口见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#rum-关闭状态接收端手工部署准备2026-09-14)。本地候选和资源创建均不代表真实 RUM 接通；站点发布身份保持独立。
+2026-09-14 启用候选准备：owner 要求合并推进网站接线、Privacy、14 日窗口及验证。当前本地基线为 clean `7541dd2d29c1506a30b6ceeeef89953aec2c6910`；Worker 新包为 6,959 bytes / SHA256 `24127d5e780179a26e805c2dba70fe61817cc59ec580ca393698b9bb188255d3`。控制台已显示 Active/Latest `4a9a22b8`、零诊断，HTTP 面板 GET 根路径为 404/空正文/no-store；该面板不能独立证明公网部署的完整源码身份。主代理已核对 DB 绑定到给定 UUID、RUM_ENABLED=false、Logs/Traces 主开关关闭且无导出目标；日志子选项在关闭时隐藏，不把隐藏勾选当作已启用或逐字段已核验。owner 回报两表计数均为 0。主代理后续已直接核对每小时 Cron 已保存、账户 Free 为 Current plan；Cron events 暂无记录，界面提示新任务最多延迟 30 分钟展示，实际执行仍待核验。
+
+本批只准备本地启用候选，暂拟 `[2026-09-15T00:00:00Z, 2026-09-29T00:00:00Z)`；错过开始前的全部门禁时必须整体顺延。配置、公开 Privacy 日期、精确脚本/分块摘要与导入关系、原始制品离线执行须一起验证；review 仍零 JS，未知脚本/配置仍拒绝。无需修改 Worker 或 Schema，不重跑建表。适用处理条件/地区及必要 consent、维护实证和真实传输/退出仍为正式启用门禁，不因本地配置或下文候选通过而记为完成。owner 随后已授权本批本地提交；开窗写库、开关和发布仍未授权执行，本批不采集真实数据。第 6、7 节为历史快照，当前候选及后续实际结果以本段、DEV_WORKFLOW 和运行现场为准。
+
+当前版本与运行边界：已发布网站仍绑定 `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5`，其 RUM 配置为 null。网站启用候选父提交为 `7541dd2d29c1506a30b6ceeeef89953aec2c6910`，本地检查点已获授权，实际提交以 Git 历史为准；网站候选尚未发布。候选已接入真实 endpoint 与拟定日期、启用版 Privacy、两份精确锁定 ESM；707 项测试与公开输出的 24 个隔离执行场景通过，review 零 JS。精确资源、SQL 制品与执行入口见 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#rum-网站启用候选准备2026-09-14)。本地候选和资源创建均不代表真实 RUM 接通；站点发布身份保持独立。
 
 本文负责 006 第 5.5 节 RUM 的本地实现及后续接通条件，不负责其他三地区浏览器、真机、读者研究或发布验收。
 
 | 维度 | 当前状态 | 依据 |
 | --- | --- | --- |
 | 需求 | 已确认本地实施 | 2026-09-10 owner 要求实施 RUM，随后明确尚无 Cloudflare 账户，先完成本地实现 |
-| 实施 | 本地代码与解码兼容修正完成，新候选待冻结 | web-vitals 客户端、独立 Worker/D1 与隔离测试；2026-09-14 首个单文件 ESM 遇 Quick Edit 类型错误，已补显式默认参数，待提交后重打包 |
-| 验证 | 本地自动化通过，真实 RUM 未验收 | 本地实施批 41 文件/690 测试；后续 `21cdbb6` clean-source 全量检查为 41 文件/698 测试、Astro 128 文件零诊断及 public/review 输出门禁 |
-| 线上 RUM | 资源已准备，正式接收端待部署、采集未启用 | Worker 地址已从控制台读到，D1 与关闭配置由 owner 报告完成；站点客户端仍为 null，资源存在不等于已接通 |
+| 实施 | 解码修正已提交并重打包；网站启用候选本地完成，检查点已获授权，发布待独立授权 | Worker 控制台零诊断；网站接线、Privacy、精确 ESM 清单、受保护开窗 SQL 已准备 |
+| 验证 | 本地自动化通过，真实 RUM 未验收 | 本轮 42 文件/707 测试；Astro 132 文件零诊断；public 24 个 RUM 共存场景及 GoatCounter 回归通过；review 14 页零 JS |
+| 线上 RUM | Worker 已观测活跃版本与关闭配置，网站采集未启用 | DB 绑定、Free 与每小时 Cron 已核对；两表为 0 为 owner 回报，实际维护未验收；没有真实采集窗口 |
 
-基线为 `29b3d953588d5f9dcb7b37d426a99a8760f22310` 加既有技术验收文档与 Entry Hero sizes 未提交修改；这些改动保留。线上身份仍以发布回执为准，本地实施不改写旧证据。
+2026-09-10 首次实施基线为 `29b3d953588d5f9dcb7b37d426a99a8760f22310` 加当时技术验收文档与 Entry Hero sizes 修改；历史结果见第 6 节。当前本地与线上身份分别以上述 Git 和发布回执为准。
 
 ## 1. 目标、范围与授权
 
@@ -36,16 +40,16 @@
 
 ## 3. 实现边界与顺序
 
-1. `src/rum/contract.ts`、`configuration.ts`、`collector.ts`、`bootstrap.ts`、`web-vitals.ts`：字段、默认关闭配置、环境门禁、唯一发送及延迟自托管库加载。`astro.config.mjs` 与 `SiteLayout.astro` 仅在配置非空的 public 构建接线。当前 off 不增加 JS/预加载或 RUM meta。
+1. `src/rum/contract.ts`、`configuration.ts`、`collector.ts`、`bootstrap.ts`、`web-vitals.ts`：字段、可关闭配置、环境门禁、唯一发送及延迟自托管库加载。`astro.config.mjs` 与 `SiteLayout.astro` 仅在配置非空的 public 构建接线；当前本地候选非空，review 保持关闭，null 分支不增加 RUM 接线。
 2. `workers/rum/schema.sql`、`store.ts`、`worker.ts`：独立 D1 最小表、条件 upsert、SQL 聚合、冻结与清理；仅 POST `/vitals`，无公开数据/管理写接口。开窗由受信任运维调用，不能由访客触发。
 3. `tests/rum/`：注入 Fake callbacks/fetch，使用 Node 内存 SQLite 执行真实 SQL，零网络/无持久数据库；补窄架构允许项。当前输出 verifier 保持拒绝未审 RUM bundle，不能改配置绕过发布门禁。
 4. README、ARCHITECTURE、006/011、DEV_WORKFLOW 与 Privacy 同步本地实现、未启用和真实联调停点；源内容、图片、字体及其追溯不变。
 
 ## 4. 验证与完成标准
 
-定向验证默认 off/review/preview/未知路径/维护/自动化/偏好禁发；严格字段/大体积/失败；重复和乱序、BFCache ID 重置；14 天和截止竞争；49/50 样本、p75、缺样、快照不可变、清理和维护中断。完整 check 与 public → review 构建须通过，off public 库存保持唯一既有 analytics 脚本且其摘要不变。命令只见 DEV_WORKFLOW。
+定向验证 off/review/preview/未知路径/维护/自动化/偏好禁发；严格字段/大体积/失败；重复和乱序、BFCache ID 重置；14 天和截止竞争；49/50 样本、p75、缺样、快照不可变、清理和维护中断。完整 check 与 public → review 构建须通过。当前启用候选精确锁定页面入口和延迟 chunk 的两文件库存、摘要和导入图，实际原始 ESM 须通过共存与隐私禁发执行检查；Privacy 日期与客户端独立核对。null 分支仍不输出 RUM，未知资源不得借关闭/启用放宽。命令只见 DEV_WORKFLOW。
 
-本地实现完成不等于启用或取得 RUM 数据。后续需实际账户 Free 计划、DPA/处理地区/必要 consent、最小网络传输、维护禁发/退出清理、Worker 运行兼容与 quota 拒绝证据；再冻结真实日期、endpoint、public bundle 白名单及启用 Privacy，经具体发布授权接通。当前没有已验收的 RUM 启用制品或真实采样窗口；站点已有的发布身份不代替 RUM 接通验收。
+本地实现完成不等于启用或取得 RUM 数据。实际账户 Free 计划已核对；后续仍需 DPA/处理地区/必要 consent、最小网络传输、维护禁发/退出清理、Worker 运行兼容与 quota 拒绝证据；再冻结真实日期、endpoint、public bundle 白名单及启用 Privacy，经具体发布授权接通。当前启用候选已通过本地隔离验证，尚未冻结 clean-source 发布制品或开启真实采样窗口；站点已有的发布身份不代替 RUM 接通验收。
 
 ## 5. 外部依据
 
@@ -65,7 +69,7 @@
 
 本地实施单元可关闭；线上 RUM 与 Beta 验收保持开放。下一项是账户准备后核对 Free 计划与处理条件，实例化接收端、D1、日志/调度/开窗/退出入口，完成受控真实联调，再准备精确启用制品和逐次发布。无需为了继续其他本地工作先注册账户。
 
-## 7. 关闭状态接收端准备（2026-09-14）
+## 7. 关闭状态接收端准备（2026-09-14 历史快照）
 
 后续编辑器实证：Quick Edit 报 `TextDecoderConstructorOptions` 缺少 `ignoreBOM`，旧候选暂停发布。已在本地显式补齐标准默认值 `false`，保持 `fatal: true`，并补带 BOM 的 JSON 回归；RUM 3 文件/36 测试、定向格式/ESLint 与 Astro 128 文件零诊断通过。owner 已明确授权修正、回归与三份运行文档共五文件的本地提交，以及新 clean-source 候选打包；入口与精确范围由 DEV_WORKFLOW 维护，结果以 Git 历史及新 manifest 为准。尚未确认云端错误清除，不把 Node 本地检查写成 Cloudflare 类型验证已通过。
 

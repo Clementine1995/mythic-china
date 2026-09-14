@@ -51,9 +51,12 @@ afterEach(() => {
 });
 
 describe("RUM collection", () => {
-  it("ships unconfigured and creates no review configuration", () => {
-    expect(rumDeployment).toBeNull();
-    expect(createRumConfiguration("public", ["/"])).toBeNull();
+  it("prepares one fixed public window and creates no review configuration", () => {
+    expect(rumDeployment).toMatchObject({
+      endpoint: "https://mythic-china-rum.huyichen2019.workers.dev/vitals",
+    });
+    expect(createRumConfiguration("public", ["/"], null)).toBeNull();
+    expect(createRumConfiguration("public", ["/"])).not.toBeNull();
     expect(createRumConfiguration("review", ["/"], deployment)).toBeNull();
     expect(() =>
       createRumConfiguration("public", ["/"], {

@@ -6,8 +6,12 @@ export interface RumDeployment {
   endAtMs: number;
 }
 
-// No account or endpoint is configured. Activation also requires artifact review.
-export const rumDeployment: RumDeployment | null = null;
+// This is the local activation candidate; server opening and publication are separate.
+export const rumDeployment: RumDeployment | null = {
+  endpoint: "https://mythic-china-rum.huyichen2019.workers.dev/vitals",
+  startAtMs: Date.UTC(2026, 8, 15),
+  endAtMs: Date.UTC(2026, 8, 29),
+};
 export const rumConfigurationName = "mythic-china-rum";
 
 export interface RumConfiguration extends RumDeployment {

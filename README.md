@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-文档核对日期：2026-09-14；最新站点发布与 GoatCounter 实证日期：2026-09-10。Cloudflare 资源准备与 RUM 关闭状态候选见下文；不将历史站点回执写成今日线上复验。2026-09-11 的匿名 HTTP 复核因连接限制/超时未取得响应，不据此判断线上故障。
+文档核对日期：2026-09-14；最新站点发布与 GoatCounter 实证日期：2026-09-10。Cloudflare 关闭状态接收端与本地网站启用候选见下文；不将历史站点回执写成今日线上复验。2026-09-11 的匿名 HTTP 复核因连接限制/超时未取得响应，不据此判断线上故障。
 
 **当前阶段：英语阅读版 Public Beta / pending human validation。正式 MVP 范围已确认，验收尚未收口。**
 
@@ -18,7 +18,7 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 | 发布 | [正式站点](https://mythic-china-beta.vercel.app) 的最新回执绑定 clean source `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`；2026-09-10 完整 140 文件 / 3,278,559 字节 HTTP、MIME、长度与 SHA256 通过，部署网址受登录保护 | 今天未复核远端；可索引不等于搜索引擎已收录。文档提交不改变生产制品身份 |
 | GoatCounter | 正式启用；4 次页面浏览、3 次事件共 7 条受控计数，7 次实际请求头、6 次 HTTP 200；Related 响应未观测，后台确认收数；原生 DNT、受控退出和实际 BFCache 返回有证据 | 阅读和退出采用 CDP 焦点模拟；原生前后台完整流程、原生 GPC 及账户自动清理/实际导出注销未实测；预算已耗尽，不补发、不删除规范路径 |
 | 表单 | Newsletter 默认关闭分支和 Reader Request 离线审核已实现；页面均为无控件 inactive 状态 | 真实启用后移，测试保持暂停；既有供应商记录的处理、保留和退出责任仍按 006，不因后移消失 |
-| 性能与 RUM | 21cdbb6 的 41 文件/698 测试、Astro 128 文件零诊断、双构建及 39 组布局检查有日志；旧 dc0ad2d 的地区 HTTP/PSI 是历史基线；017 本地实现完成，2026-09-14 owner 已准备 Cloudflare 资源，后续解码兼容修正通过 36 项 RUM 测试与 128 文件零诊断；站点配置仍为 null | Quick Edit 实证发现旧候选缺少显式解码参数，旧候选暂停发布；已授权修正的本地提交与重新打包，新候选按 DEV_WORKFLOW 冻结，仍需编辑器复验；D1/开关/日志按 owner 回报待复核；完整地区浏览器、三平台真机、修改后性能、真实 RUM 接通与 14 日窗口未完成 |
+| 性能与 RUM | 解码修正已提交为 7541dd2，Worker 编辑器零诊断，DB 绑定与关闭开关/日志已核对；本地网站候选暂拟 09-15 至 09-29 UTC 窗口，707 测试通过、Astro 132 文件零诊断，public 两个精确锁定 ESM/24 隔离场景通过，review 零 JS | 本轮网站候选仅作本地检查点，尚未发布，真实采集与 14 日窗口未开启；每小时 Cron 与账户 Free 已核对，处理条件、实际维护与传输待验；完整地区浏览器、三平台真机及修改后性能未完成。21cdbb6 的布局/旧性能证据不代替本轮验收 |
 | 中文与扩展 | 005 已确认三个既有对象的简中试点目标；当前英语根路径、中文专名和 CJK 字体已存在 | 中文路由、locale Schema、语言切换与 localized SEO 未实施；中文、搜索、扩栏、商业化均不阻塞英语阅读版 MVP |
 
 证据入口：[生产验收与激活](DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)、[发布后技术验收](DEV_WORKFLOW.md#发布后技术验收2026-09-10)、[内容与 Hero 审核](docs/requirements/012-five-hero-visual-briefs.md)、[Beta 退出条件](docs/requirements/011-public-beta-validation.md#23-beta-退出条件)。各阶段原始结果保留在 DEV_WORKFLOW 与对应需求的带日期记录中，不把旧“未发布”“未提交”当作当前状态。
@@ -51,7 +51,7 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 `Entry Markdown / Collection / Source / Claim / Terminology + visual brief / production record / manifest -> 严格 Schema -> 内容图与视觉资产图/文件校验 -> approved/current resolver -> published-only projection -> Astro public 静态页面、SEO、Sitemap/RSS/robots -> 经身份与验收门禁的 CDN 制品`。
 
-默认 review 输出到 `dist/`，为 14 页 noindex/nofollow、零客户端 JavaScript，不可部署；显式 public 输出到 `.local/public-build/`，为 13 页和发现文件，仅正式 origin 可启用已批准的 GoatCounter。正文与导航不依赖统计脚本。RUM 配置为 null 时没有其入口/chunk，Newsletter/Reader Request 没有真实传输。
+默认 review 输出到 `dist/`，为 14 页 noindex/nofollow、零客户端 JavaScript，不可部署；显式 public 输出到 `.local/public-build/`，为 13 页和发现文件，仅正式 origin 可启用已批准的 GoatCounter。正文与导航不依赖统计脚本。当前本地 RUM 候选配置非空，public 输出其元数据与延迟自托管 chunk；已发布站点仍为 RUM 关闭制品。配置为 null 时不输出 RUM 接线，Newsletter/Reader Request 没有真实传输。
 
 - 读者阅读：主视觉与标题 → 可选 content note → opening → Quick Answer → 故事与来源解释 → 完整 Sources → 合集/Related → 未开放的 Reader Request 说明 → Footer。
 - 编辑生产：研究问题 → claim/source 与术语 → 英文正文和视觉 brief → 编辑/资产审核 → 状态批准 → 构建与发布验收。
@@ -59,9 +59,9 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 ## 当前运行口径
 
-唯一保存项目为 `F:\codex-project\mythic-china`。2026-09-14 解码修正检查点的父节点为 `08db1e0eb11cd6650ca82873047bc2e046efac6b`，已包含阅读版范围整理；较早文档检查点为 `b6144610ada7c713a5213c3e747fc190dd42dd2c`，最新已发布业务源仍为 `21cdbb6`。owner 已明确授权五文件本地提交与新 clean-source 候选打包，实际提交以 Git 历史和执行回执为准；新候选由对应忽略目录的 manifest 标识，不复用旧包摘要。主代理不推送或部署，本地 tracking ref 不证明远端状态。
+唯一保存项目为 `F:\codex-project\mythic-china`。本轮网站候选的父提交为解码修正 `7541dd2d29c1506a30b6ceeeef89953aec2c6910`，父节点 `08db1e0eb11cd6650ca82873047bc2e046efac6b` 已包含阅读版范围整理；最新已发布业务源仍为 `21cdbb6`。owner 已授权保存其上的网站启用候选检查点，实际提交以 Git 历史为准；既有验证仍为提交前本地诊断；关闭状态 Worker 的 clean-source 包与本轮网站候选分开标识。没有推送或发布，本地 tracking ref 不证明远端状态。
 
-最新站点运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用，详情见 DEV_WORKFLOW。该轮临时 Edge、预览和凭据会话均已关闭；本轮不启动服务。网站不依赖工作电脑常开，项目没有线上内容/账号数据库。2026-09-14 已从 Cloudflare 控制台读到 `mythic-china-rum` Worker 及 workers.dev 地址；owner 提供 D1 ID，并报告建表、接收关闭与日志关闭完成。正式 RUM 接收端仍待手动部署，站点客户端、调度和 14 日窗口未启用；精确资源身份、制品及待复核项见 [接收端准备入口](DEV_WORKFLOW.md#rum-关闭状态接收端手工部署准备2026-09-14)。
+最新站点运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用，详情见 DEV_WORKFLOW。该轮临时 Edge、预览和凭据会话均已关闭；本轮不启动服务。网站不依赖工作电脑常开，项目没有线上内容/账号数据库。2026-09-14 Cloudflare 控制台显示 `mythic-china-rum` Active/Latest `4a9a22b8`、零诊断，HTTP 面板根路径为空 404/no-store；完整公网部署身份仍待独立核验。DB 绑定、RUM_ENABLED=false、Logs/Traces 主开关关闭已直接核对；owner 回报两表为 0；每小时 Cron 与账户 Free 已直接核对，Cron events 暂无记录，实际执行待验。窗口与网站生产采集尚未开启，下一步见 [网站启用候选入口](DEV_WORKFLOW.md#rum-网站启用候选准备2026-09-14)。
 
 `dev` / `preview` 会改变运行状态，不是只读健康检查；服务、供应商数据操作、推送与部署仍需各自授权。
 
@@ -84,8 +84,8 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 - `docs/requirements/`：`001` 保存 MVP/M1–M7 总合同，`002` 保存 M3 视觉资产管线合同，`003` 保存 M4 页面、探索与 SEO 的详细合同、状态投影、实施单元和验收门禁，`004` 保存首个纵切片的编辑、Collection/Guide Hero 候选检查点及后续生产闭环与生产字体状态，`005` 保存已确认但尚未实施的本地化内容试点合同，`006` 保存 M5 外部交互、隐私、供应商与 Mock/真实联调边界，`007` 保存第二个 MVP Collection 的比较、推荐与 owner 确认，`008` 保存四篇新增候选的 claim map、正式书目、分层证据账本、精确 locator、术语/版本门禁、最小证据物化、四篇单篇纵切片与后续证据纠偏，`009` 保存两个三篇 Collection 阅读路径及本地 review 输出门禁，`010` 保存四篇英语文稿形成性审核协议、AI 修订边界、内容提示合同与目标读者审核流程，`011` 保存可索引 Public Beta、上线后 R2 与正式 MVP 收口合同，`012` 保存四篇 Entry 与 Liaozhai Collection 的五份 Hero-only visual brief，以及候选选择、账户与公开使用确认、exact-canvas、production lineage、五审、资产接线及 VB6 逐项 ready 审核和后续独立首发 published/日期决定；内容对象、正文、关系和状态仍按各次授权边界判断，不能由资产闭环自动推导。
 - `src/`：Content Layer、视觉资产加载/校验/current resolver、纯 release/review 投影、含 Privacy 但已接线的 public SEO/artifact builder、共享生产壳、真实页面模板/静态路由、M5-U2 provider-neutral service/Fake、U5A 离线阅读状态判定、U5B 轻量清洗合同/GoatCounter adapter/DOM hook 与 M6 仅正式 origin 启用的 public bootstrap/配置，以及 M5-U3 Newsletter/Reader Request/Privacy inert review UI。
 - `tests/`：内容、视觉资产、页面投影、public SEO/artifact、resolver、运行时、架构边界、M5-U2 外部交互纯合同、U5A 阅读判定、U5B 请求 mapping/DOM 生命周期与 M5-U3 页面/output policy Vitest。
-- `scripts/`：固定 Node 子进程身份、review build intent、静态输出和视觉资产构建的稳定 runner/verifier；review verifier 现包含 M5-U3 HTML5 DOM oracle，命令和影响只看 `DEV_WORKFLOW.md`。
-- `src/rum/`、`workers/rum/`、`tests/rum/`：017 的默认关闭客户端、独立 RUM 接收/存储/汇总与纯内存验证；不进入正文数据链，不含真实 Cloudflare 账户或发布配置。
+- `scripts/`：固定 Node 子进程身份、review build intent、静态输出和视觉资产构建的稳定 runner/verifier；包括 HTML5 DOM、精确 ESM 依赖图、原始脚本隔离执行及只生成开窗 SQL 的入口，命令和影响只看 `DEV_WORKFLOW.md`。
+- `src/rum/`、`workers/rum/`、`tests/rum/`：017 的客户端启用候选、独立 RUM 接收/存储/汇总与纯内存验证；已接入真实 endpoint 和拟定窗口，不进入正文数据链，运行启用与发布另行授权。
 - `prototypes/`：不可发布的静态视觉评审原型；不代表应用实现或已核准内容，工作母版与探索废图不应进入正式代码仓库。
 - `package.json`、`pnpm-lock.yaml` 与 `pnpm-workspace.yaml`：精确依赖、唯一锁、pnpm 11 发布成熟期例外与显式第三方 build-script 拒绝策略；不得另建 lock。
 

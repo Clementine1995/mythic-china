@@ -2,8 +2,10 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { readBuildIntent } from "../site/build-intent";
 import { isAnalyticsEnabled } from "../site/analytics-configuration";
+import { rumDeployment } from "../rum/configuration";
 
 const hasAnalytics = readBuildIntent() === "public" && isAnalyticsEnabled;
+const performanceWindow = readBuildIntent() === "public" ? rumDeployment : null;
 ---
 
 <SiteLayout
@@ -19,7 +21,7 @@ const hasAnalytics = readBuildIntent() === "public" && isAnalyticsEnabled;
         still planned and inactive.
       </p>
       <p class="privacy-updated">
-        Last updated <time datetime="2026-09-10">September 10, 2026</time>
+        Last updated <time datetime="2026-09-14">September 14, 2026</time>
       </p>
     </header>
 
@@ -203,30 +205,97 @@ const hasAnalytics = readBuildIntent() === "public" && isAnalyticsEnabled;
         id="performance-monitoring"
         aria-labelledby="performance-monitoring-heading"
       >
-        <h2 id="performance-monitoring-heading">
-          Planned performance monitoring
-        </h2>
-        <p>
-          Real user monitoring is not enabled. This version sends no performance
-          measurements. We are preparing to measure loading speed, interaction
-          delay, and layout shifts using a self-hosted copy of Google's
-          web-vitals library and a dedicated Cloudflare receiver.
-        </p>
-        <p>
-          The planned payload contains only a metric name, its value, a random
-          identifier for that metric instance, and an update sequence. It does
-          not contain page addresses, referrers, email addresses, or identifiers
-          shared across visits. No cookies or browser storage are used.
-          Cloudflare would still receive technical network information when
-          handling a request.
-        </p>
-        <p>
-          We plan to delete active measurements after 30 days and retain only
-          aggregate results. Provider recovery and backup processes may take
-          longer. The account, processing terms, request behavior, deletion
-          process, and any required consent must be verified before activation.
-          This notice will be updated with those verified arrangements.
-        </p>
+        {
+          performanceWindow ? (
+            <>
+              <h2 id="performance-monitoring-heading">
+                Performance monitoring
+              </h2>
+              <p>
+                This version is configured to measure loading speed, interaction
+                delay, and layout shifts from{" "}
+                <time
+                  datetime={new Date(performanceWindow.startAtMs).toISOString()}
+                >
+                  {new Date(performanceWindow.startAtMs).toISOString()}
+                </time>{" "}
+                until{" "}
+                <time
+                  datetime={new Date(performanceWindow.endAtMs).toISOString()}
+                >
+                  {new Date(performanceWindow.endAtMs).toISOString()}
+                </time>{" "}
+                (UTC, end excluded). Measurements are sent only during that
+                window, using a self-hosted copy of Google's web-vitals library
+                and a dedicated Cloudflare receiver.
+              </p>
+              <p>
+                Each request contains only a metric name (LCP, INP, or CLS), its
+                value, a random identifier for that metric instance, and an
+                update sequence. It contains no page address, referrer, email
+                address, or identifier shared across visits. We use no cookies
+                or browser storage for performance monitoring. Cloudflare
+                receives technical network information, including IP addresses,
+                when handling requests; our receiver does not save IP addresses
+                or request headers.
+              </p>
+              <p>
+                An hourly maintenance task removes active measurements once they
+                are 30 days old and retains aggregate window results without the
+                random measurement identifiers. Removal may be delayed until the
+                next maintenance run. Cloudflare recovery and backup processes
+                may retain deleted data for longer; see its{" "}
+                <a href="https://www.cloudflare.com/privacypolicy/">
+                  Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a href="https://developers.cloudflare.com/d1/reference/time-travel/">
+                  D1 recovery documentation
+                </a>
+                . Processing is not restricted to your country.
+              </p>
+              <p>
+                Global Privacy Control or Do Not Track disables performance
+                monitoring. You can also use <code>?rum=off</code> or{" "}
+                <code>#rum=off</code> in a page address. Keep that option in
+                each page address you visit; it is not saved as a browser
+                preference. GoatCounter has its separate{" "}
+                <code>analytics=off</code> option described above. Automated
+                browsers, previews, unpublished paths, and visits outside the
+                stated window do not send performance data.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 id="performance-monitoring-heading">
+                Planned performance monitoring
+              </h2>
+              <p>
+                Real user monitoring is not enabled. This version sends no
+                performance measurements. We are preparing to measure loading
+                speed, interaction delay, and layout shifts using a self-hosted
+                copy of Google's web-vitals library and a dedicated Cloudflare
+                receiver.
+              </p>
+              <p>
+                The planned payload contains only a metric name, its value, a
+                random identifier for that metric instance, and an update
+                sequence. It does not contain page addresses, referrers, email
+                addresses, or identifiers shared across visits. No cookies or
+                browser storage are used. Cloudflare would still receive
+                technical network information when handling a request.
+              </p>
+              <p>
+                We plan to delete active measurements after 30 days and retain
+                only aggregate results. Provider recovery and backup processes
+                may take longer. The account, processing terms, request
+                behavior, deletion process, and any required consent must be
+                verified before activation. This notice will be updated with
+                those verified arrangements.
+              </p>
+            </>
+          )
+        }
       </section>
 
       <section id="rights" aria-labelledby="rights-heading">

@@ -6,7 +6,7 @@ import {
 } from "../../scripts/review-output-policy.mjs";
 
 describe("RUM output activation boundary", () => {
-  it("blocks a configured or executable RUM artifact until its production review", () => {
+  it("blocks unreviewed RUM metadata and executable artifacts", () => {
     for (const intent of ["review", "public"]) {
       const policy =
         intent === "review"

@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { analyticsScriptHref } from "../../scripts/analytics-output-policy.mjs";
+import {
+  rumRelease,
+  publicScriptHrefs,
+} from "../../scripts/rum-output-policy.mjs";
 import { createPublicSite } from "../../src/site/public-site.ts";
 import {
   createPublicSeoMetadata,
@@ -33,7 +37,8 @@ const analyticsConfiguration = {
     (path) => path.startsWith("/explore/") && path !== "/explore/",
   ),
 };
-const analyticsHtml = `<meta name="mythic-china-analytics" content='${JSON.stringify(analyticsConfiguration)}'><script type="module" src="${analyticsScriptHref}"></script>`;
+const rumHtml = `<meta name="mythic-china-rum" content='${JSON.stringify({ ...rumRelease, buildIntent: "public", publicPaths: [...publicPagePaths] })}'>`;
+const analyticsHtml = `<meta name="mythic-china-analytics" content='${JSON.stringify(analyticsConfiguration)}'><script type="module" src="${analyticsScriptHref}"></script>${rumHtml}`;
 const site = createPublicSite(origin);
 function homeHtml() {
   const metadata = createPublicSeoMetadata(site, {
@@ -70,6 +75,21 @@ describe("public output safety", () => {
       ).toThrow();
   });
   it.each([
+    ["missing RUM", (html) => html.replace(rumHtml, "")],
+    ["duplicate RUM", (html) => html.replace(rumHtml, rumHtml + rumHtml)],
+    [
+      "wrong RUM date",
+      (html) =>
+        html.replace(
+          String(rumRelease.endAtMs),
+          String(rumRelease.endAtMs + 86400000),
+        ),
+    ],
+    [
+      "wrong RUM endpoint",
+      (html) =>
+        html.replace(rumRelease.endpoint, "https://other.workers.dev/vitals"),
+    ],
     ["missing analytics", (html) => html.replace(analyticsHtml, "")],
     [
       "duplicate analytics",
@@ -222,7 +242,7 @@ describe("public output safety", () => {
       "sitemap.xml",
       "robots.txt",
       "_astro/site.css",
-      analyticsScriptHref.slice(1),
+      ...publicScriptHrefs.map((href) => href.slice(1)),
     ];
     expect(() => assertPublicInventory(files)).not.toThrow();
     for (const extra of [

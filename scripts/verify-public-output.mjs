@@ -4,7 +4,13 @@ import {
   analyticsMetaName,
   assertAnalyticsScriptBytes,
 } from "./analytics-output-policy.mjs";
-import { assertAnalyticsBootstrapExecution } from "./verify-analytics-bootstrap.mjs";
+import { assertRumBootstrapExecution } from "./verify-rum-bootstrap.mjs";
+import {
+  assertRumPrivacyNotice,
+  assertPublicScriptGraph,
+  publicScriptHrefs,
+  rumMetaName,
+} from "./rum-output-policy.mjs";
 import { assertHeroPageOutput } from "./hero-output-policy.mjs";
 import { createHash } from "node:crypto";
 import { lstat, readFile, readdir } from "node:fs/promises";
@@ -82,9 +88,18 @@ const analyticsBytes = await readFile(
   join(outputRoot, analyticsScriptHref.slice(1)),
 );
 assertAnalyticsScriptBytes(analyticsBytes);
+const scriptModules = Object.fromEntries(
+  await Promise.all(
+    publicScriptHrefs.map(async (href) => [
+      href,
+      await readFile(join(outputRoot, href.slice(1))),
+    ]),
+  ),
+);
+const scriptResources = assertPublicScriptGraph(scriptModules);
 const htmlByPath = new Map();
 const pages = [];
-const resources = [];
+const resources = [...scriptResources];
 const appliedStylesheets = new Set();
 for (const path of publicPagePaths) {
   const outputPath = publicOutputPath(path);
@@ -173,10 +188,21 @@ const analyticsConfiguration = JSON.parse(
     "content",
   ),
 );
-await assertAnalyticsBootstrapExecution(
-  analyticsBytes.toString("utf8"),
-  analyticsConfiguration,
+const rumConfiguration = JSON.parse(
+  htmlAttribute(
+    htmlElements(htmlFor("/")).find(
+      (node) =>
+        node.tagName === "meta" && htmlAttribute(node, "name") === rumMetaName,
+    ),
+    "content",
+  ),
 );
+const rumExecution = assertRumBootstrapExecution(
+  scriptModules,
+  analyticsConfiguration,
+  rumConfiguration,
+);
+assertRumPrivacyNotice(htmlFor("/privacy/"), rumConfiguration);
 assertReviewPrivacyNotice(
   htmlFor("/privacy/"),
   "privacy/index.html",
@@ -384,5 +410,5 @@ const [sitemap, rss, robots] = await Promise.all(
 );
 assertPublicDiscoveryFiles({ sitemap, rss, robots }, pages, site.origin);
 process.stdout.write(
-  `Public output verified: ${pages.length} HTML, 2 XML, robots.txt, ${images.length} Hero images, ${seenFonts.size} fonts; one hash-locked enabled analytics script, offline execution passed. Local diagnostic only; no release receipt or deployment.\n`,
+  `Public output verified: ${pages.length} HTML, 2 XML, robots.txt, ${images.length} Hero images, ${seenFonts.size} fonts; ${publicScriptHrefs.length} hash-locked script modules, ${rumExecution.scenarios} RUM coexistence scenarios and GoatCounter regression passed without real networking. Local diagnostic only; no release receipt or deployment.\n`,
 );

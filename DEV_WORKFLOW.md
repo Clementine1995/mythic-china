@@ -1,5 +1,88 @@
 # DEV_WORKFLOW.md
 
+## RUM 网站候选本地提交（2026-09-14）
+
+owner 在候选验证完成后明确要求“提交吧”。本次授权仅为当前 20 文件的本地检查点，提交说明为 `feat(rum): prepare website activation candidate`；不包含推送、真实 D1 写入、接收开关切换或网站发布，窗口仍为未启用的拟定日期。提交前仅同步 README、017 与本文的授权和版本状态措辞，业务代码与脚本字节沿用上一节已通过的验证，不重复测试。文档 UTF-8、相对链接和 diff 空白检查须通过；独立只读核查确认 20 文件均属本批，无本地产物、凭据或依赖变更。
+
+```powershell
+$mythicRumCommitFiles = @(
+  'DEV_WORKFLOW.md', 'README.md', 'docs/ARCHITECTURE.md',
+  'docs/requirements/017-real-user-monitoring.md',
+  'scripts/analytics-output-policy.mjs', 'scripts/analytics-script.json',
+  'scripts/prepare-rum-window.mjs', 'scripts/public-output-policy.mjs',
+  'scripts/review-output-policy.mjs', 'scripts/rum-output-policy.mjs',
+  'scripts/rum-script.json', 'scripts/verify-analytics-bootstrap.mjs',
+  'scripts/verify-public-output.mjs', 'scripts/verify-rum-bootstrap.mjs',
+  'src/pages/privacy.astro', 'src/rum/configuration.ts',
+  'tests/rum/activation.test.ts', 'tests/rum/collector.test.ts',
+  'tests/rum/output-boundaries.test.ts', 'tests/site/public-output-policy.test.mjs'
+)
+if ((git rev-parse HEAD) -ne '7541dd2d29c1506a30b6ceeeef89953aec2c6910') { throw 'Unexpected commit parent.' }
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Expected an empty staging area.' }
+$mythicRumCommitPaths = @(git diff --name-only --no-renames) + @(git ls-files --others --exclude-standard)
+if (Compare-Object ($mythicRumCommitFiles | Sort-Object) ($mythicRumCommitPaths | Sort-Object)) { throw 'Commit scope changed.' }
+git diff --check
+if ($LASTEXITCODE -ne 0) { throw 'Whitespace check failed.' }
+git --literal-pathspecs add -- $mythicRumCommitFiles
+if ($LASTEXITCODE -ne 0) { throw 'Staging failed.' }
+$mythicRumStagedPaths = @(git diff --cached --name-only)
+if (Compare-Object ($mythicRumCommitFiles | Sort-Object) ($mythicRumStagedPaths | Sort-Object)) { throw 'Staged scope changed.' }
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed.' }
+git commit -m 'feat(rum): prepare website activation candidate'
+if ($LASTEXITCODE -ne 0) { throw 'Local commit failed.' }
+git log -1 --format='%H %P %s'
+git status --short
+```
+
+提交结果以执行后的 Git 历史和干净工作区为准，不在提交正文预写自身哈希。此前候选验证仍是提交前诊断，后续发布须从 clean revision 按既定入口重新构建、核验并冻结，不能把旧制品直接标为 clean-source receipt。
+
+## RUM 网站启用候选准备（2026-09-14）
+
+owner 已要求合并推进下一批本地准备。基线 clean `7541dd2d29c1506a30b6ceeeef89953aec2c6910`，沿既有 Node 24.16.0 / Corepack 0.35.0 / pnpm 11.22.0 与进程 PATH 门禁；不安装依赖、启动服务、写真实数据库、切换 Cloudflare 接收开关、提交、推送或发布。已核对 DB 绑定、RUM_ENABLED=false、Logs/Traces 主开关关闭且无导出目标；owner 回报两表为 0；主代理后续直接核对每小时 Cron 已保存和账户 Free Current plan。Cron events 暂无记录，界面提示新任务最多延迟 30 分钟展示，执行成功还需实际核验。Worker 控制台 Active/Latest `4a9a22b8`、零错误，HTTP 面板根请求 404/空正文/no-store；完整公网身份仍未独立验证。
+
+暂定窗口为北京时间 2026-09-15 08:00 至 2026-09-29 08:00（UTC 00:00、结束排除）。本地配置与 Privacy、独立输出合同都要锁定同一日期与真实 endpoint；所有真实启用门禁不能在开始前完成时整体顺延，不写过期窗口。网站候选不代表生产采集已启用，账户 Free 已从控制台确认；处理条件/地区与必要 consent 仍由 owner 在正式启用前确认。
+
+修改范围：`src/rum/configuration.ts`、`src/pages/privacy.astro`；`scripts/analytics-output-policy.mjs`、`analytics-script.json`、`public-output-policy.mjs`、`review-output-policy.mjs`、`verify-public-output.mjs`；新增 RUM 输出合同/脚本清单及原始 ESM 离线执行验证；对应 RUM/public/analytics 边界测试与 README、ARCHITECTURE、017。保持单一页面入口，只容许精确清单中的延迟分块；未知脚本、导入、元数据和 review 可执行输出仍拒绝。无文章、来源、图片或字体变化，资产重新审校不适用。
+
+本地命令沿固定环境运行；原始 ESM 验证若需要 Node 的 VM module 支持，仅在隔离子进程传入 `--experimental-vm-modules`，不改全局 Node 选项。所有 Fake 网络和内存 SQLite 均不连接真实服务：
+
+```powershell
+& $mythicProjectCorepack pnpm run test tests/rum tests/site/analytics-output-policy.test.mjs tests/site/public-output-policy.test.mjs tests/site/external-interactions-ui.test.ts
+& $mythicProjectCorepack pnpm run check
+$mythicPreviousOrigin = $env:MYTHIC_CHINA_SITE_ORIGIN
+try {
+  $env:MYTHIC_CHINA_SITE_ORIGIN = 'https://mythic-china-beta.vercel.app'
+  & $mythicProjectCorepack pnpm run build:public
+  if ($LASTEXITCODE -ne 0) { throw 'RUM public candidate validation failed.' }
+} finally {
+  $env:MYTHIC_CHINA_SITE_ORIGIN = $mythicPreviousOrigin
+}
+& $mythicProjectCorepack pnpm run build
+```
+
+第一次候选构建应拒绝旧脚本摘要。只读检查新输出及导入关系后登记精确清单，再重跑同一入口；不自动采信任意新输出。未提交源只形成本地诊断；逐次提交授权后须从 clean revision 冻结同一字节，再申请真实开窗、接收开关与网站发布的具体执行授权。
+
+开窗 SQL 由源码配置生成，只保存到忽略目录供审核，不连接数据库；拒绝覆盖既有文件。生成时与未来在 D1 执行时都必须尚未到窗口开始时间：
+
+```powershell
+$mythicRumSqlDirectory = Join-Path (Get-Location) '.local/rum-activation-20260915'
+$mythicRumSqlFile = Join-Path $mythicRumSqlDirectory 'open-window.sql'
+if (Test-Path -LiteralPath $mythicRumSqlFile) { throw 'SQL candidate already exists.' }
+$mythicRumSql = & $mythicProjectNode scripts/prepare-rum-window.mjs --prepare
+if ($LASTEXITCODE -ne 0) { throw 'Window preparation failed.' }
+New-Item -ItemType Directory -Path $mythicRumSqlDirectory -Force | Out-Null
+[IO.File]::WriteAllText($mythicRumSqlFile, (($mythicRumSql -join "`n") + "`n"), [Text.UTF8Encoding]::new($false))
+Get-FileHash -LiteralPath $mythicRumSqlFile -Algorithm SHA256
+```
+
+后续开窗在已核对的 D1 Studio 运行一次带数据库时间/重叠门禁的 INSERT，之后只读确认精确起止日期、维护时间、invalid_reason 与 snapshot_json；重复执行不新增窗口，不吞掉零行结果。不在本批执行。回退为关闭接收开关并回退到已验证不含 RUM 的网站版本，保留已有窗口与数据以供核查；不静默删除真实样本。
+
+本地验证结果：完整 check 通过 Prettier、ESLint、42 文件/707 测试和 review 输出；首次检查中的一个 VM fixture 类型提示已移除，随后 public → review 构建均为 Astro 132 文件零 error/warning/hint。public 为 13 HTML、2 XML、robots、112 Hero、10 字体及两个精确锁定 ESM；24 个 RUM 共存场景和全部既有 GoatCounter 原始脚本回归通过，无真实网络请求。Privacy 披露与日期独立校验通过，review 14 页仍零 JS。离线实际 Web Vitals chunk 触发 LCP/CLS；未冒充真实 INP、浏览器请求头、Cloudflare runtime/配额或线上退出验收。
+
+本批 SQL 已保存到 `.local/rum-activation-20260915/open-window.sql`，SHA256 `29357b0cf3b9ca39e5f7457941606e68a5817cb19776cf24549b46415d81cb44`；只生成，未在真实 D1 执行。入口脚本为 `/_astro/page.-Wwx2jLY.js`（11,635 bytes，SHA256 `6507043b3970895f9d54751f163a6ce677989e48998d30e2aedb99337f173bbc`），唯一延迟分块为 `/_astro/web-vitals.CMUBx256.js`（7,962 bytes，SHA256 `4191d66a5ad74e21fe39a849df0bf0fd738d5115644ecb5cec3f7d688051fc12`）。未知脚本、导入图变化和过期 SQL 均拒绝。独立只读代码审查无阻塞发现。没有修改内容、来源、资产、依赖或 Worker/Schema；公开披露仅增加本次性能采集说明。未提交、推送、启用真实接收或发布，未形成 clean-source 发布回执。
+
 ## RUM 关闭状态接收端：手工部署准备（2026-09-14）
 
 **当前停点：旧候选暂停发布。** 后续内置浏览器核查已确认代码粘贴进 `worker.js`，Quick Edit 显示 `TextDecoderConstructorOptions` 缺少 `ignoreBOM` 的 TS2345 错误（原制品第 112 行）。界面 Active/Latest 短版本为 `70d438ce`，Deploy 禁用，预览仍为 Hello World；这些信号不足以确认 RUM 已发布。该错误是编辑器类型合同问题，不把它写成运行时解码事故。下文旧候选的 hash 和验证保留为追溯，不再指示 owner 发布该旧文件。

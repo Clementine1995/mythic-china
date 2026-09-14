@@ -3,6 +3,7 @@ import {
   analyticsScriptHref,
   analyticsMetaName,
 } from "./analytics-output-policy.mjs";
+import { assertRumConfiguration, rumMetaName } from "./rum-output-policy.mjs";
 
 import { parse as parseHtml } from "parse5";
 import { extname } from "node:path";
@@ -1303,10 +1304,19 @@ function assertStaticHtmlResourcePolicy(html, relativePath, intent) {
       );
     }
     if (elementKey === "meta") {
-      if (name === "mythic-china-rum")
-        throw new Error(
-          `${relativePath} contains RUM configuration before activation review.`,
-        );
+      if (name === rumMetaName) {
+        if (
+          intent !== "public" ||
+          node.parentNode !== head ||
+          node.attrs.length !== 2
+        )
+          throw new Error(
+            `${relativePath} contains invalid or non-public RUM configuration.`,
+          );
+        const value = JSON.parse(readElementAttribute(node, "content"));
+        // Full route identity is checked by the independent public document oracle.
+        assertRumConfiguration(value, value.publicPaths);
+      }
       if (intent === "review" && name === analyticsMetaName)
         throw new Error(`${relativePath} contains analytics configuration.`);
       if (

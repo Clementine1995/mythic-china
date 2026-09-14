@@ -5,11 +5,18 @@ import { setImmediate } from "node:timers/promises";
 
 // This executes the unmodified reviewed bundle. The context has only a Fake fetch;
 // it provides neither host networking nor browser/service startup.
-export async function assertAnalyticsBootstrapExecution(code, configuration) {
-  const script = new Script(code, {
-    filename: "reviewed-analytics-bootstrap.js",
-  });
-  function fixture({
+export async function assertAnalyticsBootstrapExecution(
+  code,
+  configuration,
+  execute = (source, globals) =>
+    new Script(source, {
+      filename: "reviewed-analytics-bootstrap.js",
+    }).runInNewContext(globals, {
+      timeout: 1000,
+      contextCodeGeneration: { strings: false, wasm: false },
+    }),
+) {
+  async function fixture({
     config = configuration,
     url = configuration.origin + "/about/?private=discard#discard",
     webdriver = false,
@@ -35,6 +42,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
     };
     const document = {
       head,
+      createElement: () => ({ relList: { supports: () => false } }),
       visibilityState: "visible",
       querySelectorAll: (selector) =>
         selector === 'meta[name="mythic-china-analytics"]'
@@ -71,10 +79,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
           : Promise.resolve({ status: 200 });
       },
     };
-    script.runInNewContext(
-      { window, document, URL, URLSearchParams },
-      { timeout: 1000, contextCodeGeneration: { strings: false, wasm: false } },
-    );
+    await execute(code, { window, document, URL, URLSearchParams });
     return {
       calls,
       listeners,
@@ -136,7 +141,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
     { config: enabled, webdriver: true },
   ];
   for (const options of inactive) {
-    const result = fixture(options);
+    const result = await fixture(options);
     await setImmediate();
     assert.equal(
       result.calls.length + result.listeners.size + result.timers.size,
@@ -163,7 +168,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
     }
   }
   for (const path of configuration.publicPaths) {
-    const f = fixture({
+    const f = await fixture({
       config: enabled,
       url: configuration.origin + path + "?private=discard#discard",
     });
@@ -174,7 +179,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
     checkRequests(f.calls);
   }
   const entryPath = "/explore/painted-skin/";
-  const entry = fixture({
+  const entry = await fixture({
     config: enabled,
     url: configuration.origin + entryPath,
   });
@@ -195,7 +200,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
   );
   assert.equal(entry.timers.size, 0);
   checkRequests(entry.calls);
-  const optedOut = fixture({ url: configuration.origin + entryPath });
+  const optedOut = await fixture({ url: configuration.origin + entryPath });
   optedOut.window.location.hash = "analytics=off";
   optedOut.listeners.get("window:hashchange")();
   optedOut.window.location.hash = "sources";
@@ -204,7 +209,7 @@ export async function assertAnalyticsBootstrapExecution(code, configuration) {
   await setImmediate();
   assert.equal(optedOut.calls.length, 1, "Opt-out must suppress later events.");
   assert.equal(optedOut.listeners.size + optedOut.timers.size, 0);
-  const failed = fixture({ config: enabled, fail: true });
+  const failed = await fixture({ config: enabled, fail: true });
   await setImmediate();
   assert.equal(failed.calls.length, 1, "Transport failure must not retry.");
 }

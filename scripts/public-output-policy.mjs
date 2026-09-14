@@ -2,6 +2,11 @@ import assert from "node:assert/strict";
 import { parse } from "parse5";
 import { assertPublicHtmlResourcePolicy } from "./review-output-policy.mjs";
 import {
+  assertRumConfiguration,
+  publicScriptHrefs,
+  rumMetaName,
+} from "./rum-output-policy.mjs";
+import {
   analyticsScriptHref,
   analyticsMetaName,
   assertAnalyticsConfiguration,
@@ -40,9 +45,9 @@ export function publicOutputPath(path) {
 }
 export function assertPublicInventory(paths) {
   assert.deepEqual(
-    paths.filter((path) => path.endsWith(".js")),
-    [analyticsScriptHref.slice(1)],
-    "Expected only the reviewed analytics bundle.",
+    paths.filter((path) => path.endsWith(".js")).sort(),
+    publicScriptHrefs.map((href) => href.slice(1)).sort(),
+    "Expected only the reviewed entry and RUM chunk.",
   );
   assert.deepEqual(
     paths.filter((path) => path.endsWith(".html")).sort(),
@@ -58,7 +63,7 @@ export function assertPublicInventory(paths) {
   assert(
     paths.every(
       (path) =>
-        path === analyticsScriptHref.slice(1) ||
+        publicScriptHrefs.includes(`/${path}`) ||
         /^(?:_astro\/[^/]+\.(?:css|avif|webp|woff2)|(?:[a-z0-9-]+\/)*index\.html|robots\.txt|rss\.xml|sitemap\.xml)$/u.test(
           path,
         ),
@@ -230,6 +235,20 @@ export function assertPublicDocument(html, path, origin) {
     htmlAttribute(configurationNode, "content"),
   );
   assertAnalyticsConfiguration(analyticsConfiguration, origin, publicPagePaths);
+  const rumNode = inHead(
+    one(
+      tag("meta").filter((node) => htmlAttribute(node, "name") === rumMetaName),
+      "RUM configuration",
+    ),
+  );
+  assert.deepEqual(rumNode.attrs.map(({ name }) => name).sort(), [
+    "content",
+    "name",
+  ]);
+  assertRumConfiguration(
+    JSON.parse(htmlAttribute(rumNode, "content")),
+    publicPagePaths,
+  );
   const jsonNode = inHead(
     one(
       tag("script").filter(
