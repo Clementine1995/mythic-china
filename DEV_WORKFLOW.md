@@ -920,7 +920,13 @@ powershell.exe -NoProfile -STA -File "F:\codex-project\mythic-china\.local\readi
 
 ## 职责
 
-### 当前运行与版本摘要（2026-09-12）
+### 当前运行与版本摘要
+
+2026-09-15 本地状态核对：HEAD 为文档检查点 `295cab218e1f9bd8f078e78ee1a34aca1dd47d65`，父提交是生产源码 `73e482a0647d28d420363fbfd2864c6ee0369c46`。本次从干净工作树开始同步 README、PRODUCT、ARCHITECTURE、001、005、011、017 与本文，仅修改文档；不运行生产探针，不重建、不提交、不推送、不部署。最新生产、接收及自动维护回执见 [RUM 正式发布与收尾](#rum-正式发布与收尾2026-09-15)，正式待验项见 [011](docs/requirements/011-public-beta-validation.md#24-当前待验清单)，自助维护工具未交付范围见 [PRODUCT](docs/PRODUCT.md#75-自助维护目标与当前缺口)。这些文档变更不改变现有冻结包身份。
+
+### 历史运行与版本摘要（2026-09-12）
+
+以下内容记录 09-12 及更早批次的状态；其中“未启用”“未发布”“未建立环境”只适用于对应历史时点。其后发布记录更新了运行事实，但不改写旧 QA 身份和原始回执定位缺口。
 
 正式 MVP 已采用阅读版范围：6 篇英语文章、2 个合集、各自 Hero、来源、导航、SEO、最小分析及现有静态页；表单真实启用、逐篇正文图和完整故事卡后移。当前为 Public Beta / pending human validation，退出条件仍按 011。
 
@@ -934,7 +940,7 @@ powershell.exe -NoProfile -STA -File "F:\codex-project\mythic-china\.local\readi
 
 本次范围仅为文档同步，没有 Git 写入、运行配置变更、服务启动或远端部署。现有 QA 属于 `dc0ad2d6cdbd3e1e02e19841af67fc3f5522f3dd` 及其不可变制品；文档变更不自动重新绑定源身份。若后续从新 revision 构建，按原规则重建并完成适用校验；若采用已验收的不可变制品，必须核对原 source/lock 与完整 artifact inventory/digest，并将本次时点决定作为附加记录，不改写旧 receipt 的事实。
 
-当前执行主线（2026-09-09）：按 [011](docs/requirements/011-public-beta-validation.md) 优先准备阅读版 Beta，Newsletter、Reader Request、Analytics/RUM 保持关闭。Tally 测试已由 owner 暂停在 3/10 次激活、2 条 Completed；下文后续用例是历史计划，不再自动执行。未完成项归对应功能未来启用，测试记录不擅自删除。本次仅做本地 public 重建、静态校验和诊断包整理；提交、启动预览服务、远端预览及生产发布仍按具体动作授权。
+历史执行主线（2026-09-09）：按 [011](docs/requirements/011-public-beta-validation.md) 优先准备阅读版 Beta，Newsletter、Reader Request、Analytics/RUM 保持关闭。Tally 测试已由 owner 暂停在 3/10 次激活、2 条 Completed；下文后续用例是历史计划，不再自动执行。未完成项归对应功能未来启用，测试记录不擅自删除。本次仅做本地 public 重建、静态校验和诊断包整理；提交、启动预览服务、远端预览及生产发布仍按具体动作授权。
 
 本文件是初始化、构建、启动、验证、版本控制和发布命令的唯一来源。当前工作区包含 M2 静态应用、测试、文档、冻结的不可发布 M1 独立原型和一个本地 Git 仓库；用户已建立 `main`、M1/M2/M3/M4-U1/U2/U3 基线提交与 `origin`。M2 历史基线为 `f258227`，M3 历史基线为 `c606f5`，M4-U2 历史基线为 `5f327b6`，M4-U3 实现基线为 `e94eaca`。M3 Hero v1 手部缺陷已按版本合同返修为 Project owner 验收的 Hero v2；012 又为四篇 Entry 与 Liaozhai Collection 闭合五组 Hero。当前共有 21 个精确画布 master、21 份 repository source rendition、9 份 production record、12 份 approved manifest 版本记录、11 个 approved/current 逻辑资产及 17 份 current responsive rendition；非默认视觉入口已实际生成、解码 120 个 AVIF/WebP 目标。经 2026-09-02 项目总检，M4 本地产品实现已完成：U1–U3、U4A public/SEO 纯基础设施、首个纵切片、Collection/Guide Hero、4 份英文与 6 份 CJK WOFF2 静态链、U5A direct-only noindex 字体样张、23 文件/279 测试、8 页/42 图/10 字体/零 XML/零客户端 JavaScript、24 个最终视口组合、12 个 Hero art-direction 组合及 Project owner 当时的 8 页判断均已闭合。Project owner 随后把该完成状态提交为本地基线 `3983bee91ada4a286613ec702a8009a4f528af3f`；进入 M5 前只读复核确认工作树、暂存区和未跟踪文件均为空，本地 `main` 相对当时未 fetch 的 `origin/main`（`e2893d1`）显示 ahead 1。M5-U2 实施期间，reflog 显示 `origin/main` 于 2026-09-02 14:04:40 +0800 由外部 push 更新到 `3983bee`；本批未执行 fetch 或任何 Git 写操作，且 tracking ref 不单独证明服务器端状态。Project owner 后续把 M5-U1–U3、U4 账户准备快照与第二 Collection 决策包提交为 `3fa46d5f85c43a5278e15ca6b0630d724439acc9`；2026-09-03 四篇研究批开始时 HEAD、本地 `main` 与本地 `origin/main` tracking ref 均为该提交，工作树干净。013 已完成 `public` intent、runner、页面/endpoint 与本地诊断输出；deployable 身份、远端环境和发布仍未完成；VB6 独立审核 6+2 到 ready 后，owner 又批准全部为 published，六篇目标公开日期为 2026-09-10。真实键盘/200%、偏好/故障、本地性能与支持平台 fallback 归 M6 release-candidate gate；M7 承接 Public Beta 生产、live smoke、回滚、线上地区复核、RUM/p75、上线后 R2a/R2b 与正式 MVP 收口。原计划 M4-U4B 的接线归 M6 public artifact assembly。未来服务、内容状态提升、代理 Git 写入、Vercel 项目操作、部署与发布仍须分别授权；项目没有真实联调环境或发布环境。不提供不可执行的假设命令，也不把本地 build 或 preview 解释为远端预览或生产发布。
 

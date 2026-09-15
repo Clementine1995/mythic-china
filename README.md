@@ -39,6 +39,20 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 - [写文章与更新文章](docs/ARTICLE_WORKFLOW.md)：选题、来源、英文稿、草稿字段模板、Hero 审核、合集关系与新增文章所需工程接线。
 - [日常可执行入口](DEV_WORKFLOW.md#日常维护与发版入口)：本机环境、检查/构建、审稿服务、精确提交和平台操作顺序。当前没有通用一键发布器，旧 `.local/` 执行包不能直接复用。
 
+## 尚未完成与后续边界
+
+以下依据 2026-09-15 上线回执及本地文档检查点整理；不是新一轮线上实测，也不改变阅读版范围。
+
+| 工作 | 当前缺口 | 完成依据 |
+| --- | --- | --- |
+| 正式 MVP 技术验收 | RUM 真实传输/INP 与完整观察结果；macOS/iOS/Android 真机；美东/美西/欧洲完整浏览器性能与适用 Network、移动 LCP 复核 | [011 待验清单](docs/requirements/011-public-beta-validation.md#24-当前待验清单)与 [017](docs/requirements/017-real-user-monitoring.md#4-验证与完成标准)；不能用配置开启或模拟结果代替真实验证 |
+| 统计运行补验 | GoatCounter 原生前后台/GPC、自动清理和实际导出/退出等证据仍有缺项 | [006](docs/requirements/006-external-interactions.md)；既有测试预算与暂停决定保持 |
+| 正式 MVP 读者验收与收口 | R2a/R2b 未开始，发现的问题须处置/复测，最后由 owner 确认 | [011 退出条件](docs/requirements/011-public-beta-validation.md#23-beta-退出条件)；完整观察窗后流量不足的接受限制只适用于 RUM |
+| 完全自助维护 | 指南已完成；文章接线、验收清单维护与通用冻结/上传/发布工具尚未实现 | [PRODUCT 自助维护目标](docs/PRODUCT.md#75-自助维护目标与当前缺口)；属于独立后续能力，不新增为原阅读版 MVP 退出门槛 |
+| 后续运营与扩展 | 表单真实启用、正文插图、完整故事卡包、简中三页试点尚未交付；搜索等按路线推进 | [PRODUCT](docs/PRODUCT.md#8-out-of-scope-for-mvp)与 [005](docs/requirements/005-localized-content-pilot.md)；未完成不等于当前上线阻塞 |
+
+当前本地已提交文档检查点为 `295cab2`；本轮状态同步另计工作树修改，未推送、未再次发布。生产仍使用 73e482a 的冻结包。历史 QA 的追加原始回执定位缺口按 DEV_WORKFLOW 保留，不能以文档整理补成测试证据。
+
 ## 项目负责
 
 - 用自然英文讲清中国神话、志怪、民间信仰、文学故事与历史人物传说化过程。
