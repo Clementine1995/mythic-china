@@ -2,7 +2,7 @@
 
 ## 0. 文档职责与状态
 
-2026-09-15 RUM 运行更新：每小时自动维护已由 Cron 两次 Success 和 D1 时间推进证实，无需再手动触发。旧未启用空窗已取消封存，新完整窗口为 09-16 至 09-30 UTC，零样本、无异常；接收与正式网站 RUM 仍关闭。对应日期/取消边界修改已通过 717 测试及 public/review 构建，新本地提交已获授权，尚需 clean-source 验证、有效 Vercel 身份与发布；旧日期候选不再提升。精确记录见 017/DEV_WORKFLOW，本日未发送真实测量，其他交互、隐私及验收边界不变。
+2026-09-15 RUM 运行更新：clean `73e482a` 已随同一冻结制品发布到正式域名，receiver=true，小时维护已推进新窗口；旧未启用空窗保留取消快照。固定窗口为 09-16 至 09-30 UTC，当前尚未开始采样。717 测试、public/review 构建、受保护候选核验与 141 个公开文件字节检查通过；实际预检 204、无状态错误来源拒绝正确，未发送真实测量 POST。完整观察结果和真实传输/INP 仍待验收。Newsletter/Reader Request 仍关闭，隐私与其他验收边界不变；精确记录见 017/DEV_WORKFLOW。
 
 2026-09-14 本轮处理核查：沿用已登记的个人运营者 hyc / China（CN）、项目联系地址和英语文化读者定位；既有文档未提出特定驻留要求，不据此声称不存在法定义务。Cloudflare [Self-Serve §6.1](https://www.cloudflare.com/terms/) 在适用个人数据范围内纳入 [DPA](https://www.cloudflare.com/cloudflare-customer-dpa/)，没有发现需要另找签字开关的依据，也未代 owner 接受新协议。[分处理者清单](https://www.cloudflare.com/gdpr/subprocessors/cloudflare-services/) 及 [D1 地区说明](https://developers.cloudflare.com/d1/configuration/data-location/) 不保证 Worker 全链路限于数据库地区；Free [Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/) 默认恢复期为 7 天，活动数据清理不代表立即物理删除。owner 已批准本次最小性能改进用途和完整启用，采用无持久浏览器标识、四字段与 GPC/DNT/地址退出；不将无 Cookie、供应商条款或 owner 授权写成所有读者法域均无需 consent 的法律结论。Privacy 的既有 legitimate-interest 文字属于 GoatCounter 段落，本轮不把它自动改记为 RUM 的独立法律审核。具体启用进展以 017 与 DEV_WORKFLOW 为准，下面的准备状态保留为历史快照。
 

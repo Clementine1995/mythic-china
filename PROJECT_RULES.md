@@ -4,7 +4,7 @@
 
 本文件保存 Mythic China 特有、违反后会破坏内容可信度、资产可追溯性、静态架构或读者体验的红线。通用授权边界见 `AGENTS.md`，工程风格见 `STYLE.md`，执行命令见 `DEV_WORKFLOW.md`。
 
-当前 M2、M3 与 M4 本地实现已完成；6 篇 Entry / 2 个 Collection 均为 published 并绑定 approved/current Hero，013 public assembly 已用于 2026-09-10 的公开发布。最新已验证发布源为 `21cdbb6`，证据及限制见 README/DEV_WORKFLOW；M7 仍为 Public Beta，真机、完整地区性能、真实 RUM 与 R2 未收口。2026-09-12 owner 确认正式 MVP 采用阅读版，表单真实启用及完整正文/社媒图包后移，范围见 PRODUCT/001。以下架构红线、适用资产与隐私约束、既定技术和真人验收标准保持；后移项目不记为已实现或已验收。
+当前 M2、M3 与 M4 本地实现已完成；6 篇 Entry / 2 个 Collection 均为 published 并绑定 approved/current Hero，013 public assembly 已用于公开发布。最新已验证发布源、运行状态、证据及限制见 README/DEV_WORKFLOW，不在本文件复制滚动发布身份；M7 仍为 Public Beta，真机、完整地区性能、真实 RUM 与 R2 未收口。2026-09-12 owner 确认正式 MVP 采用阅读版，表单真实启用及完整正文/社媒图包后移，范围见 PRODUCT/001。以下架构红线、适用资产与隐私约束、既定技术和真人验收标准保持；后移项目不记为已实现或已验收。
 
 ## 项目定位
 

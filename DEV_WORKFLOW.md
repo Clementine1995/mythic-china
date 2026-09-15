@@ -1,5 +1,189 @@
 # DEV_WORKFLOW.md
 
+## 日常维护与发版入口
+
+本节是 2026-09-15 整理的常用入口；面向维护者的顺序说明见 [发版指南](docs/PUBLISHING_GUIDE.md) 与 [文章流程](docs/ARTICLE_WORKFLOW.md)。以下带日期的旧章节保留当时身份与结果，不能直接把旧 SHA、文件数量、操作标识或 `.local/` 脚本当作下一次指令。当前线上身份见 README 和本文件最近发布记录。
+
+本次整理只增加文档，不执行这里的提交、服务或平台操作。以后 owner 自己操作时，按步骤核对范围后执行；交给 AI 时仍按 AGENTS.md 分别授权本次 Git 写入、服务启动、候选上传、生产发布及额外数据/配置变化。既往某次授权不自动变成以后每次发版的授权。
+
+### 日常步骤 A：环境准备
+
+适用于本机已有依赖和包管理器缓存。打开项目目录的 PowerShell，每个新终端先执行一次；只核对身份并设置当前进程环境，不安装或升级工具。
+
+```powershell
+Set-Location -LiteralPath 'F:\codex-project\mythic-china'
+if ((Resolve-Path -LiteralPath '.').Path -ne 'F:\codex-project\mythic-china') { throw 'Unexpected workspace.' }
+$mythicProjectNode = 'D:\Program Files\nvm\v24.16.0\node.exe'
+$mythicProjectCorepack = 'D:\Program Files\nvm\v24.16.0\corepack.cmd'
+if (-not (Test-Path -LiteralPath $mythicProjectNode)) { throw 'Fixed Node is missing.' }
+if (-not (Test-Path -LiteralPath $mythicProjectCorepack)) { throw 'Fixed Corepack is missing.' }
+if ((& $mythicProjectNode --version) -ne 'v24.16.0') { throw 'Unexpected Node.' }
+if ((& $mythicProjectCorepack --version) -ne '0.35.0') { throw 'Unexpected Corepack.' }
+$mythicRuntimeDirectory = [IO.Path]::GetDirectoryName($mythicProjectNode)
+$mythicOtherPaths = @($env:Path -split [IO.Path]::PathSeparator) | Where-Object {
+  $_ -and $_.TrimEnd('\') -ine $mythicRuntimeDirectory.TrimEnd('\')
+}
+$env:Path = (@($mythicRuntimeDirectory) + $mythicOtherPaths) -join [IO.Path]::PathSeparator
+$env:COREPACK_ENABLE_NETWORK = '0'
+$env:ASTRO_TELEMETRY_DISABLED = '1'
+$mythicPnpmVersion = & $mythicProjectCorepack pnpm --version
+if ($LASTEXITCODE -ne 0 -or $mythicPnpmVersion -ne '11.22.0') { throw 'Expected cached pnpm 11.22.0.' }
+if (-not (Test-Path -LiteralPath 'node_modules/astro/bin/astro.mjs')) { throw 'Project dependencies are missing.' }
+& $mythicProjectCorepack pnpm run runtime:check
+if ($LASTEXITCODE -ne 0) { throw 'Runtime check failed.' }
+git status --short --branch
+git diff --stat
+```
+
+缺运行时、缓存或依赖就先停在准备阶段，按下方“初始化、构建与本地运行”的身份/安装门禁处理；不要直接运行 npm install 或更换锁文件。`COREPACK_ENABLE_NETWORK=0` 在当前终端禁止 Corepack 为日常检查临时联网下载；明确授权的安装使用独立安装流程。
+
+### 日常步骤 B：本地检查与两种构建
+
+先看差异，完成匹配的内容、代码及文档检查。纯操作文档修改使用本文“文档验证”，无需完整构建。网站内容或代码候选按顺序执行下面各块；任何一块失败都先修正问题，不能继续上传。
+
+```powershell
+& $mythicProjectCorepack pnpm run check
+if ($LASTEXITCODE -ne 0) { throw 'Project checks failed.' }
+```
+
+`check` 包含格式、lint、隔离测试、Astro 检查、review 构建及输出验证。它不证明真实浏览器、线上统计或远端环境通过。需定向检查时沿本文既有 `pnpm run test` 入口传入本次测试文件，不用跳过聚合检查冒充发布门禁。
+
+```powershell
+$mythicPreviousOrigin = $env:MYTHIC_CHINA_SITE_ORIGIN
+try {
+  $env:MYTHIC_CHINA_SITE_ORIGIN = 'https://mythic-china-beta.vercel.app'
+  & $mythicProjectCorepack pnpm run build:public
+  if ($LASTEXITCODE -ne 0) { throw 'Public build or output verification failed.' }
+} finally {
+  $env:MYTHIC_CHINA_SITE_ORIGIN = $mythicPreviousOrigin
+}
+```
+
+public 只写入可再生的 `.local/public-build/`。`dist/` 是 review，不得上传。若 public 后还要读回已有输出，仍在同一 origin 的 try/finally 环境内运行既有 `scripts/verify-public-output.mjs` 入口。
+
+```powershell
+& $mythicProjectCorepack pnpm run build
+if ($LASTEXITCODE -ne 0) { throw 'Review rebuild failed.' }
+git status --short
+```
+
+最后一次 review 构建用于确认模式切换不残留；两种输出目录不同，不会把 public 包改成 review。当前独立校验锁定首发页面、日期和图片清单；新增文章或旧文日期变化先按文章流程更新已批准的验收清单，不能删除断言。
+
+需要看本地审稿页面时，在已完成步骤 A 的单独终端启动以下服务。此操作会启动长驻服务，仅用于本地 review；完成后在该终端 Ctrl+C，确认已停止。实际地址以终端输出为准。
+
+```powershell
+& $mythicProjectCorepack pnpm run dev --host 127.0.0.1
+```
+
+此入口不等于冻结 public 包预览。最终 public 候选的本地服务应只提供本次冻结文件，并在当次发布记录中明确入口、端口、字节核对与停止方式；不执行旧 `.local/` 服务脚本替代本次准备。
+
+### 日常步骤 C：保存本地版本
+
+仅在 owner 决定提交本次精确文件后执行。下列交互入口逐行接收项目相对路径，空行结束；不使用 `git add .`，不推送或发布。提交信息采用 `type(scope): observable result`，例如文档用 `docs(workflow): document publishing and editorial steps`，文章用 `content(liaozhai): add a reviewed story`，按实际内容填写。
+
+```powershell
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Index is not empty; review existing staged work first.' }
+git status --short
+git -c core.safecrlf=false diff --check
+if ($LASTEXITCODE -ne 0) { throw 'Fix whitespace errors first.' }
+$mythicCommitFiles = @()
+$mythicCommitRoot = (Resolve-Path -LiteralPath '.').Path
+while ($true) {
+  $mythicCommitPath = Read-Host 'One exact project-relative file path; blank to finish'
+  if ([string]::IsNullOrWhiteSpace($mythicCommitPath)) { break }
+  if ([IO.Path]::IsPathRooted($mythicCommitPath)) { throw 'Use a project-relative file path.' }
+  $mythicCommitFullPath = [IO.Path]::GetFullPath((Join-Path $mythicCommitRoot $mythicCommitPath))
+  if (-not $mythicCommitFullPath.StartsWith($mythicCommitRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'Selected path is outside the project or is the project root.'
+  }
+  if (Test-Path -LiteralPath $mythicCommitFullPath -PathType Container) { throw 'Select a file, not a directory.' }
+  $mythicSelectedFile = $mythicCommitFullPath.Substring($mythicCommitRoot.Length + 1).Replace('\', '/')
+  if (-not (Test-Path -LiteralPath $mythicCommitFullPath -PathType Leaf)) {
+    $mythicTrackedSelection = @(git --literal-pathspecs ls-files --error-unmatch -- $mythicSelectedFile)
+    if ($LASTEXITCODE -ne 0 -or $mythicTrackedSelection.Count -ne 1 -or $mythicTrackedSelection[0] -ne $mythicSelectedFile) {
+      throw 'Missing path is not one exact tracked deletion.'
+    }
+  }
+  $mythicCommitFiles += $mythicSelectedFile
+}
+if ($mythicCommitFiles.Count -eq 0) { throw 'No files selected.' }
+$mythicCommitFiles = @($mythicCommitFiles | Sort-Object -Unique)
+git --literal-pathspecs diff -- $mythicCommitFiles
+$mythicCommitMessage = Read-Host 'Commit message for these reviewed files'
+if ([string]::IsNullOrWhiteSpace($mythicCommitMessage)) { throw 'No commit message.' }
+git --literal-pathspecs add -- $mythicCommitFiles
+if ($LASTEXITCODE -ne 0) { throw 'Staging failed; inspect the index.' }
+$mythicStagedFiles = @(git -c core.quotepath=false diff --cached --name-only)
+if ($LASTEXITCODE -ne 0 -or $mythicStagedFiles.Count -eq 0) { throw 'No staged changes.' }
+if (Compare-Object $mythicCommitFiles $mythicStagedFiles) { throw 'Staged scope differs; inspect the index before committing.' }
+$mythicStagedFiles
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged check failed; inspect the index.' }
+$mythicConfirmCommit = Read-Host 'Review the staged list above; type COMMIT to save it'
+if ($mythicConfirmCommit -cne 'COMMIT') { throw 'Not committed; staged files remain for review.' }
+git commit -m $mythicCommitMessage
+if ($LASTEXITCODE -ne 0) { throw 'Commit failed; inspect Git state.' }
+git log -1 --format='%H %s'
+git status --short
+```
+
+新文件不会出现在未暂存 `git diff` 中，执行前必须在编辑器读过；意外暂存不要直接提交。脚本中断不自动撤销或删除文件，应保留现场检查。
+
+准备正式发布时再次核对以下命令。输出状态必须为空；若存在其他工作，保留并分别处理，不为清空状态而丢弃修改。默认不创建 worktree。
+
+```powershell
+$mythicSourceStatus = git status --porcelain=v1 --untracked-files=all
+if ($LASTEXITCODE -ne 0 -or $mythicSourceStatus) { throw 'Release requires a clean working tree.' }
+git rev-parse HEAD
+git rev-parse 'HEAD^{tree}'
+Get-FileHash -LiteralPath 'pnpm-lock.yaml' -Algorithm SHA256
+```
+
+从这份干净提交重新执行步骤 B，记录真实结果；不能把提交前 dirty 验证回执改绑到新 SHA。文档提交完成不自动意味着必须部署，Git 推送也独立处理。
+
+### 日常步骤 D：冻结、上传与正式发布
+
+当前 `package.json` 与稳定 `scripts/` 没有通用 freeze/deploy/promote 命令。以下为必须落实到**本次执行包**的流程，不能用旧临时文件补成一条假通用命令。新的执行包由主实现者在本地准备、离线验证，再交给 owner 审阅；只整理手册不等于已准备下一次上传包。
+
+1. 冻结：从步骤 C 的同一 clean HEAD 及步骤 B 的 public 输出生成新目录；记录完整 HEAD/tree、lock/source 摘要、public intent、正式 origin、全部路径/字节数/SHA256、总数/总字节、inventory 与包摘要、实际验证日志。保存后逐字节回读并再次确认源未变。不得覆盖上一版包或沿用其固定数字。
+2. 准备上传：生成只包含这份静态文件的请求、新操作 UUID 与不可覆盖的尝试记录；填写现场读出的上一份正式部署 ID。记录本次零网络验证命令、掩码输入、上传/查询/提升/回退/关闭入口，以及临时服务的启动/停止命令。离线检查必须验证请求与冻结文件逐项一致，并覆盖未知结果不重复创建的控制流。
+3. 现场身份：核对项目 `prj_U8IP9LhhpaeDC2dJlP0VVv3ciu70` / `project-scu6m`、团队 `team_zxOM6nEHD6ZYTRcrAjbcwU3U` / Mathic China、正式域名 `mythic-china-beta.vercel.app`。当前交付方式无 Git 集成、无 framework/远端 build/install 命令，output 为静态根；保护预期为 `all_except_custom_domains`，无未经确认的域名或 bypass。逐项只读核对实际状态，不能用旧截图证明本次身份。
+4. 凭据：先准备好包再取得短期、最小范围 Token，只由本次已审核本地掩码入口传入内存，管理凭据只发给 `api.vercel.com`。Token 不进入请求文件、日志、命令行参数或 Git。过期/403 时先核对状态和权限，不能自动扩大范围。
+5. 单次上传：请求 `target: production`、`autoAssignCustomDomains: false`，使用受保护 staged production。保持既有正式 alias；READY 后验证候选及平台返回的相关别名没有绕过预期保护。出现网络未知只查询本次 UUID/项目/源/部署，禁止盲目再 POST；意外公开时按本次准备的故障处置先恢复保护。
+6. 候选验收：登录查看同一 deployment，验证实际路径、桌面/手机、正文/来源/图注、无 JS 阅读、适用无障碍、SEO、脚本和外部能力状态；逐项核对上传内容与冻结字节。新增内容不能借用上一版不适用的截图或结果。尚未完成的 Beta 验收继续按 011 保留，不写成通过。
+7. 正式提升：owner 明确确认本次源与候选后，在已审核会话执行该 deployment 的 promote；或在 Vercel 项目 Deployments 找到该 staged deployment，打开 `…` → `Promote`，核对部署 ID 和正式域名，再确认。不要选普通 Preview 的重建流程，也不点 Redeploy。Vercel 对 staged production 的提升不需重建；出处为 [Promoting Deployments](https://vercel.com/docs/deployments/promoting-a-deployment)，访问于 2026-09-15。若目标已被提升或状态未知，先查询正式 alias。
+8. 正式回查：确认 alias 指向本次 deployment；对本次完整 inventory 执行匿名 HTTP 状态、MIME、长度与 SHA256 校验，再看正式首页及受影响页面。HTTP 文件校验不运行浏览器统计脚本；人工 QA 每页使用 `?analytics=off&rum=off`，不消耗额外真实统计测试预算。
+9. 收尾：保存新源/部署/时间/核验结论及未验项；关闭临时监听和输入会话，清除凭据引用。README 更新稳定摘要，本文记录实际发布结果；冻结后文档变更单独处理 Git，不回写不可变发布包的 source 身份。
+
+2026-09-15 `.local/rum-release-73e482a/` 与 `.local/rum-deployment-73e482a/` 仅作追溯。`prepare.mjs`、`deployment-session.mjs` 和 `verify-public.ps1` 均有该次固定身份/数量；它们的旧 previousDeploymentId 也不能用于下一次回退。新文章会改变文件数，141 文件、717 测试只是该次结果。
+
+### 日常步骤 E：故障回退
+
+发版前保存当时的正式 deployment ID、旧文件清单及可用性证据。若新版本阻塞阅读，owner 决定恢复后：
+
+1. 打开本项目 Vercel Overview 的 Production Deployment，选择 `Instant Rollback`。
+2. 对照本次发布记录，核对页面提供的上一份正常部署及受影响域名；再 `Continue` / `Confirm Rollback`。不要选某个看似较新的未验候选。
+3. 读回正式 alias，确认恢复目标；按旧版清单核验文件和页面。回退后复核自动域名分配状态，下一次不能假设仍会自动分配。
+4. 回退结果不明时只读查询，不能反复提交。若不能确认恢复且站点存在阻塞，在本项目 Deployment Protection 中启用 All Deployments 登录保护，核对正式域名匿名访问要求登录；这是撤回公开访问，后续重新公开需验收。
+5. 本地修复仍在保存项目中完成，并走新提交和新发布包。网站回退不回退本地 Git、Cloudflare Worker、Cron 或 D1 数据；这些另按 017 的精确范围处理。
+
+官方入口与计划限制：[Vercel Instant Rollback](https://vercel.com/docs/instant-rollback)，访问于 2026-09-15。Hobby 仅支持紧邻上一份部署，以当次界面的合格目标为准；不要为找到任意旧版本自动升级账户。
+
+## RUM 正式发布与收尾（2026-09-15）
+
+已授权的本地提交为 `73e482a0647d28d420363fbfd2864c6ee0369c46`，父提交 7418f77，共 13 文件，未推送。源保持 clean 时执行会话 22513 完整通过 `check → build:public → build`：42 文件/717 测试、Astro 132 文件零诊断、public 13 页/24 个原始脚本共存场景及 GoatCounter 回归、review 14 页零 JS。日志及其摘要绑定新制品，未把上轮 dirty 验证改绑。内容、来源、图片和依赖没有变化。
+
+新冻结目录 `.local/rum-release-73e482a/` 包含 141 文件/3,300,770 bytes，artifact SHA256 `97d70b9bcceac6f302b1b88b60bacda7e1636644a07c6a463bacc00fa9cbadd7`，inventory SHA256 `a0864a8d51f55ce7d95aea1df409c516f5d7f7e16f0a201b08c2e9e41caa4a9d`。127 文件与旧候选相同，13 HTML 更新元数据/Privacy 日期，入口脚本仅改窗口日期。`.local/rum-deployment-73e482a/` 的 request SHA256 `e440c1013292adc9f12cd5241ab9a308a86e2c85ad1d9f2291af3b7a479d85e8`，新 attempt `0e15e247-2ce7-412c-a15f-c2d6f64f04c0`；旧 attempt/部署/QA 回执未复制。生成、字节回读及离线 payload/公开验证入口检查通过。
+
+新凭据限定 project-scu6m/1 Hour，由 owner 提供后经关闭回显的 stdin 和本地命名管道只传入内存。preflight 复核既定项目/团队、访问保护与旧正式 alias；单次创建 `dpl_5ivyuseZxGH4SjXYzETgyd1NbVJa`，受保护网址为 `https://project-scu6m-ntoeuan1v-mathic-china.vercel.app`，READY 后匿名 302 到 Vercel 登录，141 上传 source UID 全部匹配。当前冻结 Privacy 在桌面/手机宽度可读、无横溢，当前候选 DOM/canonical/日期/13 路径/脚本与零表单、零错误核验通过，限定范围如 local-qa/staged-qa 回执所述。
+
+Cloudflare 新窗 maintenance 自动推进到 `1789434095000`（01:01:35 UTC），invalid=null、测量 0，旧取消窗快照保持。随后 UI 将 RUM_ENABLED 从 false 改为 true 并 Deploy，只部署运行配置，未上传业务代码；Logs/Traces 主开关关闭，Cron 仍每小时。启用后无状态根 GET 404、缺 Origin GET 403、允许 Origin OPTIONS 204，均空正文/no-store 且精确 CORS 正确。首次探针误将启用后的 OPTIONS 预期写为关闭时的 503，依据现有 Worker 分支纠正验证预期后通过；未修改线上逻辑或发送测量 POST。
+
+同一候选于 `2026-09-15T01:22:44.538Z` 提升到正式域名，`01:27:25.936Z` 再次 API 核对 alias。`verify-public.ps1 -VerifyLive` 对正式 141 文件的匿名 HTTP 状态、MIME、长度及 SHA256 全通过，回执为 `public-smoke-20260915-012610-7418663.json`；正式 Privacy/首页显示新日期及入口，浏览器零警告/错误。临时 4321 服务正常 close，监听已消失；空掩码表单按精确脚本/管道关闭，发布进程确认 Credential cleared 并退出。Token 页面和本地页已关闭，保留正式站点与 Cloudflare 设置页。
+
+本次发布不等于真实 RUM 收数或 MVP 验收完成。观察窗为 09-16/09-30 UTC，当前尚未开始，真实 Network/INP、完整观察结论、地区/真机/读者验收仍待补齐；没有重放 GoatCounter 正向预算。此次发布完成时仅在冻结后更新五份状态文档；后续上线状态与维护指南按独立文档检查点管理，具体身份以 Git 历史为准，不修改已保存制品的 source/manifest 身份。以下章节是各阶段快照，不覆盖本节。
+
 ## RUM 顺延检查点与重新冻结（2026-09-15）
 
 owner 已明确授权上轮完成并验证的 13 文件本地提交。提交前仅更新五份状态文档的授权措辞，检查 UTF-8、相对链接、格式及 diff；不改业务字节，不增加 Git 推送。执行以下精确入口：
@@ -1975,7 +2159,7 @@ try {
 
 ## 数据库、外部服务与真实写入口
 
-站点运行期的真实写入当前均未启用。外部已有审核已通过的 Buttondown 账户及 owner 提供发布链接的 Tally Free 表单；本站 Newsletter/Analytics 配置默认关闭，Reader Request 尚未接线，没有数据库或站内表单 endpoint。Tally 的最新证据及受控步骤见本文末尾与 006 第 12.10 节；账户准备或托管表单存在不等于本站真实接入。未来启用任一能力时必须先在对应需求和本文落实：
+当前运行状态按 2026-09-15 发布记录：GoatCounter 已启用；RUM 客户端与 Cloudflare 接收端已启用，D1 与小时 Cron 已接通，固定窗口尚未开始，真实测量仍待验。Newsletter 与 Reader Request 保持无控件 inactive；外部 Buttondown/Tally 账户及历史测试记录不代表本站表单已开放。普通文章构建和发版不操作这些数据。Tally 的受控步骤见本文末尾与 006 第 12.10 节；额外启用或改变外部能力时必须先在对应需求和本文落实：
 
 - 环境和实际身份校验。
 - Mock/隔离测试入口。

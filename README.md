@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-文档核对日期：2026-09-15；正式站点最近发布与 GoatCounter 正向实证日期：2026-09-10。本日已证实 RUM 小时维护自动执行，取消并保留从未启用的旧空窗口，新窗口顺延为 09-16 至 09-30 UTC。对应网站修改已通过本地验证并获本地提交授权，尚未发布；接收仍关闭，正式 Privacy 的 HTTP 回读没有 RUM 接线。
+文档核对日期及最近发布：2026-09-15。正式站点已发布 clean source `73e482a0647d28d420363fbfd2864c6ee0369c46`，141 个公开文件的 HTTP、类型、长度和 SHA256 全部匹配。RUM 客户端与接收端已开启，固定观察窗为 09-16 至 09-30 UTC；当前尚未开始采样，正式 MVP 验收继续等待真实数据及人工验证。
 
 **当前阶段：英语阅读版 Public Beta / pending human validation。正式 MVP 范围已确认，验收尚未收口。**
 
@@ -15,10 +15,10 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 | 内容 | 6 published Entry、2 published Collection、14 Source、25 verified Claim、6 bilingual-approved Terminology；六篇 publishedAt 为 2026-09-10，updatedAt 为 null | 独立英语读者 R2a/R2b 尚未开始；owner 双语确认与 AI 审读不代替真人样本 |
 | 插画与阅读 | 8 个 approved/current Hero family；13 个 public 页面，11 个含图页 / 19 个图位、112 个 AVIF/WebP、10 个字体；首页双专题、阅读路径、Sources、Related 与原生图注已实现 | 六篇正文均无正文插图，完整故事卡包为 0/6；钟馗 Lead/OG/Social 样例保留，后续运营另行交付 |
 | 工程 | M1 冻结为工程参考，M2–M4 本地实现完成；013 public assembly 与 014–016 页面收尾已随站发布 | M1 旧视觉皮肤未获满意度批准，不影响后续独立验收的生产页面 |
-| 发布 | [正式站点](https://mythic-china-beta.vercel.app) 的最新回执绑定 clean source `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`；2026-09-10 完整 140 文件 / 3,278,559 字节 HTTP、MIME、长度与 SHA256 通过，09-14 API 复核 alias | 旧 RUM 候选 dpl_Eigw53XwYJCMBickdv67PV2wHCds 已受保护部署但未提升，旧日期已过期，不能继续发布；新日期候选已获本地提交授权，发布仍需有效 Vercel 凭据。可索引不等于搜索引擎已收录 |
+| 发布 | [正式站点](https://mythic-china-beta.vercel.app) 已于 2026-09-15 01:22:44 UTC 提升 clean `73e482a0647d28d420363fbfd2864c6ee0369c46` / `dpl_5ivyuseZxGH4SjXYzETgyd1NbVJa`；141 文件 / 3,300,770 字节的匿名 HTTP、MIME、长度与 SHA256 全通过，API 再次核对正式 alias | 受保护候选已原样提升；未推送 Git。公开可索引不等于搜索引擎已收录 |
 | GoatCounter | 正式启用；4 次页面浏览、3 次事件共 7 条受控计数，7 次实际请求头、6 次 HTTP 200；Related 响应未观测，后台确认收数；原生 DNT、受控退出和实际 BFCache 返回有证据 | 阅读和退出采用 CDP 焦点模拟；原生前后台完整流程、原生 GPC 及账户自动清理/实际导出注销未实测；预算已耗尽，不补发、不删除规范路径 |
 | 表单 | Newsletter 默认关闭分支和 Reader Request 离线审核已实现；页面均为无控件 inactive 状态 | 真实启用后移，测试保持暂停；既有供应商记录的处理、保留和退出责任仍按 006，不因后移消失 |
-| 性能与 RUM | 每小时 Cron 连续两次 Success，最新维护与 D1 时间一致；旧零测量窗已取消封存，09-16 至 09-30 UTC 新窗已建立。顺延修改通过 717 测试、132 文件零诊断、13 页 public/14 页 review 与 24 个隔离脚本场景；Worker 运行字节不变 | 正式 RUM 未启用，接收 false，新窗零样本、无异常；网站本地检查点已获授权，尚未发布。真实传输/INP、完整 14 日观察、地区浏览器、三平台真机仍待验 |
+| 性能与 RUM | RUM 已随 73e482a 发布，receiver=true、小时 Cron 正常；新窗已被自动维护，无异常、零样本。717 测试、132 文件零诊断、13 页 public/14 页 review 与 24 个隔离脚本场景通过 | 固定窗口为 09-16 至 09-30 UTC，尚未开始；真实传输/INP、完整观察结果、地区浏览器及三平台真机仍待验。预检 204 只证明 CORS 通道，不代表收数 |
 | 中文与扩展 | 005 已确认三个既有对象的简中试点目标；当前英语根路径、中文专名和 CJK 字体已存在 | 中文路由、locale Schema、语言切换与 localized SEO 未实施；中文、搜索、扩栏、商业化均不阻塞英语阅读版 MVP |
 
 证据入口：[生产验收与激活](DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)、[发布后技术验收](DEV_WORKFLOW.md#发布后技术验收2026-09-10)、[内容与 Hero 审核](docs/requirements/012-five-hero-visual-briefs.md)、[Beta 退出条件](docs/requirements/011-public-beta-validation.md#23-beta-退出条件)。各阶段原始结果保留在 DEV_WORKFLOW 与对应需求的带日期记录中，不把旧“未发布”“未提交”当作当前状态。
@@ -32,6 +32,12 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 3. 有实际独立英语读者后，按 010/011 冻结 live 执行包并开展 R2a/R2b；缺样仍记 pending，不用 AI 或受控统计替代。
 4. 中文三页试点、内容分发素材、未来表单启用可独立授权推进，不要求工作电脑常开，不自动恢复暂停的测试。
 5. 001/011 收口仍需既定真机、地区性能、RUM、R2、问题处置与 owner 确认；仅 RUM 完整观察窗后不足流量的情况适用 011 既有接受限制条款。范围收敛不降低验收标准。
+
+## 维护者操作指南
+
+- [发版操作指南](docs/PUBLISHING_GUIDE.md)：本地检查、干净提交、发布包、候选验收、正式提升、回退与 Cloudflare 日常边界。
+- [写文章与更新文章](docs/ARTICLE_WORKFLOW.md)：选题、来源、英文稿、草稿字段模板、Hero 审核、合集关系与新增文章所需工程接线。
+- [日常可执行入口](DEV_WORKFLOW.md#日常维护与发版入口)：本机环境、检查/构建、审稿服务、精确提交和平台操作顺序。当前没有通用一键发布器，旧 `.local/` 执行包不能直接复用。
 
 ## 项目负责
 
@@ -51,7 +57,7 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 `Entry Markdown / Collection / Source / Claim / Terminology + visual brief / production record / manifest -> 严格 Schema -> 内容图与视觉资产图/文件校验 -> approved/current resolver -> published-only projection -> Astro public 静态页面、SEO、Sitemap/RSS/robots -> 经身份与验收门禁的 CDN 制品`。
 
-默认 review 输出到 `dist/`，为 14 页 noindex/nofollow、零客户端 JavaScript，不可部署；显式 public 输出到 `.local/public-build/`，为 13 页和发现文件，仅正式 origin 可启用已批准的 GoatCounter。正文与导航不依赖统计脚本。当前本地 RUM 候选配置非空，public 输出其元数据与延迟自托管 chunk；已发布站点仍为 RUM 关闭制品。配置为 null 时不输出 RUM 接线，Newsletter/Reader Request 没有真实传输。
+默认 review 输出到 `dist/`，为 14 页 noindex/nofollow、零客户端 JavaScript，不可部署；显式 public 输出到 `.local/public-build/`，为 13 页和发现文件。已发布的 73e482a 同时包含独立 GoatCounter 与 RUM 接线，RUM 仅在正式 origin、批准路径和固定窗口内采集；正文与导航不依赖统计脚本。`rumDeployment = null` 时不输出 RUM 接线，Newsletter/Reader Request 仍无真实传输。
 
 - 读者阅读：主视觉与标题 → 可选 content note → opening → Quick Answer → 故事与来源解释 → 完整 Sources → 合集/Related → 未开放的 Reader Request 说明 → Footer。
 - 编辑生产：研究问题 → claim/source 与术语 → 英文正文和视觉 brief → 编辑/资产审核 → 状态批准 → 构建与发布验收。
@@ -59,9 +65,9 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 ## 当前运行口径
 
-唯一保存项目为 `F:\codex-project\mythic-china`，本次检查点的父提交为 `7418f7714b1c182b59085d783a26639879e6e3a0`；owner 已授权提交本轮 13 个相关文件，包含日期顺延、窄取消边界、对应测试和状态文档，实际提交身份以 Git 历史为准。旧冻结包 `.local/rum-release-7418f7/` 及受保护部署回执 `.local/rum-deployment-7418f7/` 保留追溯，其旧日期已不适用，不得继续提升。用户完整启用授权保留；本次本地检查点授权已补齐，接收和网站发布继续按 clean-source 验证与有效 Vercel 凭据门禁执行。下一步与证据见 [调度与顺延记录](DEV_WORKFLOW.md#rum-调度实证与窗口顺延2026-09-15)。
+唯一保存项目为 `F:\codex-project\mythic-china`，生产已发布源码检查点为 `73e482a0647d28d420363fbfd2864c6ee0369c46`，未推送。新冻结包位于 `.local/rum-release-73e482a/`，部署及 QA/公开验证回执位于 `.local/rum-deployment-73e482a/`；旧包仅保留追溯。生产已使用同一冻结包；上线状态文档与维护指南按独立文档检查点管理，提交身份以 Git 历史为准，不改变生产制品身份。完整身份和执行结果见 [RUM 上线记录](DEV_WORKFLOW.md#rum-正式发布与收尾2026-09-15)。
 
-最新站点运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用。旧临时服务和凭据会话均已关闭，本轮未启动服务；网站不依赖工作电脑常开。2026-09-15 已直接核对 RUM_ENABLED=false、Logs/Traces 主开关关闭；小时 Cron 在 09-14 23:01:23、09-15 00:01:36 UTC 连续 Success，后者与 D1 维护时间一致。D1 现有旧取消封存窗和 09-16/09-30 UTC 新未来窗，测量表为 0，新窗无异常；未将新窗插入时间当成额外维护证据。Worker 无需重部署，完整公网源码身份及真实传输等剩余验证仍按 017。
+最新站点运行回执为 2026-09-15 的 Vercel 静态 Public Beta 与 RUM 接线发布，GoatCounter 沿用既有配置。临时本地服务已关闭、凭据会话已清除；网站与 Cloudflare 小时任务不依赖工作电脑常开。接收开关 true，Logs/Traces 主开关关闭；新窗 maintenance 已自动推进到 01:01:35 UTC，invalid=null、测量为 0。旧未启用空窗保留取消快照；真实收数、INP、完整观察结果与运行限制仍按 017 验收。
 
 `dev` / `preview` 会改变运行状态，不是只读健康检查；服务、供应商数据操作、推送与部署仍需各自授权。
 
@@ -122,7 +128,7 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 ## 发布口径
 
-当前最新已验证发布源为 `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5`，发布与受控统计证据日期为 2026-09-10；`dc0ad2d` 是此前阅读版首发及部分 QA/性能证据的源身份。两者不得互相改绑。最新 140 文件完整性回执与 GoatCounter 收数不证明完整地区性能、真机、RUM 或真人验证已通过。
+当前已验证发布源与完整文件核验以本文件“当前状态”和 DEV_WORKFLOW 最近发布记录为准。`21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` 的 2026-09-10 发布/受控统计与 `dc0ad2d` 的早期 QA/性能证据保留原身份，属于历史记录，不能改绑到 73e482a。最新静态文件核验通过也不证明完整地区性能、真机、RUM 收数或真人验证已通过。
 
 正式阅读版 MVP 的范围以 PRODUCT/001 为准，退出 Beta 的质量合同以 011 为准。后续从新 revision 构建仍须绑定 clean source、lock/source digest、public intent、verifier/适用 QA 与 `dirty: false`；不可变制品复用须核对完整 inventory/digest。原 dc0ad2d 后续 QA 接受结论与追加原始回执定位缺口见 DEV_WORKFLOW 当前证据索引，不改写早期 partial 回执。
 
