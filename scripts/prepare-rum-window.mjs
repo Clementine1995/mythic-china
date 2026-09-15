@@ -20,7 +20,11 @@ SELECT ${startAtMs}, ${endAtMs}, unixepoch() * 1000
 WHERE ${startAtMs} > unixepoch() * 1000
   AND NOT EXISTS (
     SELECT 1 FROM rum_windows
-    WHERE snapshot_json IS NULL OR end_at_ms > ${startAtMs}
+    WHERE snapshot_json IS NULL OR (end_at_ms > ${startAtMs} AND (
+      invalid_reason IS NOT 'cancelled-before-activation'
+      OR EXISTS (SELECT 1 FROM rum_measurements AS m
+        WHERE m.window_start_at_ms = rum_windows.start_at_ms)
+    ))
   );
 SELECT changes() AS inserted_windows;
 SELECT start_at_ms, end_at_ms, last_maintenance_at_ms, invalid_reason, snapshot_json

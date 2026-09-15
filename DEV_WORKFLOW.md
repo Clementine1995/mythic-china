@@ -1,5 +1,102 @@
 # DEV_WORKFLOW.md
 
+## RUM 顺延检查点与重新冻结（2026-09-15）
+
+owner 已明确授权上轮完成并验证的 13 文件本地提交。提交前仅更新五份状态文档的授权措辞，检查 UTF-8、相对链接、格式及 diff；不改业务字节，不增加 Git 推送。执行以下精确入口：
+
+```powershell
+$mythicRumRescheduleFiles = @(
+  'DEV_WORKFLOW.md', 'README.md', 'docs/ARCHITECTURE.md',
+  'docs/requirements/006-external-interactions.md', 'docs/requirements/017-real-user-monitoring.md',
+  'scripts/analytics-script.json', 'scripts/prepare-rum-window.mjs', 'scripts/rum-output-policy.mjs',
+  'src/pages/privacy.astro', 'src/rum/configuration.ts',
+  'tests/rum/activation.test.ts', 'tests/rum/worker.test.ts', 'workers/rum/store.ts'
+)
+if ((git rev-parse HEAD) -ne '7418f7714b1c182b59085d783a26639879e6e3a0') { throw 'Unexpected parent.' }
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) { throw 'Expected empty index.' }
+$mythicRumPaths = @(git diff --name-only) + @(git ls-files --others --exclude-standard)
+if (Compare-Object ($mythicRumPaths | Sort-Object) ($mythicRumRescheduleFiles | Sort-Object)) { throw 'Unexpected scope.' }
+git -c core.safecrlf=false diff --check
+if ($LASTEXITCODE -ne 0) { throw 'Whitespace check failed.' }
+git --literal-pathspecs add -- $mythicRumRescheduleFiles
+if ($LASTEXITCODE -ne 0) { throw 'Staging failed.' }
+if (Compare-Object (@(git diff --cached --name-only) | Sort-Object) ($mythicRumRescheduleFiles | Sort-Object)) { throw 'Unexpected staged scope.' }
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed.' }
+git commit -m 'fix(rum): reschedule inactive observation window'
+if ($LASTEXITCODE -ne 0) { throw 'Commit failed.' }
+git log -1 --format='%H %P %s'
+git status --short
+```
+
+提交后从新 clean HEAD 运行既有固定 Node/Corepack 的 `check`、显式正式 origin 的 `build:public` 和 review `build`。仅成功后在新 `.local/rum-release-<新短 SHA>/` 冻结完整 141 文件，绑定新 HEAD/tree/lock、日期、原始文件与脚本依赖图及本次验证记录；保存后逐字节回读并再次核对 clean。新 `.local/rum-deployment-<新短 SHA>/` 只从该包生成 request/manifest 和随机 attempt，复用已审发布会话及掩码入口，不复制旧执行/QA 回执。先 `--validate-only`，再恢复有效凭据、执行 preflight、单次 stage、限定 QA、promote 与公开字节验证；旧包不得改绑或继续提升。所有实际结果在冻结后单独记运行摘要，不能提前写成已发布。
+
+## RUM 调度实证与窗口顺延（2026-09-15）
+
+执行结果：Settings 复核 receiver=false、Logs/Traces=false；正式 Privacy HTTP 200、无 RUM meta，仍引用 `page.Br3bZ4bz.js`。D1 取消和开窗两条 SQL 各影响 1 行，回读旧窗 start/end/maintenance 保留、reason=cancelled-before-activation、标准零样本快照；新窗 start `1789516800000`、end `1790726400000`、maintenance `1789432510000`、invalid/snapshot=null，两窗测量均 0。新 maintenance 仅为 INSERT 时间。精确 SQL、前后状态和本地验证保存在 ignored `.local/rum-activation-20260916/`，未删除数据库行或发真实测量。
+
+验证结果：RUM 4 文件/50 测试通过；取消 SQL 的 5 组内存 SQLite 场景和重复执行通过。完整 check 首次发现本轮及前轮临时 helper 的 Node 全局 import 缺失，已只补这两个 ignored helper；其后一次 Vitest 子进程意外退出（714 测试、1 error）不记为通过，重跑相同入口后 42 文件/717 测试和 Astro 132 文件零诊断通过。public 首次按预期拒绝旧脚本清单，比较原始 JS 后确认唯一差异是起止日期；入口更新为 `/_astro/page.cUnh6GO6.js` / SHA256 `33a9cf6fce5ba05823ac8e7ff17b6ad0d58215c022e312761ae14b0b133b287a`。重新 public build 的 13 页、24 个共存场景、GoatCounter 回归及随后 review 14 页零 JS 全部通过。Worker 包与 7541dd2 字节一致，不需重新上传。
+
+后续提交授权：owner 已明确回复“授权”，同意本批 13 文件本地检查点；提交说明为 `fix(rum): reschedule inactive observation window`，实际新 revision 以 Git 历史为准。原一小时 Vercel Token 已过期且旧会话已清除；新 clean-source 包和新部署 attempt 尚未创建，旧包/部署不得改绑或提升。完整启用授权保留，接收与网站发布等待新检查点和凭据；本轮未创建/提升部署、未启本地服务，内容/资产/来源不变，新的实际 Network/INP 与读者样本未验证。
+
+owner 本轮明确授权“触发并修复调度”，补足上轮自动审批的具体确认。执行前 UTC 00:06 已过旧窗起点；同一 D1 读回 start `1789430400000`、end `1790640000000`、maintenance `1789430496000`、invalid_reason=collection-paused、snapshot=null、measurements=0。Cron Events 两条 `0 * * * *` 分别在 09-14 23:01:23、09-15 00:01:36 UTC Success，自动维护已证实，故无需再手动触发或改频。沿前轮完整启用授权继续必要顺延；接收关闭、旧客户端未发布的事实须在取消前再核对。
+
+修改文件及职责：017 定义只允许零测量、未启用窗口的显式取消；`src/rum/configuration.ts` 与 `scripts/rum-output-policy.mjs` 锁定 09-16/09-30 UTC；`workers/rum/store.ts` 与 `scripts/prepare-rum-window.mjs` 只豁免已取消/封存/零测量旧窗的重叠阻塞；activation/worker 测试覆盖普通 NULL 原因和含数据等拒绝分支；Privacy 仅更新说明日期，窗口仍由配置生成；构建后审查 `analytics-script.json` 的实际入口摘要，chunk 清单按实际差异处理。README/ARCHITECTURE/006/本文同步结果。旧制品及部署回执保留，不改绑为新日期。
+
+本地使用固定 Node/Corepack/pnpm 环境，沿 `test tests/rum`、`check`、显式正式 origin 的 `build:public` 和 review `build` 顺序验证，不安装依赖。取消 SQL 另存 `.local/rum-activation-20260916/`，先用内存 SQLite 验证精确行门禁、零测量、已封存和重复调用，再在核对后的 D1 Studio 单条执行。取消前整行保存回执，实际取消只改 reason/snapshot；新窗起止为 `1789516800000` / `1790726400000`，由已修改生成入口准备，真实执行必须尚未到起点。旧错误/暂停原因保存在取消前回执，不静默抹去。
+
+## RUM 完整启用执行授权（2026-09-14）
+
+本轮实际结果（UTC 13:00 后复核）：D1 Studio 最初多语句只执行了光标所在 SELECT，没有插入；改为单条受保护 INSERT 后显示 Executed 1/1、Affected Rows 1。读回唯一窗口为 start `1789430400000`、end `1790640000000`、maintenance `1789389337000`（12:35:37 UTC）、invalid/snapshot 均 null，测量 0。13:00 后及 13:20 左右再次单条 SELECT，维护时间仍未推进；不将 INSERT 时间认定为 Cron 成功。Settings 仍显示 Every hour、下一次 14:00，接收 false；公网三次无状态请求实际为 GET 根 404、无 Origin GET /vitals 403、正式 Origin OPTIONS /vitals 503，均空正文/no-store，最后一项精确 CORS origin 正确。
+
+用户完整启用授权已用于上述开窗和本次候选部署。Vercel preflight 核对项目、团队、访问保护和正式 alias 指向 `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy` 后，单次创建候选 `dpl_Eigw53XwYJCMBickdv67PV2wHCds`，URL `https://project-scu6m-r1ko4dsc4-mathic-china.vercel.app`，12:57:50 UTC 已 READY，匿名访问 302 到 Vercel 登录，正式 alias 尚未提升。141 个上传 source UID 与冻结字节 SHA1 全匹配；本地主页/钟馗/Privacy 导航与桌面、手机宽度的新增说明可读、无横溢，云端已登录 Privacy 的 canonical、13 路径 meta、日期、endpoint、单一脚本及零表单/控制台错误均通过。具体受限范围写入本轮 local-qa/staged-qa 回执；没有浏览器网络抓取、真实 INP 或新 GoatCounter 正向请求。
+
+停点清理：已通过 `close` 正常关闭有凭据的发布会话，工具确认 Credential cleared；临时 4321 服务和先前空凭据输入进程按精确脚本路径核对后关闭，未留本地监听或明文凭据文件。临时浏览器宽度已恢复，localhost 与 Token 页已关闭，保留受保护候选页供继续核验。源码及冻结制品未改，四份运行文档未新提交、未推送；维护确认仍待答复，网站没有执行 promote。恢复时读取同目录 deployment-result 的现有 deployment ID，先 `status` 核验，再继续既定流程；不得重新执行 `stage`。
+
+自动审批阻止了选团队凭据范围；用户随后自行提供凭据，发布入口仅通过关闭回显的 stdin 保留内存。手动 `Trigger scheduled event` 及按完整启用授权/空表证据的重审均被自动审批拒绝，理由是缺少对此具体生产触发的单独确认；未绕过拒绝、未点击成功、未执行手动维护或修改 Cron。已向 owner 提交“授权触发并修复调度”确认，包含必要时临时每分钟后恢复每小时；答复前保持 false，不 promote。只读复查可继续；获得此具体确认后仍沿同一窗口、候选与尝试记录推进，不重新创建部署、不删除测量。若无法在窗口开始前完成，须按原合同整体顺延。
+
+后续正式提升成功后，匿名文件验证入口为以下命令；本轮仅执行无 `-VerifyLive` 的离线准备校验（141 文件、3,300,770 bytes），未把预期部署 ID 当作已经核验的 CDN 路由：
+
+```powershell
+& 'C:\Users\335086\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe' -NoProfile -File .local/rum-deployment-7418f7/verify-public.ps1 -VerifyLive
+```
+
+本轮浏览器 QA 临时入口为 `.local/rum-deployment-7418f7/serve-frozen.mjs`，仅从冻结请求读入字节，绑定 127.0.0.1:4321；读取主页、文章和 Privacy 后关闭服务。不会改构建产物或连接真实分析服务。执行：`& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/rum-deployment-7418f7/serve-frozen.mjs`。
+
+本轮独立发布入口位于 `.local/rum-deployment-7418f7/`，由冻结 `artifact.json` 的 path 映射成 Vercel file 字段，保留 141 文件与逐项摘要；不改原始冻结 manifest。请求 SHA256 为 `9e756cce3d0a2249632ef43f51413e5046787c69c0d093b88cbc70b2a25881d8`。继承单次创建/提升保护、受保护 staged、真实 QA 回执门禁和内存凭据流程；提升传空 JSON 对象，`promoted` 只读核验未知提升结果。执行时先离线验证，再启动本地掩码输入；命令输入按 preflight、stage、status/files、QA、promote、promoted、close 顺序。当前预期回退为 `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`，必须由 preflight 的正式 alias 读回确认，否则停止。
+
+```powershell
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/rum-deployment-7418f7/deployment-session.mjs --validate-only
+& 'D:\Program Files\nvm\v24.16.0\node.exe' .local/rum-deployment-7418f7/deployment-session.mjs
+```
+
+owner 在冻结包与待办交付后明确要求“这些你操作不了吗，授权了，一次结束吧”。本轮将此授权用于既有最小 RUM 方案的连续启用：核验 D1 并执行已审未来窗口 SQL、确认定时维护、将接收变量改为 true、准备并发布同一冻结网站制品以及匹配上线验证。沿用已登记的 Worker、DB、Vercel 项目和正式域名，不扩大为表单、其他分析事件、账号或通用数据库。服务/浏览器验证仅为本次临时环境，完成清理；不把同意执行解释为接受尚未展示的新法律协议或创建更大权限凭据。
+
+执行 D1 Studio 前只读核对数据库 `mythic-china-rum-db` / `300f8ad2-992a-4a14-944b-6b4a897d7b1e` 与两表当前状态；随后执行 `.local/rum-activation-20260915/open-window.sql`，预期新增一行，起止 UTC 为 2026-09-15/09-29 00:00。插入回执必须与查询结果一致；已有同一窗口时只读核验，不重复插入，不删除或重置测量。接收暂时保持 false，首次插入维护时间不算 Cron 成功；后续维护更新及异常标记另验。所有必要启用前核验未能在开始前完成时整体顺延，不能保留过期窗口并假称完整采样。
+
+网站仅使用 `.local/rum-release-7418f7/` 冻结字节，后续文档修改不重建或改绑它。新部署入口必须独立实例化原有受保护 staged→核验→promote 流程并绑定 7418f77 的完整清单；旧脚本和旧 attempt 不执行。Vercel 凭据若现有会话已失效，只使用用户安全输入的新会话，不读浏览器存储或落盘明文；保护、目标和当前生产回退身份须在真实 API/界面核对后确定。不得重放已耗尽的 GoatCounter 7 次正向统计预算；本次网站验证使用 analytics=off，RUM 验证遵守未来窗口与隔离边界，不为填充样本伪造真实流量。
+
+## RUM clean-source 发布包与维护核查（2026-09-14）
+
+owner 要求继续已提交版本的发布包准备与 Cloudflare 只读核查。开始时 main 为 clean `7418f7714b1c182b59085d783a26639879e6e3a0`，本轮沿既有固定 Node/Corepack/pnpm 与 `check`、显式 origin 的 `build:public`、`build` 入口顺序完成 clean-source 验证：42 文件/707 测试通过，public/review 均为 Astro 132 文件零诊断，public 两份 ESM 的 24 个共存场景及 GoatCounter 回归通过，review 14 页零 JS。实际执行会话 23672 退出 0，并输出绑定完整 revision 的完成标记；未把此前 dirty 验证改绑为本次结果。
+
+2026-09-14T11:51:46Z 在源仍 clean 时冻结 `.local/rum-release-7418f7/`：`artifact.json` 保存 141 个 public 文件的完整 base64 字节，合计 3,300,770 bytes；`manifest.json` 绑定 source tree `9f807085ffc5bd85e3bdcf8e10ad9585c4da998c`、锁文件摘要、完整文件清单、日期/endpoint、验证与未完成项。制品 SHA256 为 `8b6033df4c12e9fd89c6a53b3722509e1420ddc7d947a32d2207f57450fee4a2`，清单摘要为 `43a3f2e15be9170c4d40ff18f81da122c324d8179412f84ab26a7950ea71c181`。保存后回读并逐文件解码、校验长度与 SHA256，通过后再次确认源干净。目录采用排他创建，未覆盖旧包、未生成或发送部署请求。
+
+冻结复用既有本地 prepare 流程的 clean HEAD/tree/lock 门禁、`assertPublicInventory`、逐文件读取和排他保存，补 `assertPublicScriptGraph`；未执行旧部署或浏览器脚本。与 21cdbb6 清单相比，126 文件完全不变，13 HTML 更新，旧入口被新的页面入口与延迟 chunk 替换；图片、字体和内容材料不重做。当前文件封装可用以下只读入口核对：
+
+```powershell
+Get-FileHash -LiteralPath '.local/rum-release-7418f7/artifact.json' -Algorithm SHA256
+Get-Content -LiteralPath '.local/rum-release-7418f7/manifest.json' -Raw
+git status --short
+```
+
+Cloudflare 只读结果：UTC 11:49 左右刷新 Cron Events 仍无历史记录，已经超过此前设置后的 30 分钟；随后 Metrics 的 Last 24 hours 显示 18 Invocations、0 Errors。调用图只按部署版本分组，不能据总调用或零错误认定定时维护成功。官方 [Cron Events](https://developers.cloudflare.com/workers/configuration/cron-triggers/#view-past-events) 与 Workers Logs 是不同入口，没有依据把空表归因于关闭日志。可用独立 GraphQL scheduled 统计核验，但本会话没有已授权的 Cloudflare API 凭据/连接，不提取浏览器凭据或开启原始请求日志。
+
+下一项受控核验：单独获准后，在已核对的 D1 执行既有 `open-window.sql` 创建未来窗口，RUM_ENABLED 保持 false；随后只读比较 `last_maintenance_at_ms` 是否由小时任务推进、`invalid_reason` 是否仍为空，以及测量表仍为 0。首次 INSERT 填入的维护时间不算 Cron 证据；必须观察后续更新。窗口开始前的维护不会因关闭采集而将窗口记为 collection-paused。开始前未完成全部启用门禁时整体顺延，不启动残缺观察窗。本轮尚未获得该写库、开关或生产发布授权。
+
+冻结包的 `releaseReady` 明确为 false：尚需 Privacy 实际显示及冻结字节浏览器 QA、Worker 公网完整身份、维护与真实传输/INP/退出验证，以及处理依据/必要 consent 和具体发布授权。本轮只在冻结完成后同步 README、017、006 与本文的运行摘要，不改业务源码、来源/图片/字体或依赖；文档更新不改变已保存的 clean-source 制品身份。没有服务、真实采集、推送或发布。
+
 ## RUM 网站候选本地提交（2026-09-14）
 
 owner 在候选验证完成后明确要求“提交吧”。本次授权仅为当前 20 文件的本地检查点，提交说明为 `feat(rum): prepare website activation candidate`；不包含推送、真实 D1 写入、接收开关切换或网站发布，窗口仍为未启用的拟定日期。提交前仅同步 README、017 与本文的授权和版本状态措辞，业务代码与脚本字节沿用上一节已通过的验证，不重复测试。文档 UTF-8、相对链接和 diff 空白检查须通过；独立只读核查确认 20 文件均属本批，无本地产物、凭据或依赖变更。

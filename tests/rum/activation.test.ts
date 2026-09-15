@@ -32,6 +32,65 @@ describe("RUM activation boundaries", () => {
       fixture.sqlite.close();
     }
   });
+  it.each([
+    ["cancelled-before-activation", true, false, true],
+    [null, true, false, false],
+    ["collection-paused", true, false, false],
+    ["cancelled-before-activation", false, false, false],
+    ["cancelled-before-activation", true, true, false],
+  ])(
+    "guards prepared overlap with reason=%s, sealed=%s, data=%s",
+    (reason, sealed, hasData, allowed) => {
+      const fixture = createRumDatabase(rumRelease.startAtMs - 1000);
+      const oldStart = rumRelease.startAtMs - 86400000;
+      try {
+        fixture.sqlite
+          .prepare("INSERT INTO rum_windows VALUES (?, ?, ?, ?, ?)")
+          .run(
+            oldStart,
+            rumRelease.endAtMs - 86400000,
+            oldStart,
+            reason,
+            sealed
+              ? JSON.stringify(
+                  ["LCP", "INP", "CLS"].map((name) => ({
+                    name,
+                    n: 0,
+                    p75: null,
+                  })),
+                )
+              : null,
+          );
+        if (hasData)
+          fixture.sqlite
+            .prepare(
+              "INSERT INTO rum_measurements VALUES (?, 'LCP', 'fixture', 1, 1, ?, ?)",
+            )
+            .run(oldStart, oldStart, oldStart);
+        const original = fixture.sqlite
+          .prepare("SELECT * FROM rum_windows")
+          .get();
+        const sql = createRumWindowSql(rumRelease, fixture.clock.atMs);
+        fixture.sqlite.exec(sql);
+        fixture.sqlite.exec(sql);
+        expect(
+          fixture.sqlite.prepare("SELECT * FROM rum_windows").all(),
+        ).toHaveLength(allowed ? 2 : 1);
+        expect(
+          fixture.sqlite
+            .prepare("SELECT * FROM rum_windows WHERE start_at_ms = ?")
+            .get(oldStart),
+        ).toEqual(original);
+        expect(
+          fixture.sqlite
+            .prepare("SELECT COUNT(*) AS n FROM rum_measurements")
+            .get()?.n,
+        ).toBe(hasData ? 1 : 0);
+      } finally {
+        fixture.sqlite.close();
+      }
+    },
+  );
   it("rejects preparation and execution after the start time", () => {
     expect(() => createRumWindowSql(rumRelease, rumRelease.startAtMs)).toThrow(
       /future/,

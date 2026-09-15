@@ -39,7 +39,12 @@ export async function openRumWindow(
       `INSERT INTO rum_windows
     (start_at_ms, end_at_ms, last_maintenance_at_ms)
     SELECT ?, ?, ? WHERE NOT EXISTS (
-      SELECT 1 FROM rum_windows WHERE snapshot_json IS NULL OR end_at_ms > ?
+      SELECT 1 FROM rum_windows
+      WHERE snapshot_json IS NULL OR (end_at_ms > ? AND (
+        invalid_reason IS NOT 'cancelled-before-activation'
+        OR EXISTS (SELECT 1 FROM rum_measurements AS m
+          WHERE m.window_start_at_ms = rum_windows.start_at_ms)
+      ))
     )`,
     )
     .bind(startAtMs, startAtMs + rumWindowMs, nowMs, startAtMs)

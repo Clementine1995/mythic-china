@@ -2,6 +2,8 @@
 
 ## 0. 状态与结论
 
+- 2026-09-15 RUM 顺延：小时维护已由平台事件与 D1 更新时间证实。两处开窗入口仅豁免明确 `cancelled-before-activation`、已封存且零测量的旧窗；普通失败/NULL 原因、未封存或含数据窗口仍阻止重叠。D1 保留旧空窗，新日期为 09-16/09-30 UTC；客户端与独立产物门禁同步锁定，Privacy 从同一配置生成。Worker 运行包字节不变，无 Schema 或依赖变化；本地测试和构建通过，新网站本地检查点已获授权，尚未发布，正式采集仍关闭。
+
 - 2026-09-10 Analytics 发布状态：已发布的 `21cdbb6` 制品中 `isAnalyticsEnabled` 为 true，与 Privacy 共用单一配置；review 仍零 JS/meta。唯一 hash-locked bootstrap 保持精确 origin/账户/published 路径约束；DNT/GPC 和单页 `analytics=off` 在绑定及发送前检查，运行中退出清理当前 Document 的全部监听与计时器，BFCache 不恢复。传输仍仅 p/e、omit credentials、no-referrer、no-store、keepalive，无 Cookie/持久标识/重试。原始 bundle Fake 执行与 public/review 输出已验证；正式 Origin 的 7 次真实请求头及后台计数确认。原生 DNT、单页退出和实际 BFCache 返回通过；阅读/退出使用焦点模拟，原生前后台完整流程及原生 GPC 未验证。账户/隐私和发布停点见 [006 第 12.12 节](requirements/006-external-interactions.md#1212-goatcounter-启用收尾2026-09-10)。该已发布制品的 RUM 配置为 null；2026-09-14 本地启用候选已单独接线，尚未发布。
 
 - 状态：M2 目标架构已于 2026-08-27 在当前项目根完成本地实施与自动验证，并由用户提交为 M2 历史基线 `f258227`。M3-U1–U5 已完成；Chinese Underworld Collection/Guide 与 012 的四篇 Entry 加 Liaozhai Collection 后续均沿既有合同闭合独立 Hero 谱系。当前版本化 inventory 为 9 份 production record、12 份 manifest、21 份 repository source 与 21 个 Git-ignored local master；11 个逻辑资产各有唯一 approved/current，Zhong Kui Hero v1 保留为 approved/non-current。`sharp@0.35.4` 非默认验证入口复核 21 个 master 和 17 份 current responsive rendition 的 120 个 AVIF/WebP 目标。M4-U4A 已建立供应商中立的 HTTPS origin 校验合同、公共身份、最小 inventory 门禁、SEO 与 release artifact 纯函数，013 已接入真实 origin 的本地 public build；Vercel Public Beta 已公开，GoatCounter 已启用；表单与 RUM 仍关闭。

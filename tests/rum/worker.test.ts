@@ -309,6 +309,50 @@ describe("RUM fixed-window statistics and retention", () => {
     );
   });
 
+  it.each([
+    ["cancelled-before-activation", true, false, true],
+    [null, true, false, false],
+    ["collection-paused", true, false, false],
+    ["cancelled-before-activation", false, false, false],
+    ["cancelled-before-activation", true, true, false],
+  ])(
+    "guards overlapping windows with reason=%s, sealed=%s, data=%s",
+    async (reason, sealed, hasData, allowed) => {
+      if (hasData) await receive();
+      const snapshot = sealed
+        ? JSON.stringify(
+            ["LCP", "INP", "CLS"].map((name) => ({ name, n: 0, p75: null })),
+          )
+        : null;
+      fixture.sqlite
+        .prepare("UPDATE rum_windows SET invalid_reason = ?, snapshot_json = ?")
+        .run(reason, snapshot);
+      const original = await latestRumWindow(fixture.db);
+      const opening = openRumWindow(
+        fixture.db,
+        startAtMs + rumDayMs,
+        startAtMs,
+      );
+      if (allowed) {
+        await opening;
+        await expect(
+          openRumWindow(fixture.db, startAtMs + rumDayMs, startAtMs),
+        ).rejects.toThrow();
+      } else await expect(opening).rejects.toThrow(/overlaps/);
+      expect(
+        fixture.sqlite
+          .prepare("SELECT * FROM rum_windows ORDER BY start_at_ms")
+          .all(),
+      ).toHaveLength(allowed ? 2 : 1);
+      expect(
+        fixture.sqlite
+          .prepare("SELECT * FROM rum_windows WHERE start_at_ms = ?")
+          .get(startAtMs),
+      ).toEqual(original);
+      expect(rows()).toHaveLength(hasData ? 1 : 0);
+    },
+  );
+
   it("detects maintenance gaps that cross the cutoff", async () => {
     fixture.sqlite
       .prepare("UPDATE rum_windows SET last_maintenance_at_ms = ?")

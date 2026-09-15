@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-文档核对日期：2026-09-14；最新站点发布与 GoatCounter 实证日期：2026-09-10。Cloudflare 关闭状态接收端与本地网站启用候选见下文；不将历史站点回执写成今日线上复验。2026-09-11 的匿名 HTTP 复核因连接限制/超时未取得响应，不据此判断线上故障。
+文档核对日期：2026-09-15；正式站点最近发布与 GoatCounter 正向实证日期：2026-09-10。本日已证实 RUM 小时维护自动执行，取消并保留从未启用的旧空窗口，新窗口顺延为 09-16 至 09-30 UTC。对应网站修改已通过本地验证并获本地提交授权，尚未发布；接收仍关闭，正式 Privacy 的 HTTP 回读没有 RUM 接线。
 
 **当前阶段：英语阅读版 Public Beta / pending human validation。正式 MVP 范围已确认，验收尚未收口。**
 
@@ -15,10 +15,10 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 | 内容 | 6 published Entry、2 published Collection、14 Source、25 verified Claim、6 bilingual-approved Terminology；六篇 publishedAt 为 2026-09-10，updatedAt 为 null | 独立英语读者 R2a/R2b 尚未开始；owner 双语确认与 AI 审读不代替真人样本 |
 | 插画与阅读 | 8 个 approved/current Hero family；13 个 public 页面，11 个含图页 / 19 个图位、112 个 AVIF/WebP、10 个字体；首页双专题、阅读路径、Sources、Related 与原生图注已实现 | 六篇正文均无正文插图，完整故事卡包为 0/6；钟馗 Lead/OG/Social 样例保留，后续运营另行交付 |
 | 工程 | M1 冻结为工程参考，M2–M4 本地实现完成；013 public assembly 与 014–016 页面收尾已随站发布 | M1 旧视觉皮肤未获满意度批准，不影响后续独立验收的生产页面 |
-| 发布 | [正式站点](https://mythic-china-beta.vercel.app) 的最新回执绑定 clean source `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`；2026-09-10 完整 140 文件 / 3,278,559 字节 HTTP、MIME、长度与 SHA256 通过，部署网址受登录保护 | 今天未复核远端；可索引不等于搜索引擎已收录。文档提交不改变生产制品身份 |
+| 发布 | [正式站点](https://mythic-china-beta.vercel.app) 的最新回执绑定 clean source `21cdbb6353bb14fe5ebced9ddfec1e94dc30a3a5` / `dpl_7bpnKu2bhRQPtv3E1TRibmn9dzDy`；2026-09-10 完整 140 文件 / 3,278,559 字节 HTTP、MIME、长度与 SHA256 通过，09-14 API 复核 alias | 旧 RUM 候选 dpl_Eigw53XwYJCMBickdv67PV2wHCds 已受保护部署但未提升，旧日期已过期，不能继续发布；新日期候选已获本地提交授权，发布仍需有效 Vercel 凭据。可索引不等于搜索引擎已收录 |
 | GoatCounter | 正式启用；4 次页面浏览、3 次事件共 7 条受控计数，7 次实际请求头、6 次 HTTP 200；Related 响应未观测，后台确认收数；原生 DNT、受控退出和实际 BFCache 返回有证据 | 阅读和退出采用 CDP 焦点模拟；原生前后台完整流程、原生 GPC 及账户自动清理/实际导出注销未实测；预算已耗尽，不补发、不删除规范路径 |
 | 表单 | Newsletter 默认关闭分支和 Reader Request 离线审核已实现；页面均为无控件 inactive 状态 | 真实启用后移，测试保持暂停；既有供应商记录的处理、保留和退出责任仍按 006，不因后移消失 |
-| 性能与 RUM | 解码修正已提交为 7541dd2，Worker 编辑器零诊断，DB 绑定与关闭开关/日志已核对；本地网站候选暂拟 09-15 至 09-29 UTC 窗口，707 测试通过、Astro 132 文件零诊断，public 两个精确锁定 ESM/24 隔离场景通过，review 零 JS | 本轮网站候选仅作本地检查点，尚未发布，真实采集与 14 日窗口未开启；每小时 Cron 与账户 Free 已核对，处理条件、实际维护与传输待验；完整地区浏览器、三平台真机及修改后性能未完成。21cdbb6 的布局/旧性能证据不代替本轮验收 |
+| 性能与 RUM | 每小时 Cron 连续两次 Success，最新维护与 D1 时间一致；旧零测量窗已取消封存，09-16 至 09-30 UTC 新窗已建立。顺延修改通过 717 测试、132 文件零诊断、13 页 public/14 页 review 与 24 个隔离脚本场景；Worker 运行字节不变 | 正式 RUM 未启用，接收 false，新窗零样本、无异常；网站本地检查点已获授权，尚未发布。真实传输/INP、完整 14 日观察、地区浏览器、三平台真机仍待验 |
 | 中文与扩展 | 005 已确认三个既有对象的简中试点目标；当前英语根路径、中文专名和 CJK 字体已存在 | 中文路由、locale Schema、语言切换与 localized SEO 未实施；中文、搜索、扩栏、商业化均不阻塞英语阅读版 MVP |
 
 证据入口：[生产验收与激活](DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)、[发布后技术验收](DEV_WORKFLOW.md#发布后技术验收2026-09-10)、[内容与 Hero 审核](docs/requirements/012-five-hero-visual-briefs.md)、[Beta 退出条件](docs/requirements/011-public-beta-validation.md#23-beta-退出条件)。各阶段原始结果保留在 DEV_WORKFLOW 与对应需求的带日期记录中，不把旧“未发布”“未提交”当作当前状态。
@@ -59,9 +59,9 @@ Project owner 于 2026-09-12 确认正式 MVP 采用阅读版：保留现有 6 �
 
 ## 当前运行口径
 
-唯一保存项目为 `F:\codex-project\mythic-china`。本轮网站候选的父提交为解码修正 `7541dd2d29c1506a30b6ceeeef89953aec2c6910`，父节点 `08db1e0eb11cd6650ca82873047bc2e046efac6b` 已包含阅读版范围整理；最新已发布业务源仍为 `21cdbb6`。owner 已授权保存其上的网站启用候选检查点，实际提交以 Git 历史为准；既有验证仍为提交前本地诊断；关闭状态 Worker 的 clean-source 包与本轮网站候选分开标识。没有推送或发布，本地 tracking ref 不证明远端状态。
+唯一保存项目为 `F:\codex-project\mythic-china`，本次检查点的父提交为 `7418f7714b1c182b59085d783a26639879e6e3a0`；owner 已授权提交本轮 13 个相关文件，包含日期顺延、窄取消边界、对应测试和状态文档，实际提交身份以 Git 历史为准。旧冻结包 `.local/rum-release-7418f7/` 及受保护部署回执 `.local/rum-deployment-7418f7/` 保留追溯，其旧日期已不适用，不得继续提升。用户完整启用授权保留；本次本地检查点授权已补齐，接收和网站发布继续按 clean-source 验证与有效 Vercel 凭据门禁执行。下一步与证据见 [调度与顺延记录](DEV_WORKFLOW.md#rum-调度实证与窗口顺延2026-09-15)。
 
-最新站点运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用，详情见 DEV_WORKFLOW。该轮临时 Edge、预览和凭据会话均已关闭；本轮不启动服务。网站不依赖工作电脑常开，项目没有线上内容/账号数据库。2026-09-14 Cloudflare 控制台显示 `mythic-china-rum` Active/Latest `4a9a22b8`、零诊断，HTTP 面板根路径为空 404/no-store；完整公网部署身份仍待独立核验。DB 绑定、RUM_ENABLED=false、Logs/Traces 主开关关闭已直接核对；owner 回报两表为 0；每小时 Cron 与账户 Free 已直接核对，Cron events 暂无记录，实际执行待验。窗口与网站生产采集尚未开启，下一步见 [网站启用候选入口](DEV_WORKFLOW.md#rum-网站启用候选准备2026-09-14)。
+最新站点运行回执为 2026-09-10 的 Vercel 静态 Public Beta 与 GoatCounter 启用。旧临时服务和凭据会话均已关闭，本轮未启动服务；网站不依赖工作电脑常开。2026-09-15 已直接核对 RUM_ENABLED=false、Logs/Traces 主开关关闭；小时 Cron 在 09-14 23:01:23、09-15 00:01:36 UTC 连续 Success，后者与 D1 维护时间一致。D1 现有旧取消封存窗和 09-16/09-30 UTC 新未来窗，测量表为 0，新窗无异常；未将新窗插入时间当成额外维护证据。Worker 无需重部署，完整公网源码身份及真实传输等剩余验证仍按 017。
 
 `dev` / `preview` 会改变运行状态，不是只读健康检查；服务、供应商数据操作、推送与部署仍需各自授权。
 

@@ -9,8 +9,8 @@ export interface RumDeployment {
 // This is the local activation candidate; server opening and publication are separate.
 export const rumDeployment: RumDeployment | null = {
   endpoint: "https://mythic-china-rum.huyichen2019.workers.dev/vitals",
-  startAtMs: Date.UTC(2026, 8, 15),
-  endAtMs: Date.UTC(2026, 8, 29),
+  startAtMs: Date.UTC(2026, 8, 16),
+  endAtMs: Date.UTC(2026, 8, 30),
 };
 export const rumConfigurationName = "mythic-china-rum";
 

@@ -2,6 +2,12 @@
 
 ## 0. 文档职责与状态
 
+2026-09-15 RUM 运行更新：每小时自动维护已由 Cron 两次 Success 和 D1 时间推进证实，无需再手动触发。旧未启用空窗已取消封存，新完整窗口为 09-16 至 09-30 UTC，零样本、无异常；接收与正式网站 RUM 仍关闭。对应日期/取消边界修改已通过 717 测试及 public/review 构建，新本地提交已获授权，尚需 clean-source 验证、有效 Vercel 身份与发布；旧日期候选不再提升。精确记录见 017/DEV_WORKFLOW，本日未发送真实测量，其他交互、隐私及验收边界不变。
+
+2026-09-14 本轮处理核查：沿用已登记的个人运营者 hyc / China（CN）、项目联系地址和英语文化读者定位；既有文档未提出特定驻留要求，不据此声称不存在法定义务。Cloudflare [Self-Serve §6.1](https://www.cloudflare.com/terms/) 在适用个人数据范围内纳入 [DPA](https://www.cloudflare.com/cloudflare-customer-dpa/)，没有发现需要另找签字开关的依据，也未代 owner 接受新协议。[分处理者清单](https://www.cloudflare.com/gdpr/subprocessors/cloudflare-services/) 及 [D1 地区说明](https://developers.cloudflare.com/d1/configuration/data-location/) 不保证 Worker 全链路限于数据库地区；Free [Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/) 默认恢复期为 7 天，活动数据清理不代表立即物理删除。owner 已批准本次最小性能改进用途和完整启用，采用无持久浏览器标识、四字段与 GPC/DNT/地址退出；不将无 Cookie、供应商条款或 owner 授权写成所有读者法域均无需 consent 的法律结论。Privacy 的既有 legitimate-interest 文字属于 GoatCounter 段落，本轮不把它自动改记为 RUM 的独立法律审核。具体启用进展以 017 与 DEV_WORKFLOW 为准，下面的准备状态保留为历史快照。
+
+2026-09-14 RUM 准备更新：Cloudflare 账户 Free、Worker 与 DB 绑定、接收关闭和 Logs/Traces 主开关关闭已核对；每小时 Cron 已保存但实际执行尚未证实。`7418f77` 的网站候选已从 clean source 重建并冻结，含启用版 Privacy，尚未发布或采集；准确运行身份和验证见 017/DEV_WORKFLOW。本文第 5.5.1 节的未创建资源表述属于 09-10 本地设计时点，不能覆盖当前资源事实；处理依据、实际 DPA/subprocessor/地区和必要 consent 门禁继续有效。已有公开控制者 `hyc` / China（CN）沿用，不要求 owner 重复提供；运营主体类别、读者法域与驻留要求仍需补足后才能完成该判断。
+
 2026-09-12 正式范围决定：Newsletter / Reader Request 的真实启用已移出阅读版 MVP，作为后续独立运营需求；本文件继续保存 U4 功能合同、既有测试数据、隐私和退出责任，U4 保持未完成。GoatCounter 的已启用状态、RUM 的既定退出门槛及其他技术证据不因范围调整关闭。
 
 2026-09-10 当前发布结论：clean source `21cdbb6` 的 GoatCounter 已在正式站点启用，后台确认 7 条受控计数；实际请求头、原生 DNT、单页退出与实际 BFCache 返回已有证据。阅读事件和退出使用焦点模拟，原生前后台完整流程及原生 GPC 不记为通过。Newsletter、Reader Request 与 RUM 仍关闭，U4/U5 整体不因此关闭。发布身份与证据限度见第 12.12 节末尾及 [DEV_WORKFLOW](../../DEV_WORKFLOW.md#goatcounter-生产验收与激活入口2026-09-10)。下列带日期的准备和检查点段落是历史快照，不覆盖当前发布状态。

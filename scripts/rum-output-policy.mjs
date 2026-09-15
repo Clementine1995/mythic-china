@@ -12,8 +12,8 @@ import {
 // Independent release expectation: changes to producer dates must fail until reviewed.
 export const rumRelease = Object.freeze({
   endpoint: "https://mythic-china-rum.huyichen2019.workers.dev/vitals",
-  startAtMs: Date.UTC(2026, 8, 15),
-  endAtMs: Date.UTC(2026, 8, 29),
+  startAtMs: Date.UTC(2026, 8, 16),
+  endAtMs: Date.UTC(2026, 8, 30),
 });
 export const rumMetaName = "mythic-china-rum";
 export const publicScriptHrefs = [
